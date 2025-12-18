@@ -2,125 +2,274 @@
 
 基于 GitHub Pages 的静态报告展示系统 + 本地 Node.js Admin 管理后台。
 
-## 📁 项目结构
+**在线访问**：https://html.foxlink.co.in
 
-```
-project-html-management/
-├── index.html              # 前端主页（GitHub Pages）
-├── preview.html           # 预览页面
-├── components/           # React 组件
-├── utils/               # 工具函数
-├── reports/            # HTML 报告文件
-├── data/
-│   └── reports-index.json  # 报告索引
-├── admin/              # 本地管理后台（不上传）
-│   ├── server.js       # Express 服务器
-│   ├── lib/           # 后端模块
-│   ├── public/        # Admin 前端
-│   └── start.bat     # 启动脚本
-└── test-api/          # API 测试工具
-```
+---
 
 ## 🚀 快速开始
 
-### 在线查看（GitHub Pages）
+### 新电脑使用流程
 
-访问：`https://YOUR_USERNAME.github.io/YOUR_REPO/`
+```bash
+# 1. git clone 仓库
+git clone https://github.com/gyhongyu/htmal-report.git
+cd htmal-report
 
-只读模式，可以：
-- 查看所有报告
-- 搜索和筛选
-- 预览报告
-- 分享链接
+# 2. 运行 start.bat
+start.bat
 
-### 本地管理（Windows）
+# 3. 浏览器自动打开 localhost:3030
+# 4. 首次访问 → 弹出配置窗口
+# 5. 填写 GitHub 信息 → 保存
+# 6. 自动创建 admin/.env
+# 7. 开始使用
+```
 
-#### 首次配置
+**就这么简单！** 脚本会自动：
+- ✅ 检测 Git 是否安装
+- ✅ 检测 Node.js 是否安装  
+- ✅ 自动安装依赖（npm install）
+- ✅ 检测端口占用
+- ✅ 启动服务器并打开浏览器
 
-1. 克隆仓库：
-   ```powershell
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-   cd YOUR_REPO
-   ```
+---
 
-2. 启动 Admin 后台：
-   ```powershell
-   cd admin
-   .\start.bat
-   ```
+## 📋 前置要求
 
-3. 浏览器会自动打开，完成首次配置：
-   - GitHub 用户名
-   - 仓库名称
-   - Personal Access Token
+只需安装两个软件：
 
-#### 日常使用
+1. **Git**  
+   下载：https://git-scm.com/downloads
 
-双击 `admin/start.bat` 即可启动管理后台。
+2. **Node.js (LTS 版本)**  
+   下载：https://nodejs.org/
 
-## ⚙️ 功能说明
+---
 
-### GitHub Pages 前端
+## 🏗️ 项目架构
 
-- ✅ 查看报告列表
-- ✅ 搜索和筛选
-- ✅ 分类浏览
-- ✅ 报告预览
-- ✅ 直接分享链接
-- ❌ 无法创建/编辑/删除（只读）
+### 双端系统
 
-### 本地 Admin 后台
+#### 本地 Admin 后台
+- **地址**: http://localhost:3030
+- **功能**: 创建、编辑、删除报告
+- **技术**: Node.js + Express + React
+- **存储**: 通过 GitHub API 自动同步
 
-- ✅ 创建新报告
-- ✅ 编辑现有报告
-- ✅ 删除报告
-- ✅ 自动更新索引
-- ✅ 自动推送到 GitHub
+#### 在线查看平台  
+- **地址**: https://html.foxlink.co.in
+- **功能**: 只读查看、搜索、分享、预览
+- **技术**: 纯静态 HTML + React（GitHub Pages）
+- **特性**: 自动版本检测，打开即最新
 
-## 🔧 技术栈
+---
 
-- **前端**: React 18 + TailwindCSS
-- **后端**: Node.js + Express
-- **存储**: GitHub API
-- **部署**: GitHub Pages
+## 📁 项目结构
+
+```
+htmal-report/
+├── start.bat              # 智能启动脚本（根目录）
+├── index.html            # 前端主页
+├── preview.html         # 预览页面
+├── app.js              # 前端应用逻辑
+│
+├── components/         # React 组件
+│   ├── HomePage.js
+│   ├── PageCard.js
+│   └── ...
+│
+├── utils/             # 工具函数
+│   └── reportsLoader.js
+│
+├── reports/          # HTML 报告文件
+│   └── report-*.html
+│
+├── data/
+│   └── reports-index.json  # 报告索引和版本信息
+│
+└── admin/            # 本地管理后台
+    ├── server.js     # Express 服务器
+    ├── .env         # 配置文件（自动生成，不上传）
+    ├── .env.example # 配置示例
+    │
+    ├── lib/        # 后端模块
+    │   ├── github-api.js       # GitHub API 封装
+    │   ├── config-manager.js   # 配置管理
+    │   └── reports-manager.js  # 报告 CRUD
+    │
+    └── public/     # Admin 前端
+        ├── index.html
+        ├── app.js
+        └── components/
+```
+
+---
+
+## ⚙️ 首次配置
+
+运行 `start.bat` 后，首次访问会弹出配置窗口：
+
+### 需要填写的信息
+
+1. **GitHub 用户名**  
+   例如：`gyhongyu`
+
+2. **仓库名称**  
+   例如：`htmal-report`
+
+3. **Personal Access Token (PAT)**
+   - 访问：https://github.com/settings/tokens/new
+   - 勾选 `repo` 权限
+   - 生成并复制 Token
+   - 粘贴到配置窗口
+
+4. **服务器端口**（可选）  
+   默认：`3030`
+
+**保存后自动创建 `admin/.env` 文件**，无需手动操作。
+
+---
 
 ## 📝 使用流程
 
-1. **本地创建报告**：在 Admin 后台编辑器中创建 HTML 报告
-2. **保存并发布**：点击"保存"，自动上传到 GitHub
-3. **在线查看**：访问 GitHub Pages 网址查看最新报告
-4. **分享**：复制报告链接分享给他人
+### 创建报告
 
-## 🔐 安全说明
+1. 打开 Admin 后台（http://localhost:3030）
+2. 点击"创建新页面"
+3. 编辑 HTML 内容
+4. 填写标题、描述、选择分类
+5. 点击"保存" → **自动同步到 GitHub**
 
-- Admin 后台仅在本地运行
-- GitHub Token 保存在本地 `.env` 文件（已在 gitignore 中）
-- GitHub Pages 上的报告是公开的（如仓库设为 Public）
+### 查看报告
 
-## 🆘 常见问题
+**方式 1 - 在线查看**：
+- 访问 https://html.foxlink.co.in
+- 自动显示最新内容
+- 支持搜索、筛选、分享
 
-### 如何生成 GitHub Token？
+**方式 2 - 本地预览**：
+- 在 Admin 后台点击"预览"
+- 或访问 `/preview.html?id=报告ID`
 
-1. 访问：https://github.com/settings/tokens/new
-2. 勾选 `repo` 权限
-3. 生成并复制 token
-4. 在 Admin 后台配置页面粘贴
+### 编辑/删除报告
 
-### 多设备如何同步？
+1. 在 Admin 后台找到对应报告
+2. 点击"编辑"或"删除"
+3. 保存后 → **自动同步到 GitHub**
 
-在新设备上：
-1. `git clone` 仓库
-2. 运行 `admin/start.bat`
-3. 输入相同的配置即可
+---
 
-### 如何备份数据？
+## 🔄 自动更新机制
 
-所有数据都在 GitHub 仓库中：
+### 工作原理
+
+1. 每次本地保存报告 → 更新 `reports-index.json` 的 `lastUpdated`
+2. 访问公网地址 → 检查本地缓存的版本号
+3. 如发现新版本 → 自动刷新页面
+4. 加载最新内容
+
+### 用户体验
+
+```
+本地编辑 → 关闭浏览器 → 重新访问公网
+→ 显示加载动画 → 自动检测更新 → 显示最新内容
+```
+
+**无需任何手动刷新！** ✨
+
+---
+
+## 🛠️ 常见问题
+
+### Q: 端口 3030 被占用怎么办？
+
+**A**: `start.bat` 会自动检测并询问是否关闭占用进程。或手动关闭：
+
+```powershell
+# 查找占用端口的进程
+netstat -ano | findstr :3030
+
+# 关闭进程（替换 PID）
+taskkill /F /PID <进程ID>
+```
+
+### Q: 如何在多台电脑之间同步？
+
+**A**: 
+```bash
+# 在新电脑上
+git clone https://github.com/gyhongyu/htmal-report.git
+cd htmal-report
+start.bat
+# 填写相同的 GitHub 配置即可
+```
+
+### Q: 如何备份数据？
+
+**A**: 所有数据都在 GitHub 仓库中：
 - `reports/` - HTML 文件
 - `data/reports-index.json` - 索引文件
 
-定期 `git pull` 即可获取最新数据。
+定期 `git pull` 或直接在 GitHub 下载即可。
 
-## 📜 License
+### Q: Token 过期了怎么办？
 
-MIT
+**A**: 
+1. 访问 http://localhost:3030
+2. 点击右上角"设置"图标
+3. 重新填写新的 Token
+4. 保存即可
+
+### Q: 公网显示的不是最新内容？
+
+**A**: 
+- 首次访问后会自动检测版本
+- 如果页面已打开，按 **F5** 刷新
+- 关闭后重新打开会自动更新
+
+---
+
+## 🔐 安全说明
+
+- ✅ Admin 后台仅在本地运行（localhost:3030）
+- ✅ GitHub Token 保存在本地 `.env` 文件（已在 .gitignore）
+- ✅ Token 永远不会上传到 GitHub
+- ⚠️ GitHub Pages 上的报告是公开的（如仓库为 Public）
+
+---
+
+## 🎨 技术栈
+
+### 前端
+- React 18
+- TailwindCSS (CDN)
+- Babel Standalone
+- Lucide Icons
+
+### 后端
+- Node.js
+- Express
+- GitHub REST API
+
+### 部署
+- GitHub Pages
+- 自定义域名：html.foxlink.co.in
+
+---
+
+## 📜 许可证
+
+MIT License
+
+---
+
+## 💡 提示
+
+- 第一次运行会自动安装依赖（需要几分钟）
+- 建议使用 Chrome 或 Edge 浏览器
+- 网络不稳定时 GitHub API 可能失败，重试即可
+- 自定义域名配置请查看 GitHub Pages 设置
+
+---
+
+**享受使用！**🚀

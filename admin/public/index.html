@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Reports Admin - 管理後台</title>
+    <meta name="description" content="HTML报告管理后台，创建、编辑和管理您的HTML代码页面">
+
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @layer theme {
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success-color: #16a34a;
+            --border-color: #e5e7eb;
+            --text-secondary: #6b7280;
+        }
+    }
+
+    @layer base {
+        body {
+            @apply bg-gray-50 font-sans;
+        }
+    }
+
+    @layer components {
+        .btn-primary {
+            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--primary-hover)] transition-colors duration-200;
+        }
+        
+        .btn-success {
+            @apply px-4 py-2 bg-[var(--success-color)] text-white rounded-lg hover:bg-green-600 transition-colors duration-200;
+        }
+        
+        .input-field {
+            @apply w-full p-3 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent outline-none;
+        }
+        
+        .preview-frame {
+            @apply w-full h-full border border-[var(--border-color)] rounded-lg bg-white;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- 工具函数 -->
+    <script type="text/babel" src="utils/adminApi.js"></script>
+
+    <!-- 复用的组件 -->
+    <script type="text/babel" src="components/LoadingProgress.js"></script>
+    <script type="text/babel" src="components/SearchBar.js"></script>
+    <script type="text/babel" src="components/CategoryTabs.js"></script>
+    <script type="text/babel" src="components/Pagination.js"></script>
+    <script type="text/babel" src="components/HTMLEditor.js"></script>
+    <script type="text/babel" src="components/PreviewPanel.js"></script>
+
+    <!-- Admin 专用组件 -->
+    <script type="text/babel" src="components/ConfigModal.js"></script>
+    <script type="text/babel" src="components/AdminHomePage.js"></script>
+    <script type="text/babel" src="components/AdminPageCard.js"></script>
+
+    <!-- 主应用 -->
+    <script type="text/babel" src="app.js"></script>
+</body>
+
+</html>

@@ -1,27 +1,21 @@
-# Administrator 后台不上传
-admin/
-
-# Node模块
-node_modules/
-package-lock.json
-
-# 环境配置（重要！）
-.env
+# 敏感配置文件
+admin/.env
 *.env
 
-# 测试环境
-test-api/
+# Node.js
+node_modules/
+package-lock.json
+npm-debug.log*
 
-# 部署脚本（包含 Token）
-*.bat
-DEPLOY.md
+# 测试环境（不需要上传）
+test-api/
 
 # 系统文件
 .DS_Store
 Thumbs.db
 *.log
 
-# TrickleSDK相关（已废弃）
+# 已废弃的 Trickle SDK 相关文件
 trickle/
 utils/dbCleanup.js
 utils/dbDiagnostic.js
