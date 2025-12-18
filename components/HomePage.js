@@ -172,8 +172,30 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">
                   HTML代碼管理器
+                  {diagnosticInfo && (
+                    <span className="ml-3 text-sm font-normal text-gray-600">
+                      (資料庫: {diagnosticInfo.total} 筆 | 有效: {diagnosticInfo.valid} 筆 | 無效: {diagnosticInfo.invalid} 筆)
+                    </span>
+                  )}
                 </h1>
-                <p className="text-gray-600 mt-2">查看和分享您的HTML頁面</p>
+                <p className="text-gray-600 mt-2">創建、編輯和管理您的HTML頁面</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleDiagnostic}
+                  className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center gap-2"
+                  title="檢查資料庫狀態"
+                >
+                  <div className="icon-activity text-lg"></div>
+                  診斷
+                </button>
+                <button
+                  onClick={() => onCreateNew(currentCategory)}
+                  className="btn-primary flex items-center gap-2"
+                >
+                  <div className="icon-plus text-lg"></div>
+                  創建新頁面
+                </button>
               </div>
             </div>
             <div className="max-w-md">
@@ -221,6 +243,8 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
                     <PageCard
                       key={page.pageId}
                       page={page}
+                      onEdit={(pageId) => onEditPage(pageId)}
+                      onDelete={() => handleDeletePage(page.pageId)}
                       onShare={() => handleSharePage(page.pageId, page.title)}
                       onCopyLink={() => handleCopyLink(page.pageId, page.title)}
                     />
