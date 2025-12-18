@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">FOXLINK Automotive Global Achievements (Confidential)</title>
+    <title data-lang="zh">FOXLINK 車載全球客戶實績簡介 (機密)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* --- 核心樣式 (基於公司標準模板) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', 'Noto Sans TC', sans-serif; 
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+            margin: 0; 
+            padding: 0; 
+            overflow-x: hidden; /* 防止手機版水平捲動 */
+        }
+
+        /* 語言切換邏輯 */
+        [data-lang] { display: none; }
+        
+        .content-area { 
+            animation: fadeIn 0.5s ease-out; 
+            min-height: calc(100vh - 160px); 
+            padding: 2.5rem; 
+            box-sizing: border-box; 
+            max-width: 1280px; 
+            margin: 0 auto; 
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* --- 表格樣式 (電腦版) --- */
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0; 
+            margin-top: 1rem; 
+            margin-bottom: 1rem; 
+            border: 1px solid #374151; /* gray-700 */
+            border-radius: 0.5rem;
+            overflow: hidden;
+            table-layout: fixed; /* 固定寬度佈局 */
+        }
+        
+        th, td { 
+            padding: 1rem; 
+            text-align: left; 
+            vertical-align: top; 
+            word-wrap: break-word;
+        }
+        
+        th { 
+            background-color: #1f2937; /* gray-800 */
+            color: #9ca3af; /* gray-400 */
+            font-weight: 600; 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            border-bottom: 1px solid #374151;
+        }
+        
+        td {
+            border-bottom: 1px solid #1f2937; /* gray-800 */
+            color: #d1d5db; /* gray-300 */
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background-color: #1f2937; }
+
+        /* 標籤樣式 */
+        .brand-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #374151; /* gray-700 */
+            border: 1px solid #4b5563; /* gray-600 */
+            color: #e5e7eb;
+            transition: all 0.2s;
+        }
+        
+        .brand-tag:hover {
+            background-color: #4b5563;
+            border-color: #60a5fa;
+            color: #fff;
+        }
+
+        /* 水印 */
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            user-select: none;
+            font-weight: 900;
+        }
+
+        /* 玻璃擬態標頭 */
+        header {
+            background-color: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(8px);
+        }
+
+        /* --- 手機版響應式優化 (Mobile Optimization) --- */
+        @media screen and (max-width: 768px) {
+            /* 1. 調整整體版面 */
+            .content-area {
+                padding: 1rem;
+            }
+
+            /* 2. 表格轉卡片核心代碼 */
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* 隱藏表頭 */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            table {
+                border: none;
+                background: transparent;
+            }
+
+            /* 卡片樣式 */
+            tbody tr {
+                background-color: #1f2937; /* gray-800 */
+                border: 1px solid #374151; /* gray-700 */
+                border-radius: 0.75rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                overflow: hidden;
+            }
+
+            /* 取消 hover 變色，避免手機點擊殘留 */
+            tbody tr:hover {
+                background-color: #1f2937;
+            }
+
+            /* 3. 卡片內部佈局 (3欄式處理) */
+            
+            /* 第1欄：產品領域 (作為卡片標題) */
+            td:nth-of-type(1) {
+                background-color: #374151; /* 較淺灰底 */
+                border-bottom: 1px solid #4b5563;
+                padding: 1rem;
+            }
+
+            /* 第2欄：合作夥伴 (中間層) */
+            td:nth-of-type(2) {
+                padding: 1rem 1rem 0.5rem 1rem; /* 底部留少一點 */
+                border-bottom: 1px solid #374151; /* 內部細分隔線 */
+                position: relative;
+            }
+            /* 增加小標籤提示這是「合作夥伴」 */
+            td:nth-of-type(2)::before {
+                content: "Key Partner / Tier 1";
+                display: block;
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                color: #6b7280; /* gray-500 */
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+                letter-spacing: 0.05em;
+            }
+
+            /* 第3欄：終端品牌 (底部層) */
+            td:nth-of-type(3) {
+                padding: 0.5rem 1rem 1rem 1rem; /* 頂部留少一點 */
+                border-bottom: none;
+            }
+            /* 增加小標籤提示這是「終端品牌」 */
+            td:nth-of-type(3)::before {
+                content: "End Brand Reference";
+                display: block;
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                color: #6b7280; /* gray-500 */
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+                font-weight: bold;
+                letter-spacing: 0.05em;
+            }
+
+            /* 字體與標題調整 */
+            h1 { font-size: 1.75rem !important; line-height: 1.25 !important; }
+            .watermark { font-size: 3rem; }
+
+            /* Header 響應式 */
+            header {
+                flex-wrap: wrap; 
+                gap: 0.5rem;
+            }
+            header > div {
+                width: 100%;
+                justify-content: space-between;
+            }
+            header img {
+                height: 1.5rem;
+            }
+        }
+
+        /* 列印樣式 (保持原樣，不受手機版影響) */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 10pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .watermark { color: rgba(0, 0, 0, 0.05); }
+            header { position: static; border-bottom: 2px solid #000; background: #fff; display: flex !important; flex-wrap: nowrap !important; }
+            /* 強制恢復表格佈局 */
+            table, thead, tbody, th, td, tr { display: table-row-group !important; width: auto !important; }
+            table { display: table !important; width: 100% !important; border: 1px solid #000; table-layout: auto !important; }
+            thead { display: table-header-group !important; }
+            tr { display: table-row !important; }
+            th, td { display: table-cell !important; border-bottom: 1px solid #ccc; color: #000 !important; }
+            th { background-color: #eee !important; color: #000 !important; border-bottom: 1px solid #000; -webkit-print-color-adjust: exact; }
+            .bg-gray-800, .bg-gray-900 { background-color: #fff !important; color: #000 !important; border: none; }
+            
+            /* 清除手機版額外增加的標籤 */
+            td:nth-of-type(2)::before, td:nth-of-type(3)::before { content: none !important; }
+            td:nth-of-type(1) { background-color: transparent !important; }
+            tbody tr { border: none !important; margin: 0 !important; box-shadow: none !important; border-radius: 0 !important; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative">
+
+    <!-- Watermark -->
+    <div class="watermark">CONFIDENTIAL</div>
+
+    <!-- 1. Header (Company Standard) -->
+    <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 border-b border-gray-700 no-print">
+        <div class="flex items-center space-x-3">
+            <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+            <div>
+                <span class="block text-lg font-bold leading-tight text-white" data-lang="en">Foxlink India Electric Private Limited</span>
+                <span class="block text-lg font-bold leading-tight text-white" data-lang="zh">正崴精密工業股份有限公司</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3 flex-shrink-0">
+            <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                <i class="fas fa-file-pdf mr-2"></i>
+                <span data-lang="en">Export PDF</span>
+                <span data-lang="zh">導出 PDF</span>
+            </button>
+            <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                <span data-lang="en">中文</span>
+                <span data-lang="zh">English</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 relative z-10">
+        <div class="content-area">
+            
+            <!-- 2. NDA Warning Box -->
+            <div class="mb-8 bg-red-900/10 border-l-4 border-red-500 p-4 rounded-r-lg backdrop-blur-sm">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <i class="fa-solid fa-shield-halved text-red-500 mt-1"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-bold text-red-400 uppercase tracking-wide" data-lang="en">Confidential Statement</h3>
+                        <h3 class="text-sm font-bold text-red-400 uppercase tracking-wide" data-lang="zh">Confidential / 機密聲明</h3>
+                        <p class="text-sm text-red-200/80 mt-1" data-lang="en">
+                            The information contained herein is subject to strict Non-Disclosure Agreements (NDA). To protect business confidentiality, strategic partner names may be omitted, displaying only end-brand references. Unauthorized reproduction is prohibited.
+                        </p>
+                        <p class="text-sm text-red-200/80 mt-1" data-lang="zh">
+                            本文件所載資訊受嚴格保密協議 (NDA) 約束。為保護商業機密，部分戰略合作夥伴名稱已隱藏，僅展示終端品牌實績。未經授權禁止複製或對外傳播。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Report Title -->
+            <div class="text-center border-b border-gray-700 pb-8 mb-8">
+                <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-3 font-bold tracking-wider" data-lang="en">GLOBAL ACHIEVEMENTS</span>
+                <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-3 font-bold tracking-wider" data-lang="zh">全球實績總覽</span>
+                
+                <h1 class="text-3xl md:text-4xl font-bold mb-2 text-white" data-lang="en">Automotive Global Customer Achievements</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-2 text-white" data-lang="zh">車載全球客戶實績簡介</h1>
+                
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto" data-lang="en">
+                    Automotive Electronics Global Supply List
+                </p>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto" data-lang="zh">
+                    車載電子全球供應實績表
+                </p>
+            </div>
+
+            <!-- 4. Main Achievement Table -->
+            <div class="bg-gray-800 rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
+                <div class="p-4 border-b border-gray-700 bg-gray-800 flex flex-wrap justify-between items-center gap-2">
+                    <h2 class="text-lg font-bold text-blue-400 flex items-center">
+                        <i class="fa-solid fa-list-ul mr-2"></i> 
+                        <span data-lang="en">Supply Achievement List</span>
+                        <span data-lang="zh">供應實績列表</span>
+                    </h2>
+                    <div class="flex flex-wrap gap-2">
+                         <div class="flex items-center text-xs text-gray-500">
+                            <span class="w-2 h-2 rounded-full bg-gray-600 mr-2"></span>
+                            Direct / Strategic (Hidden)
+                        </div>
+                        <div class="flex items-center text-xs text-gray-400">
+                            <span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
+                            Tier 1 (Shown)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 35%;">
+                                    <span data-lang="en">Category</span>
+                                    <span data-lang="zh">產品應用領域</span>
+                                </th>
+                                <th style="width: 25%;">
+                                    <span data-lang="en">Key Partners / Tier 1</span>
+                                    <span data-lang="zh">重點合作夥伴 / 一級供應商</span>
+                                    <br>
+                                    <span class="text-[10px] text-gray-500 normal-case" data-lang="en">(Direct/Strategic left blank)</span>
+                                    <span class="text-[10px] text-gray-500 normal-case" data-lang="zh">(若為直供或戰略合作則留白)</span>
+                                </th>
+                                <th style="width: 40%;">
+                                    <span data-lang="en">End Brand Reference</span>
+                                    <span data-lang="zh">終端車廠 / 品牌實績</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <!-- 1. ADAS & Vision Systems (NEW HIGHLIGHT) -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-start">
+                                        <div class="p-2 bg-red-500/10 rounded-lg text-red-400 mr-3 flex-shrink-0">
+                                            <i class="fa-solid fa-eye text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white text-base" data-lang="en">ADAS & Vision Systems</div>
+                                            <div class="font-bold text-white text-base" data-lang="zh">ADAS 與視覺影像系統</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="en">Camera Module Cables, Image Sensor Boards (FCAM/RCAM), Vision PCBA</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="zh">攝像頭模組線束 (Camera Module Cables), 影像感測模組/板 (Image Sensor Boards/FCAM/RCAM), 視覺系統 PCBA</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="font-bold text-white text-lg">Lens Tech / Valeo / JET</div>
+                                    <div class="text-xs text-gray-500" data-lang="en">Lens Technology / Valeo / Jet Opto</div>
+                                    <div class="text-xs text-gray-500" data-lang="zh">藍思科技 (Lens Tech) / Valeo / 凱銳 (Jet Opto)</div>
+                                </td>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <span class="brand-tag border-red-500/30 text-red-300">TESLA</span>
+                                        <span class="brand-tag">Toyota</span>
+                                        <span class="brand-tag">BMW</span>
+                                        <span class="brand-tag">Volvo</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 2. EV Components -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-start">
+                                        <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400 mr-3 flex-shrink-0">
+                                            <i class="fa-solid fa-bolt text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white text-base" data-lang="en">EV Key Components</div>
+                                            <div class="font-bold text-white text-base" data-lang="zh">EV 純電關鍵零組件</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="en">High Voltage Connectors, FPC/FPCBA, Inverter Control, Housing</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="zh">高壓連接器 (High Voltage Connectors), 軟性電路板/模組 (FPC/FPCBA), 逆變器控制 (Inverter Control), 機構件/外殼 (Housing)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="relative group">
+                                    <!-- Blank for Direct -->
+                                    <div class="h-full w-full flex items-center">
+                                        <span class="text-xs text-gray-600 italic group-hover:text-gray-500 transition-colors cursor-default" data-lang="en">(Direct Supply)</span>
+                                        <span class="text-xs text-gray-600 italic group-hover:text-gray-500 transition-colors cursor-default" data-lang="zh">(直接供應)</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <span class="brand-tag border-blue-500/30 text-blue-300">TESLA</span>
+                                        <span class="brand-tag border-blue-500/30 text-blue-300">RIVIAN</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 3. Powertrain & Body -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-start">
+                                        <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-400 mr-3 flex-shrink-0">
+                                            <i class="fa-solid fa-gears text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white text-base" data-lang="en">Powertrain & Body</div>
+                                            <div class="font-bold text-white text-base" data-lang="zh">動力總成與車身電子</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="en">Powertrain, 48V Modules, Exterior Lighting, Sensors</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="zh">動力總成 (Powertrain), 48V 電源模組, 車外照明 (Exterior Lighting), 感測器 (Sensors)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="font-bold text-white text-lg">Valeo</div>
+                                    <div class="text-xs text-gray-500" data-lang="en">Global Tier 1</div>
+                                    <div class="text-xs text-gray-500" data-lang="zh">全球一級供應商 (Global Tier 1)</div>
+                                </td>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <span class="brand-tag">BMW</span>
+                                        <span class="brand-tag">Volvo</span>
+                                        <span class="brand-tag">Stellantis</span>
+                                        <span class="brand-tag">Renault</span>
+                                        <span class="brand-tag">Nissan</span>
+                                        <span class="brand-tag" data-lang="en">Geely</span>
+                                        <span class="brand-tag" data-lang="zh">Geely (吉利)</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 4. Powertrain Sensors (REFINED) -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-start">
+                                        <div class="p-2 bg-green-500/10 rounded-lg text-green-400 mr-3 flex-shrink-0">
+                                            <i class="fa-solid fa-microchip text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white text-base" data-lang="en">Powertrain Sensors & PCBA</div>
+                                            <div class="font-bold text-white text-base" data-lang="zh">動力與壓力傳感器 PCBA</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="en">MAP/TMAP Sensors, Oil Pressure Sensors, Control Boards</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="zh">進氣/溫度壓力感測器 (MAP/TMAP Sensors), 油壓感測器 (Oil Pressure), 控制板 (Control Boards)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="font-bold text-white text-lg">Valeo / Major Tier 1</div>
+                                </td>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <span class="brand-tag">Mercedes-Benz</span>
+                                        <span class="brand-tag">VW Group</span>
+                                        <span class="brand-tag">Peugeot</span>
+                                        <span class="brand-tag">Mitsubishi</span>
+                                        <span class="brand-tag" data-lang="en">Great Wall</span>
+                                        <span class="brand-tag" data-lang="zh">Great Wall (長城)</span>
+                                        <span class="brand-tag">GAC</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 5. Entertainment & DVR -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-start">
+                                        <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400 mr-3 flex-shrink-0">
+                                            <i class="fa-solid fa-video text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white text-base" data-lang="en">In-Car Entertainment</div>
+                                            <div class="font-bold text-white text-base" data-lang="zh">影音娛樂系統</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="en">Rear Seat Entertainment (RSE), Infotainment Main Board</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="zh">後座娛樂系統 (RSE), 資訊娛樂主機板 (Infotainment Main Board)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="font-bold text-white text-lg" data-lang="en">JET OPTO</div>
+                                    <div class="font-bold text-white text-lg" data-lang="zh">JET OPTO (凱銳)</div>
+                                    <div class="text-xs text-gray-500" data-lang="en">System Integrator</div>
+                                    <div class="text-xs text-gray-500" data-lang="zh">系統整合商 (System Integrator)</div>
+                                </td>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <span class="brand-tag">Toyota</span>
+                                        <span class="brand-tag">Honda</span>
+                                        <span class="brand-tag">Subaru</span>
+                                        <span class="brand-tag">GM</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 6. E-Mobility (2-Wheeler) -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-start">
+                                        <div class="p-2 bg-teal-500/10 rounded-lg text-teal-400 mr-3 flex-shrink-0">
+                                            <i class="fa-solid fa-motorcycle text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white text-base" data-lang="en">E-Mobility (2-Wheeler)</div>
+                                            <div class="font-bold text-white text-base" data-lang="zh">E-Mobility 兩輪電動車系統</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="en">ECU, Digital Dashboard, Smart Key, Battery Swapping</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="zh">電子控制單元 (ECU), 數位儀表 (Digital Dashboard), 智慧鑰匙 (Smart Key), 電池交換系統 (Battery Swapping)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="relative group">
+                                     <!-- Blank for Strategic Partner -->
+                                     <div class="h-full w-full flex items-center">
+                                        <span class="text-xs text-gray-600 italic group-hover:text-gray-500 transition-colors cursor-default" data-lang="en">(Strategic Partnership)</span>
+                                        <span class="text-xs text-gray-600 italic group-hover:text-gray-500 transition-colors cursor-default" data-lang="zh">(戰略合作夥伴)</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <span class="brand-tag border-teal-500/30 text-teal-300">Gogoro</span>
+                                        <span class="brand-tag border-teal-500/30 text-teal-300" data-lang="en">Yadea</span>
+                                        <span class="brand-tag border-teal-500/30 text-teal-300" data-lang="zh">Yadea (雅迪)</span>
+                                        <span class="brand-tag" data-lang="en">Lifan</span>
+                                        <span class="brand-tag" data-lang="zh">Lifan (力帆)</span>
+                                        <span class="brand-tag" data-lang="en">TAILG</span>
+                                        <span class="brand-tag" data-lang="zh">TAILG (台鈴)</span>
+                                        <span class="brand-tag" data-lang="en">Da Tian</span>
+                                        <span class="brand-tag" data-lang="zh">Da Tian (大田)</span>
+                                        <span class="brand-tag" data-lang="en">Daye/Zontes</span>
+                                        <span class="brand-tag" data-lang="zh">Daye (大冶/升仕)</span>
+                                        <span class="brand-tag" data-lang="en">Qipai</span>
+                                        <span class="brand-tag" data-lang="zh">Qipai (氣派)</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- 7. Telematics & Cockpit -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-start">
+                                        <div class="p-2 bg-orange-500/10 rounded-lg text-orange-400 mr-3 flex-shrink-0">
+                                            <i class="fa-solid fa-satellite-dish text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white text-base" data-lang="en">Telematics & Cockpit</div>
+                                            <div class="font-bold text-white text-base" data-lang="zh">車聯網與智慧座艙</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="en">GPS Trackers, Telematics Gateway, CMS (Digital Mirror)</div>
+                                            <div class="text-xs text-gray-400 mt-1" data-lang="zh">GPS 追蹤器, 車載資通訊閘道器 (Telematics Gateway), 電子後視鏡 (CMS/Digital Mirror)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="relative group">
+                                     <!-- Blank for Strategic -->
+                                     <div class="h-full w-full flex items-center">
+                                        <span class="text-xs text-gray-600 italic group-hover:text-gray-500 transition-colors cursor-default" data-lang="en">(Strategic Partnership)</span>
+                                        <span class="text-xs text-gray-600 italic group-hover:text-gray-500 transition-colors cursor-default" data-lang="zh">(戰略合作夥伴)</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <span class="brand-tag" data-lang="en">Carmax</span>
+                                        <span class="brand-tag" data-lang="zh">Carmax (車美仕)</span>
+                                        <span class="brand-tag" data-lang="en">ATrack</span>
+                                        <span class="brand-tag" data-lang="zh">ATrack (威潤)</span>
+                                        <span class="brand-tag" data-lang="en">Join Link</span>
+                                        <span class="brand-tag" data-lang="zh">Join Link (宗盈)</span>
+                                        <span class="brand-tag" data-lang="en">Noetiq</span>
+                                        <span class="brand-tag" data-lang="zh">Noetiq (隆摩亞)</span>
+                                        <span class="brand-tag">Golden Martian</span>
+                                        <span class="brand-tag">Polaroid</span>
+                                        <span class="brand-tag">DOD</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5. Footer -->
+            <footer class="mt-12 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 no-print gap-4 md:gap-0">
+                <div class="text-center md:text-left">
+                    <span class="block">Prepared by: Automotive Business Unit</span>
+                    <span class="block mt-1">© 2025 FOXLINK. All Rights Reserved.</span>
+                </div>
+                <div class="text-center md:text-right">
+                    <span class="block text-red-400/70 uppercase">Internal Use Only</span>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <script>
+        let currentLang = 'en'; // 預設英文
+
+        function updateLanguageUI() {
+            try {
+                // 隱藏所有帶 data-lang 的元素
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                // 顯示當前語言的元素
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    // 在手機版中，我們依賴 CSS 設置 display: block
+                    // 所以這裡只要清除 inline 的 display: none 即可，讓 CSS 接手
+                    el.style.display = ''; 
+                    
+                    // 為了確保非手機版的表格正常顯示，以及特定元素的 inline 特性
+                    // 我們做一個簡單的修正：
+                    if (['span', 'strong', 'a', 'i', 'button', 'title'].includes(tagName)) {
+                         el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.removeProperty('display'); // 讓 CSS 決定是 table-cell 還是 block
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                // 更新標題
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 語言切換
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            // PDF 導出 (瀏覽器列印)
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            // 初始化
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
