@@ -1,70 +1,81 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+
     <title>HTML代碼管理器</title>
+    <meta name="description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
+    <meta name="keywords" content="HTML編輯器,代碼預覽,網頁製作,線上編輯">
+    <meta property="og:title" content="HTML代碼管理器">
+    <meta property="og:description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
+    <meta name="twitter:title" content="HTML代碼管理器">
+    <meta name="twitter:description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
 
-    <!-- 使用公共 CDN 资源 -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet">
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
 
+    <!-- Predefined Tailwind CSS, use it as needed, or update base on your -->
     <style type="text/tailwindcss">
         @layer theme {
         :root {
             --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success-color: #16a34a;
+            --border-color: #e5e7eb;
+            --text-secondary: #6b7280;
         }
     }
-    
+
+    @layer base {
+        body {
+            @apply bg-gray-50 font-sans;
+        }
+    }
+
     @layer components {
         .btn-primary {
-            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-blue-700 transition-colors;
+            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--primary-hover)] transition-colors duration-200;
         }
+        
         .btn-success {
-            @apply px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors;
+            @apply px-4 py-2 bg-[var(--success-color)] text-white rounded-lg hover:bg-green-600 transition-colors duration-200;
         }
+        
         .input-field {
-            @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent;
+            @apply w-full p-3 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent outline-none;
+        }
+        
+        .preview-frame {
+            @apply w-full h-full border border-[var(--border-color)] rounded-lg bg-white;
+        }
+        
+        .progress-bar {
+            @apply relative h-1 bg-gray-200 rounded-full overflow-hidden;
+        }
+        
+        .progress-bar-fill {
+            @apply absolute top-0 left-0 h-full bg-[var(--primary-color)] transition-all duration-300;
         }
     }
     </style>
 
-    <!-- 添加版本号到所有脚本 - 确保每次都加载最新 -->
-    <script>
-        window.APP_VERSION = Date.now();
-        console.log('[主页] 应用版本:', window.APP_VERSION);
-    </script>
 </head>
 
 <body>
     <div id="root"></div>
-
-    <!-- 静态加载但带版本号 -->
-    <script>
-        // 动态插入 script 标签，带版本号
-        const v = window.APP_VERSION;
-        const scripts = [
-            'utils/reportsLoader.js',
-            'components/LoadingProgress.js',
-            'components/Pagination.js',
-            'components/SearchBar.js',
-            'components/CategoryTabs.js',
-            'components/PageCard.js',
-            'components/HomePage.js',
-            'app.js'
-        ];
-
-        scripts.forEach(src => {
-            document.write(`<script type="text/babel" src="${src}?v=${v}"><\/script>`);
-        });
-    </script>
+    <script type="text/babel" src="utils/reportsLoader.js"></script>
+    <script type="text/babel" src="components/LoadingProgress.js"></script>
+    <script type="text/babel" src="components/SearchBar.js"></script>
+    <script type="text/babel" src="components/CategoryTabs.js"></script>
+    <script type="text/babel" src="components/Pagination.js"></script>
+    <script type="text/babel" src="components/HomePage.js"></script>
+    <script type="text/babel" src="components/PageCard.js"></script>
+    <script type="text/babel" src="app.js"></script>
 </body>
 
 </html>
