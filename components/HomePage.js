@@ -121,15 +121,15 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     };
 
     const handleSharePage = async (pageId, title) => {
-      const pageData = await getStoredPageData(pageId);
-      const htmlData = await getStoredHTML(pageId);
-
-      if (!pageData || !htmlData) {
+      // 找到对应的 page 获取 fileName
+      const page = allPages.find(p => p.pageId === pageId);
+      if (!page || !page.fileName) {
         alert('頁面資料不完整，無法分享');
         return;
       }
 
-      const url = `${window.location.origin}/preview.html?id=${pageId}`;
+      // 直接分享 HTML 文件链接
+      const url = `${window.location.origin}/reports/${page.fileName}`;
       setShareData({ title, url });
       setShowShareModal(true);
     };
