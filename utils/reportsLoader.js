@@ -1,11 +1,23 @@
 // 从 GitHub Pages 加载报告的工具函数
+// 禁用所有缓存，确保实时获取最新数据
 
 /**
  * 从 data/reports-index.json 加载报告索引
+ * 使用时间戳和禁用缓存 headers 确保获取最新数据
  */
 async function loadReportsIndex() {
     try {
-        const response = await fetch('./data/reports-index.json');
+        // 添加时间戳防止缓存
+        const timestamp = Date.now();
+        const response = await fetch(`./data/reports-index.json?v=${timestamp}`, {
+            cache: 'no-store', // 禁用缓存
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
+
         if (!response.ok) {
             console.error('无法加载报告索引');
             return { reports: [] };
@@ -42,10 +54,20 @@ async function getAllStoredPages() {
 
 /**
  * 根据文件名获取报告HTML内容
+ * 禁用缓存确保获取最新版本
  */
 async function getReportHTML(fileName) {
     try {
-        const response = await fetch(`./reports/${fileName}`);
+        const timestamp = Date.now();
+        const response = await fetch(`./reports/${fileName}?v=${timestamp}`, {
+            cache: 'no-store',
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
+
         if (!response.ok) {
             return null;
         }
