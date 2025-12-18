@@ -12,8 +12,6 @@ function App() {
 
   return (
     <HomePage
-      onCreateNew={handleCreateOrEdit}
-      onEditPage={handleCreateOrEdit}
       currentCategory={currentCategory}
       setCurrentCategory={setCurrentCategory}
       searchKeyword={searchKeyword}
