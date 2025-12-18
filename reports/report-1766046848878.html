@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>India Sales WhatsApp Gen</title>
+    <!-- 引入 Tailwind CSS 用於樣式 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome 用於圖標 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- 引入 React 和 ReactDOM -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- 引入 Babel 用於解析 JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f3f4f6;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .textarea-box {
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+        }
+        /* Mobile optimization */
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const IndiaSalesGen = () => {
+            // --- 狀態管理 ---
+            const [customerName, setCustomerName] = useState('');
+            const [customerCompany, setCustomerCompany] = useState('');
+            const [referrerName, setReferrerName] = useState('');
+            
+            const [myName, setMyName] = useState('Michael');
+            const [myCompany, setMyCompany] = useState('Foxlink');
+            
+            const [startDate, setStartDate] = useState('');
+            const [endDate, setEndDate] = useState('');
+            
+            const [visitLocation, setVisitLocation] = useState('Gurugram/Delhi NCR');
+            
+            const [stage, setStage] = useState(1);
+            const [subScenario, setSubScenario] = useState('no-ref');
+            const [generatedScript, setGeneratedScript] = useState('');
+            const [copied, setCopied] = useState(false);
+
+            // --- 自動化邏輯 ---
+            useEffect(() => {
+                if (stage === 1) {
+                    if (referrerName.trim()) {
+                        setSubScenario('ref');
+                    } else if (subScenario === 'ref') {
+                        setSubScenario('no-ref');
+                    }
+                }
+            }, [referrerName, stage]);
+
+            // --- 核心話術庫 (最終定稿版) ---
+            const scripts = {
+                1: { // 階段一：完全陌生
+                    'no-ref': {
+                        title: "完全陌生 (直接切入)",
+                        tone: "專業、表明來意",
+                        template: (data) => 
+                            `Hi ${data.cName || '[Name]'}, hope you're having a busy week.\n\n` +
+                            `This is ${data.mName} from ${data.mCompany}. I'm the new Regional Lead for ${data.loc}.\n\n` +
+                            `I'm visiting your area ${data.date} to support key partners. I wanted to check:\n\n` +
+                            `Are you the right person to discuss supply chain support for ${data.cCompany}?\n\n` +
+                            `Thanks, ${data.mName}`
+                    },
+                    'ref': {
+                        title: "有介紹人",
+                        tone: "借力使力",
+                        template: (data) =>
+                            `Hi ${data.cName || '[Name]'}, greetings from ${data.mCompany}.\n\n` +
+                            `Our mutual friend, ${data.rName || '[Referrer Name]'}, suggested I connect with you regarding manufacturing support.\n\n` +
+                            `I'm visiting ${data.loc} ${data.date} and would love to stop by for a quick hello, just to put a face to the name.\n\n` +
+                            `Best, ${data.mName}`
+                    },
+                    'verify': {
+                        title: "確認身分 (極簡)",
+                        tone: "快速確認",
+                        template: (data) =>
+                            `Hello, I am ${data.mName} from ${data.mCompany}.\n\n` +
+                            `May I ask if this is Mr. ${data.cName || '[Name]'} from ${data.cCompany}?\n\n` +
+                            `(Waiting for reply...)`
+                    }
+                },
+                2: { // 階段二：建立關係與邀約
+                    'pain-point': {
+                        title: "建立關係 (Relationship)",
+                        tone: "邀約優先、價值導向", 
+                        template: (data) =>
+                            `Hi ${data.cName || '[Name]'}, thanks for connecting.\n\n` +
+                            `I will be in ${data.loc} ${data.date}. I'd like to request a brief 10-min meeting when I'm in your area.\n\n` +
+                            `My priority is to introduce myself, so if you need any service or help in the future, I will be there.\n\n` +
+                            `Also, I can share some insights from our global experience that might be useful for your current projects.\n\n` +
+                            `If you're open for a quick coffee, let me know?`
+                    },
+                    'courtesy': {
+                        title: "順道拜訪 (Courtesy)",
+                        tone: "低壓、交朋友",
+                        template: (data) =>
+                            `Hi ${data.cName || '[Name]'}, quick update on my travel schedule.\n\n` +
+                            `I'll be in ${data.loc} ${data.date}.\n\n` +
+                            `Since I'm in the neighborhood, can I drop by for 10 mins? Just a courtesy visit to introduce myself personally.\n\n` +
+                            `Let me know if you are around!`
+                    }
+                },
+                3: { // 階段三：行程確認
+                    'heads-up': {
+                        title: "告知行程 (老友感)",
+                        tone: "親切、確認",
+                        template: (data) =>
+                            `Hi ${data.cName || '[Name]'}, finalizing my calendar for ${data.date} in ${data.loc}.\n\n` +
+                            `I have a slot open on Tuesday/Wednesday. Are you gonna be in town?\n\n` +
+                            `Would be great to catch up over tea.`
+                    },
+                    'confirm-loc': {
+                        title: "確認地點",
+                        tone: "細心",
+                        template: (data) =>
+                            `Hi ${data.cName || '[Name]'}, looking forward to seeing you ${data.date}.\n\n` +
+                            `Could you share your office location pin? Or should we meet at a cafe nearby?\n\n` +
+                            `See you soon.`
+                    },
+                    'soft-ping': {
+                        title: "臨時輕推 (Soft Ping)",
+                        tone: "隨意",
+                        template: (data) =>
+                            `Hi ${data.cName || '[Name]'}, I'm finishing up a meeting nearby in ${data.loc}.\n\n` +
+                            `If you're free in the next hour, I can drop by for a quick hello. If not, no worries!\n\n` +
+                            `Cheers, ${data.mName}`
+                    }
+                }
+            };
+
+            // --- 自動更新生成的文字 ---
+            useEffect(() => {
+                const currentScriptObj = scripts[stage][subScenario] || Object.values(scripts[stage])[0];
+                const templateFn = currentScriptObj.template;
+
+                // 處理日期邏輯
+                let dateString = 'next week';
+                if (startDate.trim()) {
+                    if (endDate.trim()) {
+                        dateString = `from ${startDate} to ${endDate}`;
+                    } else {
+                        dateString = `on ${startDate}`;
+                    }
+                }
+
+                const text = templateFn({
+                    cName: customerName.trim(),
+                    cCompany: customerCompany.trim() || 'your company',
+                    rName: referrerName.trim(),
+                    mName: myName,
+                    mCompany: myCompany,
+                    loc: visitLocation,
+                    date: dateString
+                });
+                setGeneratedScript(text);
+                setCopied(false);
+            }, [customerName, customerCompany, referrerName, myName, myCompany, startDate, endDate, visitLocation, stage, subScenario]);
+
+            // --- 複製功能 ---
+            const copyToClipboard = () => {
+                const textArea = document.createElement("textarea");
+                textArea.value = generatedScript;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                } catch (err) {
+                    console.error('Copy failed', err);
+                }
+                document.body.removeChild(textArea);
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-50 font-sans text-gray-800 p-4 md:p-8 pb-32">
+                    <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+                        
+                        {/* Header */}
+                        <div className="bg-gradient-to-r from-orange-600 to-red-700 text-white p-6">
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                                        <i className="fab fa-whatsapp text-3xl"></i>
+                                        India Sales WhatsApp
+                                    </h1>
+                                    <p className="text-orange-100 text-sm mt-1">
+                                        專為印度市場設計的業務話術生成器
+                                    </p>
+                                </div>
+                                <div className="hidden md:block text-right text-xs opacity-80">
+                                    <div>Strategy: Invite First & Global Value</div>
+                                    <div>Tone: Direct & Friendly</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-3">
+                            
+                            {/* 左側：輸入區 */}
+                            <div className="col-span-1 bg-gray-50 p-6 border-r border-gray-200 space-y-5">
+                                <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">1. 基礎資訊</h2>
+                                
+                                <div className="space-y-4">
+                                    {/* 客戶姓名 */}
+                                    <div>
+                                        <label className="block text-xs font-semibold text-gray-600 mb-1">客戶稱呼 (Name)</label>
+                                        <div className="relative">
+                                            <i className="fas fa-user absolute left-3 top-3 text-gray-400"></i>
+                                            <input 
+                                                type="text" 
+                                                placeholder="e.g. Gaurav"
+                                                className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 text-sm"
+                                                value={customerName}
+                                                onChange={(e) => setCustomerName(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* 介紹人 */}
+                                    <div>
+                                        <label className="block text-xs font-semibold text-gray-600 mb-1 flex justify-between">
+                                           <span>介紹人 (Referrer)</span>
+                                           <span className="text-orange-500 font-normal opacity-70">Optional</span>
+                                        </label>
+                                        <div className="relative">
+                                            <i className="fas fa-users absolute left-3 top-3 text-gray-400"></i>
+                                            <input 
+                                                type="text" 
+                                                placeholder="e.g. Common Friend"
+                                                className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 text-sm bg-orange-50 border-orange-100"
+                                                value={referrerName}
+                                                onChange={(e) => setReferrerName(e.target.value)}
+                                            />
+                                        </div>
+                                        {referrerName && (
+                                            <p className="text-xs text-orange-600 mt-1 pl-1">* 已切換為「有介紹人」話術</p>
+                                        )}
+                                    </div>
+
+                                    {/* 客戶公司 */}
+                                    <div>
+                                        <label className="block text-xs font-semibold text-gray-600 mb-1">客戶公司 (Company)</label>
+                                        <div className="relative">
+                                            <i className="fas fa-building absolute left-3 top-3 text-gray-400"></i>
+                                            <input 
+                                                type="text" 
+                                                placeholder="e.g. Hero, boAt"
+                                                className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 text-sm"
+                                                value={customerCompany}
+                                                onChange={(e) => setCustomerCompany(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* 拜訪日期與地點 */}
+                                    <div>
+                                        <label className="block text-xs font-semibold text-gray-600 mb-1">拜訪日期 (Visit Date)</label>
+                                        <div className="flex gap-2 mb-2">
+                                            <div className="flex-1">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="Start (e.g. 20th)"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 text-sm"
+                                                    value={startDate}
+                                                    onChange={(e) => setStartDate(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="flex items-center text-gray-400">-</div>
+                                            <div className="flex-1">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="End (Optional)"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 text-sm"
+                                                    value={endDate}
+                                                    onChange={(e) => setEndDate(e.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="text-xs text-gray-400 mb-2 pl-1">
+                                           * 只填左邊 = 指定日；填兩邊 = 日期區間
+                                        </div>
+
+                                        <label className="block text-xs font-semibold text-gray-600 mb-1">地點 (Location)</label>
+                                        <input 
+                                            type="text" 
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 text-sm"
+                                            value={visitLocation}
+                                            onChange={(e) => setVisitLocation(e.target.value)}
+                                        />
+                                    </div>
+
+                                    <div className="pt-4 border-t border-gray-200">
+                                        <label className="block text-xs font-semibold text-gray-400 mb-1">我的資訊 (Defaults)</label>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <input 
+                                                className="w-full px-2 py-1 bg-white border border-gray-200 rounded text-xs text-gray-500"
+                                                value={myName} onChange={(e) => setMyName(e.target.value)}
+                                            />
+                                            <input 
+                                                className="w-full px-2 py-1 bg-white border border-gray-200 rounded text-xs text-gray-500"
+                                                value={myCompany} onChange={(e) => setMyCompany(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 右側：生成與選擇區 */}
+                            <div className="col-span-1 lg:col-span-2 p-6 flex flex-col h-full">
+                                
+                                <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">2. 選擇情境 & 生成</h2>
+
+                                {/* Stage Tabs */}
+                                <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg mb-6">
+                                    {[
+                                        { id: 1, label: '陌生開發', icon: 'fa-user' },
+                                        { id: 2, label: '邀約見面', icon: 'fa-handshake' },
+                                        { id: 3, label: '行程通知', icon: 'fa-map-marked-alt' },
+                                    ].map((tab) => (
+                                        <button
+                                            key={tab.id}
+                                            onClick={() => { setStage(tab.id); setSubScenario(Object.keys(scripts[tab.id])[0]); }}
+                                            className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-md transition-all \${
+                                                stage === tab.id 
+                                                ? 'bg-white text-orange-600 shadow-sm' 
+                                                : 'text-gray-500 hover:text-gray-700'
+                                            }`}
+                                        >
+                                            <i className={`fas \${tab.icon}`}></i>
+                                            {tab.label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Sub-scenarios */}
+                                <div className="mb-4 flex flex-wrap gap-2">
+                                    {Object.entries(scripts[stage]).map(([key, info]) => (
+                                        <button
+                                            key={key}
+                                            onClick={() => setSubScenario(key)}
+                                            className={`px-4 py-1.5 rounded-full text-xs font-medium border transition-colors \${
+                                                subScenario === key
+                                                ? 'bg-orange-100 text-orange-700 border-orange-200'
+                                                : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                                            }`}
+                                        >
+                                            {info.title}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Generated Area */}
+                                <div className="flex-1 flex flex-col">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="text-xs font-semibold text-gray-400">
+                                            Tone: {scripts[stage][subScenario]?.tone}
+                                        </span>
+                                        <button 
+                                            onClick={copyToClipboard}
+                                            className={`flex items-center gap-1 text-xs px-3 py-1.5 rounded transition-colors \${
+                                                copied ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                            }`}
+                                        >
+                                            <i className={`fas \${copied ? 'fa-check' : 'fa-copy'}`}></i>
+                                            {copied ? ' Copied!' : ' Copy Text'}
+                                        </button>
+                                    </div>
+
+                                    <textarea 
+                                        className="w-full flex-1 p-4 bg-green-50 border border-green-200 rounded-xl text-gray-800 text-sm leading-relaxed resize-none focus:ring-2 focus:ring-green-400 focus:outline-none textarea-box"
+                                        style={{minHeight: '200px'}}
+                                        value={generatedScript}
+                                        onChange={(e) => setGeneratedScript(e.target.value)}
+                                    />
+                                    
+                                    <div className="mt-2 text-xs text-gray-400 flex items-center gap-1">
+                                        <i className="fas fa-info-circle"></i>
+                                        <span>Tip: 可以直接在上方編輯框微調後再複製。</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {/* Footer: Indian Context Tips */}
+                        <div className="bg-yellow-50 p-4 border-t border-yellow-100 text-sm text-yellow-800">
+                            <div className="flex items-start gap-3">
+                                <div className="bg-yellow-200 p-2 rounded-full shrink-0 w-8 h-8 flex items-center justify-center">
+                                    <i className="fas fa-lightbulb text-yellow-700"></i>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold mb-1">🇮🇳 印度市場溝通小撇步</h4>
+                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 list-disc pl-4 text-xs">
+                                        <li><strong>稱呼:</strong> 初次即使是 WhatsApp 也建議用 "Mr. [Last Name]"。</li>
+                                        <li><strong>時間:</strong> 避免在午餐時間 (1:30 - 2:30 PM) 傳訊。</li>
+                                        <li><strong>見面:</strong> 說 "Coffee" 或 "Chai" 比說 "Meeting" 容易約到人。</li>
+                                        <li><strong>關鍵:</strong> "I will be there" 在印度是非常有力的承諾。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<IndiaSalesGen />, document.getElementById('root'));
+    </script>
+</body>
+</html>
