@@ -1,81 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>HTML代碼管理器</title>
-    <meta name="description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
-    <meta name="keywords" content="HTML編輯器,代碼預覽,網頁製作,線上編輯">
-    <meta property="og:title" content="HTML代碼管理器">
-    <meta property="og:description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
-    <meta name="twitter:title" content="HTML代碼管理器">
-    <meta name="twitter:description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
-
     <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
     <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
 
-    <!-- Predefined Tailwind CSS, use it as needed, or update base on your -->
     <style type="text/tailwindcss">
         @layer theme {
         :root {
             --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --success-color: #16a34a;
-            --border-color: #e5e7eb;
-            --text-secondary: #6b7280;
         }
     }
-
-    @layer base {
-        body {
-            @apply bg-gray-50 font-sans;
-        }
-    }
-
+    
     @layer components {
         .btn-primary {
-            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--primary-hover)] transition-colors duration-200;
+            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-blue-700 transition-colors;
         }
-        
         .btn-success {
-            @apply px-4 py-2 bg-[var(--success-color)] text-white rounded-lg hover:bg-green-600 transition-colors duration-200;
+            @apply px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors;
         }
-        
         .input-field {
-            @apply w-full p-3 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent outline-none;
-        }
-        
-        .preview-frame {
-            @apply w-full h-full border border-[var(--border-color)] rounded-lg bg-white;
-        }
-        
-        .progress-bar {
-            @apply relative h-1 bg-gray-200 rounded-full overflow-hidden;
-        }
-        
-        .progress-bar-fill {
-            @apply absolute top-0 left-0 h-full bg-[var(--primary-color)] transition-all duration-300;
+            @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent;
         }
     }
     </style>
-
 </head>
 
 <body>
     <div id="root"></div>
-    <script type="text/babel" src="utils/reportsLoader.js"></script>
-    <script type="text/babel" src="components/LoadingProgress.js"></script>
-    <script type="text/babel" src="components/SearchBar.js"></script>
-    <script type="text/babel" src="components/CategoryTabs.js"></script>
-    <script type="text/babel" src="components/Pagination.js"></script>
-    <script type="text/babel" src="components/HomePage.js"></script>
-    <script type="text/babel" src="components/PageCard.js"></script>
-    <script type="text/babel" src="app.js"></script>
+
+    <!-- Service Worker 注册 - 完全控制缓存 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('[主页] Service Worker 已注册'))
+                .catch(err => console.error('[主页] Service Worker 注册失败:', err));
+        }
+    </script>
+
+    <!-- 动态加载脚本，每次带新时间戳 - 确保实时更新 -->
+    <script>
+        const version = Date.now();
+        console.log('[主页] 脚本版本:', version);
+
+        const scripts = [
+            { src: `utils/reportsLoader.js?v=${version}`, type: 'text/babel' },
+            { src: `components/LoadingProgress.js?v=${version}`, type: 'text/babel' },
+            { src: `components/Pagination.js?v=${version}`, type: 'text/babel' },
+            { src: `components/SearchBar.js?v=${version}`, type: 'text/babel' },
+            { src: `components/CategoryTabs.js?v=${version}`, type: 'text/babel' },
+            { src: `components/PageCard.js?v=${version}`, type: 'text/babel' },
+            { src: `components/HomePage.js?v=${version}`, type: 'text/babel' },
+            { src: `app.js?v=${version}`, type: 'text/babel' }
+        ];
+
+        // 按顺序加载脚本
+        function loadScript(index) {
+            if (index >= scripts.length) {
+                console.log('[主页] 所有脚本加载完成');
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.type = scripts[index].type;
+            script.src = scripts[index].src;
+            script.onload = () => {
+                console.log('[主页] 已加载:', scripts[index].src);
+                loadScript(index + 1);
+            };
+            script.onerror = () => {
+                console.error('[主页] 加载失败:', scripts[index].src);
+                loadScript(index + 1);
+            };
+            document.body.appendChild(script);
+        }
+
+        loadScript(0);
+    </script>
 </body>
 
 </html>
