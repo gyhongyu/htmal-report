@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-18T07:22:32.941Z",
+  "lastUpdated": "2025-12-18T08:23:11.373Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -14,6 +14,19 @@
       "fileName": "report-1766042552185.html",
       "createdAt": "2025-12-18T07:22:32.941Z",
       "updatedAt": "2025-12-18T07:22:32.941Z"
+    },
+    {
+      "id": "report-1766046190926",
+      "title": "2025年 全球客戶實績總覽",
+      "description": "2025 Global Customer Achievements",
+      "categories": [
+        "客戶簡報",
+        "內部簡報",
+        "其他"
+      ],
+      "fileName": "report-1766046190926.html",
+      "createdAt": "2025-12-18T08:23:11.373Z",
+      "updatedAt": "2025-12-18T08:23:11.373Z"
     }
   ]
 }
