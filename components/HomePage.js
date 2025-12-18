@@ -135,7 +135,15 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     };
 
     const handleCopyLink = async (pageId, title) => {
-      const url = `${window.location.origin}/preview.html?id=${pageId}`;
+      // 找到对应的 page 获取 fileName
+      const page = allPages.find(p => p.pageId === pageId);
+      if (!page || !page.fileName) {
+        alert('無法複製連結');
+        return;
+      }
+
+      // 直接复制 HTML 文件链接
+      const url = `${window.location.origin}/reports/${page.fileName}`;
       const text = `${title}\n${url}`;
       await navigator.clipboard.writeText(text);
       alert('連結已複製到剪貼簿');
