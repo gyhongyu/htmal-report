@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-18T09:04:15.850Z",
+  "lastUpdated": "2025-12-18T09:07:10.974Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -66,19 +66,6 @@
       "fileName": "report-1766047005427.html",
       "createdAt": "2025-12-18T08:36:45.874Z",
       "updatedAt": "2025-12-18T08:36:45.874Z"
-    },
-    {
-      "id": "report-1766048655413",
-      "title": "專案名稱：「我的動物」追蹤器系列開發",
-      "description": "Project: My Animal Tracker Series Development",
-      "categories": [
-        "客戶簡報",
-        "內部簡報",
-        "項目計劃"
-      ],
-      "fileName": "report-1766048655413.html",
-      "createdAt": "2025-12-18T09:04:15.850Z",
-      "updatedAt": "2025-12-18T09:04:15.850Z"
     }
   ]
 }
