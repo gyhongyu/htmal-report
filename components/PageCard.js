@@ -2,7 +2,8 @@
 function PageCard({ page, onShare, onCopyLink }) {
   try {
     const handlePreview = () => {
-      const url = `${window.location.origin}/preview.html?id=${page.pageId}`;
+      // 直接打开 HTML 文件，不使用 iframe 预览
+      const url = `${window.location.origin}/reports/${page.fileName}`;
       window.open(url, '_blank');
     };
 
