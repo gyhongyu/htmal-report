@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">Foxlink Group Global Facilities List 2025</title>
+    <title data-lang="zh">2025 正崴集團全球據點完整清單</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- 基礎樣式 (深色模式 Dark Mode) --- */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+        [data-lang] { display: none; }
+        
+        .content-area {
+            animation: fadeIn 0.5s ease-out;
+            min-height: calc(100vh - 160px);
+            padding: 2.5rem;
+            box-sizing: border-box;
+            background-color: #111827;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 互動式區塊樣式 (深色) */
+        details {
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 1px solid #374151; /* gray-700 */
+            background-color: #1f2937; /* gray-800 */
+            transition: all 0.3s ease;
+        }
+        
+        details[open] {
+            border-color: #4b5563; /* gray-600 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        summary {
+            list-style: none;
+            padding: 1rem 1.5rem;
+            background-color: #374151; /* gray-700 */
+            color: #fbbf24; /* amber-400 */
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        
+        summary:hover {
+            background-color: #4b5563;
+        }
+
+        summary::after {
+            content: '\f078'; /* FontAwesome chevron-down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s;
+            color: #fbbf24;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        /* 表格樣式 (深色) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #111827;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #374151;
+            vertical-align: top;
+            word-wrap: break-word;
+        }
+        
+        th {
+            background-color: #1f2937;
+            color: #60a5fa; /* blue-400 */
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        tbody tr:hover {
+            background-color: #1e293b;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 欄位寬度定義 */
+        .col-code { width: 10%; }
+        .col-name { width: 25%; }
+        .col-addr { width: 30%; }
+        .col-struct { width: 20%; }
+        .col-prod { width: 15%; }
+
+        /* 代碼欄位樣式 */
+        .code-text {
+            font-family: 'Courier New', monospace;
+            color: #fbbf24; /* Amber for visibility */
+            font-weight: 600;
+        }
+        
+        /* 標籤樣式 (Badge Style) */
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        /* 1. 綠色 (100% / Wholly Owned) */
+        .badge-100 {
+            background-color: #10b981; /* emerald-500 */
+            color: #000;
+        }
+        
+        /* 2. 紫色 (JV / 合資) */
+        .badge-jv {
+            background-color: #8b5cf6; /* violet-500 */
+            color: #fff;
+        }
+        
+        /* 3. 黃色 (Listed / 上市) */
+        .badge-listed {
+            background-color: #f59e0b; /* amber-500 */
+            color: #000;
+        }
+
+        /* 4. 粉色 (Investment) */
+        .badge-inv {
+            background-color: #ec4899; /* pink-500 */
+            color: #fff;
+        }
+        
+        /* 5. 灰色 (Subsidiary) */
+        .badge-sub {
+            background-color: #6b7280; /* gray-500 */
+            color: #fff;
+        }
+
+        /* 6. NVIDIA 綠 */
+        .badge-nvidia {
+            background-color: #76b900;
+            color: #000;
+        }
+
+        /* 夥伴清單樣式 (深色模式適配) */
+        .partner-list {
+            font-size: 0.8rem;
+            color: #d1d5db; /* gray-300 */
+            margin-top: 6px;
+            line-height: 1.4;
+            padding-left: 2px;
+        }
+        .partner-list strong {
+            color: #fff; /* white */
+            font-weight: 600;
+        }
+        .partner-bullet {
+            color: #60a5fa; /* blue-400 */
+            margin-right: 4px;
+        }
+        
+        .internal-unit {
+            color: #6b7280; /* gray-500 */
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* *** 列印優化樣式 *** */
+        @media print {
+            .no-print { display: none !important; }
+            body { 
+                background: #ffffff !important; 
+                color: #000000 !important; 
+                font-size: 8pt; 
+            }
+            .content-area {
+                padding: 0 !important;
+                margin: 0;
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
+            }
+            
+            details {
+                display: block !important;
+                border: 1px solid #ccc !important;
+                margin-bottom: 1rem;
+                page-break-inside: avoid;
+            }
+            
+            summary {
+                background-color: #eee !important;
+                color: #000 !important;
+                border-bottom: 1px solid #999 !important;
+                padding: 0.5rem;
+            }
+            summary::after { display: none !important; }
+
+            table { border: none; width: 100%; }
+            th { 
+                background-color: #f3f4f6 !important; 
+                color: #000 !important; 
+                border-bottom: 2px solid #999 !important;
+                padding: 4px;
+            }
+            td { 
+                border-bottom: 1px solid #eee !important;
+                color: #000 !important;
+                padding: 4px;
+            }
+            
+            /* 標籤列印樣式修正 - 轉為黑白高對比 */
+            .badge { border: 1px solid #000 !important; background: #fff !important; color: #000 !important; }
+            .partner-list { color: #000 !important; }
+            .partner-list strong { color: #000 !important; }
+            .text-green-400 { color: #000 !important; }
+            .text-white { color: #000 !important; }
+            .text-blue-300 { color: #000 !important; }
+            
+            tr { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- 1. 固定的頭部 (no-print) -->
+    <header class="sticky top-0 left-0 right-0 p-4 md:px-8 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print shadow-lg">
+        <div class="flex items-center space-x-3">
+            <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+            <div class="border-l pl-3 border-gray-600">
+                <span class="block text-lg font-bold leading-tight text-white" data-lang="en">Foxlink Group Facilities</span>
+                <span class="block text-lg font-bold leading-tight text-white" data-lang="zh">正崴集團全球據點</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3 flex-shrink-0">
+            <!-- PDF 導出按鈕 -->
+            <button id="export-pdf-btn" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors flex items-center btn-icon shadow-sm">
+                <i class="fas fa-file-pdf mr-2"></i>
+                <span data-lang="en">Export PDF</span>
+                <span data-lang="zh">導出 PDF</span>
+            </button>
+            <!-- 語言切換按鈕 -->
+            <button id="lang-toggle" class="bg-gray-700 hover:bg-gray-600 text-blue-400 border border-gray-600 px-4 py-2 rounded text-sm font-medium transition-colors shadow-sm">
+                <span data-lang="en">中文</span>
+                <span data-lang="zh">English</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 4. 內容主體 -->
+    <main class="flex-1 bg-gray-900 py-8">
+        <div class="content-area">
+            
+            <!-- 頁面標題 -->
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 pb-4 border-b border-gray-700">
+                <div>
+                    <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Global Subsidiaries & Strategic Entities</h1>
+                    <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">集團子公司與戰略合資企業清單</h1>
+                    <p class="text-gray-400 text-sm" data-lang="en">Comprehensive directory of manufacturing units, joint ventures, and subsidiaries.</p>
+                    <p class="text-gray-400 text-sm" data-lang="zh">包含全球製造據點、合資企業與主要子公司之完整名錄。</p>
+                </div>
+                <div class="mt-4 md:mt-0 px-4 py-1 bg-blue-900/50 border border-blue-700 rounded text-blue-300 text-xs font-bold uppercase tracking-wide">
+                    <span data-lang="en">Confidential / For Internal Use</span>
+                    <span data-lang="zh">內部文件 / 僅供商務使用</span>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- 1. TAIWAN 台灣 -->
+            <!-- ========================================== -->
+            <details open>
+                <summary>
+                    <span data-lang="en">1. TAIWAN (Headquarters, R&D, Energy Hub)</span>
+                    <span data-lang="zh">1. 台灣 (總部、研發、能源事業群)</span>
+                </summary>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-code"><span data-lang="en">Code</span><span data-lang="zh">代號</span></th>
+                                <th class="col-name"><span data-lang="en">Company Name</span><span data-lang="zh">公司名稱</span></th>
+                                <th class="col-addr"><span data-lang="en">Address</span><span data-lang="zh">地址</span></th>
+                                <th class="col-struct"><span data-lang="en">Structure / Partners</span><span data-lang="zh">結構 / 關鍵夥伴</span></th>
+                                <th class="col-prod"><span data-lang="en">Main Business</span><span data-lang="zh">主要業務</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="code-text">100000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Cheng Uei Precision Industry Co., Ltd. (HQ)</span><span data-lang="zh">正崴精密工業股份有限公司 (總部)</span></td>
+                                <td><span data-lang="en">No. 18, Chung Shan Road, Tu Cheng District</span><span data-lang="zh">新北市土城區中山路18號</span></td>
+                                <td>
+                                    <span class="badge badge-listed">Listed</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Ticker: <strong>TWSE 2392</strong></div>
+                                </td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Headquarters</span><span data-lang="zh">集團總部</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">-</td>
+                                <td><span data-lang="en">Cheng Uei (Dingpu RD Center)</span><span data-lang="zh">正崴 (頂埔研發中心)</span></td>
+                                <td><span data-lang="en">No. 49, Sec. 4, Jhongyang Rd., Tu Cheng District</span><span data-lang="zh">新北市土城區中央路四段49號</span></td>
+                                <td><span class="internal-unit" data-lang="en">(Internal Unit)</span><span class="internal-unit" data-lang="zh">(內部單位)</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">R&D Center</span><span data-lang="zh">研發中心</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">-</td>
+                                <td><span data-lang="en">Cheng Uei (Minquan Plant)</span><span data-lang="zh">正崴 (民權廠)</span></td>
+                                <td><span data-lang="en">No.11, Minquan St., Tucheng District</span><span data-lang="zh">新北市土城區民權街11號</span></td>
+                                <td><span class="internal-unit" data-lang="en">(Internal Unit)</span><span class="internal-unit" data-lang="zh">(內部單位)</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Manufacturing</span><span data-lang="zh">製造工廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">100001</td>
+                                <td><span data-lang="en">Cheng Uei (Taichung Branch)</span><span data-lang="zh">正崴 (中科分公司)</span></td>
+                                <td><span data-lang="en">NO. 22, Houke S. Rd., Houli Dist., Taichung</span><span data-lang="zh">台中市后里區后科南路22號</span></td>
+                                <td><span class="internal-unit" data-lang="en">(Branch)</span><span class="internal-unit" data-lang="zh">(分公司)</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Regional Hub</span><span data-lang="zh">營運據點</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">100002</td>
+                                <td><span data-lang="en">Cheng Uei (Hsinchu Branch)</span><span data-lang="zh">正崴 (竹科分公司)</span></td>
+                                <td><span data-lang="en">No.8 R&D. RD.1 Science-Based Industrial Park</span><span data-lang="zh">新竹縣科學園區研發一路8號</span></td>
+                                <td><span class="internal-unit" data-lang="en">(Branch)</span><span class="internal-unit" data-lang="zh">(分公司)</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Advanced R&D</span><span data-lang="zh">先進研發</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">L00000</td>
+                                <td class="font-bold text-white"><span data-lang="en">UBILINK AI Co., Ltd.</span><span data-lang="zh">友崴超級運算股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <span class="badge badge-nvidia">NVIDIA Partner</span>
+                                    <div class="partner-list">
+                                        <span class="partner-bullet">•</span><strong>Ubitus K.K.</strong>
+                                    </div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">AI Computing</span><span data-lang="zh">AI 超級運算</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08000</td>
+                                <td class="font-bold text-green-400"><span data-lang="en">Shinfox Energy Co., Ltd.</span><span data-lang="zh">森崴能源股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td>
+                                    <span class="badge badge-listed">Listed</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Ticker: <strong>TWSE 6806</strong></div>
+                                </td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Renewable Energy</span><span data-lang="zh">綠能總包</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08300</td>
+                                <td><span data-lang="en">Foxwell Power Co., Ltd.</span><span data-lang="zh">富威電力股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td>
+                                    <span class="badge badge-listed">Listed</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Ticker: <strong>TWSE 6994</strong></div>
+                                </td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Green Energy Trading</span><span data-lang="zh">綠電交易</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">D00000</td>
+                                <td><span data-lang="en">Well Shin Technology Co., Ltd.</span><span data-lang="zh">維熹科技股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市內湖區</span></td>
+                                <td>
+                                    <span class="badge badge-listed">Listed</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Ticker: <strong>TWSE 3501</strong></div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Power Cords</span><span data-lang="zh">電源線</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B09100</td>
+                                <td><span data-lang="en">Shih Fong Power Co., Ltd.</span><span data-lang="zh">世豐電力股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Partner: <strong>Chugoku Electric</strong></div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Hydropower</span><span data-lang="zh">水力發電</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08010</td>
+                                <td><span data-lang="en">Jiuwei Electric Power Co., Ltd.</span><span data-lang="zh">九崴電力股份有限公司</span></td>
+                                <td><span data-lang="en">Tainan City</span><span data-lang="zh">台南市歸仁區</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list">
+                                        <span class="partner-bullet">•</span><strong>Fortune Electric</strong><br>
+                                        <span class="partner-bullet">•</span><strong>Jih Sun Energy</strong>
+                                    </div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Power Plant (LNG)</span><span data-lang="zh">天然氣發電</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08330</td>
+                                <td><span data-lang="en">Billion Sun Energy Storage Tech</span><span data-lang="zh">盛日儲能科技股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Partner: <strong>Billion Electric</strong></div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy Storage</span><span data-lang="zh">儲能系統</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08200</td>
+                                <td><span data-lang="en">Shinfox Natural Gas Co., Ltd.</span><span data-lang="zh">欣鑫天然氣股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">LNG Import</span><span data-lang="zh">天然氣進口</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B02000</td>
+                                <td><span data-lang="en">Foxlink Image Technology Co.</span><span data-lang="zh">富士強科技股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Camera Modules</span><span data-lang="zh">影像模組</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B02200</td>
+                                <td><span data-lang="en">Foxlink Automotive Technology</span><span data-lang="zh">富士能科技股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Auto Electronics</span><span data-lang="zh">車載電子</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B08000</td>
+                                <td><span data-lang="en">SYNCROBOTIC Co., Ltd.</span><span data-lang="zh">星科國際股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Robotics</span><span data-lang="zh">機器人</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E03000</td>
+                                <td><span data-lang="en">Studio A Inc.</span><span data-lang="zh">晶實科技股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Apple Retail</span><span data-lang="zh">Apple 通路</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E07200</td>
+                                <td><span data-lang="en">Central Motion Picture Corp.</span><span data-lang="zh">中影股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td>
+                                    <span class="badge badge-inv">Invest</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Stake: Minority (~13%)</div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Media / Film</span><span data-lang="zh">文創電影</span></td>
+                            </tr>
+                            <!-- 補回 PDF 第一頁遺漏的公司 -->
+                            <tr>
+                                <td class="code-text">B00000</td>
+                                <td><span data-lang="en">Foxlink International Investment</span><span data-lang="zh">富士臨國際投資股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Investment</span><span data-lang="zh">投資控股</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B04000</td>
+                                <td><span data-lang="en">World Circuit Technology</span><span data-lang="zh">藝鑫華仕德科技</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">PCB</span><span data-lang="zh">印刷電路板</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B05000</td>
+                                <td><span data-lang="en">Xunqiang Communication</span><span data-lang="zh">訊強通訊科技</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Communication</span><span data-lang="zh">通訊技術</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B07000</td>
+                                <td><span data-lang="en">Power Quotient International</span><span data-lang="zh">勁永國際股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Memory/Storage</span><span data-lang="zh">記憶體/儲存</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B09000</td>
+                                <td><span data-lang="en">FIT Holding Co., Ltd. (Invest)</span><span data-lang="zh">永崴投資控股</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td>
+                                    <span class="badge badge-listed">Listed</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Ticker: <strong>TWSE 3712</strong></div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Investment</span><span data-lang="zh">投資控股</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B09200</td>
+                                <td><span data-lang="en">Synergy Co., Ltd.</span><span data-lang="zh">眾崴能源股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy</span><span data-lang="zh">能源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E00000</td>
+                                <td><span data-lang="en">Fu Uei International Investment</span><span data-lang="zh">富崴國際投資</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Investment</span><span data-lang="zh">投資控股</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E01000</td>
+                                <td><span data-lang="en">Glory Science Co., Ltd.</span><span data-lang="zh">光耀科技股份有限公司</span></td>
+                                <td><span data-lang="en">Taichung</span><span data-lang="zh">台中市后里區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Optical Lens</span><span data-lang="zh">光學鏡頭</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E03200</td>
+                                <td><span data-lang="en">Straight A Inc.</span><span data-lang="zh">晶盛科技股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Education Retail</span><span data-lang="zh">教育通路</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E03600</td>
+                                <td><span data-lang="en">Jing Jing Technology</span><span data-lang="zh">晶競科技股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Esports</span><span data-lang="zh">電競科技</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E04000</td>
+                                <td><span data-lang="en">VA Product Inc.</span><span data-lang="zh">逢緯國際股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Distribution</span><span data-lang="zh">代理經銷</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E06000</td>
+                                <td><span data-lang="en">Zhi De Investment Co.</span><span data-lang="zh">志得投資股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Investment</span><span data-lang="zh">投資</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E07000</td>
+                                <td><span data-lang="en">CMPC Cultural & Creative</span><span data-lang="zh">中影文創股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Creative</span><span data-lang="zh">文化創意</span></td>
+                            </tr>
+                            <!-- 森崴能源相關 SPV -->
+                            <tr>
+                                <td class="code-text">E08003</td>
+                                <td><span data-lang="en">Youde Wind Power Co.</span><span data-lang="zh">又德風力發電</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Wind Power</span><span data-lang="zh">風力發電</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08020</td>
+                                <td><span data-lang="en">Elegant Energy Tech</span><span data-lang="zh">逸風能源科技</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy Tech</span><span data-lang="zh">能源科技</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08030</td>
+                                <td><span data-lang="en">Yuanshan Forest</span><span data-lang="zh">元杉森林自然資源</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Carbon</span><span data-lang="zh">森林碳權</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08040</td>
+                                <td><span data-lang="en">Changpin Wind Power</span><span data-lang="zh">彰品風力發電</span></td>
+                                <td><span data-lang="en">Changhua</span><span data-lang="zh">彰化縣</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Wind Power</span><span data-lang="zh">風力發電</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E08060</td>
+                                <td><span data-lang="en">Global Way Electronics</span><span data-lang="zh">冠崴電力股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Power Gen</span><span data-lang="zh">電力生產</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08073</td>
+                                <td><span data-lang="en">Shinfox Far East (Taiwan)</span><span data-lang="zh">台灣寶威海事工程</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Marine Eng.</span><span data-lang="zh">海事工程</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08080</td>
+                                <td><span data-lang="en">June Wei Power Co.</span><span data-lang="zh">均崴電力股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Power Gen</span><span data-lang="zh">電力生產</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08090</td>
+                                <td><span data-lang="en">Eastern Rainbow Green</span><span data-lang="zh">東紅綠能環保科技</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市松山區</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Green Energy</span><span data-lang="zh">綠能環保</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08091</td>
+                                <td><span data-lang="en">Eastern Rainbow Env.</span><span data-lang="zh">東虹環境資源</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市松山區</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Env. Resource</span><span data-lang="zh">環境資源</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E08100</td>
+                                <td><span data-lang="en">Foxwell Energy Corp.</span><span data-lang="zh">富崴能源股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Offshore Wind</span><span data-lang="zh">離岸風電</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E08130</td>
+                                <td><span data-lang="en">Shinwei Power Co.</span><span data-lang="zh">信崴電力股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Power Gen</span><span data-lang="zh">電力生產</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08310</td>
+                                <td><span data-lang="en">Foxwell Certification</span><span data-lang="zh">旭威認證股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Certification</span><span data-lang="zh">碳認證</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08320</td>
+                                <td><span data-lang="en">Cheng Shin Digital</span><span data-lang="zh">承新數位股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市中山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Digital Service</span><span data-lang="zh">數位服務</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08340</td>
+                                <td><span data-lang="en">Huijie Energy Co.</span><span data-lang="zh">惠捷能源股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy</span><span data-lang="zh">能源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08350</td>
+                                <td><span data-lang="en">Smart Power System</span><span data-lang="zh">智電系統股份有限公司</span></td>
+                                <td><span data-lang="en">Banqiao, NTPC</span><span data-lang="zh">新北市板橋區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Smart Grid</span><span data-lang="zh">智慧電網</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08351</td>
+                                <td><span data-lang="en">Zhixin Energy Co.</span><span data-lang="zh">智鑫能源股份有限公司</span></td>
+                                <td><span data-lang="en">Taipei City</span><span data-lang="zh">台北市松山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy</span><span data-lang="zh">能源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08353</td>
+                                <td><span data-lang="en">Hongju Energy Co.</span><span data-lang="zh">鴻聚能源股份有限公司</span></td>
+                                <td><span data-lang="en">Taichung</span><span data-lang="zh">台中市西區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy</span><span data-lang="zh">能源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08354</td>
+                                <td><span data-lang="en">Billion Power System</span><span data-lang="zh">盛智達科技</span></td>
+                                <td><span data-lang="en">Xindian, NTPC</span><span data-lang="zh">新北市新店區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Power Tech</span><span data-lang="zh">電力科技</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08355</td>
+                                <td><span data-lang="en">Smart Technology Energy</span><span data-lang="zh">福進能源科技</span></td>
+                                <td><span data-lang="en">Xinzhuang, NTPC</span><span data-lang="zh">新北市新莊區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy Tech</span><span data-lang="zh">能源科技</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">F00000</td>
+                                <td><span data-lang="en">Darts Technologies Corp.</span><span data-lang="zh">達智科技股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Tech R&D</span><span data-lang="zh">科技研發</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">G00000</td>
+                                <td><span data-lang="en">DU Precision Industry</span><span data-lang="zh">大崴精工股份有限公司</span></td>
+                                <td><span data-lang="en">Tucheng, NTPC</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Precision Mfg</span><span data-lang="zh">精密製造</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">M00000</td>
+                                <td><span data-lang="en">Microlink Communications</span><span data-lang="zh">拓創科技股份有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Comm. Tech</span><span data-lang="zh">通訊技術</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">R02000</td>
+                                <td><span data-lang="en">Suntain Co., Ltd.</span><span data-lang="zh">岳昇有限公司</span></td>
+                                <td><span data-lang="en">New Taipei City</span><span data-lang="zh">新北市土城區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Sales</span><span data-lang="zh">銷售業務</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <!-- ========================================== -->
+            <!-- 2. CHINA 中國 -->
+            <!-- ========================================== -->
+            <details>
+                <summary>
+                    <span data-lang="en">2. CHINA (Manufacturing Bases)</span>
+                    <span data-lang="zh">2. 中國 (製造基地)</span>
+                </summary>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-code"><span data-lang="en">Code</span><span data-lang="zh">代號</span></th>
+                                <th class="col-name"><span data-lang="en">Company Name</span><span data-lang="zh">公司名稱</span></th>
+                                <th class="col-addr"><span data-lang="en">Address</span><span data-lang="zh">地址</span></th>
+                                <th class="col-struct"><span data-lang="en">Structure / Partners</span><span data-lang="zh">結構 / 關鍵夥伴</span></th>
+                                <th class="col-prod"><span data-lang="en">Main Business</span><span data-lang="zh">主要業務</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="code-text">B27000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Dongguan Fu Wei Electronics</span><span data-lang="zh">東莞富崴電子有限公司</span></td>
+                                <td><span data-lang="en">Dongguan, Guangdong</span><span data-lang="zh">東莞市清溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Processing</span><span data-lang="zh">來料加工</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A01000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Dongguan Fuqiang Electronics</span><span data-lang="zh">東莞富強電子有限公司</span></td>
+                                <td><span data-lang="en">Dongguan, Guangdong</span><span data-lang="zh">廣東省東莞市</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Dongguan Plant</span><span data-lang="zh">東莞廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A03000</td>
+                                <td><span data-lang="en">Fugang Electronic (Dongguan)</span><span data-lang="zh">富港電子(東莞)有限公司</span></td>
+                                <td><span data-lang="en">Dongkeng Town, Dongguan</span><span data-lang="zh">東莞市東坑鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Electronics</span><span data-lang="zh">電子製造</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A04000</td>
+                                <td><span data-lang="en">Dong Guan Fu Shi Chang</span><span data-lang="zh">東莞富士昌電腦有限公司</span></td>
+                                <td><span data-lang="en">Qingxi Town, Dongguan</span><span data-lang="zh">東莞市清溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Peripherals</span><span data-lang="zh">電腦周邊</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A06000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Fugang Electric (Kunshan)</span><span data-lang="zh">富港電子(昆山)有限公司</span></td>
+                                <td><span data-lang="en">Kunshan, Jiangsu</span><span data-lang="zh">江蘇省昆山市</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Kunshan Plant</span><span data-lang="zh">昆山廠</span></td>
+                            </tr>
+                             <!-- 補回 PDF 遺漏的昆山周邊貿易公司 -->
+                            <tr>
+                                <td class="code-text">A06100</td>
+                                <td><span data-lang="en">Kunshan Fugang Trading</span><span data-lang="zh">昆山富港電子貿易</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Trading</span><span data-lang="zh">貿易業務</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">A06110</td>
+                                <td><span data-lang="en">Shanghai Fugang Trading</span><span data-lang="zh">上海富港電子貿易</span></td>
+                                <td><span data-lang="en">Shanghai</span><span data-lang="zh">上海市徐匯區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Trading</span><span data-lang="zh">貿易業務</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A06200</td>
+                                <td><span data-lang="en">Kunshan Fu Shi You Trading</span><span data-lang="zh">昆山富士優貿易</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Trading</span><span data-lang="zh">貿易業務</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">A06400</td>
+                                <td><span data-lang="en">Shanghai Standard Info Tech</span><span data-lang="zh">上海標竿信息科技</span></td>
+                                <td><span data-lang="en">Shanghai</span><span data-lang="zh">上海市浦東新區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">IT Tech</span><span data-lang="zh">信息技術</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A06500</td>
+                                <td><span data-lang="en">Changzhou Fugang Digital</span><span data-lang="zh">常州富港數碼科技</span></td>
+                                <td><span data-lang="en">Changzhou</span><span data-lang="zh">常州市武進區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Digital</span><span data-lang="zh">數碼科技</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">A06600</td>
+                                <td><span data-lang="en">Hefei Studio A Digital</span><span data-lang="zh">合肥晶實數碼科技</span></td>
+                                <td><span data-lang="en">Hefei</span><span data-lang="zh">合肥市蜀山區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Retail</span><span data-lang="zh">數碼零售</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A06700</td>
+                                <td><span data-lang="en">Yangzhou Standard Digital</span><span data-lang="zh">揚州標竿數碼科技</span></td>
+                                <td><span data-lang="en">Yangzhou</span><span data-lang="zh">揚州市邗江區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Retail</span><span data-lang="zh">數碼零售</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A08100</td>
+                                <td><span data-lang="en">Foxlink Tianjin Co., Ltd.</span><span data-lang="zh">富港電子(天津)有限公司</span></td>
+                                <td><span data-lang="en">Tianjin</span><span data-lang="zh">天津市</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Tianjin Plant</span><span data-lang="zh">天津廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A08101</td>
+                                <td><span data-lang="en">TeraBitCom Technology</span><span data-lang="zh">太比康通訊科技</span></td>
+                                <td><span data-lang="en">Suzhou</span><span data-lang="zh">蘇州市吳中區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Communication</span><span data-lang="zh">通訊科技</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A08300</td>
+                                <td><span data-lang="en">Changzhou Xinwei Venture</span><span data-lang="zh">常州鑫崴車能創投</span></td>
+                                <td><span data-lang="en">Changzhou</span><span data-lang="zh">常州市新北區</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Partner: <strong>Gov. Fund</strong></div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Venture Capital</span><span data-lang="zh">創投基金</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">A09000</td>
+                                <td><span data-lang="en">Culink Tianjin Co., Ltd.</span><span data-lang="zh">富士臨工業(天津)</span></td>
+                                <td><span data-lang="en">Tianjin</span><span data-lang="zh">天津市津南區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Industrial</span><span data-lang="zh">工業製造</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A11000</td>
+                                <td><span data-lang="en">Foxlink Energy (Tianjin)</span><span data-lang="zh">富士灣電能(天津)</span></td>
+                                <td><span data-lang="en">Tianjin</span><span data-lang="zh">天津經濟技術區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy</span><span data-lang="zh">能源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A12000</td>
+                                <td><span data-lang="en">Foxlink Automotive (Kunshan)</span><span data-lang="zh">昆山富士錦電子有限公司</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Auto Parts</span><span data-lang="zh">汽車零組件</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A20000</td>
+                                <td><span data-lang="en">Fushineng Electronics (Kunshan)</span><span data-lang="zh">富士能電子(昆山)</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Auto Electronics</span><span data-lang="zh">車載電子</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A21000</td>
+                                <td><span data-lang="en">Fu Shi Xiang Electronics</span><span data-lang="zh">富士祥電子(昆山)</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Electronics</span><span data-lang="zh">電子製造</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A21100</td>
+                                <td><span data-lang="en">Fu Shi Xiang R&D Changzhou</span><span data-lang="zh">富士祥研發中心(昆山)常州分公司</span></td>
+                                <td><span data-lang="en">Changzhou</span><span data-lang="zh">常州市和平中路</span></td>
+                                <td><span class="badge badge-func">Branch</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">R&D Branch</span><span data-lang="zh">研發分公司</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A22000</td>
+                                <td><span data-lang="en">Fu Gang Electronic (Nan Chang)</span><span data-lang="zh">富港電子(南昌)有限公司</span></td>
+                                <td><span data-lang="en">Nanchang</span><span data-lang="zh">南昌市新高區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Nanchang Plant</span><span data-lang="zh">南昌廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A25000</td>
+                                <td><span data-lang="en">Fuqiang Electric (Yancheng)</span><span data-lang="zh">富強電子(鹽城)有限公司</span></td>
+                                <td><span data-lang="en">Yancheng</span><span data-lang="zh">鹽城綜合保稅區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Yancheng Plant</span><span data-lang="zh">鹽城廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A26000</td>
+                                <td><span data-lang="en">Fugang Electric (Maanshan)</span><span data-lang="zh">富港電子(馬鞍山)有限公司</span></td>
+                                <td><span data-lang="en">Maanshan</span><span data-lang="zh">馬鞍山經濟開發區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Maanshan Plant</span><span data-lang="zh">馬鞍山廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A27000</td>
+                                <td><span data-lang="en">Kunshan Fugang Investment</span><span data-lang="zh">昆山富港投資有限公司</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Investment</span><span data-lang="zh">投資</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A27100</td>
+                                <td><span data-lang="en">Fuqiang Electric (Maanshan)</span><span data-lang="zh">富強電子(馬鞍山)</span></td>
+                                <td><span data-lang="en">Maanshan</span><span data-lang="zh">馬鞍山經濟開發區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Electronics</span><span data-lang="zh">電子零組件</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A29000</td>
+                                <td><span data-lang="en">Fugang Electric (Xuzhou)</span><span data-lang="zh">富港電子(徐州)有限公司</span></td>
+                                <td><span data-lang="en">Xuzhou</span><span data-lang="zh">徐州經濟開發區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Xuzhou Plant</span><span data-lang="zh">徐州廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A30000</td>
+                                <td><span data-lang="en">Dongguan Banrin Robot Tech</span><span data-lang="zh">東莞市本潤機器人科技</span></td>
+                                <td><span data-lang="en">Dongguan</span><span data-lang="zh">東莞市東坑鎮</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Partner: <strong>Banrin Team</strong></div>
+                                </td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Robotics</span><span data-lang="zh">機器人</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B07100</td>
+                                <td><span data-lang="en">Power Quotient Tech (Yancheng)</span><span data-lang="zh">勁永科技(鹽城)</span></td>
+                                <td><span data-lang="en">Yancheng</span><span data-lang="zh">鹽城綜合保稅區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Storage Tech</span><span data-lang="zh">儲存科技</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B26000</td>
+                                <td><span data-lang="en">Dong Guan Han Yang Computer</span><span data-lang="zh">東莞漢陽電腦有限公司</span></td>
+                                <td><span data-lang="en">Dongguan</span><span data-lang="zh">東莞市清溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Computer</span><span data-lang="zh">電腦產品</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B28000</td>
+                                <td><span data-lang="en">Dong Guan Fu Zhang Precision</span><span data-lang="zh">東莞富彰精密工業</span></td>
+                                <td><span data-lang="en">Dongguan</span><span data-lang="zh">東莞市清溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Precision</span><span data-lang="zh">精密工業</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B29000</td>
+                                <td><span data-lang="en">Wei Hai Fu Kang Electric</span><span data-lang="zh">威海富康電子有限公司</span></td>
+                                <td><span data-lang="en">Weihai</span><span data-lang="zh">威海高區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Electronics</span><span data-lang="zh">電子製造</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E01100</td>
+                                <td><span data-lang="en">Glorytek (Suzhou) Co., Ltd.</span><span data-lang="zh">光耀光電(蘇州)</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Optical</span><span data-lang="zh">光電產品</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E01200</td>
+                                <td><span data-lang="en">Yancheng Yaowei Technology</span><span data-lang="zh">鹽城耀崴科技</span></td>
+                                <td><span data-lang="en">Yancheng</span><span data-lang="zh">鹽城技術開發區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Technology</span><span data-lang="zh">科技</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E01300</td>
+                                <td><span data-lang="en">Glorytek (Yancheng) Co., Ltd.</span><span data-lang="zh">光耀光電(鹽城)</span></td>
+                                <td><span data-lang="en">Yancheng</span><span data-lang="zh">鹽城綜合保稅區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Optical</span><span data-lang="zh">光電產品</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E01600</td>
+                                <td><span data-lang="en">Glory Optics (Yancheng)</span><span data-lang="zh">光耀光學(鹽城)</span></td>
+                                <td><span data-lang="en">Yancheng</span><span data-lang="zh">鹽城技術開發區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Optical</span><span data-lang="zh">光學</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08001</td>
+                                <td><span data-lang="en">Chengdu Xinfuwei Energy</span><span data-lang="zh">成都新富崴能源</span></td>
+                                <td><span data-lang="en">Chengdu</span><span data-lang="zh">成都市雙流區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy</span><span data-lang="zh">能源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08092</td>
+                                <td><span data-lang="en">Kunshan Eastern Rainbow Env.</span><span data-lang="zh">昆山東虹環保設備</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">江蘇省昆山市</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Env. Equipment</span><span data-lang="zh">環保設備</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08500</td>
+                                <td><span data-lang="en">Kunshan Jiuwei Info Tech</span><span data-lang="zh">昆山九崴信息科技</span></td>
+                                <td><span data-lang="en">Kunshan</span><span data-lang="zh">昆山市錦溪鎮</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Info Tech</span><span data-lang="zh">信息科技</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">F01100</td>
+                                <td><span data-lang="en">Sharetronic Data Technology</span><span data-lang="zh">協創數據技術股份有限公司</span></td>
+                                <td><span data-lang="en">Shenzhen</span><span data-lang="zh">深圳市福田區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">IoT Devices</span><span data-lang="zh">物聯網設備</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <!-- ========================================== -->
+            <!-- 3. INDIA 印度 -->
+            <!-- ========================================== -->
+            <details>
+                <summary>
+                    <span data-lang="en">3. INDIA (Manufacturing & R&D)</span>
+                    <span data-lang="zh">3. 印度 (製造與研發)</span>
+                </summary>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-code"><span data-lang="en">Code</span><span data-lang="zh">代號</span></th>
+                                <th class="col-name"><span data-lang="en">Company Name</span><span data-lang="zh">公司名稱</span></th>
+                                <th class="col-addr"><span data-lang="en">Address</span><span data-lang="zh">地址</span></th>
+                                <th class="col-struct"><span data-lang="en">Structure / Partners</span><span data-lang="zh">結構 / 關鍵夥伴</span></th>
+                                <th class="col-prod"><span data-lang="en">Main Business</span><span data-lang="zh">主要業務</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="code-text">A28100</td>
+                                <td class="font-bold text-white"><span data-lang="en">Tegna Electronics Pvt Ltd</span><span data-lang="zh">Tegna Electronics Pvt Ltd</span></td>
+                                <td><span data-lang="en">Greater Noida, UP</span><span data-lang="zh">印度大諾伊達</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list">
+                                        <span class="partner-bullet">•</span>Partner: <strong>OPPO Mobile</strong><br>
+                                        <span class="partner-bullet">•</span>Partner: <strong>TEEMA</strong>
+                                    </div>
+                                </td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Industrial Park Dev.</span><span data-lang="zh">工業園區開發</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E13000</td>
+                                <td class="font-bold text-green-400"><span data-lang="en">Foxlink India Electric Pvt Ltd</span><span data-lang="zh">Foxlink India Electric Pvt Ltd</span></td>
+                                <td><span data-lang="en">Tirupati, Andhra Pradesh</span><span data-lang="zh">印度安得拉邦</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Tirupati Plant</span><span data-lang="zh">印度廠(製造)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A28000</td>
+                                <td><span data-lang="en">Foxlink Technical India</span><span data-lang="zh">Foxlink Technical India Pvt Ltd</span></td>
+                                <td><span data-lang="en">Noida, UP</span><span data-lang="zh">印度諾伊達</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Technical Support</span><span data-lang="zh">技術支援</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B07900</td>
+                                <td><span data-lang="en">Foxlink Powerbank Int'l</span><span data-lang="zh">Foxlink Powerbank Int'l Tech</span></td>
+                                <td><span data-lang="en">Noida, UP</span><span data-lang="zh">印度諾伊達</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Power Banks</span><span data-lang="zh">行動電源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E01500</td>
+                                <td><span data-lang="en">Glorytek Science India</span><span data-lang="zh">Glorytek Science India</span></td>
+                                <td><span data-lang="en">Noida, UP</span><span data-lang="zh">印度諾伊達</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Optical</span><span data-lang="zh">光學鏡頭</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <!-- ========================================== -->
+            <!-- 4. VIETNAM 越南 -->
+            <!-- ========================================== -->
+            <details>
+                <summary>
+                    <span data-lang="en">4. VIETNAM (Manufacturing & Energy)</span>
+                    <span data-lang="zh">4. 越南 (製造與能源)</span>
+                </summary>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-code"><span data-lang="en">Code</span><span data-lang="zh">代號</span></th>
+                                <th class="col-name"><span data-lang="en">Company Name</span><span data-lang="zh">公司名稱</span></th>
+                                <th class="col-addr"><span data-lang="en">Address</span><span data-lang="zh">地址</span></th>
+                                <th class="col-struct"><span data-lang="en">Structure / Partners</span><span data-lang="zh">結構 / 關鍵夥伴</span></th>
+                                <th class="col-prod"><span data-lang="en">Main Business</span><span data-lang="zh">主要業務</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr>
+                                <td class="code-text">H00000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Foxlink Vietnam Co., Ltd.</span><span data-lang="zh">Foxlink Vietnam Co., Ltd.</span></td>
+                                <td><span data-lang="en">HCMC (Tan Thuan EPZ)</span><span data-lang="zh">胡志明市新順加工區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">HCMC Plant</span><span data-lang="zh">胡志明廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">H01000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Foxlink Da Nang Electronics</span><span data-lang="zh">峴港富港電子有限公司</span></td>
+                                <td><span data-lang="en">Da Nang City</span><span data-lang="zh">峴港市</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Da Nang Plant</span><span data-lang="zh">峴港廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">M01000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Microlink Da Nang Comm.</span><span data-lang="zh">峴港拓創科技有限公司</span></td>
+                                <td><span data-lang="en">Da Nang IT Park</span><span data-lang="zh">峴港資訊科技園區</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Communications</span><span data-lang="zh">通訊產品</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08002</td>
+                                <td><span data-lang="en">Fox Nam Energy Co., LTD.</span><span data-lang="zh">Fox Nam Energy Co., LTD.</span></td>
+                                <td><span data-lang="en">Hanoi</span><span data-lang="zh">河內</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Partner: <strong>Bamboo Capital</strong></div>
+                                </td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Renewable Energy</span><span data-lang="zh">再生能源</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08004</td>
+                                <td><span data-lang="en">DakPsi Hydroelectic JSC</span><span data-lang="zh">DakPsi 水力發電股份公司</span></td>
+                                <td><span data-lang="en">Kon Tum Province</span><span data-lang="zh">崑嵩省</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Partner: <strong>Local Investors</strong></div>
+                                </td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Hydropower</span><span data-lang="zh">水力發電</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">-</td>
+                                <td><span data-lang="en">Foxlink Da Nang Tech</span><span data-lang="zh">峴港富強科技有限公司</span></td>
+                                <td><span data-lang="en">Da Nang IT Park</span><span data-lang="zh">峴港資訊科技園區</span></td>
+                                <td><span class="badge badge-100">Pending</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Pending</span><span data-lang="zh">待開帳</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <!-- ========================================== -->
+            <!-- 5. OTHERS 其他地區 -->
+            <!-- ========================================== -->
+            <details>
+                <summary>
+                    <span data-lang="en">5. OTHERS (USA, Singapore, etc.)</span>
+                    <span data-lang="zh">5. 其他海外 (美國、新加坡等)</span>
+                </summary>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-code"><span data-lang="en">Code</span><span data-lang="zh">代號</span></th>
+                                <th class="col-name"><span data-lang="en">Company Name</span><span data-lang="zh">公司名稱</span></th>
+                                <th class="col-addr"><span data-lang="en">Address</span><span data-lang="zh">地址</span></th>
+                                <th class="col-struct"><span data-lang="en">Structure / Partners</span><span data-lang="zh">結構 / 關鍵夥伴</span></th>
+                                <th class="col-prod"><span data-lang="en">Main Business</span><span data-lang="zh">主要業務</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="code-text">K00000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Foxlink Arizona Inc.</span><span data-lang="zh">Foxlink Arizona Inc.</span></td>
+                                <td><span data-lang="en">Arizona, USA</span><span data-lang="zh">美國亞利桑那</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">EV Chargers</span><span data-lang="zh">充電樁</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">C02100</td>
+                                <td class="font-bold text-white"><span data-lang="en">Foxlink International Inc.</span><span data-lang="zh">Foxlink International Inc.</span></td>
+                                <td><span data-lang="en">Cupertino, CA, USA</span><span data-lang="zh">美國 Cupertino</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Sales HQ</span><span data-lang="zh">業務總部</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">-</td>
+                                <td><span data-lang="en">Foxlink International (Brea)</span><span data-lang="zh">Foxlink International (Brea)</span></td>
+                                <td><span data-lang="en">Brea, CA, USA</span><span data-lang="zh">美國 Brea</span></td>
+                                <td><span class="badge badge-func">Office</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Sales Office</span><span data-lang="zh">業務辦公室</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E07300</td>
+                                <td class="font-bold text-white"><span data-lang="en">Luminys Systems Corp.</span><span data-lang="zh">Luminys Systems Corporation</span></td>
+                                <td><span data-lang="en">Irvine, CA, USA</span><span data-lang="zh">美國爾灣</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Lighting/Security</span><span data-lang="zh">照明/安防</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E07400</td>
+                                <td><span data-lang="en">Luminys Systems Canada</span><span data-lang="zh">Luminys Systems Canada</span></td>
+                                <td><span data-lang="en">Surrey, BC, Canada</span><span data-lang="zh">加拿大卑詩省</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Subsidiary</span><span data-lang="zh">子公司</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E14000</td>
+                                <td><span data-lang="en">X2Cloud Inc.</span><span data-lang="zh">X2Cloud Inc.</span></td>
+                                <td><span data-lang="en">San Francisco, USA</span><span data-lang="zh">美國舊金山</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Cloud Service</span><span data-lang="zh">雲端服務</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">K01000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Grid Response LLC</span><span data-lang="zh">Grid Response LLC</span></td>
+                                <td><span data-lang="en">Rancho Cucamonga, CA</span><span data-lang="zh">美國加州</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy Services</span><span data-lang="zh">能源服務</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E08070</td>
+                                <td><span data-lang="en">Shinfox Far East Pte. Ltd.</span><span data-lang="zh">Shinfox Far East Pte. Ltd.</span></td>
+                                <td><span data-lang="en">Singapore</span><span data-lang="zh">新加坡</span></td>
+                                <td>
+                                    <span class="badge badge-jv">JV</span>
+                                    <div class="partner-list"><span class="partner-bullet">•</span>Partner: <strong>Chugoku Electric</strong></div>
+                                </td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Green Energy Inv.</span><span data-lang="zh">綠能投資</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E08072</td>
+                                <td><span data-lang="en">Far East Offshore Wind Power</span><span data-lang="zh">Far East Offshore Wind Power</span></td>
+                                <td><span data-lang="en">Singapore</span><span data-lang="zh">新加坡</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Wind Eng.</span><span data-lang="zh">風電工程</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08071</td>
+                                <td><span data-lang="en">SFE Hercules Company</span><span data-lang="zh">SFE Hercules Company</span></td>
+                                <td><span data-lang="en">Panama City, Panama</span><span data-lang="zh">巴拿馬</span></td>
+                                <td><span class="badge badge-sub">SPV</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">SPV</span><span data-lang="zh">特殊目的公司</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E08074</td>
+                                <td><span data-lang="en">SFE Developer Company</span><span data-lang="zh">SFE Developer Company</span></td>
+                                <td><span data-lang="en">Panama City, Panama</span><span data-lang="zh">巴拿馬</span></td>
+                                <td><span class="badge badge-sub">SPV</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Developer</span><span data-lang="zh">開發商</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">J01000</td>
+                                <td><span data-lang="en">Foxlink Myanmar Company</span><span data-lang="zh">Foxlink Myanmar Company</span></td>
+                                <td><span data-lang="en">Yangon, Myanmar</span><span data-lang="zh">緬甸仰光</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-green-400 text-sm"><span data-lang="en">Myanmar Plant</span><span data-lang="zh">緬甸廠</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B07070</td>
+                                <td><span data-lang="en">PQI Japan co., Ltd.</span><span data-lang="zh">PQI Japan co., Ltd.</span></td>
+                                <td><span data-lang="en">Nagoya, Japan</span><span data-lang="zh">日本名古屋</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Japan Sales</span><span data-lang="zh">日本業務</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E03500</td>
+                                <td><span data-lang="en">Ashop Co., Ltd.</span><span data-lang="zh">Ashop Co., Ltd.</span></td>
+                                <td><span data-lang="en">Seoul, Korea</span><span data-lang="zh">韓國首爾</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Korea Retail</span><span data-lang="zh">韓國零售通路</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E08352</td>
+                                <td><span data-lang="en">Smart Power System AU</span><span data-lang="zh">Smart Power System Australia</span></td>
+                                <td><span data-lang="en">Sydney, Australia</span><span data-lang="zh">澳洲雪梨</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Energy System</span><span data-lang="zh">能源系統</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B04300</td>
+                                <td><span data-lang="en">World Circuit Tech (HK)</span><span data-lang="zh">香港華仕德電路技術</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港觀塘</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">HK Office</span><span data-lang="zh">香港辦事處</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B07200</td>
+                                <td><span data-lang="en">HK PQI Co., Ltd.</span><span data-lang="zh">勁永國際股份(香港)</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港沙田</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Sales</span><span data-lang="zh">業務銷售</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B07800</td>
+                                <td><span data-lang="en">Sinocity Industries</span><span data-lang="zh">中旋實業有限公司</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港荃灣</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Investment</span><span data-lang="zh">投資</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B07810</td>
+                                <td><span data-lang="en">DG Lifestyle Store Limited</span><span data-lang="zh">中旋有限公司</span></td>
+                                <td><span data-lang="en">Macau</span><span data-lang="zh">澳門威尼斯人</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Macau Retail</span><span data-lang="zh">澳門零售通路</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E03400</td>
+                                <td><span data-lang="en">Studio A Technology Ltd</span><span data-lang="zh">Studio A Technology</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港銅鑼灣</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Retail</span><span data-lang="zh">零售通路</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">E03700</td>
+                                <td><span data-lang="en">Straight A Limited</span><span data-lang="zh">Straight A Limited</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港荃灣</span></td>
+                                <td><span class="badge badge-sub">Subsidiary</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Retail</span><span data-lang="zh">零售通路</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">F01101</td>
+                                <td><span data-lang="en">Sharetronic Data Tech (HK)</span><span data-lang="zh">協創數據技術(香港)</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港灣仔</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">HK Office</span><span data-lang="zh">香港辦事處</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">100000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Foxlink Technology Ltd</span><span data-lang="zh">Foxlink Technology Limited</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港觀塘</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">HK Office</span><span data-lang="zh">香港辦事處</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">J00000</td>
+                                <td class="font-bold text-white"><span data-lang="en">Sinobest Brothers Limited</span><span data-lang="zh">Sinobest Brothers Limited</span></td>
+                                <td><span data-lang="en">Hong Kong</span><span data-lang="zh">香港觀塘</span></td>
+                                <td><span class="badge badge-100">100%</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">HK Office</span><span data-lang="zh">香港辦事處</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <!-- ========================================== -->
+            <!-- 6. OFFSHORE 境外控股 -->
+            <!-- ========================================== -->
+            <details>
+                <summary>
+                    <span data-lang="en">6. OFFSHORE HOLDINGS (BVI, Cayman)</span>
+                    <span data-lang="zh">6. 境外控股與投資公司</span>
+                </summary>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-code"><span data-lang="en">Code</span><span data-lang="zh">代號</span></th>
+                                <th class="col-name"><span data-lang="en">Company Name</span><span data-lang="zh">公司名稱</span></th>
+                                <th class="col-addr"><span data-lang="en">Address</span><span data-lang="zh">地址</span></th>
+                                <th class="col-struct"><span data-lang="en">Structure / Partners</span><span data-lang="zh">結構 / 關鍵夥伴</span></th>
+                                <th class="col-prod"><span data-lang="en">Main Business</span><span data-lang="zh">主要業務</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="code-text">A00000</td>
+                                <td><span data-lang="en">CU International Ltd.</span><span data-lang="zh">CU International Ltd.</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI (英屬維京群島)</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">C02000</td>
+                                <td><span data-lang="en">Pacific Wealth Limited</span><span data-lang="zh">Pacific Wealth Limited</span></td>
+                                <td><span data-lang="en">Cayman Islands</span><span data-lang="zh">開曼群島</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A08000</td>
+                                <td><span data-lang="en">New Start Industries</span><span data-lang="zh">New Start Industries</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">A14000</td>
+                                <td><span data-lang="en">Solteras Ltd.</span><span data-lang="zh">Solteras Ltd.</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">B02400</td>
+                                <td><span data-lang="en">ACCU-IMAGE Technology</span><span data-lang="zh">ACCU-IMAGE Technology</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B04100</td>
+                                <td><span data-lang="en">Value Success Limited</span><span data-lang="zh">Value Success Limited</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B04200</td>
+                                <td><span data-lang="en">Capital Guardian Limited</span><span data-lang="zh">Capital Guardian Limited</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B07080</td>
+                                <td><span data-lang="en">Perennial Ace Limited</span><span data-lang="zh">Perennial Ace Limited</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B07120</td>
+                                <td><span data-lang="en">Syscom Development Co.</span><span data-lang="zh">Syscom Development Co.</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">B07130</td>
+                                <td><span data-lang="en">Apix Limited</span><span data-lang="zh">Apix Limited</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">C00000</td>
+                                <td><span data-lang="en">CULINK International</span><span data-lang="zh">CULINK International</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E01400</td>
+                                <td><span data-lang="en">Glory Optics (BVI)</span><span data-lang="zh">Glory Optics (BVI)</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E01700</td>
+                                <td><span data-lang="en">Glory Science (BVI)</span><span data-lang="zh">Glory Science (BVI)</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">E01800</td>
+                                <td><span data-lang="en">Glory Science (Samoa)</span><span data-lang="zh">Glory Science (Samoa)</span></td>
+                                <td><span data-lang="en">Samoa</span><span data-lang="zh">薩摩亞</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">F01000</td>
+                                <td><span data-lang="en">Benefit Right Ltd.</span><span data-lang="zh">益正有限公司</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                             <tr>
+                                <td class="code-text">F01110</td>
+                                <td><span data-lang="en">Power Channel Limited</span><span data-lang="zh">Power Channel Limited</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                            <tr>
+                                <td class="code-text">G01000</td>
+                                <td><span data-lang="en">CE LINK International Ltd.</span><span data-lang="zh">大富工業股份有限公司</span></td>
+                                <td><span data-lang="en">BVI</span><span data-lang="zh">BVI</span></td>
+                                <td><span class="badge badge-sub">Holding</span></td>
+                                <td class="text-gray-400 text-sm"><span data-lang="en">Holding Co.</span><span data-lang="zh">控股公司</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <div class="mt-8 text-center text-xs text-gray-500 no-print">
+                <p data-lang="en">Note: This strategic list highlights key operational entities and verified joint ventures. Some dormant or minor holding companies may be omitted for clarity.</p>
+                <p data-lang="zh">註：本戰略清單重點列出主要營運實體與已查證之合資企業，部分休眠或微型控股公司為求清晰已省略。</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 3. 固定的尾部 (no-print) -->
+    <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+        <div class="flex items-center justify-between text-xs text-gray-400">
+            <div>
+                <span data-lang="en">© 2025 Foxlink Group. All Rights Reserved.</span>
+                <span data-lang="zh">© 2025 正崴集團 版權所有</span>
+            </div>
+            <div>
+                <span data-lang="en">Prepared by: Group Business Development</span>
+                <span data-lang="zh">製表人：集團業務開發處</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'en'; // Default to English as requested
+        let langToggleBtn;
+        let exportPdfBtn;
+
+        function updateLanguageUI() {
+            try {
+                // 隱藏所有 [data-lang] 元素
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() === 'title') {
+                        // Title 標籤分開處理
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
+
+                // 顯示當前語言的元素
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const originalDisplay = el.getAttribute('data-original-display') || 'block';
+                    
+                    // Handle inline vs. block elements
+                    if (['span', 'strong', 'a', 'i', 'div'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = (el.tagName.toLowerCase() === 'div' && el.classList.contains('partner-list')) ? 'block' : 'inline-block';
+                    } else if (['th', 'td'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'table-cell';
+                    } else if (['tr'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'table-row';
+                    } else {
+                        el.style.display = originalDisplay;
+                    }
+                });
+
+                // 更新文檔標題
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) {
+                        document.title = title.textContent;
+                    }
+                });
+            } catch (e) {
+                console.error("CRITICAL ERROR in updateLanguageUI:", e);
+            }
+        }
+
+        function toggleLanguage() {
+            currentLang = (currentLang === 'en') ? 'zh' : 'en';
+            updateLanguageUI();
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                langToggleBtn = document.getElementById('lang-toggle');
+                exportPdfBtn = document.getElementById('export-pdf-btn');
+
+                if (langToggleBtn) {
+                    langToggleBtn.addEventListener('click', toggleLanguage);
+                }
+
+                if (exportPdfBtn) {
+                    exportPdfBtn.addEventListener('click', () => {
+                        window.print();
+                    });
+                }
+
+                // Auto-expand details for printing
+                window.addEventListener('beforeprint', () => {
+                    document.querySelectorAll('details').forEach(el => el.open = true);
+                });
+
+                // Store original display style for all [data-lang] elements
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    const display = window.getComputedStyle(el).display;
+                    if (display !== 'none') {
+                        el.setAttribute('data-original-display', display);
+                    }
+                });
+
+                // Apply default language on initial load
+                updateLanguageUI();
+
+            } catch (e) {
+                console.error("CRITICAL INITIALIZATION ERROR:", e);
+            }
+        });
+    </script>
+</body>
+</html>
