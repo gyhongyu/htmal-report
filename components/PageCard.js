@@ -1,49 +1,23 @@
-function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
+// 只读版本的 PageCard - 用于 GitHub Pages
+function PageCard({ page, onShare, onCopyLink }) {
   try {
     const handlePreview = () => {
       const url = `${window.location.origin}/preview.html?id=${page.pageId}`;
       window.open(url, '_blank');
     };
 
-    const handleDownload = () => {
-      try {
-        const htmlContent = page.htmlCode || '';
-        const fileName = (page.title || '無標題頁面').replace(/[<>:"/\\|?*]/g, '_') + '.html';
-        
-        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        URL.revokeObjectURL(url);
-      } catch (error) {
-        console.error('下載失敗:', error);
-        alert('下載失敗，請重試');
-      }
-    };
-
     const formatDate = (dateString) => {
       const date = new Date(dateString);
-      return date.toLocaleDateString('zh-CN') + ' ' + date.toLocaleTimeString('zh-CN', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
+      return date.toLocaleDateString('zh-CN') + ' ' + date.toLocaleTimeString('zh-CN', {
+        hour: '2-digit',
+        minute: '2-digit'
       });
     };
 
-    const handleDoubleClick = () => {
-      onEdit(page.pageId);
-    };
-
     return (
-      <div 
-        className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-200 group cursor-pointer" 
-        onDoubleClick={handleDoubleClick}
-        data-name="page-card" 
+      <div
+        className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-200"
+        data-name="page-card"
         data-file="components/PageCard.js"
       >
         <div className="p-6">
@@ -69,13 +43,6 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
                     </div>
                   )}
                 </div>
-                <button
-                  onClick={() => onEdit(page.pageId)}
-                  className="ml-2 p-1.5 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0"
-                  title="快速编辑"
-                >
-                  <div className="icon-edit text-base"></div>
-                </button>
               </div>
               <p className="text-gray-600 text-sm line-clamp-3 mb-3">
                 {page.description || '暫無描述'}
@@ -92,18 +59,10 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
           </div>
 
           <div className="flex items-center justify-between pt-4 border-t">
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => onEdit(page.pageId)}
-                className="flex items-center gap-1 px-2 py-1 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded text-sm transition-colors"
-                title="編輯頁面"
-              >
-                <div className="icon-edit text-sm"></div>
-                <span>編輯</span>
-              </button>
+            <div className="flex items-center gap-2">
               <button
                 onClick={handlePreview}
-                className="flex items-center gap-1 px-2 py-1 text-green-600 hover:text-green-700 hover:bg-green-50 rounded text-sm transition-colors"
+                className="flex items-center gap-1 px-3 py-1.5 text-green-600 hover:text-white hover:bg-green-600 border border-green-600 rounded text-sm transition-colors"
                 title="預覽頁面"
               >
                 <div className="icon-external-link text-sm"></div>
@@ -111,7 +70,7 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
               </button>
               <button
                 onClick={onShare}
-                className="flex items-center gap-1 px-2 py-1 text-purple-600 hover:text-purple-700 hover:bg-purple-50 rounded text-sm transition-colors"
+                className="flex items-center gap-1 px-3 py-1.5 text-purple-600 hover:text-white hover:bg-purple-600 border border-purple-600 rounded text-sm transition-colors"
                 title="分享頁面"
               >
                 <div className="icon-share text-sm"></div>
@@ -120,25 +79,11 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
             </div>
             <div className="flex items-center gap-1">
               <button
-                onClick={handleDownload}
-                className="p-1 text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded transition-colors"
-                title="下載HTML文件"
-              >
-                <div className="icon-download text-sm"></div>
-              </button>
-              <button
                 onClick={onCopyLink}
-                className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded transition-colors"
+                className="p-1.5 text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
                 title="複製連結"
               >
-                <div className="icon-copy text-sm"></div>
-              </button>
-              <button
-                onClick={onDelete}
-                className="p-1 text-red-600 hover:text-red-700 hover:bg-red-50 rounded transition-colors"
-                title="刪除頁面"
-              >
-                <div className="icon-trash-2 text-sm"></div>
+                <div className="icon-copy text-base"></div>
               </button>
             </div>
           </div>
