@@ -6,6 +6,41 @@ function PageCard({ page, onShare, onCopyLink }) {
       window.open(url, '_blank');
     };
 
+    const handleDownload = () => {
+      try {
+        const htmlContent = page.htmlCode || '';
+
+        // 智能文件名：标题 + 描述
+        let fileName = '';
+        const title = (page.title || '無標題').trim();
+        const description = (page.description || '').trim();
+
+        if (description) {
+          fileName = `${title} ${description}.html`;
+        } else {
+          fileName = `${title}.html`;
+        }
+
+        // 移除文件名中的非法字符
+        fileName = fileName.replace(/[<>:"/\\|?*]/g, '_');
+
+        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error('下載失敗:', error);
+        alert('下載失敗，請重試');
+      }
+    };
+
     const formatDate = (dateString) => {
       const date = new Date(dateString);
       return date.toLocaleDateString('zh-CN') + ' ' + date.toLocaleTimeString('zh-CN', {
@@ -78,6 +113,13 @@ function PageCard({ page, onShare, onCopyLink }) {
               </button>
             </div>
             <div className="flex items-center gap-1">
+              <button
+                onClick={handleDownload}
+                className="p-1.5 text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded transition-colors"
+                title="下載HTML文件"
+              >
+                <div className="icon-download text-base"></div>
+              </button>
               <button
                 onClick={onCopyLink}
                 className="p-1.5 text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
