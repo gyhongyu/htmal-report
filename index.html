@@ -8,11 +8,13 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>HTML代碼管理器</title>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+
+    <!-- 使用公共 CDN 资源 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet">
 
     <style type="text/tailwindcss">
         @layer theme {
@@ -38,16 +40,7 @@
 <body>
     <div id="root"></div>
 
-    <!-- Service Worker 注册 - 完全控制缓存 -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('[主页] Service Worker 已注册'))
-                .catch(err => console.error('[主页] Service Worker 注册失败:', err));
-        }
-    </script>
-
-    <!-- 动态加载脚本，每次带新时间戳 - 确保实时更新 -->
+    <!-- 动态加载脚本，每次带新时间戳 -->
     <script>
         const version = Date.now();
         console.log('[主页] 脚本版本:', version);
