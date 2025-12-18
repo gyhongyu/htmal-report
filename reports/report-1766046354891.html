@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sales Kit</title>
+    
+    <!-- PWA & Mobile Icons (iOS) -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/vBNPcWBx/logo-foxlink-b-topaz-enhance-4x.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/vBNPcWBx/logo-foxlink-b-topaz-enhance-4x.png">
+    <meta name="apple-mobile-web-app-title" content="Foxlink Kit">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- PWA Manifest (Android/Chrome Embedded) -->
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Foxlink Sales Kit","short_name":"Foxlink Kit","start_url":".","display":"standalone","background_color":"#ffffff","theme_color":"#ffffff","icons":[{"src":"https://i.postimg.cc/vBNPcWBx/logo-foxlink-b-topaz-enhance-4x.png","sizes":"512x512","type":"image/png"}]}'>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- PapaParse -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        [x-cloak] { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Loading Spinner Animation */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fa-spin { animation: spin 1s linear infinite; }
+    </style>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('salesApp', () => ({
+                loading: true,
+                error: false,
+                errorMessage: '',
+                
+                // Data Containers
+                items: [],
+                mainCategories: [],
+                subTags: [],
+                
+                // Active Filters
+                activeMainCat: 'All',
+                selectedTags: [],
+                search: '',
+                
+                // UI States
+                showToast: false,
+                toastMessage: 'Copied!',
+                secretCount: 0,
+                clickTimer: null,
+                
+                // CSV Configuration
+                baseUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTY4NPnlbp5Pc0eMuwrc82PhrvspO_S6LN1IZ7DK1Atq6I615KF9IwLVims0nwg-mTiLFe270fsxaVW/pub?gid=0&single=true&output=csv',
+                
+                // Admin URL
+                adminUrl: 'https://docs.google.com/spreadsheets/d/19SEYNXeEoE42Le0S-7fEI6w_qjGne7fWRa-X3RLmHg8/edit?usp=sharing',
+
+                // Lifecycle Hook
+                init() {
+                    this.initData();
+                },
+
+                initData(forceReload = false) {
+                    console.log("Fetching CSV...", forceReload ? "(Forced Refresh)" : "");
+                    if (typeof Papa === 'undefined') {
+                        console.error("PapaParse not loaded");
+                        return;
+                    }
+                    
+                    this.loading = true;
+                    this.error = false;
+                    // Note: We don't clear items immediately on forced reload to prevent flashing
+                    if (!forceReload) this.items = []; 
+
+                    // Cache Busting
+                    let fetchUrl = this.baseUrl;
+                    if (forceReload) {
+                        fetchUrl += '&_cb=' + Date.now();
+                    }
+
+                    Papa.parse(fetchUrl, {
+                        download: true,
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: (results) => {
+                            if (results.data.length === 0) {
+                                console.warn("CSV is empty");
+                                this.loading = false;
+                                return;
+                            }
+
+                            // --- SMART COLUMN DETECTION ---
+                            const sampleRow = results.data[0];
+                            const keys = Object.keys(sampleRow);
+                            console.log("Detected CSV Headers:", keys);
+
+                            const findKey = (candidates) => keys.find(k => candidates.some(c => k.toLowerCase().includes(c.toLowerCase())));
+
+                            const mainCatKey = findKey(['Main_Category', 'Company', 'Category']) || 'Main_Category_Company';
+                            const subCatKey = findKey(['Sub_Category', 'Sub']) || 'Sub_Category';
+                            const titleKey = findKey(['en', 'Title_EN', 'English', 'Title']) || 'en';
+                            const linkKey = findKey(['link', 'url', 'href']) || 'link';
+
+                            console.log("Mapped Columns:", { mainCatKey, subCatKey, titleKey, linkKey });
+
+                            // --- PROCESS DATA ---
+                            const mainCatsSet = new Set();
+                            const subTagsSet = new Set();
+                            
+                            // Map items and assign a unique ID to each
+                            const parsedItems = results.data.map((row, index) => {
+                                const mainCat = (row[mainCatKey] || 'Uncategorized').trim();
+                                const subCatRaw = (row[subCatKey] || '').trim();
+                                
+                                const title = row[titleKey] || row['Title_TW'] || row['tw'] || 'Untitled';
+                                const link = row[linkKey] || '#';
+                                
+                                const tags = subCatRaw ? subCatRaw.split(',').map(t => t.trim()) : [];
+
+                                if (mainCat && mainCat !== 'Uncategorized') mainCatsSet.add(mainCat);
+                                tags.forEach(t => subTagsSet.add(t));
+
+                                // CRITICAL FIX: Generate unique ID using index and timestamp to prevent key collision errors
+                                const uniqueId = `item-${index}-${Date.now()}`;
+
+                                return { id: uniqueId, title, link, mainCat, tags };
+                            })
+                            .filter(item => item.title !== 'Untitled' || item.link !== '#');
+
+                            this.items = parsedItems;
+                            this.mainCategories = Array.from(mainCatsSet).sort();
+                            this.subTags = Array.from(subTagsSet).sort();
+                            
+                            console.log("Loaded Items:", this.items.length);
+                            this.loading = false;
+                            
+                            if (forceReload) {
+                                this.triggerToast(`Reloaded ${this.items.length} items!`, 'blue');
+                            }
+                        },
+                        error: (err) => {
+                            console.error(err);
+                            this.error = true;
+                            this.errorMessage = 'Failed to load CSV data.';
+                            this.loading = false;
+                        }
+                    });
+                },
+
+                // --- Secret Admin Actions ---
+                handleSecretClick() {
+                    this.secretCount++;
+                    if (this.clickTimer) clearTimeout(this.clickTimer);
+                    this.clickTimer = setTimeout(() => { this.secretCount = 0; }, 1000);
+
+                    if (this.secretCount >= 7) {
+                        this.triggerToast('Opening Editor...', 'green');
+                        window.open(this.adminUrl, '_blank');
+                        this.secretCount = 0;
+                    }
+                },
+
+                forceReload() {
+                    this.initData(true);
+                },
+
+                setMainCategory(cat) { this.activeMainCat = cat; },
+                toggleTag(tag) {
+                    if (this.selectedTags.includes(tag)) {
+                        this.selectedTags = this.selectedTags.filter(t => t !== tag);
+                    } else {
+                        this.selectedTags.push(tag);
+                    }
+                },
+                clearFilters() {
+                    this.activeMainCat = 'All';
+                    this.selectedTags = [];
+                    this.search = '';
+                },
+
+                get filteredItems() {
+                    return this.items.filter(item => {
+                        const matchMain = this.activeMainCat === 'All' || item.mainCat === this.activeMainCat;
+                        const matchTags = this.selectedTags.length === 0 || this.selectedTags.every(t => item.tags.includes(t));
+                        const q = this.search.toLowerCase();
+                        const matchSearch = !q || item.title.toLowerCase().includes(q) || item.mainCat.toLowerCase().includes(q) || item.tags.some(t => t.toLowerCase().includes(q));
+                        return matchMain && matchTags && matchSearch;
+                    });
+                },
+
+                isPdf(url) { return (url || '').toLowerCase().includes('.pdf'); },
+                shortLink(url) { try { return new URL(url).hostname.replace('www.', ''); } catch (e) { return 'link'; } },
+                openLink(url) { if(url && url !== '#') window.open(url, '_blank'); },
+                copyLink(url) {
+                    if (!url || url === '#') return;
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(url).then(() => this.triggerToast('Copied!'));
+                    } else {
+                        let ta = document.createElement("textarea");
+                        ta.value = url;
+                        ta.style.position = "fixed";
+                        ta.style.left = "-9999px";
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try { document.execCommand('copy'); this.triggerToast('Copied!'); } catch (e) {}
+                        document.body.removeChild(ta);
+                    }
+                },
+                triggerToast(msg = 'Copied!', color = 'green') {
+                    this.toastMessage = msg;
+                    this.showToast = true;
+                    setTimeout(() => this.showToast = false, 2000);
+                }
+            }))
+        })
+    </script>
+</head>
+
+<body class="text-slate-800" x-data="salesApp">
+
+    <!-- Header Section -->
+    <div class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+        <!-- 1. Top Bar: Logo & Actions -->
+        <div class="px-4 py-2 flex justify-between items-center border-b border-slate-100 bg-white">
+            
+            <!-- Logo with Secret Click -->
+            <div @click="handleSecretClick()" class="cursor-pointer select-none py-1 active:opacity-70 transition-opacity" title="Tap 7 times to edit">
+                <img src="https://i.postimg.cc/vBNPcWBx/logo-foxlink-b-topaz-enhance-4x.png" alt="Foxlink Sales Kit" class="h-8 w-auto object-contain">
+            </div>
+
+            <!-- Right: Reload & Search -->
+            <div class="flex items-center gap-3 flex-1 justify-end max-w-[240px]">
+                
+                <!-- Reload Button -->
+                <button @click="forceReload()" class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors" title="Reload Data">
+                    <i class="fas fa-sync-alt" :class="loading ? 'fa-spin text-blue-500' : ''"></i>
+                </button>
+
+                <!-- Search Bar -->
+                <div class="relative w-full">
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" x-model="search" placeholder="Search..." 
+                        class="w-full bg-slate-100 text-sm rounded-full pl-8 pr-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all focus:bg-white border border-transparent focus:border-blue-200">
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Main Categories (TABS) - Collapsible Grid -->
+        <div class="px-4 py-2 border-b border-slate-100 bg-slate-50/50 relative" x-data="{ expanded: false }">
+            <!-- Grid Container with toggleable max-height -->
+            <!-- max-h-[38px] shows exactly one row (button height ~32px + gap) -->
+            <div class="flex flex-wrap gap-2 pr-8 transition-[max-height] duration-300 ease-in-out overflow-hidden"
+                 :class="expanded ? 'max-h-[500px]' : 'max-h-[38px]'">
+                
+                <button @click="setMainCategory('All')" 
+                    class="whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-semibold transition-colors flex-shrink-0"
+                    :class="activeMainCat === 'All' ? 'bg-slate-800 text-white' : 'bg-white text-slate-600 border border-slate-200'"
+                >All</button>
+                
+                <template x-for="cat in mainCategories" :key="cat">
+                    <button @click="setMainCategory(cat)" 
+                        class="whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition-colors flex-shrink-0"
+                        :class="activeMainCat === cat ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200'"
+                        x-text="cat"
+                    ></button>
+                </template>
+            </div>
+
+            <!-- Expand Toggle Button (Only shows if we have categories) -->
+            <button 
+                x-show="mainCategories.length > 0" 
+                @click="expanded = !expanded" 
+                class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm border border-slate-200 text-slate-500 hover:text-blue-600 transition-colors z-10"
+            >
+                <i class="fas" :class="expanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </button>
+        </div>
+
+        <!-- 3. Sub Categories (TAGS) - Filter Chips -->
+        <div class="px-4 py-2 bg-white flex flex-wrap gap-2 shadow-sm min-h-[44px]" x-show="subTags.length > 0">
+            <div class="text-[10px] uppercase font-bold text-slate-400 py-1.5">Filter:</div>
+            <template x-for="tag in subTags" :key="tag">
+                <button @click="toggleTag(tag)" 
+                    class="px-2.5 py-1 rounded-md text-xs font-medium border transition-all active:scale-95"
+                    :class="selectedTags.includes(tag) ? 'bg-blue-50 border-blue-200 text-blue-600 ring-1 ring-blue-500' : 'bg-slate-50 border-slate-100 text-slate-500'"
+                >
+                    <span x-text="tag"></span>
+                </button>
+            </template>
+            <button x-show="selectedTags.length > 0" @click="selectedTags = []" class="text-xs text-slate-400 underline decoration-dotted ml-auto">Clear</button>
+        </div>
+    </div>
+
+    <!-- Content List -->
+    <div class="pt-[150px] pb-10 px-4 max-w-2xl mx-auto min-h-screen">
+        
+        <!-- Loading -->
+        <div x-show="loading" class="text-center py-10 text-slate-400">
+            <i class="fas fa-spinner fa-spin fa-2x mb-2 text-blue-500"></i>
+            <p class="text-xs">Updating Database...</p>
+        </div>
+
+        <!-- Error -->
+        <div x-show="error" class="bg-red-50 text-red-600 p-4 rounded-lg text-sm text-center my-4" x-text="errorMessage"></div>
+
+        <!-- Items -->
+        <div x-show="!loading" class="space-y-3">
+            <!-- CRITICAL FIX: Changed :key from item.link to item.id to ensure uniqueness -->
+            <template x-for="item in filteredItems" :key="item.id">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start active:scale-[0.99] transition-transform" @click="openLink(item.link)">
+                    <!-- Icon -->
+                    <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center text-xl mr-3 shrink-0"
+                         :class="isPdf(item.link) ? 'text-red-500' : 'text-blue-500'">
+                        <i class="fas" :class="isPdf(item.link) ? 'fa-file-pdf' : 'fa-link'"></i>
+                    </div>
+
+                    <!-- Texts -->
+                    <div class="flex-1 min-w-0">
+                        <!-- Upper Labels -->
+                        <div class="flex gap-1 mb-1">
+                            <span class="text-[10px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded" x-text="item.mainCat"></span>
+                            <template x-for="t in item.tags">
+                                <span class="text-[10px] font-medium bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded" x-text="t"></span>
+                            </template>
+                        </div>
+                        
+                        <h3 class="text-sm font-semibold text-slate-900 leading-tight mb-0.5" x-text="item.title"></h3>
+                        <div class="text-[11px] text-slate-400 truncate" x-text="shortLink(item.link)"></div>
+                    </div>
+
+                    <!-- Copy Btn -->
+                    <button @click.stop="copyLink(item.link)" class="text-slate-300 hover:text-blue-500 p-2 ml-1">
+                        <i class="far fa-copy text-lg"></i>
+                    </button>
+                </div>
+            </template>
+        </div>
+        
+        <!-- Empty -->
+        <div x-show="!loading && filteredItems.length === 0" class="text-center py-12 text-slate-400">
+            <i class="fas fa-inbox text-3xl mb-2"></i>
+            <p class="text-sm">No items found.</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-4 py-2 rounded-full text-xs font-medium shadow-lg z-50 flex items-center gap-2 pointer-events-none transition-all duration-300 transform"
+         :class="showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'">
+        <i class="fas fa-check text-green-400"></i> <span x-text="toastMessage"></span>
+    </div>
+
+    <!-- Alpine.js (Moved to bottom and deferred) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+</body>
+</html>
