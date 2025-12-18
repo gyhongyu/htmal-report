@@ -1,80 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>HTML代碼管理器</title>
-    <meta name="description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
-    <meta name="keywords" content="HTML編輯器,代碼預覽,網頁製作,線上編輯">
-    <meta property="og:title" content="HTML代碼管理器">
-    <meta property="og:description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
-    <meta name="twitter:title" content="HTML代碼管理器">
-    <meta name="twitter:description" content="創建、編輯和管理您的HTML代碼頁面，支援即時預覽和線上分享">
 
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <!-- 使用公共 CDN 资源 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet">
 
-    <!-- Predefined Tailwind CSS, use it as needed, or update base on your -->
     <style type="text/tailwindcss">
         @layer theme {
         :root {
             --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --success-color: #16a34a;
-            --border-color: #e5e7eb;
-            --text-secondary: #6b7280;
         }
     }
-
-    @layer base {
-        body {
-            @apply bg-gray-50 font-sans;
-        }
-    }
-
+    
     @layer components {
         .btn-primary {
-            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--primary-hover)] transition-colors duration-200;
+            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-blue-700 transition-colors;
         }
-        
         .btn-success {
-            @apply px-4 py-2 bg-[var(--success-color)] text-white rounded-lg hover:bg-green-600 transition-colors duration-200;
+            @apply px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors;
         }
-        
         .input-field {
-            @apply w-full p-3 border border-[var(--border-color)] rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent outline-none;
+            @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent;
         }
-        
-        .preview-frame {
-            @apply w-full h-full border border-[var(--border-color)] rounded-lg bg-white;
-        }
-        
-        .progress-bar {
-            @apply relative h-1 bg-gray-200 rounded-full overflow-hidden;
-        }
-        
-        .progress-bar-fill {
-            @apply absolute top-0 left-0 h-full bg-[var(--primary-color)] transition-all duration-300;
-        }
+    }
+    
+    /* 加载动画样式 */
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+    }
+    
+    .loading-overlay.fade-out {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .loader {
+        width: 80px;
+        height: 80px;
+        border: 8px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+        color: white;
+        font-size: 1.25rem;
+        margin-top: 2rem;
+        font-weight: 500;
+        animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+    
+    .progress-bar {
+        width: 300px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        margin-top: 1.5rem;
+        overflow: hidden;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: white;
+        width: 0%;
+        animation: progress 2s ease-in-out infinite;
+    }
+    
+    @keyframes progress {
+        0% { width: 0%; }
+        50% { width: 70%; }
+        100% { width: 100%; }
     }
     </style>
 
+    <!-- 版本检测和自动更新 -->
+    <script>
+        (async function autoUpdateCheck() {
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'loading-overlay';
+            loadingOverlay.innerHTML = `
+                <div class="loader"></div>
+                <div class="loading-text" id="loading-status">正在檢查更新...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            `;
+            document.body.appendChild(loadingOverlay);
+
+            const statusText = document.getElementById('loading-status');
+
+            try {
+                // 获取当前版本
+                const localVersion = localStorage.getItem('app-version');
+
+                // 从服务器获取最新版本
+                const response = await fetch('./data/reports-index.json?t=' + Date.now(), {
+                    cache: 'no-store'
+                });
+
+                if (!response.ok) {
+                    console.warn('无法检查更新，使用缓存版本');
+                    hideLoading();
+                    return;
+                }
+
+                const data = await response.json();
+                const serverVersion = data.lastUpdated;
+
+                console.log('[自动更新] 本地版本:', localVersion);
+                console.log('[自动更新] 服务器版本:', serverVersion);
+
+                // 如果版本不同，需要更新
+                if (localVersion && localVersion !== serverVersion) {
+                    statusText.textContent = '發現新版本，正在更新...';
+                    await new Promise(resolve => setTimeout(resolve, 800));
+
+                    // 保存新版本并刷新
+                    localStorage.setItem('app-version', serverVersion);
+                    location.reload(true);
+                } else {
+                    // 保存版本并继续加载
+                    localStorage.setItem('app-version', serverVersion);
+                    statusText.textContent = '載入頁面...';
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    hideLoading();
+                }
+            } catch (error) {
+                console.error('[自动更新] 检查失败:', error);
+                hideLoading();
+            }
+
+            function hideLoading() {
+                setTimeout(() => {
+                    loadingOverlay.classList.add('fade-out');
+                    setTimeout(() => loadingOverlay.remove(), 500);
+                }, 300);
+            }
+        })();
+    </script>
 </head>
 
 <body>
     <div id="root"></div>
+
     <script type="text/babel" src="utils/reportsLoader.js"></script>
     <script type="text/babel" src="components/LoadingProgress.js"></script>
+    <script type="text/babel" src="components/Pagination.js"></script>
     <script type="text/babel" src="components/SearchBar.js"></script>
     <script type="text/babel" src="components/CategoryTabs.js"></script>
-    <script type="text/babel" src="components/Pagination.js"></script>
-    <script type="text/babel" src="components/HomePage.js"></script>
     <script type="text/babel" src="components/PageCard.js"></script>
+    <script type="text/babel" src="components/HomePage.js"></script>
     <script type="text/babel" src="app.js"></script>
 </body>
 
