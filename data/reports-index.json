@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-18T08:25:55.301Z",
+  "lastUpdated": "2025-12-18T08:36:45.874Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -40,6 +40,32 @@
       "fileName": "report-1766046354891.html",
       "createdAt": "2025-12-18T08:25:55.301Z",
       "updatedAt": "2025-12-18T08:25:55.301Z"
+    },
+    {
+      "id": "report-1766046848878",
+      "title": "印度WhatsApp話術攻略生成器",
+      "description": "印度WhatsApp話術攻略生成器",
+      "categories": [
+        "客戶簡報",
+        "內部簡報",
+        "其他"
+      ],
+      "fileName": "report-1766046848878.html",
+      "createdAt": "2025-12-18T08:34:09.636Z",
+      "updatedAt": "2025-12-18T08:34:09.636Z"
+    },
+    {
+      "id": "report-1766047005427",
+      "title": "全方位戰略評估：Syrma SGS Technology (Jasbir Singh Gujral)",
+      "description": "Strategic Analysis: Syrma SGS Technology (Jasbir Singh Gujral)",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1766047005427.html",
+      "createdAt": "2025-12-18T08:36:45.874Z",
+      "updatedAt": "2025-12-18T08:36:45.874Z"
     }
   ]
 }
