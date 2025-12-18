@@ -8,8 +8,8 @@ function PageCard({ page, onShare, onCopyLink }) {
 
     const handleDownload = async () => {
       try {
-        // page 对象来自 reports-index.json，包含 fileHtmlName 属性
-        const fileName = page.fileHtmlName;
+        // page 对象来自 reports-index.json，包含 fileName 属性
+        const fileName = page.fileName;
 
         if (!fileName) {
           console.error('無文件名:', page);
