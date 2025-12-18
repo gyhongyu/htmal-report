@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">NRE Proposal: My Animal Project</title>
+    <title data-lang="zh">專案 NRE 提報：「我的動物」追蹤器系列開發</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- 基礎樣式 --- */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+        
+        /* 預設隱藏所有語言標籤 */
+        [data-lang] { display: none; }
+        
+        .content-area {
+            animation: fadeIn 0.5s ease-out;
+            min-height: calc(100vh - 160px);
+            padding: 2.5rem;
+            box-sizing: border-box;
+        }
+
+        /* --- 互動流水線樣式 --- */
+        .pipeline-container {
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: #4b5563 #1f2937;
+        }
+        
+        .pipeline-track {
+            display: flex;
+            align-items: center;
+            min-width: max-content;
+            padding: 10px 20px;
+        }
+
+        .pipeline-node {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            min-width: 160px;
+        }
+
+        .pipeline-node:hover, .pipeline-node.active {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .node-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            z-index: 10;
+            border: 3px solid #1f2937;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            background-color: #4b5563;
+        }
+        
+        .pipeline-node.active .node-circle {
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Node Colors */
+        .node-client .node-circle { background-color: #059669; }
+        .node-provider .node-circle { background-color: #2563eb; }
+        .node-freeze .node-circle { background-color: #dc2626; border-color: #fca5a5; }
+
+        .node-label {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #9ca3af;
+            font-weight: 600;
+            max-width: 140px;
+            line-height: 1.2;
+        }
+        
+        .pipeline-node.active .node-label { color: white; }
+
+        .pipeline-connector {
+            flex-grow: 1;
+            height: 2px;
+            background-color: #4b5563;
+            min-width: 40px;
+            margin: 0 5px;
+            margin-bottom: 30px; /* Align with circle center */
+        }
+
+        /* Detail Panel */
+        .detail-panel {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeIn 0.3s ease-in-out;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-item h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-item p {
+            font-size: 0.9rem;
+            color: #f3f4f6;
+            line-height: 1.5;
+        }
+        
+        .detail-list li {
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .detail-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+        }
+
+        /* --- 表格優化 --- */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 1rem; 
+            margin-bottom: 1rem; 
+            table-layout: fixed; 
+        }
+        
+        th, td { 
+            border: 1px solid #4b5563; 
+            padding: 0.75rem; 
+            text-align: left; 
+            vertical-align: top; 
+            word-wrap: break-word; 
+        }
+        
+        th:nth-child(1) { width: 40px; } /* Checkbox */
+        th:nth-child(2) { width: 15%; } /* Item */
+        th:nth-child(3) { width: 30%; } /* Desc */
+        th:nth-child(4) { width: 15%; } /* Input */
+        th:nth-child(5) { width: 20%; } /* Deliverables */
+        th:nth-child(6) { width: 80px; } /* Days */
+        th:nth-child(7) { width: 100px; } /* Cost */
+
+        th { background-color: #374151; font-weight: 600; color: #93c5fd; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #263042; }
+
+        /* 互動 Checkbox 樣式 */
+        .checkbox-cell {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .checkbox-cell:hover i {
+            color: #60a5fa;
+        }
+
+        /* 摺疊樣式 */
+        details {
+            background-color: #1f2937;
+            border-radius: 0.5rem;
+            border: 1px solid #374151;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+        details > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #374151;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] > summary { border-bottom: 1px solid #4b5563; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- PDF 列印特殊處理 --- */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff !important; color: #000 !important; font-size: 8pt; }
+            .content-area { padding: 1cm !important; border: none !important; }
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; max-width: 100% !important; margin: 0 !important; }
+            
+            th { background-color: #f0f0f0 !important; color: #000 !important; border: 1px solid #ccc !important; }
+            td { border: 1px solid #ccc !important; color: #000 !important; }
+            tbody tr { background-color: #fff !important; }
+            
+            .bg-gray-800, .bg-gray-900, .bg-blue-900, .bg-green-900, .detail-panel { 
+                background-color: #fff !important; 
+                border: 1px solid #000 !important; 
+                color: #000 !important; 
+                box-shadow: none !important;
+            }
+            .text-blue-400, .text-blue-300 { color: #0000cc !important; }
+            .text-green-400, .text-green-300 { color: #007700 !important; }
+            .text-yellow-400, .text-yellow-300 { color: #b45309 !important; }
+            
+            .checkbox-cell i { color: #000 !important; }
+            
+            .pipeline-container { display: none !important; }
+            .print-flow-list { display: block !important; }
+            
+            details[open] { border: 1px solid #ccc !important; }
+            details > summary { background-color: #eee !important; color: #000 !important; border-bottom: 1px solid #ccc; }
+            h1, h2, h3, .break-inside-avoid { page-break-inside: avoid; }
+        }
+        
+        .print-flow-list { display: none; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4 max-w-7xl">
+        
+        <!-- Header -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 p-2 rounded text-white font-bold">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">NRE (Non-Recurring Engineering) Proposal</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">NRE (Non-Recurring Engineering) 專案開發建議書</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF (合約附件)</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Title Section -->
+                <div class="text-center border-b border-gray-700 pb-8 mb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">QUOTATION & PROPOSAL</span>
+                    <h1 class="text-4xl font-bold mb-2 text-blue-400" data-lang="en">Project: My Animal Tracker Series Development</h1>
+                    <h1 class="text-4xl font-bold mb-2 text-blue-400" data-lang="zh">專案名稱：「我的動物」追蹤器系列開發</h1>
+                    
+                    <div class="flex justify-center space-x-6 text-sm text-gray-400 mt-4">
+                        <span><i class="far fa-calendar-alt mr-2"></i>2025/12/10</span>
+                        <span><i class="fas fa-coins mr-2"></i>RMB / USD / INR</span>
+                        <span><i class="far fa-clock mr-2"></i>Time: Calendar Days</span>
+                    </div>
+                </div>
+
+                <!-- 1.0 Executive Summary -->
+                <div class="mb-10">
+                    <h2 class="text-2xl font-bold mb-4 text-white border-l-4 border-blue-500 pl-4 flex items-center">
+                        <span data-lang="zh">1.0 報價範疇與核心策略</span>
+                        <span data-lang="en">1.0 Scope & Core Strategy</span>
+                    </h2>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <p class="text-gray-300 leading-relaxed mb-4" data-lang="zh">
+                            本 NRE 報價單基於 2025/12/9 技術會議決議。
+                            鑑於貴司擁有獨立的韌體開發團隊，我們採用 **「模組化 (Modular)」** 合作模式。
+                        </p>
+                        <p class="text-gray-300 leading-relaxed mb-4" data-lang="en">
+                            This NRE quotation is based on the resolution of the technical meeting on Dec 9, 2025. Given that your company has an independent firmware development team, we adopt a **"Modular"** cooperation model.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-blue-900/20 border border-blue-700/50 p-4 rounded-lg">
+                                <h3 class="font-bold text-blue-300 mb-2"><i class="fas fa-dog mr-2"></i><span data-lang="zh">專案 A: 寵物追蹤器</span><span data-lang="en">Project A: Pet Tracker</span></h3>
+                                <p class="text-sm text-gray-400" data-lang="zh">現有產品改版 (2G → 4G)。重點在於提供硬體底層驅動 (BSP)，協助貴司自研韌體落地。</p>
+                                <p class="text-sm text-gray-400" data-lang="en">Upgrade existing product (2G -> 4G). Focus on providing hardware BSP to support your firmware development.</p>
+                            </div>
+                            <div class="bg-green-900/20 border border-green-700/50 p-4 rounded-lg">
+                                <h3 class="font-bold text-green-300 mb-2"><i class="fas fa-cow mr-2"></i><span data-lang="zh">專案 B: 牛隻追蹤器</span><span data-lang="en">Project B: Cattle Tracker</span></h3>
+                                <p class="text-sm text-gray-400" data-lang="zh">原型量產化。涉及新傳感器整合、太陽能/電池堆疊與高強度防水機構設計。</p>
+                                <p class="text-sm text-gray-400" data-lang="en">Prototype to mass production. Involves new sensor integration, solar/battery stacking, and rugged IP67 design.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.0 互動式流水線專區 -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 text-white border-l-4 border-yellow-500 pl-4 flex items-center">
+                        <span data-lang="zh">2.0 開發流程責任分界圖 (Pipeline)</span>
+                        <span data-lang="en">2.0 Development Process & Responsibilities</span>
+                    </h2>
+                    
+                    <p class="text-sm text-gray-400 mb-4 italic" data-lang="zh">
+                        * 請點擊下方流程節點查看詳細權責歸屬與交付文件。此表將作為合約驗收標準。
+                    </p>
+                    <p class="text-sm text-gray-400 mb-4 italic" data-lang="en">
+                        * Please click the nodes below to view detailed responsibilities and deliverables. This chart serves as the acceptance criteria for the contract.
+                    </p>
+
+                    <!-- Legend -->
+                    <div class="flex space-x-6 mb-4 text-sm justify-end no-print">
+                        <div class="flex items-center"><span class="w-3 h-3 bg-green-600 rounded-full mr-2"></span> <span data-lang="zh">甲方 (Client)</span><span data-lang="en">Client</span></div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-blue-600 rounded-full mr-2"></span> <span data-lang="zh">乙方 (Provider)</span><span data-lang="en">Provider</span></div>
+                        <div class="flex items-center"><span class="w-3 h-3 bg-red-600 rounded-full mr-2"></span> <span data-lang="zh">規格凍結 (Freeze)</span><span data-lang="en">Freeze Point</span></div>
+                    </div>
+
+                    <!-- Flow 1 -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 mb-8 break-inside-avoid">
+                        <h3 class="text-lg font-bold text-blue-300 mb-6 border-b border-gray-700 pb-2">
+                            FLOW 1: <span data-lang="zh">寵物追蹤器 (快速升級)</span><span data-lang="en">Pet Tracker (Fast Track)</span>
+                        </h3>
+                        <div id="pipeline-pet" class="pipeline-container no-print"></div>
+                        <div id="detail-pet" class="detail-panel no-print" style="display:none;"></div>
+                        <div id="print-pet" class="print-flow-list"></div>
+                    </div>
+
+                    <!-- Flow 2 -->
+                    <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 break-inside-avoid">
+                        <h3 class="text-lg font-bold text-green-300 mb-6 border-b border-gray-700 pb-2">
+                            FLOW 2: <span data-lang="zh">牛隻追蹤器 (深度開發流水線)</span><span data-lang="en">Cattle Tracker (Deep Development)</span>
+                        </h3>
+                        <div id="pipeline-cattle" class="pipeline-container no-print"></div>
+                        <div id="detail-cattle" class="detail-panel no-print" style="display:none;"></div>
+                         <div id="print-cattle" class="print-flow-list"></div>
+                    </div>
+                </div>
+
+                <!-- 3.0 Details Table - Pet Tracker -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-blue-400 mb-4 pl-2 border-l-2 border-blue-500">
+                        <span data-lang="zh">3.0 項目詳細報價：寵物追蹤器 (4G)</span>
+                        <span data-lang="en">3.0 Quote Details: Pet Tracker (4G)</span>
+                    </h3>
+                    <details open>
+                        <summary>
+                            <span data-lang="zh">3.0 費用明細 - 點擊收合 (Click to collapse)</span>
+                            <span data-lang="en">3.0 Details - Click to collapse</span>
+                        </summary>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr>
+                                        <th><span data-lang="zh">選</span><span data-lang="en">Sel</span></th>
+                                        <th>NRE Item</th>
+                                        <th><span data-lang="zh">詳細工作內容描述</span><span data-lang="en">Detailed Description</span></th>
+                                        <th class="text-yellow-300"><span data-lang="zh">客戶需提供資料 (Input)</span><span data-lang="en">Client Input</span></th>
+                                        <th><span data-lang="zh">交付成果</span><span data-lang="en">Deliverables</span></th>
+                                        <th><span data-lang="zh">週期(天)</span><span data-lang="en">Days</span></th>
+                                        <th class="text-right">RMB</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-blue-200">2.1 HW Redesign (EE)</td>
+                                        <td>
+                                            <span data-lang="zh">1. 4G 通訊模組選型與電路設計<br>2. 射頻 (RF) 天線匹配與除錯<br>3. 電源管理電路優化 (針對 4G 功耗)<br>4. PCB Layout 重新佈局</span>
+                                            <span data-lang="en">1. 4G module selection & schematic design<br>2. RF antenna matching & debugging<br>3. PMU optimization for 4G power consumption<br>4. PCB Layout redesign</span>
+                                        </td>
+                                        <td class="text-gray-400">
+                                            <span data-lang="zh">無 (基於我方現有方案)</span>
+                                            <span data-lang="en">None (Based on existing solution)</span>
+                                        </td>
+                                        <td>
+                                            <span data-lang="zh">1. 新版電路圖 (PDF)<br>2. 新版 BOM 表<br>3. 關鍵元件規格書</span>
+                                            <span data-lang="en">1. New Schematics (PDF)<br>2. New BOM<br>3. Key Component Datasheets</span>
+                                        </td>
+                                        <td class="text-center">14</td>
+                                        <td class="text-right font-mono text-blue-300">40,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-blue-200">2.2 BSP & Drivers</td>
+                                        <td>
+                                            <span data-lang="zh"><span class="text-yellow-400 font-bold">[關鍵]</span> 配合貴司自研韌體策略：<br>1. 整理硬體底層驅動 (GPIO, GPS, 4G AT, G-Sensor)<br>2. 搭建編譯環境說明<br>3. 提供 Register Map</span>
+                                            <span data-lang="en"><span class="text-yellow-400 font-bold">[Critical]</span> Support your FW strategy:<br>1. Low-level drivers (GPIO, GPS, 4G AT, G-Sensor)<br>2. Compilation environment guide<br>3. Register Map</span>
+                                        </td>
+                                        <td class="text-gray-400">
+                                            <span data-lang="zh">1. 貴司韌體開發環境需求</span>
+                                            <span data-lang="en">1. Your FW environment requirements</span>
+                                        </td>
+                                        <td>
+                                            <span data-lang="zh">1. 硬體介面開發手冊<br>2. 基礎 SDK 包<br>3. MQTT 通訊測試範例代碼</span>
+                                            <span data-lang="en">1. HW Interface Guide<br>2. Basic SDK (w/ Drivers)<br>3. MQTT Communication Sample Code</span>
+                                        </td>
+                                        <td class="text-center">30</td>
+                                        <td class="text-right font-mono text-blue-300">80,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-blue-200">2.3 Online Training</td>
+                                        <td>
+                                            <span data-lang="zh"><span class="text-yellow-400 font-bold">[關鍵]</span> 針對印度研發團隊技術轉移：<br>1. 3場線上會議 (每場 2小時)<br>2. 硬體控制流程解說<br>3. 協助點亮第一版韌體</span>
+                                            <span data-lang="en"><span class="text-yellow-400 font-bold">[Critical]</span> Tech transfer to India team:<br>1. 3 Online sessions (2hrs each)<br>2. HW control flow explanation<br>3. Assist in bring-up of first FW</span>
+                                        </td>
+                                        <td class="text-gray-400">
+                                            <span data-lang="zh">指派對接工程師參與</span>
+                                            <span data-lang="en">Assign engineers to attend</span>
+                                        </td>
+                                        <td>
+                                            <span data-lang="zh">1. 培訓錄影/紀要<br>2. Q&A 技術問題追蹤表</span>
+                                            <span data-lang="en">1. Meeting Recording/Minutes<br>2. Q&A Tracker</span>
+                                        </td>
+                                        <td class="text-center">7</td>
+                                        <td class="text-right font-mono text-blue-300">50,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-blue-200">2.4 PCBA Validation</td>
+                                        <td>
+                                            <span data-lang="zh">1. SMT 貼片生產 (5-10片)<br>2. 基礎電性測試與燒錄測試<br>3. 射頻訊號校準</span>
+                                            <span data-lang="en">1. SMT Production (5-10 pcs)<br>2. Basic Electrical & Burning Test<br>3. RF Calibration</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">無</span><span data-lang="en">None</span></td>
+                                        <td>
+                                            <span data-lang="zh">1. 4G PCBA 功能樣品 (5片)<br>2. 測試報告</span>
+                                            <span data-lang="en">1. Functional Samples (5 pcs)<br>2. Test Report</span>
+                                        </td>
+                                        <td class="text-center">30</td>
+                                        <td class="text-right font-mono text-blue-300">30,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- 4.0 Details Table - Cattle Tracker -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-green-400 mb-4 pl-2 border-l-2 border-green-500">
+                        <span data-lang="zh">4.0 項目詳細報價：牛隻追蹤器 (量產化)</span>
+                        <span data-lang="en">4.0 Quote Details: Cattle Tracker (Mass Production)</span>
+                    </h3>
+                    <details open>
+                        <summary>
+                            <span data-lang="zh">4.0 費用明細 - 點擊收合 (Click to collapse)</span>
+                            <span data-lang="en">4.0 Details - Click to collapse</span>
+                        </summary>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr>
+                                        <th><span data-lang="zh">選</span><span data-lang="en">Sel</span></th>
+                                        <th>NRE Item</th>
+                                        <th><span data-lang="zh">詳細工作內容描述</span><span data-lang="en">Detailed Description</span></th>
+                                        <th class="text-yellow-300"><span data-lang="zh">客戶需提供資料 (Input)</span><span data-lang="en">Client Input</span></th>
+                                        <th><span data-lang="zh">交付成果</span><span data-lang="en">Deliverables</span></th>
+                                        <th><span data-lang="zh">週期(天)</span><span data-lang="en">Days</span></th>
+                                        <th class="text-right">RMB</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-green-200">2.1 HW Redesign (EE)</td>
+                                        <td>
+                                            <span data-lang="zh">1. 4G 模組選型與電路設計<br>2. RF 天線匹配與除錯<br>3. 電源管理 (針對 4G)<br>4. PCB Layout 重新佈局</span>
+                                            <span data-lang="en">1. 4G module selection & schematic<br>2. RF matching & debug<br>3. PMU optimization<br>4. PCB Layout redesign</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">無 (基於我方現有方案)</span><span data-lang="en">None</span></td>
+                                        <td>
+                                            <span data-lang="zh">1. 新版電路圖 (PDF)<br>2. 新版 BOM 表<br>3. 關鍵元件規格書</span>
+                                            <span data-lang="en">1. Schematics (PDF)<br>2. BOM<br>3. Datasheets</span>
+                                        </td>
+                                        <td class="text-center">80</td>
+                                        <td class="text-right font-mono text-green-300">80,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-green-200">2.2 BSP & Drivers</td>
+                                        <td>
+                                            <span data-lang="zh"><span class="text-yellow-400 font-bold">[關鍵]</span> 配合自研韌體：<br>1. 整理硬體底層驅動<br>2. 搭建編譯環境說明<br>3. 提供 Register Map</span>
+                                            <span data-lang="en"><span class="text-yellow-400 font-bold">[Critical]</span> Support FW:<br>1. Low-level drivers<br>2. Env setup guide<br>3. Register Map</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">1. 貴司韌體開發環境需求</span><span data-lang="en">1. Env Requirements</span></td>
+                                        <td>
+                                            <span data-lang="zh">1. 硬體介面開發手冊<br>2. 基礎 SDK 包<br>3. MQTT 通訊測試範例</span>
+                                            <span data-lang="en">1. HW Interface Guide<br>2. Basic SDK<br>3. MQTT Sample Code</span>
+                                        </td>
+                                        <td class="text-center">60</td>
+                                        <td class="text-right font-mono text-green-300">120,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-green-200">2.3 Reliability Test</td>
+                                        <td>
+                                            <span data-lang="zh">1. 制定專案測試計畫<br>2. 執行測試計畫內容的測試專案</span>
+                                            <span data-lang="en">1. Define Test Plan<br>2. Execute reliability tests</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">無</span><span data-lang="en">None</span></td>
+                                        <td><span data-lang="zh">1. 產品測試報告</span><span data-lang="en">1. Test Report</span></td>
+                                        <td class="text-center">90</td>
+                                        <td class="text-right font-mono text-green-300">50,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-green-200">3.1 DFM Optimization</td>
+                                        <td>
+                                            <span data-lang="zh">審核 Gerber/BOM，轉換為工廠生產標準，量產風險評估。</span>
+                                            <span data-lang="en">Review Gerber/BOM, convert to factory standards, risk assessment.</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">1. 完整 Gerber<br>2. BOM 表<br>3. 座標檔</span><span data-lang="en">1. Gerber<br>2. BOM<br>3. Pick & Place</span></td>
+                                        <td><span data-lang="zh">1. DFM 報告<br>2. 優化 BOM</span><span data-lang="en">1. DFM Report<br>2. Optimized BOM</span></td>
+                                        <td class="text-center">5</td>
+                                        <td class="text-right font-mono text-green-300">50,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-green-200">3.2 ME Design</td>
+                                        <td>
+                                            <span data-lang="zh"><span class="text-yellow-500 text-xs font-bold">[關鍵]</span> IP67 防水外殼與太陽能板/電池續航力堆疊方案。</span>
+                                            <span data-lang="en"><span class="text-yellow-500 text-xs font-bold">[Critical]</span> IP67 Housing & Solar/Battery stacking for long battery life.</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">1. 3D 原型 (STP)<br>2. 電池規格限制</span><span data-lang="en">1. 3D Proto<br>2. Battery Specs</span></td>
+                                        <td><span data-lang="zh">1. 3D STP檔<br>2. 2D 工程圖<br>3. 結構評估報告</span><span data-lang="en">1. 3D STP<br>2. 2D Dwgs<br>3. Structure Report</span></td>
+                                        <td class="text-center">15</td>
+                                        <td class="text-right font-mono text-green-300">80,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-green-200">3.3 Tooling</td>
+                                        <td>
+                                            <span data-lang="zh">模具流道設計、開模 (注塑模)、外殼咬花確認。</span>
+                                            <span data-lang="en">Mold flow design, Tooling (Injection), Texture confirmation.</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">確認之 3D 圖檔</span><span data-lang="en">Confirmed 3D</span></td>
+                                        <td><span data-lang="zh">1. 模具實體<br>2. T1 試模樣品</span><span data-lang="en">1. Mold Entity<br>2. T1 Samples</span></td>
+                                        <td class="text-center">45</td>
+                                        <td class="text-right font-mono text-green-300">150,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center checkbox-cell"><i class="far fa-square"></i></td>
+                                        <td class="font-bold text-green-200">3.4 NPI Introduction</td>
+                                        <td>
+                                            <span data-lang="zh">建立 SOP、製作測試治具 (Jig)、首批試產管理。</span>
+                                            <span data-lang="en">Create SOP, Test Jigs, Pilot Run management.</span>
+                                        </td>
+                                        <td class="text-gray-400"><span data-lang="zh">無</span><span data-lang="en">None</span></td>
+                                        <td><span data-lang="zh">1. SOP 文件<br>2. 良率報告</span><span data-lang="en">1. SOP Doc<br>2. Yield Report</span></td>
+                                        <td class="text-center">7</td>
+                                        <td class="text-right font-mono text-green-300">50,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Summary Section -->
+                <div class="mb-8 p-6 bg-gray-800 border-2 border-yellow-600 rounded-lg break-inside-avoid">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-4 flex items-center">
+                        <i class="fas fa-calculator mr-2"></i>
+                        <span data-lang="zh">預估費用總結 (Estimated Cost Summary)</span>
+                        <span data-lang="en">Estimated Cost Summary</span>
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                            <div class="text-gray-400 text-sm mb-1">RMB (Total)</div>
+                            <div id="total-rmb" class="text-3xl font-bold text-white">0</div>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                            <div class="text-gray-400 text-sm mb-1">USD (approx.)</div>
+                            <div id="total-usd" class="text-2xl font-bold text-blue-300">0</div>
+                            <div class="text-xs text-gray-500 mt-1">@ 0.1418</div>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                            <div class="text-gray-400 text-sm mb-1">INR (approx.)</div>
+                            <div id="total-inr" class="text-2xl font-bold text-green-300">0</div>
+                            <div class="text-xs text-gray-500 mt-1">@ 12.8032</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-xs text-gray-500 text-right">
+                        <span data-lang="zh">* 匯率來源: Google Finance (2025/12/15)</span>
+                        <span data-lang="en">* Exchange rates via Google Finance (2025/12/15)</span>
+                    </div>
+                </div>
+
+                <!-- 5.0 Common Items (Restored & Translated) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 break-inside-avoid">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4">
+                            <span data-lang="zh">5.0 共通項目 (Common Items)</span>
+                            <span data-lang="en">5.0 Common Items</span>
+                        </h3>
+                        <div class="bg-gray-800 border border-gray-600 rounded p-4">
+                            <ul class="space-y-3">
+                                <li class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                    <span>
+                                        <i class="fas fa-tasks mr-2 text-blue-400"></i>
+                                        <span data-lang="zh">專案管理 (PM)</span>
+                                        <span data-lang="en">Project Management</span>
+                                    </span>
+                                    <span class="text-gray-400 text-sm">
+                                        <span data-lang="zh">含在各項費用中</span>
+                                        <span data-lang="en">Included in costs</span>
+                                    </span>
+                                </li>
+                                <li class="flex justify-between items-center pb-2">
+                                    <span>
+                                        <i class="fas fa-certificate mr-2 text-yellow-400"></i>
+                                        <span data-lang="zh">特殊認證費</span>
+                                        <span data-lang="en">Certification Fee</span>
+                                    </span>
+                                    <span class="text-gray-400 text-sm">
+                                        <span data-lang="zh">實報實銷 (TBD)</span>
+                                        <span data-lang="en">At Cost (TBD)</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4">
+                            <span data-lang="zh">6.0 付款條件 (Payment Terms)</span>
+                            <span data-lang="en">6.0 Payment Terms</span>
+                        </h3>
+                        <div class="bg-gray-800 border border-gray-600 rounded p-4">
+                            <div class="w-full bg-gray-700 rounded-full h-4 mb-4 flex overflow-hidden">
+                                <div class="bg-blue-500 h-4 flex items-center justify-center text-[10px] text-white" style="width: 50%">50% Start</div>
+                                <div class="bg-green-500 h-4 flex items-center justify-center text-[10px] text-white" style="width: 30%">30% Sample</div>
+                                <div class="bg-purple-500 h-4 flex items-center justify-center text-[10px] text-white" style="width: 20%">20% Final</div>
+                            </div>
+                            <ul class="text-sm text-gray-300 space-y-1">
+                                <li>• <span data-lang="zh">專案啟動時支付 50%</span><span data-lang="en">50% upon Project Kick-off</span></li>
+                                <li>• <span data-lang="zh">T1 樣品確認後支付 30%</span><span data-lang="en">30% upon T1 Sample Approval</span></li>
+                                <li>• <span data-lang="zh">結案移交文件時支付 20%</span><span data-lang="en">20% upon Handover</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7.0 Disclaimer (Restored & Translated) -->
+                <div class="p-6 border-l-4 border-red-500 bg-red-900/20 rounded-r-lg mb-8 break-inside-avoid">
+                    <h3 class="text-red-400 font-bold mb-2">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <span data-lang="zh">韌體責任聲明 (Firmware Disclaimer)</span>
+                        <span data-lang="en">Firmware Responsibility Disclaimer</span>
+                    </h3>
+                    <div class="text-gray-300 text-sm space-y-2">
+                        <p>1. <span data-lang="zh">本 NRE <strong>不包含</strong> 應用層韌體 (Application Firmware) 的開發。</span><span data-lang="en">This NRE does <strong>NOT</strong> include Application Firmware development.</span></p>
+                        <p>2. <span data-lang="zh"><strong>貴司 (Client)</strong> 需自行負責 MQTT 協議對接、後台邏輯以及最終產品的軟體功能驗證。</span><span data-lang="en"><strong>Client</strong> is responsible for MQTT protocol integration, backend logic, and final software validation.</span></p>
+                        <p>3. <span data-lang="zh"><strong>我方 (Provider)</strong> 責任在於提供硬體正常運作之環境 (Hardware Ready) 及必要的驅動說明 (BSP/SDK)。</span><span data-lang="en"><strong>Provider's</strong> responsibility is to ensure a "Hardware Ready" environment and provide necessary low-level drivers (BSP/SDK).</span></p>
+                    </div>
+                </div>
+
+                <!-- Sign-off Area (Restored) -->
+                <div class="grid grid-cols-2 gap-10 mt-12 border-t border-gray-700 pt-8 break-inside-avoid">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-8">
+                            <span data-lang="zh">供應商簽章 (Supplier):</span>
+                            <span data-lang="en">Supplier Signature:</span>
+                        </p>
+                        <div class="border-b border-gray-500 h-8"></div>
+                        <p class="text-gray-500 text-xs mt-2">Date: ________________</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm mb-8">
+                            <span data-lang="zh">客戶確認 (Client):</span>
+                            <span data-lang="en">Client Signature:</span>
+                        </p>
+                        <div class="border-b border-gray-500 h-8"></div>
+                        <p class="text-gray-500 text-xs mt-2">Date: ________________</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="text-center text-gray-500 text-xs py-4 no-print">
+            <span data-lang="zh">製表人：專案管理團隊 (PM Team)</span>
+            <span data-lang="en">Prepared by: Project Management Team (PM Team)</span>
+        </footer>
+
+    </div>
+
+    <!-- Script for Logic -->
+    <script>
+        // --- 1. 定義流程數據 (Multilingual Data) ---
+        // RESTORED FULL CONTENT
+        const flowPetData = [
+            {
+                id: 'p1', type: 'provider',
+                title: { zh: '硬體就緒 (HW Ready)', en: 'HW Ready' },
+                owner: { zh: '乙方 EE Team', en: 'Provider EE Team' },
+                input: { zh: '現有 2G 產品架構', en: 'Existing 2G Architecture' },
+                action: { zh: '4G 模組選型、RF 天線匹配、PCBA Layout', en: '4G Module Selection, RF Matching, PCBA Layout' },
+                deliverables: { zh: ['新版電路圖 (PDF)', 'BOM 表', 'PCBA 貼片位置圖'], en: ['Schematics (PDF)', 'BOM', 'Pick & Place File'] }
+            },
+            {
+                id: 'p2', type: 'provider',
+                title: { zh: 'BSP 交付', en: 'BSP Delivery' },
+                owner: { zh: '乙方 SW Team', en: 'Provider SW Team' },
+                input: { zh: '硬體暫存器映射 (Reg Map)', en: 'Register Map' },
+                action: { zh: '底層驅動調試 (GPIO, GPS, 4G AT)、SDK 包封裝', en: 'Low-level Driver Porting (GPIO, GPS, 4G AT), SDK Packaging' },
+                deliverables: { zh: ['硬體介面開發手冊', '完整 SDK 包', 'MQTT 通訊測試範例代碼'], en: ['HW Interface Guide', 'Complete SDK', 'MQTT Communication Sample Code'] } // RESTORED
+            },
+            {
+                id: 'p3', type: 'client',
+                title: { zh: '韌體移植', en: 'FW Porting' },
+                owner: { zh: '甲方 FW Team', en: 'Client FW Team' },
+                input: { zh: '乙方提供的 SDK & 手冊', en: 'SDK & Manual from Provider' },
+                action: { zh: '【關鍵路徑】應用層代碼編寫、2G 轉 4G 邏輯修改、功能定義', en: '[Critical Path] App Layer Coding, 2G to 4G Logic Migration, Feature Definition' },
+                deliverables: { zh: ['可運行的應用層韌體 (bin)'], en: ['Runnable Application Firmware (bin)'] }
+            },
+            {
+                id: 'p4', type: 'client',
+                title: { zh: '對接驗證', en: 'Integration' },
+                owner: { zh: '甲方 Server Team', en: 'Client Server Team' },
+                input: { zh: '設備端 MQTT 協議', en: 'Device MQTT Protocol' },
+                action: { zh: '後台數據解析、壓力測試、App 功能聯調', en: 'Backend Parsing, Stress Testing, App Integration' },
+                deliverables: { zh: ['驗收測試報告 (UAT)'], en: ['UAT Report'] }
+            }
+        ];
+
+        const flowCattleData = [
+            {
+                id: 'c1', type: 'client',
+                title: { zh: '核心規格定義', en: 'Spec Definition' },
+                owner: { zh: '甲方 PM / 研發總監', en: 'Client PM / R&D Director' },
+                input: { zh: '市場需求文件 (MRD)', en: 'MRD' },
+                action: { zh: '【輸入】定義核心傳感器 (如 GH3011)、電池規格 (18650?)、太陽能板功率需求', en: '[Input] Define Core Sensors (e.g. GH3011), Battery Specs (18650?), Solar Power Req.' },
+                deliverables: { zh: ['產品規格書 (PRD)', '關鍵元件指定清單'], en: ['PRD', 'Key Component List'] }
+            },
+            {
+                id: 'c2', type: 'provider',
+                title: { zh: '堆疊與限制評估', en: 'Stacking Eval' },
+                owner: { zh: '乙方 ME (機構) Team', en: 'Provider ME Team' },
+                input: { zh: '甲方定義的電池/太陽能規格', en: 'Battery/Solar Specs from Client' },
+                action: { zh: '【評估】繪製 3D 堆疊圖、確認電池是否干涉、計算太陽能板面積與光學視窗位置', en: '[Eval] 3D Stacking, Interference Check, Solar Area & Optical Window Calculation' },
+                deliverables: { zh: ['3D 堆疊報告 (Stacking Report)', '機構限高圖 (Limit Drawing)'], en: ['3D Stacking Report', 'Limit Drawing'] }
+            },
+            {
+                id: 'c3', type: 'freeze',
+                title: { zh: '規格凍結 (Freeze)', en: 'Spec Freeze' },
+                owner: { zh: '雙方專案負責人', en: 'Project Leads (Both)' },
+                input: { zh: '堆疊報告 & PRD', en: 'Stacking Report & PRD' },
+                action: { zh: '【簽核】確認最終尺寸與元件。**此後變更需支付 ECO 費用並重修模具**', en: '[Sign-off] Confirm dimensions & components. **Changes after this point incur ECO fees.**' },
+                deliverables: { zh: ['規格凍結確認書 (Sign-off)'], en: ['Spec Freeze Sign-off'] }
+            },
+            {
+                id: 'c4', type: 'provider',
+                title: { zh: '細部設計 (DFM)', en: 'Detailed DFM' },
+                owner: { zh: '乙方 ME / EE Team', en: 'Provider ME / EE Team' },
+                input: { zh: '凍結的規格', en: 'Frozen Specs' },
+                action: { zh: 'IP67 防水結構設計、超音波熔接線設計、PCBA 詳細佈線', en: 'IP67 Design, Ultrasonic Welding Line, Detailed PCBA Routing' },
+                deliverables: { zh: ['模具 3D 圖檔 (Tooling 3D)', 'DFM 審查報告'], en: ['Tooling 3D Files', 'DFM Report'] }
+            },
+            {
+                id: 'c5', type: 'provider',
+                title: { zh: '開模與打樣', en: 'Tooling & EVT' },
+                owner: { zh: '乙方工廠端', en: 'Provider Factory' },
+                input: { zh: '確認的模具圖檔', en: 'Confirmed Tooling 3D' },
+                action: { zh: '模具製造 (CNC/EDM)、T1 試模、功能樣機 (EVT) 製作', en: 'Mold Making (CNC/EDM), T1 Shot, EVT Prototype Build' },
+                deliverables: { zh: ['T1 樣品', '模具驗收報告', 'EVT 樣機 5 套'], en: ['T1 Samples', 'Mold Acceptance Report', '5 EVT Units'] }
+            },
+            {
+                id: 'c6', type: 'provider',
+                title: { zh: 'NPI 試產', en: 'NPI Pilot' },
+                owner: { zh: '乙方生產管理', en: 'Provider Production Mgmt' },
+                input: { zh: 'EVT 驗證結果', en: 'EVT Validation Results' },
+                action: { zh: '建立 SOP、製作測試治具 (Jig)、首批小量試產', en: 'Establish SOP, Fabricate Test Jigs, Pilot Run' },
+                deliverables: { zh: ['SOP 文件', '試產良率報告', '首批出貨'], en: ['SOP Docs', 'Yield Report', 'First Shipment'] }
+            }
+        ];
+
+        let currentLang = 'zh';
+
+        // --- 2. 渲染邏輯 (Multilingual Support) ---
+        function renderPipeline(containerId, detailId, printId, data) {
+            const container = document.getElementById(containerId);
+            const detailPanel = document.getElementById(detailId);
+            const printList = document.getElementById(printId);
+            
+            container.innerHTML = ''; // Clear existing
+            detailPanel.innerHTML = '';
+            printList.innerHTML = '';
+
+            const track = document.createElement('div');
+            track.className = 'pipeline-track';
+            
+            // Build Print List (Table)
+            let printHtml = `<table class="w-full text-xs border border-gray-400"><thead><tr class="bg-gray-200">
+                <th class="p-1 border border-gray-400">Step</th>
+                <th class="p-1 border border-gray-400">Owner</th>
+                <th class="p-1 border border-gray-400">Action</th>
+                <th class="p-1 border border-gray-400">Deliverables</th>
+            </tr></thead><tbody>`;
+
+            data.forEach((step, index) => {
+                // Node
+                const node = document.createElement('div');
+                node.className = `pipeline-node node-${step.type}`;
+                node.setAttribute('data-step-index', index); // For reference
+                
+                // Multilingual Title Logic
+                const titleZh = `<span data-lang="zh">${step.title.zh}</span>`;
+                const titleEn = `<span data-lang="en">${step.title.en}</span>`;
+                
+                node.innerHTML = `
+                    <div class="node-circle">${index + 1}</div>
+                    <div class="node-label">${titleZh}${titleEn}</div>
+                `;
+                
+                node.onclick = () => {
+                    container.querySelectorAll('.pipeline-node').forEach(n => n.classList.remove('active'));
+                    node.classList.add('active');
+                    showDetail(detailPanel, step);
+                    updateLanguageVisibility(); // Ensure correct lang shows in detail
+                };
+                track.appendChild(node);
+
+                // Connector
+                if (index < data.length - 1) {
+                    const connector = document.createElement('div');
+                    connector.className = 'pipeline-connector';
+                    track.appendChild(connector);
+                }
+                
+                // Print Table Row
+                printHtml += `<tr>
+                    <td class="p-1 border border-gray-400 font-bold">
+                        <span data-lang="zh">${index+1}. ${step.title.zh}</span>
+                        <span data-lang="en">${index+1}. ${step.title.en}</span>
+                    </td>
+                    <td class="p-1 border border-gray-400">
+                        <span data-lang="zh">${step.owner.zh}</span>
+                        <span data-lang="en">${step.owner.en}</span>
+                    </td>
+                    <td class="p-1 border border-gray-400">
+                        <span data-lang="zh">${step.action.zh}</span>
+                        <span data-lang="en">${step.action.en}</span>
+                    </td>
+                    <td class="p-1 border border-gray-400">
+                        <span data-lang="zh">${step.deliverables.zh.join(', ')}</span>
+                        <span data-lang="en">${step.deliverables.en.join(', ')}</span>
+                    </td>
+                </tr>`;
+            });
+            
+            printHtml += `</tbody></table>`;
+            printList.innerHTML = printHtml;
+            container.appendChild(track);
+        }
+
+        function showDetail(panel, step) {
+            const typeColor = step.type === 'client' ? 'text-green-400' : (step.type === 'provider' ? 'text-blue-400' : 'text-red-400');
+            
+            // Helper to build list
+            const buildList = (items) => items.map(d => `<li>${d}</li>`).join('');
+
+            panel.innerHTML = `
+                <h3 class="text-lg font-bold ${typeColor} mb-4 flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i> 
+                    <span data-lang="zh">${step.title.zh} (詳細定義)</span>
+                    <span data-lang="en">${step.title.en} (Detail)</span>
+                </h3>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <h4><span data-lang="zh">責任歸屬 (Owner)</span><span data-lang="en">Owner</span></h4>
+                        <p class="font-bold text-white">
+                            <span data-lang="zh">${step.owner.zh}</span>
+                            <span data-lang="en">${step.owner.en}</span>
+                        </p>
+                    </div>
+                    <div class="detail-item">
+                        <h4><span data-lang="zh">前置輸入 (Input)</span><span data-lang="en">Input</span></h4>
+                        <p>
+                            <span data-lang="zh">${step.input.zh}</span>
+                            <span data-lang="en">${step.input.en}</span>
+                        </p>
+                    </div>
+                    <div class="detail-item">
+                        <h4><span data-lang="zh">執行內容 (Action)</span><span data-lang="en">Action</span></h4>
+                        <p>
+                            <span data-lang="zh">${step.action.zh}</span>
+                            <span data-lang="en">${step.action.en}</span>
+                        </p>
+                    </div>
+                    <div class="detail-item">
+                        <h4><span data-lang="zh">交付文件 (Deliverables)</span><span data-lang="en">Deliverables</span></h4>
+                        <ul class="detail-list text-sm text-gray-300">
+                            <span data-lang="zh">${buildList(step.deliverables.zh)}</span>
+                            <span data-lang="en">${buildList(step.deliverables.en)}</span>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            panel.style.display = 'block';
+        }
+
+        function updateLanguageVisibility() {
+            // Hide all first
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                if (el.tagName.toLowerCase() !== 'title') {
+                    el.style.display = 'none';
+                }
+            });
+            // Show current
+            document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                const tag = el.tagName.toLowerCase();
+                if (['span', 'i', 'strong', 'a'].includes(tag)) {
+                    el.style.display = 'inline-block';
+                } else if (tag === 'table') {
+                    el.style.display = 'table';
+                } else if (tag === 'tr') {
+                    el.style.display = 'table-row';
+                } else if (['th', 'td'].includes(tag)) {
+                    el.style.display = 'table-cell';
+                } else {
+                    el.style.display = 'block';
+                }
+            });
+            
+            // Title Tag
+            document.querySelectorAll('title').forEach(title => {
+                if (title.getAttribute('data-lang') === currentLang) {
+                    document.title = title.textContent;
+                }
+            });
+        }
+
+        // --- 印度數字格式化 ---
+        function formatIndianNumber(num) {
+            num = num.toString();
+            var lastThree = num.substring(num.length - 3);
+            var otherNumbers = num.substring(0, num.length - 3);
+            if (otherNumbers != '') lastThree = ',' + lastThree;
+            var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+            return res;
+        }
+
+        // --- 3. 初始化 ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render Pipelines
+            renderPipeline('pipeline-pet', 'detail-pet', 'print-pet', flowPetData);
+            renderPipeline('pipeline-cattle', 'detail-cattle', 'print-cattle', flowCattleData);
+            
+            // Auto-click first nodes
+            setTimeout(() => {
+                const p1 = document.querySelector('#pipeline-pet .pipeline-node');
+                const c1 = document.querySelector('#pipeline-cattle .pipeline-node');
+                if(p1) p1.click();
+                if(c1) c1.click();
+            }, 100);
+
+            // Lang Toggle
+            const langToggleBtn = document.getElementById('lang-toggle');
+            if (langToggleBtn) {
+                langToggleBtn.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'zh' : 'en';
+                    updateLanguageVisibility();
+                });
+            }
+            
+            // Initial View
+            updateLanguageVisibility();
+            
+            // Print
+            document.getElementById('export-pdf-btn').addEventListener('click', () => window.print());
+
+            // Cost Calculation
+            const RATE_USD = 0.1418;
+            const RATE_INR = 12.8032;
+
+            function updateTotal() {
+                let totalRMB = 0;
+                document.querySelectorAll('.checkbox-cell i.fa-check-square').forEach(icon => {
+                    const row = icon.closest('tr');
+                    const costCell = row.querySelector('td:last-child');
+                    if (costCell) {
+                        const costText = costCell.innerText.replace(/,/g, '').trim();
+                        const cost = parseFloat(costText);
+                        if (!isNaN(cost)) totalRMB += cost;
+                    }
+                });
+
+                const totalUSD = totalRMB * RATE_USD;
+                const totalINR = totalRMB * RATE_INR;
+
+                document.getElementById('total-rmb').innerText = totalRMB.toLocaleString('en-US');
+                document.getElementById('total-usd').innerText = Math.round(totalUSD).toLocaleString('en-US');
+                document.getElementById('total-inr').innerText = formatIndianNumber(Math.round(totalINR));
+            }
+
+            // Checkbox Logic
+            document.querySelectorAll('.checkbox-cell').forEach(cell => {
+                cell.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const icon = this.querySelector('i');
+                    const row = this.closest('tr');
+                    
+                    if (icon.classList.contains('fa-square')) {
+                        icon.classList.remove('fa-square');
+                        icon.classList.add('fa-check-square', 'text-green-400');
+                        row.classList.add('bg-blue-900/20');
+                    } else {
+                        icon.classList.remove('fa-check-square', 'text-green-400');
+                        icon.classList.add('fa-square');
+                        row.classList.remove('bg-blue-900/20');
+                    }
+                    updateTotal();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
