@@ -8,46 +8,59 @@ function PageCard({ page, onShare, onCopyLink }) {
 
     const handleDownload = async () => {
       try {
-        // 动态加载 HTML 内容
-        let htmlContent = page.htmlCode;
+        // page 对象来自 reports-index.json，包含 fileHtmlName 属性
+        const fileName = page.fileHtmlName;
 
-        if (!htmlContent && page.fileName) {
-          // 如果没有 htmlCode，从文件加载
-          htmlContent = await getReportHTML(page.fileName);
+        if (!fileName) {
+          console.error('無文件名:', page);
+          alert('無法下載：缺少文件信息');
+          return;
         }
 
+        console.log('[下載] 正在加載文件:', fileName);
+
+        // 从 reports/ 文件夹加载 HTML 内容
+        const htmlContent = await getReportHTML(fileName);
+
         if (!htmlContent) {
+          console.error('[下載] HTML內容為空');
           alert('無法獲取報告內容');
           return;
         }
 
+        console.log('[下載] HTML內容大小:', htmlContent.length, '字節');
+
         // 智能文件名：标题 + 描述
-        let fileName = '';
+        let downloadFileName = '';
         const title = (page.title || '無標題').trim();
         const description = (page.description || '').trim();
 
         if (description) {
-          fileName = `${title} ${description}.html`;
+          downloadFileName = `${title} ${description}.html`;
         } else {
-          fileName = `${title}.html`;
+          downloadFileName = `${title}.html`;
         }
 
         // 移除文件名中的非法字符
-        fileName = fileName.replace(/[<>:"/\\|?*]/g, '_');
+        downloadFileName = downloadFileName.replace(/[<>:"/\\|?*]/g, '_');
+
+        console.log('[下載] 文件名:', downloadFileName);
 
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
 
         const link = document.createElement('a');
         link.href = url;
-        link.download = fileName;
+        link.download = downloadFileName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
 
         URL.revokeObjectURL(url);
+
+        console.log('[下載] 成功');
       } catch (error) {
-        console.error('下載失敗:', error);
+        console.error('[下載] 失敗:', error);
         alert('下載失敗，請重試');
       }
     };
