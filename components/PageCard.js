@@ -6,9 +6,20 @@ function PageCard({ page, onShare, onCopyLink }) {
       window.open(url, '_blank');
     };
 
-    const handleDownload = () => {
+    const handleDownload = async () => {
       try {
-        const htmlContent = page.htmlCode || '';
+        // 动态加载 HTML 内容
+        let htmlContent = page.htmlCode;
+
+        if (!htmlContent && page.fileName) {
+          // 如果没有 htmlCode，从文件加载
+          htmlContent = await getReportHTML(page.fileName);
+        }
+
+        if (!htmlContent) {
+          alert('無法獲取報告內容');
+          return;
+        }
 
         // 智能文件名：标题 + 描述
         let fileName = '';
