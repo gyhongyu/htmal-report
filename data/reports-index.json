@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-18T09:07:10.974Z",
+  "lastUpdated": "2025-12-18T10:33:16.490Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -66,6 +66,19 @@
       "fileName": "report-1766047005427.html",
       "createdAt": "2025-12-18T08:36:45.874Z",
       "updatedAt": "2025-12-18T08:36:45.874Z"
+    },
+    {
+      "id": "report-1766053995273",
+      "title": "集團子公司與全球製造據點完整清單",
+      "description": "Global Subsidiaries & Manufacturing Sites",
+      "categories": [
+        "客戶簡報",
+        "內部簡報",
+        "市場分析"
+      ],
+      "fileName": "report-1766053995273.html",
+      "createdAt": "2025-12-18T10:33:16.490Z",
+      "updatedAt": "2025-12-18T10:33:16.490Z"
     }
   ]
 }
