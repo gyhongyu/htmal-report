@@ -1,10 +1,10 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-18T11:57:33.635Z",
+  "lastUpdated": "2025-12-19T07:42:12.643Z",
   "reports": [
     {
       "id": "report-1766042552185",
-      "title": "車載全球客戶實績簡介",
+      "title": "車載全球客戶實績簡介test",
       "description": "Automotive Global Customer Achievements",
       "categories": [
         "客戶簡報",
@@ -13,7 +13,7 @@
       ],
       "fileName": "report-1766042552185.html",
       "createdAt": "2025-12-18T07:22:32.941Z",
-      "updatedAt": "2025-12-18T07:22:32.941Z"
+      "updatedAt": "2025-12-19T07:42:12.643Z"
     },
     {
       "id": "report-1766046190926",
