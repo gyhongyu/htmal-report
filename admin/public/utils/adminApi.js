@@ -1,5 +1,5 @@
 // Admin API 工具函数
-// 替换 Trickle SDK，调用本地 Express API
+// 调用本地 Express API
 
 const API_BASE = '';  // 同域，无需指定
 

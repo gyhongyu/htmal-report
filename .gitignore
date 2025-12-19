@@ -15,8 +15,3 @@ test-api/
 Thumbs.db
 *.log
 
-# 已废弃的 Trickle SDK 相关文件
-trickle/
-utils/dbCleanup.js
-utils/dbDiagnostic.js
-utils/htmlStorage.js

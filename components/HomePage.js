@@ -6,7 +6,6 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     const [showShareModal, setShowShareModal] = React.useState(false);
     const [shareData, setShareData] = React.useState({ title: '', url: '' });
     const [currentPage, setCurrentPage] = React.useState(1);
-    const [diagnosticInfo, setDiagnosticInfo] = React.useState(null);
     const itemsPerPage = 21;
 
     React.useEffect(() => {
@@ -169,34 +168,11 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
         return;
       }
 
-      // 直接复制 HTML 文件链接
+      // 直接複製 HTML 文件連結
       const url = `${window.location.origin}/reports/${page.fileName}`;
       const text = `${title}\n${url}`;
       await navigator.clipboard.writeText(text);
       alert('連結已複製到剪貼簿');
-    };
-
-    const handleDiagnostic = async () => {
-      try {
-        console.log('開始執行診斷...');
-        if (typeof window.checkActualRecordCount !== 'function') {
-          alert('診斷工具尚未載入，請重新整理頁面後再試');
-          return;
-        }
-
-        const result = await window.checkActualRecordCount();
-
-        if (result.error) {
-          alert(`診斷過程發生錯誤：${result.error}`);
-          return;
-        }
-
-        setDiagnosticInfo(result);
-        alert(`資料庫診斷完成！\n總資料: ${result.total} 筆\n有效資料: ${result.valid} 筆\n無效資料: ${result.invalid} 筆\n\n詳細信息請查看瀏覽器控制台`);
-      } catch (error) {
-        console.error('診斷失敗:', error);
-        alert('診斷失敗，請查看控制台了解詳情');
-      }
     };
 
     return (

@@ -92,10 +92,39 @@ exit /b 1
 echo [√] 端口 3030 可用
 
 :: ----------------------------------------
-:: [4/5] 检查依赖
+:: [4/5] 检查 & 准备本地 CDN 资源
 :: ----------------------------------------
-echo [4/5] 检查依赖...
+echo [4/5] 准备本地 CDN 資源...
+set "VENDOR_DIR=admin\public\vendor"
+if not exist "%VENDOR_DIR%" mkdir "%VENDOR_DIR%"
+
+set "HAS_MISSING=0"
+if not exist "%VENDOR_DIR%\react.min.js" set "HAS_MISSING=1"
+if not exist "%VENDOR_DIR%\react-dom.min.js" set "HAS_MISSING=1"
+if not exist "%VENDOR_DIR%\babel.min.js" set "HAS_MISSING=1"
+if not exist "%VENDOR_DIR%\tailwindcss.js" set "HAS_MISSING=1"
+
+if "%HAS_MISSING%"=="0" (
+    echo [√] 本地資源已就緒
+    goto :check_node_modules
+)
+
+echo [!] 正在從雲端下載大型依賴到本地 (僅需下載一次)
+powershell -Command "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://unpkg.com/react@18/umd/react.production.min.js' -OutFile '%VENDOR_DIR%\react.min.js'; Invoke-WebRequest -Uri 'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js' -OutFile '%VENDOR_DIR%\react-dom.min.js'; Invoke-WebRequest -Uri 'https://unpkg.com/@babel/standalone/babel.min.js' -OutFile '%VENDOR_DIR%\babel.min.js'; Invoke-WebRequest -Uri 'https://cdn.tailwindcss.com' -OutFile '%VENDOR_DIR%\tailwindcss.js'; }"
+if errorlevel 1 (
+    echo [!] 下載失敗，系統將繼續使用雲端連結
+) else (
+    echo [√] 本地資源準備完成
+)
+
+:check_node_modules
+:: ----------------------------------------
+:: [5/5] 检查依赖
+:: ----------------------------------------
+echo [5/5] 检查 Node 模块...
+
 if not exist "admin\node_modules\" (
+
     echo.
     echo [!] 首次运行，正在安装依赖...
     echo 这可能需要几分钟时间，请稍候...

@@ -1,7 +1,12 @@
-function CategoryTabs({ activeCategory, onCategoryChange, categoryCounts }) {
+function CategoryTabs({ activeCategory, currentCategory, onCategoryChange, setCurrentCategory, categoryCounts = {} }) {
+  console.log('Root CategoryTabs rendered', { activeCategory, currentCategory, categoryCounts });
+  const active = activeCategory || currentCategory;
+  const onChange = onCategoryChange || setCurrentCategory;
+  const safeCounts = categoryCounts || {};
+
   try {
     const [showMore, setShowMore] = React.useState(false);
-    
+
     const categories = [
       { id: '全部', name: '全部', icon: 'layout-grid' },
       { id: '客戶簡報', name: '客戶簡報', icon: 'presentation' },
@@ -25,30 +30,28 @@ function CategoryTabs({ activeCategory, onCategoryChange, categoryCounts }) {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-wrap gap-2 py-3">
             {visibleCategories.map(category => {
-              const count = categoryCounts[category.id] || 0;
-              const isActive = activeCategory === category.id;
-              
+              const count = safeCounts[category.id] || 0;
+              const isActive = active === category.id;
+
               return (
                 <button
                   key={category.id}
-                  onClick={() => onCategoryChange(category.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
-                    isActive 
-                      ? 'bg-[var(--primary-color)] text-white shadow-sm' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  onClick={() => onChange(category.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all ${isActive
+                    ? 'bg-[var(--primary-color)] text-white shadow-sm'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   <div className={`icon-${category.icon} text-base`}></div>
                   <span className="font-medium">{category.name}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${
-                    isActive ? 'bg-white bg-opacity-20' : 'bg-white'
-                  }`}>
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${isActive ? 'bg-white bg-opacity-20' : 'bg-white'
+                    }`}>
                     {count}
                   </span>
                 </button>
               );
             })}
-            
+
             {hasMore && (
               <button
                 onClick={() => setShowMore(!showMore)}

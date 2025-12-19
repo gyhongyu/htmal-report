@@ -19,6 +19,11 @@ function AdminHomePage({
         loadPages();
     }, []);
 
+    // 當分類或搜尋關鍵字變動時，重置分頁到第一頁
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [currentCategory, searchKeyword]);
+
     const loadPages = async () => {
         try {
             setLoading(true);
@@ -40,17 +45,32 @@ function AdminHomePage({
         }
     };
 
+    // 計算分類數量
+    const categoryCounts = React.useMemo(() => {
+        const counts = { '全部': pages.length };
+        pages.forEach(page => {
+            if (page.categories) {
+                page.categories.forEach(cat => {
+                    counts[cat] = (counts[cat] || 0) + 1;
+                });
+            }
+        });
+        return counts;
+    }, [pages]);
+
     // 过滤和搜索
-    const filteredPages = pages.filter(page => {
-        const matchCategory = currentCategory === '全部' ||
-            (page.categories && page.categories.includes(currentCategory));
+    const filteredPages = React.useMemo(() => {
+        return pages.filter(page => {
+            const matchCategory = currentCategory === '全部' ||
+                (page.categories && page.categories.includes(currentCategory));
 
-        const matchSearch = !searchKeyword ||
-            page.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-            (page.description && page.description.toLowerCase().includes(searchKeyword.toLowerCase()));
+            const matchSearch = !searchKeyword ||
+                (page.title && page.title.toLowerCase().includes(searchKeyword.toLowerCase())) ||
+                (page.description && page.description.toLowerCase().includes(searchKeyword.toLowerCase()));
 
-        return matchCategory && matchSearch;
-    });
+            return matchCategory && matchSearch;
+        });
+    }, [pages, currentCategory, searchKeyword]);
 
     // 分页
     const totalPages = Math.ceil(filteredPages.length / pageSize);
@@ -58,18 +78,6 @@ function AdminHomePage({
         (currentPage - 1) * pageSize,
         currentPage * pageSize
     );
-
-    // 获取所有分类
-    const allCategories = ['全部'];
-    pages.forEach(page => {
-        if (page.categories) {
-            page.categories.forEach(cat => {
-                if (!allCategories.includes(cat)) {
-                    allCategories.push(cat);
-                }
-            });
-        }
-    });
 
     if (loading) {
         return <LoadingProgress text="加载中..." />;
@@ -110,25 +118,25 @@ function AdminHomePage({
                 <div className="mb-6">
                     <SearchBar
                         searchKeyword={searchKeyword}
-                        setSearchKeyword={setSearchKeyword}
+                        onSearchChange={setSearchKeyword}
                     />
                 </div>
 
                 {/* 分类标签 */}
                 <div className="mb-6">
                     <CategoryTabs
-                        categories={allCategories}
                         currentCategory={currentCategory}
                         setCurrentCategory={setCurrentCategory}
+                        categoryCounts={categoryCounts}
                     />
                 </div>
 
                 {/* 统计信息 */}
                 <div className="mb-6">
                     <div className="text-sm text-gray-600">
-                        共 <span className="font-semibold text-gray-900">{filteredPages.length}</span> 个页面
-                        {searchKeyword && ` · 搜索: "${searchKeyword}"`}
-                        {currentCategory !== '全部' && ` · 分类: ${currentCategory}`}
+                        共 <span className="font-semibold text-gray-900">{filteredPages.length}</span> 個頁面
+                        {searchKeyword && ` · 搜尋: "${searchKeyword}"`}
+                        {currentCategory !== '全部' && ` · 分類: ${currentCategory}`}
                     </div>
                 </div>
 
