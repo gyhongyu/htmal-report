@@ -121,17 +121,44 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     };
 
     const handleSharePage = async (pageId, title) => {
-      // 找到对应的 page 获取 fileName
-      const page = allPages.find(p => p.pageId === pageId);
-      if (!page || !page.fileName) {
-        alert('頁面資料不完整，無法分享');
-        return;
-      }
+      try {
+        // 找到对应的 page 获取 fileName
+        const page = allPages.find(p => p.pageId === pageId);
+        if (!page || !page.fileName) {
+          alert('頁面資料不完整，無法分享');
+          return;
+        }
 
-      // 直接分享 HTML 文件链接
-      const url = `${window.location.origin}/reports/${page.fileName}`;
-      setShareData({ title, url });
-      setShowShareModal(true);
+        const url = `${window.location.origin}/reports/${page.fileName}`;
+
+        // 优先使用原生分享 API（移动设备会弹出 WhatsApp/WeChat/Line 等）
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: title,
+              text: page.description || title,
+              url: url
+            });
+            console.log('[分享] 成功使用原生分享');
+          } catch (err) {
+            // 用户取消分享，不需要提示
+            if (err.name !== 'AbortError') {
+              console.error('[分享] 失败:', err);
+              // 降级：复制链接
+              await navigator.clipboard.writeText(url);
+              alert('分享失敗，連結已複製到剪貼簿');
+            }
+          }
+        } else {
+          // 降级方案：直接复制链接（桌面浏览器）
+          await navigator.clipboard.writeText(url);
+          alert('分享連結已複製到剪貼簿');
+          console.log('[分享] 使用降级方案（复制链接）');
+        }
+      } catch (error) {
+        console.error('[分享] 错误:', error);
+        alert('分享失敗，請重試');
+      }
     };
 
     const handleCopyLink = async (pageId, title) => {
