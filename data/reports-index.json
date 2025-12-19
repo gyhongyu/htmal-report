@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-19T11:25:38.919Z",
+  "lastUpdated": "2025-12-19T11:48:46.492Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -118,6 +118,19 @@
       "fileName": "report-1766143538210.html",
       "createdAt": "2025-12-19T11:25:38.919Z",
       "updatedAt": "2025-12-19T11:25:38.919Z"
+    },
+    {
+      "id": "report-1766144925521",
+      "title": "Strategic Analysis: REVOSAUTO TECH PVT LTD(Bolt.Earth)",
+      "description": "全方位戰略評估：REVOSAUTO TECH PVT LTD (Bolt.Earth)",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1766144925521.html",
+      "createdAt": "2025-12-19T11:48:46.492Z",
+      "updatedAt": "2025-12-19T11:48:46.492Z"
     }
   ]
 }

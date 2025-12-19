@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: REVOSAUTO TECH PRIVATE LIMITED -->
+    <!-- DECISION MAKER: Raghav Bharadwaj (CEO) / Prakash John (Sourcing) -->
+    <title data-lang="en">Strategic KYC: Bolt.Earth (REVOSAUTO TECH PVT LTD)</title>
+    <title data-lang="zh">全方位戰略評估：Bolt.Earth (REVOSAUTO TECH PVT LTD)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 核心樣式 --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+        .tag-est { background-color: #a16207; color: white; }
+        .tag-ver { background-color: #15803d; color: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; font-size: 10pt; } .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .text-white { color: #000 !important; } .text-gray-300, .text-gray-400 { color: #333 !important; } .tag, .bg-blue-600 { -webkit-print-color-adjust: exact; print-color-adjust: exact; } h1, h2, h3 { page-break-after: avoid; } .section-divider { margin-top: 2rem; } canvas { max-height: 300px; page-break-inside: avoid; } table, tr { page-break-inside: avoid; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">FULL SPECTRUM ANALYSIS</span>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="en">Strategic Analysis: REVOSAUTO TECH PVT LTD</h1>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="zh">全方位戰略評估：REVOSAUTO TECH PVT LTD (Bolt.Earth)</h1>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="en">India's Largest EV Charging Network ($30M+ Funded, IPO 2027 Target)</p>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="zh">印度最大 EV 充電網絡商 (獲資 3000 萬美元，目標 2027 IPO)</p>
+                </div>
+
+                <!-- PART 1 -->
+                <div class="section-divider">
+                    <span data-lang="en">Part 1: Strategic Overview</span>
+                    <span data-lang="zh">第一部：宏觀戰略概覽</span>
+                </div>
+
+                <!-- Dashboard -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-sm uppercase" data-lang="en">Cash Cow Products</h3>
+                        <h3 class="text-gray-400 text-sm uppercase" data-lang="zh">核心營收產品</h3>
+                        <p class="text-2xl font-bold text-white mt-2" data-lang="en">Bolt Lite & Speedometers</p>
+                        <p class="text-2xl font-bold text-white mt-2" data-lang="zh">Bolt Lite 充電樁 & 儀表板</p>
+                        <p class="text-xs text-green-400 mt-1" data-lang="en">Market Leader (30K+ Points)</p>
+                        <p class="text-xs text-green-400 mt-1" data-lang="zh">市場領導者 (3萬+ 充電點)</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-sm uppercase" data-lang="en">Transformation Goal</h3>
+                        <h3 class="text-gray-400 text-sm uppercase" data-lang="zh">轉型目標</h3>
+                        <p class="text-3xl font-bold text-blue-400 mt-2" data-lang="en">DC Fast Chargers</p>
+                        <p class="text-3xl font-bold text-blue-400 mt-2" data-lang="zh">直流快充 (30kW-240kW)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">From "Slow AC" to "Fast DC"</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">從慢充轉向高速快充網絡</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-sm uppercase" data-lang="en">Foxlink Role</h3>
+                        <h3 class="text-gray-400 text-sm uppercase" data-lang="zh">正崴定位</h3>
+                        <p class="text-2xl font-bold text-yellow-400 mt-2" data-lang="en">Scale-Up Partner</p>
+                        <p class="text-2xl font-bold text-yellow-400 mt-2" data-lang="zh">IPO 擴張期量產夥伴</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Turnkey Manufacturing</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">從組裝到 Turnkey 代工</p>
+                    </div>
+                </div>
+
+                <!-- Executive Summary -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">1. Executive Summary: The Re-engagement Strategy</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">壹、 執行摘要：重啟合作戰略</h2>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <p data-lang="en">Bolt.Earth (Revosauto Tech) is aggressively pivoting from L2/L3 AC chargers to high-power DC Fast Chargers (up to 240kW) following their Series B ($20M) and Series A+ ($5M) funding rounds. While they recently inaugurated a "Testing & Assembly" facility in Bangalore (2025), their paid-up capital (INR 1.4L) remains low, indicating they are <strong>NOT</strong> building a heavy manufacturing asset base. They need reliable partners to handle the <strong>volume production</strong> of these complex DC chargers to meet their FY27 IPO targets.</p>
+                    <p data-lang="zh">Bolt.Earth (Revosauto Tech) 在完成 Series B (2000萬美元) 與 Series A+ (500萬美元) 融資後，正積極從慢充 (AC) 轉向高功率直流快充 (DC Fast Charging, 240kW)。雖然他們 2025 年在班加羅爾啟用了新的「測試與組裝中心」，但其註冊資本 (INR 1.4 Lakhs) 極低，顯示其核心仍是輕資產運營。為了達成 2027 年 IPO 的營收目標，他們無法完全自製，極需具備規模量產能力的 EMS 夥伴來承接複雜的 DC 快充訂單。</p>
+                    
+                    <div class="mt-4 p-4 bg-blue-900/30 border border-blue-700 rounded">
+                        <strong class="text-blue-300 block mb-2" data-lang="en">Strategic Pitch:</strong>
+                        <strong class="text-blue-300 block mb-2" data-lang="zh">核心話術：</strong>
+                        <p data-lang="en">"Raghav, we supported your Lite series growth. Now, as you target the IPO in 2027 with high-stakes DC Fast Chargers, let Foxlink handle the complex Turnkey manufacturing. Your new Bangalore facility is great for NPI, but our Chennai plant is built for the Scale you need."</p>
+                        <p data-lang="zh">「Raghav, 過去我們支持了 Bolt Lite 的成長。現在貴司目標 2027 IPO 並全力進攻高難度的 DC 快充，正崴能提供完整的 Turnkey 製造服務。貴司新的班加羅爾工廠適合做 NPI (新品導入)，但要達到 IPO 所需的規模量產，正崴的欽奈工廠才是最佳後盾。」</p>
+                    </div>
+                </div>
+
+                <!-- Opportunity Matrix -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">2. Cooperation Areas</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">貳、 目標合作領域</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Blade 1 -->
+                    <div class="partner-card p-4 rounded-lg border-l-4 border-green-500">
+                        <div class="text-green-400 mb-2 font-bold text-lg" data-lang="en">1. Mass Production</div>
+                        <div class="text-green-400 mb-2 font-bold text-lg" data-lang="zh">1. 快充量產 (DC Chargers)</div>
+                        <h4 class="text-white font-bold mb-1" data-lang="en">Level 3 DC Fast Chargers</h4>
+                        <h4 class="text-white font-bold mb-1" data-lang="zh">Level 3 直流快充樁</h4>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="en">Target Cost is key. Move from Job Work to Turnkey to lower BOM cost.</p>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="zh">他們極度在意成本。建議從單純代工 (Job Work) 轉為連工帶料 (Turnkey) 以降低 BOM 成本。</p>
+                    </div>
+                    <!-- Blade 2 -->
+                    <div class="partner-card p-4 rounded-lg border-l-4 border-blue-500">
+                        <div class="text-blue-400 mb-2 font-bold text-lg" data-lang="en">2. Component Supply</div>
+                        <div class="text-blue-400 mb-2 font-bold text-lg" data-lang="zh">2. 關鍵組件供應</div>
+                        <h4 class="text-white font-bold mb-1" data-lang="en">SLED OPM & Speedometers</h4>
+                        <h4 class="text-white font-bold mb-1" data-lang="zh">SLED 顯示模組 & 儀表</h4>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="en">Continue legacy support for T-500 clusters but push for higher localization.</p>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="zh">延續 T-500 儀表的供應，但強調在地化生產優勢以應對進口關稅。</p>
+                    </div>
+                    <!-- Blade 3 -->
+                    <div class="partner-card p-4 rounded-lg border-l-4 border-yellow-500">
+                        <div class="text-yellow-400 mb-2 font-bold text-lg" data-lang="en">3. Reliability Ops</div>
+                        <div class="text-yellow-400 mb-2 font-bold text-lg" data-lang="zh">3. 品質可靠度服務</div>
+                        <h4 class="text-white font-bold mb-1" data-lang="en">RMA & Quality Control</h4>
+                        <h4 class="text-white font-bold mb-1" data-lang="zh">RMA 改善與品控代管</h4>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="en">Address past RMA pain points (2023) with a new "Zero-Defect" protocol.</p>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="zh">針對 2023 年的品質警示，提出全新的「零缺陷」管理方案，重建信任。</p>
+                    </div>
+                </div>
+
+                <!-- Supply Chain -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">3. Supply Chain Alignment</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">叁、 戰略供應鏈對接</h2>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-4 mt-2">
+                        <!-- Foxlink -->
+                        <div class="flex-1 bg-blue-900/30 p-4 rounded border border-blue-600 text-center w-full">
+                            <div class="text-xl font-bold text-white mb-1">Foxlink</div>
+                            <div class="text-xs text-gray-400" data-lang="en">Manufacturing Arm</div>
+                            <div class="text-xs text-gray-400" data-lang="zh">電子製造後盾</div>
+                            <div class="mt-2 text-sm text-yellow-300" data-lang="en">Turnkey PCBA / Wire Harness</div>
+                            <div class="mt-2 text-sm text-yellow-300" data-lang="zh">Turnkey PCBA / 線束</div>
+                        </div>
+                        <div class="text-2xl text-gray-500"><i class="fas fa-long-arrow-alt-right"></i></div>
+                        <!-- Target Company -->
+                        <div class="flex-1 bg-green-900/30 p-4 rounded border border-green-600 text-center w-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] px-2 py-0.5">Partner</div>
+                            <div class="text-xl font-bold text-white mb-1">Bolt.Earth</div>
+                            <div class="text-xs text-gray-400" data-lang="en">Platform & Brand</div>
+                            <div class="text-xs text-gray-400" data-lang="zh">品牌與平台運營</div>
+                            <div class="mt-2 text-sm text-green-300" data-lang="en">R&D / Sales / CMS Software</div>
+                            <div class="mt-2 text-sm text-green-300" data-lang="zh">研發 / 銷售 / 軟體平台</div>
+                        </div>
+                        <div class="text-2xl text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                        <!-- OEM Clients -->
+                        <div class="flex-1 bg-gray-900 p-4 rounded border border-gray-600 text-center w-full">
+                            <div class="text-xl font-bold text-white mb-1">Users</div>
+                            <div class="text-xs text-gray-400" data-lang="en">End Clients</div>
+                            <div class="text-xs text-gray-400" data-lang="zh">終端客戶</div>
+                            <div class="mt-2 text-sm text-blue-300">Fleets, Real Estate, Gov</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2 -->
+                <div class="section-divider">
+                    <span data-lang="en">Part 2: Deep Reconnaissance Intelligence</span>
+                    <span data-lang="zh">第二部：深度市場情報 (4D 分析)</span>
+                </div>
+
+                <!-- Financial Intel -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="en">4. Financial Intelligence (Balance Sheet)</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="zh">肆、 隱形資產負債表 (財務偵察)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="recon-box opp">
+                        <h3 class="text-xl font-bold text-white mb-2" data-lang="en"><i class="fas fa-coins text-yellow-400 mr-2"></i>Capital Structure</h3>
+                        <h3 class="text-xl font-bold text-white mb-2" data-lang="zh"><i class="fas fa-coins text-yellow-400 mr-2"></i>資本結構分析</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Paid-up:</strong> INR 1.4 Lakhs (Verified MCA)</p>
+                            <p data-lang="zh"><strong>實收資本：</strong> INR 14 萬盧比 (MCA 驗證)</p>
+                            <p class="border-t border-gray-600 pt-2 italic" data-lang="en"><strong>Insight:</strong> Extremely low paid-up capital confirms "Asset Light" model. They rely on VC funding ($30M+) and outsourced manufacturing. They are NOT building a mega-factory.</p>
+                            <p class="border-t border-gray-600 pt-2 italic" data-lang="zh"><strong>洞察：</strong> 極低的實收資本確認了其「輕資產」模式。他們仰賴風險投資 ($3000萬美金+) 和委外代工。這證明他們不會自建大型工廠，這就是 Foxlink 的機會。</p>
+                        </div>
+                    </div>
+                    <div class="recon-box neutral">
+                        <h3 class="text-xl font-bold text-white mb-2" data-lang="en"><i class="fas fa-university text-blue-400 mr-2"></i>Investment Status</h3>
+                        <h3 class="text-xl font-bold text-white mb-2" data-lang="zh"><i class="fas fa-university text-blue-400 mr-2"></i>投資狀況</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Funding:</strong> Series B ($20M) + Series A+ ($5M Jan '25)</p>
+                            <p data-lang="zh"><strong>融資：</strong> Series B ($20M) + Series A+ ($5M, 2025年1月)</p>
+                            <p class="border-t border-gray-600 pt-2 italic" data-lang="en"><strong>Insight:</strong> Fresh funds (Jan 2025) are allocated for "Fast Charging Expansion". They have cash to pay, but will demand aggressive pricing to capture market share.</p>
+                            <p class="border-t border-gray-600 pt-2 italic" data-lang="zh"><strong>洞察：</strong> 2025 年初剛獲得新資金，主要用於「擴張快充網絡」。他們有付款能力，但為了搶佔市佔率，勢必會極度壓低供應商價格 (Target Cost)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trade Data -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="en">5. Supply Chain Pain Points (Trade Data)</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="zh">伍、 供應鏈痛點掃描 (貿易數據)</h2>
+                <div class="recon-box risk">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white" data-lang="en">Import Dependency Signals</h3>
+                        <h3 class="text-xl font-bold text-white" data-lang="zh">進口依賴信號 (HS Code 推估)</h3>
+                        <span class="tag tag-est">High Reliance</span>
+                    </div>
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-900/50">
+                            <tr>
+                                <th class="px-2 py-2" data-lang="en">Item</th><th class="px-2 py-2" data-lang="zh">項目</th>
+                                <th class="px-2 py-2" data-lang="en">Pain Point</th><th class="px-2 py-2" data-lang="zh">痛點</th>
+                                <th class="px-2 py-2 text-red-400" data-lang="en">Your Pitch</th><th class="px-2 py-2 text-red-400" data-lang="zh">話術切入</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td data-lang="en">MCU / Power Modules</td><td data-lang="zh">微控制器 / 功率模組</td>
+                                <td data-lang="en">Import Duty & Lead Time</td><td data-lang="zh">進口關稅 & 交期長</td>
+                                <td class="text-gray-400" data-lang="en">We have local sourcing.</td><td class="text-gray-400" data-lang="zh">我們有在地供應鏈優勢。</td>
+                            </tr>
+                            <tr>
+                                <td data-lang="en">Display Units (SLED)</td><td data-lang="zh">SLED 顯示屏</td>
+                                <td data-lang="en">Quality Fluctuations</td><td data-lang="zh">品質波動 (曾發RMA)</td>
+                                <td class="text-gray-400" data-lang="en">Automated Optical Inspection (AOI).</td><td class="text-gray-400" data-lang="zh">導入全自動 AOI 檢測。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- HR & Factory -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="en">6. HR & Factory Intelligence</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="zh">陸、 人力與工廠偵察</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="recon-box">
+                        <h3 class="font-bold text-white mb-3 text-lg" data-lang="en"><i class="fas fa-users text-purple-400 mr-2"></i>Recruitment Signals</h3>
+                        <h3 class="font-bold text-white mb-3 text-lg" data-lang="zh"><i class="fas fa-users text-purple-400 mr-2"></i>招聘信號解讀</h3>
+                        <div class="space-y-4 text-sm text-gray-300">
+                            <p data-lang="en"><strong>"Sourcing / Embedded"?</strong> <br><span class="text-xs text-gray-400">Signal: Ramping up internal R&D for DC Fast Chargers.</span> <br><span class="text-green-400 font-bold">Opp: They design, we build.</span></p>
+                            <p data-lang="zh"><strong>招募「採購 / 嵌入式工程師」？</strong> <br><span class="text-xs text-gray-400">信號：正在強化內部 DC 快充的研發能力。</span> <br><span class="text-green-400 font-bold">機會：他們負責設計，正崴負責製造 (Design for Manufacturing)。</span></p>
+                        </div>
+                    </div>
+                    <div class="recon-box">
+                        <h3 class="font-bold text-white mb-3 text-lg" data-lang="en"><i class="fas fa-satellite text-blue-400 mr-2"></i>Satellite Recon</h3>
+                        <h3 class="font-bold text-white mb-3 text-lg" data-lang="zh"><i class="fas fa-satellite text-blue-400 mr-2"></i>衛星工廠偵察</h3>
+                        <div class="grid grid-cols-2 gap-4 text-xs text-gray-300">
+                            <div class="bg-gray-900 p-2 rounded">
+                                <strong class="text-blue-400">HSR Layout, Bangalore</strong>
+                                <p data-lang="en">• Corporate HQ & R&D Lab.</p>
+                                <p data-lang="zh">• 企業總部 & 研發實驗室。</p>
+                            </div>
+                            <div class="bg-gray-900 p-2 rounded">
+                                <strong class="text-blue-400">Bangalore (New 2025)</strong>
+                                <p data-lang="en">• 13,000 sq ft Testing Center.</p>
+                                <p data-lang="zh">• 2025 新建 1.3萬呎測試中心。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radar & Power Map -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="en">7. Strategic Synthesis</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-purple-300 border-l-4 border-purple-500 pl-4" data-lang="zh">柒、 戰略綜合分析</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Fit Score</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">適配度評分</h4>
+                        <div class="relative w-full h-48">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                    </div>
+                    <div class="recon-box col-span-2">
+                        <h4 class="font-bold text-white mb-4 text-sm" data-lang="en">Target Power Map</h4>
+                        <h4 class="font-bold text-white mb-4 text-sm" data-lang="zh">組織權力地圖</h4>
+                        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-600 border-2 border-white flex items-center justify-center text-xl font-bold shadow-lg">CEO</div>
+                                <div class="text-sm font-bold mt-2 text-white">Raghav Bharadwaj</div>
+                                <div class="text-xs text-blue-400" data-lang="en">Strategy (IPO)</div>
+                                <div class="text-xs text-blue-400" data-lang="zh">戰略決策 (IPO 目標)</div>
+                            </div>
+                            <div class="text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded border border-gray-700 text-center opacity-75 border-dashed">
+                                <div class="font-bold text-sm text-gray-200" data-lang="en">Prakash John</div>
+                                <div class="font-bold text-sm text-gray-200" data-lang="zh">Prakash John</div>
+                                <div class="text-[10px] text-gray-400" data-lang="en">Sourcing Lead (Gatekeeper)</div>
+                                <div class="text-[10px] text-gray-400" data-lang="zh">採購負責人 (守門人)</div>
+                            </div>
+                            <div class="text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                             <div class="bg-gray-900 p-3 rounded border border-gray-700 text-center opacity-75 border-dashed">
+                                <div class="font-bold text-sm text-gray-200" data-lang="en">Uthez P</div>
+                                <div class="font-bold text-sm text-gray-200" data-lang="zh">Uthez P</div>
+                                <div class="text-[10px] text-gray-400" data-lang="en">Tech Lead (Spec)</div>
+                                <div class="text-[10px] text-gray-400" data-lang="zh">技術負責人 (定規格)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Ready to Re-engage?</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">準備好重啟合作了嗎？</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Data compiled for internal strategy only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">本報告數據僅供內部戰略參考。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Open CRM</span>
+                        <span data-lang="zh">開啟 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: Foxlink India Strategic Team</span>
+                    <span data-lang="zh">製表人： 正崴印度戰略團隊</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Scores: Synergy=5(High), Payment=5(Funded), Urgency=5(IPO), Access=5(Old Client), Scale=4(High)
+        const radarScores = [5, 5, 5, 5, 4]; 
+
+        const chartData = {
+            en: { labels: ['Synergy', 'Payment', 'Urgency', 'Access', 'Scale'], label: 'Score' },
+            zh: { labels: ['互補性', '支付力', '急迫性', '易接觸', '規模'], label: '評分' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 5 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
