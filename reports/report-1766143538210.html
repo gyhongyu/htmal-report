@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>印度銷售離職後郵件分析報告總結</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }
+        .section-title { border-left: 5px solid #ef4444; padding-left: 1rem; margin-bottom: 1.5rem; color: #fff; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; }
+        .pain-point { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.05); padding: 1rem; border-radius: 0 0.5rem 0.5rem 0; }
+        canvas { max-height: 400px; width: 100%; }
+        
+        /* 收合區塊樣式 */
+        details > summary {
+            list-style: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] > summary { margin-bottom: 1rem; border-bottom-color: #475569; }
+        details[open] > summary i.fa-chevron-down { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="p-6 md:p-12 max-w-7xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 border-b border-gray-700 pb-6">
+        <div>
+            <h1 class="text-4xl font-extrabold text-white tracking-tight">印度銷售離職後郵件分析報告總結</h1>
+            <p class="text-gray-500 text-sm mt-2">CONFIDENTIAL ANALYSIS REPORT</p>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="card bg-gradient-to-br from-red-900/40 to-slate-900 border-l-4 border-l-red-600 relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl text-red-500"><i class="fas fa-chess-queen"></i></div>
+        <h2 class="text-2xl font-bold text-white mb-4 z-10 relative"><i class="fas fa-search-dollar mr-3 text-red-500"></i>執行摘要：從「代工思維」轉向「合資戰略」</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+            <div class="md:col-span-2 space-y-4">
+                <p class="text-gray-300 leading-relaxed text-lg">
+                    經過對 11 個關鍵客戶檔案的最終核實，我們必須面對一個殘酷的事實：<span class="text-red-400 font-bold border-b-2 border-red-500">客戶資產已隨著前任業務離職而歸零。</span>
+                </p>
+                <p class="text-gray-300 leading-relaxed">
+                    Bolt.Earth 與 Lucas TVS 等客戶已斷鏈。這證明過去用「小公司思維」經營印度市場——靠單一業務跑單幫、做代工——已經全面失誤。
+                </p>
+                <p class="text-white font-bold leading-relaxed border-l-4 border-yellow-500 pl-4">
+                    正崴坐擁 108 家子公司的國際集團資源，不應在印度做低階 EMS 競爭。本報告建議集團調整戰略方向：<span class="text-yellow-400">利用我們的 Tesla/Audi/Benz 頂級車規認證與供應鏈整合能力，直接與印度上市 Tier 1 巨頭 (如 Motherson, Uno Minda) 進行合資 (JV) 談判。</span>
+                </p>
+            </div>
+            
+            <!-- 客戶健康度 (FINAL SNAPSHOT) -->
+            <div class="bg-slate-900/80 p-5 rounded-xl border border-red-900/50 flex flex-col justify-center">
+                <h3 class="text-sm text-red-400 uppercase font-bold mb-4 border-b border-red-900/50 pb-2">客戶健康度 (FINAL SNAPSHOT)</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1 text-gray-500 font-medium">
+                            <span><i class="fas fa-check-circle text-gray-600 mr-2"></i>穩定推進</span>
+                            <span class="text-gray-500">0% (0家)</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-2.5">
+                            <div class="bg-gray-600 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1 text-white font-medium">
+                            <span><i class="fas fa-link-slash text-red-500 mr-2"></i>斷鏈/拒絕往來 (Disconnected)</span>
+                            <span class="text-red-400">45% (5家)</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-red-600 h-2.5 rounded-full" style="width: 45%"></div>
+                        </div>
+                        <p class="text-xs text-red-500/70 mt-1">含: Bolt, Lucas, Raptee, Samsung, Apacer</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1 text-white font-medium">
+                            <span><i class="fas fa-pause-circle text-yellow-500 mr-2"></i>停滯/沈睡 (Stalled)</span>
+                            <span class="text-yellow-400">55% (6家)</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 55%"></div>
+                        </div>
+                         <p class="text-xs text-yellow-500/70 mt-1">含: Jio, Hero, Exide, JLN, NDS, Noise</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MACRO ANALYSIS (COLLAPSIBLE) -->
+    <details class="group mb-8" open>
+        <summary class="flex justify-between items-center bg-gradient-to-r from-blue-900 to-slate-800 p-6 rounded-lg border border-blue-700 shadow-lg text-white font-bold text-xl hover:bg-blue-800 transition-colors">
+            <span><i class="fas fa-brain mr-3 text-blue-400"></i>宏觀戰略診斷：為何我們需要改變打法？</span>
+            <span class="text-sm bg-blue-600 px-3 py-1 rounded-full group-open:bg-slate-600">點擊收合/展開分析</span>
+        </summary>
+        
+        <div class="bg-slate-800/50 border-x border-b border-blue-900/50 p-8 rounded-b-lg space-y-8 animate-fade-in-down">
+            
+            <div class="flex items-start gap-6">
+                <div class="hidden md:block p-4 bg-blue-900/30 rounded-full text-blue-400 text-3xl"><i class="fas fa-store-slash"></i></div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">1. 我們在用「巷口雜貨店」的方式，經營「跨國航母」的生意</h3>
+                    <div class="pl-4 border-l-2 border-blue-500 space-y-2">
+                        <p class="text-gray-300"><strong>荒謬點：</strong> 看看我們的武器庫（108 家公司清單），我們有 <span class="text-green-400">Shinfox (森崴能源)</span> 做綠電和充電站，有 <span class="text-blue-400">Glory Science (光耀)</span> 做光學鏡頭，有 <span class="text-purple-400">PQI (勁永)</span> 做儲存。</p>
+                        <p class="text-gray-300"><strong>印度現狀：</strong> 但我們在印度的業務（前任），卻在跟 <span class="text-white font-bold">Reliance Jio</span> 這種千億級別的巨頭，討論「一條線材幾塊錢」、「一個電池包怎麼組裝」。</p>
+                        <p class="text-yellow-100 bg-yellow-900/20 p-2 rounded"><strong>總監點評：這是在「降級銷售」。</strong><br>Jio 要的是 "EV Ecosystem" (換電站+能源管理)，這明明是 Shinfox (森崴) 的強項，結果我們只派了一個賣連接器的業務去跟人家談螺絲釘？難怪 Jio 會覺得我們反應慢、開發慢（Stalled: Timeline）。因為單靠一個零組件廠的 RD，當然做不出整個換電站系統！</p>
+                        <p class="text-red-400 font-bold">結論：我們輸，不是輸在價格，是輸在「沒有打群架」。我們明明有航母艦隊，卻派了一艘舢舨去打印度洋。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+                <div class="hidden md:block p-4 bg-green-900/30 rounded-full text-green-400 text-3xl"><i class="fas fa-map-signs"></i></div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">2. 「去 A 化」的關鍵在印度，但戰術完全錯誤</h3>
+                    <div class="pl-4 border-l-2 border-green-500 space-y-2">
+                        <p class="text-gray-300"><strong>宏觀視角：</strong> 2026 H1 報告寫得很清楚，集團要從 A2 (Apple) 依賴，轉向 Automotive (車用) 和 Data Center (數據中心)。</p>
+                        <p class="text-gray-300"><strong>印度現狀：</strong> 我們找了 Hero, Exide, Raptee, Lucas TVS，這些全都是車用客戶。方向是對的，但<strong>定位錯了</strong>。</p>
+                        <p class="text-yellow-100 bg-yellow-900/20 p-2 rounded"><strong>總監點評：</strong><br>對於 Hero 和 Tata (Exide) 這種想要建立「印度供應鏈」的國家級企業，他們不缺一個「代工廠」，他們缺的是<strong>「技術轉移夥伴 (Technology Partner)」</strong>。<br>Exide 嫌我們貴 (Lost: Price)，是因為我們只做 EMS (來料加工)，當然比不過印度本地小廠。如果我們當時帶去談的是 "Foxlink Automotive Technology (富士能)" 的整車電子架構，或者是 "FIT (永崴投控)" 的資本合作，Exide 根本不會跟我們計較那幾分錢的加工費。</p>
+                        <p class="text-red-400 font-bold">結論：我們把自己做小了。在印度，Foxlink 被當成了普通的 Vendor，而不是 Strategic Partner。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-6">
+                <div class="hidden md:block p-4 bg-red-900/30 rounded-full text-red-400 text-3xl"><i class="fas fa-user-slash"></i></div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">3. 所謂的「信任斷層」，本質是「品牌空洞」</h3>
+                    <div class="pl-4 border-l-2 border-red-500 space-y-2">
+                        <p class="text-gray-300"><strong>宏觀視角：</strong> 正崴是上市公司，全球佈局。</p>
+                        <p class="text-gray-300"><strong>印度現狀：</strong> 為什麼一個業務離職，客戶就不理我們了？連 Bolt.Earth 這種新創都敢拒接我們電話？</p>
+                        <p class="text-yellow-100 bg-yellow-900/20 p-2 rounded"><strong>總監點評：</strong><br>這說明在客戶眼裡，<span class="font-bold">Foxlink India = 那個業務員 (Mohanraj)</span>。客戶根本不知道 Foxlink Group 背後有多強大的資源。如果他們知道我們背後有森崴能源、有台電的標案經驗、有輝達 (NVIDIA) 的合作關係 (N4)，他們敢因為一個業務離職就斷聯嗎？他們巴結都來不及！</p>
+                        <p class="text-red-400 font-bold">結論：我們在印度只有「業務關係」，沒有「品牌資產」。</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </details>
+
+    <!-- Visualization Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        
+        <!-- Chart 1: Pain Points Breakdown -->
+        <div class="card">
+            <h2 class="section-title text-red-400"><i class="fas fa-heart-broken mr-3"></i>流失/中斷主因診斷</h2>
+            <p class="text-sm text-gray-400 mb-6">為什麼全軍覆沒？「信任斷層」與「行政失能」是導致客戶拒絕回頭的主因。</p>
+            <div class="relative h-80 w-full">
+                <canvas id="painPointChart"></canvas>
+            </div>
+            <!-- 【數據修正】 -->
+            <div class="mt-4 text-xs text-gray-500 text-center border-t border-gray-700 pt-2">
+                *數據修正：Bolt 與 Lucas 因業務離職後的溝通真空期過長，已被歸類為「信任斷層」。
+            </div>
+        </div>
+
+        <!-- Chart 2: Customer Strategic Matrix -->
+        <div class="card">
+            <h2 class="section-title text-blue-400"><i class="fas fa-crosshairs mr-3"></i>客戶重建矩陣 (Re-entry Matrix)</h2>
+            <p class="text-sm text-gray-400 mb-6">X軸：營收潛力 | Y軸：修復難度 (越低越難，0代表拒絕往來)</p>
+            <div class="relative h-80 w-full">
+                <canvas id="customerMatrixChart"></canvas>
+            </div>
+             <div class="mt-4 flex justify-center space-x-6 text-xs text-gray-400">
+                <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-red-600 mr-1"></span> 紅區：需高層介入/放棄</span>
+                <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-yellow-500 mr-1"></span> 黃區：尚有對話窗口</span>
+                <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-500 mr-1"></span> 藍區：潛力巨大但需重啟</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deep Dive Table -->
+    <div class="card">
+        <h2 class="section-title"><i class="fas fa-notes-medical mr-3"></i>深度診斷：為何客戶拒絕回頭？</h2>
+        <div class="overflow-x-auto rounded-lg border border-gray-700">
+            <table class="w-full text-left text-sm text-gray-300">
+                <thead class="bg-slate-800 text-gray-100 uppercase font-bold tracking-wider">
+                    <tr>
+                        <th class="p-4 border-b border-gray-600">災難等級</th>
+                        <th class="p-4 border-b border-gray-600">客戶 (狀態)</th>
+                        <th class="p-4 border-b border-gray-600">斷鏈真相 (The Truth)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700 bg-slate-900/50">
+                    <tr class="hover:bg-slate-800 transition-colors bg-red-900/10">
+                        <td class="p-4 font-bold text-red-500"><i class="fas fa-skull mr-2"></i>信任破產</td>
+                        <td class="p-4 font-bold">Bolt.Earth<br>Lucas TVS</td>
+                        <td class="p-4">前任離職後出現長達一年的「服務真空」。客戶曾試圖聯繫解決問題 (如 Bolt 的品質案) 未果，現已轉單並將我方列入拒絕往來。</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800 transition-colors">
+                        <td class="p-4 font-bold text-orange-400"><i class="fas fa-user-slash mr-2"></i>行政失能</td>
+                        <td class="p-4">Samsung<br>Raptee</td>
+                        <td class="p-4">報價遲到、發票拖欠。客戶對我方「後勤能力」徹底失去信心，認為我們不具備合格供應商的運營素質。</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800 transition-colors">
+                        <td class="p-4 font-bold text-yellow-400"><i class="fas fa-money-bill-wave mr-2"></i>價格鴻溝</td>
+                        <td class="p-4">Exide, JLN<br>NDS</td>
+                        <td class="p-4">雙方對成本結構無共識。隨著時間推移，客戶已找到本地替代方案，我方變為備胎。</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800 transition-colors">
+                        <td class="p-4 font-bold text-blue-400"><i class="fas fa-clock mr-2"></i>時程脫節</td>
+                        <td class="p-4">Jio, Hero</td>
+                        <td class="p-4">項目需求急迫，但我方反應太慢。客戶可能已採購競品，但我方仍保有「集團對接」的高層管道。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 戰略方向建議 -->
+    <div class="card border-t-4 border-t-yellow-500 mt-8">
+        <h2 class="section-title text-xl text-white"><i class="fas fa-compass mr-3 text-yellow-500"></i>戰略方向建議 (Strategic Direction)</h2>
+        <div class="relative pl-8 border-l-2 border-gray-700 space-y-8 py-2">
+            <!-- Phase 1 -->
+            <div class="relative">
+                <div class="absolute -left-[41px] bg-gray-900 border-2 border-green-500 rounded-full w-6 h-6 flex items-center justify-center">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
+                <h4 class="text-white font-bold text-lg">方向一：盤點集團籌碼 (Leverage Group Assets)</h4>
+                <p class="text-sm text-gray-400 mt-2">
+                    我們不是來印度賣零組件的。請總部整合 108 家子公司的資源（森崴的能源、富士能的車載、光耀的光學），作為我們談判的「軍火庫」。<br>
+                    <span class="text-green-400 font-bold">核心優勢：</span> 印度本地供應商無法具備的 <strong>Tesla / Audi / Benz / Toyota 頂級車規認證</strong>。這才是我們最大的價值壁壘。
+                </p>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="relative">
+                <div class="absolute -left-[41px] bg-gray-900 border-2 border-yellow-500 rounded-full w-6 h-6 flex items-center justify-center">
+                    <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                </div>
+                <h4 class="text-white font-bold text-lg">方向二：鎖定上市 Tier 1 (Targeting Giants)</h4>
+                <p class="text-sm text-gray-400 mt-2">
+                    停止在非上市的中小型客戶（如 Raptee, NDS）身上消耗資源。直接鎖定 <strong>Motherson (SMR), Uno Minda, Tata AutoComp</strong> 等印度上市 Tier 1 巨頭。<br>
+                    <span class="text-yellow-400 font-bold">市場洞察：</span> 這些巨頭雖然壟斷了印度產能，但極度缺乏高階精密電子的技術與國際認證。他們不缺工廠，他們缺「技術合夥人」。
+                </p>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="relative">
+                <div class="absolute -left-[41px] bg-gray-900 border-2 border-blue-500 rounded-full w-6 h-6 flex items-center justify-center">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                </div>
+                <h4 class="text-white font-bold text-lg">方向三：合資戰略 (JV Strategy)</h4>
+                <p class="text-sm text-gray-400 mt-2">
+                    放棄代工 (EMS) 的紅海價格戰。建議總部啟動高層對話，以「合資 (JV)」模式切入市場。<br>
+                    <span class="text-blue-400 font-bold">價值主張：</span> "Foxlink 不只是供應商，我們是帶來全球車規技術與供應鏈整合的戰略股東。"
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to render charts -->
+    <script>
+        // Chart 1: Pain Points Breakdown (Bar Chart - Revised Data)
+        const ctx1 = document.getElementById('painPointChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['信任斷層 (業務離職)', '價格談判失敗', '行政效率失能', '時程錯配', '商業模式僵化'],
+                datasets: [{
+                    label: '受影響客戶數',
+                    data: [5, 4, 2, 2, 2], // 修正數據：Bolt, Lucas, Apacer, Raptee, Samsung 歸入信任/行政
+                    backgroundColor: [
+                        'rgba(220, 38, 38, 0.8)', // Red (Trust Issue - Critical)
+                        'rgba(249, 115, 22, 0.7)', 
+                        'rgba(234, 179, 8, 0.7)', 
+                        'rgba(59, 130, 246, 0.7)', 
+                        'rgba(168, 85, 247, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(220, 38, 38, 1)',
+                        'rgba(249, 115, 22, 1)',
+                        'rgba(234, 179, 8, 1)',
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(168, 85, 247, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const labels = [
+                                    'Bolt, Lucas, Apacer, Raptee, Samsung',
+                                    'Exide, JLN, NDS, Apacer',
+                                    'Samsung, Raptee',
+                                    'Hero, Jio',
+                                    'Noise, Apacer'
+                                ];
+                                return `客戶: ${labels[context.dataIndex]}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { weight: 'bold', size: 10 } }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Customer Strategic Matrix (Revised for Crisis - No Active)
+        const ctx2 = document.getElementById('customerMatrixChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bubble',
+            data: {
+                datasets: [
+                    {
+                        label: '斷鏈/拒絕往來 (Dead/Ghosted)',
+                        data: [
+                            { x: 60, y: 5, r: 10, customer: 'Bolt.Earth' }, // High potential but dead relationship
+                            { x: 55, y: 5, r: 8, customer: 'Lucas TVS' },
+                            { x: 65, y: 10, r: 10, customer: 'Raptee' },
+                            { x: 40, y: 5, r: 6, customer: 'Apacer' }
+                        ],
+                        backgroundColor: 'rgba(153, 27, 27, 0.7)', // Dark Red
+                        borderColor: 'rgba(153, 27, 27, 1)'
+                    },
+                    {
+                        label: '需高層挽救 (Critical Rescue)',
+                        data: [
+                            { x: 95, y: 15, r: 15, customer: 'Samsung' }, // Huge Potential, very low health
+                            { x: 90, y: 25, r: 15, customer: 'Reliance Jio' }, 
+                            { x: 85, y: 20, r: 12, customer: 'Hero MotoCorp' }
+                        ],
+                        backgroundColor: 'rgba(220, 38, 38, 0.7)', // Red
+                        borderColor: 'rgba(220, 38, 38, 1)'
+                    },
+                    {
+                        label: '價格卡關 (Stalled on Cost)',
+                        data: [
+                            { x: 70, y: 40, r: 12, customer: 'Exide' }, // Still talking but stalled
+                            { x: 45, y: 45, r: 7, customer: 'JLN Phenix' },
+                            { x: 40, y: 40, r: 7, customer: 'NDS Eco' },
+                            { x: 50, y: 35, r: 8, customer: 'Noise' }
+                        ],
+                        backgroundColor: 'rgba(234, 179, 8, 0.7)', // Yellow
+                        borderColor: 'rgba(234, 179, 8, 1)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#cbd5e1' }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.raw.customer}: (潛力 ${context.raw.x}, 修復難度 ${context.raw.y})`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: '營收潛力 (Revenue Potential)', color: '#94a3b8' },
+                        min: 0, max: 100,
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        title: { display: true, text: '修復難度 (Health/Recovery Score)', color: '#94a3b8' },
+                        min: 0, max: 100,
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#94a3b8', callback: function(value) { return value === 0 ? '拒絕往來' : value; } }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
