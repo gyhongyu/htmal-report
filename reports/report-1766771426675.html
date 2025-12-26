@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">Strategic Implementation Plan: India Automotive Electronics</title>
+    <title data-lang="zh">印度車載電子供應鏈戰略實施計劃</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- 基礎樣式 --- */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #f1f5f9; /* slate-100 */
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+        [data-lang] { display: none; }
+        
+        .content-area {
+            animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            min-height: calc(100vh - 160px);
+            padding: 2.5rem;
+            box-sizing: border-box;
+        }
+
+        /* 卡片特效 */
+        .strategy-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            border-color: #60a5fa;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .client-card-belrise { border-top: 4px solid #3b82f6; } /* Blue */
+        .client-card-motherson { border-top: 4px solid #10b981; } /* Green */
+        .client-card-unominda { border-top: 4px solid #f59e0b; } /* Yellow */
+
+        /* 列表樣式 */
+        .detail-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        .detail-list li i {
+            margin-top: 0.25rem;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* 下載按鈕 */
+        .download-btn {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid #475569;
+            transition: all 0.2s;
+        }
+        .download-btn:hover {
+            background: rgba(51, 65, 85, 0.9);
+            border-color: #94a3b8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 列印樣式優化 */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff !important; color: #000 !important; }
+            .strategy-card, .bg-gray-800, .bg-gray-900, header {
+                background: #fff !important;
+                border: 1px solid #ccc !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+            .text-gray-300, .text-gray-400, .text-blue-200, .text-green-200, .text-slate-300, .text-slate-400 {
+                color: #333 !important;
+            }
+            h1, h2, h3 { color: #000 !important; border-color: #000 !important; }
+            .bg-slate-900\/95 { background: #fff !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 flex flex-col min-h-screen">
+
+    <!-- 主容器 -->
+    <div class="w-full mx-auto bg-slate-800 shadow-2xl relative border border-slate-700 flex flex-col my-4 max-w-7xl">
+        
+        <!-- 頁首 (替換為公司制式模板導航欄) -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-slate-900/95 backdrop-blur border-b border-slate-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight text-white" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight text-white" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-slate-700 hover:bg-slate-600 text-white border border-slate-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 內容主體 -->
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- 標題區 -->
+                <div class="text-center border-b border-slate-700 pb-10 mb-10">
+                    <span class="inline-block bg-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-full mb-4 tracking-widest uppercase shadow-lg shadow-red-900/50">
+                        <span data-lang="en">Strategic Implementation Plan</span>
+                        <span data-lang="zh">最高戰略執行計畫</span>
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white tracking-tight" data-lang="en">
+                        Strategic Implementation Plan:<br><span class="text-blue-400">India Automotive Electronics Supply Chain</span>
+                    </h1>
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white tracking-tight" data-lang="zh">
+                        印度車載電子供應鏈<br><span class="text-blue-400">戰略實施計劃</span>
+                    </h1>
+                    
+                    <p class="text-xl text-slate-400 mt-4 max-w-4xl mx-auto font-light leading-relaxed" data-lang="en">
+                        To unlock this supply chain, we must design a transitional business model that makes us <strong>"indispensable to the client while they temporarily rely on us."</strong>
+                    </p>
+                    <p class="text-xl text-slate-400 mt-4 max-w-4xl mx-auto font-light leading-relaxed" data-lang="zh">
+                        要打通這條鏈，我們必須設計一套<strong>「讓甲方無法拒絕，且暫時不得不依賴我們」</strong>的過渡性商業模式。
+                    </p>
+                </div>
+
+                <!-- 核心局勢分析 (圖1對應) -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="en">
+                        <span class="w-1 h-8 bg-blue-500 mr-4 rounded-full"></span>Core Situation Analysis: The Complex Triangle
+                    </h2>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="zh">
+                        <span class="w-1 h-8 bg-blue-500 mr-4 rounded-full"></span>核心局勢分析：錯綜複雜的三角關係
+                    </h2>
+                    
+                    <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 mb-8">
+                        <p class="text-slate-300 text-lg leading-relaxed mb-6" data-lang="en">
+                            We face a critical reality: "Foxlink's (Partner C) production line migration needs time for validation, while Uniquesky (Partner B) lacks the capital to withstand major commercial risks."
+                        </p>
+                        <p class="text-slate-300 text-lg leading-relaxed mb-6" data-lang="zh">
+                            我們面臨一個非常現實且棘手的問題：「丙方（Foxlink）的產線遷移需要時間驗證，而乙方（Uniquesky）的資金體量相對較小，難以承受巨大的商業風險。」
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- 甲方 -->
+                            <div class="bg-slate-900 p-6 rounded-lg border-l-4 border-yellow-500">
+                                <h3 class="text-xl font-bold text-yellow-400 mb-2" data-lang="en">Client (Partner A)</h3>
+                                <h3 class="text-xl font-bold text-yellow-400 mb-2" data-lang="zh">甲方 (Belrise 等巨頭)</h3>
+                                <p class="text-sm text-slate-400" data-lang="en">Urgent for launch. Resists buying pure solutions. Wants tech/manufacturing rights but avoids 0-to-1 factory setup.</p>
+                                <p class="text-sm text-slate-400" data-lang="zh">急需產品上市，不想依賴純買方案，想擁有技術或製造話語權，但又不想從零開始建電子廠。</p>
+                            </div>
+                            
+                            <!-- 丙方 -->
+                            <div class="bg-slate-900 p-6 rounded-lg border-l-4 border-green-500">
+                                <h3 class="text-xl font-bold text-green-400 mb-2" data-lang="en">Foxlink (Partner C)</h3>
+                                <h3 class="text-xl font-bold text-green-400 mb-2" data-lang="zh">丙方 (Foxlink)</h3>
+                                <p class="text-sm text-slate-400" data-lang="en">Global experience, but no local IATF line yet. Needs "Order First, Move Later" buffer. Conservative on unverified investment.</p>
+                                <p class="text-sm text-slate-400" data-lang="zh">雖有國際大廠經驗，但在印度本地尚未建立車規產線。需要「先接單、後移轉」的緩衝期，不見兔子不撒鷹。</p>
+                            </div>
+                            
+                            <!-- 乙方 -->
+                            <div class="bg-slate-900 p-6 rounded-lg border-l-4 border-blue-500">
+                                <h3 class="text-xl font-bold text-blue-400 mb-2" data-lang="en">Uniquesky (Partner B)</h3>
+                                <h3 class="text-xl font-bold text-blue-400 mb-2" data-lang="zh">乙方 (Uniquesky)</h3>
+                                <p class="text-sm text-slate-400" data-lang="en">Holds core tech but lacks capital. Risk of being squeezed out by Client (taking design) or Foxlink (direct supply).</p>
+                                <p class="text-sm text-slate-400" data-lang="zh">擁有核心技術，但資金實力最弱。夾在強勢甲方和製造巨頭之間，最怕被兩邊吃掉（甲方拿設計自製，丙方跳過乙方對接）。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 戰略核心：三方合資/專案綁定 -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="en">
+                        <span class="w-1 h-8 bg-red-500 mr-4 rounded-full"></span>Solution: Why "Tri-Party JV" is the Only Way?
+                    </h2>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="zh">
+                        <span class="w-1 h-8 bg-red-500 mr-4 rounded-full"></span>解法：為何「三方合資/專案綁定」是唯一解？
+                    </h2>
+
+                    <div class="bg-gradient-to-r from-red-900/20 to-slate-900 border border-red-500/30 p-6 rounded-xl mb-8">
+                        <h4 class="text-lg font-bold text-red-400 mb-4" data-lang="en">Risks of a loose "Trading Relationship":</h4>
+                        <h4 class="text-lg font-bold text-red-400 mb-4" data-lang="zh">如果僅維持鬆散的「買賣關係」，會發生以下災難：</h4>
+                        <ul class="space-y-3 text-slate-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mt-1 mr-3"></i> 
+                                <span data-lang="en"><strong>Client:</strong> Sees Uniquesky as a middleman, cuts them out after tech transfer.</span>
+                                <span data-lang="zh"><strong>Belrise (甲)：</strong> 會覺得 Uniquesky (乙) 只是個中間商，一旦技術轉移完成，就會想踢掉乙。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mt-1 mr-3"></i> 
+                                <span data-lang="en"><strong>Foxlink:</strong> Client may demand direct dealing with Foxlink for lower costs once production stabilizes.</span>
+                                <span data-lang="zh"><strong>Foxlink (丙)：</strong> 如果在中國生產順利，Belrise 可能會要求直接對接 Foxlink 以降低成本，邊緣化 Uniquesky。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mt-1 mr-3"></i> 
+                                <span data-lang="en"><strong>Uniquesky:</strong> Bears R&D costs but risks abandonment post-MP, unable to handle recalls.</span>
+                                <span data-lang="zh"><strong>Uniquesky (乙)：</strong> 承擔了前期的研發投入，卻可能在量產後被拋棄，且無力承擔售後或召回的巨額賠償風險。</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-red-900/40 rounded text-center border border-red-500/50">
+                            <p class="text-xl font-bold text-white" data-lang="en">Therefore, we must design a structure where <span class="text-yellow-400">"Interdependence"</span> is a legal and commercial fact.</p>
+                            <p class="text-xl font-bold text-white" data-lang="zh">因此，我們必須設計一個結構，讓 <span class="text-yellow-400">「缺一不可」</span> 成為法律或商業上的事實。</p>
+                        </div>
+                    </div>
+
+                    <!-- 戰略架構表 -->
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+                        <h3 class="text-xl font-bold text-white mb-4" data-lang="en">Framework: The "Iron Triangle" Consortium</h3>
+                        <h3 class="text-xl font-bold text-white mb-4" data-lang="zh">戰略架構："Belrise-Uniquesky-Foxlink" 鐵三角</h3>
+                        <p class="text-slate-400 mb-6" data-lang="en">We propose a "Project Consortium" or "Virtual JV" concept first.</p>
+                        <p class="text-slate-400 mb-6" data-lang="zh">我們先推動一個「專案聯合體 (Consortium)」或「虛擬合資 (Virtual JV)」的概念。</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-900 text-slate-200">
+                                        <th class="p-4 border border-slate-600" data-lang="en">Role</th><th class="p-4 border border-slate-600" data-lang="zh">角色</th>
+                                        <th class="p-4 border border-slate-600" data-lang="en">Core Contribution</th><th class="p-4 border border-slate-600" data-lang="zh">核心貢獻</th>
+                                        <th class="p-4 border border-slate-600" data-lang="en">Potential Risk</th><th class="p-4 border border-slate-600" data-lang="zh">潛在風險</th>
+                                        <th class="p-4 border border-slate-600" data-lang="en">Binding Strategy</th><th class="p-4 border border-slate-600" data-lang="zh">綁定策略 (保護機制)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm text-slate-300">
+                                    <tr>
+                                        <td class="p-4 border border-slate-700 font-bold text-yellow-400" data-lang="en">Client (A)</td><td class="p-4 border border-slate-700 font-bold text-yellow-400" data-lang="zh">甲方 (Belrise)</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en">Market access, Orders, Brand, Capital</td><td class="p-4 border border-slate-700" data-lang="zh">市場通路、訂單、品牌、資金</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en">Wants to own tech, avoids imports</td><td class="p-4 border border-slate-700" data-lang="zh">想獨吞技術、不想依賴進口</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en"><strong>Market for Tech & Capacity:</strong> Commit to volume and provide initial NRE support.</td><td class="p-4 border border-slate-700" data-lang="zh"><strong>以市場換技術與產能：</strong> 承諾包銷，並提供初期 NRE (一次性工程費用) 支持。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 border border-slate-700 font-bold text-blue-400" data-lang="en">Uniquesky (B)</td><td class="p-4 border border-slate-700 font-bold text-blue-400" data-lang="zh">乙方 (Uniquesky)</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en">Core IP, Solution Design, BMS Algo</td><td class="p-4 border border-slate-700" data-lang="zh">核心技術 (IP)、方案設計、BMS/T-Box 算法</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en">Low capital, risk of being cut out</td><td class="p-4 border border-slate-700" data-lang="zh">資金少、怕被踢開</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en"><strong>Tech Equity / Royalties:</strong> Do not sell off IP. Charge per unit royalty.<br><span class="text-blue-300">Key: Retain core code & keys.</span></td><td class="p-4 border border-slate-700" data-lang="zh"><strong>技術入股/授權費：</strong> 方案不賣斷，而是按出貨量抽成 (Royalty)。<br><span class="text-blue-300">關鍵：Uniquesky 掌握核心代碼與授權金鑰。</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 border border-slate-700 font-bold text-green-400" data-lang="en">Foxlink (C)</td><td class="p-4 border border-slate-700 font-bold text-green-400" data-lang="zh">丙方 (Foxlink)</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en">Manufacturing, Supply Chain, Global Quality</td><td class="p-4 border border-slate-700" data-lang="zh">製造能力 (Manufacturing)、供應鏈管理、全球品質背書</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en">No local line yet, order uncertainty</td><td class="p-4 border border-slate-700" data-lang="zh">印度本地無產線、怕訂單不穩</td>
+                                        <td class="p-4 border border-slate-700" data-lang="en"><strong>Transitional Mfg Agreement:</strong> Phase 1 (CN) -> Phase 2 (IN).<br><span class="text-green-300">Key: Client accepts initial offshore production for quality.</span></td><td class="p-4 border border-slate-700" data-lang="zh"><strong>過渡期製造承諾：</strong> 簽訂「雙階段製造協議」。階段一 (中國生產) -> 階段二 (印度生產)。<br><span class="text-green-300">關鍵：甲方必須接受「前6-12個月中國製造」是為了品質保證。</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 破局戰略：雙階段實施 -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="en">
+                        <span class="w-1 h-8 bg-purple-500 mr-4 rounded-full"></span>Operation: Dual-Phase Roadmap
+                    </h2>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="zh">
+                        <span class="w-1 h-8 bg-purple-500 mr-4 rounded-full"></span>具體操作模式：雙階段實施路徑
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- 階段一 -->
+                        <div class="strategy-card p-8 rounded-xl border-l-4 border-l-blue-500 flex flex-col h-full">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-bold text-blue-400" data-lang="en">1. Phase 1: Offshore Incubation</h3>
+                                <h3 class="text-2xl font-bold text-blue-400" data-lang="zh">1. 階段一：離岸孵化期</h3>
+                                <span class="text-blue-500/20 text-5xl font-black select-none">01</span>
+                            </div>
+                            <p class="text-sm text-slate-400 mb-4" data-lang="en"><strong>Timeline:</strong> Kick-off to 6-12 months post-MP.</p>
+                            <p class="text-sm text-slate-400 mb-4" data-lang="zh"><strong>時間跨度：</strong> 專案啟動 至 量產後 6-12 個月。</p>
+                            <p class="text-sm text-slate-300 mb-6 font-bold" data-lang="en">Definition: "Trade for Time, Quality for Trust"</p>
+                            <p class="text-sm text-slate-300 mb-6 font-bold" data-lang="zh">核心定義：「以貿易換時間，以品質換信任」。</p>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="en">Operations</h4>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="zh">操作模式</h4>
+                                    <ul class="text-sm text-slate-400 space-y-1 list-disc pl-4">
+                                        <li><strong data-lang="en">Uniquesky:</strong><strong data-lang="zh">Uniquesky (乙方)：</strong> <span data-lang="en">Solution Design, NPI Validation.</span><span data-lang="zh">負責方案設計、NPI (新產品導入) 驗證。</span></li>
+                                        <li><strong data-lang="en">Foxlink:</strong><strong data-lang="zh">Foxlink (丙方)：</strong> <span data-lang="en">Production via CN/TW IATF 16949 lines.</span><span data-lang="zh">利用昆山/台灣現有的 IATF 16949 產線進行生產。</span></li>
+                                        <li><strong data-lang="en">Client:</strong><strong data-lang="zh">甲方：</strong> <span data-lang="en">Import SKD/CBU, white-label sales.</span><span data-lang="zh">以 SKD (半散件) 或 CBU (整機) 形式進口，貼牌銷售。</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="en">Value</h4>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="zh">戰略價值</h4>
+                                    <ul class="text-sm text-slate-400 space-y-1 list-disc pl-4">
+                                        <li><strong data-lang="en">Client:</strong><strong data-lang="zh">對甲方：</strong> <span class="text-white" data-lang="en">Zero Capex</span><span class="text-white" data-lang="zh">零資本支出 (Zero Capex)</span>。 <span data-lang="en">Immediate entry, no factory investment.</span><span data-lang="zh">不需要建廠、買設備、招人，產品就能立刻上市搶占份額。</span></li>
+                                        <li><strong data-lang="en">Foxlink:</strong><strong data-lang="zh">對丙方：</strong> <span class="text-white" data-lang="en">Zero Risk Trial</span><span class="text-white" data-lang="zh">零風險試單</span>。 <span data-lang="en">No premature relocation.</span><span data-lang="zh">不需要在没有長期訂單承諾前就搬遷產線。</span></li>
+                                        <li><strong data-lang="en">Uniquesky:</strong><strong data-lang="zh">對乙方：</strong> <span class="text-white" data-lang="en">Cash Flow</span><span class="text-white" data-lang="zh">現金流保障</span>。 <span data-lang="en">Quick ROI via NRE/Trading.</span><span data-lang="zh">通過貿易差價或 NRE 快速回籠研發資金。</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 階段二 -->
+                        <div class="strategy-card p-8 rounded-xl border-l-4 border-l-green-500 flex flex-col h-full">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-bold text-green-400" data-lang="en">2. Phase 2: Localization & JV</h3>
+                                <h3 class="text-2xl font-bold text-green-400" data-lang="zh">2. 階段二：本地化移轉期</h3>
+                                <span class="text-green-500/20 text-5xl font-black select-none">02</span>
+                            </div>
+                            <p class="text-sm text-slate-400 mb-4" data-lang="en"><strong>Trigger:</strong> Volume > 50k/m OR 3-year commitment.</p>
+                            <p class="text-sm text-slate-400 mb-4" data-lang="zh"><strong>觸發條件：</strong> 單一產品月訂單穩定超過 5 萬套，或甲方承諾包銷 3 年以上。</p>
+                            <p class="text-sm text-slate-300 mb-6 font-bold" data-lang="en">Definition: "Deep Binding of Capital & Tech"</p>
+                            <p class="text-sm text-slate-300 mb-6 font-bold" data-lang="zh">核心定義：「資本與技術的深度綁定」。</p>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="en">Operations</h4>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="zh">操作模式</h4>
+                                    <ul class="text-sm text-slate-400 space-y-1 list-disc pl-4">
+                                        <li><strong data-lang="en">Tri-Party JV:</strong><strong data-lang="zh">三方合資 (或 專案公司)：</strong> <span data-lang="en">Client (Capex), Foxlink (Opex/Mgmt), Uniquesky (IP).</span><span data-lang="zh">Belrise 出資買設備 (重資產)，Foxlink 出技術管理與廠房 (輕資產)，Uniquesky 出 IP (技術股)。</span></li>
+                                        <li><strong data-lang="en">Copy & Paste:</strong><strong data-lang="zh">產線複製 (Copy & Paste)：</strong> <span data-lang="en">Move line & team to India.</span><span data-lang="zh">將昆山/台灣的一條成熟產線，連同工程師團隊，物理搬遷至印度 (Chennai/Noida)。</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="en">Value</h4>
+                                    <h4 class="text-xs font-bold text-white uppercase mb-2" data-lang="zh">戰略價值</h4>
+                                    <ul class="text-sm text-slate-400 space-y-1 list-disc pl-4">
+                                        <li><strong data-lang="en">Client:</strong><strong data-lang="zh">對甲方：</strong> <span data-lang="en">"Make in India", Subsidies, Virtual Factory.</span><span data-lang="zh">滿足 "Make in India" 政策，享受補貼，擁有了一座屬於自己的電子廠 (名義上)。</span></li>
+                                        <li><strong data-lang="en">Foxlink:</strong><strong data-lang="zh">對丙方：</strong> <span data-lang="en">Locked-in orders (5-10 yrs), shared risk.</span><span data-lang="zh">鎖定了未來 5-10 年的穩定代工訂單，且由甲方分擔了重資產風險。</span></li>
+                                        <li><strong data-lang="en">Uniquesky:</strong><strong data-lang="zh">對乙方：</strong> <span data-lang="en">Long-term royalties, JV protection.</span><span data-lang="zh">獲得了長期的技術授權費 (Royalty)，並因為合資關係，不會被輕易踢出局。</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 三大目標客戶差異化策略 -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="en">
+                        <span class="w-1 h-8 bg-yellow-500 mr-4 rounded-full"></span>Target Strategy: The Big Three
+                    </h2>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="zh">
+                        <span class="w-1 h-8 bg-yellow-500 mr-4 rounded-full"></span>三大目標客戶攻單策略
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Belrise -->
+                        <div class="strategy-card p-6 rounded-xl border-t-4 border-t-blue-500">
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="en">1. Belrise (Easiest Entry)</h3>
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">1. Belrise (最容易突破)</h3>
+                            <p class="text-xs text-blue-300 font-bold mb-2" data-lang="en">Strategy: "Turnkey Virtual Factory"</p>
+                            <p class="text-xs text-blue-300 font-bold mb-2" data-lang="zh">策略：「交鑰匙的虛擬工廠」</p>
+                            <p class="text-xs text-slate-400 mb-4" data-lang="en">Status: Has chassis, no electronics. Building takes 18-24m.</p>
+                            <p class="text-xs text-slate-400 mb-4" data-lang="zh">現狀：有底盤無電子，自建需18-24個月。</p>
+                            <div class="bg-slate-900/50 p-3 rounded border border-slate-700 mb-2">
+                                <p class="text-xs text-white font-bold" data-lang="en">The Pitch:</p>
+                                <p class="text-xs text-white font-bold" data-lang="zh">提案 (The Pitch):</p>
+                                <p class="text-xs text-slate-400" data-lang="en">B provides "White Label" solution; C sets up "Belrise Exclusive Workshop" in India.</p>
+                                <p class="text-xs text-slate-400" data-lang="zh">乙方提供完整「白牌」方案；丙方在印度廠設立「Belrise 專屬保密車間」。</p>
+                            </div>
+                            <p class="text-xs text-red-400 font-bold" data-lang="en">Killer Move:</p>
+                            <p class="text-xs text-red-400 font-bold" data-lang="zh">殺手鐧：</p>
+                            <p class="text-xs text-slate-300" data-lang="en">"Building your own factory is high risk. Let Foxlink do it for 3 years, then transfer or JV."</p>
+                            <p class="text-xs text-slate-300" data-lang="zh">「你自己建廠風險太高。前三年由 Foxlink 代工，量大後協助移轉產線或 JV。」</p>
+                        </div>
+
+                        <!-- Uno Minda -->
+                        <div class="strategy-card p-6 rounded-xl border-t-4 border-t-yellow-500">
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="en">2. Uno Minda (Toughest)</h3>
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">2. Uno Minda (最難搞)</h3>
+                            <p class="text-xs text-yellow-300 font-bold mb-2" data-lang="en">Strategy: "IP-Led Manufacturing"</p>
+                            <p class="text-xs text-yellow-300 font-bold mb-2" data-lang="zh">策略：「技術授權綁定製造」</p>
+                            <p class="text-xs text-slate-400 mb-4" data-lang="en">Status: Has EV div, lacks high-end algo.</p>
+                            <p class="text-xs text-slate-400 mb-4" data-lang="zh">現狀：已有 EV 部門，缺高階演算法。</p>
+                            <div class="bg-slate-900/50 p-3 rounded border border-slate-700 mb-2">
+                                <p class="text-xs text-white font-bold" data-lang="en">The Pitch:</p>
+                                <p class="text-xs text-white font-bold" data-lang="zh">提案 (The Pitch):</p>
+                                <p class="text-xs text-slate-400" data-lang="en">Sell "Core Module" only. Algorithm burned in.</p>
+                                <p class="text-xs text-slate-400" data-lang="zh">不賣全套，賣「核心模組」。核心算法燒錄其中。</p>
+                            </div>
+                            <p class="text-xs text-green-400 font-bold" data-lang="en">Binding:</p>
+                            <p class="text-xs text-green-400 font-bold" data-lang="zh">關鍵綁定：</p>
+                            <p class="text-xs text-slate-300" data-lang="en">Core board must be made by Foxlink for security/yield.</p>
+                            <p class="text-xs text-slate-300" data-lang="zh">聲明為保良率資安，核心板必須由經過認證的 Foxlink 獨家生產。</p>
+                        </div>
+
+                        <!-- Motherson -->
+                        <div class="strategy-card p-6 rounded-xl border-t-4 border-t-green-500">
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="en">3. Motherson (Global Giant)</h3>
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">3. Motherson (全球巨人)</h3>
+                            <p class="text-xs text-green-300 font-bold mb-2" data-lang="en">Strategy: "China+1 Backup"</p>
+                            <p class="text-xs text-green-300 font-bold mb-2" data-lang="zh">策略：「China+1 的備份基地」</p>
+                            <p class="text-xs text-slate-400 mb-4" data-lang="en">Status: Strong supply chain, needs resilience.</p>
+                            <p class="text-xs text-slate-400 mb-4" data-lang="zh">現狀：供應鏈極強，在意韌性與去中化。</p>
+                            <div class="bg-slate-900/50 p-3 rounded border border-slate-700 mb-2">
+                                <p class="text-xs text-white font-bold" data-lang="en">The Pitch:</p>
+                                <p class="text-xs text-white font-bold" data-lang="zh">提案 (The Pitch):</p>
+                                <p class="text-xs text-slate-400" data-lang="en">Foxlink is main actor. Tesla/Benz experience + India backup.</p>
+                                <p class="text-xs text-slate-400" data-lang="zh">Foxlink 為主角，強調 Tesla/Benz 經驗與印度產能備份。</p>
+                            </div>
+                            <p class="text-xs text-purple-400 font-bold" data-lang="en">Role:</p>
+                            <p class="text-xs text-purple-400 font-bold" data-lang="zh">角色定位：</p>
+                            <p class="text-xs text-slate-300" data-lang="en">Uniquesky as "Rapid Response Unit".</p>
+                            <p class="text-xs text-slate-300" data-lang="zh">Uniquesky 作為「快速反應部隊」，提供高性價比替代方案。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 談判角色分配 -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="en">
+                        <span class="w-1 h-8 bg-purple-500 mr-4 rounded-full"></span>Role Play Strategy
+                    </h2>
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-white" data-lang="zh">
+                        <span class="w-1 h-8 bg-purple-500 mr-4 rounded-full"></span>談判桌上的角色分配 (Role Play)
+                    </h2>
+                    <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-24 flex-shrink-0 text-sm font-bold text-slate-400 mt-1" data-lang="en">Client Challenge:</div>
+                            <div class="w-24 flex-shrink-0 text-sm font-bold text-slate-400 mt-1" data-lang="zh">甲方挑戰：</div>
+                            <div class="flex-1 bg-slate-900 p-3 rounded border-l-4 border-red-500 text-slate-200 italic">
+                                <span data-lang="en">"Why shouldn't I do it myself? Why let you earn this money?"</span>
+                                <span data-lang="zh">"為什麼我不自己做？為什麼要給你們賺？"</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-24 flex-shrink-0 text-sm font-bold text-blue-400 mt-1" data-lang="en">Uniquesky Answer:</div>
+                            <div class="w-24 flex-shrink-0 text-sm font-bold text-blue-400 mt-1" data-lang="zh">乙方回答：<br>(Uniquesky)</div>
+                            <div class="flex-1 bg-slate-900 p-3 rounded border-l-4 border-blue-500 text-slate-200">
+                                <span data-lang="en">"Chairman, you can own the tech, but yield and supply chain take time. We give you design, but let Foxlink bear the risk for the first 3 years. This is to protect your brand."</span>
+                                <span data-lang="zh">"董事長，技術你可以擁有，但良率和供應鏈管理是需要時間積累的。我們把設計給您，但讓 Foxlink 幫您承擔前三年的製造風險。這是為了保護您的品牌聲譽。"</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-24 flex-shrink-0 text-sm font-bold text-green-400 mt-1" data-lang="en">Foxlink Answer:</div>
+                            <div class="w-24 flex-shrink-0 text-sm font-bold text-green-400 mt-1" data-lang="zh">丙方展示：<br>(Foxlink)</div>
+                            <div class="flex-1 bg-slate-900 p-3 rounded border-l-4 border-green-500 text-slate-200">
+                                <span data-lang="en">"We are Apple/Tesla grade. We have equipment ready in India. Order today, ship next month. This is speed you can't achieve by building yourself."</span>
+                                <span data-lang="zh">"我們不是普通代工廠，我們是 Apple/Tesla 等級的製造商。我們在印度已經準備好了設備和工人。您今天下單，下個月就能出貨。這是您自己建廠做不到的速度。"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 設計師總結 -->
+                <div class="mb-12 p-8 border-2 border-blue-500/50 bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full filter blur-3xl"></div>
+                    <h3 class="text-2xl font-bold text-white mb-4 relative z-10" data-lang="en">Designer's Verdict</h3>
+                    <h3 class="text-2xl font-bold text-white mb-4 relative z-10" data-lang="zh">設計師的總結 (The Verdict)</h3>
+                    <div class="space-y-4 text-lg font-light text-slate-300 relative z-10 leading-relaxed">
+                        <p data-lang="en">We are not just selling parts. We are the <strong>"Accelerator for India's EV Supply Chain"</strong>.</p>
+                        <p data-lang="zh">要在這三家巨頭面前站穩腳跟，絕對不能讓他們覺得我們只是「賣貨的」。我們要包裝成：<strong>「印度電動車供應鏈的加速器 (Accelerator)」</strong>。</p>
+                        <ul class="list-none space-y-2 ml-4 text-base">
+                            <li><span class="text-blue-400 font-bold">Uniquesky</span> <span data-lang="en">= Brain (Software/Algo)</span><span data-lang="zh">是大腦（軟體/算法）</span>。</li>
+                            <li><span class="text-green-400 font-bold">Foxlink</span> <span data-lang="en">= Muscle (Mfg/Quality)</span><span data-lang="zh">是肌肉（製造/品控）</span>。</li>
+                            <li><span class="text-yellow-400 font-bold">Client</span> <span data-lang="en">= Face (Brand/Market)</span><span data-lang="zh">是臉面（品牌/市場）</span>。</li>
+                        </ul>
+                        <p class="mt-4 border-t border-slate-700 pt-4" data-lang="en">
+                            <strong>Key Move:</strong> Propose <strong>"Built-Operate-Transfer (BOT)"</strong> to Belrise. "Let us do it now; we can help you build your factory later." Secure the PO first.
+                        </p>
+                        <p class="mt-4 border-t border-slate-700 pt-4" data-lang="zh">
+                            <strong>最關鍵的一步：</strong> 在與 Belrise 的會議中，我們必須主動提出 <strong>"Built-Operate-Transfer (BOT)"</strong> 的概念暗示 —— 「現在讓我們幫你做，未來如果你量夠大，我們甚至可以幫你建廠。」 當然，這是畫大餅，目的是先拿下現在的訂單（PO）。只要訂單在手，未來兩三年他們就很難換掉已經經過驗證的供應鏈了。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 資料下載區 (最下方) -->
+                <div class="border-t border-slate-700 pt-8">
+                    <h3 class="text-xl font-bold text-white mb-6" data-lang="en">Downloads</h3>
+                    <h3 class="text-xl font-bold text-white mb-6" data-lang="zh">相關資料下載</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 no-print">
+                        <a href="https://drive.google.com/file/d/1Kd0DFM2wv-yZp97yTbLK0lUSu5yFM4gK/view?usp=sharing" target="_blank" class="download-btn p-4 rounded-lg flex items-center justify-between group">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-pdf text-blue-400 mr-3 text-2xl"></i>
+                                <div>
+                                    <div class="text-[10px] text-slate-400 uppercase">Target 1</div>
+                                    <div class="font-bold text-sm text-white" data-lang="en">Belrise Intro</div>
+                                    <div class="font-bold text-sm text-white" data-lang="zh">Belrise 簡介</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-download text-slate-500 group-hover:text-white"></i>
+                        </a>
+                        <a href="https://drive.google.com/file/d/17_7iJSLxaHhMdxYp_MLgpiDgMeGX64oC/view?usp=sharing" target="_blank" class="download-btn p-4 rounded-lg flex items-center justify-between group">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-pdf text-green-400 mr-3 text-2xl"></i>
+                                <div>
+                                    <div class="text-[10px] text-slate-400 uppercase">Target 2</div>
+                                    <div class="font-bold text-sm text-white" data-lang="en">Motherson Intro</div>
+                                    <div class="font-bold text-sm text-white" data-lang="zh">Motherson 簡介</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-download text-slate-500 group-hover:text-white"></i>
+                        </a>
+                        <a href="https://drive.google.com/file/d/1Dj52Lg9nf17KeennlYYarkQU7SPJ-jsM/view?usp=sharing" target="_blank" class="download-btn p-4 rounded-lg flex items-center justify-between group">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-pdf text-yellow-400 mr-3 text-2xl"></i>
+                                <div>
+                                    <div class="text-[10px] text-slate-400 uppercase">Target 3</div>
+                                    <div class="font-bold text-sm text-white" data-lang="en">Uno Minda Intro</div>
+                                    <div class="font-bold text-sm text-white" data-lang="zh">Uno Minda 簡介</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-download text-slate-500 group-hover:text-white"></i>
+                        </a>
+                        <a href="https://drive.google.com/file/d/18eo5eaJ_cBHo27LlKppeYQl3w2edIlIe/view?usp=sharing" target="_blank" class="download-btn p-4 rounded-lg flex items-center justify-between group border-blue-500/30 bg-blue-900/10">
+                            <div class="flex items-center">
+                                <i class="fas fa-microchip text-purple-400 mr-3 text-2xl"></i>
+                                <div>
+                                    <div class="text-[10px] text-blue-300 uppercase">Partner</div>
+                                    <div class="font-bold text-sm text-blue-100" data-lang="en">Uniquesky Intro</div>
+                                    <div class="font-bold text-sm text-blue-100" data-lang="zh">Uniquesky 簡介</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-download text-blue-400 group-hover:text-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- 頁尾 -->
+        <footer class="sticky bottom-0 left-0 right-0 p-4 bg-slate-900 border-t border-slate-800 z-20 no-print text-center md:text-right">
+            <div class="text-xs text-slate-500">
+                <span data-lang="en">Confidential - Prepared by Business Development Team</span>
+                <span data-lang="zh">機密文件 - 業務開發團隊 (BD) 編製</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // 默認英文
+
+        function updateLanguageUI() {
+            try {
+                // 隱藏所有帶語言標記的元素
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') {
+                        el.style.display = 'none';
+                    }
+                });
+
+                // 顯示當前語言的元素
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    // 根據元素類型設置正確的 display 屬性
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) {
+                        el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+
+                // 更新網頁標題
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) {
+                        document.title = title.textContent;
+                    }
+                });
+            } catch (e) {
+                console.error("Language switch error:", e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 語言切換監聽
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) {
+                langBtn.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'zh' : 'en';
+                    updateLanguageUI();
+                });
+            }
+
+            // PDF 導出監聽
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) {
+                pdfBtn.addEventListener('click', () => window.print());
+            }
+
+            // 初始化語言界面
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

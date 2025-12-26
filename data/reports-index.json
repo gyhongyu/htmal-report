@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-26T17:17:24.830Z",
+  "lastUpdated": "2025-12-26T17:50:27.351Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -144,6 +144,19 @@
       "fileName": "report-1766769444228.html",
       "createdAt": "2025-12-26T17:17:24.830Z",
       "updatedAt": "2025-12-26T17:17:24.830Z"
+    },
+    {
+      "id": "report-1766771426675",
+      "title": "Strategic Implementation Plan: India Automotive Electronics Supply Chain",
+      "description": "印度車載電子供應鏈 戰略實施計劃",
+      "categories": [
+        "年度計劃",
+        "市場分析",
+        "內部簡報"
+      ],
+      "fileName": "report-1766771426675.html",
+      "createdAt": "2025-12-26T17:50:27.351Z",
+      "updatedAt": "2025-12-26T17:50:27.351Z"
     }
   ]
 }
