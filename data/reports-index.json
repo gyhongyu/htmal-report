@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-26T16:16:44.474Z",
+  "lastUpdated": "2025-12-26T17:17:24.830Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -131,6 +131,19 @@
       "fileName": "report-1766765803842.html",
       "createdAt": "2025-12-26T16:16:44.474Z",
       "updatedAt": "2025-12-26T16:16:44.474Z"
+    },
+    {
+      "id": "report-1766769444228",
+      "title": "Meeting Minutes: Strategic Discussion with Sentec India",
+      "description": "會議記錄：與 Sentec India 策略討論",
+      "categories": [
+        "會議記要",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1766769444228.html",
+      "createdAt": "2025-12-26T17:17:24.830Z",
+      "updatedAt": "2025-12-26T17:17:24.830Z"
     }
   ]
 }

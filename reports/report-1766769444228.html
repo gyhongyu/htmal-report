@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: SENTEC INDIA COMPANY PRIVATE LIMITED -->
+    <!-- ATTENDEES: Michael Chen (Foxlink), Jeff Chen (Sentec India) -->
+    <title data-lang="en">MOM: Strategic Discussion with Sentec India</title>
+    <title data-lang="zh">會議記錄：與 Sentec India 策略討論 (完整版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 核心樣式 (維持公司制式模板) --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+        .tag-est { background-color: #a16207; color: white; }
+        .tag-ver { background-color: #15803d; color: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; font-size: 10pt; } .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .text-white { color: #000 !important; } .text-gray-300, .text-gray-400 { color: #333 !important; } .tag, .bg-blue-600 { -webkit-print-color-adjust: exact; print-color-adjust: exact; } h1, h2, h3 { page-break-after: avoid; } .section-divider { margin-top: 2rem; } canvas { max-height: 300px; page-break-inside: avoid; } table, tr { page-break-inside: avoid; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="en">Meeting Minutes: Strategic Discussion with Sentec India</h1>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="zh">會議記錄：與 Sentec India 策略討論</h1>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="en">Subject: Market Intelligence, Competitor Analysis & Partner Vetting</p>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="zh">主題：市場情資、競爭對手分析與合作夥伴評估</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1">2025/12/22</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs">
+                                    Plot #25, Sector 5, IMT Manesar,<br>
+                                    Gurgaon, Haryana, 122051, India
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    Foxlink: Michael Chen<br>
+                                    Sentec: Jeff Chen (Managing Director)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-xl font-bold text-white">Mr. Jeff Chen (陳杰)</div>
+                                <div class="text-sm text-blue-400 mb-1">Managing Director</div>
+                                <div class="text-lg font-bold text-gray-200 mt-2">Sentec India Company Private Limited</div>
+                                <div class="text-xs text-gray-400 mt-2">
+                                    <i class="fas fa-phone mr-2"></i>+91-98711-03704<br>
+                                    <i class="fas fa-envelope mr-2"></i>jeff.chen@sentecgroup.com
+                                </div>
+                                <div class="mt-3 text-xs text-gray-500 bg-gray-900 p-2 rounded border border-gray-700">
+                                    <strong data-lang="en">Background:</strong>
+                                    <span data-lang="en">Highly successful operator in Indian automotive components (2-Wheelers). Dominant market share (~70%) in specific product lines.</span>
+                                    <strong data-lang="zh">背景：</strong>
+                                    <span data-lang="zh">印度二輪車零組件市場的資深經營者。在特定產品線擁有約 70% 的統治級市佔率。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4">
+                    
+                    <!-- Point 1 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 1: Competitor Landscape - The "Capital Player" Insight</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題一：競爭格局分析 - 「資本玩家」與合資模式</h3>
+                        <div class="text-gray-300 text-sm space-y-3">
+                            <p data-lang="en">
+                                Jeff Chen provided a deep-dive analysis of the top-tier local competitors, specifically identifying <strong>Minda, Uno Minda, and Lumax</strong>. He categorized these entities as "Capital Players" rather than technology innovators. Their business model relies almost exclusively on forming Joint Ventures (JVs) with international (primarily Japanese) firms to acquire manufacturing technology, rather than developing it in-house.
+                            </p>
+                            <p data-lang="zh">
+                                Jeff Chen 對印度本土頂級競爭對手進行了深度分析，特別點名了 <strong>Minda、Uno Minda 與 Lumax</strong>。他將這些企業歸類為「資本型玩家 (Capital Players)」，而非技術創新者。這些集團的商業模式高度依賴與國際大廠（主要是日商）成立合資企業 (JV) 來獲取製造技術，本身缺乏自主研發能力。
+                            </p>
+                            <div class="bg-gray-800 p-3 rounded border-l-2 border-blue-500">
+                                <strong class="text-blue-400 block mb-1" data-lang="en">Strategic Implication for Foxlink:</strong>
+                                <span data-lang="en">This confirms a gap in the market. While these incumbents have capital and connections, they lack the efficiency and yield rates of a dedicated manufacturer like Foxlink. Sentec's success in beating a Minda-Japanese JV (via higher yield/lower cost) proves that Foxlink can compete and win against these giants by offering superior manufacturing technology without the heavy overhead of a traditional JV structure.</span>
+                                <strong class="text-blue-400 block mb-1" data-lang="zh">對正崴的戰略意涵：</strong>
+                                <span data-lang="zh">這確認了市場缺口的存在。雖然這些既有大廠擁有資金與人脈，但缺乏像 Foxlink 這樣專精製造廠的效率與良率。Sentec 先前擊敗 Minda 日系合資廠的案例（依靠高良率與低成本）證明了，Foxlink 若能提供優於傳統 JV 架構的製造技術與成本優勢，完全有能力從這些巨頭手中搶下市佔。</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 2: Market Trends - GST Policy & Product Diversification</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題二：市場趨勢 - GST 稅收政策與產品多角化</h3>
+                        <div class="text-gray-300 text-sm space-y-3">
+                            <p data-lang="en">
+                                Jeff highlighted a critical regulatory driver: The Indian government's GST structure heavily taxes engines over 350cc. This has forced OEMs to focus on the <strong>sub-350cc segment</strong>, incentivizing them to pack these smaller bikes with high-end features (digital clusters, connectivity) to maintain premium positioning.
+                            </p>
+                            <p data-lang="zh">
+                                Jeff 強調了一個關鍵的政策驅動力：印度政府的 GST 稅制對 350cc 以上的引擎課徵重稅。這迫使車廠（OEMs）將重心轉向 <strong>350cc 以下的級距</strong>，並致力於在這些車款中導入高階配備（如數位儀表、聯網功能）以維持產品的高端定位與利潤。
+                            </p>
+                            <p data-lang="en">
+                                <strong>Sentec's Strategy:</strong> Despite holding ~70% market share in his core segment, Jeff considers it a "mature market." He is actively diversifying into "Air" components (e.g., intake systems) to drive growth. This signals that purely mechanical components are saturating, and the growth lies in electronics and new features—Foxlink's domain.
+                            </p>
+                            <p data-lang="zh">
+                                <strong>Sentec 的對應策略：</strong> 儘管 Jeff 在其核心領域擁有約 70% 的市佔率，但他認為該市場已屬「成熟市場」。他目前正積極多角化發展「空氣 (Air)」相關零組件（如進氣系統）以尋求成長。這訊號顯示純機械零件市場正在飽和，未來的增長點在於電子化與新功能——這正是 Foxlink 的強項。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="recon-box risk">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 3: Foxlink Target Intelligence - Belrise Industries</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題三：Foxlink 目標情資 - Belrise Industries</h3>
+                        <div class="text-gray-300 text-sm space-y-3">
+                            <p data-lang="en">
+                                Foxlink shared the upcoming plan to initiate partnership discussions with <strong>Belrise Industries</strong> in January. In response, Jeff shared significant intelligence: Belrise had previously approached Sentec for a potential Joint Venture.
+                            </p>
+                            <p data-lang="zh">
+                                我方提及預計一月份將與 <strong>Belrise Industries</strong> 展開合作洽談。對此，Jeff 分享了重要情報：Belrise 先前也曾接觸過 Sentec 尋求合資機會。
+                            </p>
+                            <div class="bg-red-900/20 border border-red-500/30 p-3 rounded">
+                                <p data-lang="en">
+                                    <strong class="text-red-400">Jeff's Assessment & Warning:</strong> Jeff declined the partnership with Belrise for two key reasons:
+                                    <br>1. <strong>No Market Share Gain:</strong> The JV would not help Sentec expand its share in the air cleaner/filter market.
+                                    <br>2. <strong>Technology Risk:</strong> Jeff expressed strong concerns about the <strong>high risk of technology theft ("stolen technology")</strong> if they were to collaborate.
+                                </p>
+                                <p data-lang="zh">
+                                    <strong class="text-red-400">Jeff 的評估與警示：</strong> Jeff 當時拒絕了與 Belrise 的合作，主要基於兩點考量：
+                                    <br>1. <strong>無助於市佔擴張：</strong> 該合資案無法幫助 Sentec 在空氣濾清產品市場取得更多份額。
+                                    <br>2. <strong>技術風險：</strong> Jeff 強烈表達了對於<strong>技術被盜用 (Technology Theft)</strong> 的擔憂，認為合作存在高度風險。
+                                </p>
+                            </div>
+                            <p data-lang="en">
+                                <strong>Strategic Implication:</strong> As Foxlink proceeds with the January meeting, we must prioritize Intellectual Property (IP) protection mechanisms and treat technical disclosures with extreme caution.
+                            </p>
+                            <p data-lang="zh">
+                                <strong>戰略意涵：</strong> Foxlink 在推進一月份的會議時，必須將智慧財產權 (IP) 保護機制列為優先事項，並對技術資料的揭露採取極度謹慎的態度。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 4: Target Account Intelligence - Hero MotoCorp</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題四：目標客戶情資 - Hero MotoCorp 組織變動</h3>
+                        <div class="text-gray-300 text-sm space-y-3">
+                            <p data-lang="en">
+                                Discussion revealed significant internal shifts at Hero MotoCorp. The company has recently undergone a major leadership overhaul, appointing a <strong>new CEO</strong>. This change has triggered the departure of many senior managers, which explains why Foxlink's existing contact list has become unresponsive.
+                            </p>
+                            <p data-lang="zh">
+                                討論揭露了 Hero MotoCorp 內部重大的變動。該公司近期進行了高層改組，任命了<strong>新任 CEO</strong>。此變動引發了許多資深經理人的離職，這也解釋了為何 Foxlink 現有的聯絡人清單近期回應率低落。
+                            </p>
+                            <p data-lang="en">
+                                Furthermore, Hero is in the process of centralizing/relocating their Procurement and R&D centers. <strong>The exact new location is currently unconfirmed</strong> and requires immediate verification to realign our sales logistics.
+                            </p>
+                            <p data-lang="zh">
+                                此外，Hero 正在進行採購與研發 (R&D) 中心的集中化/搬遷。<strong>確切的新址目前尚未確認</strong>，這需要我們立即進行查證，以重新調整我們的業務拜訪動線。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫</span>
+                </div>
+
+                <div class="recon-box action">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-900/50">
+                            <tr>
+                                <th class="px-2 py-2">#</th>
+                                <th class="px-2 py-2" data-lang="en">Action Item</th><th class="px-2 py-2" data-lang="zh">行動項目</th>
+                                <th class="px-2 py-2" data-lang="en">Owner</th><th class="px-2 py-2" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="font-bold text-yellow-500">1</td>
+                                <td data-lang="en"><strong>Meeting with Sonic (ADATA)</strong><br><span class="text-xs text-gray-400">Jeff connected us via LINE. Need to schedule a formal site visit to ADATA's Noida facility immediately.</span></td>
+                                <td data-lang="zh"><strong>安排與 Sonic (ADATA) 會面</strong><br><span class="text-xs text-gray-400">Jeff 已透過 LINE 建立群組。需立即安排前往 ADATA Noida 廠區的正式參訪。</span></td>
+                                <td>Michael Chen</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-yellow-500">2</td>
+                                <td data-lang="en"><strong>Taiwan Trade Center Luncheon</strong><br><span class="text-xs text-gray-400">Attend the networking event on the 25th to expand connections with the Delhi Taiwanese business community.</span></td>
+                                <td data-lang="zh"><strong>參加台灣貿易中心午餐會</strong><br><span class="text-xs text-gray-400">出席 25 日的社交活動，拓展德里地區台商圈人脈。</span></td>
+                                <td>Michael Chen</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-green-500">3</td>
+                                <td data-lang="en"><strong>Re-verify Hero MotoCorp Contacts</strong><br><span class="text-xs text-gray-400">Investigate the new R&D location and map out the new organizational structure under the new CEO.</span></td>
+                                <td data-lang="zh"><strong>重新驗證 Hero MotoCorp 窗口</strong><br><span class="text-xs text-gray-400">調查新研發中心位置，並針對新 CEO 上任後的組織架構進行重新情蒐。</span></td>
+                                <td>Michael Chen</td>
+                            </tr>
+                             <tr>
+                                <td class="font-bold text-blue-500">4</td>
+                                <td data-lang="en"><strong>Preparation for Belrise Meeting (Jan)</strong><br><span class="text-xs text-gray-400">Prepare NDA and IP protection strategy based on Jeff's warning about technology theft risks.</span></td>
+                                <td data-lang="zh"><strong>Belrise 會議準備 (一月份)</strong><br><span class="text-xs text-gray-400">基於 Jeff 對於技術盜用的警示，準備嚴謹的保密協議 (NDA) 與 IP 保護策略。</span></td>
+                                <td>Michael Chen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Confidential Meeting Record</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">內部機密會議記錄</div>
+                        <div class="text-xs text-gray-400" data-lang="en">For Foxlink India Management Only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">僅供 Foxlink 印度管理層參閱。</div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: Michael Chen (Foxlink India)</span>
+                    <span data-lang="zh">記錄人：Michael Chen (Foxlink India)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
