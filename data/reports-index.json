@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-19T11:49:12.856Z",
+  "lastUpdated": "2025-12-26T16:16:44.474Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -118,6 +118,19 @@
       "fileName": "report-1766144925521.html",
       "createdAt": "2025-12-19T11:48:46.492Z",
       "updatedAt": "2025-12-19T11:48:46.492Z"
+    },
+    {
+      "id": "report-1766765803842",
+      "title": "Meeting Minutes: Visit to Paulbert Talenting Pvt. Ltd.",
+      "description": "會議記錄：拜訪 Paulbert Talenting Pvt. Ltd.",
+      "categories": [
+        "會議記要",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1766765803842.html",
+      "createdAt": "2025-12-26T16:16:44.474Z",
+      "updatedAt": "2025-12-26T16:16:44.474Z"
     }
   ]
 }
