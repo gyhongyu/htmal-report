@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: VIVO MOBILE INDIA PVT LTD -->
+    <!-- ATTENDEES: Michael Chen (Foxlink), Akash Malik (Vivo) -->
+    <title data-lang="en">MOM: Vivo & Supplier Strategic Review</title>
+    <title data-lang="zh">會議記錄：Vivo 供應商戰略審查會議</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 核心樣式 (維持公司制式模板) --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+        .tag-est { background-color: #a16207; color: white; }
+        .tag-ver { background-color: #15803d; color: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; font-size: 10pt; } .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .text-white { color: #000 !important; } .text-gray-300, .text-gray-400 { color: #333 !important; } .tag, .bg-blue-600 { -webkit-print-color-adjust: exact; print-color-adjust: exact; } h1, h2, h3 { page-break-after: avoid; } .section-divider { margin-top: 2rem; } canvas { max-height: 300px; page-break-inside: avoid; } table, tr { page-break-inside: avoid; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="en">Meeting Minutes: Vivo & Supplier Strategic Review</h1>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="zh">會議記錄：Vivo 供應商戰略審查會議</h1>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="en">Subject: Contract Process Alignment & Supply Chain Optimization</p>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="zh">主題：合約流程對齊與供應鏈優化</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1">2025/12/23</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs">
+                                    Plot No. 08, Sector-24,<br>
+                                    Yamuna Expressway Area, Gautam Buddha Nagar,<br>
+                                    Uttar Pradesh - 201310
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    Foxlink: Michael Chen<br>
+                                    Vivo: Akash Malik
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-xl font-bold text-white">Akash Malik</div>
+                                <div class="text-sm text-blue-400 mb-1">Senior Manager - Procurement</div>
+                                <div class="text-lg font-bold text-gray-200 mt-2">vivo Mobile India Private Limited</div>
+                                <div class="text-xs text-gray-400 mt-2">
+                                    <i class="fas fa-mobile-alt mr-2"></i>+91 7206003604<br>
+                                    <i class="fas fa-envelope mr-2"></i>akashscm@vivo.com<br>
+                                    <i class="fas fa-globe mr-2"></i>www.vivo.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Context/Overview Block -->
+                <div class="bg-blue-900/20 border border-blue-500/30 p-4 rounded-lg mb-6">
+                    <h3 class="text-blue-400 font-bold mb-2 text-sm uppercase" data-lang="en">Executive Summary & Context</h3>
+                    <h3 class="text-blue-400 font-bold mb-2 text-sm uppercase" data-lang="zh">專案背景與執行摘要</h3>
+                    <div class="text-gray-300 text-sm">
+                        <p data-lang="en">The project has been stagnant for 9 months since its initiation in March. The supplier headquarters has already invested capital in a dedicated production line and is inquiring about the delay. The primary objective of this meeting was to identify the root causes of this stagnation and realign on contract procedures and cost structures to unlock the project.</p>
+                        <p data-lang="zh">本專案自今年三月啟動以來，已歷時九個月仍未進入實質量產階段。由於供應商總部已投入資本建設專用產線，目前面臨極大的投資回報壓力。本次會議的核心目的，即是找出導致專案停滯的「根本原因」，並釐清雙方對於合約流程與供應鏈責任的重大認知落差，以期重啟專案。</p>
+                    </div>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4">
+                    
+                    <!-- Point 1: Contract Delays (Risk) -->
+                    <div class="recon-box risk">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 1: Contract Finalization & Legal Team Requirements</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題一：合約簽署瓶頸與溝通語言規範</h3>
+                        
+                        <div class="text-gray-300 text-sm space-y-3">
+                            <!-- Context -->
+                            <div>
+                                <strong class="text-gray-400 block text-xs uppercase mb-1" data-lang="en">Context & Issue</strong>
+                                <strong class="text-gray-400 block text-xs uppercase mb-1" data-lang="zh">現況與問題</strong>
+                                <p data-lang="en">The supplier has attempted to negotiate specific contract terms but has faced significant delays. It was clarified that Vivo's legal team operates independently from procurement and consists entirely of Indian legal professionals.</p>
+                                <p data-lang="zh">專案延宕的主因被鎖定在「合約簽署」環節。供應商過去試圖針對合約條款進行協商，但發現回覆極度緩慢。經確認，Vivo 的法務審查團隊由<strong>印度本地律師</strong>組成，且獨立於採購部門運作。</p>
+                            </div>
+
+                            <!-- Facts -->
+                            <div class="bg-gray-800 p-3 rounded border border-gray-600">
+                                <strong class="text-white block text-xs uppercase mb-1" data-lang="en">Key Operational Constraints</strong>
+                                <strong class="text-white block text-xs uppercase mb-1" data-lang="zh">關鍵作業限制</strong>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li data-lang="en"><strong>Language Barrier:</strong> Any communication or contract revision containing <strong>Chinese text</strong> is unreadable to the Indian legal team, causing the file to be ignored or rejected immediately.</li>
+                                    <li data-lang="zh"><strong>語言隔閡：</strong> 過去往來的郵件或合約修訂若夾雜中文，印度法務無法閱讀，導致案件直接被擱置或退回。</li>
+                                    <li data-lang="en"><strong>Review Cycle:</strong> Any deviation from Vivo's standard template triggers a mandatory review process that takes a <strong>minimum of 3 months</strong>.</li>
+                                    <li data-lang="zh"><strong>審查週期：</strong> 任何對標準合約的修改，都必須經過至少 <strong>3 個月</strong> 的強制審查週期，這是導致專案卡關九個月的結構性原因。</li>
+                                </ul>
+                            </div>
+
+                            <!-- Implication -->
+                            <div>
+                                <strong class="text-green-400 block text-xs uppercase mb-1" data-lang="en">Strategic Decision</strong>
+                                <strong class="text-green-400 block text-xs uppercase mb-1" data-lang="zh">決策與行動</strong>
+                                <p data-lang="en">To bypass this bottleneck, strict protocol is now established: <strong>All future communication must be in English only.</strong> Furthermore, the supplier will evaluate accepting the standard contract terms to avoid the 3-month delay.</p>
+                                <p data-lang="zh">為繞過此障礙，雙方達成戰術共識：即刻起，所有與 Vivo 往來的郵件、合約修訂與附件，<strong>必須全數使用英文</strong>。嚴禁出現中文說明。同時，供應商將重新評估是否直接接受標準條款，以換取專案即刻啟動。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 2: Supply Chain (Neutral/Correction) -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 2: Supply Chain Model & Financial Impact</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題二：供應鏈模型校準與財務損益修正</h3>
+                        
+                        <div class="text-gray-300 text-sm space-y-3">
+                            <!-- Context -->
+                            <div>
+                                <strong class="text-gray-400 block text-xs uppercase mb-1" data-lang="en">Context & Misconception</strong>
+                                <strong class="text-gray-400 block text-xs uppercase mb-1" data-lang="zh">認知落差與背景</strong>
+                                <p data-lang="en">The supplier previously operated under the assumption that they were required to hold 30 days of safety stock (carrying heavy holding costs), which inflated their internal financial forecasts and reduced quotation competitiveness.</p>
+                                <p data-lang="zh">在成本結構上，供應商一直存在嚴重誤解，誤以為必須承擔高額的庫存持有成本 (30天安全庫存)，這導致內部的財務預測偏高，影響了報價競爭力與合作意願。</p>
+                            </div>
+
+                            <!-- Correction -->
+                            <div class="bg-gray-800 p-3 rounded border border-gray-600">
+                                <strong class="text-white block text-xs uppercase mb-1" data-lang="en">Policy Correction</strong>
+                                <strong class="text-white block text-xs uppercase mb-1" data-lang="zh">政策導正</strong>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li data-lang="en"><strong>Old Belief:</strong> 30 Days Stock (Split holding).</li>
+                                    <li data-lang="zh"><strong>舊認知 (錯誤)：</strong> 供應商需備 30 天安全庫存。</li>
+                                    <li data-lang="en"><strong>Official Policy:</strong> <strong>10 Days Total Stock</strong>, held 100% by Vivo.</li>
+                                    <li data-lang="zh"><strong>新事實 (正確)：</strong> Vivo 政策為「庫存即成本」。總安全庫存僅需 <strong>10 天</strong>，且<strong>完全由 Vivo 自行持有</strong>。</li>
+                                </ul>
+                            </div>
+
+                            <!-- Implication -->
+                            <div>
+                                <strong class="text-green-400 block text-xs uppercase mb-1" data-lang="en">Financial Implication</strong>
+                                <strong class="text-green-400 block text-xs uppercase mb-1" data-lang="zh">戰略意義</strong>
+                                <p data-lang="en">This clarification effectively removes the inventory holding cost from the supplier's P&L for this project. Finance must re-calculate the project profitability based on this "Zero Holding Cost" model.</p>
+                                <p data-lang="zh">此澄清對 Foxlink 極為有利。這意味著我們<strong>不需要</strong>在當地額外租賃倉庫或積壓資金。財務部門需立即根據此「零庫存持有成本」的新模型，重新計算專案損益 (P&L)，這將大幅提升本案的淨利率預期。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫</span>
+                </div>
+
+                <div class="recon-box action">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-900/50">
+                            <tr>
+                                <th class="px-2 py-2">#</th>
+                                <th class="px-2 py-2" data-lang="en">Action Item</th><th class="px-2 py-2" data-lang="zh">行動項目</th>
+                                <th class="px-2 py-2" data-lang="en">Owner</th><th class="px-2 py-2" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="font-bold text-yellow-500">1</td>
+                                <td data-lang="en"><strong>Enforce English-Only Protocol</strong><br><span class="text-xs text-gray-400">Mandate that all legal/contract docs sent to Vivo are 100% English. Stop using bilingual formats.</span></td>
+                                <td data-lang="zh"><strong>執行全英文溝通規範</strong><br><span class="text-xs text-gray-400">強制規定所有發送給 Vivo 的法務/合約文件必須 100% 為英文。停止使用雙語對照格式，以免被印度法務忽略。</span></td>
+                                <td>Michael Chen</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-yellow-500">2</td>
+                                <td data-lang="en"><strong>Contract Review Decision</strong><br><span class="text-xs text-gray-400">Decide whether to accept standard terms or wait 3+ months for changes.</span></td>
+                                <td data-lang="zh"><strong>合約策略定奪</strong><br><span class="text-xs text-gray-400">評估是否接受標準條款以立即啟動專案，或堅持修改但需承擔 3 個月以上的延遲。</span></td>
+                                <td>Michael Chen</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-green-500">3</td>
+                                <td data-lang="en"><strong>Recalculate Project P&L</strong><br><span class="text-xs text-gray-400">Update financial models removing inventory holding costs based on the new 10-day Vivo-held policy.</span></td>
+                                <td data-lang="zh"><strong>重新計算專案損益 (P&L)</strong><br><span class="text-xs text-gray-400">根據新的「10天庫存由 Vivo 持有」政策，移除庫存持有成本並更新財務模型。</span></td>
+                                <td>Finance / Sales</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Confidential Meeting Record</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">內部機密會議記錄</div>
+                        <div class="text-xs text-gray-400" data-lang="en">For Foxlink India Management Only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">僅供 Foxlink 印度管理層參閱。</div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: Michael Chen (Foxlink India)</span>
+                    <span data-lang="zh">記錄人：Michael Chen (Foxlink India)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
