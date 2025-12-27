@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-27T05:11:46.257Z",
+  "lastUpdated": "2025-12-27T06:24:03.823Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -170,6 +170,19 @@
       "fileName": "report-1766811971407.html",
       "createdAt": "2025-12-27T05:06:11.935Z",
       "updatedAt": "2025-12-27T05:06:11.935Z"
+    },
+    {
+      "id": "report-1766816643348",
+      "title": "Meeting Minutes: Visit to Pionex Technologies Pvt Ltd",
+      "description": "會議記錄：拜訪 Pionex Technologies Pvt Ltd",
+      "categories": [
+        "會議記要",
+        "工作報告",
+        "年度計劃"
+      ],
+      "fileName": "report-1766816643348.html",
+      "createdAt": "2025-12-27T06:24:03.823Z",
+      "updatedAt": "2025-12-27T06:24:03.823Z"
     }
   ]
 }
