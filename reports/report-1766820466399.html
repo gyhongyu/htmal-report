@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: SENSETEK & SENVISION -->
+    <!-- ATTENDEES: Michael Chen (Foxlink), Eric Wu (Sensetek) -->
+    <title data-lang="en">MOM: Sensetek & Senvision Quotation & Strategy Discussion</title>
+    <title data-lang="zh">會議記錄：Sensetek & Senvision 報價推進與供應鏈策略討論</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 核心樣式 (維持公司制式模板) --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+        .tag-est { background-color: #a16207; color: white; }
+        .tag-ver { background-color: #15803d; color: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; font-size: 10pt; } .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .text-white { color: #000 !important; } .text-gray-300, .text-gray-400 { color: #333 !important; } .tag, .bg-blue-600 { -webkit-print-color-adjust: exact; print-color-adjust: exact; } h1, h2, h3 { page-break-after: avoid; } .section-divider { margin-top: 2rem; } canvas { max-height: 300px; page-break-inside: avoid; } table, tr { page-break-inside: avoid; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="en">Meeting Minutes: Discussion with Sensetek & Senvision</h1>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="zh">會議記錄：Sensetek & Senvision 報價推進與供應鏈策略討論</h1>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="en">Subject: Quotation Review, Supply Chain Analysis & Strategic Entry</p>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="zh">主題：報價審核、供應鏈結構分析與市場切入策略</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1">2025/12/25</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs">
+                                    Plot 175, 176, Sector 5, Imt Manesar,<br>
+                                    Gurugram, Haryana 122052, India
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    Foxlink: Michael Chen<br>
+                                    Sensetek/Senvision: Eric Wu
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-xl font-bold text-white">Mr. Eric Wu</div>
+                                <div class="text-sm text-blue-400 mb-1">Purchasing & Material Control Manager</div>
+                                <div class="text-lg font-bold text-gray-200 mt-2">Sensetek / Senvision</div>
+                                <div class="text-xs text-gray-400 mt-2">
+                                    <i class="fas fa-phone mr-2"></i>+91-88824 38133<br>
+                                    <i class="fas fa-envelope mr-2"></i>eric.wu@sensetekoptical.co.in
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4">
+                    
+                    <!-- Point 1 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 1: Quotation Review Results</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題一：報價審核結果 (Approved)</h3>
+                        <div class="text-gray-300 text-sm">
+                            <p data-lang="en">Eric Wu reviewed Foxlink's preliminary quotation for the automotive electronics project. He confirmed that <strong>Foxlink's pricing is highly competitive</strong> and the cost structure is superior to existing suppliers. The quote has been validated and approved at the purchasing level.</p>
+                            <p data-lang="zh">Eric Wu 詳細審核了 Foxlink 針對車用電子項目提交的粗估報價。其確認 <strong>Foxlink 的報價極具競爭力</strong>，且成本結構優於現有供應商。目前在價格層面上，已正式通過採購端的內部驗證 (Approved)。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 2: Current Supply Chain Structure Analysis</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題二：現行供應鏈結構分析</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en">Analysis of Sensetek/Senvision's supply chain reveals a highly vertical integration with group affiliates:</p>
+                            <p data-lang="zh">針對 Sensetek/Senvision 的現行供應鏈運作模式進行梳理，發現其高度依賴集團關聯企業：</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Key Components (Shine Optics, China):</strong> Supplies Sensor, Power IC, Lens, and Serializer. <em>Note: Shine Optics is also a major shareholder/holding entity.</em></li>
+                                <li data-lang="zh"><strong>關鍵零組件 (Shine Optics 盛泰, 中國)：</strong> 供應 Sensor、Power IC、Lens 等核心元件。<em>備註：盛泰不僅是供應商，更是主要的控股方。</em></li>
+                                <li data-lang="en"><strong>Harness (Golden Corn, Thailand):</strong> Exclusive supplier for wire harnesses.</li>
+                                <li data-lang="zh"><strong>線束 (Golden Corn 祥龍, 泰國)：</strong> 目前唯一的線束供應來源。</li>
+                                <li data-lang="en"><strong>Sales Flow:</strong> Sensetek (Mfg) -> Senvision (Trading) -> Aisin Haryana -> Maruti Suzuki.</li>
+                                <li data-lang="zh"><strong>銷售流向：</strong> Sensetek (製造) -> Senvision (貿易) -> Aisin Haryana -> Maruti Suzuki。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="recon-box risk">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 3: Strategic Barriers to Entry</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題三：供應商導入之結構性壁壘</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en">Despite the pricing advantage, two major structural barriers prevent immediate Official Quotation/Mass Production:</p>
+                            <p data-lang="zh">儘管價格具備優勢，但要推進至正式報價 (Official Quotation) 與量產，目前面臨兩大結構性挑戰：</p>
+                            <div class="bg-gray-800 p-2 rounded border border-gray-600 mt-2">
+                                <p data-lang="en"><strong>1. Aisin Registration:</strong> The BOM is locked with Aisin. Adding Foxlink requires a formal <strong>ECN/PCN process</strong> and Aisin's approval.</p>
+                                <p data-lang="zh"><strong>1. Aisin 立項報備限制：</strong> BOM 表已鎖定既有供應商。導入 Foxlink 需啟動正式的 <strong>ECN/PCN 變更流程</strong> 並獲得 Aisin 核准。</p>
+                            </div>
+                            <div class="bg-gray-800 p-2 rounded border border-gray-600 mt-1">
+                                <p data-lang="en"><strong>2. Holding Company Interest:</strong> Decisions are driven by <strong>Shine Optics/Sensetek holding executives</strong>. Replacing group companies with Foxlink requires strong justification beyond price, specifically regarding "Track Record" and risk management.</p>
+                                <p data-lang="zh"><strong>2. 控股高層決策權：</strong> 決策核心在於 <strong>Shine Optics (盛泰) 與 Sensetek 控股高層</strong>。由於涉及集團內部利益，僅憑價格難以說服高層承擔更換供應商的風險 (缺乏 Track Record)。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="recon-box action">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 4: Breakthrough Strategy - Executive Engagement</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題四：突破策略 - 決策核心拜訪</h3>
+                        <div class="text-gray-300 text-sm">
+                            <p data-lang="en">To bypass local limitations, it was decided that Foxlink must engage directly with the <strong>decision-makers at the holding level (Sensetek/Shine Optics)</strong>. The goal is to present Foxlink's global automotive capabilities (e.g., Tesla case study) to mitigate the "New Supplier" risk and secure a top-down directive.</p>
+                            <p data-lang="zh">為突破現有層級的限制，會議決議 Foxlink 必須「越級」直接拜訪 <strong>Sensetek 與 Shine Optics 的控股決策者</strong>。目標是透過展示 Foxlink 的全球車載實績（如 Tesla 案例），消除高層對新供應商的疑慮，進而取得「由上而下」的推動力。</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫</span>
+                </div>
+
+                <div class="recon-box action">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-900/50">
+                            <tr>
+                                <th class="px-2 py-2">#</th>
+                                <th class="px-2 py-2" data-lang="en">Action Item</th><th class="px-2 py-2" data-lang="zh">行動項目</th>
+                                <th class="px-2 py-2" data-lang="en">Owner</th><th class="px-2 py-2" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="font-bold text-yellow-500">1</td>
+                                <td data-lang="en"><strong>Coordinate Executive Visit</strong><br><span class="text-xs text-gray-400">Identify key decision-makers and schedule a meeting with Holding Company Execs.</span></td>
+                                <td data-lang="zh"><strong>協調高層拜訪行程</strong><br><span class="text-xs text-gray-400">確認控股高層名單與意向，安排雙方決策者會面。</span></td>
+                                <td>M. Chen / Eric Wu</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-yellow-500">2</td>
+                                <td data-lang="en"><strong>Prepare Executive Presentation</strong><br><span class="text-xs text-gray-400">Focus on Global Automotive Quality, Track Record (Tesla), and Delivery Capabilities.</span></td>
+                                <td data-lang="zh"><strong>準備高層匯報資料</strong><br><span class="text-xs text-gray-400">重點展示全球車載品質體系、實績 (Tesla) 及交付能力。</span></td>
+                                <td>Foxlink Team</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-blue-500">3</td>
+                                <td data-lang="en"><strong>Supply Chain Integration Proposal</strong><br><span class="text-xs text-gray-400">Develop a plan to integrate with existing suppliers (Meiko PCB, Shine Optics Lens).</span></td>
+                                <td data-lang="zh"><strong>供應鏈配合方案研擬</strong><br><span class="text-xs text-gray-400">研擬與現有供應鏈 (如 Meiko PCB, Shine Optics Lens) 的整合生產提案。</span></td>
+                                <td>Foxlink Team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Confidential Meeting Record</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">內部機密會議記錄</div>
+                        <div class="text-xs text-gray-400" data-lang="en">For Foxlink India Management Only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">僅供 Foxlink 印度管理層參閱。</div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: Michael Chen (Foxlink India)</span>
+                    <span data-lang="zh">記錄人：Michael Chen (Foxlink India)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

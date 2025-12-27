@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-27T06:24:40.174Z",
+  "lastUpdated": "2025-12-27T07:27:47.271Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -183,6 +183,19 @@
       "fileName": "report-1766816643348.html",
       "createdAt": "2025-12-27T06:24:03.823Z",
       "updatedAt": "2025-12-27T06:24:03.823Z"
+    },
+    {
+      "id": "report-1766820466399",
+      "title": "Meeting Minutes: Discussion with Sensetek & Senvision Subject: Quotation Review, Supply Chain Analysis & Strategic Entry",
+      "description": "會議記錄：Sensetek & Senvision 報價推進與供應鏈策略討論",
+      "categories": [
+        "會議記要",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1766820466399.html",
+      "createdAt": "2025-12-27T07:27:47.271Z",
+      "updatedAt": "2025-12-27T07:27:47.271Z"
     }
   ]
 }
