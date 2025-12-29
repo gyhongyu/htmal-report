@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-27T07:38:18.041Z",
+  "lastUpdated": "2025-12-29T15:00:57.478Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -196,6 +196,19 @@
       "fileName": "report-1766820466399.html",
       "createdAt": "2025-12-27T07:27:47.271Z",
       "updatedAt": "2025-12-27T07:27:47.271Z"
+    },
+    {
+      "id": "report-1767020456556",
+      "title": "Meeting Minutes: Foxlink & Portronics Potential Business Collaboration",
+      "description": "會議記錄：正崴 (Foxlink) 與 Portronics 潛在業務合作討論",
+      "categories": [
+        "內部簡報",
+        "會議記要",
+        "工作報告"
+      ],
+      "fileName": "report-1767020456556.html",
+      "createdAt": "2025-12-29T15:00:57.478Z",
+      "updatedAt": "2025-12-29T15:00:57.478Z"
     }
   ]
 }
