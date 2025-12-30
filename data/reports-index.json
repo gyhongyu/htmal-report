@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-12-29T15:00:57.478Z",
+  "lastUpdated": "2025-12-30T15:23:55.789Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -209,6 +209,19 @@
       "fileName": "report-1767020456556.html",
       "createdAt": "2025-12-29T15:00:57.478Z",
       "updatedAt": "2025-12-29T15:00:57.478Z"
+    },
+    {
+      "id": "report-1767108235282",
+      "title": "MOM: Strategic Exchange with ADATA Semiconductor (India)",
+      "description": "會議記錄：與 ADATA Semiconductor (India) COO 交流摘要",
+      "categories": [
+        "會議記要",
+        "內部簡報",
+        "工作報告"
+      ],
+      "fileName": "report-1767108235282.html",
+      "createdAt": "2025-12-30T15:23:55.789Z",
+      "updatedAt": "2025-12-30T15:23:55.789Z"
     }
   ]
 }
