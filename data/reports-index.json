@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-01T17:29:41.458Z",
+  "lastUpdated": "2026-01-05T05:43:01.935Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -235,6 +235,19 @@
       "fileName": "report-1767288580848.html",
       "createdAt": "2026-01-01T17:29:41.458Z",
       "updatedAt": "2026-01-01T17:29:41.458Z"
+    },
+    {
+      "id": "report-1767591781235",
+      "title": "Meeting Minutes: Temple Private Limited Visit",
+      "description": "拜訪 Temple Private Limited 會議記錄",
+      "categories": [
+        "會議記要",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1767591781235.html",
+      "createdAt": "2026-01-05T05:43:01.935Z",
+      "updatedAt": "2026-01-05T05:43:01.935Z"
     }
   ]
 }

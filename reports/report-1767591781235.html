@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 標題已更新為 Temple -->
+    <title data-lang="en">Meeting Minutes: Temple Private Limited Visit</title>
+    <title data-lang="zh">拜訪 Temple Private Limited 會議記錄</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+        [data-lang] { display: none; }
+        .content-area {
+            animation: fadeIn 0.5s ease-out;
+            min-height: calc(100vh - 160px);
+            padding: 2.5rem;
+            box-sizing: border-box;
+        }
+
+        details {
+            background-color: #1f2937;
+            border-radius: 0.5rem;
+            border: 1px solid #374151;
+            margin-bottom: 0.75rem;
+        }
+        details > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #374151;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary:hover { background-color: #4b5563; }
+        details > summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 300;
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary::after { transform: rotate(45deg); }
+        details[open] > summary {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #4b5563;
+        }
+        details > div {
+            padding: 1.5rem;
+            border-top: 1px solid #374151;
+            line-height: 1.7;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        a {
+            color: #60a5fa;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-style: dotted;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        a:hover {
+            color: #e0f2fe;
+            background-color: #3b82f6;
+            text-decoration: solid;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            table-layout: auto;
+        }
+        th, td {
+            border: 1px solid #4b5563;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+            word-wrap: break-word;
+        }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <!-- 1. 固定的容器 -->
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- 2. 固定的頭部 -->
+        <header class="sticky top-0 left-0 right-0 p-5 flex justify-between items-center z-20 bg-gray-800 border-b border-gray-700">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8">
+                <div>
+                    <span class="text-xl font-bold" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="text-xl font-bold" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <button id="lang-toggle" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                <span data-lang="en">切換到中文</span>
+                <span data-lang="zh">Switch to English</span>
+            </button>
+        </header>
+
+        <!-- 4. 內容主體 -->
+        <main class="flex-1">
+            
+            <div class="content-area">
+                <!-- 標題區 (已更新為 Temple) -->
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold mb-4" data-lang="en">Meeting Minutes: Temple Private Limited Visit</h1>
+                    <h1 class="text-4xl font-bold mb-4" data-lang="zh">拜訪 Temple Private Limited 會議記錄</h1>
+                    
+                    <p class="text-2xl text-gray-300 mt-2" data-lang="en">Temple "Portable Health Monitoring Device" Development &amp; Mass Production Cable Solution</p>
+                    <p class="text-2xl text-gray-300 mt-2" data-lang="zh">Temple "便攜式健康監測裝置" 開發與量產之線纜解決方案</p>
+                </div>
+                
+                <!-- 會議資訊 (已更新) -->
+                <div class="mt-8 border-y border-gray-700 py-6 text-gray-300 text-sm space-y-2">
+                    <div class="flex justify-between">
+                        <span class="font-semibold" data-lang="en">Date:</span>
+                        <span class="font-semibold" data-lang="zh">會議日期：</span>
+                        <!-- 日期來自語音轉檔中的 "Today is Friday" (假設為 2025-11-14) -->
+                        <span>2025-11-14</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-semibold" data-lang="en">Location:</span>
+                        <span class="font-semibold" data-lang="zh">會議地點：</span>
+                        <!-- 地址來自 COI.pdf -->
+                        <span data-lang="en">Temple Private Limited Office (Gurgaon, India)</span>
+                        <span data-lang="zh">Temple Private Limited 辦公室 (印度 古爾岡)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-semibold" data-lang="en">Prepared by:</span>
+                        <span class="font-semibold" data-lang="zh">制表人：</span>
+                        <!-- 根據您的指示 -->
+                        <span data-lang="en">Michael Chen (Employee ID: 9892)</span>
+                        <span data-lang="zh">陳宏昱 (Michael Chen) (員工 ID: 9892)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-semibold" data-lang="en">Document ID:</span>
+                        <span class="font-semibold" data-lang="zh">文件編號：</span>
+                        <!-- 套用模板格式 -->
+                        <span>FOX/IN/SALES/2025/1114-01</span>
+                    </div>
+                </div>
+
+                <!-- 會議照片 (已替換為您指定的照片) -->
+                <div class="my-8">
+                    <img src="https://i.postimg.cc/Sx6gwY2V/Whats-App-Image-2025-11-14-at-11-30-41.jpg" alt="Meeting Photo with Temple Team" class="w-full md:w-2/3 lg:w-1/2 mx-auto rounded-lg shadow-lg">
+                    <p class="text-center text-sm text-gray-400 mt-2" data-lang="en">Foxlink (Michael Chen) visit to Temple (Hemant Gupta &amp; Team)</p>
+                    <p class="text-center text-sm text-gray-400 mt-2" data-lang="zh">Foxlink (陳宏昱) 拜訪 Temple 團隊 (Hemant Gupta 等)</p>
+                </div>
+
+                <!-- 壹、 出席人員 (已更新) -->
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="en">1. Attendees</h2>
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="zh">壹、 出席人員</h2>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-lang="en">Unit</th>
+                                <th data-lang="zh">單位</th>
+                                <th data-lang="en">Representative</th>
+                                <th data-lang="zh">出席代表</th>
+                                <th data-lang="en">Title</th>
+                                <th data-lang="zh">職稱</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-lang="en"><strong>Foxlink (Our Side)</strong></td>
+                                <td data-lang="zh"><strong>我方 (Foxlink)</strong></td>
+                                <td data-lang="en">Michael Chen</td>
+                                <td data-lang="zh">陳宏昱 (Michael Chen)</td>
+                                <td data-lang="en">Manager, India Business Unit</td>
+                                <td data-lang="zh">印度業務部 經理</td>
+                            </tr>
+                            <!-- 資訊來自 GSTIN and Major Contact Person.txt 及 1.txt -->
+                            <tr>
+                                <td data-lang="en" rowspan="2"><strong>Temple (Client)</strong></td>
+                                <td data-lang="zh" rowspan="2"><strong>客戶方 (Temple)</strong></td>
+                                <td data-lang="en">Hemant Gupta</td>
+                                <td data-lang="zh">Hemant Gupta</td>
+                                <td data-lang="en">Point of Contact (Procurement)</td>
+                                <td data-lang="zh">主要聯絡人 (採購)</td>
+                            </tr>
+                            <tr>
+                                <td data-lang="en">Shalabh Singawne</td>
+                                <td data-lang="zh">Shalabh Singawne</td>
+                                <td data-lang="en">Head of Procurement &amp; Supply Chain</td>
+                                <td data-lang="zh">採購與供應鏈主管</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 貳、 會議目的 (已更新) -->
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="en">2. Meeting Purpose</h2>
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="zh">貳、 會議目的</h2>
+                <!-- 根據您的指示 "目的就是拿回客戶的關鍵信息進行我們公司的CRM帳戶登入" -->
+                <p data-lang="en">This was the first official visit to Temple Private Limited. The primary objective was to obtain key client information (COI, PAN Card, GSTIN) required to create an account in Foxlink's internal CRM system.</p>
+                <p data-lang="zh">本次為首次 (First Visit) 拜訪 Temple Private Limited。主要目的為獲取客戶關鍵資訊（公司註冊證 COI、PAN Card、GSTIN 稅號），以便在 Foxlink 內部 CRM 系統中建立客戶帳戶。</p>
+                <p class="mt-4" data-lang="en">This account creation is a prerequisite for subsequent actions, including sample applications, technical support, and issuing formal quotations. The meeting also served to discuss the specific requirements for their new product's Type-C charging cable.</p>
+                <p class="mt-4" data-lang="zh">此帳戶的建立是後續申請樣品（Cable）、提供技術支持及正式報價的先決條件。此次會議亦深入探討了客戶新產品「Portable health monitoring device」對 Type-C 充電線的具體需求。</p>
+
+                <!-- 叁、 會議紀要 (已更新) -->
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="en">3. Meeting Summary (Key Discussion Points)</h2>
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="zh">叁、 會議紀要 (關鍵討論點)</h2>
+                <div class="space-y-3">
+                    <!-- 資訊來自 1.txt, Temple_COI.pdf, Temple_PAN Card.pdf, GSTIN and Major Contact Person.txt -->
+                    <details>
+                        <summary>
+                            <span data-lang="en">3.1. Client Information &amp; CRM Account Setup</span>
+                            <span data-lang="zh">3.1. 客戶資訊與 CRM 帳戶建立</span>
+                        </summary>
+                        <div>
+                            <p data-lang="en">As per Foxlink's internal process, Michael Chen requested the necessary documents for CRM account creation. The following complete information was obtained:</p>
+                            <p data-lang="zh">為符合 Foxlink 內部流程，Michael 經理要求客戶提供建立 CRM 帳戶所需的必要文件。已取得的完整資訊如下：</p>
+                            
+                            <!-- Company Details Table -->
+                            <h4 class="font-semibold mt-4 mb-2" data-lang="en">Company Registration Details:</h4>
+                            <h4 class="font-semibold mt-4 mb-2" data-lang="zh">公司註冊詳情：</h4>
+                            <div class="overflow-x-auto">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-semibold w-1/3" data-lang="en">Company Legal Name</td>
+                                            <td class="font-semibold w-1/3" data-lang="zh">公司法定名稱</td>
+                                            <td>TEMPLE PRIVATE LIMITED</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-semibold" data-lang="en">CIN (Corporate ID)</td>
+                                            <td class="font-semibold" data-lang="zh">公司註冊號 (CIN)</td>
+                                            <td>U26400HR2024PTC120507</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-semibold" data-lang="en">PAN (Tax ID)</td>
+                                            <td class="font-semibold" data-lang="zh">公司 PAN 號</td>
+                                            <td>AADCU5528K</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-semibold" data-lang="en">GSTIN</td>
+                                            <td class="font-semibold" data-lang="zh">GSTIN 稅號</td>
+                                            <td>07AADCU5528K1Z1</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-semibold" data-lang="en">Registered Address</td>
+                                            <td class="font-semibold" data-lang="zh">公司註冊地址</td>
+                                            <td>A1/03, A1 Block, 04th Floor, Sushant Lok Phase-2, Sector 55, Gurgaon, Gurgaon, Gurgaon- 122011, Haryana, India</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Contact Details Table -->
+                            <h4 class="font-semibold mt-6 mb-2" data-lang="en">Primary Contacts (Procurement &amp; Supply Chain):</h4>
+                            <h4 class="font-semibold mt-6 mb-2" data-lang="zh">主要聯絡人 (採購與供應鏈)：</h4>
+                            <div class="overflow-x-auto">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th data-lang="en">Contact Person</th>
+                                            <th data-lang="zh">聯絡人</th>
+                                            <th data-lang="en">Phone</th>
+                                            <th data-lang="zh">電話</th>
+                                            <th data-lang="en">Email</th>
+                                            <th data-lang="zh">電子郵件</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Hemant Gupta</td>
+                                            <td>+91 9878415364</td>
+                                            <td>hemant.gupta@temple.com</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shalabh Singawne</td>
+                                            <td>+91 9958081188</td>
+                                            <td>shalabh@temple.com</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </details>
+                    
+                    <!-- 資訊來自 1.txt (已移除 open 屬性) -->
+                    <details>
+                        <summary>
+                            <span data-lang="en">3.2. Core Need: Type-C Charging Cable</span>
+                            <span data-lang="zh">3.2. 核心需求：Type-C 充電線</span>
+                        </summary>
+                        <div>
+                            <p data-lang="en">The client's immediate requirement is for a Type-C charging cable, which will be included as a standard accessory with their new hardware product.</p>
+                            <p data-lang="zh">客戶的立即需求是 Type-C 充電線。此線纜將作為其新硬體產品的標準配件，一同包裝在產品盒內（非單獨銷售）。</p>
+                            <ul data-lang="en">
+                                <li><strong>Usage:</strong> Bundled in the box with the main device and its charging case.</li>
+                                <li><strong>Required Quantity:</strong> <strong>500,000 pcs</strong> for the first order, with an estimated annual quantity of <strong>800,000 pcs</strong>.</li>
+                                <li><strong>Key Specification:</strong> Must support <strong>60W (20V/3A)</strong> charging speed.</li>
+                                <li><strong>Customization:</strong> The client requires their brand name/logo to be printed on the cable.</li>
+                            </ul>
+                            <ul data-lang="zh">
+                                <li><strong>產品用途：</strong> 與主機、充電盒一同包裝在盒內 (in the box)。</li>
+                                <li><strong>需求數量：</strong> 首單 <strong>500,000 條</strong>，預估年用量 (Annual Quantity) 約 <strong>800,000 條</strong>。</li>
+                                <li><strong>關鍵規格：</strong> 需支援 <strong>60W (20V/3A)</strong> 的充電速度。</li>
+                                <li><strong>客製化：</strong> 客戶要求在線纜上客製化印刷品牌名稱 (customized name)。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- 資訊來自 1.txt 及 image_8828c4.jpg -->
+                    <details>
+                        <summary>
+                            <span data-lang="en">3.3. Client Product: "Portable Health Monitoring Device"</span>
+                            <span data-lang="zh">3.3. 客戶產品："便攜式健康監測裝置"</span>
+                        </summary>
+                        <div>
+                            <p data-lang="en">The client introduced their flagship product, a high-tech wearable health monitor. This is the device the charging cable is intended for.</p>
+                            <p data-lang="zh">客戶介紹了他們正在開發的旗艦產品，是一款高科技的可攜式健康監測裝置，此充電線即為該產品使用。</p>
+                            <ul data-lang="en">
+                                <li><strong>Product Name:</strong> 'Portable health monitoring device' (Confirmed via WhatsApp for reporting purposes).</li>
+                                <li><strong>Functionality:</strong> This advanced device not only tracks cardiovascular status (like Apple Watch) but also monitors "brain health" and "brain flow".</li>
+                                <li><strong>Development Status:</strong> Currently in the prototype stage. The final device casing is planned to use Aluminium and Titanium.</li>
+                            </ul>
+                            <ul data-lang="zh">
+                                <li><strong>產品名稱：</strong> ‘Portable health monitoring device’ (經 WhatsApp 確認，用於報告的正式名稱)。</li>
+                                <li><strong>產品功能：</strong> 此高階裝置不僅能監測心血管狀態（類似 Apple Watch），更能監測「腦部健康 (brain health)」與「腦血流 (brain flow)」。</li>
+                                <li><strong>開發狀態：</strong> 目前為原型機 (Prototype) 階段。最終產品外殼計畫使用鋁合金 (Aluminium) 和鈦金屬 (Titanium)。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <!-- 資訊來自 1.txt -->
+                    <details>
+                        <summary>
+                            <span data-lang="en">3.4. Foxlink's Capability &amp; Other Opportunities</span>
+                            <span data-lang="zh">3.4. Foxlink 產能與潛在機會 (SMT)</span>
+                        </summary>
+                        <div>
+                            <p data-lang="en">Michael Chen introduced Foxlink's capabilities to assure the client:</p>
+                            <p data-lang="zh">Michael 經理向客戶介紹了 Foxlink 的能力，給予客戶信心：</p>
+                            <ul data-lang="en">
+                                <li><strong>Cable Capacity:</strong> Daily capacity is 30,000 pcs for a single shift, scalable to 90,000 pcs with three shifts, fully meeting their volume requirements.</li>
+                                <li><strong>SMT Service (Opportunity):</strong> Michael highlighted Foxlink's SMT (Surface-Mount Technology) services, offering to manufacture the PCBA for their device prototype. The client expressed interest in this secondary business opportunity.</li>
+                            </ul>
+                            <ul data-lang="zh">
+                                <li><strong>線纜產能：</strong> 單班日產能 (Daily capacity) 為 30K (30,000) 條，若開啟三班可達 90K，產能充足。</li>
+                                <li><strong>SMT 服務 (潛在機會)：</strong> Michael 主動提到了 Foxlink 的 SMT 服務，表示可以協助客戶製造其裝置原型機的 PCBA。客戶對此第二項業務表達了興趣。</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- 肆、 決議事項與後續行動 (已更新) -->
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="en">4. Resolutions &amp; Action Items</h2>
+                <h2 class="text-3xl font-bold mt-10 mb-6" data-lang="zh">肆、 決議事項與後續行動 (Action Items)</h2>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-lang="en">#</th>
+                                <th data-lang="zh">序號</th>
+                                <th data-lang="en">Action Item</th>
+                                <th data-lang="zh">行動事項</th>
+                                <th data-lang="en">Responsible Party</th>
+                                <th data-lang="zh">負責單位</th>
+                                <th data-lang="en">Due Date</th>
+                                <th data-lang="zh">預計完成日</th>
+                                <th data-lang="en">Notes</th>
+                                <th data-lang="zh">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td data-lang="en">Provide COI, PAN, and GSTIN documents</td>
+                                <td data-lang="zh">提供 COI, PAN, GSTIN 公司文件</td>
+                                <td data-lang="en"><strong>Temple (H. Gupta)</strong></td>
+                                <td data-lang="zh"><strong>Temple (H. Gupta)</strong></td>
+                                <td data-lang="en"><strong>Done</strong> (11/14)</td>
+                                <td data-lang="zh"><strong>已完成</strong> (11/14)</td>
+                                <td data-lang="en"><strong>[Completed]</strong> Client has sent the files via WhatsApp.</td>
+                                <td data-lang="zh"><strong>[已完成]</strong> 客戶已於會後透過 WhatsApp 提供。</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td data-lang="en">Create CRM Account for "Temple Private Limited"</td>
+                                <td data-lang="zh">建立 "Temple Private Limited" 的 CRM 帳戶</td>
+                                <td data-lang="en"><strong>Foxlink (M. Chen)</strong></td>
+                                <td data-lang="zh"><strong>Foxlink (M. Chen)</strong></td>
+                                <td data-lang="en">11/14</td>
+                                <td data-lang="zh">11/14</td>
+                                <td data-lang="en"><strong>[Top Priority]</strong> Use the provided documents to create the account, enabling sample requests and quotations.</td>
+                                <td data-lang="zh"><strong>[最優先]</strong> 使用客戶提供的文件建立帳戶，以利後續申請樣品及報價。</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td data-lang="en">Prepare 60W cable solution &amp; samples</td>
+                                <td data-lang="zh">準備 60W 線纜方案與樣品</td>
+                                <td data-lang="en"><strong>Foxlink (M. Chen)</strong></td>
+                                <td data-lang="zh"><strong>Foxlink (M. Chen)</strong></td>
+                                <td data-lang="en">Next Week (11/21)</td>
+                                <td data-lang="zh">下週 (11/21)</td>
+                                <td data-lang="en">Provide detailed specs (wire count, etc.) for the 60W (20V/3A) cable. Arrange for samples to be delivered to the client.</td>
+                                <td data-lang="zh">提供 60W (20V/3A) 線纜的具體規格 (如線芯數)並安排樣品寄送。</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td data-lang="en">Follow up on SMT service opportunity</td>
+                                <td data-lang="zh">跟進 SMT 服務機會</td>
+                                <td data-lang="en"><strong>Foxlink (M. Chen)</strong></td>
+                                <td data-lang="zh"><strong>Foxlink (M. Chen)</strong></td>
+                                <td data-lang="en">TBD (Phase 2)</td>
+                                <td data-lang="zh">待定 (Phase 2)</td>
+                                <td data-lang="en">Share Foxlink's SMT capabilities and case studies with the client as a potential Phase 2 collaboration.</td>
+                                <td data-lang="zh">向客戶分享 Foxlink 的 SMT 製造能力與案例，作為 Phase 2 的潛在合作。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- 3. 固定的尾部 -->
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <!-- 根據您的指示 -->
+                    <span data-lang="en">Prepared by: Michael Chen (9892)</span>
+                    <span data-lang="zh">製表人： 陳宏昱 (9892)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // Default to English
+        let langToggleBtn;
+
+        /**
+         * Update the UI to show the correct language elements
+         */
+        function updateLanguageUI() {
+            try {
+                // Hide all [data-lang] elements
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() === 'title') {
+                        // Title tags are handled separately
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
+
+                // Show elements for the current language
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const originalDisplay = el.getAttribute('data-original-display') || 'block';
+                    
+                    // Handle inline vs. block elements
+                    if (['span', 'strong', 'a'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'inline';
+                    } else if (['th', 'td'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'table-cell'; // Correct display for table cells
+                    } else if (['tr'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'table-row'; // Correct display for table rows
+                    } else {
+                        el.style.display = originalDisplay;
+                    }
+                });
+
+                // Update the document's title
+                updateDocumentTitle();
+            } catch (e) {
+                console.error("CRITICAL ERROR in updateLanguageUI:", e);
+            }
+        }
+
+        /**
+         * Toggle the language and update the UI
+         */
+        function toggleLanguage() {
+            try {
+                currentLang = (currentLang === 'en') ? 'zh' : 'en';
+                updateLanguageUI();
+            } catch (e) {
+                console.error("CRITICAL ERROR in toggleLanguage:", e);
+            }
+        }
+
+        /**
+         * Update the document's main title based on language
+         */
+        function updateDocumentTitle() {
+            try {
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) {
+                        document.title = title.textContent;
+                    }
+                });
+            } catch (e) {
+                console.error("ERROR in updateDocumentTitle:", e);
+            }
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                langToggleBtn = document.getElementById('lang-toggle');
+                if (!langToggleBtn) console.error("FATAL - 'lang-toggle' not found!");
+
+                // --- Event Listeners ---
+                langToggleBtn.addEventListener('click', () => {
+                    toggleLanguage();
+                });
+
+                // Store original display style for all [data-lang] elements
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    const display = window.getComputedStyle(el).display;
+                    if (display !== 'none') {
+                        el.setAttribute('data-original-display', display);
+                    }
+                });
+
+                // Apply default language on initial load
+                updateLanguageUI();
+
+            } catch (e) {
+                console.error("CRITICAL INITIALIZATION ERROR:", e);
+                document.body.innerHTML = `<div style="color: red; padding: 20px; font-size: 24px;">Initialization Error. Check console. ERROR: ${e.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
