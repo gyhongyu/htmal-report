@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-05T05:43:01.935Z",
+  "lastUpdated": "2026-01-05T08:16:37.901Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -248,6 +248,19 @@
       "fileName": "report-1767591781235.html",
       "createdAt": "2026-01-05T05:43:01.935Z",
       "updatedAt": "2026-01-05T05:43:01.935Z"
+    },
+    {
+      "id": "report-1767600996684",
+      "title": "MOM: Visit to Wangda Technologies Noida & Chennai Infrastructure",
+      "description": "會議記錄：參訪 Wangda Technologies 諾依達與清奈工廠佈局",
+      "categories": [
+        "會議記要",
+        "季度計劃",
+        "工作報告"
+      ],
+      "fileName": "report-1767600996684.html",
+      "createdAt": "2026-01-05T08:16:37.901Z",
+      "updatedAt": "2026-01-05T08:16:37.901Z"
     }
   ]
 }
