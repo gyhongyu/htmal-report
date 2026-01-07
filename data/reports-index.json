@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-07T10:36:34.428Z",
+  "lastUpdated": "2026-01-07T11:19:01.277Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -274,6 +274,19 @@
       "fileName": "report-1767782193683.html",
       "createdAt": "2026-01-07T10:36:34.428Z",
       "updatedAt": "2026-01-07T10:36:34.428Z"
+    },
+    {
+      "id": "report-1767784740258",
+      "title": "MOM: Foxlink and Tamil Nadu Guidance India Market Strategy & Customer Matchmaking",
+      "description": "會議記錄：正崴和Tamil Nadu Guidance印度市場拓展策略與客戶對接",
+      "categories": [
+        "年度計劃",
+        "會議記要",
+        "內部簡報"
+      ],
+      "fileName": "report-1767784740258.html",
+      "createdAt": "2026-01-07T11:19:01.277Z",
+      "updatedAt": "2026-01-07T11:19:01.277Z"
     }
   ]
 }
