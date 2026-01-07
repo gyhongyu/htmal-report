@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-05T08:16:37.901Z",
+  "lastUpdated": "2026-01-07T10:36:34.428Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -261,6 +261,19 @@
       "fileName": "report-1767600996684.html",
       "createdAt": "2026-01-05T08:16:37.901Z",
       "updatedAt": "2026-01-05T08:16:37.901Z"
+    },
+    {
+      "id": "report-1767782193683",
+      "title": "MOM: Cattle Device & Pet Tracker Initiatives",
+      "description": "會議記錄：牛隻追蹤設備與寵物追蹤器專案",
+      "categories": [
+        "項目計劃",
+        "會議記要",
+        "工作報告"
+      ],
+      "fileName": "report-1767782193683.html",
+      "createdAt": "2026-01-07T10:36:34.428Z",
+      "updatedAt": "2026-01-07T10:36:34.428Z"
     }
   ]
 }

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: MY animal project -->
+    <!-- ATTENDEES: Joseph, Michael, Shahabaz (Foxlink), Sandeep, Shivam, Sudhanshu (MY animal project) -->
+    <title data-lang="en">MOM: FOXLINK & MY animal project - Project Review</title>
+    <title data-lang="zh">會議記錄：正崴與 MY animal project 專案審查</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- 核心樣式 (維持公司制式模板) --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; } .content-area { padding: 0 !important; } .bg-gray-800, .recon-box { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴印度電氣有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1.5 rounded text-xs font-medium border border-gray-600 transition-colors">
+                    <i class="fas fa-file-pdf mr-2"></i><span data-lang="en">Export PDF</span><span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span><span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">PROJECT REVIEW MINUTES</span>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="en">MOM: Cattle Device & Pet Tracker Initiatives</h1>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="zh">會議記錄：牛隻追蹤設備與寵物追蹤器專案</h1>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0 border-none">
+                            <tr class="bg-transparent">
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1">2026/01/07</td>
+                            </tr>
+                            <tr class="bg-transparent">
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1">Online Conference</td>
+                            </tr>
+                            <tr class="bg-transparent">
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    Foxlink: Joseph, Michael, Shahabaz<br>
+                                    MY animal project: Sandeep, Shivam, Sudhanshu
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象</h3>
+                        <div class="text-xl font-bold text-white">MY animal project Team</div>
+                        <p class="text-sm text-gray-400 mt-2" data-lang="en">Ongoing project review with recurring contacts.</p>
+                        <p class="text-sm text-gray-400 mt-2" data-lang="zh">既有合作夥伴之專案進度審查。</p>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Cattle Device -->
+                    <div class="recon-box opp">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 1: Cattle Device - Strategic Order Consolidation</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題一：牛隻追蹤設備 - 策略性訂單整合</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Context:</strong> The original plan was a 2-phase pilot (10 units then 70). Client now proposed moving directly to a single 80-unit order.</p>
+                            <p data-lang="zh"><strong>背景：</strong> 原計畫為兩階段試點（10 台後接 70 台）。客戶現在提議直接整合為單次 80 台的訂單。</p>
+                            <p data-lang="en"><strong>Detail:</strong> Client expresses high confidence in core modules (GPS/GSM/Health). They requested adding "Activity Tracking" (IMU sensors) to this batch. They formally committed to accepting the 80 units even if the new activity feature requires further calibration, protecting Foxlink from hardware liability.</p>
+                            <p data-lang="zh"><strong>細節：</strong> 客戶對核心模組（GPS/GSM/健康監測）表現出高度信心，並要求在此批次中加入「活動追蹤」（IMU 感測器）。客戶正式承諾，即便新功能需進一步校準，也會接收全數 80 台設備，確保正崴免於硬體賠償風險。</p>
+                            <p data-lang="en"><strong>Implication:</strong> This accelerates the production cycle and consolidates procurement, indicating the client's aggressive push for market deployment.</p>
+                            <p data-lang="zh"><strong>戰略意義：</strong> 此舉加速了生產週期並整合了採購流程，顯示客戶對市場部署的激進態度。</p>
+                        </div>
+                    </div>
+
+                    <!-- Payment Terms -->
+                    <div class="recon-box risk">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 2: Commercial Deadlock - "TT in Advance" Requirement</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題二：商務僵局 - 「電匯預付」要求</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Context:</strong> Foxlink standards require full upfront payment (TT) for initial material procurement.</p>
+                            <p data-lang="zh"><strong>背景：</strong> 根據正崴標準流程，初期材料採購需全額預付（TT）。</p>
+                            <p data-lang="en"><strong>Detail:</strong> Client expressed serious concerns, as they previously understood a "test-then-pay" model. A late shift to TT requires their internal finance re-approval, potentially delaying the timeline. Client offered a "future volume commitment" in exchange for a payment exception.</p>
+                            <p data-lang="zh"><strong>細節：</strong> 客戶表示嚴重關切，因先前理解為「先測試後付款」。此時轉向預付模式需其內部財務重新核准，恐延誤進度。客戶提出以「未來量產承諾」換取付款條件的例外處理。</p>
+                            <p data-lang="en"><strong>Implication:</strong> If Foxlink management does not grant an exception, the project launch may be pushed back by several weeks due to client's internal bureaucracy.</p>
+                            <p data-lang="zh"><strong>戰略意義：</strong> 若正崴管理層不給予例外許可，專案啟動可能因客戶內部流程延誤數週。</p>
+                        </div>
+                    </div>
+
+                    <!-- Pet Tracker -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 3: Pet Tracker - Technical Pivot to 4G</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題三：寵物追蹤器 - 轉向 4G 的技術轉型</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Context:</strong> 2G samples were found incompatible with the Indian network (hardcoded for China).</p>
+                            <p data-lang="zh"><strong>背景：</strong> 經發現，原 2G 樣品與印度網路不相容（僅針對中國市場硬寫入）。</p>
+                            <p data-lang="en"><strong>Detail:</strong> Foxlink proposed a full 4G redesign with an NRE cost of 70,000 RMB (~9 Lakhs INR). To mitigate this cost, Foxlink proposed a rebate model where the NRE is amortized or discounted against future high-volume orders.</p>
+                            <p data-lang="zh"><strong>細節：</strong> 正崴提議進行全面的 4G 重新設計，NRE 費用為 7 萬人民幣（約 90 萬盧比）。為緩解此成本壓力，正崴提出返利模式，即 NRE 費用可在未來的大量訂單中抵扣或折讓。</p>
+                            <p data-lang="en"><strong>Implication:</strong> Ensures long-term technical viability in India but requires the client to commit to a multi-year volume forecast to justify the investment.</p>
+                            <p data-lang="zh"><strong>戰略意義：</strong> 確保了在印度的長期技術可行性，但要求客戶必須提供多年期產量預測以支持此項投資。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫</span>
+                </div>
+
+                <div class="recon-box">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-900/50">
+                            <tr>
+                                <th class="px-2 py-2">#</th>
+                                <th class="px-2 py-2" data-lang="en">Action Item</th><th class="px-2 py-2" data-lang="zh">行動項目</th>
+                                <th class="px-2 py-2" data-lang="en">Owner</th><th class="px-2 py-2" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td>1</td>
+                                <td data-lang="en">Escalate payment exception (TT) request to Foxlink management.</td>
+                                <td data-lang="zh">向管理層呈報付款條件（TT）例外申請。</td>
+                                <td>Shahabaz</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td data-lang="en">Provide formal volume forecasts for Cattle & Pet Tracker.</td>
+                                <td data-lang="zh">提供牛隻與寵物追蹤器的正式產量預測。</td>
+                                <td>Sandeep</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td data-lang="en">Re-evaluate 4G Pet Tracker NRE based on volume forecast.</td>
+                                <td data-lang="zh">根據產量預測重新評估 4G 專案的 NRE 費用。</td>
+                                <td>Joseph</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td data-lang="en">Schedule recurring weekly sync-up call.</td>
+                                <td data-lang="zh">安排每週例行進度會議。</td>
+                                <td>Shahabaz / Sudhanshu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Confidential: Project Strategy Document</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">機密：專案戰略文件</div>
+                    </div>
+                    <div class="text-xs text-gray-400">Foxlink India Internal Use</div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: Michael Chen (Foxlink India)</span>
+                    <span data-lang="zh">記錄人：Michael Chen (正崴印度)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        function updateLanguageUI() {
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+            });
+            document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                const tagName = el.tagName.toLowerCase();
+                if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                else el.style.display = 'block';
+            });
+            document.querySelectorAll('title').forEach(title => {
+                if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+            });
+        }
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateLanguageUI();
+        });
+        document.getElementById('export-pdf-btn').addEventListener('click', () => window.print());
+        updateLanguageUI();
+    </script>
+</body>
+</html>
