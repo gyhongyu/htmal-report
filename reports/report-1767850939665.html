@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: SANMINA CORPORATION (INDIA) -->
+    <!-- ATTENDEES: Michael Chen, Naveen Kumar (Foxlink), Hariraamu Harikrishnan, Sangeetha (Sanmina) -->
+    <title data-lang="en">MOM: Foxlink & Sanmina Strategic Partnership Exploration</title>
+    <title data-lang="zh">會議記錄：正崴與 Sanmina 戰略合作夥伴關係探討</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- 核心樣式 (維持公司制式模板) --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; font-size: 10pt; } .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } .bg-gray-800, .bg-gray-900, .recon-box { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .text-white { color: #000 !important; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司 (印度)</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">STRATEGIC PARTNERSHIP RECORD</span>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="en">Meeting Minutes: Foxlink & Sanmina Strategic Partnership Exploration</h1>
+                    <h1 class="text-3xl font-bold mb-4 text-blue-400" data-lang="zh">會議記錄：正崴與 Sanmina 戰略合作夥伴關係探討</h1>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="en">Subject: India Operational Synergy & Local Supply Chain Integration</p>
+                    <p class="text-lg text-gray-300 mt-2" data-lang="zh">主題：印度營運協同效應與在地供應鏈整合</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1">2026/01/06</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs">
+                                    Sanmina Facility, Chennai Campus,<br>
+                                    Sipcot Industrial Growth Centre, Mathur Village,<br>
+                                    Oragadam, Tamil Nadu, India - 602 105
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    Foxlink: Michael Chen, Naveen Kumar<br>
+                                    Sanmina: Hariraamu Harikrishnan, Sangeetha
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-xl font-bold text-white">Hariraamu Harikrishnan</div>
+                                <div class="text-sm text-blue-400 mb-1">Director - Purchase</div>
+                                <div class="text-lg font-bold text-gray-200 mt-2">SANMINA CORPORATION</div>
+                                <div class="text-xs text-gray-400 mt-2">
+                                    <i class="fas fa-phone mr-2"></i>+91-96000 58003<br>
+                                    <i class="fas fa-envelope mr-2"></i>hariraamu.harikrishnan@sanmina.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Point 1: Foxlink Status -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 1: Foxlink's "China Plus One" Strategy & India Assets</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題一：正崴「中國加一」戰略與印度資產佈局</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Context:</strong> To align with global customer mandates (e.g., Apple), Foxlink is aggressively shifting manufacturing capabilities to India.</p>
+                            <p data-lang="zh"><strong>背景：</strong> 為符合全球客戶（如 Apple）的策略要求，正崴正積極將生產能力轉移至印度。</p>
+                            <p data-lang="en"><strong>Detail:</strong> While the Tirupati plant is active (shifting to C2C and SSD modules), the 25,000 sqm Chennai facility is ready but "on hold" per HQ policy which forbids activation without confirmed business orders.</p>
+                            <p data-lang="zh"><strong>細節：</strong> 目前 Tirupati 廠營運中（轉產 C2C 線材與 SSD 模組）；清奈 25,000 平方米新廠已完工，但受限於總部「無訂單不開廠」的政策，目前處於停工待命狀態。</p>
+                            <p data-lang="en"><strong>Implication:</strong> Securing a partnership with Sanmina is critical to providing the necessary "business case" to HQ for activating the Chennai plant and transferring equipment/tech from China.</p>
+                            <p data-lang="zh"><strong>影響：</strong> 與 Sanmina 建立合作關係，是向總部提出啟動清奈廠及從中國/台灣移轉設備與技術之「商業計畫」的關鍵關鍵。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2: Sanmina Capability -->
+                    <div class="recon-box opp">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 2: Sanmina’s High-Complexity Infrastructure in Chennai</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題二：Sanmina 在清奈的高複雜度製造基礎設施</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Context:</strong> Sanmina positions itself as a Tier-1 EMS provider for mission-critical industries (Medical, Defense, Cloud).</p>
+                            <p data-lang="zh"><strong>背景：</strong> Sanmina 定位為一級 EMS 服務商，專注於任務關鍵型產業（醫療、國防、雲端）。</p>
+                            <p data-lang="en"><strong>Detail:</strong> Their Chennai campus spans 100 acres with 20 SMT lines, operating as a JV with Reliance (STS). They recently acquired Zi system for AI server manufacturing (AMD partner).</p>
+                            <p data-lang="zh"><strong>細節：</strong> 其清奈園區佔地 100 英畝，擁有 20 條 SMT 線，與 Reliance 合資成立 STS。近期併購 Zi system 以切入 AI 伺服器製造（AMD 合作夥伴）。</p>
+                            <p data-lang="en"><strong>Implication:</strong> Sanmina’s focus on low-to-mid volume/high-complexity products complements Foxlink’s component expertise, offering a pathway for high-value localized sourcing.</p>
+                            <p data-lang="zh"><strong>影響：</strong> Sanmina 專注於中低產量/高複雜度產品，與正崴的零組件專業互補，為高價值在地化採購提供了路徑。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 3: Collaborative Model -->
+                    <div class="recon-box opp">
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Item 3: Collaborative "Made in India" Advocacy</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">議題三：「印度製造」協作模式提議</h3>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            <p data-lang="en"><strong>Context:</strong> Bridging the gap between Foxlink's idle capacity and Sanmina’s current Chinese sourcing reliance.</p>
+                            <p data-lang="zh"><strong>背景：</strong> 旨在彌合正崴閒置產能與 Sanmina 目前對中國採購依賴之間的差距。</p>
+                            <p data-lang="en"><strong>Detail:</strong> Foxlink proposed that Sanmina issue RFQs for components currently imported (Connectors, EV BMS, Component Trays). Foxlink will use these RFQs to justify transferring production lines from China to India.</p>
+                            <p data-lang="zh"><strong>細節：</strong> 我方建議 Sanmina 針對目前從中國進口的零組件（連接器、電動車 BMS、吸塑托盤）發出詢價單 (RFQ)。正崴將以此作為向總部爭取將產線從中國轉移至印度的依據。</p>
+                            <p data-lang="en"><strong>Implication:</strong> This "business-first" approach enables both companies to bypass government marketing inertia and build a tangible local supply chain.</p>
+                            <p data-lang="zh"><strong>影響：</strong> 這種「業務優先」的方法使兩家公司能夠繞過政府機關的行政推延，建立實質的在地供應鏈。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫</span>
+                </div>
+
+                <div class="recon-box action">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-900/50">
+                            <tr>
+                                <th class="px-2 py-2">#</th>
+                                <th class="px-2 py-2" data-lang="en">Action Item</th><th class="px-2 py-2" data-lang="zh">行動項目</th>
+                                <th class="px-2 py-2" data-lang="en">Owner</th><th class="px-2 py-2" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="font-bold text-yellow-500">1</td>
+                                <td data-lang="en"><strong>Execute Mutual NDA</strong><br><span class="text-xs text-gray-400">Sanmina to share draft; Foxlink to sign promptly for tech exchange.</span></td>
+                                <td data-lang="zh"><strong>簽署雙方保密協定 (NDA)</strong><br><span class="text-xs text-gray-400">Sanmina 提供草案；正崴儘速簽回以利技術資訊交換。</span></td>
+                                <td>Sanmina / Michael Chen</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-yellow-500">2</td>
+                                <td data-lang="en"><strong>Pilot RFQ Issuance</strong><br><span class="text-xs text-gray-400">Sanmina to provide RFQs for small items (Connectors/Trays) as a test case.</span></td>
+                                <td data-lang="zh"><strong>發放試點 RFQ</strong><br><span class="text-xs text-gray-400">Sanmina 針對小型零件（連接器/托盤）提供 RFQ 作為測試案例。</span></td>
+                                <td>Sanmina (Hariraamu)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-green-500">3</td>
+                                <td data-lang="en"><strong>Sanmina Shop Floor Tour</strong><br><span class="text-xs text-gray-400">Invite Foxlink team for operational insight into Chennai facility.</span></td>
+                                <td data-lang="zh"><strong>Sanmina 現場參觀</strong><br><span class="text-xs text-gray-400">安排正崴團隊參觀清奈廠區，深入了解營運細節。</span></td>
+                                <td>Sanmina</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Confidential Strategic Record</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">戰略性內部機密紀錄</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Authorized for Foxlink India Management & Sales Distribution.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">授權正崴印度管理層與業務部門參閱。</div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: Michael Chen (Foxlink India)</span>
+                    <span data-lang="zh">記錄人：Michael Chen (Foxlink India)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

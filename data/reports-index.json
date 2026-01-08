@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-08T05:32:16.003Z",
+  "lastUpdated": "2026-01-08T05:42:20.583Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -300,6 +300,19 @@
       "fileName": "report-1767850335345.html",
       "createdAt": "2026-01-08T05:32:16.003Z",
       "updatedAt": "2026-01-08T05:32:16.003Z"
+    },
+    {
+      "id": "report-1767850939665",
+      "title": "Meeting Minutes: Foxlink & Sanmina Strategic Partnership Exploration",
+      "description": "會議記錄：正崴與 Sanmina 戰略合作夥伴關係探討",
+      "categories": [
+        "會議記要",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1767850939665.html",
+      "createdAt": "2026-01-08T05:42:20.583Z",
+      "updatedAt": "2026-01-08T05:42:20.583Z"
     }
   ]
 }
