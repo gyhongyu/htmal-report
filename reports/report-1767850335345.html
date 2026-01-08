@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">Meeting Minutes: Nextron & Foxlink Partnership</title>
+    <title data-lang="zh">會議記錄：Nextron 與 Foxlink 戰略製造夥伴關係</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Screen Styles --- */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #111827; /* gray-900 */
+            color: #f3f4f6; /* gray-100 */
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+        
+        /* Language Toggling Class */
+        [data-lang] { display: none; }
+        
+        .content-area {
+            animation: fadeIn 0.5s ease-out;
+            min-height: calc(100vh - 160px);
+            padding: 2.5rem;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            table-layout: auto;
+        }
+        th, td {
+            border: 1px solid #374151;
+            padding: 1rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th { background-color: #1f2937; color: #60a5fa; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; }
+        tbody tr:nth-child(odd) { background-color: #111827; }
+        tbody tr:nth-child(even) { background-color: #1f2937; }
+        tbody tr:hover { background-color: #374151; transition: background-color 0.2s; }
+
+        /* Links */
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover { color: #93c5fd; text-decoration: underline; }
+
+        /* Print Styles (PDF Export Optimization) */
+        @media print {
+            .no-print { display: none !important; }
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-family: 'Times New Roman', serif;
+                font-size: 11pt;
+            }
+            .content-area {
+                padding: 0 !important;
+                animation: none;
+                border: none !important;
+                box-shadow: none !important;
+            }
+            .w-full.mx-auto {
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+            
+            /* Typography corrections for print */
+            h1 { color: #000 !important; font-size: 24pt !important; margin-bottom: 10px !important; }
+            h2 { color: #000 !important; border-left: none !important; padding-left: 0 !important; border-bottom: 2px solid #000; margin-top: 20px !important; }
+            h3 { color: #333 !important; }
+            p, li { color: #000 !important; line-height: 1.5; }
+            
+            /* Table Print Styles */
+            table { box-shadow: none !important; border: 1px solid #000 !important; width: 100% !important; }
+            th { background-color: #eee !important; color: #000 !important; border: 1px solid #000 !important; }
+            td { border: 1px solid #000 !important; color: #000 !important; }
+            tbody tr:nth-child(odd), tbody tr:nth-child(even) { background-color: transparent !important; }
+            
+            /* Special Elements */
+            .bg-gray-800, .bg-gray-900 {
+                background-color: transparent !important;
+                border: 1px solid #ccc !important;
+                color: #000 !important;
+                margin-bottom: 10px;
+            }
+            .text-blue-400, .text-blue-300 { color: #000 !important; }
+            .text-green-400 { color: #000 !important; }
+            .text-yellow-400 { color: #000 !important; }
+            
+            /* Action Item Box */
+            .border-red-600 { border-color: #000 !important; }
+            .bg-gradient-to-br { background: none !important; border: 2px solid #000 !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-5xl mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4 min-h-[90vh]">
+        
+        <!-- Header (Official Foxlink Template) -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <!-- PDF 導出按鈕 -->
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <!-- 語言切換按鈕 -->
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Title Section -->
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 uppercase tracking-wider">Confidential</span>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-white" data-lang="en">Nextron & Foxlink Strategic Manufacturing Partnership</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-white" data-lang="zh">Nextron 與 Foxlink 戰略製造夥伴關係討論</h1>
+                    
+                    <div class="flex justify-center items-center space-x-6 text-gray-400 mt-4 text-sm">
+                        <span><i class="fas fa-users mr-2"></i> Nextron Rep, Navein (Foxlink)</span>
+                        <span><i class="fas fa-map-marker-alt mr-2"></i> Virtual / Teleconference</span>
+                    </div>
+                </div>
+
+                <!-- Dashboard Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <!-- Card 1 -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600 text-center relative overflow-hidden group hover:border-blue-500 transition-colors">
+                        <div class="absolute top-0 right-0 bg-blue-600/20 px-2 py-1 rounded-bl text-xs text-blue-300">Priority 1</div>
+                        <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-2" data-lang="en">Focus Product</h3>
+                        <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-2" data-lang="zh">核心產品</h3>
+                        <p class="text-3xl font-bold text-white mb-1">PSU</p>
+                        <p class="text-xs text-blue-400" data-lang="en">650W / 750W / 1000W</p>
+                        <p class="text-xs text-blue-400" data-lang="zh">高瓦數電源供應器</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600 text-center relative overflow-hidden group hover:border-green-500 transition-colors">
+                        <div class="absolute top-0 right-0 bg-green-600/20 px-2 py-1 rounded-bl text-xs text-green-300">Priority 2</div>
+                        <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-2" data-lang="en">New Category</h3>
+                        <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-2" data-lang="zh">新產品線</h3>
+                        <p class="text-3xl font-bold text-white mb-1">SSD</p>
+                        <p class="text-xs text-green-400" data-lang="en">Target Cost ~$2.00</p>
+                        <p class="text-xs text-green-400" data-lang="zh">目標成本約 $2.00</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-600 text-center relative overflow-hidden group hover:border-yellow-500 transition-colors">
+                        <div class="absolute top-0 right-0 bg-yellow-600/20 px-2 py-1 rounded-bl text-xs text-yellow-300">Driver</div>
+                        <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-2" data-lang="en">Strategy</h3>
+                        <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-2" data-lang="zh">戰略驅動</h3>
+                        <p class="text-2xl font-bold text-white mb-1">Made in India</p>
+                        <p class="text-xs text-yellow-400" data-lang="en">BIS Regulation Halt</p>
+                        <p class="text-xs text-yellow-400" data-lang="zh">BIS 認證政策變動</p>
+                    </div>
+                </div>
+
+                <!-- Section 1: Objective -->
+                <h2 class="text-2xl font-bold mt-12 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">1. Strategic Context & Objective</h2>
+                <h2 class="text-2xl font-bold mt-12 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">1. 戰略背景與會議目標</h2>
+                
+                <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                    <p class="mb-4 text-gray-300 leading-relaxed" data-lang="en">
+                        The discussion represents a pivotal step in Nextron's strategy to enhance its <strong>"Made in India"</strong> product portfolio. The dialogue is driven by the Indian government's halt on new <strong>BIS certifications</strong> for Power Supply Units (PSUs), creating a time-sensitive imperative to localize production.
+                    </p>
+                    <p class="mb-4 text-gray-300 leading-relaxed" data-lang="zh">
+                        本次討論是 Nextron 強化其<strong>「印度製造」</strong>產品組合的關鍵一步。對話的主要驅動力來自印度政府近期暫停了新的電源供應器 (PSU) <strong>BIS 認證</strong>，這迫使 Nextron 必須盡快實現在地化生產以抓住市場機遇。
+                    </p>
+                    <div class="flex items-center mt-4 p-3 bg-blue-900/20 border border-blue-800 rounded">
+                        <i class="fas fa-bullseye text-blue-400 mr-3 text-xl"></i>
+                        <div>
+                            <strong class="text-blue-300 block text-sm" data-lang="en">Primary Goal:</strong>
+                            <strong class="text-blue-300 block text-sm" data-lang="zh">主要目標：</strong>
+                            <span class="text-gray-400 text-sm" data-lang="en">Feasibility of manufacturing partnership for PSUs and SSDs.</span>
+                            <span class="text-gray-400 text-sm" data-lang="zh">探討 PSU 與 SSD 的製造合作可行性。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: PSU -->
+                <h2 class="text-2xl font-bold mt-12 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">2. Power Supply Unit (PSU) Partnership</h2>
+                <h2 class="text-2xl font-bold mt-12 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">2. 電源供應器 (PSU) 合作探討</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-600 pb-2" data-lang="en"><i class="fas fa-industry mr-2 text-blue-400"></i>Proposal & Requirements</h3>
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-600 pb-2" data-lang="zh"><i class="fas fa-industry mr-2 text-blue-400"></i>提案與需求</h3>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li>
+                                <strong class="text-gray-100 block">Product Focus:</strong>
+                                <span data-lang="en">High-capacity SMPS (650W, 750W, 1000W).</span>
+                                <span data-lang="zh">高容量 SMPS (650W, 750W, 1000W)。</span>
+                            </li>
+                            <li>
+                                <strong class="text-gray-100 block">Supply Model:</strong>
+                                <span data-lang="en">Nextron provides complete PCB & components. Foxlink handles assembly.</span>
+                                <span data-lang="zh">Nextron 提供完整 PCB 與元件，Foxlink 負責組裝。</span>
+                            </li>
+                            <li>
+                                <strong class="text-gray-100 block">Current Status:</strong>
+                                <span data-lang="en">PCBA design in Mumbai; harness cables already mfg in India.</span>
+                                <span data-lang="zh">PCBA 於孟買設計中；線束已在印度生產。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-600 pb-2" data-lang="en"><i class="fas fa-check-circle mr-2 text-green-400"></i>Foxlink Response</h3>
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-600 pb-2" data-lang="zh"><i class="fas fa-check-circle mr-2 text-green-400"></i>Foxlink 回應</h3>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li>
+                                <strong class="text-gray-100 block">Workflow:</strong>
+                                <span data-lang="en">Design provided by Nextron -> Foxlink China creates SOP -> Implementation at Foxlink India.</span>
+                                <span data-lang="zh">Nextron 提供設計 -> Foxlink 中國制定 SOP -> 導入 Foxlink 印度廠。</span>
+                            </li>
+                            <li>
+                                <strong class="text-gray-100 block">Capacity:</strong>
+                                <span data-lang="en">Confirmed "open vacant capacity" in India.</span>
+                                <span data-lang="zh">確認印度廠區有「閒置產能」可供使用。</span>
+                            </li>
+                            <li>
+                                <strong class="text-gray-100 block">Sourcing Support:</strong>
+                                <span data-lang="en">Foxlink agreed to assist component sourcing via China vendor network.</span>
+                                <span data-lang="zh">同意透過其中國供應商網絡協助元件採購。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 3: SSD -->
+                <h2 class="text-2xl font-bold mt-12 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">3. SSD Manufacturing Analysis</h2>
+                <h2 class="text-2xl font-bold mt-12 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">3. SSD 製造分析</h2>
+
+                <!-- Pricing Table -->
+                <div class="mb-6 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr>
+                                <th class="w-1/3" data-lang="en">Item</th>
+                                <th class="w-1/3" data-lang="zh">項目</th>
+                                <th class="w-1/3" data-lang="en">Foxlink Initial Quote</th>
+                                <th class="w-1/3" data-lang="zh">Foxlink 初始報價</th>
+                                <th class="w-1/3" data-lang="en">Nextron Target / Benchmark</th>
+                                <th class="w-1/3" data-lang="zh">Nextron 目標 / 基準</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong class="block text-gray-100" data-lang="en">Price per Unit</strong>
+                                    <strong class="block text-gray-100" data-lang="zh">單價</strong>
+                                </td>
+                                <td class="text-red-400 font-bold">~$4.00</td>
+                                <td class="text-green-400 font-bold">~$2.00</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="block text-gray-100" data-lang="en">Scope Included</strong>
+                                    <strong class="block text-gray-100" data-lang="zh">包含範圍</strong>
+                                </td>
+                                <td>
+                                    <span data-lang="en">All-inclusive (Mfg, Test, Packaging, Freight)</span>
+                                    <span data-lang="zh">全包 (製造、測試、包裝、運費)</span>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Limited (Manufacturing & Testing Only)</span>
+                                    <span data-lang="zh">僅限製造與測試 (不含包裝物流)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="block text-gray-100" data-lang="en">Outcome</strong>
+                                    <strong class="block text-gray-100" data-lang="zh">結論</strong>
+                                </td>
+                                <td colspan="2">
+                                    <span class="text-blue-300" data-lang="en">Agreed to renegotiate based on revised "Bulk Pack In/Out" SOW.</span>
+                                    <span class="text-blue-300" data-lang="zh">同意基於修正後的 SOW 重新報價。</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Division of Responsibilities -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 mt-6">
+                    <h3 class="text-lg font-bold text-white mb-4" data-lang="en">Defined Scope of Work: "Bulk Pack In, Bulk Pack Out"</h3>
+                    <h3 class="text-lg font-bold text-white mb-4" data-lang="zh">定義工作範圍：「大包進，大包出」</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Nextron -->
+                        <div class="relative pl-6 border-l-2 border-blue-500">
+                            <h4 class="font-bold text-blue-400 mb-2">Nextron (Materials)</h4>
+                            <ul class="text-sm text-gray-300 space-y-1 list-disc pl-4">
+                                <li>PCB & Components</li>
+                                <li>Gerber files & Stenciling</li>
+                                <li>PCB panel ("cupboard")</li>
+                                <li>MP Tool (Firmware/Serialization)</li>
+                                <li data-lang="en">All packaging materials</li>
+                                <li data-lang="zh">所有包裝材料</li>
+                            </ul>
+                        </div>
+                        <!-- Foxlink -->
+                        <div class="relative pl-6 border-l-2 border-green-500">
+                            <h4 class="font-bold text-green-400 mb-2">Foxlink (Execution)</h4>
+                            <ul class="text-sm text-gray-300 space-y-1 list-disc pl-4">
+                                <li data-lang="en">Assembly</li>
+                                <li data-lang="zh">組裝</li>
+                                <li data-lang="en">Testing</li>
+                                <li data-lang="zh">測試</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-gray-700">
+                        <p class="text-sm text-gray-400" data-lang="en"><i class="fas fa-info-circle mr-2"></i><strong>Controller Note:</strong> Foxlink is open to working with non-Phison controllers (e.g., Silicon Motion) if Nextron provides testing equipment and training.</p>
+                        <p class="text-sm text-gray-400" data-lang="zh"><i class="fas fa-info-circle mr-2"></i><strong>控制器備註：</strong> 若 Nextron 提供測試設備與培訓，Foxlink 願意配合非 Phison 控制器（如 Silicon Motion）的生產。</p>
+                    </div>
+                </div>
+
+                <!-- Section 4: Action Items (Conclusion) -->
+                <div class="mt-12 p-8 border-2 border-red-600 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl relative shadow-2xl">
+                    <div class="absolute -top-5 left-10 bg-red-600 text-white px-4 py-1 rounded text-sm font-bold tracking-wider uppercase">Action Items</div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-6 mt-2" data-lang="en">Summary of Action Items</h3>
+                    <h3 class="text-2xl font-bold text-white mb-6 mt-2" data-lang="zh">行動項目總結</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Item 1 -->
+                        <div class="flex items-start">
+                            <div class="bg-red-900/40 text-red-300 font-bold px-2 py-1 rounded text-xs mr-3 mt-1">NEXTRON</div>
+                            <p class="text-gray-300" data-lang="en">Prepare and send comprehensive <strong>Scope of Work (SOW)</strong> for SSD to Foxlink for revised quoting.</p>
+                            <p class="text-gray-300" data-lang="zh">準備並發送 SSD 的完整<strong>工作範圍說明書 (SOW)</strong> 給 Foxlink 以獲取修訂報價。</p>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="flex items-start">
+                            <div class="bg-red-900/40 text-red-300 font-bold px-2 py-1 rounded text-xs mr-3 mt-1">NEXTRON</div>
+                            <p class="text-gray-300" data-lang="en">Provide initial information for PSU to Foxlink China for <strong>SOP design</strong>.</p>
+                            <p class="text-gray-300" data-lang="zh">向 Foxlink 中國團隊提供 PSU 初始資訊以進行 <strong>SOP 設計</strong>。</p>
+                        </div>
+                         <!-- Item 3 -->
+                         <div class="flex items-start">
+                            <div class="bg-red-900/40 text-red-300 font-bold px-2 py-1 rounded text-xs mr-3 mt-1">NEXTRON</div>
+                            <p class="text-gray-300" data-lang="en">Send required sample equipment for testing to Foxlink's Sri City facility.</p>
+                            <p class="text-gray-300" data-lang="zh">寄送必要的測試樣品設備至 Foxlink Sri City 廠區。</p>
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="flex items-start">
+                            <div class="bg-blue-900/40 text-blue-300 font-bold px-2 py-1 rounded text-xs mr-3 mt-1">FOXLINK</div>
+                            <p class="text-gray-300" data-lang="en">Provide specific shipping address for Sri City facility.</p>
+                            <p class="text-gray-300" data-lang="zh">提供 Sri City 廠區的具體收貨地址。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
+                <div class="mb-2 md:mb-0">
+                    <span data-lang="en">Generated from Meeting Transcript</span>
+                    <span data-lang="zh">生成自會議錄音轉錄稿</span>
+                </div>
+                <div class="text-right">
+                    <span class="block">CONFIDENTIAL - INTERNAL USE ONLY</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script -->
+    <script>
+        // Set default language to English as requested
+        let currentLang = 'en'; 
+        let langToggleBtn;
+        let exportPdfBtn;
+
+        function updateLanguageUI() {
+            try {
+                // Hide all lang elements first
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    // Don't hide the <title> tag, just let it be
+                    if (el.tagName.toLowerCase() !== 'title') {
+                        el.style.display = 'none';
+                    }
+                });
+
+                // Show current lang elements
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const originalDisplay = el.getAttribute('data-original-display') || 'block';
+                    
+                    // Specific handling for inline/table elements
+                    if (['span', 'strong', 'a', 'i', 'b'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'inline';
+                    } else if (['th', 'td'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'table-cell';
+                    } else if (['tr'].includes(el.tagName.toLowerCase())) {
+                        el.style.display = 'table-row';
+                    } else {
+                        el.style.display = originalDisplay;
+                    }
+                });
+
+                // Update Button Text
+                if (langToggleBtn) {
+                    // Update button text logic if needed, currently handled by data-lang spans inside button
+                }
+
+                // Update Document Title
+                const matchingTitle = document.querySelector(`title[data-lang="${currentLang}"]`);
+                if (matchingTitle) {
+                    document.title = matchingTitle.textContent;
+                }
+
+            } catch (e) {
+                console.error("UI Update Error:", e);
+            }
+        }
+
+        function toggleLanguage() {
+            currentLang = (currentLang === 'en') ? 'zh' : 'en';
+            updateLanguageUI();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            langToggleBtn = document.getElementById('lang-toggle');
+            exportPdfBtn = document.getElementById('export-pdf-btn');
+
+            if (langToggleBtn) {
+                langToggleBtn.addEventListener('click', toggleLanguage);
+            }
+
+            if (exportPdfBtn) {
+                exportPdfBtn.addEventListener('click', () => {
+                    window.print();
+                });
+            }
+
+            // Save original display types
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const display = window.getComputedStyle(el).display;
+                if (display !== 'none') {
+                    el.setAttribute('data-original-display', display);
+                }
+            });
+
+            // Initial Run
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

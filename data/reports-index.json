@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-07T11:19:01.277Z",
+  "lastUpdated": "2026-01-08T05:32:16.003Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -287,6 +287,19 @@
       "fileName": "report-1767784740258.html",
       "createdAt": "2026-01-07T11:19:01.277Z",
       "updatedAt": "2026-01-07T11:19:01.277Z"
+    },
+    {
+      "id": "report-1767850335345",
+      "title": "Nextron & Foxconn Strategic Manufacturing Partnership",
+      "description": "Nextron 與 Foxlink 戰略製造夥伴關係討論",
+      "categories": [
+        "年度計劃",
+        "工作報告",
+        "會議記要"
+      ],
+      "fileName": "report-1767850335345.html",
+      "createdAt": "2026-01-08T05:32:16.003Z",
+      "updatedAt": "2026-01-08T05:32:16.003Z"
     }
   ]
 }
