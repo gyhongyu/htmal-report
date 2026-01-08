@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-08T05:42:20.583Z",
+  "lastUpdated": "2026-01-08T08:59:46.485Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -313,6 +313,19 @@
       "fileName": "report-1767850939665.html",
       "createdAt": "2026-01-08T05:42:20.583Z",
       "updatedAt": "2026-01-08T05:42:20.583Z"
+    },
+    {
+      "id": "report-1767862785133",
+      "title": "Comprehensive Analysis: ELCINA (India)",
+      "description": "印度 ELCINA 協會全方位戰略與 KYC 報告",
+      "categories": [
+        "內部簡報",
+        "年度計劃",
+        "市場分析"
+      ],
+      "fileName": "report-1767862785133.html",
+      "createdAt": "2026-01-08T08:59:46.485Z",
+      "updatedAt": "2026-01-08T08:59:46.485Z"
     }
   ]
 }

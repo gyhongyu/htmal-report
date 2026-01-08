@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: ELCINA (Electronic Industries Association of India) -->
+    <!-- ANALYST: Gemini Strategic Analyst -->
+    <title data-lang="en">Strategic KYC: ELCINA (India Electronics Association)</title>
+    <title data-lang="zh">戰略評估與 KYC：ELCINA 印度電子工業協會</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 核心樣式 --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; font-size: 10pt; } .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .text-white { color: #000 !important; } .tag, .bg-blue-600 { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- RESTORED OFFICIAL HEADER -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">FULL SCALE STRATEGIC REPORT</span>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="en">Comprehensive Analysis: ELCINA (India)</h1>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="zh">印度 ELCINA 協會全方位戰略與 KYC 報告</h1>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="en">Organizational Intelligence & Membership Feasibility Study</p>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="zh">組織情報分析與入會必要性評估報告</p>
+                </div>
+
+                <!-- DASHBOARD -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 mt-8">
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Nature</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">組織性質</h3>
+                        <p class="text-lg font-bold text-white mt-1">NGO / Industry Body</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Gov Relation</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">政府關係</h3>
+                        <p class="text-lg font-bold text-green-400 mt-1" data-lang="en">Primary Advisor</p>
+                        <p class="text-lg font-bold text-green-400 mt-1" data-lang="zh">首席政策顧問</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Est. Year</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">成立年份</h3>
+                        <p class="text-lg font-bold text-white mt-1">1967</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Influence</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">行業影響力</h3>
+                        <p class="text-lg font-bold text-yellow-400 mt-1">Critical Tier-1</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: NATURE & GOV RELATION -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">1. Organizational Profile & Gov Relationship</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">壹、 組織性質與政府關係定位</h2>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-white font-bold mb-3" data-lang="en">Official Identity</h3>
+                            <h3 class="text-white font-bold mb-3" data-lang="zh">官方身分</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">ELCINA (Electronic Industries Association of India) is a non-profit, non-governmental organization. It is NOT a government department but serves as the <strong class="text-blue-400">premier consultancy body</strong> for the Ministry of Electronics and Information Technology (MeitY).</p>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">ELCINA (印度電子工業協會) 正式身分為非營利性民間產業協會 (NGO)。雖非政府單位，但其扮演印度政府（特別是電子資訊技術部 <strong class="text-blue-400">MeitY</strong>）制定電子硬體政策時的首席顧問單位。</p>
+                        </div>
+                        <div class="bg-gray-900/50 p-4 rounded border border-blue-900/30">
+                            <h3 class="text-white font-bold mb-3" data-lang="en">Strategic Corridor (Taiwan)</h3>
+                            <h3 class="text-white font-bold mb-3" data-lang="zh">台印戰略走廊</h3>
+                            <p class="text-sm text-gray-300" data-lang="en">The portal <code class="text-yellow-400">elcina.tw</code> is a dedicated "India-Taiwan Electronics Collaboration Center" established specifically to de-risk the entry for Taiwanese giants like <strong class="text-white">Foxlink, Foxconn, and Pegatron</strong>.</p>
+                            <p class="text-sm text-gray-300" data-lang="zh"><code class="text-yellow-400">elcina.tw</code> 網站是專為台灣企業設立的「印台電子合作中心」。其存在目的是為了解決台灣大廠（如正崴、鴻海、和碩）進入印度時面臨的行政障礙，提供專屬對接窗口。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: CORE VALUE PROPOSITIONS -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">2. Core Membership Values (Detailed Assessment)</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">貳、 入會核心價值評估（深度分析）</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Value 1 -->
+                    <div class="recon-box opp flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="en">1. Policy Advocacy</h3>
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="zh">1. 政策遊說與補貼 (Advocacy)</h3>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="en">ELCINA represents the collective voice of the industry in front of MeitY and DGFT.</p>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="zh">當企業面臨印度政府行政效率低下或關稅不公時，協會能代表整個產業與政府談判，比單一企業更有份量。</p>
+                        <div class="mt-auto pt-4 border-t border-gray-700">
+                            <ul class="text-xs text-green-400 space-y-1">
+                                <li data-lang="en">• Early info on PLI & SPECS schemes</li>
+                                <li data-lang="zh">• 第一時間獲取 PLI/SPECS 補貼動態</li>
+                                <li data-lang="en">• Collective bargaining on import duties</li>
+                                <li data-lang="zh">• 針對進口關稅進行集體議價遊說</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Value 2 -->
+                    <div class="recon-box neutral flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="en">2. B2B & JV Matching</h3>
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="zh">2. B2B 媒合與合資 (JV)</h3>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="en">Access to a directory of vetted Indian partners for Local Component Sourcing.</p>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="zh">協助在印度尋找可靠的 Tier-1 供應商或 JV 合資對象。透過協會介紹，可大幅降低遇到不對等夥伴或商業詐騙的風險。</p>
+                        <div class="mt-auto pt-4 border-t border-gray-700">
+                            <ul class="text-xs text-yellow-400 space-y-1">
+                                <li data-lang="en">• Association's reputation backing</li>
+                                <li data-lang="zh">• 享有協會聲譽擔保的對接服務</li>
+                                <li data-lang="en">• Directory of 400+ native members</li>
+                                <li data-lang="zh">• 對接 400+ 家印度本土電子商</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Value 3 -->
+                    <div class="recon-box flex flex-col border-l-4 border-blue-400">
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="en">3. Land & Clusters</h3>
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="zh">3. 工業土地與資源取得</h3>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="en">ELCINA operates its own Electronic Manufacturing Clusters (EMC).</p>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="zh">協會在拉賈斯坦邦等地設有現成的電子工業園區，能協助會員優先取得土地資源並解決環評等程序問題。</p>
+                        <div class="mt-auto pt-4 border-t border-gray-700">
+                            <ul class="text-xs text-blue-400 space-y-1">
+                                <li data-lang="en">• Priority allotment in EMC clusters</li>
+                                <li data-lang="zh">• ELCINA 專屬園區優先入駐權</li>
+                                <li data-lang="en">• Supply chain research reports</li>
+                                <li data-lang="zh">• 深度印度電子供應鏈研究報告</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: ASSOCIATION COMPARISON -->
+                <div class="section-divider">
+                    <span data-lang="en">Part 3: Comparative Analysis</span>
+                    <span data-lang="zh">第三部：印度主要行業協會橫向對比</span>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead>
+                            <tr class="bg-gray-700">
+                                <th class="p-4" data-lang="en">Association</th><th class="p-4" data-lang="zh">協會名稱</th>
+                                <th class="p-4" data-lang="en">Core Focus</th><th class="p-4" data-lang="zh">核心領域</th>
+                                <th class="p-4" data-lang="en">Recommended For</th><th class="p-4" data-lang="zh">建議入會時機</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4 font-bold text-blue-400">ELCINA</td>
+                                <td class="p-4" data-lang="en">Electronic Components, EMS, Hardware Mfg</td>
+                                <td class="p-4" data-lang="zh">電子元件、EMS、硬體製造</td>
+                                <td class="p-4 text-green-400" data-lang="en"><strong class="font-bold">Strategic Priority</strong> for General Mfg Ops</td>
+                                <td class="p-4 text-green-400" data-lang="zh">只要在印度有<strong class="font-bold">製造基地</strong>，此為首選</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold text-gray-300">ICEA</td>
+                                <td class="p-4" data-lang="en">Mobile Phones, Tablets, Consumer Electronics</td>
+                                <td class="p-4" data-lang="zh">手機、平板、消費電子</td>
+                                <td class="p-4" data-lang="en">Specific focus on handset ecosystem</td>
+                                <td class="p-4" data-lang="zh">業務高度集中在<strong class="font-bold">手機供應鏈</strong>時考慮</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold text-gray-300">MAIT</td>
+                                <td class="p-4" data-lang="en">IT Equipment, Servers, PC Hardware</td>
+                                <td class="p-4" data-lang="zh">IT 設備、伺服器、PC硬體</td>
+                                <td class="p-4" data-lang="en">Computing & Digital Transformation</td>
+                                <td class="p-4" data-lang="zh">專注於<strong class="font-bold">電腦或伺服器</strong>硬體生產時</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SECTION 4: STRATEGIC SYNTHESIS -->
+                <div class="section-divider">
+                    <span data-lang="en">Part 4: Strategic Synthesis</span>
+                    <span data-lang="zh">第四部：戰略綜合分析</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Synergy Score</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">協同價值評分</h4>
+                        <div class="relative w-full h-48">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                    </div>
+                    <div class="recon-box col-span-2 flex flex-col justify-center">
+                        <h4 class="font-bold text-white mb-4 text-sm" data-lang="en">Critical Decision Matrix</h4>
+                        <h4 class="font-bold text-white mb-4 text-sm" data-lang="zh">關鍵決策矩陣</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3 bg-gray-900 p-3 rounded">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <div class="text-sm">
+                                    <span class="text-gray-200 font-bold" data-lang="en">JV Matching:</span>
+                                    <span class="text-gray-400" data-lang="en"> Access to Top 10 Indian Electronics Groups for local partnerships.</span>
+                                    <span class="text-gray-200 font-bold" data-lang="zh">合資匹配：</span>
+                                    <span class="text-gray-400" data-lang="zh"> 獲取印度前十大電子集團之高層聯絡方式，利於在地化合資。</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 bg-gray-900 p-3 rounded">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <div class="text-sm">
+                                    <span class="text-gray-200 font-bold" data-lang="en">Policy Early Warning:</span>
+                                    <span class="text-gray-400" data-lang="en"> 30-day lead time on new import tariffs via internal circulation.</span>
+                                    <span class="text-gray-200 font-bold" data-lang="zh">政策預警：</span>
+                                    <span class="text-gray-400" data-lang="zh"> 透過協會內部週報，可提前 30 天掌握新進口關稅變動預告。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: STRATEGIC RECOMMENDATION -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-yellow-300 border-l-4 border-yellow-500 pl-4" data-lang="en">5. Final Strategic Conclusion</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-yellow-300 border-l-4 border-yellow-500 pl-4" data-lang="zh">伍、 最終戰略結論與建議</h2>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <p class="text-gray-300 leading-relaxed" data-lang="en">For a company of our scale with direct manufacturing interests in India, ELCINA membership is <strong class="text-yellow-400 uppercase">Strategically Necessary</strong>. In India's complex regulatory environment, "Networking" (Guanxi) is the ultimate risk-mitigation tool. Membership provides an entry ticket into the policy-making circle of the Indian government.</p>
+                    <p class="text-gray-300 leading-relaxed" data-lang="zh">對於像我司這樣在印度擁有直接製造利益的公司，加入 ELCINA 是<strong class="text-yellow-400">具備戰略必要性</strong>的。在印度複雜的監管環境下，「圈子」(Networking) 是最終的避險工具。入會不僅是獲取資訊，更是拿到進入印度政府政策制定核心圈的門票。</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="bg-blue-900/20 p-4 rounded border border-blue-500/50">
+                            <h4 class="font-bold text-blue-300 mb-2" data-lang="en">Short-term Action</h4>
+                            <h4 class="font-bold text-blue-300 mb-2" data-lang="zh">短期行動方案</h4>
+                            <p class="text-xs text-gray-400" data-lang="en">Initiate contact with <strong class="text-white">Manik Kumar (Taiwan Desk)</strong> to verify current member benefits for Taiwan-listed firms.</p>
+                            <p class="text-xs text-gray-400" data-lang="zh">聯繫 <strong class="text-white">Manik Kumar (台灣窗口)</strong>，確認針對台灣上市公司的最新專屬權益。</p>
+                        </div>
+                        <div class="bg-yellow-900/20 p-4 rounded border border-yellow-500/50">
+                            <h4 class="font-bold text-yellow-300 mb-2" data-lang="en">Membership Tier Goal</h4>
+                            <h4 class="font-bold text-yellow-300 mb-2" data-lang="zh">目標入會等級</h4>
+                            <p class="text-xs text-gray-400" data-lang="en">Aim for <strong class="text-white">Full Membership</strong> to secure voting rights and seat in the Executive Committee.</p>
+                            <p class="text-xs text-gray-400" data-lang="zh">建議申請 <strong class="text-white">全額會員 (Full Membership)</strong>，以確保擁有投票權及進入執行委員會的資格。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Strategic Synthesis: HIGH PRIORITY</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">戰略綜合評價：高優先級</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Prepared for Internal Executive Decision.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">報告供內部高層決策使用，嚴禁外流。</div>
+                    </div>
+                    <button id="lang-toggle-bottom" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95">
+                        <span data-lang="en">Switch Language</span>
+                        <span data-lang="zh">切換語言</span>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-between">
+                <div class="text-xs text-gray-500">
+                    &copy; 2026 Foxlink Strategic Intelligence Group. All Rights Reserved.
+                </div>
+                <div class="text-xs text-gray-400">
+                    <span data-lang="en">Report ID: IN-AS-2026-002</span>
+                    <span data-lang="zh">報告編號：IN-AS-2026-002</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // Default to English as per request
+        let radarChart = null;
+
+        const radarScores = [5, 5, 4, 4, 3]; // Networking, Policy, Sourcing, Land, Cost
+
+        const chartData = {
+            en: { labels: ['Networking', 'Policy Lobbying', 'JV Matching', 'Land Support', 'Cost Benefit'], label: 'Strategic Value' },
+            zh: { labels: ['行業人脈', '政策遊說', '合資媒合', '土地支持', '成本效益'], label: '戰略價值評分' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = ['lang-toggle', 'lang-toggle-bottom'];
+            btns.forEach(id => {
+                const b = document.getElementById(id);
+                if(b) b.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'zh' : 'en';
+                    updateLanguageUI();
+                });
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const canvas = document.getElementById('opportunityRadar');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                radarChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: chartData[currentLang].labels,
+                        datasets: [{
+                            label: chartData[currentLang].label,
+                            data: radarScores, 
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            r: {
+                                angleLines: { color: '#374151' },
+                                grid: { color: '#374151' },
+                                pointLabels: { color: '#9ca3af', font: {size: 11} },
+                                ticks: { display: false, max: 5 }
+                            }
+                        },
+                        plugins: { legend: { display: false } },
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
