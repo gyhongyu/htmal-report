@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foxlink Product Catalog</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 20px; /* Space for footer */
+        }
+        
+        /* Header & Logo Styles */
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-container {
+            width: 180px;
+            margin: 0 auto 15px auto;
+        }
+        h1 {
+            color: #2e3092; /* Foxlink Blue */
+            margin: 0 0 25px 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Disclaimer Box Styles */
+        .disclaimer-box {
+            background-color: #eef5ff;
+            border-left: 5px solid #2e3092;
+            padding: 20px;
+            margin: 0 auto 40px auto;
+            max-width: 900px;
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .disclaimer-title {
+            font-weight: 700;
+            color: #2e3092;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        /* PDF Button Styles */
+        .pdf-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #2e3092;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .pdf-btn:hover {
+            background-color: #1a1c6b;
+        }
+        .pdf-icon {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Catalog Grid Styles */
+        .category-section {
+            margin-bottom: 60px;
+            page-break-inside: avoid; /* Prevent category header splitting from content */
+        }
+        .category-header {
+            border-bottom: 2px solid #2e3092;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .category-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space out title and QRs */
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+        .category-title-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .category-title {
+            font-size: 28px;
+            color: #2e3092;
+            margin: 0;
+            font-weight: 600;
+        }
+        .qr-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .qr-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 11px;
+        }
+        .qr-item img {
+            width: 80px; /* Increased for better visibility on web */
+            height: 80px;
+            margin-bottom: 3px;
+            border: 1px solid #ddd;
+            padding: 2px;
+            background: #fff;
+        }
+        .category-desc {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Contact Section Styles */
+        .contact-section {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            page-break-inside: avoid;
+            margin-bottom: 40px;
+        }
+        .contact-qr img {
+            width: 120px; /* Increased for better visibility on web */
+            height: 120px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: #fff;
+        }
+        .contact-text {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #2e3092;
+            font-size: 16px;
+        }
+
+        /* Footer Styles */
+        .footer {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 3px solid #2e3092;
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            background-color: #fff;
+            page-break-inside: avoid;
+        }
+        .footer h3 {
+            margin: 0 0 8px 0;
+            color: #2e3092;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer p {
+            margin: 4px 0;
+        }
+
+        @media (max-width: 768px) {
+            .category-desc {
+                white-space: normal;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+            .pdf-btn {
+                position: static;
+                display: block;
+                width: 100%;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .category-title-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #eee;
+            /* Critical for PDF layout: */
+            break-inside: avoid; 
+            page-break-inside: avoid;
+        }
+        /* Style for non-clickable cards in Automotive/EV section */
+        .card.no-link {
+            cursor: default;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+            border-color: #2e3092;
+        }
+        .image-container {
+            width: 100%;
+            height: 160px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .card-content {
+            padding: 12px;
+            text-align: center;
+            background: #fff;
+            border-top: 1px solid #f0f0f0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-name {
+            font-weight: 500;
+            font-size: 15px;
+            color: #444;
+        }
+
+        /* Print Styles for PDF Generation (Optimized) */
+        @page {
+            size: A4;
+            margin: 15mm; /* 1.5cm margin on all sides */
+        }
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+                zoom: 75%; /* Scales down content to 75% */
+                -webkit-print-color-adjust: exact; /* Ensures colors print accurately */
+                print-color-adjust: exact;
+            }
+            .container {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .pdf-btn {
+                display: none !important;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc; /* Lighter border for print */
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr); /* 4 Columns for denser catalog layout */
+                gap: 15px; /* Slightly tighter gap */
+            }
+            .category-section {
+                margin-bottom: 30px; /* Reduce spacing between sections for print */
+                break-inside: avoid; 
+            }
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+            /* Hide URL footprint if browser settings allow */
+            a[href]:after {
+                content: none !important;
+            }
+            /* Ensure QRs print nicely */
+            .qr-item {
+                display: flex !important;
+            }
+            /* Force QR sizes for print readability */
+            /* 25mm is approx 95px, safe for scanning */
+            .qr-item img {
+                width: 25mm !important; 
+                height: 25mm !important;
+                border: 0.5pt solid #ccc !important;
+            }
+            /* 35mm is approx 130px, very safe for scanning */
+            .contact-qr img {
+                width: 35mm !important; 
+                height: 35mm !important;
+            }
+            /* Footer Styling for Print */
+            .footer {
+                border-top: 2px solid #2e3092 !important;
+                margin-top: 20px;
+                padding-top: 15px;
+                font-size: 11px; /* Slightly adjusted for print readability */
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="pdf-btn" onclick="window.print()">
+            <span class="pdf-icon">&#128424;</span> Export to PDF
+        </button>
+
+        <div class="header-section">
+            <div class="logo-container">
+                <!-- Inserted SVG Logo -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 330" width="100%" height="auto" aria-label="Foxlink Logo">
+                  <g fill="#2e3092">
+                    <path d="M403.5 102.4c-4.2 1.8-9.3 7.9-10.1 12.1-1.8 9.9 6.7 18.8 18.3 19 18.3.1 25.3-21.4 9.8-30.2-4.6-2.6-13.1-3-18-.9M70.2 133.3c-3.5 16-6.6 30.2-6.9 31.4l-.5 2.3H97l3.1-6.3c4.3-8.5 15.4-19.4 23.9-23.5 11.8-5.7 15.4-6.2 47.7-6.2H201l.4-2.3c2.6-11.8 4.6-21.9 4.6-23.2s-7.5-1.5-64.7-1.5H76.5z"/>
+                    <path d="M137.8 138.9c-11.4 3.7-20.9 11-28.7 22.1l-4.2 6h25c21.6 0 25.7.2 29.3 1.7 4.2 1.7 2 1.8-68.7 2.3l-73 .5-.3 2.5-.3 2.5 75.3.3c61.3.2 75.4.5 75.6 1.6s-13.4 1.3-75.4 1.4c-78.4.1-77.3.1-77.4 3.9 0 1 16 1.3 76.5 1.3 67.3 0 76.5.2 76.5 1.5s-9.2 1.5-76.9 1.5c-69.2 0-76.9.2-77.5 1.6-1.8 4.6-5.4 4.4 74.7 4.4 71.5.1 75.1.2 72.2 1.8-2.6 1.5-6.6 1.7-29 1.9-14.3.2-26.2.3-26.3.3-.5 0 4.7 8.8 6.2 10.8 11.4 14.5 22.4 20.2 39.1 20.2 20.1 0 37.9-10.9 46.6-28.5l3.2-6.5h99.8l-.7 6.5c-1.1 11.1 4.1 19.9 13.3 22.4 2.4.7 20.5 1.1 48.8 1.1h45l1.9-10.3c1-5.6 2-11.4 2.3-13l.6-2.7H374c-33.5 0-37.2-.2-36.6-1.6.3-.9.6-1.8.6-2s17-.4 37.9-.4h37.9l.6-2.3c.3-1.2.6-2.5.6-3 0-.4-16.9-.7-37.5-.7-32.7 0-37.5-.2-37.5-1.5s4.9-1.5 37.9-1.5h37.9l.5-2.2c.4-1.2 1-1.8 1.4-1.4 7 7.2 30.4 28.7 33.6 30.9 9.8 6.6 22.5 11.7 29.1 11.7h3.1l3.4-15.3c1.9-8.3 4.1-18.7 5-22.9.9-4.3 1.9-7.8 2.3-7.8.3 0 9.3 9.3 20 20.7 10.6 11.4 20.4 21.8 21.7 23 2.3 2.3 2.9 2.3 23.9 2.3h21.5l-6.8-7.3c-3.8-3.9-8.9-9.5-11.5-12.2-2.5-2.8-9.3-10.2-15.2-16.5l-10.6-11.5 20.6-16.1c11.4-8.9 21.7-16.7 23-17.5 3.4-2.1 2.7-3.6-1.5-3.3-2.1.2-12.2.3-22.5.3l-18.6.1-11.9 9.6c-6.5 5.2-12.5 10-13.3 10.7-.9.7-4.9 3.9-9 7.1-4.1 3.3-8 6.3-8.6 6.7-.6.5.7-6.5 2.8-15.4 2-8.9 3.8-16.9 3.8-17.7 0-1.3-2.7-1.5-19.2-1.4l-19.2.2-2.8 12.3c-2.4 10.5-3.2 13.8-3.7 16.8-.1.2-6.8-6.2-15.1-14.3-8.2-8-15.3-14.6-15.7-14.6-35.4-.7-39.4-.5-39.8 1.5-.3 1.1-1.6 6.9-3 12.8-1.4 6-2.5 11.3-2.5 11.8s8 .9 18.5.9c17.8 0 18.5.1 18.5 2 0 2-.7 2-37.6 2-35.3 0-37.5-.1-37-1.8.3-.9 1.7-7.6 3.2-14.7 1.4-7.2 2.8-13.3 3.1-13.8.2-.4-8.1-.7-18.6-.7h-18.9l-2.1 8.7c-1.1 4.9-2.5 11.8-3.2 15.5l-1.1 6.8H199.5l-2.4-5.6c-5-11.6-16.3-21.6-29.3-26-8.8-3-21.5-3.2-30-.5M283.3 177c13.1 0 20.7.4 20.7 1 0 1.3-101.6 1.4-102.5.1-.8-1.5 2.9-1.6 33-1.4 15.4.2 37.3.3 48.8.3m133.7 1c0 1-74.9 1.9-75.6.9-.2-.3-.1-.9.3-1.3 1.1-1 75.3-.7 75.3.4m-115 8.5c0 1.3-6.2 1.5-50 1.5s-50-.2-50-1.5 6.2-1.5 50-1.5 50 .2 50 1.5"/>
+                    <path d="M202.4 140.1c-.2.4.9 3.3 2.5 6.5 1.5 3.3 4.3 9.2 6.1 13.1l3.3 7.3h63.3l12.2-12.9c6.7-7.1 12.2-13.3 12.2-13.8 0-.4-8.2-.7-18.2-.5l-18.3.3-9.6 10-9.5 10-4.3-10c-2.4-5.6-4.6-10.1-5-10.1-10.3-.4-34.4-.3-34.7.1M53.7 208.2c-1.5 5.7-2.9 11.5-3.3 13.1l-.6 2.7 18.2-.2 18.3-.3 2.3-11c1.3-6.1 2.3-11.8 2.4-12.8 0-1.6-1.5-1.7-17.3-1.7H56.3zm160.1-9.3c-.1.5-5.4 6.1-11.5 12.5-6.2 6.4-11.3 11.8-11.3 12.1s8.3.5 18.4.5h18.4l9.4-10.1 9.5-10.2 4.3 10.2 4.3 10.1h17.9c9.8 0 17.8-.2 17.8-.5s-.4-1.3-1-2.3c-.5-.9-3.2-6.5-5.9-12.5l-5-10.7h-32.4c-18.8 0-32.7.4-32.9.9"/>
+                  </g>
+                </svg>
+            </div>
+            <h1>Foxlink Product Catalog</h1>
+        </div>
+
+        <div class="disclaimer-box">
+            <span class="disclaimer-title">IMPORTANT NOTICE</span>
+            Foxlink primarily operates as an <strong>ODM (Original Design Manufacturing)</strong> and <strong>JDM (Joint Design Manufacturing)</strong> provider. Due to strict Non-Disclosure Agreements (NDAs), we are unable to publicly display many of our customers' specific products. The items listed in this catalog are for reference purposes only and represent a portion of our capabilities. Our extensive product lines cover nearly 100% of the electronics industry components. Official quotations and specifications will be provided based on customer-supplied drawings and Technical Data Sheets (TDS).
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Connector</h2>
+                </div>
+                <p class="category-desc" title="Group Vertical Integration; Multiple EE and ME CAE Tools; Material and Failure Analysis Capability.">Group Vertical Integration; Multiple EE and ME CAE Tools; Material and Failure Analysis Capability.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/pogo-pin/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/1_1_Pogo-Pin-1.jpg" alt="Pogo Pin">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Pogo Pin</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/type-c-receptacle/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/2-TypeCReceptacle.png" alt="Type C Receptacle">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Type C Receptacle</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/type-c-plug/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/1_4_Type-C-Plug.jpg" alt="Type C Plug">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Type C Plug</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/hdmi-connector/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/1_7_HDMI-Connector.jpg" alt="HDMI Connector">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">HDMI Connector</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/audio-jack/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/1_8_Audio-Jack.jpg" alt="Audio Jack">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Audio Jack</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/automotive-connector/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2025/10/AutomotiveConnector.png" alt="Automotive Connector">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Automotive Connector</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/mim/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2025/10/MIM-300x170.png" alt="MIM">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">MIM</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">FPC</h2>
+                </div>
+                <p class="category-desc" title="One-stop service from layout to FPCBA. Diversified products: Single-Sided, Double-Sided, Multi-layer & Rigid Flex.">One-stop service from layout to FPCBA. Diversified products: Single-Sided, Double-Sided, Multi-layer & Rigid Flex.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/single-side/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/2_1_Single-Side_02.jpg" alt="Single-Side">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Single-Side</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/double-side/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/2_2_Double-side_01.jpg" alt="Double-Side">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Double-Side</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/multi-flex/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/2_3_Multi-flex_01.jpg" alt="Multi-Flex">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Multi-Flex</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/rigid-flex/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/2_4_Rigid-flex_01.jpg" alt="Rigid-Flex">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Rigid-Flex</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/automotive-fpc/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/GpLJtdyh/Automotive-FPC.jpg" alt="Automotive-FPC">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Automotive-FPC</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Cable</h2>
+                </div>
+                <p class="category-desc" title="Customize Cable: USB, Mini coaxial, Thunderbolt, Lightning, HDMI, Mouse, Monitor, Multiport dongle.">Customize Cable: USB, Mini coaxial, Thunderbolt, Lightning, HDMI, Mouse, Monitor, Multiport dongle.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/usb-cable/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_1_USB-cable_01_USB_A-30-to-Micro-USB-7Pin.jpg" alt="USB Cable">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">USB Cable</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/mini-coaxial-cable/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_2_Mini-coaxial-cable_Micro-DVI-to-S-video_01.jpg" alt="Mini Coaxial Cable">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Mini Coaxial Cable</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/thunderbolt-cable/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_3_Thunderbolt-Cable_01.jpg" alt="Thunderbolt Cable">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Thunderbolt Cable</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/lightning-cable/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_4_Lightning-Cable_01.jpg" alt="Lightning Cable">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Lightning Cable</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/hdmi-cable/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_5_HDMI-cable_01.jpg" alt="HDMI Cable">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">HDMI Cable</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/mouse-cable/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_6_Mouse-cable.jpg" alt="Mouse Cable">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Mouse Cable</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/monitor-cable/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_8_Monitor-cable.jpg" alt="Monitor Cable">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Monitor Cable</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/cable-dongle/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/3_9_Dongle_01-1-300x225.jpg" alt="Dongle">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Dongle</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Camera Module</h2>
+                </div>
+                <p class="category-desc" title="Highly customized outline and shape. Customize Camera Module: USB, Face Authentication, Compact, 3D.">Highly customized outline and shape. Customize Camera Module: USB, Face Authentication, Compact, 3D.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/usb-camera-module/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/4_1_USB-Camera-Module.jpg" alt="USB Camera Module">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">USB Camera Module</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/face-authentication-camera-module/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/4_2_Face-Authentication-Camera-Module.jpg" alt="Face Authentication Camera Module">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Face Authentication Camera Module</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/compact-camera-module/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/4_3_Compact-Camera-Module_02.jpg" alt="Compact Camera Module">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Compact Camera Module</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/3d-camera-module/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/4_4_3D-Camera-Module.jpg" alt="3D Camera Module">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">3D Camera Module</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Plastic & Metal Parts</h2>
+                </div>
+                <p class="category-desc" title="Tooling Development: Rapid integration from art to product. Total solution from tooling to fabrication.">Tooling Development: Rapid integration from art to product. Total solution from tooling to fabrication.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/adapter-shell/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/5_1_Adapter-Shell.jpg" alt="Adapter Shell">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Adapter Shell</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/connector-part/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/5_2_Connector-Part_02.jpg" alt="Connector Part">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Connector Part</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/charger-shell/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/5_3_Charger-Shell_01.jpg" alt="Charger Shell">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Charger Shell</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/plastic-usb-storage/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/5_4_USB-Storage.jpg" alt="USB Storage">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">USB Storage</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/double-injection/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/5_5_Double-Injection.jpg" alt="Double Injection">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Double Injection</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Accessory</h2>
+                </div>
+                <p class="category-desc" title="Customize variety of accessories, variable resolution design ability. Perfect outline flexibility.">Customize variety of accessories, variable resolution design ability. Perfect outline flexibility.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/gaming-controller/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/6_1_Gaming-Controller_01.jpg" alt="Gaming Controller">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Gaming Controller</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/docking-station/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/6_2_Docking-station_01.jpg" alt="Docking Station">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Docking Station</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/webcam/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/6_3_Webcam_01.jpg" alt="Webcam">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Webcam</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/wireless-mouse/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/6_4_Wireless-Mouse_01.jpg" alt="Wireless Mouse">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Wireless Mouse</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/automobile-gadget/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/6_5_Automobile-Gadget_01.jpg" alt="Automobile Gadget">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Automobile Gadget</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/remote-control/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/6_6_Remote-Control_01.jpg" alt="Remote Control">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Remote Control</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Audio Product</h2>
+                </div>
+                <p class="category-desc" title="Acoustic Technology: Headset clamping force simulation. Customize Wired/Wireless Headset, Speaker.">Acoustic Technology: Headset clamping force simulation. Customize Wired/Wireless Headset, Speaker.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/wired-headset/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/01_Wired-Headset.jpg" alt="Wired Headset">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Wired Headset</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/wired-headphone/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2016/11/02_Wired-Headphone.jpg" alt="Wired Headphone">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Wired Headphone</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/wireless-headphone/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2016/11/03_Wireless-Headphone_03.jpg" alt="Wireless Headphone">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Wireless Headphone</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/speaker/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/04_Speaker.jpg" alt="Speaker">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Speaker</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/wireless-audio-adapter/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/Ghj42YJy/Wireless-Audio-Adapter.jpg" alt="Wireless Audio Adapter">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Wireless Audio Adapter</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Power Management</h2>
+                </div>
+                <p class="category-desc" title="Complete power solutions for AC/DC adapter, tailor-made open frame PS and forced air cooling system.">Complete power solutions for AC/DC adapter, tailor-made open frame PS and forced air cooling system.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/power-bank/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/8_1_Power-Bank_01.jpg" alt="Power Bank">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Power Bank</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/battery/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/wxXvfJrr/Battery.jpg" alt="Battery">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Battery</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/power-adapter/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/8_3_Power-Adapter_01.jpg" alt="Power Adapter">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Power Adapter</div>
+                    </div>
+                </a>
+                <a href="https://www.foxlink.com/web/en/portfolio-item/power-supply/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/8_4_Power-Supply_01.jpg" alt="Power Supply">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Power Supply</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Wearable Device</h2>
+                </div>
+                <p class="category-desc" title="Customize Wearable Device: Wrist band, Smart Watch, HRM headset, Healthcare device. App & Cloud Service.">Customize Wearable Device: Wrist band, Smart Watch, HRM headset, Healthcare device. App & Cloud Service.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/wearable-device/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/01/9_1_Wearable-Device_01.jpg" alt="Wearable Device">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Wearable Device</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">IOT</h2>
+                </div>
+                <p class="category-desc" title="Internet of things—embedded with electronics, software, sensors, and network connectivity for data exchange.">Internet of things—embedded with electronics, software, sensors, and network connectivity for data exchange.</p>
+            </div>
+            <div class="grid">
+
+                <a href="https://www.foxlink.com/web/en/portfolio-item/smart-home/" class="card" target="_blank">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/hPCK6016/Smart-Home.jpg" alt="Smart Home">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Smart Home</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Consumer Electronics (PQI)</h2>
+                    <div class="qr-group">
+                        <a href="https://www.pqigroup.com/" target="_blank" class="qr-item">
+                            <img src="https://i.postimg.cc/4x8xMLMt/QR-Code-pqi-website.png" alt="PQI Website">
+                            <span>Website</span>
+                        </a>
+                        <a href="https://drive.google.com/file/d/14SN0sLHDkZ1yvRHwSQRDD8Otxipd6BLN/view?usp=drive_link" target="_blank" class="qr-item">
+                            <img src="https://i.postimg.cc/7hgLWxvF/QR-Code-pqi-catalog.png" alt="PQI Catalog">
+                            <span>Catalog</span>
+                        </a>
+                    </div>
+                </div>
+                <p class="category-desc" title="PQI Mobility, Storage, and Power solutions. Member of Foxlink Group.">PQI Mobility, Storage, and Power solutions. Member of Foxlink Group.</p>
+            </div>
+            <div class="grid">
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/x1M6pMhM/DRAM-Modules-(Desktop-Laptop).jpg" alt="DRAM Modules (Desktop/Laptop)">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">DRAM Modules (Desktop/Laptop)</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/JzjW3yQc/Solid-State-Drive-(SSD).jpg" alt="Solid State Drive (SSD)">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Solid State Drive (SSD)</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/6pzxbkDB/USB-Flash-Drive.jpg" alt="USB Flash Drive">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">USB Flash Drive</div>
+                    </div>
+                </div>
+                 <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/6Q0q0bhZ/Micro-SD-Card.jpg" alt="MicroSD Card">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">MicroSD Card</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/0Nxdj3QW/Ga-N-Wall-Chargers-(Wired).jpg" alt="GaN Wall Chargers (Wired)">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">GaN Wall Chargers (Wired)</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/X7bwQmKb/Qi2-Wireless-Chargers.jpg" alt="Qi2 Wireless Chargers">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Qi2 Wireless Chargers</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/d1sb24WZ/Fast-Charging-Power-Banks.jpg" alt="Fast Charging Power Banks">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Fast Charging Power Banks</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/K8NSR6N6/Fingerprint-Security.jpg" alt="Fingerprint Security">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Fingerprint Security</div>
+                    </div>
+                </div>
+                 <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/KzQDT5Vr/Crypto-Wallet.jpg" alt="Crypto Wallet">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Crypto Wallet</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/Xv9WcswY/TWS-Earbuds.jpg" alt="TWS Earbuds">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">TWS Earbuds</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/MK8jwLGk/Apple-MFi-Accessories.jpg" alt="Apple MFi Accessories">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Apple MFi Accessories</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/qvNr5JdB/USB-C-Hubs-Adapters.jpg" alt="USB-C Hubs & Adapters">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">USB-C Hubs & Adapters</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title-row">
+                    <h2 class="category-title">Automotive/EV</h2>
+                    <div class="qr-group">
+                        <a href="https://drive.google.com/drive/folders/15G-SOno9n8hUUT9vuT8pxRcIJTH4i8ag?usp=drive_link" target="_blank" class="qr-item">
+                            <img src="https://i.postimg.cc/fTfL7TfY/QR-Code-ev-catalog.png" alt="EV Catalog">
+                            <span>Catalog</span>
+                        </a>
+                    </div>
+                </div>
+                <p class="category-desc" title="Smart Vehicle IoT Solutions, BMS, T-Box, and Cloud Platforms.">Smart Vehicle IoT Solutions, BMS, T-Box, and Cloud Platforms.</p>
+            </div>
+            <div class="grid">
+
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/g2TSCx5j/Smart-Vehicle-Io-T-Hardware.jpg" alt="Smart Vehicle IoT Hardware">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Smart Vehicle IoT Hardware</div>
+                    </div>
+                </div>
+                 <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/BQct7Dj6/Smart-T-Box-(4G-5G).jpg" alt="Smart T-Box (4G/5G)">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Smart T-Box (4G/5G)</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/fyWW6qtx/Smart-BMS-Battery.jpg" alt="Smart BMS & Battery">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Smart BMS & Battery</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/RhPPRqxh/Smart-Dashboard-Cluster.jpg" alt="Smart Dashboard & Cluster">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Smart Dashboard & Cluster</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/BQWhs8J2/Smart-Battery-Swap-System.jpg" alt="Smart Battery Swap System">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Smart Battery Swap System</div>
+                    </div>
+                </div>
+                <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/hjtGXPg3/Vehicle-Management-Platform.jpg" alt="Vehicle Management Platform">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Vehicle Management Platform</div>
+                    </div>
+                </div>
+                 <div class="card no-link">
+                    <div class="image-container">
+                        <img src="https://i.postimg.cc/cCQYmLg9/Vision-Systems-DVR.jpg" alt="Vision Systems & DVR">
+                    </div>
+                    <div class="card-content">
+                        <div class="product-name">Vision Systems & DVR</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <a href="https://michael.foxlink.co.in/" target="_blank" class="qr-item contact-qr" style="flex-direction: column; display: inline-flex;">
+                <img src="https://i.postimg.cc/pd6y9GYq/QR-Code-please-contact.png" alt="Contact QR">
+                <div class="contact-text">Contact Us (E-Business Card)</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <h3>FOXLINK INDIA ELECTRIC PRIVATE LIMITED</h3>
+            <p>Registered Office Address: Plot 2, EMC I, Vikruthamala Village Yerpedu Mandal, Tirupati Airport Road, Chittoor, AP – 517520, India</p>
+            <p>CIN: U29100AP2020FTC114388 | E-Mail ID: Support_Tpt@Foxlink.com | Contact No: +91 0877 229 0000</p>
+        </div>
+
+    </div>
+</body>
+</html>
