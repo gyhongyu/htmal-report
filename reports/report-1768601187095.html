@@ -508,6 +508,11 @@
             display: none;
         }
 
+        /* --- PRINT BACK COVER (Hidden on Web) --- */
+        .print-back-cover {
+            display: none;
+        }
+
         /* --- 10. MOBILE OPTIMIZATIONS --- */
         @media screen and (max-width: 768px) {
 
@@ -1026,6 +1031,97 @@
 
             a[href]:after {
                 content: none !important;
+            }
+        }
+
+        @media print {
+            .ui-controls {
+                display: none !important;
+            }
+
+            .print-back-cover {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                height: 297mm;
+                width: 210mm;
+                page-break-before: always;
+                position: relative;
+                overflow: hidden;
+                border: none;
+                text-align: center;
+                margin: 0;
+                padding: 40px;
+                background: white;
+                box-sizing: border-box;
+                order: 9999;
+            }
+
+            .back-line-top,
+            .back-line-bottom {
+                width: 60%;
+                height: 2px;
+                background-color: var(--primary-color);
+                margin: 20px 0;
+            }
+
+            .back-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                flex-grow: 1;
+                gap: 30px;
+            }
+
+            .back-footer-info {
+                width: 100%;
+                margin-bottom: 20px;
+                color: var(--primary-color);
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .back-footer-info h3 {
+                font-size: 11pt;
+                font-weight: bold;
+                margin: 0 0 5px 0;
+            }
+
+            .back-footer-info p {
+                font-size: 8pt;
+                margin: 2px 0;
+                line-height: 1.3;
+            }
+
+            .back-title {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 24pt;
+                color: var(--primary-color);
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin: 0;
+            }
+
+            .qr-container {
+                padding: 20px;
+                border: 1px solid #eee;
+                border-radius: 10px;
+            }
+
+            .qr-container img {
+                width: 50mm !important;
+                height: 50mm !important;
+                object-fit: contain;
+                border: none !important;
+            }
+
+            .back-text {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14pt;
+                color: #555;
+                margin: 0;
             }
         }
     </style>
@@ -2003,6 +2099,26 @@
             </div>
         </div>
 
+        <!-- PRINT BACK COVER -->
+        <div class="print-back-cover">
+            <div class="back-line-top"></div>
+            <div class="back-content">
+                <h2 class="back-title">Scan to Download</h2>
+                <div class="qr-container">
+                    <img src="https://i.postimg.cc/hj5dCKn6/catalog-QR-Code.png" alt="Online Catalog">
+                </div>
+                <p class="back-text">Foxlink Product Catalog 2026</p>
+            </div>
+
+            <div class="back-footer-info">
+                <h3>FOXLINK INDIA ELECTRIC PRIVATE LIMITED</h3>
+                <p>Registered Office Address: Plot 2, EMC I, Vikruthamala Village Yerpedu Mandal, Tirupati Airport Road,
+                    Chittoor, AP – 517520, India</p>
+                <p>CIN: U29100AP2020FTC114388 | E-Mail ID: Support_Tpt@Foxlink.com | Contact No: +91 0877 229 0000</p>
+            </div>
+
+            <div class="back-line-bottom"></div>
+        </div>
     </div>
 
     <!-- Modal for Image Preview -->
