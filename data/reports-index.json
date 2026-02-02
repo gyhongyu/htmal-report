@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-02T08:49:28.678Z",
+  "lastUpdated": "2026-02-02T08:50:29.712Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -342,8 +342,8 @@
     },
     {
       "id": "report-1770022168132",
-      "title": "Voice Recorder Cloud Sync SOP",
-      "description": "語音錄音機雲端同步設置指南",
+      "title": "Voice Recorder Google Drive Sync SOP",
+      "description": "語音錄音機google網盤同步設置指南",
       "categories": [
         "內部簡報",
         "工作報告",
@@ -351,7 +351,7 @@
       ],
       "fileName": "report-1770022168132.html",
       "createdAt": "2026-02-02T08:49:28.678Z",
-      "updatedAt": "2026-02-02T08:49:28.678Z"
+      "updatedAt": "2026-02-02T08:50:29.712Z"
     }
   ]
 }
