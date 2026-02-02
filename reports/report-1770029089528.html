@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: Ameinar International Pvt. Ltd. -->
+    <!-- ANALYST: Michael Chen -->
+    <title data-lang="en">Strategic KYC: Ameinar International (Sourcing Agent)</title>
+    <title data-lang="zh">戰略評估與 KYC：Ameinar International (採購代理)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 核心樣式 (源自官方模板) --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.caution { border-left: 4px solid #f97316; } /* Orange for Caution */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        
+        /* Print Styles */
+        @media print { .no-print { display: none !important; } body { background: #fff !important; color: #000 !important; font-size: 10pt; } .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } .bg-gray-800, .bg-gray-900, .recon-box { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .text-white { color: #000 !important; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- OFFICIAL HEADER STRUCTURE -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文 (繁)</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-orange-600 text-white text-xs px-2 py-1 rounded mb-2">PRELIMINARY ASSESSMENT</span>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="en">KYC Analysis: Ameinar International</h1>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="zh">背景調查報告：Ameinar International</h1>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="en">Sourcing Agent & Consultant | Chennai</p>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="zh">採購代理與顧問 | 欽奈 (Chennai)</p>
+                </div>
+
+                <!-- DASHBOARD -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 mt-8">
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Capital Nature</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">資本屬性</h3>
+                        <p class="text-lg font-bold text-gray-300 mt-1" data-lang="en">Pvt Ltd (Low Cap)</p>
+                        <p class="text-lg font-bold text-gray-300 mt-1" data-lang="zh">私人有限公司 (低資本)</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Primary Role</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">主要角色</h3>
+                        <p class="text-lg font-bold text-orange-400 mt-1" data-lang="en">Intermediary / Trader</p>
+                        <p class="text-lg font-bold text-orange-400 mt-1" data-lang="zh">中介 / 貿易商</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">HQ Location</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">總部位置</h3>
+                        <p class="text-lg font-bold text-white mt-1">Chennai, TN</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Strategic Priority</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">戰略優先級</h3>
+                        <p class="text-lg font-bold text-gray-400 mt-1">C-Tier (Observe)</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: PROFILE & AUTHENTICITY -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-orange-300 border-l-4 border-orange-500 pl-4" data-lang="en">1. Corporate Profile & Risk Check</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-orange-300 border-l-4 border-orange-500 pl-4" data-lang="zh">壹、 企業檔案與風險篩查</h2>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-white font-bold mb-3" data-lang="en">Entity Verification</h3>
+                            <h3 class="text-white font-bold mb-3" data-lang="zh">實體驗證</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">
+                                <strong>Ameinar International Pvt. Ltd.</strong> is a verified entity but is notably new.
+                            </p>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">
+                                <strong>Ameinar International Pvt. Ltd.</strong> 為已驗證的實體，但公司非常年輕。
+                            </p>
+                            <ul class="text-sm text-gray-300 mt-2 space-y-1">
+                                <li><strong class="text-gray-400">Reg Date:</strong> March 18, 2025 (< 1 year old)</li>
+                                <li><strong class="text-gray-400">Paid-up Capital:</strong> 1 Lakh INR (~$1,200 USD)</li>
+                                <li class="text-orange-400 text-xs mt-1"><i class="fas fa-exclamation-triangle"></i> Note: Minimum capital requirement suggests asset-light operation.</li>
+                            </ul>
+                            <p class="text-sm text-gray-300 mt-2" data-lang="zh">
+                                <span class="text-orange-400 text-xs"><i class="fas fa-exclamation-triangle"></i> 註記：實收資本為註冊最低門檻，顯示其為輕資產運營模式。</span>
+                            </p>
+                        </div>
+                        <div class="bg-gray-900/50 p-4 rounded border border-orange-900/30">
+                            <h3 class="text-white font-bold mb-3" data-lang="en">Operational Context</h3>
+                            <h3 class="text-white font-bold mb-3" data-lang="zh">營運背景</h3>
+                            <p class="text-sm text-gray-300" data-lang="en">The company markets itself as a provider of "Seamless Sourcing", "Tail Spend Management", and "Staffing". This indicates they act as a <strong>Service Provider or Middleman</strong> rather than a manufacturer with their own production demand.</p>
+                            <p class="text-sm text-gray-300" data-lang="zh">該公司自我定位為「無縫採購」、「尾端支出管理」與「人力派遣」服務商。這表明其本質為 **服務商或中間人**，而非擁有自身生產需求的製造商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: BUSINESS MODEL ANALYSIS -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">2. Business Model & Intent Analysis</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">貳、 商業模式與意圖分析</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Box 1: Sourcing Agent -->
+                    <div class="recon-box caution flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="en">1. Sourcing Agent</h3>
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="zh">1. 採購代理 (Sourcing Agent)</h3>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="en">Likely scouting for overseas clients who need Indian manufacturing but lack local presence.</p>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="zh">極可能正在為缺乏在地團隊的海外客戶尋找印度代工廠。</p>
+                        <div class="mt-auto pt-4 border-t border-gray-700">
+                            <ul class="text-xs text-orange-400 space-y-1">
+                                <li data-lang="en">• Risk: Price shopping / Brokerage</li>
+                                <li data-lang="zh">• 風險：比價工具 / 賺取差價</li>
+                                <li data-lang="en">• No direct volume guarantee</li>
+                                <li data-lang="zh">• 無直接訂單保證</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Box 2: Staffing -->
+                    <div class="recon-box neutral flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="en">2. Staffing Services</h3>
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="zh">2. 人力派遣 (Staffing)</h3>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="en">They may be pitching recruitment or staffing solutions to Foxlink.</p>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="zh">他們也可能意圖向 Foxlink 推銷人力招募或派遣服務。</p>
+                        <div class="mt-auto pt-4 border-t border-gray-700">
+                            <ul class="text-xs text-gray-400 space-y-1">
+                                <li data-lang="en">• Not relevant to Sales Dept</li>
+                                <li data-lang="zh">• 與業務部門無關 (屬 HR 範疇)</li>
+                                <li data-lang="en">• Low strategic value</li>
+                                <li data-lang="zh">• 低戰略價值</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Box 3: Opportunity -->
+                    <div class="recon-box opp flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="en">3. Hidden Projects</h3>
+                        <h3 class="text-xl font-bold text-white mb-3" data-lang="zh">3. 潛在專案 (Hidden Opps)</h3>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="en">Small possibility of holding a specific, high-margin project for a niche client.</p>
+                        <p class="text-sm text-gray-300 mb-4" data-lang="zh">微小可能性：手上握有特定利基型客戶的高毛利專案。</p>
+                        <div class="mt-auto pt-4 border-t border-gray-700">
+                            <ul class="text-xs text-green-400 space-y-1">
+                                <li data-lang="en">• Requires validation</li>
+                                <li data-lang="zh">• 需見面驗證</li>
+                                <li data-lang="en">• "High Precision" claims</li>
+                                <li data-lang="zh">• 網站聲稱有「高精密」需求</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: FIT GAP -->
+                <div class="section-divider">
+                    <span data-lang="en">Part 3: Strategic Fit Analysis</span>
+                    <span data-lang="zh">第三部：戰略契合度分析</span>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead>
+                            <tr class="bg-gray-700">
+                                <th class="p-4" data-lang="en">Dimension</th><th class="p-4" data-lang="zh">維度</th>
+                                <th class="p-4" data-lang="en">Foxlink Preference</th><th class="p-4" data-lang="zh">Foxlink 偏好</th>
+                                <th class="p-4" data-lang="en">Ameinar Reality</th><th class="p-4" data-lang="zh">Ameinar 現況</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4 font-bold text-gray-300">Model</td>
+                                <td class="p-4" data-lang="en">Direct to OEM/ODM</td>
+                                <td class="p-4" data-lang="zh">直接對接 OEM/ODM 原廠</td>
+                                <td class="p-4 text-orange-400" data-lang="en">Intermediary / Agent</td>
+                                <td class="p-4 text-orange-400" data-lang="zh">中間商 / 代理人 (隔一層)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold text-gray-300">Volume</td>
+                                <td class="p-4" data-lang="en">High Volume / Mass Production</td>
+                                <td class="p-4" data-lang="zh">大批量 / 量產規模</td>
+                                <td class="p-4" data-lang="en">Likely Small Batch / Tail Spend</td>
+                                <td class="p-4" data-lang="zh">可能為小批量 / 尾端採購</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold text-gray-300">Risk</td>
+                                <td class="p-4" data-lang="en">Established Entity (>3 yrs)</td>
+                                <td class="p-4" data-lang="zh">成熟實體 (>3年)</td>
+                                <td class="p-4 text-red-400" data-lang="en">New Startup (< 1 yr)</td>
+                                <td class="p-4 text-red-400" data-lang="zh">新創公司 (< 1年)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SECTION 4: STRATEGIC SYNTHESIS -->
+                <div class="section-divider">
+                    <span data-lang="en">Part 4: Assessment Synthesis</span>
+                    <span data-lang="zh">第四部：綜合評估</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Risk Radar</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">風險評估雷達</h4>
+                        <div class="relative w-full h-48">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                    </div>
+                    <div class="recon-box col-span-2 flex flex-col justify-center">
+                        <h4 class="font-bold text-white mb-4 text-sm" data-lang="en">Decision Matrix: CAUTION</h4>
+                        <h4 class="font-bold text-white mb-4 text-sm" data-lang="zh">決策矩陣：審慎應對</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3 bg-gray-900 p-3 rounded border border-orange-700/50">
+                                <i class="fas fa-search text-orange-500"></i>
+                                <div class="text-sm">
+                                    <span class="text-gray-200 font-bold" data-lang="en">Information Gap:</span>
+                                    <span class="text-gray-400" data-lang="en"> The "End Customer" is unknown. We are talking to a middleman.</span>
+                                    <span class="text-gray-200 font-bold" data-lang="zh">資訊斷層：</span>
+                                    <span class="text-gray-400" data-lang="zh"> 「終端客戶」不明。我們目前是在與中間人對話，而非決策者。</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 bg-gray-900 p-3 rounded">
+                                <i class="fas fa-shield-alt text-blue-500"></i>
+                                <div class="text-sm">
+                                    <span class="text-gray-200 font-bold" data-lang="en">Asset-Light:</span>
+                                    <span class="text-gray-400" data-lang="en"> Low capital suggests no factory. They are not a manufacturing competitor, but a service layer.</span>
+                                    <span class="text-gray-200 font-bold" data-lang="zh">輕資產屬性：</span>
+                                    <span class="text-gray-400" data-lang="zh"> 低資本顯示無工廠。他們不是製造競爭對手，而是服務層。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: RECOMMENDATION -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-yellow-300 border-l-4 border-yellow-500 pl-4" data-lang="en">5. Final Recommendation</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-yellow-300 border-l-4 border-yellow-500 pl-4" data-lang="zh">伍、 最終建議與行動</h2>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <p class="text-gray-300 leading-relaxed" data-lang="en">We recommend <strong class="text-yellow-400 uppercase">Cautious Engagement (Intel Gathering)</strong>. Do not allocate significant engineering resources yet. The goal of the first meeting should be purely investigative.</p>
+                    <p class="text-gray-300 leading-relaxed" data-lang="zh">我們建議 <strong class="text-yellow-400">審慎接觸 (以情報收集為主)</strong>。暫勿投入研發或工程資源。初次會議的目標應純粹為調查性質，查明其實力與意圖。</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="bg-orange-900/20 p-4 rounded border border-orange-500/50">
+                            <h4 class="font-bold text-orange-300 mb-2" data-lang="en">Defensive Meeting</h4>
+                            <h4 class="font-bold text-orange-300 mb-2" data-lang="zh">防禦性會議</h4>
+                            <p class="text-xs text-gray-400" data-lang="en">Accept the meeting but hold it locally or online. <strong>Goal:</strong> Identify who their end-client is.</p>
+                            <p class="text-xs text-gray-400" data-lang="zh">接受會議，但安排在當地或線上。<strong>目標：</strong> 套出其背後的終端客戶是誰。</p>
+                        </div>
+                        <div class="bg-gray-700/30 p-4 rounded border border-gray-500/50">
+                            <h4 class="font-bold text-gray-300 mb-2" data-lang="en">No RFQ Yet</h4>
+                            <h4 class="font-bold text-gray-300 mb-2" data-lang="zh">暫不報價</h4>
+                            <p class="text-xs text-gray-400" data-lang="en">Do not provide detailed BOM costing or samples until end-customer is verified.</p>
+                            <p class="text-xs text-gray-400" data-lang="zh">在驗證終端客戶身份前，請勿提供詳細 BOM 報價或樣品。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-orange-900/20 border border-orange-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-orange-300 font-bold" data-lang="en">Assessment Result: OBSERVATION LIST</div>
+                        <div class="text-sm text-orange-300 font-bold" data-lang="zh">評估結果：列入觀察名單 (C-Tier)</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Proceed with caution. Validate intent.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">謹慎推進，需驗證意圖。</div>
+                    </div>
+                    <button id="lang-toggle-bottom" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95">
+                        <span data-lang="en">Switch Language</span>
+                        <span data-lang="zh">切換語言</span>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-between">
+                <div class="text-xs text-gray-500">
+                    &copy; 2025 Foxlink India Strategic Team. All Rights Reserved.
+                </div>
+                <div class="text-xs text-gray-400">
+                    <span data-lang="en">Report ID: IN-CUST-2025-090</span>
+                    <span data-lang="zh">報告編號：IN-CUST-2025-090</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // Default to English as per standard protocol
+        let radarChart = null;
+
+        // Scores for Middleman: Tech Fit(2), Margin(3-maybe), Stability(1), Payment Safety(3), Volume(2)
+        const radarScores = [2, 3, 1, 3, 2]; 
+
+        const chartData = {
+            en: { labels: ['Tech Fit', 'Profit Margin', 'Stability', 'Payment Safety', 'Volume Scale'], label: 'Opportunity Score' },
+            zh: { labels: ['技術契合度', '利潤空間', '訂單穩定性', '付款安全性', '訂單規模'], label: '機會評分' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                // Hide all elements with data-lang
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                // Show elements for current lang
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                // Update Title
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = ['lang-toggle', 'lang-toggle-bottom'];
+            btns.forEach(id => {
+                const b = document.getElementById(id);
+                if(b) b.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'zh' : 'en';
+                    updateLanguageUI();
+                });
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const canvas = document.getElementById('opportunityRadar');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                radarChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: chartData[currentLang].labels,
+                        datasets: [{
+                            label: chartData[currentLang].label,
+                            data: radarScores, 
+                            backgroundColor: 'rgba(249, 115, 22, 0.2)', // Orange for caution
+                            borderColor: 'rgba(249, 115, 22, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(249, 115, 22, 1)'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            r: {
+                                angleLines: { color: '#374151' },
+                                grid: { color: '#374151' },
+                                pointLabels: { color: '#9ca3af', font: {size: 11} },
+                                ticks: { display: false, max: 5 },
+                                suggestedMin: 0,
+                                suggestedMax: 5
+                            }
+                        },
+                        plugins: { legend: { display: false } },
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Ensure English is default per standard protocol
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
