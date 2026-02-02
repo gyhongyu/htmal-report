@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: Voice Recorder SOP -->
+    <!-- AUTHOR: IT Operations -->
+    <title data-lang="en">SOP: Voice Recorder Cloud Sync Strategy</title>
+    <title data-lang="zh">標準作業程序：錄音機雲端自動同步設置</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- 核心樣式 (承襲貴司報告風格) --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        .step-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
+        .step-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        .step-number { position: absolute; top: -10px; right: -10px; font-size: 4rem; font-weight: 900; color: rgba(255,255,255,0.05); z-index: 0; }
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }
+        .recon-box.alert { border-left: 4px solid #f59e0b; }
+        .recon-box.success { border-left: 4px solid #10b981; }
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+        .section-divider { display: flex; align-items: center; margin-top: 4rem; margin-bottom: 2rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+        
+        /* Print Styles */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 10pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .bg-gray-800, .bg-gray-900, .step-card, .recon-box { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            .text-white { color: #000 !important; } 
+            .text-blue-400, .text-blue-300 { color: #000 !important; }
+            a { text-decoration: none !important; color: #000 !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- RESTORED OFFICIAL HEADER (FOXLINK STANDARD) -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Private Limited</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">中文</span>
+                    <span data-lang="zh">English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="text-center border-b border-gray-700 pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2">IT STANDARD OPERATING PROCEDURE</span>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="en">Voice Recorder Cloud Sync</h1>
+                    <h1 class="text-4xl font-bold mb-4 text-blue-400" data-lang="zh">語音錄音機雲端同步設置指南</h1>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="en">Automated Backup Strategy for High-Volume Storage</p>
+                    <p class="text-xl text-gray-300 mt-2" data-lang="zh">針對大容量存儲的自動化備份策略</p>
+                </div>
+
+                <!-- DASHBOARD METRICS -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 mt-8">
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Target App</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">目標應用</h3>
+                        <p class="text-lg font-bold text-white mt-1">Voice Recorder</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Cloud Platform</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">雲端平台</h3>
+                        <p class="text-lg font-bold text-green-400 mt-1">Google Drive</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Sync Type</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">同步類型</h3>
+                        <p class="text-lg font-bold text-yellow-400 mt-1" data-lang="en">One-Way Backup</p>
+                        <p class="text-lg font-bold text-yellow-400 mt-1" data-lang="zh">單向備份</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-600 text-center">
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="en">Storage Limit</h3>
+                        <h3 class="text-gray-400 text-xs uppercase" data-lang="zh">存儲限制</h3>
+                        <p class="text-lg font-bold text-white mt-1" data-lang="en">Unlimited*</p>
+                        <p class="text-lg font-bold text-white mt-1" data-lang="zh">無限制*</p>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: INSTALLATION -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">1. Installation & Source</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">壹、 安裝與來源確認</h2>
+                
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 mb-8">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="flex-1">
+                            <h3 class="text-white font-bold mb-3" data-lang="en">Verified Application</h3>
+                            <h3 class="text-white font-bold mb-3" data-lang="zh">官方驗證應用程式</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed mb-4" data-lang="en">To ensure data security and correct functionality, please download the specific version by developer <strong>Jakub First</strong>.</p>
+                            <p class="text-sm text-gray-300 leading-relaxed mb-4" data-lang="zh">為確保數據安全與功能正確，請務必下載由開發者 <strong>Jakub First</strong> 發布的特定版本。</p>
+                            
+                            <a href="https://play.google.com/store/apps/details?id=com.first75.voicerecorder2" target="_blank" class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded transition-colors text-sm font-bold no-underline">
+                                <i class="fab fa-google-play mr-2"></i>
+                                <span data-lang="en">Open Google Play Store</span>
+                                <span data-lang="zh">前往 Google Play 商店</span>
+                            </a>
+                        </div>
+                        <div class="bg-gray-900/50 p-4 rounded border border-blue-900/30">
+                            <div class="text-xs text-gray-400 uppercase mb-1" data-lang="en">Package ID</div>
+                            <div class="text-xs text-gray-400 uppercase mb-1" data-lang="zh">應用程式 ID</div>
+                            <code class="text-yellow-400">com.first75.voicerecorder2</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: CONFIGURATION STEPS -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="en">2. Configuration Workflow</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-blue-300 border-l-4 border-blue-500 pl-4" data-lang="zh">貳、 設定流程</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Step 1 -->
+                    <div class="step-card p-6 rounded-lg">
+                        <div class="step-number">1</div>
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3" data-lang="en">Permissions</h3>
+                            <h3 class="text-xl font-bold text-blue-400 mb-3" data-lang="zh">權限授權</h3>
+                            <p class="text-sm text-gray-300" data-lang="en">Launch the app and grant the following permissions immediately:</p>
+                            <p class="text-sm text-gray-300" data-lang="zh">啟動 App 並立即授予以下關鍵權限：</p>
+                            <ul class="mt-4 text-xs text-gray-400 space-y-2">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Microphone (麥克風)</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Storage (檔案存儲)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card p-6 rounded-lg">
+                        <div class="step-number">2</div>
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3" data-lang="en">Link Drive</h3>
+                            <h3 class="text-xl font-bold text-blue-400 mb-3" data-lang="zh">連結雲端</h3>
+                            <p class="text-sm text-gray-300" data-lang="en">Navigate to <strong>Settings > Cloud Backup</strong>.</p>
+                            <p class="text-sm text-gray-300" data-lang="zh">進入 <strong>Settings (設定) > Cloud Backup (雲端備份)</strong>。</p>
+                            <div class="mt-4 bg-gray-900 p-2 rounded border border-gray-700 text-xs">
+                                <span class="text-yellow-400">Action:</span> Select "Google Drive" and login.
+                                <br><span class="text-yellow-400">操作:</span> 選擇 "Google Drive" 並登入帳號。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card p-6 rounded-lg">
+                        <div class="step-number">3</div>
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3" data-lang="en">Upload Rules</h3>
+                            <h3 class="text-xl font-bold text-blue-400 mb-3" data-lang="zh">上傳規則</h3>
+                            <p class="text-sm text-gray-300" data-lang="en">Disable Wi-Fi restriction for instant sync.</p>
+                            <p class="text-sm text-gray-300" data-lang="zh">關閉 Wi-Fi 限制以確保即時同步。</p>
+                            <ul class="mt-4 text-xs space-y-2">
+                                <li class="flex justify-between border-b border-gray-700 pb-1">
+                                    <span>Upload on Wi-Fi only</span>
+                                    <strong class="text-red-400">OFF</strong>
+                                </li>
+                                <li class="flex justify-between border-b border-gray-700 pb-1">
+                                    <span>Auto upload</span>
+                                    <strong class="text-green-400">ON</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: SYNC LOGIC ANALYSIS -->
+                <div class="section-divider">
+                    <span data-lang="en">Part 3: Sync Logic Analysis</span>
+                    <span data-lang="zh">第三部：同步邏輯解析</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="recon-box success flex flex-col justify-center">
+                        <h4 class="font-bold text-white mb-2" data-lang="en"><i class="fas fa-cloud-upload-alt mr-2"></i>Cloud Path Structure</h4>
+                        <h4 class="font-bold text-white mb-2" data-lang="zh"><i class="fas fa-cloud-upload-alt mr-2"></i>雲端路徑結構</h4>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="en">All files are automatically stored in the root directory:</p>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="zh">所有錄音檔將自動存儲於根目錄下的：</p>
+                        <div class="mt-4 bg-black/30 p-3 rounded font-mono text-blue-300 text-sm">
+                            My Drive / Recordings / [Date_Time].mp3
+                        </div>
+                    </div>
+
+                    <div class="recon-box alert flex flex-col justify-center">
+                        <h4 class="font-bold text-white mb-2" data-lang="en"><i class="fas fa-exclamation-triangle mr-2"></i>One-Way Sync Protocol</h4>
+                        <h4 class="font-bold text-white mb-2" data-lang="zh"><i class="fas fa-exclamation-triangle mr-2"></i>單向備份協議</h4>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="en">Deleting files from the phone <strong>DOES NOT</strong> delete them from the Cloud.</p>
+                        <p class="text-sm text-gray-300 mt-2" data-lang="zh">從手機刪除檔案 <strong>不會</strong> 刪除雲端硬碟上的備份。</p>
+                        <div class="mt-4 text-xs text-yellow-500 font-bold">
+                            <span data-lang="en">Benefit: Safe to clear local storage frequently.</span>
+                            <span data-lang="zh">優勢：可隨時清理手機空間而不丟失資料。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: STRATEGIC CONCLUSION -->
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-yellow-300 border-l-4 border-yellow-500 pl-4" data-lang="en">4. Storage Strategy Conclusion</h2>
+                <h2 class="text-2xl font-bold mt-10 mb-6 text-yellow-300 border-l-4 border-yellow-500 pl-4" data-lang="zh">肆、 存儲策略結論</h2>
+                
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <p class="text-gray-300 leading-relaxed" data-lang="en">Leveraging the available Cloud Storage (e.g., 2TB plan) allows for high-fidelity recording without concern for local device limitations. The "One-Way Sync" feature acts as an automated archiving system.</p>
+                    <p class="text-gray-300 leading-relaxed" data-lang="zh">利用現有的雲端大容量空間（如 2TB 方案），可進行高音質錄音而無需擔心手機本地容量限制。「單向同步」功能實際上充當了自動歸檔系統，確保資料永久保存。</p>
+                    
+                    <div class="flex items-center space-x-4 mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded">
+                        <i class="fas fa-shield-alt text-2xl text-blue-400"></i>
+                        <div>
+                            <div class="text-sm font-bold text-white" data-lang="en">Recommended Action</div>
+                            <div class="text-sm font-bold text-white" data-lang="zh">建議行動</div>
+                            <div class="text-xs text-gray-400" data-lang="en">Periodically verify Cloud folder integrity before bulk deleting local files.</div>
+                            <div class="text-xs text-gray-400" data-lang="zh">在批量刪除手機檔案前，請定期檢查雲端資料夾的完整性。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Status: OPERATIONAL</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">狀態：可執行</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Approved for deployment.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">已核准部署。</div>
+                    </div>
+                    <button id="lang-toggle-bottom" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95">
+                        <span data-lang="en">Switch Language</span>
+                        <span data-lang="zh">切換語言</span>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-between">
+                <div class="text-xs text-gray-500">
+                    &copy; 2026 IT Operations Division. All Rights Reserved.
+                </div>
+                <div class="text-xs text-gray-400">
+                    <span data-lang="en">Doc ID: SOP-REC-2026-001</span>
+                    <span data-lang="zh">文件編號：SOP-REC-2026-001</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // Default to English as per standard
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = ['lang-toggle', 'lang-toggle-bottom'];
+            btns.forEach(id => {
+                const b = document.getElementById(id);
+                if(b) b.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'zh' : 'en';
+                    updateLanguageUI();
+                });
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

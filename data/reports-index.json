@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-01-29T18:37:46.736Z",
+  "lastUpdated": "2026-02-02T08:49:28.678Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -339,6 +339,19 @@
       "fileName": "report-1768601187095.html",
       "createdAt": "2026-01-16T22:06:27.480Z",
       "updatedAt": "2026-01-29T18:37:46.736Z"
+    },
+    {
+      "id": "report-1770022168132",
+      "title": "Voice Recorder Cloud Sync SOP",
+      "description": "語音錄音機雲端同步設置指南",
+      "categories": [
+        "內部簡報",
+        "工作報告",
+        "其他"
+      ],
+      "fileName": "report-1770022168132.html",
+      "createdAt": "2026-02-02T08:49:28.678Z",
+      "updatedAt": "2026-02-02T08:49:28.678Z"
     }
   ]
 }
