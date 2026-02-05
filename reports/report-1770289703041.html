@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: ALTO-SHAAM INDIA PRIVATE LIMITED -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Alto-Shaam India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Alto-Shaam India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Alto-Shaam India</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Alto-Shaam India</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">ALTO-SHAAM INDIA PVT LTD</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U74994PN2020FTC190138</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Private / Subsidiary)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (美資全資子公司)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (Est)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 25-50 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Type:</strong> High-margin Premium Equipment</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>類型：</strong> 高毛利專業餐飲設備</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Factory</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Pune (Maval)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Pune (Maval 工業區)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Rare manufacturing hub outside USA</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">總部外極少數製造據點</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing & Ops:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造與營運中心：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Pune (Maval):</strong> Core assembly plant. Producing "Halo Heat" holding cabinets & shelf merchandisers.</li>
+                                <li data-lang="zh"><strong>Pune (Maval):</strong> 核心組裝廠。生產 Halo Heat 保溫櫃與熱食展示櫃。</li>
+                                <li data-lang="en"><strong>Culinary Institute (Pune):</strong> Experience center for client demos and menu development.</li>
+                                <li data-lang="zh"><strong>烹飪體驗中心 (Pune):</strong> 用於客戶測試與菜單開發。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Sales Offices:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">區域銷售據點：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Delhi (NCR):</strong> Focus on North Indian Hotel chains (Marriott, Taj) & Catering.</li>
+                                <li data-lang="zh"><strong>Delhi (NCR):</strong> 專攻北印度飯店集團 (Marriott, Taj) 與外燴。</li>
+                                <li data-lang="en"><strong>Bangalore:</strong> Focus on Corporate Cafeterias (Tech Parks).</li>
+                                <li data-lang="zh"><strong>Bangalore:</strong> 覆蓋南印度科技園區食堂市場。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace:</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Direct Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">直接控股</span>
+                                <strong class="text-white">Alto-Shaam, Inc. (USA)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">99.9% Stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">99.9% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Owner</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人</span>
+                                <strong class="text-white">The Maahs Family</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Private Family Business</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">私人家族企業</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Strategy</span>
+                                <span class="text-gray-500 block" data-lang="zh">戰略風格</span>
+                                <strong class="text-blue-300">Conservative & Steady</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Asset-light to Asset-heavy</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">從輕資產轉向重資產</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Combi Ovens:</strong> Prodigi™ / Converge® (Flagship, Imported).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>多功能蒸烤箱：</strong> 旗艦產品，目前主要進口。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Holding Cabinets:</strong> Cook & Hold, Heated Shelf. <span class="text-yellow-400 font-bold">[Made in India]</span></li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>保溫熟成櫃：</strong> 核心技術產品，<span class="text-yellow-400 font-bold">[印度製造重點]</span>。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Merchandisers:</strong> Heated display for QSR/Cinema.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>熱食展示櫃：</strong> 廣泛用於電影院、便利商店。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Localization)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">BOM 拆解 (在地化需求)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Thermal:</strong> Halo Heat Cables, SSR (Solid State Relays).</li>
+                            <li data-lang="zh"><strong>熱能管理：</strong> Halo Heat 加熱電纜、固態繼電器 (SSR)。</li>
+                            
+                            <li data-lang="en"><strong>Interconnects:</strong> High-Temp Wiring Harness (>200°C), Power Connectors. <span class="text-green-400 font-bold">Foxlink Opp.</span></li>
+                            <li data-lang="zh"><strong>線束連接：</strong> 耐高溫線束 (>200°C)、工業電源連接器。<span class="text-green-400 font-bold">Foxlink 機會。</span></li>
+                            
+                            <li data-lang="en"><strong>ECU/HMI:</strong> Industrial Touch Panels, Logic PCBs.</li>
+                            <li data-lang="zh"><strong>電控單元：</strong> 工業級防油污觸控面板、控制主板。</li>
+                            
+                            <li data-lang="en"><strong>Mech:</strong> SS304 Food Grade Steel, Tempered Glass.</li>
+                            <li data-lang="zh"><strong>機構件：</strong> SS304 食品級不鏽鋼、耐熱玻璃。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Strategic Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">供應鏈缺口與需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization:</strong> Seeking local vendors for Cable Assembly & PCBA to cut import duties.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化急迫性：</strong> 尋求線束與 PCBA 的在地供應商，以降低進口關稅。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Cost Down:</strong> Need "Ruggedized" components at competitive prices to fight Rational/Unox.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>成本優化：</strong> 需具備價格競爭力的「耐用型」組件，以對抗 Rational/Unox。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Ramp-up Phase</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：產能爬坡期</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Focus: Factory Ops & Technical Service</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Technical Service Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (售後)</span>
+                                    </td>
+                                    <td data-lang="en">Training dealer technicians. Signals growing install base and service demand.</td>
+                                    <td data-lang="zh">培訓經銷商維修團隊，顯示裝機量擴大，售後壓力增加。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Assembly Technician</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Maval, Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Maval (工廠)</span>
+                                    </td>
+                                    <td data-lang="en">Continuous hiring for line workers. Confirms factory ramp-up.</td>
+                                    <td data-lang="zh">持續招募組裝技師，證實 Pune 工廠產能正在爬坡。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Regional Sales Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai/West</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Mumbai (業務)</span>
+                                    </td>
+                                    <td data-lang="en">Targeting QSR chains in West India.</td>
+                                    <td data-lang="zh">針對西印度 QSR 快餐連鎖客戶的專案銷售。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Supply Chain Coordinator</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (SCM)</span>
+                                    </td>
+                                    <td data-lang="en">Handling CKD imports & developing local vendors.</td>
+                                    <td data-lang="zh">負責處理進口料件清關與本地採購開發。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Quality Engineer (IQC)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (品管)</span>
+                                    </td>
+                                    <td data-lang="en">Checking incoming local materials (Sheet metal/Packaging).</td>
+                                    <td data-lang="zh">針對本地供應商 (金屬件/包材) 進行進料檢驗。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Consultant-Driven</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">顧問導向 (Consultant-Driven)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Kitchen Consultants:</strong> Projects (Hotels/Hospitals) heavily rely on FCSI consultants to specify brands.</li>
+                                <li data-lang="zh"><strong>廚房顧問：</strong> 大型專案 (飯店/醫院) 多由專業顧問指定規格，依賴度高。</li>
+                                
+                                <li data-lang="en"><strong>End Users:</strong> QSRs (KFC, Pizza Hut), Hotels (Marriott), Corp Cafeterias (Google/Infosys).</li>
+                                <li data-lang="zh"><strong>終端客戶：</strong> QSR 連鎖 (KFC)、飯店、企業園區食堂。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Model</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">物流模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Import:</strong> Through Mumbai/Nhava Sheva port to Pune Central Warehouse.</li>
+                                <li data-lang="zh"><strong>進口件：</strong> 經 Mumbai 港口運至 Pune 中央倉。</li>
+                                
+                                <li data-lang="en"><strong>Local:</strong> Direct dispatch from Pune factory to nationwide dealers.</li>
+                                <li data-lang="zh"><strong>國產件：</strong> 由 Pune 工廠直接發貨至全印度經銷商。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Premium Niche / Strong Brand / Growing Local Ops</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Commercial Oven Market</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度商業蒸烤箱市場排名 (Top 5)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">RATIONAL AG</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Dominant Leader >50%)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (市場霸主，市佔 >50%)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">UNOX</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Italy (Aggressive Pricing/Features)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">義大利 (高 CP 值，快速搶佔中階)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">3</td>
+                                        <td class="p-2 text-white font-bold">Alto-Shaam</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">USA (Leader in Holding/QSR)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">美國 (保溫技術與 QSR 領域最強)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Convotherm</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Traditional 5-Star Hotel choice)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (傳統五星級飯店首選)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Hoshizaki</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan (Expanding via acquisitions)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本 (透過收購積極切入)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> To fight Rational on price, Alto-Shaam MUST localize. Foxlink's high-temp harnesses and control panels can significantly reduce their BOM cost.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> 為在價格上對抗 Rational，在地化是必經之路。Foxlink 的耐高溫線束與控制面板可大幅降低其 BOM 成本。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-02</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Award] Top Workplaces USA 2025</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[榮譽] 全美最佳工作場所</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Parent company award highlights strong family culture, aiding talent attraction in India.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">母公司獲獎，強調家族企業文化，有助於在印度招募高階人才。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Product] Origin™ Multi-Cook Oven</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新品] Origin™ 系列預告</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">AI-driven temp control. Hints at future assembly lines for this model in Pune.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">主打 AI 智能溫控。暗示未來 Pune 廠可能引進此新機型的組裝線。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Event] AAHAR 2026 Prep</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[展會] 備戰 AAHAR 2026</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Will showcase "Made in India" holding cabinets significantly.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">將擴大展位，重點展示「印度製造」的保溫櫃系列。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-20:</strong> <span data-lang="en">US HQ expansion done. Improved spare parts logistics to India.</span><span data-lang="zh">美國總部擴建完成，提升全球備件物流速度。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Partnering with IHM Pune for "Alto-Shaam Academy" (Student training).</span><span data-lang="zh">與 IHM Pune 合作設立學院，培訓餐飲學生使用其設備。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-20:</strong> <span data-lang="en">QSR expansion in Tier 2/3 cities driving double-digit growth.</span><span data-lang="zh">隨著 QSR 在二三線城市展店，Q4 訂單雙位數成長。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-10:</strong> <span data-lang="en">Sourcing: Looking for precision Sheet Metal vendors in Chakan.</span><span data-lang="zh">採購團隊在 Chakan 尋找精密鈑金供應商。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Ground Action Required?</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">需要採取行動？</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Confidential data for internal use only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">本報告僅供內部參考，請勿外傳。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred from Alto-Shaam Report): 
+        // Market Share: 7 (Top 3 in premium, but niche compared to Rational)
+        // Localization: 7 (Pune factory active, but Combi still imported)
+        // Brand Power: 8 (Strong US legacy, QSR favorite)
+        // Digital Reach: 6 (B2B reliance on consultants, less digital direct)
+        // Financial Health: 8 (Private family owned, stable, conservative)
+        const radarScores = [7, 7, 8, 6, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
