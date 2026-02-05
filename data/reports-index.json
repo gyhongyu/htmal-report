@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T04:29:28.008Z",
+  "lastUpdated": "2026-02-05T08:55:50.144Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -352,6 +352,19 @@
       "fileName": "report-1770022168132.html",
       "createdAt": "2026-02-02T08:49:28.678Z",
       "updatedAt": "2026-02-02T08:50:29.712Z"
+    },
+    {
+      "id": "report-1770281748390",
+      "title": "Stanley Black & Decker India KYC Report",
+      "description": "Stanley Black & Decker India KYC Report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770281748390.html",
+      "createdAt": "2026-02-05T08:55:50.144Z",
+      "updatedAt": "2026-02-05T08:55:50.144Z"
     }
   ]
 }

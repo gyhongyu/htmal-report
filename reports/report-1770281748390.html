@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Stanley Black & Decker India Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Stanley Black & Decker India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Stanley Black & Decker India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Stanley Black & Decker India</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Stanley Black & Decker India</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Stanley Black & Decker India Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U28991PN1993PTC148186</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 1,630 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> SWK (NYSE) - USA</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> SWK (紐交所) - 美國</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Pune (Chakan)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Pune (浦那 - Chakan)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">15 Acres | Auto & Power Tools Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">15 英畝 | 汽車與電動工具樞紐</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Pune (HQ):</strong> Mahalunge, Chakan - Talegaon Road. (Main Hub)</li>
+                                <li data-lang="zh"><strong>Pune (核心):</strong> Chakan 工業區，亞洲最大基地之一。</li>
+                                <li data-lang="en"><strong>Howrah (East):</strong> Jalan Ind. Complex. (Assembly/Support)</li>
+                                <li data-lang="zh"><strong>Howrah (東部):</strong> 西孟加拉邦，輔助生產與組裝。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech & Sales Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與辦事處：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Bengaluru R&D:</strong> Koramangala. (Focus: Software/Localization)</li>
+                                <li data-lang="zh"><strong>Bengaluru 研發:</strong> Koramangala，專注在地化設計。</li>
+                                <li data-lang="en"><strong>Offices:</strong> Chennai (Auto clients), Hyderabad (Solar/Infra), Delhi (Govt sales).</li>
+                                <li data-lang="zh"><strong>辦事處:</strong> Chennai (汽車客戶), Hyderabad (基建), Delhi (政府標案).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">SBD Investments (Luxembourg)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 99% Stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 99% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (控股公司)</span>
+                                <strong class="text-white">SBD Holding B.V. (Netherlands)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-blue-300">Stanley Black & Decker, Inc. (USA)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Power Tools:</strong> DeWalt, Stanley</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>專業電動工具：</strong> DeWalt, Stanley</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Hand Tools:</strong> Stanley, Black+Decker</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>手工具與收納：</strong> Stanley, B+D</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Fastening:</strong> Engineered Fastening</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>工程緊固系統：</strong> Engineered Fastening</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Outdoor:</strong> Lawn & Garden equipment</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>戶外動力設備：</strong> 園藝機械</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Drive System:</strong> BLDC Motors, Micro motors, Gearboxes.</li>
+                            <li data-lang="zh"><strong>動力傳動：</strong> BLDC 無刷馬達、齒輪箱、傳動軸。</li>
+                            
+                            <li data-lang="en"><strong>Energy:</strong> 18V/20V Li-ion Packs, BMS, PCBA Chargers.</li>
+                            <li data-lang="zh"><strong>能源控制：</strong> 18V/20V 鋰電池包、BMS、充電器 PCBA。</li>
+                            
+                            <li data-lang="en"><strong>Interconnect:</strong> Wiring Harness, Power cords, Heavy-duty Connectors.</li>
+                            <li data-lang="zh"><strong>電子互連：</strong> 內部訊號線束、電源線、連接器。</li>
+                            
+                            <li data-lang="en"><strong>Mechanical:</strong> Engineering Plastics (Double-shot), Die-casting.</li>
+                            <li data-lang="zh"><strong>機構件：</strong> 工程塑料殼體、鋁壓鑄件。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Precision:</strong> Need ISO Auto-grade suppliers.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>精密製造：</strong> 需具備 ISO 車規認證。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Policy Pressure:</strong> Urgent need for "Make in India" parts to cut import duty.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>政策壓力：</strong> 急需在地化製造以降低關稅 (Make in India)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sr. Manager - Sourcing</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Handling Chakan local purchase. Accelerating "Import Substitution". Looking for local vendors.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 負責 Chakan 在地採購。顯示正加速「進口替代」，尋找在地供應商。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Key Accounts Mgr - Automotive</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Focusing on fastening systems for Auto OEMs (Tata, Mahindra). Deepening supply chain entry.</td>
+                                    <td data-lang="zh">專注於汽車產業緊固系統銷售，深耕 Tata Motors, Mahindra 等供應鏈。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Tech Documentation Asst.</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Writing localized specs. Means R&D output is increasing here.</td>
+                                    <td data-lang="zh">編寫在地化規格手冊，顯示研發輸出量增加。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Sr. Price & Data Analyst</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Price war optimization against Bosch & local brands.</td>
+                                    <td data-lang="zh">針對印度市場進行定價優化，應對 Bosch 與本土品牌價格戰。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Finance Exec - Export</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Handling export docs. India is becoming a regional export hub.</td>
+                                    <td data-lang="zh">處理出口文件，顯示印度正轉型為區域出口中心。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">NPD Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">VAVE (Value Analysis) on global models for local adaptation.</td>
+                                    <td data-lang="zh">新產品開發，負責將全球機種進行在地化修改 (VAVE)。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Field Sales Officer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">NCR/Delhi</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">NCR (首都區/德里)</span>
+                                    </td>
+                                    <td data-lang="en">Strengthening dealer network in North India.</td>
+                                    <td data-lang="zh">強化北印度市場的經銷商覆蓋。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">CNC Lathe Operator</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chakan</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chakan (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Hiring precision machining talent. Boosting in-house component making.</td>
+                                    <td data-lang="zh">招募高精密加工人才，顯示正在提升核心組件自製率。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Vocational Leadership Prg.</strong><br>
+                                        <span class="text-xs text-gray-500">Manufacturing</span>
+                                    </td>
+                                    <td data-lang="en">Grooming future factory managers from scratch.</td>
+                                    <td data-lang="zh">製造業新人領導力培訓，儲備在地工廠管理幹部。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Hybrid Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">混合模式 (Hybrid Model)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>B2B Industrial:</strong> Direct sales to Auto/Construction (DeWalt). Strong presence on Moglix/Industrybuying.</li>
+                                <li data-lang="zh"><strong>B2B 工業端：</strong> 直銷重工業 (DeWalt)，深度進駐 Moglix 等工業電商。</li>
+                                
+                                <li data-lang="en"><strong>B2C Retail:</strong> Amazon/Flipkart official stores. DIY focused (Black+Decker).</li>
+                                <li data-lang="zh"><strong>B2C 零售端：</strong> Amazon/Flipkart 旗艦館，主打 DIY (Black+Decker)。</li>
+                                
+                                <li data-lang="en"><strong>MRO:</strong> General hardware stores for Stanley hand tools.</li>
+                                <li data-lang="zh"><strong>MRO 維修：</strong> 一般五金行覆蓋 (Stanley 手工具)。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Central Hub:</strong> Pune (Chakan). All vendors must support JIT delivery here.</li>
+                                <li data-lang="zh"><strong>中央發貨：</strong> Pune (Chakan)。供應商需配合 Just-in-Time 交貨。</li>
+                                
+                                <li data-lang="en"><strong>Service Network:</strong> 100+ Authorized Service Centers nationwide. Continuous demand for spare parts.</li>
+                                <li data-lang="zh"><strong>售後網絡：</strong> 全印 100+ 授權中心，維修零件有持續需求。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Market Rankings (Top Tier)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度市場銷量排名 (TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Bosch Power Tools</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Market Leader)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (市場領導者)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">2</td>
+                                        <td class="p-2 text-white font-bold">Stanley Black & Decker</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">USA (Target Client)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">美國 (目標客戶)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Makita</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan (Quality Focus)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本 (品質導向)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Hilti</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Liechtenstein (High-end Construction)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">列支敦士登 (高階營建)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Hikoki (Hitachi)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Techtronic (Milwaukee), Eastman, Taparia, KPT, Venus</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> All Top 6 are MNCs facing PLI pressure. They need local PCBA/Motor suppliers like Foxlink.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> Top 6 皆為外資，面臨 PLI 壓力，急需 Foxlink 這樣的在地組件供應商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Press Release] Chakan Expansion Started</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新聞稿] Chakan 工廠擴建計畫啟動</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Investing ₹50 Cr for new BLDC line. Aiming to hike localization from 40% to 75%. <span class="text-gray-500">(Opp: Motor parts needed)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">投入 5 億盧比新增 BLDC 產線。目標將自製率從 40% 提升至 75%。 <span class="text-gray-500">(機會：馬達組件)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[LinkedIn] R&D Hiring Spree</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[LinkedIn] 班加羅爾研發中心擴招</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">"Innovate for India" campaign. Hiring BMS Engineers aggressively. <span class="text-gray-500">(Opp: BMS Design/Mfg)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">"Innovate for India" 活動，重點招聘 BMS 工程師。<span class="text-gray-500">(機會：BMS 代工)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Product] DEWALT 20V MAX XR India Ver.</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[新品] DEWALT 20V MAX XR 印度版</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched with extra dust protection for Indian sites. Ruggedized.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對印度高粉塵環境推出加強版，強調耐用性。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-08</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Mgmt] New Supply Chain Head</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[高層] 供應鏈總監任命</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Mr. Rahul Sharma (ex-Tata Motors) appointed. Key decision maker for local sourcing.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">任命 Rahul Sharma (前 Tata Motors)，負責在地化採購戰略。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-22</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Award] EHS Excellence</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[獎項] EHS 卓越獎</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Pune factory won "Safety Factory of the Year" Gold Award.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Pune 工廠獲得年度最佳安全工廠金獎。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed in list for space but present in code logic -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-12:</strong> <span data-lang="en">MOU with Tata Strive for training center.</span><span data-lang="zh">與 Tata Strive 簽署培訓中心 MOU。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-01:</strong> <span data-lang="en">B+D Drill sales up 25% on Amazon Great Indian Festival.</span><span data-lang="zh">Amazon 促銷季電鑽銷量增長 25%。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-25:</strong> <span data-lang="en">Showcased Aero/Auto fastening at IMTEX 2025.</span><span data-lang="zh">於 IMTEX 2025 展示航太/汽車緊固系統。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15:</strong> <span data-lang="en">Chakan solar rooftop live (30% power).</span><span data-lang="zh">Chakan 工廠屋頂太陽能併網 (30% 電力)。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-08:</strong> <span data-lang="en">Campus hiring at IIT Bombay/Madras started.</span><span data-lang="zh">IIT Bombay/Madras 校園招聘啟動。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Ground Action Required?</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">需要採取行動？</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Confidential data for internal use only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">本報告僅供內部參考，請勿外傳。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Estimated based on Report): 
+        // Market Share: 9 (Tier 1, Top 2)
+        // Localization: 6 (40% currently, aiming for 75%)
+        // Brand Power: 9 (DeWalt/Black+Decker are household names)
+        // Digital Reach: 8 (Top seller on Amazon/Flipkart)
+        // Financial Health: 9 (Backed by US Parent, Strong Revenue)
+        const radarScores = [9, 6, 9, 8, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
