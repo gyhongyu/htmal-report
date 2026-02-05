@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T09:24:54.009Z",
+  "lastUpdated": "2026-02-05T09:28:36.432Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -430,6 +430,19 @@
       "fileName": "report-1770283492094.html",
       "createdAt": "2026-02-05T09:24:54.009Z",
       "updatedAt": "2026-02-05T09:24:54.009Z"
+    },
+    {
+      "id": "report-1770283714328",
+      "title": "Samsung India Electronics KYC report",
+      "description": "Samsung India Electronics KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770283714328.html",
+      "createdAt": "2026-02-05T09:28:36.432Z",
+      "updatedAt": "2026-02-05T09:28:36.432Z"
     }
   ]
 }
