@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T09:08:39.120Z",
+  "lastUpdated": "2026-02-05T09:13:01.317Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -391,6 +391,19 @@
       "fileName": "report-1770282516904.html",
       "createdAt": "2026-02-05T09:08:39.120Z",
       "updatedAt": "2026-02-05T09:08:39.120Z"
+    },
+    {
+      "id": "report-1770282779236",
+      "title": "Delta Electronics India KYC Report",
+      "description": "Delta Electronics India KYC Report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770282779236.html",
+      "createdAt": "2026-02-05T09:13:01.317Z",
+      "updatedAt": "2026-02-05T09:13:01.317Z"
     }
   ]
 }
