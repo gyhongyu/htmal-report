@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Hella India Automotive (FORVIA) -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Hella India Automotive (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Hella India Automotive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Hella India Automotive</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Hella India Automotive</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Parent:</strong> FORVIA Group | <strong>Date:</strong> Feb 2026</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>母公司：</strong> FORVIA 集團 | <strong>數據基準：</strong> 2026年2月</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Hella India Automotive Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U74899DL1980PTC010755</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (FY25 Est)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 1,250 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Global Parent:</strong> FORVIA SE (France)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> FORVIA SE (法國)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Core Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Gurgaon (Dhankot)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Gurgaon (Dhankot 廠區)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Main Electronics Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">電子製造旗艦基地</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Units:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Dhankot (Gurgaon):</strong> Flagship. BCM, RKE, Pedals, Steering Sensors.</li>
+                                <li data-lang="zh"><strong>Dhankot (旗艦廠):</strong> 生產 BCM、遙控鑰匙、電子油門踏板、轉向傳感器。</li>
+                                <li data-lang="en"><strong>Derabassi (Punjab):</strong> Switches & Sensor modules assembly.</li>
+                                <li data-lang="zh"><strong>Derabassi (旁遮普):</strong> 開關與傳感器模組組裝。</li>
+                                <li data-lang="en"><strong>Pune (Chakan):</strong> Satellite unit for JIT delivery to Tata/Mahindra.</li>
+                                <li data-lang="zh"><strong>Pune (衛星廠):</strong> 針對 Tata/Mahindra 的 JIT 組裝與發貨中心。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D & Tech Centers:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與技術中心：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>HIA Pune (Baner):</strong> Global Hub for 2-Wheeler Electrification.</li>
+                                <li data-lang="zh"><strong>HIA Pune (研發總部):</strong> 全球「兩輪車電動化」研發中心 (400+ 工程師)。</li>
+                                <li data-lang="en"><strong>Chennai Design Center:</strong> Focus on Lighting Electronics.</li>
+                                <li data-lang="zh"><strong>Chennai 設計中心:</strong> 專注於照明電子開發。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (MNC):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Direct Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">直接控股</span>
+                                <strong class="text-white">Hella Holding Intl (Germany)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">100% Owned</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">100% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Strategic Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">戰略母公司</span>
+                                <strong class="text-white">HELLA GmbH & Co. KGaA</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司 (法國)</span>
+                                <strong class="text-blue-300">FORVIA SE (Euronext)</strong>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3 italic" data-lang="en"><strong>Note:</strong> Merged into FORVIA's "Electronics" Business Group. Defined as a global hub for 2W/3W EV tech.</p>
+                        <p class="text-xs text-gray-400 mt-3 italic" data-lang="zh"><strong>備註：</strong> 歸屬於 FORVIA 電子事業群，被定位為集團的二輪/三輪電動車技術中心。</p>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Body Electronics:</strong> BCM, Central Locking, RKE Keys.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>車身電子：</strong> BCM、中控鎖、遙控鑰匙。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>DAS & Sensors:</strong> EPS Torque Sensors, Accelerator Pedals (APS), Radars.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>駕駛輔助：</strong> 電子動力轉向傳感器 (EPS)、電子油門、雷達。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>xEV Specific:</strong> Motor Controllers (E-2W/3W), BMS.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電動車專用：</strong> 馬達控制器、BMS (電池管理)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Localization Focus)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">BOM 拆解 (在地化焦點)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Connectors (High Value):</strong> IP69K Waterproof, Press-Fit Pins for PCB. <span class="text-green-400 font-bold">Foxlink Core Stronghold.</span></li>
+                            <li data-lang="zh"><strong>連接器 (高價值)：</strong> IP69K 防水等級、PCB 免焊魚眼端子 (Press-Fit)。<span class="text-green-400 font-bold">Foxlink 核心強項。</span></li>
+                            
+                            <li data-lang="en"><strong>Electronics:</strong> MCUs (Renesas/NXP), MOSFETs/IGBTs for controllers.</li>
+                            <li data-lang="zh"><strong>電子元件：</strong> 車規 MCU、功率元件 (MOSFET/IGBT)。</li>
+                            
+                            <li data-lang="en"><strong>Mechanics:</strong> Engg Plastic (PA66+GF) for Pedals, Die-cast Heatsinks.</li>
+                            <li data-lang="zh"><strong>機構件：</strong> 高強度工程塑膠 (踏板用)、壓鑄散熱片。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Strategic Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">供應鏈缺口與需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization Mandate:</strong> Must increase local content from 45% to 65% by 2026.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化指令：</strong> 2026 年底前須將電子組件在地化比例從 45% 提升至 65%。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Opportunity:</strong> Seeking "German Quality at Indian Cost" to replace imported TE/Molex connectors.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>機會點：</strong> 尋求「德國品質、印度成本」的連接器，以替代 TE/Molex 進口件。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Sourcing & EV Tech</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：採購與 EV 技術</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Focus: Localizing Electronics & EV Systems</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Commodity Manager - Electronics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (採購)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Direct Hit:</strong> Sourcing PCBs & Connectors. Mandate: "Develop local alternatives to import".</td>
+                                    <td data-lang="zh"><strong>直接目標：</strong> 負責 PCB 與連接器採購。明確任務：「開發進口替代的在地供應商」。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">SQE - Electro-Mechanical</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gurgaon</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Gurgaon (品管)</span>
+                                    </td>
+                                    <td data-lang="en">Auditing North India suppliers for Switches/Connectors.</td>
+                                    <td data-lang="zh">負責稽核北印度供應商的連接器與開關品質。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">System Architect - BMS</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (研發)</span>
+                                    </td>
+                                    <td data-lang="en">Developing 400V/800V BMS for Tata Motors EV projects.</td>
+                                    <td data-lang="zh">針對 Tata Motors 電動車專案開發高壓 BMS。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Program Manager - 2W EV</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (PM)</span>
+                                    </td>
+                                    <td data-lang="en">Liaison for Ola Electric & TVS projects.</td>
+                                    <td data-lang="zh">專門對接 Ola Electric 與 TVS 的新車型專案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Purchase Executive - Plastic</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Derabassi</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Derabassi (採購)</span>
+                                    </td>
+                                    <td data-lang="en">Sourcing precision molds & injection molding partners.</td>
+                                    <td data-lang="zh">尋找精密模具與射出成型供應商。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">OEM Relationships</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">主要客戶 (OEMs)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Passenger Cars:</strong> Maruti Suzuki (Biggest Client - BCM/Keys), Tata Motors (EV), Mahindra.</li>
+                                <li data-lang="zh"><strong>乘用車：</strong> Maruti Suzuki (最大客戶), Tata Motors (EV), Mahindra。</li>
+                                
+                                <li data-lang="en"><strong>2-Wheelers:</strong> TVS Motor, Royal Enfield, Ola Electric (Controllers).</li>
+                                <li data-lang="zh"><strong>二輪車：</strong> TVS, Royal Enfield, Ola Electric (控制器)。</li>
+                                
+                                <li data-lang="en"><strong>CV:</strong> Ashok Leyland, VE Commercial.</li>
+                                <li data-lang="zh"><strong>商用車：</strong> Ashok Leyland, VE Commercial。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Aftermarket & Logistics</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">售後與物流</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Aftermarket Power:</strong> 120+ Distributors. Selling Plugs, Wipers, Horns. (Cash Cow).</li>
+                                <li data-lang="zh"><strong>售後強權：</strong> 120+ 經銷商，銷售火星塞/雨刷/喇叭，提供穩定現金流。</li>
+                                
+                                <li data-lang="en"><strong>VMI Model:</strong> Suppliers must support Vendor Managed Inventory at Gurgaon/Pune hubs.</li>
+                                <li data-lang="zh"><strong>VMI 模式：</strong> 供應商需支援 Gurgaon/Pune 樞紐的庫存管理。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Tech Leader / Strong Parent / Localizing Fast</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Auto Electronics Market</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度汽車電子市場排名 (Top Players)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Bosch India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Engine/Chassis Control)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (引擎/底盤控制)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Continental</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Clusters/Airbags)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (儀表/安全氣囊)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">3</td>
+                                        <td class="p-2 text-white font-bold">Hella India (FORVIA)</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Germany (Body Electronics/Sensors)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">德國 (車身電子/傳感器/踏板)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Valeo India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">France (Parking/Wipers)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">法國 (停車輔助/雨刷)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Minda Corp</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Locks/Wiring - Local Rival)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (鎖頭/線束 - 本土對手)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> Hella needs Foxlink's "German Quality" connectors to avoid using low-cost local parts, while replacing expensive imports.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> Hella 需要 Foxlink 的「德國品質」連接器，既能避免使用廉價本土件，又能替代昂貴的進口品。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-01</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corporate] FORVIA India Expansion</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[集團動態] FORVIA 印度擴張計畫</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Integrating Hella & Faurecia electronics. New "Cockpit Electronics" plant planned in Chennai.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">整合 Hella 與 Faurecia 電子事業，計畫在 Chennai 建立智慧座艙新廠。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-25</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Production] 10M EPS Sensors Milestone</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[量產里程碑] 1000 萬顆 EPS 傳感器</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Dhankot plant rolled out 10 millionth "Made in India" Torque Sensor (for Maruti).</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Dhankot 工廠達成 1000 萬顆「印度製造」轉向扭矩傳感器下線。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-12</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Partnership] Ola Electric MOU</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[戰略合作] 與 Ola Electric 簽署 MOU</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Co-developing Integrated BCM & Motor Controllers for new E-Motorcycles.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">合作開發新款電動機車的整合式 BCM 與馬達控制器。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-18:</strong> <span data-lang="en">Dhankot plant gets IGBC Platinum Green Building rating.</span><span data-lang="zh">Dhankot 工廠獲得 IGBC 白金級綠建築認證。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Sourcing Head calls for global PCB players to set up in India.</span><span data-lang="zh">採購總監呼籲國際 PCB 廠來印設廠，解決供應鏈痛點。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-10:</strong> <span data-lang="en">Demoed UWB Digital Key tech in Bangalore (Target: Tata 2027).</span><span data-lang="zh">在班加羅爾演示 UWB 數位鑰匙技術，預計 2027 導入 Tata。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Ground Action Required?</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">需要採取行動？</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Confidential data for internal use only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">本報告僅供內部參考，請勿外傳。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred from Hella Report): 
+        // Market Share: 8 (Tech Leader #3, Strong in BCM/Sensors)
+        // Localization: 7 (Aggressive push to 65%, but currently 45%)
+        // Brand Power: 9 (Global Tier 1, FORVIA backing, strong Aftermarket)
+        // Digital Reach: 8 (Digital Key tech, strong dealer network)
+        // Financial Health: 8 (Stable revenue, backed by Global Parent)
+        const radarScores = [8, 7, 9, 8, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

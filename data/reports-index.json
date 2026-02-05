@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T10:50:35.675Z",
+  "lastUpdated": "2026-02-05T10:56:08.572Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -599,6 +599,19 @@
       "fileName": "report-1770288633748.html",
       "createdAt": "2026-02-05T10:50:35.675Z",
       "updatedAt": "2026-02-05T10:50:35.675Z"
+    },
+    {
+      "id": "report-1770288966158",
+      "title": "Hella India Automotive KYC report",
+      "description": "Hella India Automotive KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770288966158.html",
+      "createdAt": "2026-02-05T10:56:08.572Z",
+      "updatedAt": "2026-02-05T10:56:08.572Z"
     }
   ]
 }
