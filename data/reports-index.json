@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T09:58:04.878Z",
+  "lastUpdated": "2026-02-05T10:00:35.360Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -482,6 +482,19 @@
       "fileName": "report-1770285348320.html",
       "createdAt": "2026-02-05T09:55:50.487Z",
       "updatedAt": "2026-02-05T09:55:50.487Z"
+    },
+    {
+      "id": "report-1770285633592",
+      "title": "Flex India (Flextronics) KYC report",
+      "description": "Flex India (Flextronics) KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770285633592.html",
+      "createdAt": "2026-02-05T10:00:35.360Z",
+      "updatedAt": "2026-02-05T10:00:35.360Z"
     }
   ]
 }

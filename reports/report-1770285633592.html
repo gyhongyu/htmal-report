@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Flextronics Technologies (India) Pvt Ltd -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Flex India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Flex India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">GLOBAL EMS GIANT</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Flex India (Flextronics)</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Flex India (偉創力)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Status:</strong> Cloud & Industrial Leader</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>地位：</strong> 雲端與工業製造龍頭</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Rev > ₹4,000 Cr</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Flextronics Technologies (India) Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U74999TN2001PTC046643</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Chennai HQ)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (欽奈總部)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (FY25 Est)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 4,000 Cr+</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Flex Ltd. (NASDAQ: FLEX)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Flex Ltd. (美國納斯達克)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Mega Campus</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">超級園區</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Chennai (Sriperumbudur)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Chennai (Sriperumbudur)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">100 Acres | SEZ & DTA</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">100 英畝 | 經濟特區與國內關稅區</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Chennai (Mega Hub):</strong> 100+ acres. PCBA, Metal Stamping, Injection Molding, Box Build. (Server/Auto/Lifestyle).</li>
+                                <li data-lang="zh"><strong>Chennai (超級樞紐):</strong> 100+ 英畝。PCBA、沖壓、射出、整機組裝 (伺服器/汽車/生活)。</li>
+                                <li data-lang="en"><strong>Waluj (Aurangabad):</strong> Mechanical & Wiring harness focus.</li>
+                                <li data-lang="zh"><strong>Waluj (Aurangabad):</strong> 專注於機械與線束製造。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">GBS & R&D:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">全球服務與研發：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>GBS (Chennai/Pune):</strong> Global procurement hub. Commodity Managers sit here.</li>
+                                <li data-lang="zh"><strong>GBS (Chennai/Pune):</strong> 全球採購決策樞紐。採購經理駐點於此。</li>
+                                <li data-lang="en"><strong>Design Center:</strong> Bengaluru/Pune. BOM engineering & sourcing support.</li>
+                                <li data-lang="zh"><strong>設計中心:</strong> Bengaluru/Pune。BOM 工程與採購支援。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Profile:</strong> World's 3rd Largest EMS. Serving giants like Cisco, Ford, Dyson. Deep roots in India (20+ years).</p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>背景：</strong> 全球第三大 EMS。服務 Cisco, Ford, Dyson 等巨頭。深耕印度超過 20 年。</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Direct Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">直接母公司</span>
+                                <strong class="text-white">Flextronics Asia-Pacific (Mauritius)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-blue-400">Flex Ltd. (USA/Singapore)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Cloud (CEC):</strong> Servers, Storage, Optical Switches. (Fastest Growing).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>雲端運算 (CEC)：</strong> 伺服器、儲存、交換器 (成長最快)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Lifestyle:</strong> Premium Vacuums (Dyson), Coffee Machines.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>生活家電：</strong> 高階吸塵器 (Dyson)、咖啡機。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Automotive:</strong> DC-DC Converters, Lighting, Infotainment.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>汽車電子：</strong> DC-DC 轉換器、照明、娛樂系統。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Industrial:</strong> Inverters, Medical Devices.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>工業醫療：</strong> 逆變器、醫療檢測設備。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Foxlink Fit)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解 (Foxlink 機會)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>High-Speed Connectors:</strong> Server Backplane & PCIe slots. Critical for CEC growth.</li>
+                            <li data-lang="zh"><strong>高速連接器：</strong> 伺服器背板與 PCIe 插槽。雲端業務關鍵。</li>
+                            
+                            <li data-lang="en"><strong>Cable Assemblies:</strong> Internal SAS/SATA & Power cables for Servers.</li>
+                            <li data-lang="zh"><strong>內部線束：</strong> 伺服器用 SAS/SATA 訊號線與電源線。</li>
+                            
+                            <li data-lang="en"><strong>Auto Headers:</strong> PCB headers for automotive electronics.</li>
+                            <li data-lang="zh"><strong>車用連接器：</strong> 汽車電子用 PCB 板端連接器。</li>
+                            
+                            <li data-lang="en"><strong>Mechanicals:</strong> Precision Stamping for Server Chassis & Shielding.</li>
+                            <li data-lang="zh"><strong>精密機構：</strong> 伺服器機殼與屏蔽罩沖壓。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Strategic Needs</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">戰略供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization:</strong> Urgent need for local Server component ecosystem to cut lead times.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化：</strong> 急需在地伺服器組件供應鏈以縮短交期。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>JIT Delivery:</strong> Suppliers must match Flex's agile manufacturing speed.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>JIT 交貨：</strong> 供應商需配合 Flex 的敏捷製造速度。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Strategic Moves</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：戰略意圖解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Analysis of recent key job postings</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Global Commodity Mgr - Interconnects</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai/Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai/Pune</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Target:</strong> Managing Amphenol/Molex. Explicitly seeking "Cost Competitive Alternatives".</td>
+                                    <td data-lang="zh"><strong>目標：</strong> 管理 Amphenol/Molex。明確尋找「具成本競爭力的替代方案」。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Sourcing Eng - Data Center</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">Buying Rack & PDU components. Server expansion confirmed.</td>
+                                    <td data-lang="zh">採購伺服器機櫃與 PDU 零件。確認伺服器擴產。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">NPI Program Mgr - Auto</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">New EV Charger project. Needs high-power connectors.</td>
+                                    <td data-lang="zh">新 EV 充電樁專案。需大功率連接器。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">SQE - Cable & Harness</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">Auditing crimping quality & impedance tests. High quality standard.</td>
+                                    <td data-lang="zh">稽核壓接品質與阻抗測試。高品質標準。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Production Lead - SMT</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">Managing new high-speed SMT lines for server motherboards.</td>
+                                    <td data-lang="zh">管理新設的高速 SMT 產線 (伺服器主板)。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Mech Design Eng</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">DFM support for plastic molding.</td>
+                                    <td data-lang="zh">塑膠模具 DFM 支援。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Business Model & Clients</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 商業模式與客戶</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Model -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">High Reliability Focus</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">聚焦高可靠度 (HRS)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Strategy:</strong> Pivoting from Consumer Electronics to "Cloud, Auto, Industrial". Higher margin.</li>
+                                <li data-lang="zh"><strong>策略：</strong> 從消費電子轉向「雲端、汽車、工業」。追求高毛利。</li>
+                                
+                                <li data-lang="en"><strong>Logistics:</strong> FTWZ status in Chennai allows duty-free import/export & bonded repair.</li>
+                                <li data-lang="zh"><strong>物流：</strong> 擁有 FTWZ (自貿倉儲) 優勢，可保稅進出口與維修。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Clients -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Key Global Accounts</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">核心全球客戶</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Data Center:</strong> Cisco, HP Enterprise (HPE), Dell.</li>
+                                <li data-lang="zh"><strong>資料中心：</strong> Cisco, HP Enterprise (HPE), Dell.</li>
+                                
+                                <li data-lang="en"><strong>Lifestyle:</strong> Dyson (Exclusive India partner), Bose.</li>
+                                <li data-lang="zh"><strong>生活家電：</strong> Dyson (印度獨家夥伴), Bose.</li>
+                                
+                                <li data-lang="en"><strong>Auto/Ind:</strong> Ford, Mahindra, Enphase Energy.</li>
+                                <li data-lang="zh"><strong>汽車/工業：</strong> Ford, Mahindra, Enphase Energy.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Tech & Quality Leader / Vertical Integration</p>
+                    </div>
+
+                    <!-- Top Competitors Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">EMS Market Position</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">EMS 市場地位</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Segment</th>
+                                        <th class="p-2" data-lang="en">Flex Position</th><th class="p-2" data-lang="zh">Flex 地位</th>
+                                        <th class="p-2" data-lang="en">Key Rivals</th><th class="p-2" data-lang="zh">主要對手</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-white">Server / Cloud</td>
+                                        <td class="p-2 text-green-400 font-bold" data-lang="en">#1 Leader</td>
+                                        <td class="p-2 text-green-400 font-bold" data-lang="zh">第一名</td>
+                                        <td class="p-2 text-gray-400">Jabil, Foxconn</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold">Lifestyle</td>
+                                        <td class="p-2 text-gray-300" data-lang="en">Top Tier</td>
+                                        <td class="p-2 text-gray-300" data-lang="zh">一線大廠</td>
+                                        <td class="p-2 text-gray-400">Dixon, Amber</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold">Automotive</td>
+                                        <td class="p-2 text-gray-300" data-lang="en">Growing Fast</td>
+                                        <td class="p-2 text-gray-300" data-lang="zh">快速成長</td>
+                                        <td class="p-2 text-gray-400">Sanmina, Motherson</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3 p-2 bg-blue-900/20 border border-blue-500/30 rounded">
+                                <p class="text-xs text-blue-300" data-lang="en"><strong>Foxlink Opportunity:</strong> 1. High Speed Server Cables (Direct replacement for imports). 2. Automotive Connectors (Non-China origin).</p>
+                                <p class="text-xs text-blue-300" data-lang="zh"><strong>Foxlink 機會點：</strong> 1. 高速伺服器線束 (直接替代進口)。 2. 車用連接器 (非中資產地)。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-02</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Strategy] Server Export Hub</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[戰略] 伺服器出口樞紐</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Chennai to become Top 3 global cloud mfg hubs. Exports to double in 2026.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Chennai 將成為全球三大雲端製造中心之一。2026 出口翻倍。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Sustainability] Zero Waste Factory</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[永續] 零廢棄物工廠</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Chennai plant achieved "Zero Waste to Landfill". Suppliers must align packing.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Chennai 工廠達成零廢棄物認證。供應商需配合環保包材。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Hiring] GBS Expansion</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[招聘] GBS 中心擴編</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Pune GBS hiring 500+ supply chain experts with AI analytics skills.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Pune 全球服務中心擴招 500+ 具 AI 分析能力的供應鏈專家。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Product] Medical Device Mass Production</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[產品] 醫療設備量產</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Started volume prod of new portable ultrasound for GE HealthCare.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">開始為 GE HealthCare 量產新型可攜式超音波儀。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Advanced Mfg Training Center launched in TN.</span><span data-lang="zh">在泰米爾納德邦設立先進製造培訓中心。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">New Power Electronics Lab in Bangalore for EV.</span><span data-lang="zh">班加羅爾啟用 EV 功率電子實驗室。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Strategic Action Required</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">戰略行動建議</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Pitch High-Speed Server Interconnects.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">主打高速伺服器連接方案。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Flex India): 
+        // Market Share: 9 (Leader in Server/Medical, Top 3 EMS)
+        // Localization: 9 (Huge Chennai campus, vertical integration)
+        // Brand Power: 8 (Top 3 Global EMS)
+        // Digital Reach: 7 (B2B focus, strong internal systems)
+        // Financial Health: 9 (NASDAQ listed parent, strong India revenue)
+        const radarScores = [9, 9, 8, 7, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)', // Blue for Flex
+                        borderColor: 'rgba(37, 99, 235, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(37, 99, 235, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
