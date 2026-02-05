@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T10:14:46.184Z",
+  "lastUpdated": "2026-02-05T10:25:15.491Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -534,6 +534,19 @@
       "fileName": "report-1770286483910.html",
       "createdAt": "2026-02-05T10:14:46.184Z",
       "updatedAt": "2026-02-05T10:14:46.184Z"
+    },
+    {
+      "id": "report-1770287113837",
+      "title": "Sonodyne Technologies KYC report",
+      "description": "Sonodyne Technologies KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770287113837.html",
+      "createdAt": "2026-02-05T10:25:15.491Z",
+      "updatedAt": "2026-02-05T10:25:15.491Z"
     }
   ]
 }

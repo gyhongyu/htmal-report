@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Sonodyne Technologies Pvt. Ltd. -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Sonodyne India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Sonodyne India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-teal-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">PREMIUM AUDIO</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Sonodyne Technologies</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Sonodyne Technologies (聲擎)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Status:</strong> National Audio Champion</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>地位：</strong> 國家級音響精品</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-teal-400">Niche Leader</div>
+                            <div class="text-xs text-gray-500 uppercase">Pro Audio & Hi-Fi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Sonodyne Technologies Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U32202WB2001PTC093674</p>
+                        <p class="text-xs text-teal-400 mt-2" data-lang="en">Status: Active (Kolkata HQ)</p>
+                        <p class="text-xs text-teal-400 mt-2" data-lang="zh">狀態：活躍 (加爾各答總部)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (FY25 Est)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 250 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Type:</strong> High Margin / Low Volume</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>類型：</strong> 高毛利 / 精品製造</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Mfg Hub</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">製造樞紐</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Falta SEZ (West Bengal)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Falta 經濟特區 (西孟加拉邦)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Export Focused Unit</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">出口導向型工廠</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Falta SEZ (Core):</strong> Highly integrated. Woodworking (MDF cabinets), Die-casting, & Electronics assembly under one roof.</li>
+                                <li data-lang="zh"><strong>Falta SEZ (核心)：</strong> 高度垂直整合。木工 (MDF 箱體)、壓鑄、電子組裝一條龍。</li>
+                                <li data-lang="en"><strong>Mumbai Center:</strong> Experience & Sales center for Bollywood/Media clients.</li>
+                                <li data-lang="zh"><strong>孟買中心：</strong> 針對寶萊塢/媒體客戶的體驗與銷售中心。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D & Design:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與設計：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Kolkata Design Lab:</strong> Focus on Electro-acoustics, DSP algorithms & Class-D amplifier modules.</li>
+                                <li data-lang="zh"><strong>加爾各答設計實驗室：</strong> 專注電聲學、DSP 演算法與 D 類擴大機模組開發。</li>
+                                <li data-lang="en"><strong>Testing:</strong> In-house Anechoic Chamber for precision audio measurement.</li>
+                                <li data-lang="zh"><strong>測試：</strong> 擁有廠內無響室進行精密音頻測試。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Profile:</strong> Boutique Family Business (Mukherjee Family). "Engineer-led". High focus on tech specs, not blind expansion.</p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>背景：</strong> 精品家族企業 (Mukherjee 家族)。「工程師治國」。專注技術規格，不盲目擴張。</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Promoter</span>
+                                <span class="text-gray-500 block" data-lang="zh">創辦人/推廣者</span>
+                                <strong class="text-white">Mukherjee Family</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Legacy</span>
+                                <span class="text-gray-500 block" data-lang="zh">傳承</span>
+                                <strong class="text-teal-400">Pioneers of Indian Hi-Fi</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Studio Monitors:</strong> SRP, PM Series. Active reference speakers. (Export Lead).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>錄音室監聽：</strong> SRP/PM 系列。主動式參考級喇叭 (出口主力)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Residential:</strong> Alaap, Malhar series. Soundbars, Wireless.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>住宅音響：</strong> Alaap/Malhar 系列。Soundbar、無線音響。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Pro Audio:</strong> Ceiling speakers, Line Arrays for commercial install.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>商業音響：</strong> 吸頂喇叭、線陣列系統 (商場/戲院)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Foxlink Fit)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解 (Foxlink 機會)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Audio Connectors:</strong> XLR, TRS (6.35mm). Gold plated contacts essential.</li>
+                            <li data-lang="zh"><strong>音訊連接器：</strong> XLR, TRS (6.35mm)。需鍍金觸點以防失真。</li>
+                            
+                            <li data-lang="en"><strong>Internal Wiring:</strong> High purity OFC with excellent shielding.</li>
+                            <li data-lang="zh"><strong>機內線：</strong> 高純度無氧銅 (OFC) 與優異屏蔽層。</li>
+                            
+                            <li data-lang="en"><strong>Power Modules:</strong> Toroidal Transformers (AB Class) & SMPS (D Class).</li>
+                            <li data-lang="zh"><strong>電源模組：</strong> 環形變壓器 (AB類) 與開關電源 (D類)。</li>
+                            
+                            <li data-lang="en"><strong>Chips:</strong> DSP chips (Analog Devices/TI) for crossovers.</li>
+                            <li data-lang="zh"><strong>晶片：</strong> 數位分音用 DSP 晶片 (ADI/TI)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Sourcing Strategy</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">採購策略</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization:</strong> Seeking Indian alternatives to imported Neutrik/Amphenol connectors to cut costs/lead time.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化：</strong> 尋求 Neutrik/Amphenol 進口連接器的印度替代品，以降低成本與交期。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Export Quality:</strong> Components must meet global standards as >50% products are exported.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>出口品質：</strong> 超過 50% 產品出口，元件必須符合國際標準。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Innovation Focus</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：創新焦點</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Analysis of recent key job postings in Kolkata</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sourcing Manager - Electronics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Kolkata</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Kolkata (加爾各答)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Target:</strong> Connectors & Passives. Must know SEZ procedures.</td>
+                                    <td data-lang="zh"><strong>目標：</strong> 連接器與被動元件。需熟悉 SEZ 流程。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Electro-Acoustic Eng</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Kolkata</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Kolkata (加爾各答)</span>
+                                    </td>
+                                    <td data-lang="en">Designing new drivers & cabinets using Klippel system.</td>
+                                    <td data-lang="zh">使用 Klippel 系統設計新單體與箱體。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Embedded Eng - Audio DSP</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Kolkata</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Kolkata (加爾各答)</span>
+                                    </td>
+                                    <td data-lang="en">Developing Wi-Fi streaming speakers. Smart audio push.</td>
+                                    <td data-lang="zh">開發 Wi-Fi 串流音響。推動智慧音訊產品。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Production Sup - Cabinet</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Falta SEZ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Falta SEZ (工廠)</span>
+                                    </td>
+                                    <td data-lang="en">Managing woodwork & painting. Custom orders increasing.</td>
+                                    <td data-lang="zh">管理木工與噴漆。客製化訂單增加。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">App Developer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Remote/Kolkata</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">遠端/加爾各答</span>
+                                    </td>
+                                    <td data-lang="en">Building iOS/Android EQ control app. Shift to digital user exp.</td>
+                                    <td data-lang="zh">開發 EQ 控制 App。轉向數位用戶體驗。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">QC Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Falta SEZ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Falta SEZ (工廠)</span>
+                                    </td>
+                                    <td data-lang="en">Listening tests & instrument testing for frequency consistency.</td>
+                                    <td data-lang="zh">負責聽測與儀器測試，確保頻響一致性。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Business Model & Clients</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 商業模式與客戶</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Channels -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Channel Strategy</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路策略</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Pro Audio (B2B):</strong> Via global distributors to recording studios.</li>
+                                <li data-lang="zh"><strong>專業音響 (B2B):</strong> 透過全球代理商銷售給錄音室。</li>
+                                
+                                <li data-lang="en"><strong>Home Audio (B2C):</strong> Boutique audio stores & Croma premium outlets.</li>
+                                <li data-lang="zh"><strong>家用音響 (B2C):</strong> 高階音響店與 Croma 精選門市。</li>
+                                
+                                <li data-lang="en"><strong>DTC:</strong> Official website for Wireless series.</li>
+                                <li data-lang="zh"><strong>DTC:</strong> 官網直銷無線系列。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Clients -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">End Users</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">終端客戶</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Studios:</strong> Hollywood & Bollywood mix engineers (Nearfield monitors).</li>
+                                <li data-lang="zh"><strong>錄音室：</strong> 好萊塢與寶萊塢混音師 (近場監聽)。</li>
+                                
+                                <li data-lang="en"><strong>Commercial:</strong> PVR Cinemas, ITC Hotels (Background music).</li>
+                                <li data-lang="zh"><strong>商業安裝：</strong> PVR 影城、ITC 飯店 (背景音樂)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">High Brand Power / Niche Leader</p>
+                    </div>
+
+                    <!-- Top Competitors Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">Pro Audio Market Position</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">專業音響市場地位</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Brand</th><th class="p-2" data-lang="zh">品牌</th>
+                                        <th class="p-2" data-lang="en">Profile</th><th class="p-2" data-lang="zh">特點</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 text-gray-400">1</td>
+                                        <td class="p-2 text-gray-300">Genelec</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Industry Standard (Finland)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">行業標準 (芬蘭)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 text-gray-400">2</td>
+                                        <td class="p-2 text-gray-300">Yamaha</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Entry Level Leader (Japan)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">入門級首選 (日本)</td>
+                                    </tr>
+                                    <tr class="bg-teal-900/40 border-l-4 border-teal-500">
+                                        <td class="p-2 font-bold text-white">3</td>
+                                        <td class="p-2 font-bold text-teal-400">Sonodyne</td>
+                                        <td class="p-2 text-gray-300" data-lang="en">High Value / Metal Cabinet</td>
+                                        <td class="p-2 text-gray-300" data-lang="zh">高性價比 / 金屬箱體</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3 p-2 bg-blue-900/20 border border-blue-500/30 rounded">
+                                <p class="text-xs text-blue-300" data-lang="en"><strong>Foxlink Opportunity:</strong> Pitch High-Quality Gold Plated XLR/TRS Connectors & WiFi Modules. Support their shift to wireless.</p>
+                                <p class="text-xs text-blue-300" data-lang="zh"><strong>Foxlink 機會點：</strong> 主打高品質鍍金 XLR/TRS 連接器與 Wi-Fi 模組。支援其無線化轉型。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-teal-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-01</div>
+                        <div>
+                            <strong class="text-teal-400 block text-sm" data-lang="en">[Product] "Alaap 2" Wireless Speaker</strong>
+                            <strong class="text-teal-400 block text-sm" data-lang="zh">[新品] "Alaap 2" 智慧音箱</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched with AirPlay 2 & Chromecast. Shift from analog to digital stream.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">推出支援 AirPlay 2 的第二代產品。正式轉向數位串流。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-22</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Event] NAMM Show 2026</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[展會] NAMM Show 參展</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Showcased flagship SRP 800 upgrade. Positive reviews from Sound on Sound.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">在美國展示旗艦級 SRP 800 改款。獲得業界好評。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-18</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Strategy] OEM Business Expansion</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[戰略] 代工業務 (OEM) 擴張</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Manufacturing cabinets & amps for a European audio brand at Falta.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Falta 工廠開始為某歐洲音響品牌代工箱體與擴大機。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-10</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Award] Top Exporter</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[獎項] 頂級出口商</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Received PLEXCONCIL Gold Award for Consumer Electronics exports.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">獲得電子出口促進委員會頒發的消費電子出口金獎。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">R&D Whitepaper: GaN Power in Class-D Amps.</span><span data-lang="zh">發布白皮書：氮化鎵電源在 D 類擴大機的應用。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-teal-900/30 border border-teal-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-teal-300 font-bold" data-lang="en">Strategic Action Required</div>
+                        <div class="text-sm text-teal-300 font-bold" data-lang="zh">戰略行動建議</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Offer Gold-Plated Connectors & Wi-Fi Modules.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">提供鍍金連接器與 Wi-Fi 模組方案。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Sonodyne): 
+        // Market Share: 4 (Niche player, low volume)
+        // Localization: 9 (High vertical integration, SEZ)
+        // Brand Power: 9 (National Champion, high respect)
+        // Digital Reach: 5 (Just starting smart speakers)
+        // Financial Health: 8 (Profitable boutique, export revenue)
+        const radarScores = [4, 9, 9, 5, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(20, 184, 166, 0.2)', // Teal for Sonodyne
+                        borderColor: 'rgba(20, 184, 166, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(20, 184, 166, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
