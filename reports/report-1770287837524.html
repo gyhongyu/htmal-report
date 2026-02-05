@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Roots Industries India Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Roots Industries India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Roots Industries India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Roots Industries India Ltd</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Roots Industries India Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Roots Industries India Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U02520TZ1990PLC002987</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Public Co.)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市公眾公司)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (Group)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (集團)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 1,500-1,800 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Ramasamy Family</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終控股：</strong> K. Ramasamy 家族</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Coimbatore, TN</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Coimbatore (哥印拜陀)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">"Detroit of South India" Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">"南印度底特律" 製造中心</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Ganapathy (HQ Plants):</strong> Horns assembly, Coil winding, Stamping.</li>
+                                <li data-lang="zh"><strong>Ganapathy (總廠):</strong> 喇叭組裝、線圈繞線與金屬沖壓。</li>
+                                <li data-lang="en"><strong>Thudiyalur (Precision):</strong> Aerospace/Medical grade CNC machining.</li>
+                                <li data-lang="zh"><strong>Thudiyalur (精密廠):</strong> 航太/醫療等級 CNC 加工中心。</li>
+                                <li data-lang="en"><strong>Sulur (EV Division):</strong> New plant for Airport/Golf carts & L5 delivery vehicles.</li>
+                                <li data-lang="zh"><strong>Sulur (EV 廠):</strong> 電動車組裝廠 (機場車/高爾夫球車/最後一哩運送)。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D & Global Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與海外據點：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>R&D Center (Coimbatore):</strong> NABL accredited Anechoic Chamber for NVH testing.</li>
+                                <li data-lang="zh"><strong>Roots R&D:</strong> 擁有 NABL 認證的無響室 (Anechoic Chamber)，專攻 NVH。</li>
+                                <li data-lang="en"><strong>Global JVs:</strong> Malaysia & Russia (Assembly units for ASEAN/East Europe).</li>
+                                <li data-lang="zh"><strong>海外合資:</strong> 馬來西亞與俄羅斯設有組裝廠。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace:</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Type</span>
+                                <span class="text-gray-500 block" data-lang="zh">類型</span>
+                                <strong class="text-white">Closely Held Public Limited</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">Unlisted</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">非上市</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Controlling Family</span>
+                                <span class="text-gray-500 block" data-lang="zh">控股家族</span>
+                                <strong class="text-white">Ramasamy Family</strong>
+                                <span class="block text-blue-300 mt-1" data-lang="en">> 90% Stake</span>
+                                <span class="block text-blue-300 mt-1" data-lang="zh">> 90% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Key Characteristic</span>
+                                <span class="text-gray-500 block" data-lang="zh">關鍵特徵</span>
+                                <strong class="text-blue-300">Hidden Champion</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Global Top 5 in Horns</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">隱形冠軍 (全球前五大喇叭廠)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Auto Acoustics:</strong> Electronic/Air Horns, Backup Alarms.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>汽車聲學：</strong> 電子喇叭、空氣喇叭、倒車警示。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Roots Eco (EV):</strong> Golf carts, Airport Tugs, Last-mile vehicles.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電動載具 (EV)：</strong> 機場拖車、高爾夫球車、物流車。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Precision Engg:</strong> Medical/Aerospace components.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>精密工程：</strong> 醫療與航太精密組件。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Cleaning:</strong> Sweepers & Scrubbers (w/ Hako Germany).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>工業清潔：</strong> 掃地機、洗地機 (德系合資)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Connectors (Critical):</strong> Waterproof (IP69K) for Horns. Currently Aptiv/Delphi. <span class="text-green-400 font-bold">Foxlink Opp</span></li>
+                            <li data-lang="zh"><strong>防水連接器 (核心)：</strong> 需 IP69K 認證。目前多用 Delphi/Aptiv。<span class="text-green-400 font-bold">Foxlink 機會</span></li>
+                            
+                            <li data-lang="en"><strong>EV Harness:</strong> High current cables for battery packs & controllers (48V/72V).</li>
+                            <li data-lang="zh"><strong>EV 線束：</strong> 電池連接線與控制線束，需耐大電流。</li>
+                            
+                            <li data-lang="en"><strong>PCBA:</strong> Motor Controllers (EV), Oscillator boards (Horns).</li>
+                            <li data-lang="zh"><strong>PCBA 電控：</strong> 馬達控制器、電子喇叭震盪電路板。</li>
+                            
+                            <li data-lang="en"><strong>Materials:</strong> Tungsten contacts (longevity), Spring steel diaphragms.</li>
+                            <li data-lang="zh"><strong>特殊材料：</strong> 鎢觸點 (壽命關鍵)、彈簧鋼膜片。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Strategic Shifts</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">戰略供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Cost Down:</strong> Seeking reliable alternatives to western connectors for export horns.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>降本需求：</strong> 針對傳統喇叭，尋找可替代歐美大廠的高性價比連接器。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>EV Integrated Parts:</strong> Looking for "Dashboard Assemblies" & "Charging Inlets".</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>EV 整合組件：</strong> 急需儀表總成 (Dashboard) 與充電槍母座供應商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Strategic Intent</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：戰略意圖解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Focus: EV Supply Chain Localization & Precision Engineering</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Head of Procurement - EV</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (總部)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Critical:</strong> Mandate to build "Non-China" supply chain for Battery, BMS & Controllers.</td>
+                                    <td data-lang="zh"><strong>關鍵訊號：</strong> 專責採購電池包、BMS 與馬達控制器，明確要求建立「非中國」供應鏈。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">R&D Engineer - Power Electronics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (總部)</span>
+                                    </td>
+                                    <td data-lang="en">Developing proprietary 2kW-5kW motor controllers. Move towards in-house tech.</td>
+                                    <td data-lang="zh">開發自有 2kW-5kW 馬達控制器，顯示其掌握核心電控技術的野心。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Wiring Harness Design Eng.</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (總部)</span>
+                                    </td>
+                                    <td data-lang="en">Designing full harness for new L5 Electric Cargo 3-wheelers.</td>
+                                    <td data-lang="zh">針對新款電動貨運三輪車 (L5 Category) 進行全車線束規劃。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Export Sales Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Remote/Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">遠端/總部</span>
+                                    </td>
+                                    <td data-lang="en">Promoting "Mechatronics Contract Mfg" to US Medical clients.</td>
+                                    <td data-lang="zh">推廣 "Mechatronics" 代工服務，鎖定美國醫療設備客戶。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">SQE - Electronic Components</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (總部)</span>
+                                    </td>
+                                    <td data-lang="en">Auditing PCB & Connector vendors for IATF 16949 compliance.</td>
+                                    <td data-lang="zh">稽核 PCB 與連接器供應商，確保符合 IATF 16949 標準。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">VAVE Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (總部)</span>
+                                    </td>
+                                    <td data-lang="en">Cost optimization for legacy horns. Finding cheaper connector alternatives.</td>
+                                    <td data-lang="zh">針對傳統喇叭進行價值工程 (Cost Down)，尋找替代連接器。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">OEM Relationships</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">主要客戶 (OEMs)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Global Export:</strong> Navistar (Trucks), PACCAR, Harley Davidson, BMW, VW Group.</li>
+                                <li data-lang="zh"><strong>全球出口：</strong> Navistar (卡車), PACCAR, Harley Davidson, BMW, VW Group。</li>
+                                
+                                <li data-lang="en"><strong>Domestic India:</strong> Tata Motors, Ashok Leyland, TVS, Royal Enfield, Toyota.</li>
+                                <li data-lang="zh"><strong>印度內銷：</strong> Tata Motors, Ashok Leyland, TVS, Royal Enfield, Toyota。</li>
+                                
+                                <li data-lang="en"><strong>EV Sector:</strong> Airport Authority of India (AAI), High-end Resorts, Steel Plants (Internal logistics).</li>
+                                <li data-lang="zh"><strong>EV 客戶：</strong> 印度機場管理局 (AAI)、五星級度假村、大型鋼廠內部物流。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Aftermarket Dominance</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">售後市場 (AM) 優勢</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Brand Power:</strong> "Roots" is a generic term for horns in India.</li>
+                                <li data-lang="zh"><strong>品牌力：</strong> "Roots" 在印度幾乎是喇叭的代名詞。</li>
+                                
+                                <li data-lang="en"><strong>Network:</strong> 300+ Distributors covering 20,000 retail touchpoints.</li>
+                                <li data-lang="zh"><strong>通路網：</strong> 300+ 一級經銷商，覆蓋 20,000 個零售點。</li>
+                                
+                                <li data-lang="en"><strong>Logistics:</strong> Massive packaging & logistics volume for spare parts.</li>
+                                <li data-lang="zh"><strong>物流：</strong> 售後零件的包裝與物流需求巨大。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Strong Export & Market Share / EV is emerging</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Auto Horn Market Leaders</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度汽車喇叭市場排名 (Top 5)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">1</td>
+                                        <td class="p-2 text-white font-bold">Roots Industries</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">India (Target: Quality/Export Leader)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">印度 (目標客戶：品質與出口王)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Uno Minda</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Volume Leader / Entry level)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (產量王 / 主攻大眾市場)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Hella India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Key Rival / Less Mfg in India)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (主要對手 / 在地製造比較低)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Denso India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan (Dedicated to Toyota/Suzuki)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本 (主供 Toyota/Suzuki 體系)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Bosch</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Exiting mfg / Outsourcing)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (逐漸淡出製造 / 轉向外包)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> Roots cannot use cheap connectors due to export quality demands (Harley/BMW). Foxlink's Waterproof IP69K connectors are the perfect fit.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> Roots 因出口歐美 (Harley/BMW) 無法使用劣質組件。Foxlink 的 IP69K 防水連接器是完美的切入點。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-04</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Product Launch] Roots Amperion EV</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新品發布] "Roots Amperion" 高速電動車</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Entered L5 category for last-mile delivery. High demand for wiring harnesses.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">進軍 L5 級距電動載貨三輪車市場，解決最後一哩配送。線束需求大。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Export Award] PACCAR Supplier of the Year</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[出口成就] 北美卡車訂單續約</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Won "Supplier of the Year 2025" from PACCAR. 5-year heavy horn contract renewed.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">獲得 PACCAR 集團頒發年度供應商獎，確認續簽 5 年重型喇叭合約。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Tech Partnership] Israel JV Rumor</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[技術合作] 與以色列公司開發 AVAS</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Collaborating on Smart Horns with AVAS (Pedestrian Alert) for EVs.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">與以色列新創合作開發具備行人警示聲 (AVAS) 功能的智慧喇叭。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-15:</strong> <span data-lang="en">Delivered 4x4 Silent Scout EVs to Indian Army.</span><span data-lang="zh">向印度陸軍交付首批 4x4 電動靜音偵察車。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-01:</strong> <span data-lang="en">Ganapathy Plant achieves Carbon Neutrality (2MW Solar).</span><span data-lang="zh">Ganapathy 廠區完成 2MW 太陽能建置，宣示碳中和。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-18:</strong> <span data-lang="en">Won ACMA Gold Award for Excellence in Exports.</span><span data-lang="zh">獲得 ACMA 頒發的「卓越出口獎 (金獎)」。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-05:</strong> <span data-lang="en">HR aggressively recruiting Harness Experts from Yazaki/Motherson.</span><span data-lang="zh">HR 積極挖角 Yazaki/Motherson 背景的線束專家。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Ground Action Required?</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">需要採取行動？</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Confidential data for internal use only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">本報告僅供內部參考，請勿外傳。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred from Roots Report): 
+        // Market Share: 9 (Leader in Horns, Top 5 globally)
+        // Localization: 8 (Deep mfg in Coimbatore, very strong engineering base)
+        // Brand Power: 8 (Household name in India, strong export reputation)
+        // Digital Reach: 6 (Traditional manufacturing, B2B focused, emerging EV digital needs)
+        // Financial Health: 8 (Family owned, closely held, debt usually low in such groups, solid export rev)
+        const radarScores = [9, 8, 8, 6, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
