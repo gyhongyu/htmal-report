@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T08:58:36.946Z",
+  "lastUpdated": "2026-02-05T09:08:39.120Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -378,6 +378,19 @@
       "fileName": "report-1770281915478.html",
       "createdAt": "2026-02-05T08:58:36.946Z",
       "updatedAt": "2026-02-05T08:58:36.946Z"
+    },
+    {
+      "id": "report-1770282516904",
+      "title": "Tower Manufacturing Corp (USA) KYC report",
+      "description": "Tower Manufacturing Corp (USA) KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770282516904.html",
+      "createdAt": "2026-02-05T09:08:39.120Z",
+      "updatedAt": "2026-02-05T09:08:39.120Z"
     }
   ]
 }

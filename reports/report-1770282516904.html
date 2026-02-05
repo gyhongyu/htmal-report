@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Tower Manufacturing Corporation (USA) -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Tower Manufacturing Corp (Feb 2026)</title>
+    <title data-lang="zh">國際買家 KYC 深度報告：Tower Manufacturing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">INTERNATIONAL BUYER</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Tower Manufacturing Corp (USA)</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Tower Manufacturing Corp (USA)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Status:</strong> Seeking India Entry</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>狀態：</strong> 尋求印度供應鏈</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-purple-400">US Buyer</div>
+                            <div class="text-xs text-gray-500 uppercase">SME Niche Leader</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Intent</span>
+                    <span data-lang="zh">1. 企業身份與採購意向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Tower Manufacturing Corp.</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>Location:</strong> Providence, RI, USA</p>
+                        <p class="text-xs text-purple-400 mt-2" data-lang="en">Status: International Buyer (No India Office)</p>
+                        <p class="text-xs text-purple-400 mt-2" data-lang="zh">狀態：國際買家 (尚無印度實體)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Buying Power</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">採購實力估算</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">$50M - 80M</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Rev USD)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Structure:</strong> Private (Family/Mgmt)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>架構：</strong> 私有企業 (家族/管理層)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Current Mfg Base</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">當前製造基地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Shenzhen, China</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">中國深圳 (福永)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">250,000 sq ft (ISO 9001)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">25 萬平方英尺 (ISO 9001)</p>
+                    </div>
+                </div>
+
+                <!-- Strategic Intent -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-bullseye mr-2 text-blue-400"></i>Strategic Intent: Why are they here?</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-bullseye mr-2 text-blue-400"></i>戰略意圖：為何來到印度？</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">"China Plus One" Strategy:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">"中國+1" 策略執行：</strong>
+                            <p class="mb-2" data-lang="en">Currently 90% dependent on Shenzhen. Urgently seeking a risk-free alternative to avoid US Tariffs (Section 301) and geopolitical risks.</p>
+                            <p class="mb-2" data-lang="zh">目前 90% 產能依賴深圳。急需尋找「非中國製造」的替代基地，以規避美國 301 關稅與地緣政治風險。</p>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Target Persona:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">目標決策人畫像：</strong>
+                            <p class="mb-2" data-lang="en">VP of Global Sourcing / Supply Chain Director. Looking for partners with <strong>UL Lab capabilities</strong> and <strong>Export Compliance</strong>.</p>
+                            <p class="mb-2" data-lang="zh">全球採購副總/供應鏈總監。首選具備 <strong>UL 實驗室資質</strong> 與 <strong>出口合規經驗</strong> 的合作夥伴。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership (Brief) -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Background</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 股權與背景</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-2" data-lang="en">Founded in 1957 by Louis Shatkin. A stable, conservative US private entity. Unlike giants like Hubbell, they dominate the "Portable GFCI" niche.</p>
+                        <p class="text-sm text-gray-300 mb-2" data-lang="zh">由 Louis Shatkin 於 1957 年創立。穩健的美資私有企業。不同於 Hubbell 等巨頭，他們在「攜帶式漏電保護」利基市場擁有統治地位。</p>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Portable GFCIs:</strong> Plugs, In-Line cables, Adapters.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>攜帶式漏電保護：</strong> 插頭式、線纜式、轉接器。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Equip. Protection:</strong> ELCI / LCDI for Air-cons/Medical.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>設備保護 (ELCI/LCDI)：</strong> 空調、醫療設備用電源保護。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Switches:</strong> Rotary, Rocker, Thermostats.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>機電開關：</strong> 旋轉開關、翹板開關、恆溫器。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Foxlink Fit)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">BOM 拆解與 Foxlink 機會</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Plastic Housing:</strong> UL 94 V-0 PC/ABS. Needs precision injection.</li>
+                            <li data-lang="zh"><strong>塑膠外殼：</strong> UL 94 V-0 防火等級 PC/ABS，需精密雙色射出。</li>
+                            
+                            <li data-lang="en"><strong>Sensing PCBA:</strong> 4-6mA trip threshold logic. Anti-interference.</li>
+                            <li data-lang="zh"><strong>偵測模組 PCBA：</strong> 4-6mA 跳脫邏輯，需高抗干擾設計與打件。</li>
+                            
+                            <li data-lang="en"><strong>Core Mechanism:</strong> Solenoids & Relays (Coil winding automation).</li>
+                            <li data-lang="zh"><strong>核心機構：</strong> 電磁線圈 (Solenoids) 與繼電器，需自動繞線技術。</li>
+                            
+                            <li data-lang="en"><strong>Metal Parts:</strong> Phosphor Bronze stamping (Ni/Ag plating).</li>
+                            <li data-lang="zh"><strong>金屬件：</strong> 磷青銅導電彈片，需高速沖壓與電鍍。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Sourcing Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">採購痛點與需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Risk-Free Origin:</strong> Need "Non-China" certificate of origin.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>產地去風險：</strong> 需要「非中國製造」產地證明以規避關稅。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Certification:</strong> Supplier MUST have capability to handle UL/cUL audits.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>安規認證：</strong> 供應商必須具備應對 UL/cUL 稽核的能力。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. Recruitment Signals (Global Sourcing)</span>
+                    <span data-lang="zh">4. 招聘情報與採購訊號</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Global Hiring: What does it mean for India?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">全球招聘動態：對印度的啟示</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Analysis of recent global openings</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role Focus</th>
+                                    <th class="w-1/3" data-lang="zh">職缺焦點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Quality Engineer (Supplier)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Remote / Asia</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">遠端 / 亞洲區</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Key Signal:</strong> Strengthening remote management of suppliers. Implies they need vendors who are self-sufficient in QC (UL Labs).</td>
+                                    <td data-lang="zh"><strong>關鍵訊號：</strong> 強化對供應商的遠端管理。暗示他們需要具備自主 QC 能力 (UL 實驗室) 的合作夥伴。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Sourcing Specialist</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Asia Focus</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">亞洲區</span>
+                                    </td>
+                                    <td data-lang="en">Looking for "China+1" options. Evaluating Vietnam & India.</td>
+                                    <td data-lang="zh">尋找「中國+1」選項，正在評估越南與印度供應商。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-gray-400">No R&D in India</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gap Analysis</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">缺口分析</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Opportunity:</strong> Foxlink can offer JDM (Joint Design) to localize specs or cost-down existing designs.</td>
+                                    <td data-lang="zh"><strong>機會點：</strong> Foxlink 可提供 JDM (聯合設計) 服務，協助其進行產品規格在地化或 Cost Down。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. End Customers (Your Indirect Clients)</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 終端客戶 (您的間接客戶)</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- OEM -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">White Label / OEM</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">OEM 代工業務 (貼牌)</h4>
+                            <p class="text-sm text-gray-300 mb-2" data-lang="en">Supplying plugs for major brands. Winning Tower means entering these ecosystems:</p>
+                            <p class="text-sm text-gray-300 mb-2" data-lang="zh">為各大品牌提供插頭代工。贏得 Tower 等同進入以下生態系：</p>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-1">
+                                <li>TTI (Techtronic Industries)</li>
+                                <li>Stanley Black & Decker</li>
+                                <li>Carrier (Air Conditioners)</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Channels -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Retail & Distribution</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">零售與經銷通路</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Industrial:</strong> DigiKey, Mouser, Grainger, McMaster-Carr. (High turnover, stable).</li>
+                                <li data-lang="zh"><strong>工業經銷：</strong> DigiKey, Mouser, Grainger. (周轉快，訂單穩定)。</li>
+                                
+                                <li data-lang="en"><strong>Retail (Pro):</strong> Home Depot, Lowe's. (Own brand "Tower Mfg").</li>
+                                <li data-lang="zh"><strong>零售賣場：</strong> Home Depot, Lowe's (自有品牌銷售)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Opportunity Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">機會點畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Note: 'Localization' score is low, representing HIGH opportunity.</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">註：「在地化」分數低代表 Foxlink 的切入機會極高。</p>
+                    </div>
+
+                    <!-- Top Competitors Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">Global Peers & The "China" Problem</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">全球競爭對手與「中國」困境</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2" data-lang="en">Competitor</th><th class="p-2" data-lang="zh">競爭對手</th>
+                                        <th class="p-2" data-lang="en">Profile</th><th class="p-2" data-lang="zh">畫像</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold">Leviton</td>
+                                        <td class="p-2 text-gray-400">US Giant. Dominates wiring devices. Hard to displace.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold">Hubbell</td>
+                                        <td class="p-2 text-gray-400">Industrial Heavyweight. High-end focus.</td>
+                                    </tr>
+                                    <tr class="bg-red-900/20 border-l-4 border-red-500">
+                                        <td class="p-2 font-bold text-white">Elegrp (China)</td>
+                                        <td class="p-2 text-red-300">Direct Chinese rival aggressively taking Amazon share with lower prices.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3 p-2 bg-blue-900/20 border border-blue-500/30 rounded">
+                                <p class="text-xs text-blue-300" data-lang="en"><strong>The Pitch:</strong> "We offer price competitiveness similar to Elegrp, but with 'Non-China' origin safety against tariffs."</p>
+                                <p class="text-xs text-blue-300" data-lang="zh"><strong>話術建議：</strong> 「我們提供接近 Elegrp 的成本競爭力，但具備『非中國製造』的產地安全，助您規避關稅。」</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Strategic Signals (2025-2026)</span>
+                    <span data-lang="zh">7. 關鍵戰略訊號 (2025-2026)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Industry Trend] NEMA Report: Supply Chain De-risking</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[產業趨勢] NEMA 報告：供應鏈去風險化</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">SME electric component makers are accelerating "China+1". India is the preferred alternative for injection/assembly.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">美國中小型電氣元件商加速「中國+1」。印度被視為注塑與組裝的首選替代基地。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Sourcing] Seeking Vertical Integration</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[採購動向] 尋求垂直整合能力</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Due to material volatility, Tower prefers vendors who can do in-house stamping/molding to lock costs.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">因應原物料波動，Tower 偏好能自製模具與沖壓件的供應商以鎖定長期成本。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-30</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Regulation] NEC 2026 Outdoor Mandate</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[法規] NEC 2026 戶外用電規範升級</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Draft expands outdoor GFCI mandate (EV chargers etc). Huge tailwind for Tower's "Rainproof" line.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">NEC 草案擴大戶外 GFCI 強制範圍 (如 EV 充電桩)。這對 Tower 的戶外防水產品線是一大利多。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Tech] Smart Detection</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[技術] 智能偵測趨勢</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Competitors launching "End-of-Life" indication GFCIs. Foxlink can showcase PCBA testing reliability.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">競爭對手推出具壽命警示功能的 GFCI。Foxlink 可展示 PCBA 測試的可靠性。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-purple-900/30 border border-purple-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-purple-300 font-bold" data-lang="en">Action: Pitch "Risk-Free India Mfg"</div>
+                        <div class="text-sm text-purple-300 font-bold" data-lang="zh">行動建議：主打「無風險印度製造」</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Showcase UL Lab & Cable Assembly videos.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">展示 UL 實驗室資質與線束組裝影片。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Tower Mfg): 
+        // Market Share: 7 (Niche Leader in Portable GFCI, but small compared to Leviton)
+        // Localization: 2 (Currently 90% in China -> HUGE Opportunity gap for India)
+        // Brand Power: 7 (Strong in Pro channels/Home Depot)
+        // Digital Reach: 6 (Traditional Industrial Dist like DigiKey)
+        // Fin. Health: 8 (Stable Private Cash Cow)
+        const radarScores = [7, 2, 7, 6, 8]; 
+
+        const chartData = {
+            en: { labels: ['Niche Share', 'India Local %', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['利基市佔', '印度在地化', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(147, 51, 234, 0.2)', // Purple for Buyer
+                        borderColor: 'rgba(147, 51, 234, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(147, 51, 234, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
