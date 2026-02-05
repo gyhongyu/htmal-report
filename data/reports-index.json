@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T09:16:50.904Z",
+  "lastUpdated": "2026-02-05T09:24:54.009Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -417,6 +417,19 @@
       "fileName": "report-1770283009253.html",
       "createdAt": "2026-02-05T09:16:50.904Z",
       "updatedAt": "2026-02-05T09:16:50.904Z"
+    },
+    {
+      "id": "report-1770283492094",
+      "title": "Sanmina-SCI India Pvt Ltd KYC report",
+      "description": "Sanmina-SCI India Pvt Ltd KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770283492094.html",
+      "createdAt": "2026-02-05T09:24:54.009Z",
+      "updatedAt": "2026-02-05T09:24:54.009Z"
     }
   ]
 }
