@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T10:00:35.360Z",
+  "lastUpdated": "2026-02-05T10:07:43.923Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -495,6 +495,19 @@
       "fileName": "report-1770285633592.html",
       "createdAt": "2026-02-05T10:00:35.360Z",
       "updatedAt": "2026-02-05T10:00:35.360Z"
+    },
+    {
+      "id": "report-1770286061581",
+      "title": "Bosch Limited (India) KYC report",
+      "description": "Bosch Limited (India) KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770286061581.html",
+      "createdAt": "2026-02-05T10:07:43.923Z",
+      "updatedAt": "2026-02-05T10:07:43.923Z"
     }
   ]
 }
