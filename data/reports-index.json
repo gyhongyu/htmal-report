@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T10:45:54.453Z",
+  "lastUpdated": "2026-02-05T10:50:35.675Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -586,6 +586,19 @@
       "fileName": "report-1770288352378.html",
       "createdAt": "2026-02-05T10:45:54.453Z",
       "updatedAt": "2026-02-05T10:45:54.453Z"
+    },
+    {
+      "id": "report-1770288633748",
+      "title": "IFB Industries Limited KYC report",
+      "description": "IFB Industries Limited KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770288633748.html",
+      "createdAt": "2026-02-05T10:50:35.675Z",
+      "updatedAt": "2026-02-05T10:50:35.675Z"
     }
   ]
 }
