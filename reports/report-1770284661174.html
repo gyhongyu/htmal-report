@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Matrix Comsec Pvt. Ltd. -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Matrix Comsec (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Matrix Comsec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-orange-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">TELECOM & SECURITY LEADER</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Matrix Comsec Pvt Ltd</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Matrix Comsec (電信/安防)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Status:</strong> Indigenous R&D Leader</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>地位：</strong> 印度本土研發龍頭</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-orange-400">Tier 2</div>
+                            <div class="text-xs text-gray-500 uppercase">Enterprise Grade</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Matrix Comsec Private Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72200GJ1998PTC034047</p>
+                        <p class="text-xs text-orange-400 mt-2" data-lang="en">Status: Active (Vadodara HQ)</p>
+                        <p class="text-xs text-orange-400 mt-2" data-lang="zh">狀態：活躍 (Vadodara 總部)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (FY25 Est)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 600 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ownership:</strong> Jivani Family (100% Private)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>所有權：</strong> Jivani 家族 (全資私有)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">R&D & Mfg Hub</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">研發與製造基地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Vadodara (Gujarat)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Vadodara (古吉拉特邦)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Waghodia Plant (ZED Gold)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">Waghodia 工廠 (ZED 金級認證)</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Waghodia Plant (Vadodara):</strong> 15,000 sqm Integrated facility. SMT, Assembly, Burn-in testing.</li>
+                                <li data-lang="zh"><strong>Waghodia 廠 (Vadodara):</strong> 1.5 萬平米整合工廠。含 SMT、組裝與燒機測試。</li>
+                                <li data-lang="en"><strong>Certification:</strong> ZED Gold Certified. Focus on "Zero Defect".</li>
+                                <li data-lang="zh"><strong>認證:</strong> ZED 金級認證，強調零缺陷製造。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D Center (Core):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發中心 (核心)：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Vadodara R&D:</strong> 40% of workforce are engineers. Focus on Embedded, VoIP, & Video Analytics.</li>
+                                <li data-lang="zh"><strong>Vadodara 研發:</strong> 40% 員工為研發人員。專注嵌入式系統、VoIP 與影像分析。</li>
+                                <li data-lang="en"><strong>Strategy:</strong> "R&D Driven Manufacturing".</li>
+                                <li data-lang="zh"><strong>戰略:</strong> 「研發驅動製造」。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Promoters:</strong> Jivani Family (Ganesh & Dhiren Jivani). Bootstrapped, zero external PE funding. Focus on product roadmap control.</p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>創辦人：</strong> Jivani 家族 (Ganesh 與 Dhiren 兄弟)。無外部私募資金，堅持掌握產品路線圖控制權。</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Founders</span>
+                                <span class="text-gray-500 block" data-lang="zh">創始人</span>
+                                <strong class="text-white">Ganesh Jivani (MD)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Entity</span>
+                                <span class="text-gray-500 block" data-lang="zh">實體</span>
+                                <strong class="text-orange-400">Matrix Comsec Pvt Ltd</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Unified Comm:</strong> IP-PBX (ETERNITY), VoIP Gateways, IP Phones.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>統合通訊：</strong> IP-PBX 交換機、VoIP 閘道器、IP 話機。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Video Surveillance:</strong> IP Cameras, NVR (Enterprise Grade).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>影像監控：</strong> 網路攝影機、NVR (企業級)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Access Control:</strong> Biometric Readers (COSEC), Controllers.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>門禁考勤：</strong> 生物辨識讀卡機 (COSEC)、控制器。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Foxlink Fit)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解 (Foxlink 機會)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Telecom Connectors (Core):</strong> RJ45 & RJ11 ports for PBX/Gateways. High durability required.</li>
+                            <li data-lang="zh"><strong>通訊連接器 (核心)：</strong> PBX/閘道器用 RJ45/RJ11 接口。需高耐用度。</li>
+                            
+                            <li data-lang="en"><strong>Cable Assemblies:</strong> Internal wire harnesses & FFC for NVRs.</li>
+                            <li data-lang="zh"><strong>線束組件：</strong> NVR 內部線束與軟排線 (FFC)。</li>
+                            
+                            <li data-lang="en"><strong>I/O Connectors:</strong> USB, Terminal Blocks for industrial controllers.</li>
+                            <li data-lang="zh"><strong>I/O 連接器：</strong> USB 接口、工業控制器用接線端子。</li>
+                            
+                            <li data-lang="en"><strong>Enclosures:</strong> Metal Rack-mount cases for PBX/NVR.</li>
+                            <li data-lang="zh"><strong>機殼：</strong> PBX/NVR 用金屬機架式外殼。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Strategic Sourcing</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">戰略採購需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Non-Chinese Mandate:</strong> Critical for Defense/Govt clients. Need "Taiwan/India" origin components.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>非中資要求：</strong> 國防/政府客戶剛需。急需「台灣/印度」產地元件。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Tier 1 Alternative:</strong> Seeking alternatives to Tyco/Molex with better pricing.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>一線替代：</strong> 尋找品質對標 Tyco/Molex 但價格更優的供應商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Strategic Moves</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：戰略意圖解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Analysis of recent key job postings in Vadodara</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sr. Eng - Strategic Sourcing</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Vadodara</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Vadodara (巴羅達)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Key Signal:</strong> "Alternate Vendor Development" for connectors/electronics. Cost optimization focus.</td>
+                                    <td data-lang="zh"><strong>關鍵訊號：</strong> 負責電子元件/連接器的「替代供應商開發」。強調成本優化。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Embedded HW Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Vadodara</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Vadodara (巴羅達)</span>
+                                    </td>
+                                    <td data-lang="en">Developing ARM Cortex-A based NVR motherboards.</td>
+                                    <td data-lang="zh">開發基於 ARM Cortex-A 處理器的 NVR 主板。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Regional Sales Mgr - USA</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Remote</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">遠端</span>
+                                    </td>
+                                    <td data-lang="en">Expanding export channels in North America. Strict compliance needed.</td>
+                                    <td data-lang="zh">拓展北美外銷通路。對合規性要求提高。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Quality Assurance Eng</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Waghodia</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Waghodia (工廠)</span>
+                                    </td>
+                                    <td data-lang="en">IQC focus on connector reliability & PCB testing.</td>
+                                    <td data-lang="zh">進料檢驗 (IQC) 重點關注連接器可靠度與 PCB 測試。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Supply Chain Planner</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Vadodara</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Vadodara (巴羅達)</span>
+                                    </td>
+                                    <td data-lang="en">Managing inventory for thousands of SKUs. "Stock & Sell" model.</td>
+                                    <td data-lang="zh">管理數千種料號庫存。支援 "Stock & Sell" 快速發貨模式。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Mechanical Design Eng</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Vadodara</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Vadodara (巴羅達)</span>
+                                    </td>
+                                    <td data-lang="en">Designing IP65 outdoor reader casings.</td>
+                                    <td data-lang="zh">設計 IP65 戶外讀卡機外殼。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Channel Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">100% Indirect Sales</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">100% 間接銷售 (純經銷)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>SI Network:</strong> 2,500+ System Integrators across India.</li>
+                                <li data-lang="zh"><strong>SI 網絡：</strong> 全印度 2,500+ 系統整合商合作夥伴。</li>
+                                
+                                <li data-lang="en"><strong>Logistics:</strong> "Stock & Sell" model. 48-hour dispatch promise from Vadodara hub.</li>
+                                <li data-lang="zh"><strong>物流：</strong> "Stock & Sell" 模式。承諾 Vadodara 中央倉 48 小時內發貨。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Customer Base -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Key End Users</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">核心終端客戶</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Government:</strong> Defense, Railways (Via GeM portal). High compliance needs.</li>
+                                <li data-lang="zh"><strong>政府/國防：</strong> 國防部、鐵路局 (GeM 平台)。高合規要求。</li>
+                                
+                                <li data-lang="en"><strong>BFSI:</strong> SBI, HDFC Bank (Branch connectivity).</li>
+                                <li data-lang="zh"><strong>銀行金融：</strong> SBI, HDFC Bank (分行通訊系統)。</li>
+                                
+                                <li data-lang="en"><strong>Manufacturing:</strong> Reliance, Tata Steel (Time-Attendance).</li>
+                                <li data-lang="zh"><strong>製造業：</strong> Reliance, Tata Steel (門禁考勤)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Indigenous R&D / Govt Preferred</p>
+                    </div>
+
+                    <!-- Top Competitors Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">Market Leadership</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">市場領導地位</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Segment</th>
+                                        <th class="p-2" data-lang="en">Matrix Position</th><th class="p-2" data-lang="zh">Matrix 地位</th>
+                                        <th class="p-2" data-lang="en">Key Rivals</th><th class="p-2" data-lang="zh">主要對手</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-orange-900/40 border-l-4 border-orange-500">
+                                        <td class="p-2 font-bold text-white">Telecom (SMB)</td>
+                                        <td class="p-2 text-green-400 font-bold" data-lang="en">Indigenous Leader</td>
+                                        <td class="p-2 text-green-400 font-bold" data-lang="zh">本土第一</td>
+                                        <td class="p-2 text-gray-400">NEC, Avaya, Yeastar</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold">Video Surveillance</td>
+                                        <td class="p-2 text-gray-300" data-lang="en">Enterprise Choice</td>
+                                        <td class="p-2 text-gray-300" data-lang="zh">企業級首選</td>
+                                        <td class="p-2 text-gray-400">Hikvision, Honeywell</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold">Access Control</td>
+                                        <td class="p-2 text-gray-300" data-lang="en">Premium Tier</td>
+                                        <td class="p-2 text-gray-300" data-lang="zh">高階市場</td>
+                                        <td class="p-2 text-gray-400">HID, Spectra</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3 p-2 bg-blue-900/20 border border-blue-500/30 rounded">
+                                <p class="text-xs text-blue-300" data-lang="en"><strong>Foxlink Opportunity:</strong> "Non-Chinese" Connectors (RJ45/USB). Critical for their Defense/Govt orders to replace Chinese components.</p>
+                                <p class="text-xs text-blue-300" data-lang="zh"><strong>Foxlink 機會點：</strong> 「非中資」連接器 (RJ45/USB)。協助其國防/政府訂單替換中國製元件。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-orange-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-01</div>
+                        <div>
+                            <strong class="text-orange-400 block text-sm" data-lang="en">[Expo] Intersec Dubai 2026</strong>
+                            <strong class="text-orange-400 block text-sm" data-lang="zh">[展會] 杜拜 Intersec 2026</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched "COSEC ARGO FACE 2.0". < 0.5s recognition speed.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">發布 COSEC ARGO FACE 2.0 人臉辨識機，辨識速度 < 0.5秒。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Product] 256-Channel NVR</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[新品] 256路 NVR 發布</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">For Smart City projects. Requires high-frequency connectors & backplanes.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">專攻智慧城市專案。對高頻連接器與背板要求極高。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Award] Top Telecom Exporter</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[獎項] 最佳資通訊出口獎</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Awarded by ESC India. Confirms strong export quality.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">獲 ESC 頒發出口大獎，確認其出口品質實力。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Win] Bangalore Metro Project</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[中標] 班加羅爾地鐵專案</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Deploying 500 IP-PBX units for BMRCL.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">贏得 BMRCL 通訊標案，將部署 500 台 IP-PBX。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">OWASP Cybersecurity Compliance achieved for IP Cameras.</span><span data-lang="zh">IP 攝影機通過 OWASP 網路安全合規檢測。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-25:</strong> <span data-lang="en">Kenya Office opened for East Africa expansion.</span><span data-lang="zh">肯亞辦事處成立，深耕東非市場。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-orange-900/30 border border-orange-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-orange-300 font-bold" data-lang="en">Strategic Action Required</div>
+                        <div class="text-sm text-orange-300 font-bold" data-lang="zh">戰略行動建議</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Pitch "Taiwan/India Origin" RJ45 Connectors.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">主打「台灣/印度產地」RJ45 連接器方案。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Matrix Comsec): 
+        // Market Share: 8 (Indigenous Leader in Telecom, but global giants exist)
+        // Localization: 10 (Design & Mfg all in India, "Indigenous")
+        // Brand Power: 7 (Strong in Enterprise/Govt, less in consumer)
+        // Digital Reach: 7 (B2B focus)
+        // Financial Health: 8 (Private, Zero Debt usually for such profiles, Export revenue)
+        const radarScores = [8, 10, 7, 7, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(234, 88, 12, 0.2)', // Orange for Matrix
+                        borderColor: 'rgba(234, 88, 12, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(234, 88, 12, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
