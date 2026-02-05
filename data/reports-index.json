@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T09:55:50.487Z",
+  "lastUpdated": "2026-02-05T09:58:04.878Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -469,19 +469,6 @@
       "fileName": "report-1770284966325.html",
       "createdAt": "2026-02-05T09:49:28.214Z",
       "updatedAt": "2026-02-05T09:49:28.214Z"
-    },
-    {
-      "id": "report-1770285239032",
-      "title": "Larsen & Toubro (L&T) KYC report",
-      "description": "Larsen & Toubro (L&T) KYC report",
-      "categories": [
-        "內部簡報",
-        "市場分析",
-        "其他"
-      ],
-      "fileName": "report-1770285239032.html",
-      "createdAt": "2026-02-05T09:54:01.246Z",
-      "updatedAt": "2026-02-05T09:54:01.246Z"
     },
     {
       "id": "report-1770285348320",
