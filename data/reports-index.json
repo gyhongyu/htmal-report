@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T08:55:50.144Z",
+  "lastUpdated": "2026-02-05T08:58:36.946Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -365,6 +365,19 @@
       "fileName": "report-1770281748390.html",
       "createdAt": "2026-02-05T08:55:50.144Z",
       "updatedAt": "2026-02-05T08:55:50.144Z"
+    },
+    {
+      "id": "report-1770281915478",
+      "title": "Valeo India Pvt Ltd KYC report",
+      "description": "Valeo India Pvt Ltd KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770281915478.html",
+      "createdAt": "2026-02-05T08:58:36.946Z",
+      "updatedAt": "2026-02-05T08:58:36.946Z"
     }
   ]
 }
