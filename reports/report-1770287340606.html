@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Salcomp Manufacturing India Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Salcomp India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Salcomp India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">POWER GIANT</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Salcomp India</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Salcomp India (領益智造)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Status:</strong> Apple's #1 Charger Supplier</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>地位：</strong> Apple 第一大充電器供應商</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-green-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Rev > ₹5,000 Cr</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Salcomp Manufacturing India Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U32109TN2006PTC060133</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="en">Status: Active (Chennai)</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="zh">狀態：活躍 (欽奈)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (FY25 Est)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 5,200 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Parent:</strong> Lingyi iTech (China)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>母公司：</strong> 領益智造 (中國)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Mega Campus</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">超級園區</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Sriperumbudur (Chennai)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Sriperumbudur (欽奈)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Ex-Nokia SEZ | 12k Employees</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">前 Nokia 經濟特區 | 1.2萬員工</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Sriperumbudur (Super Factory):</strong> Largest charger plant in India. 100M+ units/year.</li>
+                                <li data-lang="zh"><strong>Sriperumbudur (超級工廠)：</strong> 印度最大充電器廠。年產能破億。</li>
+                                <li data-lang="en"><strong>Expansion:</strong> New Housing Enclosure plant & 15k capacity Dormitory Complex.</li>
+                                <li data-lang="zh"><strong>擴建：</strong> 新增外殼射出廠與 1.5 萬人宿舍區。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Strategic Context:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">戰略背景：</strong>
+                            <p data-lang="en">Acquired defunct Nokia plant in 2019. Revived it to serve Apple's iPhone manufacturing shift to India.</p>
+                            <p data-lang="zh">2019年收購 Nokia 廢棄廠房並將其復活，專為 Apple iPhone 供應鏈服務。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Complex Structure:</strong> Finnish Brand (Salcomp Plc) owned by Chinese Giant (Lingyi iTech). Positions as "Finnish-Tech, Indian-Made" to mitigate geopolitical risks.</p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>複雜架構：</strong> 芬蘭品牌 (Salcomp) 被中國巨頭 (領益智造) 收購。在印度強調「芬蘭技術、印度製造」以降低地緣政治風險。</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Direct Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">直接母公司</span>
+                                <strong class="text-white">Salcomp Plc (Finland)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-green-400">Lingyi iTech (China)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Mobile Adapters:</strong> 20W (iPhone), 33W-120W (Oppo/Vivo).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>手機充電器：</strong> 20W (iPhone)、33W-120W (Oppo/Vivo)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Notebook Power:</strong> 30W/35W/70W USB-C (MacBook Air).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>筆電電源：</strong> 30W/35W/70W USB-C (MacBook Air)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Precision Parts:</strong> Charger housing & Structural parts.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>精密結構件：</strong> 充電器外殼與結構件。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Solar:</strong> Micro-inverters (New Business).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>太陽能：</strong> 微型逆變器 (新業務)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Foxlink Fit)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解 (Foxlink 機會)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>USB-C Receptacle (Core):</strong> High durability (10k cycles), High Current. Huge volume.</li>
+                            <li data-lang="zh"><strong>USB-C 母座 (核心)：</strong> 高耐用度 (1萬次插拔)、大電流。量極大。</li>
+                            
+                            <li data-lang="en"><strong>AC Pins:</strong> Copper pins with high quality plating. BIS/US/EU standards.</li>
+                            <li data-lang="zh"><strong>AC 插腳：</strong> 高品質電鍍銅腳。需符合 BIS/US/EU 標準。</li>
+                            
+                            <li data-lang="en"><strong>Magnetics:</strong> High-Freq Transformers (Partial in-house).</li>
+                            <li data-lang="zh"><strong>磁性元件：</strong> 高頻變壓器 (部分自製)。</li>
+                            
+                            <li data-lang="en"><strong>Electronics:</strong> GaN ICs, Capacitors (Aihua).</li>
+                            <li data-lang="zh"><strong>電子元件：</strong> 氮化鎵晶片、電容 (艾華)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Strategic Needs</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">戰略供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>"China-Free" Sourcing:</strong> Apple mandate to reduce reliance on Chinese connectors (Luxshare/Deren). Need Taiwan/India alternatives.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>去中化採購：</strong> Apple 要求減少對中國連接器 (立訊/得潤) 的依賴。急需台灣/印度替代方案。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization:</strong> AC Pins & Busbars need local source to cut cost/lead time.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化：</strong> AC 插腳與匯流排需在地供應以降低成本與交期。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Scaling Up</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：規模擴張</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Analysis of recent key job postings in Chennai</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sr. Sourcing Mgr - Mech</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Target:</strong> Buying AC Pins, Busbars & Resin. Emphasis on "Localization".</td>
+                                    <td data-lang="zh"><strong>目標：</strong> 採購 AC 插腳、匯流排與塑膠粒子。強調「在地化」。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">SQE - Connector</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">Auditing plating quality & dimensions of connectors. High precision required.</td>
+                                    <td data-lang="zh">稽核連接器電鍍品質與尺寸。高精度要求。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Program Mgr - Apple</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">Coordinating NPI with Apple teams. Key account focus.</td>
+                                    <td data-lang="zh">協調 Apple NPI 專案。核心客戶聚焦。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Production Head - Molding</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">Managing new injection molding plant. Vertical integration.</td>
+                                    <td data-lang="zh">管理新射出成型廠。垂直整合。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Automation Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Sriperumbudur</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Sriperumbudur</span>
+                                    </td>
+                                    <td data-lang="en">Maintaining high-speed assembly lines (1 adapter/sec).</td>
+                                    <td data-lang="zh">維護高速自動化組裝線 (每秒一顆)。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Test Eng - Power Elec</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (欽奈)</span>
+                                    </td>
+                                    <td data-lang="en">Testing high-wattage GaN chargers for thermal/EMI.</td>
+                                    <td data-lang="zh">測試大瓦數 GaN 充電器溫升與 EMI。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Customers</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與客戶</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Key Customers -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">OEM Relationships</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">OEM 客戶關係</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Tier 1:</strong> Apple (>60%). Largest charger supplier in India for iPhone/Mac.</li>
+                                <li data-lang="zh"><strong>Tier 1：</strong> Apple (>60%)。iPhone/Mac 印度最大充電器供應商。</li>
+                                
+                                <li data-lang="en"><strong>Tier 2:</strong> Xiaomi, Vivo, Oppo (Supply to their India factories).</li>
+                                <li data-lang="zh"><strong>Tier 2：</strong> 小米, Vivo, Oppo (供應其印度工廠)。</li>
+                                
+                                <li data-lang="en"><strong>Emerging:</strong> Amazon (Kindle/FireTV), Google (Pixel).</li>
+                                <li data-lang="zh"><strong>新興：</strong> Amazon, Google (Pixel)。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Model</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">物流模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Hub-to-Hub:</strong> Direct ship to nearby Foxconn/Pegatron for kitting.</li>
+                                <li data-lang="zh"><strong>廠對廠：</strong> 直接運往附近的鴻海/和碩工廠進行包裝。</li>
+                                
+                                <li data-lang="en"><strong>VMI:</strong> Vendor Managed Inventory required. High peak season volatility.</li>
+                                <li data-lang="zh"><strong>VMI：</strong> 需供應商管理庫存。旺季波動極大。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Undisputed Market Leader</p>
+                    </div>
+
+                    <!-- Top Competitors Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">Power Adapter Market Position</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">充電器市場地位</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">公司</th>
+                                        <th class="p-2" data-lang="en">Focus</th><th class="p-2" data-lang="zh">專注</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-green-900/40 border-l-4 border-green-500">
+                                        <td class="p-2 font-bold text-white">1</td>
+                                        <td class="p-2 font-bold text-green-400">Salcomp</td>
+                                        <td class="p-2 text-gray-300" data-lang="en">Apple Core, Highest Volume</td>
+                                        <td class="p-2 text-gray-300" data-lang="zh">Apple 核心，量最大</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 text-gray-400">2</td>
+                                        <td class="p-2 text-gray-300">Aohai Tech</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Xiaomi / Non-Apple</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">小米 / 非蘋陣營</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 text-gray-400">3</td>
+                                        <td class="p-2 text-gray-300">Flextronics Power</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Notebook / Server Power</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">筆電 / 伺服器電源</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3 p-2 bg-blue-900/20 border border-blue-500/30 rounded">
+                                <p class="text-xs text-blue-300" data-lang="en"><strong>Foxlink Opportunity:</strong> "China-Free" mandate. Replace Luxshare/Deren for USB-C Receptacles & AC Pins. 100M+ units volume.</p>
+                                <p class="text-xs text-blue-300" data-lang="zh"><strong>Foxlink 機會點：</strong> 「去中化」指令。替代立訊/得潤供應 USB-C 母座與 AC 插腳。年需求破億。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-03</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Expansion] 15k Women's Dormitory</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[擴建] 1.5萬人女性宿舍啟用</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Inaugurated by PM Modi. Solves manpower bottleneck for expansion.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">莫迪總理視訊啟用。解決擴產人力瓶頸。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Export] Record Exports</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[出口] 出口額破紀錄</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">>₹2000 Cr export in first 3 quarters of FY25.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">FY25 前三季出口突破 200 億盧比。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Customer] Google Pixel Win</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[客戶] 贏得 Google Pixel 訂單</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Exclusive supplier for Pixel 9 India chargers.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">取得 Pixel 9 印度版充電器獨家供貨權。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-25</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Strategy] Vertical Integration</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[戰略] 垂直整合</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Parent Lingyi iTech moving molding capacity to India.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">母公司領益智造將模具產能移至印度。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-20:</strong> <span data-lang="en">100% RE Goal by 2027 announced.</span><span data-lang="zh">宣佈 2027 年達成 100% 綠電目標。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Sourcing team seeking local OFC copper suppliers.</span><span data-lang="zh">採購團隊尋找在地無氧銅供應商。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-green-900/30 border border-green-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-green-300 font-bold" data-lang="en">Strategic Action Required</div>
+                        <div class="text-sm text-green-300 font-bold" data-lang="zh">戰略行動建議</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Pitch Local USB-C Receptacles & AC Pins immediately.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">立即推廣在地化 USB-C 母座與 AC 插腳。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Salcomp): 
+        // Market Share: 10 (Undisputed Leader in Chargers)
+        // Localization: 9 (Huge campus, vertical integration increasing)
+        // Brand Power: 8 (Strong B2B brand, Apple's choice)
+        // Digital Reach: 7 (B2B manufacturing focus)
+        // Financial Health: 9 (Strong revenue growth due to Apple)
+        const radarScores = [10, 9, 8, 7, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(22, 163, 74, 0.2)', // Green for Salcomp
+                        borderColor: 'rgba(22, 163, 74, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(22, 163, 74, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
