@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: CP PLUS (Aditya Infotech Ltd) -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: CP PLUS (Aditya Infotech) (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：CP PLUS (Aditya Infotech)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: CP PLUS (Aditya Infotech)</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：CP PLUS (Aditya Infotech)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Aditya Infotech Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U74899DL1995PLC066784</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="en">Status: Listed (NSE: AITN)</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="zh">狀態：已上市 (NSE/BSE)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (FY25 Est)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 3,111 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Net Profit:</strong> ₹ 351 Cr (Growing)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>淨利：</strong> 35.1 億盧比 (成長中)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Mega Factory</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與超級工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Noida (HQ) / Kadapa (Mfg)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Noida (總部) / Kadapa (製造)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Largest Surveillance Factory in India</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">印度最大監控設備工廠</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing (Strategic Shift):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地 (戰略轉變)：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Kadapa (Andhra Pradesh):</strong> YSR EMC Cluster. Cap: 17.2M units/year.</li>
+                                <li data-lang="zh"><strong>Kadapa (安得拉邦):</strong> 年產能 1,720 萬台超級工廠。</li>
+                                <li data-lang="en"><span class="text-yellow-400 font-bold">CRITICAL:</span> Acquired Dixon's 50% stake in Sep 2025. Now 100% owned.</li>
+                                <li data-lang="zh"><span class="text-yellow-400 font-bold">關鍵轉變：</span> 2025年9月已回購 Dixon 持股，現為 100% 全資擁有。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D & Tech Centers:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與技術中心：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Noida (Sector 4):</strong> Firmware Localization, AI integration, Cloud Platform.</li>
+                                <li data-lang="zh"><strong>Noida 研發中心:</strong> 韌體在地化、AI 演算法、雲平台維運。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace:</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Promoters</span>
+                                <span class="text-gray-500 block" data-lang="zh">控股家族</span>
+                                <strong class="text-white">Khemka Family</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">60-65% Stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">60-65% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Public/Institutions</span>
+                                <span class="text-gray-500 block" data-lang="zh">公眾/機構投資人</span>
+                                <strong class="text-white">Listed Entity (AITN)</strong>
+                                <span class="block text-blue-300 mt-1" data-lang="en">~35-40%</span>
+                                <span class="block text-blue-300 mt-1" data-lang="zh">~35-40%</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Transformation</span>
+                                <span class="text-gray-500 block" data-lang="zh">轉型歷程</span>
+                                <strong class="text-blue-300">Agent to Brand</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Ex-Dahua Agent -> CP PLUS Brand</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">從代理商轉型為自有品牌</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3 italic" data-lang="en"><strong>Note:</strong> Fully controls its own supply chain after buying out Dixon's stake in the JV factory.</p>
+                        <p class="text-xs text-gray-400 mt-3 italic" data-lang="zh"><strong>備註：</strong> 收購合資工廠股份後，完全掌控供應鏈採購權，不再受制於代工廠。</p>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>IP Cameras:</strong> 2MP to 4K AI, PTZ, Bullet.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>網絡攝影機：</strong> 2MP-4K AI 機種 (PTZ/槍型)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>HD Analog:</strong> High volume mass market cameras.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>類比高清：</strong> 針對大眾市場的高 CP 值產品。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Recorders:</strong> DVR / NVR (4 to 64 channels).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>錄影主機：</strong> 4路至 64路 DVR/NVR。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Specialty:</strong> Body Worn Cameras (Police/Railways).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>專用設備：</strong> 穿戴式執法紀錄器 (警用/鐵路)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Kadapa Factory)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">BOM 拆解 (Kadapa 工廠)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Interconnects (Critical):</strong> RJ45 (PoE), BNC Cables, DC Power Pigtails. <span class="text-green-400 font-bold">Foxlink Core Opp.</span></li>
+                            <li data-lang="zh"><strong>連接線束 (核心)：</strong> RJ45 (含 PoE)、BNC 同軸線、DC 電源線。<span class="text-green-400 font-bold">Foxlink 核心機會。</span></li>
+                            
+                            <li data-lang="en"><strong>PCBA:</strong> SoC (Qualcomm/Novatek), DDR, Flash.</li>
+                            <li data-lang="zh"><strong>PCBA 核心：</strong> SoC (轉向 Qualcomm/Novatek)、記憶體。</li>
+                            
+                            <li data-lang="en"><strong>Optics:</strong> Sony/Omnivision Sensors, M12 Lens, IR Cut.</li>
+                            <li data-lang="zh"><strong>光學模組：</strong> Sony/Omnivision 感測器、鏡頭、IR 濾光片。</li>
+                            
+                            <li data-lang="en"><strong>Mech:</strong> Die-cast Aluminium (Outdoor) / ABS (Indoor).</li>
+                            <li data-lang="zh"><strong>機構件：</strong> 鋁壓鑄外殼 (戶外) / ABS 塑膠 (室內)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">供應鏈缺口與需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Non-Chinese Mandate:</strong> Urgent need for non-Chinese connectors to meet Public Procurement norms.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>去中化指令：</strong> 急需非中國來源的連接器，以符合政府公共採購規範。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Direct Vendor List:</strong> Building independent AVL after splitting from Dixon.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>建立直供名單：</strong> 與 Dixon 分手後，正在獨立建立供應商清單 (AVL)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Sourcing & Mfg</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：採購與製造</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Focus: Supply Chain Independence & AI Tech</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Head of Procurement</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Noida</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Noida (總部)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Key Target:</strong> Requirement: "Sourcing from Vietnam/Taiwan". Clear intent to de-risk from China.</td>
+                                    <td data-lang="zh"><strong>關鍵目標：</strong> 要求具備「越南/台灣」採購經驗，明確意圖降低對中國依賴。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Production Manager - SMT</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Kadapa</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Kadapa (工廠)</span>
+                                    </td>
+                                    <td data-lang="en">Managing SMT expansion. Shows PCB assembly capacity is scaling up.</td>
+                                    <td data-lang="zh">負責 SMT 產線擴建，顯示 PCB 打件產能正在擴張。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Quality Head</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Kadapa</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Kadapa (品管)</span>
+                                    </td>
+                                    <td data-lang="en">Setting up independent quality systems post-Dixon split.</td>
+                                    <td data-lang="zh">建立獨立於 Dixon 之外的品質管理體系。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Vertical Head - Govt Projects</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Delhi</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Delhi (專案)</span>
+                                    </td>
+                                    <td data-lang="en">Focus on "Smart City" & "Amrit Bharat Station" (Railways) tenders.</td>
+                                    <td data-lang="zh">專攻智慧城市與鐵路車站升級標案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Strategic Sourcing - Mechanics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Noida</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Noida (機構)</span>
+                                    </td>
+                                    <td data-lang="en">Localization of Housing & Die-casting.</td>
+                                    <td data-lang="zh">負責機構件 (外殼、壓鑄) 的在地化開發。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Channel Power (The Moat)</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路護城河</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Pyramid Structure:</strong> 4-5 National Dist., Regional Dist., & 30,000+ System Integrators.</li>
+                                <li data-lang="zh"><strong>金字塔體系：</strong> 4-5家國代、區域代理、以及 30,000+ 家系統整合商。</li>
+                                
+                                <li data-lang="en"><strong>Digital Glue:</strong> "CP PLUS World" App incentivizes installers directly. High stickiness.</li>
+                                <li data-lang="zh"><strong>數位黏著：</strong> "CP PLUS World" App 直接綁定底層安裝商，黏著度極高。</li>
+                                
+                                <li data-lang="en"><strong>Govt e-Marketplace (GeM):</strong> Top selling surveillance brand on GeM portal.</li>
+                                <li data-lang="zh"><strong>政府採購 (GeM)：</strong> GeM 平台上銷量最高的監控品牌之一。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Speed</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">物流速度</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Reach:</strong> 41 Branches/Warehouses pan-India.</li>
+                                <li data-lang="zh"><strong>覆蓋：</strong> 全印度 41 個分公司與倉庫。</li>
+                                
+                                <li data-lang="en"><strong>Promise:</strong> 48-hour delivery to Tier-2 cities. Requires strict JIT from vendors.</li>
+                                <li data-lang="zh"><strong>承諾：</strong> 二線城市 48 小時達。對供應商交期要求嚴格。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Volume Leader / High Brand Power / Strong Digital</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Surveillance Market</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度監控市場排名 (Top Players)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">1</td>
+                                        <td class="p-2 text-white font-bold">CP PLUS (Aditya)</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">India (Volume Leader / Govt Preferred)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">印度 (銷量第一 / 政府首選)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Hikvision India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">China/India JV (Tech Leader but Geo-risk)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">中印合資 (技術強但有地緣風險)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Dahua</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">China (Losing share to CP PLUS)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">中國 (市佔率正被 CP PLUS 蠶食)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Godrej Security</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Banks & Home segment)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (專攻銀行與居家)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Tiandy / UniView</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">China (Low cost challengers)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">中國 (低價挑戰者)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> CP PLUS is splitting from Dixon & "De-Chinesing". They need a Direct Vendor List. Foxlink can capture the RJ45/Cable volume.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> CP PLUS 正與 Dixon 分手並執行去中化，急需建立直供名單。Foxlink 可承接其龐大的 RJ45 與線束訂單。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-02</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corporate Strategy] 100% Mfg Control</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[戰略里程碑] 100% 自主製造</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Kadapa plant now fully owned (Dixon exited). Investing ₹500 Cr in SMT/Molding.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Kadapa 工廠已全資擁有 (Dixon 退出)。未來三年投入 50 億盧比擴產。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Tech Partnership] Qualcomm AI Chip</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[技術合作] Qualcomm AI 晶片</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Partnering with Qualcomm for Edge AI cameras (Snapdragon chips) for industrial use.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">與 Qualcomm 合作開發搭載 Snapdragon 晶片的邊緣運算攝影機。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-09</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Product Launch] "ViDu" Sub-brand</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[新品發布] "ViDu" 子品牌</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched consumer Wi-Fi camera brand "ViDu" to compete with Xiaomi/TP-Link.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">推出消費級 Wi-Fi 攝影機品牌 "ViDu"，對決小米與 TP-Link。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2026-01-15:</strong> <span data-lang="en">Aditya Khemka won "Visionary Leader 2025" by Outlook Business.</span><span data-lang="zh">Aditya Khemka 獲選 Outlook Business 年度遠見領袖。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Approved for PLI 2.0 (Telecom/Networking), boosting export competitiveness.</span><span data-lang="zh">獲得 PLI 2.0 獎勵資格，大幅提升出口競爭力。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-20:</strong> <span data-lang="en">Started exports to UAE & Indonesia. "Made in India" going global.</span><span data-lang="zh">啟動對阿聯酋與印尼出口，印度製造走向全球。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Ground Action Required?</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">需要採取行動？</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Confidential data for internal use only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">本報告僅供內部參考，請勿外傳。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred from CP PLUS Report): 
+        // Market Share: 9 (Volume Leader #1, Govt Preferred)
+        // Localization: 9 (Kadapa Super Factory, 100% Owned, PLI approved)
+        // Brand Power: 9 (National Brand, "Make in India" champion)
+        // Digital Reach: 9 (CP PLUS World App, GeM Dominance)
+        // Financial Health: 8 (Listed, Profitable, Growing Revenue)
+        const radarScores = [9, 9, 9, 9, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

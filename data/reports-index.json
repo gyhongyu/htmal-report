@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T10:56:08.572Z",
+  "lastUpdated": "2026-02-05T11:00:49.212Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -612,6 +612,19 @@
       "fileName": "report-1770288966158.html",
       "createdAt": "2026-02-05T10:56:08.572Z",
       "updatedAt": "2026-02-05T10:56:08.572Z"
+    },
+    {
+      "id": "report-1770289247355",
+      "title": "CP PLUS (Aditya Infotech) KYC report",
+      "description": "CP PLUS (Aditya Infotech) KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770289247355.html",
+      "createdAt": "2026-02-05T11:00:49.212Z",
+      "updatedAt": "2026-02-05T11:00:49.212Z"
     }
   ]
 }
