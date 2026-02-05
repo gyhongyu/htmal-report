@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T10:10:26.228Z",
+  "lastUpdated": "2026-02-05T10:14:46.184Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -521,6 +521,19 @@
       "fileName": "report-1770286224127.html",
       "createdAt": "2026-02-05T10:10:26.228Z",
       "updatedAt": "2026-02-05T10:10:26.228Z"
+    },
+    {
+      "id": "report-1770286483910",
+      "title": "Velankani Electronics KYC report",
+      "description": "Velankani Electronics KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770286483910.html",
+      "createdAt": "2026-02-05T10:14:46.184Z",
+      "updatedAt": "2026-02-05T10:14:46.184Z"
     }
   ]
 }
