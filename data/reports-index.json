@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T10:37:19.804Z",
+  "lastUpdated": "2026-02-05T10:45:54.453Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -573,6 +573,19 @@
       "fileName": "report-1770287837524.html",
       "createdAt": "2026-02-05T10:37:19.804Z",
       "updatedAt": "2026-02-05T10:37:19.804Z"
+    },
+    {
+      "id": "report-1770288352378",
+      "title": "Pricol Limited KYC report",
+      "description": "Pricol Limited KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770288352378.html",
+      "createdAt": "2026-02-05T10:45:54.453Z",
+      "updatedAt": "2026-02-05T10:45:54.453Z"
     }
   ]
 }

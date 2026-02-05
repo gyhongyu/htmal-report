@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Pricol Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Pricol Limited (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Pricol Limited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Pricol Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Pricol Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Pricol Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> L34200TZ2011PLC022194</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="en">Status: Listed (NSE: PRICOLLTD)</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="zh">狀態：已上市 (NSE/BSE)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (FY25 Est)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 2,450 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>EBITDA:</strong> 12-13% (Rising due to premiumization)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>利潤率：</strong> 12-13% (隨產品高階化提升)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Tech Center</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Coimbatore, TN</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Coimbatore (哥印拜陀)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">South India's Engg Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">南印度工程重鎮</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Clusters:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地 (Proximity to Client)：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Coimbatore (Unit I, III):</strong> R&D Heart, High-end TFT clusters & Sensors.</li>
+                                <li data-lang="zh"><strong>Coimbatore (核心):</strong> 研發心臟，生產高階 TFT 儀表與傳感器。</li>
+                                <li data-lang="en"><strong>Manesar (North):</strong> Serving Hero MotoCorp & Maruti Suzuki.</li>
+                                <li data-lang="zh"><strong>Manesar (北部):</strong> 就近服務 Hero MotoCorp 與 Maruti。</li>
+                                <li data-lang="en"><strong>Pune (West):</strong> Chakan belt. Serving Tata Motors & Bajaj Auto.</li>
+                                <li data-lang="zh"><strong>Pune (西部):</strong> Chakan 汽車帶，供應 Tata Motors 與 Bajaj。</li>
+                                <li data-lang="en"><strong>Sri City (South-East):</strong> Export hub & Isuzu supply.</li>
+                                <li data-lang="zh"><strong>Sri City (東南):</strong> 出口基地，供應 Isuzu。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech & Strategic Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">技術與戰略節點：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Coimbatore Tech Center:</strong> 275+ Patents. Focus on HMI & Connected Vehicle hardware.</li>
+                                <li data-lang="zh"><strong>Coimbatore Tech Center:</strong> 擁有 275+ 專利，專攻 HMI 人機介面。</li>
+                                <li data-lang="en"><strong>Pantnagar (North):</strong> Dedicated unit for Bajaj & Hero's hill state plants.</li>
+                                <li data-lang="zh"><strong>Pantnagar (北阿坎德):</strong> 專責供應 Bajaj/Hero 的北部工廠。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Strategic Conflict</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構 (戰略敏感)</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Shareholding Structure:</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權結構分析：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Promoter Family</span>
+                                <span class="text-gray-500 block" data-lang="zh">控股家族 (Promoters)</span>
+                                <strong class="text-white">Vanitha & Vikram Mohan</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">~38.51% (Controlling)</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">~38.51% (實際控制)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-red-500/50">
+                                <span class="text-red-400 block" data-lang="en"><i class="fas fa-exclamation-triangle mr-1"></i>Hostile Stake</span>
+                                <span class="text-red-400 block" data-lang="zh"><i class="fas fa-exclamation-triangle mr-1"></i>敵意持股</span>
+                                <strong class="text-white">Minda Corporation</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">~15.7% (Rival)</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">~15.7% (最大競爭對手)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Management Style</span>
+                                <span class="text-gray-500 block" data-lang="zh">管理風格</span>
+                                <strong class="text-blue-300">Technology Agnostic</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Moving away from mechanical</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">積極擺脫傳統機械形象</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-red-300 mt-3 italic" data-lang="en"><strong>Note:</strong> Minda Corp is attempting a hostile takeover. Pricol is aggressively defending its independence. Foxlink can leverage this by being a "Non-Minda" partner.</p>
+                        <p class="text-xs text-red-300 mt-3 italic" data-lang="zh"><strong>戰略備註：</strong> Minda 意圖敵意併購，雙方關係緊張。Foxlink 若能提供「非 Minda 體系」的供應鏈方案，將成為 Pricol 的重要盟友。</p>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Driver Info (65%):</strong> TFT LCD Clusters, Hybrid Clusters, Telematics (T-Box).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>駕駛資訊 (65%)：</strong> TFT 液晶儀表、混合式儀表、車載資通訊盒 (T-Box)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Actuation & Control:</strong> E-Water Pumps, Oil Pumps, Fuel Level Sensors.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>致動控制：</strong> 電子冷卻水泵、機油幫浦、燃油浮筒。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Connected Vehicle:</strong> Solutions for Fleet Management & Asset Tracking.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>車聯網方案：</strong> 車隊管理系統與資產追蹤。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (TFT Cluster)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">TFT 儀表 BOM 拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Display:</strong> 4.3" to 10.25" Auto-grade Panels. <span class="text-red-400">(Reliance on BOE/Tianma is a pain point)</span></li>
+                            <li data-lang="zh"><strong>顯示模組：</strong> 4.3~10.25吋車規面板。<span class="text-red-400">(急尋非中資來源替代京東方/天馬)</span></li>
+                            
+                            <li data-lang="en"><strong>Interconnects:</strong> HSD / FAKRA for Video. Board-to-Board for modules. <span class="text-green-400 font-bold">Foxlink Core Opp</span></li>
+                            <li data-lang="zh"><strong>連接器：</strong> 影像傳輸用 HSD/FAKRA，主板用板對板。<span class="text-green-400 font-bold">Foxlink 核心機會</span></li>
+                            
+                            <li data-lang="en"><strong>PCBA:</strong> NXP i.MX / STM32 SoCs. DDR3/4 Memory.</li>
+                            <li data-lang="zh"><strong>核心運算：</strong> NXP i.MX 或 STM32 圖形晶片，搭配 DDR 記憶體。</li>
+                            
+                            <li data-lang="en"><strong>Housing:</strong> Double-shot injection for light sealing.</li>
+                            <li data-lang="zh"><strong>機構件：</strong> 雙料射出成型殼體 (需高精密防漏光)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Strategic Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>EV Transition:</strong> Urgent need for BMS wiring & connectors (Partnering with BMS PowerSafe).</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>EV 轉型：</strong> 急需 BMS (電池管理) 相關的高壓線束與連接器技術。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Optical Bonding:</strong> Seeking local vendors for Display bonding to reduce imports.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>光學貼合：</strong> 尋找具備 Optical Bonding 經驗的模組供應商，以縮短供應鏈。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Tech & De-risking</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：技術升級與去風險化</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Focus: Software, Displays & Supply Chain Resilience</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Head of Sourcing - Electronics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (總部)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Strategic:</strong> Mandate is "De-risking Supply Chain" (Reduce China dependency).</td>
+                                    <td data-lang="zh"><strong>戰略任務：</strong> "De-risking Supply Chain"，意即降低對單一國家 (中國) 的依賴。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">HMI Developer (Qt/QML)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore/Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore/Pune</span>
+                                    </td>
+                                    <td data-lang="en">Mass hiring for UI engineers. Confirms surge in TFT Cluster orders.</td>
+                                    <td data-lang="zh">大量招聘圖形介面工程師，顯示 TFT 儀表訂單量大增。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">System Engineer - BMS</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (研發)</span>
+                                    </td>
+                                    <td data-lang="en">Hardware architect for EV Battery Management Systems.</td>
+                                    <td data-lang="zh">針對 EV 電池管理系統的硬體架構師。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Program Manager - Tata Account</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (業務)</span>
+                                    </td>
+                                    <td data-lang="en">Dedicated liaison for Tata's new SUV Digital Cockpit project.</td>
+                                    <td data-lang="zh">專責對接 Tata 的新款 SUV 數位座艙專案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">SQE - Display & Touch</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (品管)</span>
+                                    </td>
+                                    <td data-lang="en">Auditing display vendors. Indicates quality pain points in new line.</td>
+                                    <td data-lang="zh">負責稽核顯示屏供應商的品質，這是其新產品線的痛點。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Cybersecurity Analyst</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Coimbatore (資安)</span>
+                                    </td>
+                                    <td data-lang="en">Designing protection for Connected Vehicles (AIS-189 compliance).</td>
+                                    <td data-lang="zh">針對車聯網數據安全 (AIS-189 法規) 進行防護設計。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">OEM Relationships</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">主要客戶 (OEMs)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>2-Wheeler (Dominant):</strong> TVS Motor, Hero MotoCorp, Royal Enfield, Bajaj Auto, Ola Electric.</li>
+                                <li data-lang="zh"><strong>二輪車 (霸主):</strong> TVS (主要), Hero, Royal Enfield, Bajaj, Ola (供應 TFT 儀表)。</li>
+                                
+                                <li data-lang="en"><strong>Commercial Vehicle:</strong> Tata Motors, Ashok Leyland (Sensors & Clusters).</li>
+                                <li data-lang="zh"><strong>商用車:</strong> Tata Motors, Ashok Leyland (儀表與傳感器)。</li>
+                                
+                                <li data-lang="en"><strong>Off-Road/Global:</strong> JCB, Caterpillar (Global Supply Agreement).</li>
+                                <li data-lang="zh"><strong>工程機械:</strong> JCB, Caterpillar (全球供應協議)。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics & Export</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">物流與出口戰略</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Global Reach:</strong> Exports to 45+ countries (Harley Davidson, KTM, BMW Motorrad).</li>
+                                <li data-lang="zh"><strong>出口市場：</strong> 銷往 45 國，客戶含 Harley, KTM, BMW Motorrad。</li>
+                                
+                                <li data-lang="en"><strong>Logic:</strong> "Proximity to Customer". Plants located near every major auto cluster.</li>
+                                <li data-lang="zh"><strong>選址邏輯：</strong> "貼近客戶"，在主要汽車聚落皆有設廠 (VMI 模式)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Dominant in 2W Clusters / High Localization</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Instrument Cluster Market</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度儀表板市場排名 (Top 5)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">1</td>
+                                        <td class="p-2 text-white font-bold">Pricol Limited</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">India (2W Segment Leader >50%)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">印度 (2W 領域霸主，市佔 >50%)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Visteon India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">USA (Leader in 4W Digital Cockpits)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">美國 (四輪數位座艙技術領先)</td>
+                                    </tr>
+                                    <tr class="bg-red-900/20">
+                                        <td class="p-2 font-bold text-center text-red-400">3</td>
+                                        <td class="p-2 text-red-300">Minda Corp (Spark Minda)</td>
+                                        <td class="p-2 text-red-400" data-lang="en">India (Hostile Shareholder / Rival)</td>
+                                        <td class="p-2 text-red-400" data-lang="zh">印度 (敵意股東 / 最大死對頭)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Continental</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Premium 4W)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (主打高階乘用車)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Uno Minda</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Strong in Switches/Lights)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (開關與燈具強，儀表較弱)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> "The enemy of my enemy is my friend." Pricol hates Minda-linked vendors. Foxlink's independent connector tech is a strategic asset for Pricol's non-Minda ecosystem.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> 「敵人的敵人就是朋友」。Pricol 極度排斥 Minda 供應鏈。Foxlink 的獨立技術棧將是 Pricol 建立「非 Minda 生態系」的關鍵盟友。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-01</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Strategic Partnership] Sibros OTA Alliance</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[戰略合作] Sibros OTA 合作案</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Partnering with Sibros (Silicon Valley) to launch OTA-enabled clusters. First client: TVS EV.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">與矽谷 Sibros 合作推出 OTA 儀表，首發客戶為 TVS 高階電動車。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-25</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Expansion] New SMT Line at Unit I</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[產能擴充] Coimbatore 全新 SMT 產線</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Dedicated line for 7"+ High-Res TFT clusters. Production live.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Unit I 新產線投產，專門生產 7 吋以上高解析度 TFT 儀表。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-red-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-12</div>
+                        <div>
+                            <strong class="text-red-400 block text-sm" data-lang="en">[Corporate War] CCI Checks Minda</strong>
+                            <strong class="text-red-400 block text-sm" data-lang="zh">[股權戰] CCI 對 Minda 增持表關切</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Competition Commission scrutiny stalls Minda's takeover bid. Pricol asserts independence.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">競爭委員會 (CCI) 介入審查 Minda 增持案，併購壓力暫緩，公司宣示獨立。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-20:</strong> <span data-lang="en">Showcased "Single Glass Cockpit" at Auto Expo preview.</span><span data-lang="zh">Auto Expo 預展展示 "Single Glass Cockpit" 概念。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Won CII Industrial Innovation Award for "Reconfigurable Digital Cluster".</span><span data-lang="zh">憑藉「可重構數位儀表」獲得 CII 工業創新獎。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">Q2 FY26 Revenue up 18% driven by TFT mix.</span><span data-lang="zh">Q2 FY26 營收增長 18%，受惠於 TFT 產品佔比提升。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15:</strong> <span data-lang="en">LinkedIn Search: Looking for Optical Bonding vendors in South India.</span><span data-lang="zh">採購團隊公開尋找南印度 Optical Bonding (光學貼合) 供應商。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-blue-900/30 border border-blue-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="en">Ground Action Required?</div>
+                        <div class="text-sm text-blue-300 font-bold" data-lang="zh">需要採取行動？</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Confidential data for internal use only.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">本報告僅供內部參考，請勿外傳。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred from Pricol Report): 
+        // Market Share: 9 (Dominant >50% share in 2W market)
+        // Localization: 9 (Very high, plants in all major auto hubs)
+        // Brand Power: 8 (Strong legacy, global exports, but under threat in 4W)
+        // Digital Reach: 7 (Moving to Connected solutions/OTA, partnership with Sibros)
+        // Financial Health: 8 (Listed, Profitable, Good EBITDA margin ~13%)
+        const radarScores = [9, 9, 8, 7, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
