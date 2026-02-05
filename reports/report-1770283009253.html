@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Silver Consumer Electricals Pvt Ltd -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Silver Consumer Electricals (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Silver Consumer Electricals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-cyan-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">REGIONAL LEADER</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Silver Consumer Electricals</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Silver Consumer Electricals (Silver Pumps)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Status:</strong> Gujarat Dominance</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>地位：</strong> 古吉拉特邦霸主</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-cyan-400">Tier 2 Leader</div>
+                            <div class="text-xs text-gray-500 uppercase">Pumps & Solar</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Silver Consumer Electricals Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U31100GJ2005PTC046665</p>
+                        <p class="text-xs text-cyan-400 mt-2" data-lang="en">Status: Active (Rajkot ROC)</p>
+                        <p class="text-xs text-cyan-400 mt-2" data-lang="zh">狀態：活躍 (Rajkot ROC)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (FY25 Est)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 3,000 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Bediya Family (Private)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Bediya 家族 (私有)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Core Base</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">核心基地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Rajkot (Shapar)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Rajkot (Shapar 工業區)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Gujarat's Pump Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">古吉拉特邦泵浦製造樞紐</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Shapar-Veraval (Core):</strong> Huge vertical integration. Casting, Winding, Assembly all in-house.</li>
+                                <li data-lang="zh"><strong>Shapar-Veraval (核心):</strong> 高度垂直整合。鑄造、繞線、組裝皆在廠內完成。</li>
+                                <li data-lang="en"><strong>Metoda GIDC:</strong> Dedicated plant for Solar Pumps & High-end Motors.</li>
+                                <li data-lang="zh"><strong>Metoda GIDC:</strong> 專注生產太陽能泵浦與高階工業馬達。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Strategy Note:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">戰略備註：</strong>
+                            <p data-lang="en">Located in Rajkot, India's pump capital. Access to skilled labor and raw materials is their key competitive advantage.</p>
+                            <p data-lang="zh">位於印度泵浦之都 Rajkot。擁有熟練工人和原物料供應鏈優勢是其核心競爭力。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Culture</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure:</strong> 100% Owned by Bediya Family (Vasantbhai Bediya). Typical "Gujarati Business" - Cash rich, cost conscious.</p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權結構：</strong> Bediya 家族全資持有。典型的「古吉拉特商人」風格——現金流充裕，對成本控制極度敏感。</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Promoters</span>
+                                <span class="text-gray-500 block" data-lang="zh">創始人</span>
+                                <strong class="text-white">Vasantbhai Bediya</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Entity</span>
+                                <span class="text-gray-500 block" data-lang="zh">實體</span>
+                                <strong class="text-cyan-400">Silver Consumer Electricals</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Submersible Pumps:</strong> V3, V4, V6, V8 (Revenue Driver).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>沉水泵：</strong> V3-V8 系列 (營收主力，深井取水)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Solar Pumps:</strong> PM-KUSUM scheme subsidized models.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>太陽能泵浦：</strong> PM-KUSUM 補助計畫主力產品。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Surface Pumps:</strong> Centrifugal & Self-priming.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>地面泵：</strong> 離心泵、自吸泵。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Induction Motors:</strong> Industrial AC motors.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>感應馬達：</strong> 工業用 AC 馬達。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Foxlink Fit)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解 (Foxlink 機會)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Flat Cables (Core Opp):</strong> IP68 Submersible flat cables. High volume, strict waterproof spec.</li>
+                            <li data-lang="zh"><strong>沉水扁平電纜 (核心機會)：</strong> 連接泵浦與控制箱。需 IP68 防水、抗磨損。</li>
+                            
+                            <li data-lang="en"><strong>Solar Connectors:</strong> MC4 type DC connectors for solar panels.</li>
+                            <li data-lang="zh"><strong>太陽能連接器：</strong> 太陽能板與控制器用 MC4 DC 連接器。</li>
+                            
+                            <li data-lang="en"><strong>Winding Wire:</strong> High purity Enameled Copper Wire.</li>
+                            <li data-lang="zh"><strong>馬達繞線：</strong> 高純度銅漆包線。</li>
+                            
+                            <li data-lang="en"><strong>Control Panels:</strong> Starters with capacitors & terminal blocks.</li>
+                            <li data-lang="zh"><strong>控制面板：</strong> 啟動器、電容器與接線端子。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Pain Points</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">供應鏈痛點與需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Waterproof Reliability:</strong> "Cable Joint Failure" is top complaint. Need better jointing kits/pre-molded cables.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>防水可靠度：</strong> 「電纜接頭進水」是最大客訴。急需高品質防水接頭或預製線束。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Cost Sensitivity:</strong> End users are farmers. Price must be competitive vs local brands.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>價格敏感：</strong> 終端為農民。價格必須極具競爭力。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Strategic Moves</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：戰略意圖解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Analysis of recent key job postings in Rajkot</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Purchase Manager - RM</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Rajkot</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Rajkot (拉傑科特)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Key Signal:</strong> Buying Copper/Cables. Emphasizes "Bulk Buying" negotiation skills.</td>
+                                    <td data-lang="zh"><strong>關鍵訊號：</strong> 負責銅線與電纜採購。強調 "Bulk Buying" (大宗採購) 談判能力。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">R&D Electrical Eng</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Rajkot</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Rajkot (拉傑科特)</span>
+                                    </td>
+                                    <td data-lang="en">Developing high-efficiency (IE3/IE4) BLDC Solar Motors.</td>
+                                    <td data-lang="zh">開發高效率 (IE3/IE4) BLDC 太陽能馬達。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Area Sales Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">UP / Bihar</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">北方邦 / 比哈爾</span>
+                                    </td>
+                                    <td data-lang="en">Aggressive expansion into North India agricultural belts.</td>
+                                    <td data-lang="zh">積極向北印度農業大邦擴張銷售網絡。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Prod. Eng - Cable Div</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Shapar</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Shapar (工廠)</span>
+                                    </td>
+                                    <td data-lang="en">Managing in-house cable extrusion lines. (They make some, buy high-end).</td>
+                                    <td data-lang="zh">管理廠內電纜押出產線 (部分自製，高階仍需外購)。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Solar Project Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Ahmedabad</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Ahmedabad (阿默達巴德)</span>
+                                    </td>
+                                    <td data-lang="en">Executing govt PM-KUSUM tenders. High volume B2G business.</td>
+                                    <td data-lang="zh">執行政府 PM-KUSUM 標案。B2G 業務量大。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Export Executive</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Rajkot</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Rajkot (拉傑科特)</span>
+                                    </td>
+                                    <td data-lang="en">Expanding into Africa (Nigeria/Kenya). Need export-compliant cables.</td>
+                                    <td data-lang="zh">拓展非洲 (奈及利亞/肯亞) 市場。需要符合出口安規的線材。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Distribution</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Channel Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-cyan-400 mb-2" data-lang="en">Deep Distribution</h4>
+                            <h4 class="font-bold text-cyan-400 mb-2" data-lang="zh">深耕通路 (Deep Distribution)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Dealer Network:</strong> 5,000+ dealers penetrating deep into rural Talukas.</li>
+                                <li data-lang="zh"><strong>經銷網絡：</strong> 5,000+ 經銷商，深入農村每個鄉鎮 (Taluka)。</li>
+                                
+                                <li data-lang="en"><strong>Influencers:</strong> Strong bond with local Plumbers & Mechanics (Key Opinion Leaders).</li>
+                                <li data-lang="zh"><strong>KOL 策略：</strong> 與當地水電工建立深厚關係，影響農民決策。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Customer Base -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Customer Mix</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">客戶組合</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Farmers (B2C):</strong> Primary revenue source. Agriculture irrigation.</li>
+                                <li data-lang="zh"><strong>農民 (B2C):</strong> 最大營收來源。農業灌溉。</li>
+                                
+                                <li data-lang="en"><strong>Government (B2G):</strong> PM-KUSUM Solar Pump tenders (High volume).</li>
+                                <li data-lang="zh"><strong>政府 (B2G):</strong> PM-KUSUM 太陽能泵浦標案 (量大)。</li>
+                                
+                                <li data-lang="en"><strong>Real Estate (B2B):</strong> Construction site drainage & water supply.</li>
+                                <li data-lang="zh"><strong>房地產 (B2B):</strong> 建築工地排水與供水系統。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Strong Regional Leader / Conservative Finance</p>
+                    </div>
+
+                    <!-- Top Competitors Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">Market Leadership</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">市場領導地位</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Region/Segment</th>
+                                        <th class="p-2" data-lang="en">Silver Position</th><th class="p-2" data-lang="zh">Silver 地位</th>
+                                        <th class="p-2" data-lang="en">Key Rivals</th><th class="p-2" data-lang="zh">主要對手</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-cyan-900/40 border-l-4 border-cyan-500">
+                                        <td class="p-2 font-bold text-white">Gujarat (Home)</td>
+                                        <td class="p-2 text-green-400 font-bold" data-lang="en">#1 Leader</td>
+                                        <td class="p-2 text-green-400 font-bold" data-lang="zh">絕對第一</td>
+                                        <td class="p-2 text-gray-400">Falcon, Lubi</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold">Pan-India</td>
+                                        <td class="p-2 text-gray-300">Tier 2 Leader</td>
+                                        <td class="p-2 text-gray-300">二線領頭羊</td>
+                                        <td class="p-2 text-gray-400">Crompton, Kirloskar, Texmo</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold">Solar Pumps</td>
+                                        <td class="p-2 text-gray-300">Aggressive Challenger</td>
+                                        <td class="p-2 text-gray-300">積極挑戰者</td>
+                                        <td class="p-2 text-gray-400">Shakti Pumps</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-3 p-2 bg-blue-900/20 border border-blue-500/30 rounded">
+                                <p class="text-xs text-blue-300" data-lang="en"><strong>Foxlink Opportunity:</strong> 1. Solar DC Connectors. 2. Export-grade Cables (UL/CE) for their African expansion.</p>
+                                <p class="text-xs text-blue-300" data-lang="zh"><strong>Foxlink 機會點：</strong> 1. 太陽能 DC 連接器。 2. 為其非洲出口業務提供符合 UL/CE 安規的高階電纜。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-02</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Govt Order] PM-KUSUM Vendor Selection</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[政府標案] 入選 PM-KUSUM 供應商</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Selected by GUVNL for 20,000 solar pumps. Huge demand for DC cables.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">入選 GUVNL 供應商名單，預計獲得 2 萬台泵浦訂單。DC 線束需求大增。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Innovation] "Silver Smart" IoT Pump</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[新品] IoT 智慧泵浦發布</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched App-controlled pump. Needs precision control PCBA & comms modules.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">推出 App 遠端控制泵浦。需要通訊模組與精密控制板。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Expansion] New Cable Plant</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[擴廠] 新電纜廠房</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Expanding cable extrusion capacity in Shapar. Vertical integration move.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Shapar 擴建電纜產能，顯示用量巨大需垂直整合。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Export] Kenya Agri Expo</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[出口] 肯亞農業展</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Showcased Stainless Steel pumps. Targeting East Africa market.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">展示全不鏽鋼泵浦，瞄準東非缺水市場。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">Signed Cricket Star as Brand Ambassador.</span><span data-lang="zh">簽約板球明星代言，提升全國知名度。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-10:</strong> <span data-lang="en">1MW Rooftop Solar installed at Rajkot plant.</span><span data-lang="zh">Rajkot 工廠安裝 1MW 屋頂太陽能。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-cyan-900/30 border border-cyan-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-cyan-300 font-bold" data-lang="en">Strategic Action Required</div>
+                        <div class="text-sm text-cyan-300 font-bold" data-lang="zh">戰略行動建議</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Offer IP68 Flat Cables & Solar Connectors.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">提供 IP68 扁平電纜與太陽能連接器方案。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log in CRM</span>
+                        <span data-lang="zh">登入 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI)</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Silver Consumer): 
+        // Market Share: 8 (Gujarat #1, National Tier 2)
+        // Localization: 9 (High vertical integration in Rajkot)
+        // Brand Power: 7 (Strong Regional, hiring cricketer for National push)
+        // Digital Reach: 6 (Traditional dealer network is king, just starting IoT)
+        // Financial Health: 8 (Cash-rich family business, conservative)
+        const radarScores = [8, 9, 7, 6, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                    else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                    else el.style.display = 'block';
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(6, 182, 212, 0.2)', // Cyan for Silver
+                        borderColor: 'rgba(6, 182, 212, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(6, 182, 212, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

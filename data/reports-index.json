@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T09:13:01.317Z",
+  "lastUpdated": "2026-02-05T09:16:50.904Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -404,6 +404,19 @@
       "fileName": "report-1770282779236.html",
       "createdAt": "2026-02-05T09:13:01.317Z",
       "updatedAt": "2026-02-05T09:13:01.317Z"
+    },
+    {
+      "id": "report-1770283009253",
+      "title": "Silver Consumer Electricals Silver Consumer Electricals KYC report",
+      "description": "Silver Consumer Electricals KYC report",
+      "categories": [
+        "內部簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1770283009253.html",
+      "createdAt": "2026-02-05T09:16:50.904Z",
+      "updatedAt": "2026-02-05T09:16:50.904Z"
     }
   ]
 }
