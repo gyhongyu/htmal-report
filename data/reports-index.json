@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-07T05:09:46.532Z",
+  "lastUpdated": "2026-02-07T05:10:22.313Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -631,13 +631,13 @@
       "title": "Alto-Shaam India KYC report",
       "description": "Alto-Shaam India KYC report",
       "categories": [
-        "內部簡報",
         "市場分析",
-        "其他"
+        "其他",
+        "客戶KYC"
       ],
       "fileName": "report-1770289703041.html",
       "createdAt": "2026-02-05T11:08:25.504Z",
-      "updatedAt": "2026-02-05T11:08:25.504Z"
+      "updatedAt": "2026-02-07T05:10:22.313Z"
     },
     {
       "id": "report-1770290889354",
