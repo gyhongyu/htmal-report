@@ -1,4 +1,4 @@
-// Admin 页面卡片组件（带编辑和删除功能）
+// Admin 頁面卡片組件（帶編輯和刪除功能）
 
 function AdminPageCard({ page, onEdit, onDelete }) {
     const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false);
@@ -19,7 +19,7 @@ function AdminPageCard({ page, onEdit, onDelete }) {
             onDelete(page.pageId);
             setShowDeleteConfirm(false);
         } catch (error) {
-            alert('删除失败: ' + error.message);
+            alert('刪除失敗: ' + error.message);
         }
     };
 
@@ -54,7 +54,7 @@ function AdminPageCard({ page, onEdit, onDelete }) {
             </div>
 
             <div className="text-xs text-gray-500 mb-3">
-                <div>创建: {formatDate(page.createdAt)}</div>
+                <div>創建: {formatDate(page.createdAt)}</div>
                 <div>更新: {formatDate(page.updatedAt)}</div>
             </div>
 
@@ -64,24 +64,24 @@ function AdminPageCard({ page, onEdit, onDelete }) {
                     className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-1"
                 >
                     <div className="icon-edit text-sm"></div>
-                    编辑
+                    編輯
                 </button>
                 <button
                     onClick={() => setShowDeleteConfirm(true)}
                     className="px-3 py-2 bg-red-50 text-red-600 text-sm rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-1"
                 >
                     <div className="icon-trash-2 text-sm"></div>
-                    删除
+                    刪除
                 </button>
             </div>
 
-            {/* 删除确认对话框 */}
+            {/* 刪除確認對話框 */}
             {showDeleteConfirm && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-6 max-w-sm mx-4">
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">确认删除</h3>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">確認刪除</h3>
                         <p className="text-gray-600 mb-4">
-                            确定要删除「{page.title}」吗？此操作无法撤销。
+                            確定要刪除「{page.title}」嗎？此操作無法撤回。
                         </p>
                         <div className="flex gap-2">
                             <button
@@ -94,7 +94,7 @@ function AdminPageCard({ page, onEdit, onDelete }) {
                                 onClick={handleDelete}
                                 className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
                             >
-                                确认删除
+                                確認刪除
                             </button>
                         </div>
                     </div>

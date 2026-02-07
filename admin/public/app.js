@@ -1,4 +1,4 @@
-// Admin 主应用
+// Admin 主應用
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -19,13 +19,13 @@ class ErrorBoundary extends React.Component {
             return (
                 <div className="min-h-screen flex items-center justify-center bg-gray-50">
                     <div className="text-center">
-                        <h1 className="text-2xl font-bold text-gray-900 mb-4">出错了</h1>
-                        <p className="text-gray-600 mb-4">抱歉，发生了意外错误</p>
+                        <h1 className="text-2xl font-bold text-gray-900 mb-4">出錯了</h1>
+                        <p className="text-gray-600 mb-4">抱歉，發生了意外錯誤</p>
                         <button
                             onClick={() => window.location.reload()}
                             className="btn-primary"
                         >
-                            重新加载
+                            重新載入
                         </button>
                     </div>
                 </div>
@@ -47,10 +47,10 @@ function App() {
         title: '',
         description: '',
         categories: [],
-        htmlCode: '<!DOCTYPE html>\n<html>\n<head>\n  <title>我的网页</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n  <p>这是一个示例网页</p>\n</body>\n</html>'
+        htmlCode: '<!DOCTYPE html>\n<html>\n<head>\n  <title>我的網頁</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n  <p>這是一個示例網頁</p>\n</body>\n</html>'
     });
 
-    // 检查配置状态
+    // 檢查配置狀態
     React.useEffect(() => {
         checkConfig();
     }, []);
@@ -64,7 +64,7 @@ function App() {
                 setShowConfigModal(true);
             }
         } catch (error) {
-            console.error('检查配置失败:', error);
+            console.error('檢查配置失敗:', error);
             setShowConfigModal(true);
         }
     };
@@ -81,7 +81,7 @@ function App() {
             title: '',
             description: '',
             categories: initialCategories,
-            htmlCode: '<!DOCTYPE html>\n<html>\n<head>\n  <title>我的网页</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n  <p>这是一个示例网页</p>\n</body>\n</html>'
+            htmlCode: '<!DOCTYPE html>\n<html>\n<head>\n  <title>我的網頁</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n  <p>這是一個示例網頁</p>\n</body>\n</html>'
         });
         setCurrentView('edit');
     };
@@ -94,37 +94,37 @@ function App() {
                 setPageData(storedData);
                 setCurrentView('edit');
             } else {
-                alert('页面数据不存在');
+                alert('頁面數據不存在');
             }
         } catch (error) {
-            console.error('加载页面失败:', error);
-            alert('加载页面失败: ' + error.message);
+            console.error('載入頁面失敗:', error);
+            alert('載入頁面失敗: ' + error.message);
         }
     };
 
     const handleSavePage = async () => {
         if (!pageData.title.trim()) {
-            alert('请输入页面标题');
+            alert('請輸入頁面標題');
             return;
         }
 
         if (!pageData.categories || pageData.categories.length < 3) {
-            alert('请至少选择3个分类标签');
+            alert('請至少選擇3個分類標籤');
             return;
         }
 
         try {
             const savedPageId = await savePageData(currentPageId, pageData);
             if (savedPageId) {
-                alert('保存成功！');
+                alert('儲存成功！');
                 setCurrentPageId(savedPageId);
                 setCurrentView('home');
             } else {
-                alert('保存失败，请重试');
+                alert('儲存失敗，請重試');
             }
         } catch (error) {
-            console.error('保存页面失败:', error);
-            alert('保存失败: ' + error.message);
+            console.error('儲存頁面失敗:', error);
+            alert('儲存失敗: ' + error.message);
         }
     };
 
@@ -140,8 +140,8 @@ function App() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-900 mb-2">欢迎使用 HTML Reports Admin</h1>
-                    <p className="text-gray-600 mb-4">请先配置 GitHub 仓库信息</p>
+                    <h1 className="text-2xl font-bold text-gray-900 mb-2">歡迎使用 HTML Reports Admin</h1>
+                    <p className="text-gray-600 mb-4">請先配置 GitHub 倉庫信息</p>
                 </div>
                 <ConfigModal
                     isOpen={showConfigModal}
@@ -188,10 +188,10 @@ function App() {
                                 className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
                             >
                                 <div className="icon-arrow-left text-lg"></div>
-                                返回首页
+                                返回首頁
                             </button>
                             <h1 className="text-2xl font-bold text-gray-900">
-                                {currentPageId ? '编辑页面' : '创建新页面'}
+                                {currentPageId ? '編輯頁面' : '創建新頁面'}
                             </h1>
                         </div>
                         <button
@@ -199,7 +199,7 @@ function App() {
                             className="btn-success flex items-center gap-2"
                         >
                             <div className="icon-save text-lg"></div>
-                            保存页面
+                            儲存頁面
                         </button>
                     </div>
                 </div>
@@ -210,35 +210,35 @@ function App() {
                 <div className="max-w-7xl mx-auto px-4 py-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">页面标题</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">頁面標題</label>
                             <input
                                 type="text"
                                 value={pageData.title}
                                 onChange={(e) => setPageData(prev => ({ ...prev, title: e.target.value }))}
                                 className="input-field"
-                                placeholder="请输入页面标题..."
+                                placeholder="請輸入頁面標題..."
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">页面描述</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">頁面描述</label>
                             <input
                                 type="text"
                                 value={pageData.description}
                                 onChange={(e) => setPageData(prev => ({ ...prev, description: e.target.value }))}
                                 className="input-field"
-                                placeholder="请输入页面描述..."
+                                placeholder="請輸入頁面描述..."
                             />
                         </div>
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            分类标签 <span className="text-red-500">（至少选择3个）</span>
+                            分類標籤 <span className="text-red-500">（至少選擇3個）</span>
                             {pageData.categories && pageData.categories.length > 0 && (
-                                <span className="ml-2 text-sm text-gray-500">已选择 {pageData.categories.length} 个</span>
+                                <span className="ml-2 text-sm text-gray-500">已選擇 {pageData.categories.length} 個</span>
                             )}
                         </label>
                         <div className="flex flex-wrap gap-2">
-                            {['客戶簡報', '內部簡報', '會議記要', '工作報告', '數據分析', '市場分析', '財務分析', '年度計劃', '季度計劃', '項目計劃', '其他'].map(category => {
+                            {['對外簡報', '客戶KYC', '客戶攻略', '內部簡報', '會議記要', '工作報告', '數據分析', '市場分析', '財務分析', '年度計劃', '季度計劃', '項目計劃', '其他'].map(category => {
                                 const isSelected = pageData.categories && pageData.categories.includes(category);
                                 return (
                                     <button
@@ -252,8 +252,8 @@ function App() {
                                             setPageData(prev => ({ ...prev, categories: newCategories }));
                                         }}
                                         className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${isSelected
-                                                ? 'bg-[var(--primary-color)] text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                            ? 'bg-[var(--primary-color)] text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                             }`}
                                     >
                                         {category}

@@ -16,7 +16,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     const loadAllPages = async () => {
       setLoading(true);
       setProgress(0);
-      
+
       try {
         setProgress(30);
         console.log('開始載入所有頁面...');
@@ -27,10 +27,10 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
         setAllPages(pages);
         setCurrentPage(1);
         setProgress(100);
-        
+
         setTimeout(() => setLoading(false), 300);
       } catch (error) {
-        console.error('加載頁面列表失敗:', error);
+        console.error('載入頁面列表失敗:', error);
         setLoading(false);
       }
     };
@@ -40,7 +40,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
       console.log('搜尋關鍵字:', searchKeyword);
       console.log('當前分類:', currentCategory);
       console.log('所有頁面數量:', allPages.length);
-      
+
       // Step 1: Filter by search keyword
       let filtered = allPages;
       if (searchKeyword.trim()) {
@@ -52,7 +52,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
         });
         console.log('關鍵字過濾後:', filtered.length, '筆');
       }
-      
+
       // Step 2: Filter by category
       if (currentCategory !== '全部') {
         filtered = filtered.filter(page => {
@@ -60,7 +60,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
         });
         console.log('分類過濾後:', filtered.length, '筆');
       }
-      
+
       console.log('最終結果:', filtered.length, '筆');
       console.log('===================');
       return filtered;
@@ -77,7 +77,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
           return titleMatch || descMatch;
         });
       }
-      
+
       const counts = { '全部': pagesToCount.length };
       pagesToCount.forEach(page => {
         if (page.categories && Array.isArray(page.categories)) {
@@ -101,11 +101,11 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
       setLoading(true);
       setProgress(0);
       setCurrentCategory(category);
-      
+
       setProgress(50);
       await new Promise(resolve => setTimeout(resolve, 200));
       setProgress(100);
-      
+
       setTimeout(() => setLoading(false), 300);
     };
 
@@ -123,12 +123,12 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     const handleSharePage = async (pageId, title) => {
       const pageData = await getStoredPageData(pageId);
       const htmlData = await getStoredHTML(pageId);
-      
+
       if (!pageData || !htmlData) {
         alert('頁面資料不完整，無法分享');
         return;
       }
-      
+
       const url = `${window.location.origin}/preview.html?id=${pageId}`;
       setShareData({ title, url });
       setShowShareModal(true);
@@ -148,14 +148,14 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
           alert('診斷工具尚未載入，請重新整理頁面後再試');
           return;
         }
-        
+
         const result = await window.checkActualRecordCount();
-        
+
         if (result.error) {
           alert(`診斷過程發生錯誤：${result.error}`);
           return;
         }
-        
+
         setDiagnosticInfo(result);
         alert(`資料庫診斷完成！\n總資料: ${result.total} 筆\n有效資料: ${result.valid} 筆\n無效資料: ${result.invalid} 筆\n\n詳細信息請查看瀏覽器控制台`);
       } catch (error) {
@@ -181,7 +181,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
                 <p className="text-gray-600 mt-2">創建、編輯和管理您的HTML頁面</p>
               </div>
               <div className="flex items-center gap-2">
-                <button 
+                <button
                   onClick={handleDiagnostic}
                   className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center gap-2"
                   title="檢查資料庫狀態"
@@ -189,7 +189,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
                   <div className="icon-activity text-lg"></div>
                   診斷
                 </button>
-                <button 
+                <button
                   onClick={() => onCreateNew(currentCategory)}
                   className="btn-primary flex items-center gap-2"
                 >
@@ -199,7 +199,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
               </div>
             </div>
             <div className="max-w-md">
-              <SearchBar 
+              <SearchBar
                 searchKeyword={searchKeyword}
                 onSearchChange={setSearchKeyword}
               />
@@ -207,7 +207,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
           </div>
         </header>
 
-        <CategoryTabs 
+        <CategoryTabs
           activeCategory={currentCategory}
           onCategoryChange={handleCategoryChange}
           categoryCounts={categoryCounts}
@@ -228,7 +228,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
                   {currentCategory === '全部' ? '還沒有HTML頁面' : `${currentCategory}分類中還沒有頁面`}
                 </h3>
                 <p className="text-gray-600 mb-6">創建您的第一個HTML頁面開始吧</p>
-                <button 
+                <button
                   onClick={() => onCreateNew(currentCategory)}
                   className="btn-primary flex items-center gap-2 mx-auto"
                 >
@@ -250,7 +250,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
                     />
                   ))}
                 </div>
-                <Pagination 
+                <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
                   onPageChange={setCurrentPage}
@@ -261,7 +261,7 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
         )}
 
         {showShareModal && (
-          <ShareModal 
+          <ShareModal
             shareUrl={shareData.url}
             title={shareData.title}
             onClose={() => setShowShareModal(false)}

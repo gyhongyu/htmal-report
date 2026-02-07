@@ -1,4 +1,4 @@
-// Admin 主页组件
+// Admin 主頁組件
 
 function AdminHomePage({
     onCreateNew,
@@ -30,8 +30,8 @@ function AdminHomePage({
             const allPages = await getAllStoredPages();
             setPages(allPages);
         } catch (error) {
-            console.error('加载页面失败:', error);
-            alert('加载失败: ' + error.message);
+            console.error('載入頁面失敗:', error);
+            alert('載入失敗: ' + error.message);
         } finally {
             setLoading(false);
         }
@@ -41,7 +41,7 @@ function AdminHomePage({
         if (await deleteStoredPage(pageId)) {
             await loadPages(); // 重新加载列表
         } else {
-            alert('删除失败');
+            alert('刪除失敗');
         }
     };
 
@@ -58,7 +58,7 @@ function AdminHomePage({
         return counts;
     }, [pages]);
 
-    // 过滤和搜索
+    // 過濾和搜尋
     const filteredPages = React.useMemo(() => {
         return pages.filter(page => {
             const matchCategory = currentCategory === '全部' ||
@@ -80,7 +80,7 @@ function AdminHomePage({
     );
 
     if (loading) {
-        return <LoadingProgress text="加载中..." />;
+        return <LoadingProgress text="載入中..." />;
     }
 
     return (
@@ -91,7 +91,7 @@ function AdminHomePage({
                     <div className="flex items-center justify-between">
                         <div>
                             <h1 className="text-2xl font-bold text-gray-900">HTML Reports Admin</h1>
-                            <p className="text-sm text-gray-600">管理后台</p>
+                            <p className="text-sm text-gray-600">管理後臺</p>
                         </div>
                         <div className="flex gap-2">
                             <button
@@ -99,14 +99,14 @@ function AdminHomePage({
                                 className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
                             >
                                 <div className="icon-settings text-lg"></div>
-                                设置
+                                設置
                             </button>
                             <button
                                 onClick={() => onCreateNew(currentCategory)}
                                 className="btn-primary flex items-center gap-2"
                             >
                                 <div className="icon-plus text-lg"></div>
-                                创建新页面
+                                創建新頁面
                             </button>
                         </div>
                     </div>
@@ -114,7 +114,7 @@ function AdminHomePage({
             </header>
 
             <div className="max-w-7xl mx-auto px-4 py-6">
-                {/* 搜索栏 */}
+                {/* 搜尋欄 */}
                 <div className="mb-6">
                     <SearchBar
                         searchKeyword={searchKeyword}
@@ -122,7 +122,7 @@ function AdminHomePage({
                     />
                 </div>
 
-                {/* 分类标签 */}
+                {/* 分類標籤 */}
                 <div className="mb-6">
                     <CategoryTabs
                         currentCategory={currentCategory}
@@ -131,7 +131,7 @@ function AdminHomePage({
                     />
                 </div>
 
-                {/* 统计信息 */}
+                {/* 統計信息 */}
                 <div className="mb-6">
                     <div className="text-sm text-gray-600">
                         共 <span className="font-semibold text-gray-900">{filteredPages.length}</span> 個頁面
@@ -140,16 +140,16 @@ function AdminHomePage({
                     </div>
                 </div>
 
-                {/* 页面网格 */}
+                {/* 頁面網格 */}
                 {paginatedPages.length === 0 ? (
                     <div className="text-center py-12">
                         <div className="icon-file-text text-6xl text-gray-300 mb-4"></div>
-                        <p className="text-gray-500">暂无页面</p>
+                        <p className="text-gray-500">暫無頁面</p>
                         <button
                             onClick={() => onCreateNew()}
                             className="mt-4 btn-primary"
                         >
-                            创建第一个页面
+                            創建第一個頁面
                         </button>
                     </div>
                 ) : (

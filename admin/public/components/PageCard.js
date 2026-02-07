@@ -9,17 +9,17 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
       try {
         const htmlContent = page.htmlCode || '';
         const fileName = (page.title || '無標題頁面').replace(/[<>:"/\\|?*]/g, '_') + '.html';
-        
+
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
-        
+
         const link = document.createElement('a');
         link.href = url;
         link.download = fileName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
+
         URL.revokeObjectURL(url);
       } catch (error) {
         console.error('下載失敗:', error);
@@ -29,9 +29,9 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
 
     const formatDate = (dateString) => {
       const date = new Date(dateString);
-      return date.toLocaleDateString('zh-CN') + ' ' + date.toLocaleTimeString('zh-CN', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
+      return date.toLocaleDateString('zh-CN') + ' ' + date.toLocaleTimeString('zh-CN', {
+        hour: '2-digit',
+        minute: '2-digit'
       });
     };
 
@@ -40,10 +40,10 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
     };
 
     return (
-      <div 
-        className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-200 group cursor-pointer" 
+      <div
+        className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-all duration-200 group cursor-pointer"
         onDoubleClick={handleDoubleClick}
-        data-name="page-card" 
+        data-name="page-card"
         data-file="components/PageCard.js"
       >
         <div className="p-6">
@@ -72,7 +72,7 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
                 <button
                   onClick={() => onEdit(page.pageId)}
                   className="ml-2 p-1.5 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0"
-                  title="快速编辑"
+                  title="快速編輯"
                 >
                   <div className="icon-edit text-base"></div>
                 </button>

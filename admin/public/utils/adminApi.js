@@ -1,7 +1,7 @@
-// Admin API 工具函数
-// 调用本地 Express API
+// Admin API 工具函數
+// 呼叫本地 Express API
 
-const API_BASE = '';  // 同域，无需指定
+const API_BASE = '';  // 同域，無需指定
 
 async function apiCall(endpoint, options = {}) {
     try {
@@ -21,12 +21,12 @@ async function apiCall(endpoint, options = {}) {
 
         return data;
     } catch (error) {
-        console.error('API调用失败:', error);
+        console.error('API呼叫失敗:', error);
         throw error;
     }
 }
 
-// 配置相关
+// 配置相關
 async function getConfigStatus() {
     return await apiCall('/api/config/status');
 }
@@ -45,7 +45,7 @@ async function updateConfig(updates) {
     });
 }
 
-// 报告相关
+// 報告相關
 async function getAllReports() {
     const data = await apiCall('/api/reports');
     return data.reports || [];
@@ -80,7 +80,7 @@ async function testConnection() {
     return await apiCall('/api/test/connection');
 }
 
-// 兼容旧的函数名（供复用的组件使用）
+// 兼容舊的函數名（供複用的組件使用）
 async function savePageData(pageId, pageData) {
     if (pageId) {
         const result = await updateReport(pageId, pageData);
@@ -103,7 +103,7 @@ async function getStoredPageData(pageId) {
             updatedAt: report.updatedAt
         };
     } catch (error) {
-        console.error('获取页面数据失败:', error);
+        console.error('獲取頁面數據失敗:', error);
         return null;
     }
 }
@@ -120,7 +120,7 @@ async function getAllStoredPages() {
             updatedAt: r.updatedAt
         }));
     } catch (error) {
-        console.error('获取所有页面失败:', error);
+        console.error('獲取所有頁面失敗:', error);
         return [];
     }
 }
@@ -130,7 +130,7 @@ async function deleteStoredPage(pageId) {
         await deleteReport(pageId);
         return true;
     } catch (error) {
-        console.error('删除页面失败:', error);
+        console.error('刪除頁面失敗:', error);
         return false;
     }
 }

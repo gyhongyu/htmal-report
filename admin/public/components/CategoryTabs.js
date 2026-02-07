@@ -16,7 +16,9 @@ function CategoryTabs({
 
     const categories = [
       { id: '全部', name: '全部', icon: 'layout-grid' },
-      { id: '客戶簡報', name: '客戶簡報', icon: 'presentation' },
+      { id: '對外簡報', name: '對外簡報', icon: 'presentation' },
+      { id: '客戶KYC', name: '客戶KYC', icon: 'shield-check' },
+      { id: '客戶攻略', name: '客戶攻略', icon: 'target' },
       { id: '內部簡報', name: '內部簡報', icon: 'file-text' },
       { id: '會議記要', name: '會議記要', icon: 'file-check' },
       { id: '工作報告', name: '工作報告', icon: 'clipboard-list' },
