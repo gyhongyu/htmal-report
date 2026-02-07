@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-05T11:28:10.902Z",
+  "lastUpdated": "2026-02-07T05:09:46.532Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -645,12 +645,12 @@
       "description": "Google (Alphabet) India KYC report",
       "categories": [
         "內部簡報",
-        "市場分析",
-        "其他"
+        "其他",
+        "客戶KYC"
       ],
       "fileName": "report-1770290889354.html",
       "createdAt": "2026-02-05T11:28:10.902Z",
-      "updatedAt": "2026-02-05T11:28:10.902Z"
+      "updatedAt": "2026-02-07T05:09:46.532Z"
     }
   ]
 }
