@@ -1,6 +1,6 @@
 // Admin 頁面卡片組件（帶編輯和刪除功能）
 
-function AdminPageCard({ page, onEdit, onDelete }) {
+function AdminPageCard({ page, baseUrl, onEdit, onDelete }) {
     const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false);
 
     const formatDate = (dateStr) => {
@@ -58,21 +58,31 @@ function AdminPageCard({ page, onEdit, onDelete }) {
                 <div>更新: {formatDate(page.updatedAt)}</div>
             </div>
 
-            <div className="flex gap-2">
-                <button
-                    onClick={() => onEdit(page.pageId)}
-                    className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-1"
+            <div className="flex flex-col gap-2">
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => onEdit(page.pageId)}
+                        className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-1"
+                    >
+                        <div className="icon-edit text-sm"></div>
+                        編輯
+                    </button>
+                    <button
+                        onClick={() => setShowDeleteConfirm(true)}
+                        className="px-3 py-2 bg-red-50 text-red-600 text-sm rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-1"
+                    >
+                        <div className="icon-trash-2 text-sm"></div>
+                        刪除
+                    </button>
+                </div>
+                <a
+                    href={`${baseUrl || window.location.origin}/reports/${page.fileName}`}
+                    target="_blank"
+                    className="px-3 py-2 bg-green-50 text-green-700 text-sm rounded-lg hover:bg-green-100 transition-colors flex items-center justify-center gap-1 border border-green-200"
                 >
-                    <div className="icon-edit text-sm"></div>
-                    編輯
-                </button>
-                <button
-                    onClick={() => setShowDeleteConfirm(true)}
-                    className="px-3 py-2 bg-red-50 text-red-600 text-sm rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-1"
-                >
-                    <div className="icon-trash-2 text-sm"></div>
-                    刪除
-                </button>
+                    <div className="icon-external-link text-sm"></div>
+                    預覽 (GitHub Pages)
+                </a>
             </div>
 
             {/* 刪除確認對話框 */}

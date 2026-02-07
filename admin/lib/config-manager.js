@@ -64,28 +64,31 @@ export class ConfigManager {
     /**
      * 保存配置
      */
-    saveConfig(owner, repo, token, port = 3030) {
+    saveConfig(owner, repo, token, port = 3030, baseUrl = '') {
         const content = `# GitHub 配置
 # 此文件包含敏感信息，请勿上传到 Git
 
 # GitHub 用户名
 GITHUB_OWNER=${owner}
 
-# 仓库名称
+# 倉庫名稱
 GITHUB_REPO=${repo}
 
 # Personal Access Token
 GITHUB_TOKEN=${token}
 
-# 服务器端口
+# 伺服器端口
 PORT=${port}
+
+# 預覽網址 (GitHub Pages 或自定義域名)
+PREVIEW_BASE_URL=${baseUrl}
 `;
 
         try {
             fs.writeFileSync(this.configPath, content, 'utf8');
             return true;
         } catch (error) {
-            console.error('保存配置文件失败:', error);
+            console.error('保存配置文件失敗:', error);
             return false;
         }
     }
@@ -100,7 +103,8 @@ PORT=${port}
             updates.owner || current.GITHUB_OWNER,
             updates.repo || current.GITHUB_REPO,
             updates.token || current.GITHUB_TOKEN,
-            updates.port || current.PORT || 3030
+            updates.port || current.PORT || 3030,
+            updates.baseUrl !== undefined ? updates.baseUrl : current.PREVIEW_BASE_URL || ''
         );
     }
 
@@ -115,7 +119,8 @@ PORT=${port}
             owner: config.GITHUB_OWNER,
             repo: config.GITHUB_REPO,
             token: config.GITHUB_TOKEN,
-            port: config.PORT || 3030
+            port: config.PORT || 3030,
+            baseUrl: config.PREVIEW_BASE_URL || ''
         };
     }
 

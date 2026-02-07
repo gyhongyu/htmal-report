@@ -58,7 +58,8 @@ app.get('/api/config/status', (req, res) => {
             owner: config.owner,
             repo: config.repo,
             tokenSet: !!config.token,
-            port: config.port
+            port: config.port,
+            baseUrl: config.baseUrl
         } : null
     });
 });
@@ -67,16 +68,16 @@ app.get('/api/config/status', (req, res) => {
  * 保存配置
  */
 app.post('/api/config/save', (req, res) => {
-    const { owner, repo, token, port } = req.body;
+    const { owner, repo, token, port, baseUrl } = req.body;
 
     if (!owner || !repo || !token) {
         return res.status(400).json({
             success: false,
-            error: '缺少必要配置项'
+            error: '缺少必要配置單'
         });
     }
 
-    const success = configManager.saveConfig(owner, repo, token, port);
+    const success = configManager.saveConfig(owner, repo, token, port, baseUrl);
 
     if (success) {
         // 重新初始化管理器

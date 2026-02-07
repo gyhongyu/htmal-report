@@ -6,11 +6,25 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     const [showShareModal, setShowShareModal] = React.useState(false);
     const [shareData, setShareData] = React.useState({ title: '', url: '' });
     const [currentPage, setCurrentPage] = React.useState(1);
+    const [isCopying, setIsCopying] = React.useState(false);
+    const [baseUrl, setBaseUrl] = React.useState('');
     const itemsPerPage = 21;
 
     React.useEffect(() => {
       loadAllPages();
+      loadConfig();
     }, []);
+
+    const loadConfig = async () => {
+      try {
+        const data = await getConfigStatus();
+        if (data.config && data.config.baseUrl) {
+          setBaseUrl(data.config.baseUrl);
+        }
+      } catch (error) {
+        console.error('加載配置失敗:', error);
+      }
+    };
 
     const loadAllPages = async () => {
       setLoading(true);
@@ -31,6 +45,38 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
       } catch (error) {
         console.error('加載頁面列表失敗:', error);
         setLoading(false);
+      }
+    };
+
+    const handleBatchCopy = async (type) => {
+      if (filteredPages.length === 0) {
+        alert('沒有可複製的內容');
+        return;
+      }
+
+      try {
+        setIsCopying(true);
+        // 模擬處理延遲，防止 UI 閃爍並確保鎖定感
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        const effectiveBaseUrl = baseUrl || window.location.origin;
+
+        let copyText = '';
+        if (type === 'links') {
+          copyText = filteredPages.map(page => `${effectiveBaseUrl}/reports/${page.fileName}`).join('\n');
+        } else {
+          copyText = filteredPages.map(page =>
+            `標題: ${page.title}\n描述: ${page.description || '無'}\n連結: ${effectiveBaseUrl}/reports/${page.fileName}`
+          ).join('\n\n');
+        }
+
+        await navigator.clipboard.writeText(copyText);
+        alert(`已成功複製 ${filteredPages.length} 筆結果`);
+      } catch (error) {
+        console.error('複製失敗:', error);
+        alert('複製失敗: ' + error.message);
+      } finally {
+        setIsCopying(false);
       }
     };
 
@@ -176,7 +222,18 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     };
 
     return (
-      <div className="min-h-screen bg-gray-50" data-name="homepage" data-file="components/HomePage.js">
+      <div className="min-h-screen bg-gray-50 relative" data-name="homepage" data-file="components/HomePage.js">
+        {/* 複製中的鎖定層 */}
+        {isCopying && (
+          <div className="fixed inset-0 bg-white/60 backdrop-blur-[2px] z-[100] flex flex-col items-center justify-center">
+            <div className="bg-white p-6 rounded-2xl shadow-xl flex flex-col items-center gap-4 border border-gray-100">
+              <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-gray-900 font-medium">正在處理批量複製...</p>
+              <p className="text-sm text-gray-500">請稍候，完成前請勿操作</p>
+            </div>
+          </div>
+        )}
+
         <header className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 py-6">
             <div className="flex items-center justify-between mb-4">
@@ -187,11 +244,41 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
                 <p className="text-gray-600 mt-2">查看和分享您的HTML頁面</p>
               </div>
             </div>
-            <div className="max-w-md">
-              <SearchBar
-                searchKeyword={searchKeyword}
-                onSearchChange={setSearchKeyword}
-              />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="max-w-md flex-1">
+                <SearchBar
+                  searchKeyword={searchKeyword}
+                  onSearchChange={setSearchKeyword}
+                />
+              </div>
+
+              <div className="flex gap-2">
+                <div className="relative group">
+                  <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2 shadow-sm text-sm font-medium">
+                    <div className="icon-copy text-lg"></div>
+                    批量複製結果
+                    <div className="icon-chevron-down text-xs"></div>
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20 overflow-hidden">
+                    <button
+                      onClick={() => handleBatchCopy('links')}
+                      className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-blue-50 transition-colors flex items-center gap-2 border-b border-gray-50"
+                    >
+                      <div className="icon-link text-blue-500"></div>
+                      僅複製連結 (斷行)
+                    </button>
+                    <button
+                      onClick={() => handleBatchCopy('full')}
+                      className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-blue-50 transition-colors flex items-center gap-2"
+                    >
+                      <div className="icon-file-text text-blue-500"></div>
+                      複製標題+描述+連結
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </header>

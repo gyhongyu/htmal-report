@@ -5,7 +5,8 @@ function ConfigModal({ isOpen, onClose, onSave }) {
         owner: '',
         repo: '',
         token: '',
-        port: '3030'
+        port: '3030',
+        baseUrl: ''
     });
     const [testing, setTesting] = React.useState(false);
     const [testResult, setTestResult] = React.useState(null);
@@ -19,7 +20,8 @@ function ConfigModal({ isOpen, onClose, onSave }) {
                         owner: data.config.owner || '',
                         repo: data.config.repo || '',
                         token: '',  // Token不回顯
-                        port: data.config.port || '3030'
+                        port: data.config.port || '3030',
+                        baseUrl: data.config.baseUrl || ''
                     });
                 }
             });
@@ -126,6 +128,22 @@ function ConfigModal({ isOpen, onClose, onSave }) {
                             className="input-field"
                             placeholder="3030"
                         />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            預覽網址 (Base URL)
+                        </label>
+                        <input
+                            type="text"
+                            value={config.baseUrl}
+                            onChange={(e) => setConfig({ ...config, baseUrl: e.target.value })}
+                            className="input-field"
+                            placeholder="https://your-username.github.io/your-repo"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                            GitHub Pages 網址或自定義域名 (結尾不需 /)
+                        </p>
                     </div>
 
                     {testResult && (

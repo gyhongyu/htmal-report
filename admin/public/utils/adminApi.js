@@ -116,6 +116,7 @@ async function getAllStoredPages() {
             title: r.title,
             description: r.description,
             categories: r.categories,
+            fileName: r.fileName,
             createdAt: r.createdAt,
             updatedAt: r.updatedAt
         }));
