@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-02-12T07:17:57.502Z",
+  "lastUpdated": "2026-03-09T03:35:28.100Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -664,6 +664,19 @@
       "fileName": "report-1770880676355.html",
       "createdAt": "2026-02-12T07:17:57.502Z",
       "updatedAt": "2026-02-12T07:17:57.502Z"
+    },
+    {
+      "id": "report-1773027326331",
+      "title": "RBA CAP SOP: Managing Uncontrollable Facility Findings",
+      "description": "標準作業程序：RBA 廠務不可控缺失管理與回覆指南",
+      "categories": [
+        "項目計劃",
+        "內部簡報",
+        "工作報告"
+      ],
+      "fileName": "report-1773027326331.html",
+      "createdAt": "2026-03-09T03:35:28.100Z",
+      "updatedAt": "2026-03-09T03:35:28.100Z"
     }
   ]
 }
