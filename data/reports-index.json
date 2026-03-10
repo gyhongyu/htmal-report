@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-09T03:35:28.100Z",
+  "lastUpdated": "2026-03-10T10:49:31.842Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -677,6 +677,19 @@
       "fileName": "report-1773027326331.html",
       "createdAt": "2026-03-09T03:35:28.100Z",
       "updatedAt": "2026-03-09T03:35:28.100Z"
+    },
+    {
+      "id": "report-1773139771250",
+      "title": "Market Intel: Dash Cams & Target Acquisition",
+      "description": "市場情報：印度行車記錄儀及客戶開發清單",
+      "categories": [
+        "內部簡報",
+        "項目計劃",
+        "市場分析"
+      ],
+      "fileName": "report-1773139771250.html",
+      "createdAt": "2026-03-10T10:49:31.842Z",
+      "updatedAt": "2026-03-10T10:49:31.842Z"
     }
   ]
 }

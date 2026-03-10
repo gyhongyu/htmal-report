@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Category: Dash Cams (India) -->
+    <!-- Date: Mar 2026 -->
+    <title data-lang="en">Market Intel: India Dash Cam Sector & Targets (Mar 2026)</title>
+    <title data-lang="zh">印度市場情報：行車記錄儀品類與客戶開發清單 (2026年3月)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 2.5rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.5rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+        .recon-box.hot { border-left: 4px solid #f97316; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+        .tag-orange { background-color: #c2410c; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 3rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-orange-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 shadow-2xl relative border border-gray-700 flex flex-col my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex justify-between items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-orange-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider" data-lang="en">HIGH GROWTH CATEGORY</span>
+                            <span class="inline-block bg-orange-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider" data-lang="zh">高增長潛力品類</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Market Intel: Dash Cams & Target Acquisition</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">市場情報：印度行車記錄儀及客戶開發清單</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Mar 2026 | <strong>Status:</strong> Pre-Mandate Boom Phase</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年3月 | <strong>市場狀態：</strong> 法規強制執行前的爆發期</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-orange-400">CAGR ~22%</div>
+                            <div class="text-xs text-gray-500 uppercase">Auto Electronics</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Market Drivers & Context -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Market Context & Policy Drivers</span>
+                    <span data-lang="zh">1. 市場背景與政策驅動力</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Driver 1 -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Policy & Legal</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">政策與法規趨勢</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Impending MoRTH Mandate</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">交通部強制安裝預期</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Ministry of Road Transport is evaluating mandating dash cams for all new passenger vehicles by 2026/2027 to curb accidents.</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">印度交通部 (MoRTH) 正評估在 2026/2027 年強制所有新乘用車標配行車記錄儀，以降低事故率。</p>
+                        <p class="text-xs text-orange-400 mt-2 font-bold" data-lang="en">Impact: Huge OEM Pre-install demand</p>
+                        <p class="text-xs text-orange-400 mt-2 font-bold" data-lang="zh">影響：龐大的車廠前裝 (OEM) 需求</p>
+                    </div>
+                    
+                    <!-- Driver 2 -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Insurance Ecosystem</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">保險理賠生態</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400" data-lang="en">Video Evidence</span>
+                            <span class="text-2xl font-bold text-green-400" data-lang="zh">視頻證據優先</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="en">Insurtechs (Acko, Digit) actively process claims 50% faster with dash cam footage. Consumers treat it as an anti-scam investment.</p>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="zh">互聯網保險公司（如 Acko, Digit）對有記錄儀影片的理賠處理速度快 50%。消費者將其視為「防碰瓷」剛需投資。</p>
+                    </div>
+
+                    <!-- Driver 3 -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Make in India Pivot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">印度製造 (Make in India) 轉向</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Tariff Barriers</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">關稅壁壘與本地化需求</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">High import duties on finished electronics force brands to shift from CBU imports to SKD/CKD local assembly.</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">成品電子產品進口關稅居高不下，迫使品牌從整機進口 (CBU) 轉向本地 SKD/CKD 組裝。</p>
+                        <p class="text-xs text-cyan-400 mt-2 font-bold" data-lang="en">Foxlink EMS Opportunity</p>
+                        <p class="text-xs text-cyan-400 mt-2 font-bold" data-lang="zh">Foxlink EMS 代工絕佳機會</p>
+                    </div>
+                </div>
+
+                <!-- 2. Target Client Acquisition List -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-orange-500 pl-3" data-lang="en">2. Target Client Acquisition List (With India Channels)</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-orange-500 pl-3" data-lang="zh">2. 潛在客戶開發清單 (已在印度佈建通路的品牌)</h2>
+                    
+                    <div class="recon-box hot">
+                        <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-bullseye mr-2 text-orange-400"></i>Tier 1: Local Indian Brands (Prime Targets for OEM/ODM)</h3>
+                        <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-bullseye mr-2 text-orange-400"></i>第一梯隊：印度本土品牌 (OEM/ODM 最佳目標)</h3>
+                        <p class="text-xs text-gray-400 mb-3" data-lang="en">These brands have massive local distribution but lack deep manufacturing capabilities. They rely heavily on contract manufacturing.</p>
+                        <p class="text-xs text-gray-400 mb-3" data-lang="zh">這些品牌擁有強大的本地銷售渠道與營銷能力，但缺乏深度製造能力，極度依賴代工廠 (EMS)。</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-300">
+                                <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                                    <tr>
+                                        <th class="w-1/4" data-lang="en">Brand / Parent Entity</th>
+                                        <th class="w-1/4" data-lang="zh">品牌 / 母公司</th>
+                                        <th class="w-1/4" data-lang="en">Market Position</th>
+                                        <th class="w-1/4" data-lang="zh">市場定位</th>
+                                        <th class="w-1/2" data-lang="en">Foxlink Pitch Strategy</th>
+                                        <th class="w-1/2" data-lang="zh">Foxlink 切入策略與痛點</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700">
+                                    <tr>
+                                        <td>
+                                            <strong class="text-white">Qubo</strong><br>
+                                            <span class="text-xs text-gray-500">Hero Electronix</span>
+                                        </td>
+                                        <td data-lang="en">Top local seller. Strong tech backing, pushing "Made in India".</td>
+                                        <td data-lang="zh">本土銷量第一。Hero 集團背書，主打「印度設計/製造」。</td>
+                                        <td data-lang="en"><span class="tag tag-green">HOT</span> Pitch PCBA + Final Assembly. They need a reliable local EMS to scale up to meet Hero group's automotive tie-ups.</td>
+                                        <td data-lang="zh"><span class="tag tag-green">重點</span> 主推 PCBA+整機組裝。他們需要可靠的本地 EMS 擴大產能，以應付母集團 Hero 潛在的車廠前裝訂單。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong class="text-white">Nextdigitron</strong><br>
+                                            <span class="text-xs text-gray-500">Independent Local</span>
+                                        </td>
+                                        <td data-lang="en">Budget king. Dominates Amazon India under ₹5,000 segment.</td>
+                                        <td data-lang="zh">性價比之王。稱霸亞馬遜印度 5,000 盧比以下市場。</td>
+                                        <td data-lang="en">Currently importing from China. Pitch SKD assembly to help them save on import duties and improve margins.</td>
+                                        <td data-lang="zh">目前多從中國進口貼牌。主推 SKD 組裝，助其避開高額進口關稅，提升毛利。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong class="text-white">boAt / Noise</strong><br>
+                                            <span class="text-xs text-gray-500">Consumer Electronics Giants</span>
+                                        </td>
+                                        <td data-lang="en">Entering auto accessories leveraging huge youth brand appeal.</td>
+                                        <td data-lang="zh">消費電子巨頭，正利用年輕品牌影響力跨足汽車配件。</td>
+                                        <td data-lang="en">Turnkey ODM. Offer them ready-to-sell dash cam designs (white label) to quickly expand their product portfolio.</td>
+                                        <td data-lang="zh">Turnkey ODM 方案。提供現成的白牌行車記錄儀設計，幫助他們快速擴充產品線。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="recon-box info">
+                        <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-globe mr-2 text-blue-400"></i>Tier 2: Foreign Brands (Localization Targets)</h3>
+                        <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-globe mr-2 text-blue-400"></i>第二梯隊：外國知名品牌 (在地化轉移目標)</h3>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-300">
+                                <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                                    <tr>
+                                        <th class="w-1/4" data-lang="en">Brand</th>
+                                        <th class="w-1/4" data-lang="zh">品牌</th>
+                                        <th class="w-1/4" data-lang="en">Status in India</th>
+                                        <th class="w-1/4" data-lang="zh">在印度的現況</th>
+                                        <th class="w-1/2" data-lang="en">Foxlink Pitch Strategy</th>
+                                        <th class="w-1/2" data-lang="zh">Foxlink 切入策略</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700">
+                                    <tr>
+                                        <td>
+                                            <strong class="text-blue-300">70mai</strong><br>
+                                            <span class="text-xs text-gray-500">Xiaomi Ecosystem (China)</span>
+                                        </td>
+                                        <td data-lang="en">Market leader in premium segment. Massive brand recall.</td>
+                                        <td data-lang="zh">中高階市場絕對領導者，品牌知名度極高。</td>
+                                        <td data-lang="en">Pitch Indian local assembly. Geopolitical pressure & BIS norms make importing full units risky. Foxlink India can be their safe haven.</td>
+                                        <td data-lang="zh">遊說其將產線轉移至印度。地緣政治與 BIS 認證使整機進口風險增加，Foxlink 印度廠可成為其避風港。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong class="text-blue-300">DDPAI</strong><br>
+                                            <span class="text-xs text-gray-500">China</span>
+                                        </td>
+                                        <td data-lang="en">Strong #2. Excellent app ecosystem & capacitor tech.</td>
+                                        <td data-lang="zh">強勢第二名。App 生態與超級電容技術深獲好評。</td>
+                                        <td data-lang="en">Similar to 70mai. Pitch cable assembly first (Hardwire kits), then expand to PCBA.</td>
+                                        <td data-lang="zh">策略同 70mai。可先從「降壓線/硬接線 (Hardwire kit)」等線束代工切入，再擴展至 PCBA。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong class="text-gray-300">Thinkware / VIOFO</strong><br>
+                                            <span class="text-xs text-gray-500">Korea / China</span>
+                                        </td>
+                                        <td data-lang="en">Niche enthusiasts, high-end 4K dual channel.</td>
+                                        <td data-lang="zh">利基市場發燒友，主打高階 4K 雙鏡頭。</td>
+                                        <td data-lang="en">Low volume, high margin. Pitch precision manufacturing and testing facilities.</td>
+                                        <td data-lang="zh">量少但毛利高。強調 Foxlink 的精密製造與嚴苛的溫/濕度測試能力。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Foxlink BOM Opportunities -->
+                <div class="section-divider">
+                    <span data-lang="en">3. BOM Breakdown & Foxlink Capabilities</span>
+                    <span data-lang="zh">3. BOM 拆解與 Foxlink 切入點分析</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <!-- Component 1 -->
+                    <div class="partner-card p-4 rounded-lg border-t-4 border-blue-500">
+                        <div class="text-blue-400 font-bold mb-2 text-sm" data-lang="en">1. Wire Harness & Connectors</div>
+                        <div class="text-blue-400 font-bold mb-2 text-sm" data-lang="zh">1. 線束與連接器 (核心強項)</div>
+                        <p class="text-xs text-white mb-2" data-lang="en"><strong>Hardwire Kits:</strong> Crucial for parking surveillance (24/7). Highly requested accessory.</p>
+                        <p class="text-xs text-white mb-2" data-lang="zh"><strong>停車監控降壓線：</strong> 24小時停車監控必備，印度市場熱銷配件。</p>
+                        <p class="text-xs text-gray-400" data-lang="en">Foxlink's core strength. We can supply Type-C, Micro-USB power cables, and fuse box OBD adapters directly to all brands.</p>
+                        <p class="text-xs text-gray-400" data-lang="zh">正崴核心強項。我們可直接向所有品牌供應 Type-C/Micro-USB 電源線及 OBD 保險絲轉接盒。</p>
+                    </div>
+
+                    <!-- Component 2 -->
+                    <div class="partner-card p-4 rounded-lg border-t-4 border-green-500">
+                        <div class="text-green-400 font-bold mb-2 text-sm" data-lang="en">2. PCBA & SMT</div>
+                        <div class="text-green-400 font-bold mb-2 text-sm" data-lang="zh">2. PCBA 與 SMT 打件</div>
+                        <p class="text-xs text-white mb-2" data-lang="en"><strong>Mainboard:</strong> SoC (SigmaStar/Novatek) + Super Capacitor management.</p>
+                        <p class="text-xs text-white mb-2" data-lang="zh"><strong>主機板：</strong> 整合影像處理晶片 (SoC) 與超級電容電源管理。</p>
+                        <p class="text-xs text-gray-400" data-lang="en">Foxlink India's SMT lines can easily handle dash cam mainboards, offering high-yield local manufacturing to avoid 20% PCBA import duties.</p>
+                        <p class="text-xs text-gray-400" data-lang="zh">利用正崴印度的 SMT 產線，提供高良率主板打件，助客戶避開高達 20% 的 PCBA 進口關稅。</p>
+                    </div>
+
+                    <!-- Component 3 -->
+                    <div class="partner-card p-4 rounded-lg border-t-4 border-purple-500">
+                        <div class="text-purple-400 font-bold mb-2 text-sm" data-lang="en">3. Lens Module (CCM)</div>
+                        <div class="text-purple-400 font-bold mb-2 text-sm" data-lang="zh">3. 鏡頭模組 (CCM)</div>
+                        <p class="text-xs text-white mb-2" data-lang="en"><strong>Optics:</strong> 1080p to 4K multi-layer glass lenses (Sony STARVIS sensors).</p>
+                        <p class="text-xs text-white mb-2" data-lang="zh"><strong>光學：</strong> 1080p 至 4K 多層玻璃鏡頭 (搭配 Sony STARVIS 感光元件)。</p>
+                        <p class="text-xs text-gray-400" data-lang="en">Leverage Foxlink group's optical capabilities to supply complete camera modules, ensuring clarity in extreme Indian heat.</p>
+                        <p class="text-xs text-gray-400" data-lang="zh">結合集團光學資源，供應完整 CCM 模組，確保在印度極端高溫下不失焦 (Heat Defocus 痛點)。</p>
+                    </div>
+
+                    <!-- Component 4 -->
+                    <div class="partner-card p-4 rounded-lg border-t-4 border-orange-500">
+                        <div class="text-orange-400 font-bold mb-2 text-sm" data-lang="en">4. Final Assembly & Testing</div>
+                        <div class="text-orange-400 font-bold mb-2 text-sm" data-lang="zh">4. 整機組裝與測試</div>
+                        <p class="text-xs text-white mb-2" data-lang="en"><strong>Thermal Reliability:</strong> Dashcams in India face 60°C+ cabin temps.</p>
+                        <p class="text-xs text-white mb-2" data-lang="zh"><strong>高溫可靠度：</strong> 印度夏季車內溫度高達 60°C+。</p>
+                        <p class="text-xs text-gray-400" data-lang="en">Provide Turnkey Box-Build solutions. Emphasize Foxlink's rigorous burn-in tests and BIS compliance services.</p>
+                        <p class="text-xs text-gray-400" data-lang="zh">提供整機 Box-Build 方案。向客戶強調正崴嚴苛的燒機測試環境及協助取得 BIS 認證的在地優勢。</p>
+                    </div>
+                </div>
+
+                <!-- 4. Competitive Landscape (Radar) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. Vendor Landscape & Capabilities</span>
+                    <span data-lang="zh">4. 終端品牌競爭力畫像 (在地 vs 外商)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Market Archetypes Comparison</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">品牌陣營能力對比</h4>
+                        <div class="relative w-full h-64">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Local Brands win on Price & Offline network; Foreign Brands win on Tech.</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">本土品牌贏在價格與線下通路；外商贏在技術規格與軟體體驗。</p>
+                    </div>
+
+                    <!-- Key Insights -->
+                    <div class="flex flex-col justify-center space-y-4">
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-cyan-400 mb-2" data-lang="en">Insight: The "Super Capacitor" Need</h4>
+                            <h4 class="font-bold text-cyan-400 mb-2" data-lang="zh">技術洞察：超級電容 (Super Capacitor) 成剛需</h4>
+                            <p class="text-sm text-gray-300" data-lang="en">Due to India's severe summer heat, lithium-ion batteries in dash cams often swell or explode. Almost all brands are transitioning to Super Capacitors. Foxlink must ensure PCBA designs robustly integrate capacitor management.</p>
+                            <p class="text-sm text-gray-300" data-lang="zh">因印度夏季高溫，傳統鋰電池行車記錄儀極易膨脹起火。市場已全面轉向「超級電容」。Foxlink 在爭取代工時，必須強調 PCBA 電源管理的設計與製造穩定性。</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-orange-400 mb-2" data-lang="en">Insight: Connectivity Shift (4G/LTE)</h4>
+                            <h4 class="font-bold text-orange-400 mb-2" data-lang="zh">趨勢洞察：4G 聯網型記錄儀崛起</h4>
+                            <p class="text-sm text-gray-300" data-lang="en">Fleet owners and high-end users are demanding real-time cloud uploading (live view) to prevent theft. Next-gen PCBA will require 4G SIM module integration.</p>
+                            <p class="text-sm text-gray-300" data-lang="zh">車隊管理與高階車主強烈需求「實時雲端監控」以防盜。下一代機種的 PCBA 必須整合 4G SIM 通訊模組，代工利潤將更高。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">5. Recent Market Signals (Jan '26 - Mar '26)</span>
+                    <span data-lang="zh">5. 最新市場動向與信號 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-orange-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-15</div>
+                        <div>
+                            <strong class="text-orange-400 block text-sm" data-lang="en">[Policy Rumor] MoRTH evaluating Section 136A Mandates</strong>
+                            <strong class="text-orange-400 block text-sm" data-lang="zh">[政策風聲] 交通部依 136A 條款評估強制令</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Govt committees discussing linking vehicle registration with mandatory basic ADAS/Dashcam proof for specific zones.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">政府委員會正在討論將車輛註冊與強制配備基礎 ADAS/行車記錄儀掛鉤，部分特區優先試行。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Brand Move] Qubo's Massive Retail Push</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[品牌動向] Qubo 大舉擴張線下零售網絡</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Qubo (Hero) expands offline to 2000+ car accessory shops. Sales volume expected to triple. Capacity crunch anticipated.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">本土第一品牌 Qubo 宣布進駐 2000 家線下汽車配件門市，預計銷量翻三倍，將面臨產能瓶頸 (Foxlink 的機會)。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Insurtech] Acko announces 5% premium discount</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[保險科技] Acko 宣布 5% 保費折扣</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Leading digital insurer Acko starts offering up to 5% off on own-damage premiums for vehicles with hardwired dashcams.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">領先的數位保險公司 Acko 開始為安裝「硬接線停車監控」記錄儀的車輛提供 5% 的車體險保費折扣。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-8 p-4 bg-orange-900/30 border border-orange-500/30 rounded-lg flex justify-between items-center no-print">
+                    <div>
+                        <div class="text-sm text-orange-400 font-bold" data-lang="en">Next Step: Business Development</div>
+                        <div class="text-sm text-orange-400 font-bold" data-lang="zh">下一步行動：業務接洽</div>
+                        <div class="text-xs text-gray-400" data-lang="en">Target Qubo & Nextdigitron for OEM/PCBA. Pitch Hardwire cable assemblies to all.</div>
+                        <div class="text-xs text-gray-400" data-lang="zh">鎖定 Qubo 與 Nextdigitron 洽談整機/PCBA 委託；向所有品牌推銷降壓線(Hardwire kit)線束。</div>
+                    </div>
+                    <a href="https://cucrm.foxlink.com.tw:4453" target="_blank" class="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2 rounded text-sm font-bold shadow-lg transition-transform active:scale-95 no-underline">
+                        <span data-lang="en">Log Target in CRM</span>
+                        <span data-lang="zh">登錄目標至 CRM</span>
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="sticky bottom-0 left-0 right-0 p-5 bg-gray-800 border-t border-gray-700 z-20 no-print">
+            <div class="flex items-center justify-end">
+                <div class="text-sm text-gray-400">
+                    <span data-lang="en">Prepared by: India Corp. Intel Team (AI) | Sector: Auto-Electronics</span>
+                    <span data-lang="zh">製表人： 印度企業情報團隊 (AI) | 領域：汽車電子</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Data arrays for radar
+        // Categories: Price Competitiveness, Software/App UI, Brand Premium, Local Offline Network, Supply Chain Localization
+        const localBrandScores = [9, 5, 6, 9, 8]; // e.g. Qubo, Nextdigitron
+        const foreignBrandScores = [5, 9, 9, 5, 3]; // e.g. 70mai, DDPAI
+
+        const chartData = {
+            en: { 
+                labels: ['Price Competitiveness', 'Software / App UI', 'Brand Premium', 'Offline Network', 'Local Supply Chain'], 
+                labelLocal: 'Local Brands (Qubo)',
+                labelForeign: 'Foreign Brands (70mai)'
+            },
+            zh: { 
+                labels: ['價格競爭力', '軟體與App體驗', '品牌溢價能力', '線下門市通路', '供應鏈在地化'], 
+                labelLocal: '本土品牌 (如 Qubo)',
+                labelForeign: '外商品牌 (如 70mai)'
+            }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td', 'div'].includes(tagName)) {
+                        // Special handling to not override display flex/block indiscriminately if we can avoid it, 
+                        // but the previous script forced 'inline-block' vs 'block' vs 'table-cell'.
+                        if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.labelLocal;
+            radarChart.data.datasets[1].label = data.labelForeign;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [
+                        {
+                            label: chartData[currentLang].labelLocal,
+                            data: localBrandScores, 
+                            backgroundColor: 'rgba(249, 115, 22, 0.2)', // Orange
+                            borderColor: 'rgba(249, 115, 22, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(249, 115, 22, 1)'
+                        },
+                        {
+                            label: chartData[currentLang].labelForeign,
+                            data: foreignBrandScores, 
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)', // Blue
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { 
+                        legend: { 
+                            display: true,
+                            position: 'bottom',
+                            labels: { color: '#e5e7eb', boxWidth: 12 }
+                        } 
+                    },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
