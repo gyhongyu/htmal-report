@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-12T11:07:28.875Z",
+  "lastUpdated": "2026-03-12T11:36:12.688Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -703,6 +703,19 @@
       "fileName": "report-1773313647863.html",
       "createdAt": "2026-03-12T11:07:28.875Z",
       "updatedAt": "2026-03-12T11:07:28.875Z"
+    },
+    {
+      "id": "report-1773315371656",
+      "title": "Foxlink Universal Report Template",
+      "description": "Foxlink 通用報告模板",
+      "categories": [
+        "其他",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1773315371656.html",
+      "createdAt": "2026-03-12T11:36:12.688Z",
+      "updatedAt": "2026-03-12T11:36:12.688Z"
     }
   ]
 }
