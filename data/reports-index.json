@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-10T10:49:31.842Z",
+  "lastUpdated": "2026-03-12T11:07:28.875Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -690,6 +690,19 @@
       "fileName": "report-1773139771250.html",
       "createdAt": "2026-03-10T10:49:31.842Z",
       "updatedAt": "2026-03-10T10:49:31.842Z"
+    },
+    {
+      "id": "report-1773313647863",
+      "title": "Target: India Auto Tier 1 Supply Chain",
+      "description": "目標市場：印度汽車 Tier 1 供應鏈與突破戰略",
+      "categories": [
+        "項目計劃",
+        "內部簡報",
+        "客戶攻略"
+      ],
+      "fileName": "report-1773313647863.html",
+      "createdAt": "2026-03-12T11:07:28.875Z",
+      "updatedAt": "2026-03-12T11:07:28.875Z"
     }
   ]
 }

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target: India Auto Tier 1 Supply Chain & Foxlink Strategy -->
+    <!-- Date: March 2026 -->
+    <title data-lang="en">Deep Dive KYC: India Auto Tier 1 Supply Chain (Mar 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：汽車 Tier 1 供應鏈與突破戰略</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 160px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+            pre { white-space: pre-wrap; word-wrap: break-word; background: #f8f9fa !important; color: #000 !important; border: 1px solid #ccc !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">MARKET INTELLIGENCE & BD STRATEGY</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: India Auto Tier 1 Supply Chain</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標市場：印度汽車 Tier 1 供應鏈與突破戰略</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> March 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年3月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Automotive FPC</div>
+                            <div class="text-xs text-gray-500 uppercase">Strategic Expansion</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Foxlink Value Proposition (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Foxlink Arsenal vs. India Market Potential</span>
+                    <span data-lang="zh">1. Foxlink 核心籌碼與印度市場潛力對接</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Market Context -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">India Auto Components Market</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">印度汽車零組件市場規模</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">$39.6 Billion</span>
+                            <span class="text-xs text-gray-500 ml-2">(H1 FY25)</span>
+                        </div>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Growth: 11.3% YoY. Strongly driven by EV transition & "Local for Local" Govt. PLI Policies.</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">增長：同比 11.3%。受電動化轉型與「在地製造」PLI 政策強烈驅動。</p>
+                    </div>
+                    
+                    <!-- Foxlink Local Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Foxlink India Footprint</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">Foxlink 印度在地製造版圖</h3>
+                        <p class="text-lg font-bold text-white mt-2">Noida & Tirupati</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>FPC Capacity:</strong> 50,000 m²/mo (Global)</p>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="en">Perfectly positioned to mitigate import bottlenecks and fulfill Tier 1's local sourcing mandates.</p>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="zh">完美契合 Tier 1 車廠化解進口瓶頸、達成在地化採購指標（Local for Local）的迫切需求。</p>
+                    </div>
+
+                    <!-- Foxlink Auto Tech -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Killer Capabilities (Automotive)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">車載產品殺手級硬實力</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-lg font-bold text-yellow-400">0 PPM Quality</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">IATF 16949 | John Deere "Achieving Excellence" 5 Yrs.</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">IATF 16949 認證 | 連續五年獲 John Deere 卓越供應商。</p>
+                        <p class="text-xs text-blue-400 mt-1" data-lang="en">Roll-to-Roll FPC up to 2,000mm (EV Battery/Powertrain).</p>
+                        <p class="text-xs text-blue-400 mt-1" data-lang="zh">捲對捲超長 FPC 達 2,000mm（專攻 EV 電池包與動力總成）。</p>
+                    </div>
+                </div>
+
+                <!-- 2. B2B Strategy SOP -->
+                <div class="section-divider">
+                    <span data-lang="en">2. 3-Step Strategic Penetration SOP</span>
+                    <span data-lang="zh">2. 三大戰略突破 SOP (海陸空並進)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-6 md:mb-8">
+                    <!-- SOP 1 -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2 flex items-center">
+                            <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">1</span>
+                            <span data-lang="en">The Front Door (Portals)</span>
+                            <span data-lang="zh">官方入口 (The Front Door)</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2" data-lang="en">Tier 1 supply chains are closed loops. Cold emails with attachments are often ignored. We must register on their official Supplier Portals & Global SaaS Procurement Platforms.</p>
+                        <p class="text-sm text-gray-300 mb-2" data-lang="zh">Tier 1 車廠供應鏈體系封閉，單純寄送簡報附檔易石沉大海。必須主動進入其官方「供應商註冊系統」與全球 SaaS 採購平台進行建檔。</p>
+                        <div class="bg-gray-900/80 p-2 rounded text-xs text-gray-400 border border-gray-700">
+                            <strong>Action:</strong> Register Foxlink profile on SupplyOn, Jaggaer, and SAP Ariba Network.
+                        </div>
+                    </div>
+
+                    <!-- SOP 2 -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-green-500/50">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2 flex items-center">
+                            <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">2</span>
+                            <span data-lang="en">The Side Door (Key Persons)</span>
+                            <span data-lang="zh">側門突擊 (The Side Door)</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2" data-lang="en">Actively mine decision-makers. Use LinkedIn to search for <code>Commodity Manager</code>, <code>Sourcing Manager - Electronics</code>, or <code>Category Manager - FPC</code> in India.</p>
+                        <p class="text-sm text-gray-300 mb-2" data-lang="zh">主動挖掘決策者。利用 LinkedIn 鎖定印度區的 <code>Commodity Manager</code>, <code>Sourcing - Electronics</code> 等職位。利用網域推算 Email 格式直接寄信。</p>
+                        <div class="bg-gray-900/80 p-2 rounded text-xs text-gray-400 border border-gray-700">
+                            <strong>Action:</strong> Use tools like Hunter.io to deduct email formats (e.g., firstname.lastname@company.com).
+                        </div>
+                    </div>
+
+                    <!-- SOP 3 -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-yellow-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2 flex items-center">
+                            <span class="bg-yellow-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">3</span>
+                            <span data-lang="en">The VIP Door (Local Trust)</span>
+                            <span data-lang="zh">主場優勢 (The VIP Door)</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2" data-lang="en">Establish local trust to prevent being marked as spam. Leverage recent events (Source India Expo) and our deep understanding of local compliance and PLI mandates.</p>
+                        <p class="text-sm text-gray-300 mb-2" data-lang="zh">建立「在地連結」與信任感。在信件中帶入最近參與的 Source India 展會，並強調 Foxlink 印度廠區能協助客戶迴避進口稅務與法規地雷。</p>
+                        <div class="bg-gray-900/80 p-2 rounded text-xs text-gray-400 border border-gray-700">
+                            <strong>Action:</strong> Emphasize Noida/Tirupati capacity to support the Tier 1's PLI compliance needs.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Tier 1 Targets & Portals -->
+                <div class="recon-box info">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en"><i class="fas fa-search-dollar mr-2 text-blue-400"></i>Target Tier 1 Supplier Portals & Intel</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh"><i class="fas fa-search-dollar mr-2 text-blue-400"></i>目標 Tier 1 供應商入口與聯絡情報</h3>
+                        <span class="tag tag-blue">CRITICAL INTEL</span>
+                    </div>
+                    
+                    <p class="text-sm text-gray-300 mb-4" data-lang="en">Major MNCs demand suppliers register on cloud platforms. Emailing alone is insufficient. Below are the verified gateways for the top targets identified in the market report.</p>
+                    <p class="text-sm text-gray-300 mb-4" data-lang="zh">跨國巨頭已全面轉向雲端採購平台。以下為針對市場報告中頂級 Tier 1 客戶所挖掘出的「官方供應商註冊入口」與採購聯絡情報：</p>
+
+                    <!-- SaaS Platforms -->
+                    <div class="bg-red-900/20 border border-red-500/30 p-3 rounded mb-4">
+                        <strong class="text-red-400 block text-sm mb-1" data-lang="en">⚠️ Prerequisite: The "Big 3" B2B Procurement Platforms</strong>
+                        <strong class="text-red-400 block text-sm mb-1" data-lang="zh">⚠️ 戰略建議：優先佈局「三大 B2B 雲端採購平台」</strong>
+                        <p class="text-xs text-gray-300" data-lang="en">Before individual outreach, create Foxlink profiles (with IATF 16949 certs) on: <strong>1. SupplyOn</strong> (Used by Bosch, ZF, Continental), <strong>2. Jaggaer</strong> (Used for RFQs), <strong>3. SAP Ariba Network</strong>.</p>
+                        <p class="text-xs text-gray-300" data-lang="zh">在進行單一客戶開發前，請團隊務必先攜帶各項認證 (IATF 16949 等) 至以下平台註冊，以進入採購雷達：<strong>1. SupplyOn</strong> (歐洲汽車工業御用：Bosch, ZF), <strong>2. Jaggaer</strong> (Continental 等發布詢價單用), <strong>3. SAP Ariba</strong>。</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300 border-collapse">
+                            <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="p-3 w-1/4" data-lang="en">Company & Status</th>
+                                    <th class="p-3 w-1/4" data-lang="zh">企業名稱與地位</th>
+                                    <th class="p-3 w-1/3" data-lang="en">Official Portal / Platform</th>
+                                    <th class="p-3 w-1/3" data-lang="zh">官方供應商入口 / 系統</th>
+                                    <th class="p-3" data-lang="en">Actionable Intel & Contacts</th>
+                                    <th class="p-3" data-lang="zh">情報解讀與聯繫途徑</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td class="p-3">
+                                        <strong class="text-white block">Samvardhana Motherson</strong>
+                                        <span class="text-xs text-blue-400">India's Largest Tier 1</span>
+                                    </td>
+                                    <td class="p-3">
+                                        <ul class="list-disc pl-4 space-y-1 text-xs">
+                                            <li><a href="https://www.smp-automotive.com/en/suppliers" target="_blank">SMP Portal (Submit Idea)</a></li>
+                                            <li><a href="https://vps.smr-automotive.com/" target="_blank">SMR VPS System</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="p-3 text-xs" data-lang="en">Use "Submit Your Idea" mechanism to present 2,000mm Roll-to-Roll FPC advantage for their EV EDS systems.</td>
+                                    <td class="p-3 text-xs" data-lang="zh">集團體系龐大。利用 SMP Portal 的「Submit Your Idea」機制，直接投遞我們 2000mm 超長 FPC 在 EV 佈線系統上的優勢。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3">
+                                        <strong class="text-white block">Bosch India / Global</strong>
+                                        <span class="text-xs text-blue-400">Global Leader</span>
+                                    </td>
+                                    <td class="p-3">
+                                        <ul class="list-disc pl-4 space-y-1 text-xs">
+                                            <li>Mainly via <strong>SupplyOn</strong></li>
+                                            <li><a href="https://innovate-bosch.com/" target="_blank">innovate-bosch.com</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="p-3 text-xs" data-lang="en">Strict global protocol. Use the Innovation portal to bypass standard JIT queues if we have cost/tech leverage.</td>
+                                    <td class="p-3 text-xs" data-lang="zh">嚴格遵循全球規範。主力使用 <strong>SupplyOn</strong> 發送 RFQ。若有特殊製程優勢，可從 Supplier Ideas 入口投遞技術亮點。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3">
+                                        <strong class="text-white block">Tata AutoComp (TACO)</strong>
+                                        <span class="text-xs text-blue-400">Tata Group SCM Core</span>
+                                    </td>
+                                    <td class="p-3">
+                                        <ul class="list-disc pl-4 space-y-1 text-xs">
+                                            <li><a href="https://tataautocomp.com/tss/" target="_blank">TSS (Supply Chain Sol.)</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="p-3 text-xs" data-lang="en">Requires passing SSRS (Supplier Selection Rating). <br><strong>Format:</strong> <code>firstname.lastname@tacogroup.com</code> <br><strong>HQ:</strong> Pune (+91 20 66535381)</td>
+                                    <td class="p-3 text-xs" data-lang="zh">必須通過其 TSS 部門的 SSRS 評估。<br><strong>信箱網域推測：</strong> <code>@tacogroup.com</code> (如: <code>feroz.khan@...</code>)。利用此格式在 LinkedIn 交叉比對現任經理。<br><strong>總部：</strong> Pune (+91 20 66535381)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3">
+                                        <strong class="text-white block">Continental India</strong>
+                                        <span class="text-xs text-blue-400">German MNC</span>
+                                    </td>
+                                    <td class="p-3">
+                                        <ul class="list-disc pl-4 space-y-1 text-xs">
+                                            <li><a href="https://www.continental.com/en/company/suppliers/psuite/" target="_blank">P-Suite Platform</a></li>
+                                            <li>Mandatory: <strong>Jaggaer</strong></li>
+                                        </ul>
+                                    </td>
+                                    <td class="p-3 text-xs" data-lang="en">Fully migrated to Jaggaer. All profiles and RFQs "must" go through this system.</td>
+                                    <td class="p-3 text-xs" data-lang="zh">已全面轉移至 <strong>Jaggaer</strong> 採購平台。所有的 RFQ 參與「必須」透過此系統完成。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3">
+                                        <strong class="text-white block">Uno Minda</strong>
+                                        <span class="text-xs text-blue-400">Local EV Electronics Giant</span>
+                                    </td>
+                                    <td class="p-3">
+                                        <ul class="list-disc pl-4 space-y-1 text-xs">
+                                            <li><a href="https://www.unominda.com/contact-us" target="_blank">Corporate Contact</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="p-3 text-xs" data-lang="en">Traditional approach works here. <br><strong>Emails:</strong> <code>communicationdesk@unominda.com</code>, <code>tksrivastava@unominda.com</code> <br><strong>Tel:</strong> +91 124-2290-693 (Manesar)</td>
+                                    <td class="p-3 text-xs" data-lang="zh">作風相對傳統，無大型 SaaS。<br><strong>公開信箱：</strong> <code>communicationdesk@unominda.com</code>, <code>tksrivastava@unominda.com</code>。<br><strong>建議：</strong> 直撥 Manesar 總部 (+91 124-2290-693) 轉接 Sourcing。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 4. Cold Email Draft -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">4. Precision Strike: Cold Email Template</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">4. 精準打擊：專屬 Cold Email 開發信草稿</h2>
+                    
+                    <p class="text-sm text-gray-400 mb-3" data-lang="en">This template combines Foxlink's product strengths (Long FPC, 0 PPM) with the specific needs of Indian Tier 1s (PLI compliance, EV shift) and establishes local presence (Source India reference).</p>
+                    <p class="text-sm text-gray-400 mb-3" data-lang="zh">本草稿結合了附件 2 的殺手級產品亮點（超長 FPC、0 PPM），對齊附件 1 中印度車廠對 EV 與在地化的渴求，並利用 Source India 展會建立在地信任感。</p>
+
+                    <div class="bg-[#0f172a] border border-gray-600 rounded-lg p-4 md:p-6 relative shadow-inner">
+                        <button class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors" onclick="navigator.clipboard.writeText(document.getElementById('email-content').innerText); alert('Copied to clipboard!');" title="Copy Text">
+                            <i class="far fa-copy"></i>
+                        </button>
+                        <pre id="email-content" class="text-sm text-gray-300 font-mono whitespace-pre-wrap overflow-x-auto"><strong>Subject:</strong> Enhancing [Target Company Name]'s EV Supply Chain with Localized FPC Solutions (Foxlink India)
+
+Dear [Contact Name],
+
+I hope this email finds you well. 
+
+As [Target Company Name] continues to accelerate its footprint in the rapidly growing Indian EV and ADAS market, securing highly reliable, localized electronic components is more critical than ever. 
+
+I am Michael Chen, Sales Manager at Foxlink India. We are a leading global manufacturer of Flexible Printed Circuits (FPC) and Rigid-Flex boards. Given the industry's shift towards the "Local for Local" strategy, I would like to briefly introduce our capabilities to your sourcing team.
+
+Why Foxlink is a strategic fit for your upcoming automotive projects:
+• <strong>Strong Local Presence in India:</strong> With manufacturing facilities in Noida and Tirupati, we are perfectly positioned to support your localized supply chain requirements and mitigate import bottlenecks.
+• <strong>Specialized for EV & ADAS:</strong> We specialize in large-format FPCs (up to 2,000mm via Roll-to-Roll equipment) which are ideal for EV Battery Packs, Powertrains, and advanced sensor modules.
+• <strong>Proven Tier 1 Reliability:</strong> We are fully IATF 16949 certified and have maintained a 0 PPM quality record, earning John Deere's "Achieving Excellence" award for 5 consecutive years.
+
+Following the recent industry momentum we observed at the Source India exhibition in Chennai last month, we are eager to expand our local partnerships.
+
+I have attached our FPC Business Unit Profile for your reference. Are you available for a brief 10-minute introductory call next week to discuss how our local capacity can support your sourcing needs? 
+
+Best regards,
+
+<strong>Michael Chen</strong>
+Sales Manager
+Foxlink India Electric Private Limited
+[Contact Details / LinkedIn Profile URL]</pre>
+                    </div>
+                </div>
+
+                <!-- 5. Target BOM Alignment -->
+                <div class="section-divider">
+                    <span data-lang="en">5. Product Alignment (Foxlink FPC vs. Indian Tier 1 BOM)</span>
+                    <span data-lang="zh">5. 產品對接矩陣 (Foxlink FPC vs 印度 Tier 1 車廠 BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 md:mb-8">
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700 hover:border-blue-500 transition-colors">
+                        <div class="text-center mb-3 text-blue-400 text-3xl"><i class="fas fa-battery-full"></i></div>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="en">EV Battery Pack</h4>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="zh">EV 電池模組</h4>
+                        <p class="text-xs text-gray-400 text-center" data-lang="en">Targeting Top/Down 16x FPCA setups. Selling our 2000mm Roll-to-Roll capability.</p>
+                        <p class="text-xs text-gray-400 text-center" data-lang="zh">主攻 Battery Top/Down 16x FPCA。直接切入 2000mm 超長製程優勢。</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700 hover:border-blue-500 transition-colors">
+                        <div class="text-center mb-3 text-purple-400 text-3xl"><i class="fas fa-car-side"></i></div>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="en">ADAS 3.0 Sensors</h4>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="zh">ADAS 3.0 傳感器</h4>
+                        <p class="text-xs text-gray-400 text-center" data-lang="en">Cameras & Radar. Selling our 6L Rigid-Flex and High-Density HDI (Stack Via) precision.</p>
+                        <p class="text-xs text-gray-400 text-center" data-lang="zh">鏡頭與雷達模組。主推 6L 軟硬結合板與高密度微型過孔技術。</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700 hover:border-blue-500 transition-colors">
+                        <div class="text-center mb-3 text-green-400 text-3xl"><i class="fas fa-lightbulb"></i></div>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="en">Atmosphere Light</h4>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="zh">車內氛圍燈</h4>
+                        <p class="text-xs text-gray-400 text-center" data-lang="en">Leveraging 590mm FPC (2L) capability for the 44pcs light bar requirement per car.</p>
+                        <p class="text-xs text-gray-400 text-center" data-lang="zh">因應單車 44pcs 燈條需求，利用 590mm 雙層 FPC 製程滿足長度要求。</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700 hover:border-blue-500 transition-colors">
+                        <div class="text-center mb-3 text-red-400 text-3xl"><i class="fas fa-cogs"></i></div>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="en">Cockpit Controls</h4>
+                        <h4 class="font-bold text-white text-center text-sm mb-2" data-lang="zh">座艙控制總成</h4>
+                        <p class="text-xs text-gray-400 text-center" data-lang="en">Wiper/Gear switches & Infotainment. Highlighting our SMT welding & Assembly capacity.</p>
+                        <p class="text-xs text-gray-400 text-center" data-lang="zh">雨刷/排檔開關與中控台。強調我們強大的 FPCA SMT 打件組裝能力。</p>
+                    </div>
+                </div>
+
+                <!-- 6. Market Fit Radar -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Foxlink Value vs. India Tier 1 Needs</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">Foxlink 價值 vs 印度車廠需求雷達圖</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Indicates high match in Tech & Mfg, but action needed on Portals.</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">顯示在技術與產能高度契合，但供應商系統註冊為當前急務。</p>
+                    </div>
+
+                    <!-- Recent Industry Dynamics -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-3 border-l-4 border-yellow-500 pl-3" data-lang="en">Context: Why India Tier 1s Need Us NOW</h4>
+                        <h4 class="font-bold text-white mb-3 border-l-4 border-yellow-500 pl-3" data-lang="zh">市場背景：為何印度 Tier 1 車廠現在急需我們</h4>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                                <strong class="text-blue-300 block text-sm mb-1" data-lang="en">1. Delta Electronics (India) EV Expansion</strong>
+                                <strong class="text-blue-300 block text-sm mb-1" data-lang="zh">1. 台達電 (印度) 佈局電動車</strong>
+                                <p class="text-xs text-gray-400" data-lang="en">Delta aims for a massive EV market share in India, expanding Krishnagiri plants for Powertrains and DC-DC converters. <strong>Our 2000mm Powertrain FPCs are a direct fit.</strong></p>
+                                <p class="text-xs text-gray-400" data-lang="zh">台達積極擴建 Krishnagiri 廠房，專攻動力總成與轉換器。<strong>Foxlink 的 2000mm 捲對捲 FPC 可直接成為其馬達/電源模組供應商。</strong></p>
+                            </div>
+                            <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                                <strong class="text-green-300 block text-sm mb-1" data-lang="en">2. TACO's "Internal Supply" Strategy</strong>
+                                <strong class="text-green-300 block text-sm mb-1" data-lang="zh">2. 塔塔 TACO 的集團內供戰略</strong>
+                                <p class="text-xs text-gray-400" data-lang="en">TACO's JV with Gotion (Battery packs) requires vast amounts of local Battery FPC/BMS components to satisfy Tata Motors' EV targets.</p>
+                                <p class="text-xs text-gray-400" data-lang="zh">TACO 與國軒高科合資生產電池包，為滿足 Tata 汽車的 EV 目標，急需海量在地化的電池 FPC 與 BMS 相關組件。</p>
+                            </div>
+                            <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                                <strong class="text-purple-300 block text-sm mb-1" data-lang="en">3. "Premiumization" Trend (Continental/Uno Minda)</strong>
+                                <strong class="text-purple-300 block text-sm mb-1" data-lang="zh">3. 「高級化」趨勢 (Continental/Uno Minda)</strong>
+                                <p class="text-xs text-gray-400" data-lang="en">Indian consumers demand advanced lighting (LED) and sunroofs. Uno Minda & Forvia are heavily investing in electronic/lighting tech, needing rigid-flex and atmosphere light FPCs.</p>
+                                <p class="text-xs text-gray-400" data-lang="zh">印度消費者偏好升級，推動先進照明與天窗需求。Uno Minda 與 Forvia 重金投資電子照明，將爆發對軟硬結合板與氛圍燈 FPC 的需求。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Radar Scores for Foxlink vs India Tier 1 Match: 
+        // Local Mfg Capacity (Noida/Tirupati): 9
+        // EV/ADAS FPC Tech (2000mm, Rigid-Flex): 10
+        // IATF/Quality Record (0 PPM, Deere Award): 10
+        // Cost/PLI Value: 9
+        // Tier 1 Portal Readiness (Action needed): 4 
+        const radarScores = [9, 10, 10, 9, 4]; 
+
+        const chartData = {
+            en: { labels: ['Local Mfg Capacity', 'EV/ADAS FPC Tech', 'IATF & 0 PPM Quality', 'PLI Policy Fit', 'B2B Portal Readiness'], label: 'Match Score (1-10)' },
+            zh: { labels: ['印度在地產能', '超長 FPC/軟硬板技術', 'IATF 車規與品質', '契合當地 PLI 政策', '官方採購入口就緒度'], label: '契合度 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 10} },
+                            ticks: { display: false, max: 10, min: 0, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
