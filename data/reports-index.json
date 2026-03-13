@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-12T11:36:12.688Z",
+  "lastUpdated": "2026-03-13T15:25:12.330Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -716,6 +716,19 @@
       "fileName": "report-1773315371656.html",
       "createdAt": "2026-03-12T11:36:12.688Z",
       "updatedAt": "2026-03-12T11:36:12.688Z"
+    },
+    {
+      "id": "report-1773415510889",
+      "title": "Quantum Energy Limited KYC Report",
+      "description": "Quantum Energy Limited 公司調查報告",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "項目計劃"
+      ],
+      "fileName": "report-1773415510889.html",
+      "createdAt": "2026-03-13T15:25:12.330Z",
+      "updatedAt": "2026-03-13T15:25:12.330Z"
     }
   ]
 }
