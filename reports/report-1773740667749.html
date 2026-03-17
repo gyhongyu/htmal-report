@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target: India Battery Swapping Association (IBSA) -->
+    <!-- Date: Feb/Mar 2026 -->
+    <title data-lang="en">Deep Dive KYC: IBSA (Mar 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：IBSA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: India Battery Swapping Association (IBSA)</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標對象：India Battery Swapping Association (IBSA)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Baseline:</strong> Source India Expo Prelude (Mar 2026) | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年3月 (展會前哨站) | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400" data-lang="en">Ecosystem Base</div>
+                            <div class="text-2xl font-bold text-blue-400" data-lang="zh">產業生態系</div>
+                            <div class="text-xs text-gray-500 uppercase">Policy & Standard Maker</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">India Battery Swapping Association</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U94110HR2022NPL105432</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Section 8 Company (Non-profit NGO)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：非營利性產業協會 (Section 8 Company)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Ecosystem Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">生態系財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">> ₹ 50,000 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="en">(Member Turnover)</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="zh">(會員合併營收)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Market Rep:</strong> >95% of India Swapping Ops</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>市場代表性：</strong> 代表超過 95% 的換電運營商</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ Setup</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心樞紐</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Gurgaon, Haryana</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Gurgaon, Haryana (古爾岡)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Sector-32 | Auto & Tech Institutional Area</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">Sector-32 | 汽車與技術機構聚集區</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Core Mandate & Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>運營核心與地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Operational Mandate:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">核心職能：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Govt Lobbying:</strong> Heavy GR (Government Relations) with NITI Aayog.</li>
+                                <li data-lang="zh"><strong>政府游說：</strong> 與 NITI Aayog 密切對接，掌握補貼話語權。</li>
+                                <li data-lang="en"><strong>Standardization:</strong> Working with BIS for "Battery Swapping Interoperability Standards".</li>
+                                <li data-lang="zh"><strong>標準制定：</strong> 與印度標準局 (BIS) 協作制定「電池交換互換性標準」。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Strategic Setup Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">戰略據點：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Delhi-NCR:</strong> Proximity to SIAM and ACMA for policy alignments.</li>
+                                <li data-lang="zh"><strong>Delhi-NCR:</strong> 鄰近 SIAM 與 ACMA，便於政策協同。</li>
+                                <li data-lang="en"><strong>Pune/Bengaluru:</strong> Members' R&D nodes for firmware/BMS localization.</li>
+                                <li data-lang="zh"><strong>Pune/Bengaluru:</strong> 會員企業的研發重鎮 (BMS與韌體開發)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Organization & The Promoters</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 組織決策架構與核心成員</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Decision Structure (Association Model):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>決策架構分析 (協會模式)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs mb-4">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Operations)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (日常運行)</span>
+                                <strong class="text-white">Secretariat</strong>
+                                <span class="block text-blue-400 mt-1" data-lang="en">Policy alignment & standard meetings</span>
+                                <span class="block text-blue-400 mt-1" data-lang="zh">負責政策對接與標準化會議</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Governance)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (核心決策)</span>
+                                <strong class="text-white">Executive Committee</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Formed by founding members</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">由創始成員組成的執行委員會</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600 border-l-4 border-l-yellow-500">
+                                <span class="text-gray-500 block" data-lang="en">The Big Bosses (Founders)</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終影響力 (創始成員)</span>
+                                <strong class="text-yellow-400 leading-relaxed block mt-1">Gogoro India, Battery Smart, Sun Mobility, Honda Power Pack, Lithium Power</strong>
+                            </div>
+                        </div>
+                        <div class="bg-gray-900/80 p-3 rounded text-sm text-gray-300 border border-gray-700" data-lang="en">
+                            <strong>Key Man Insight:</strong> Mr. Dilip Chenoy (Advisor). Ex-Secretary General of FICCI, holding immense GR clout. He is the prime conduit for FOXLINK to penetrate the inner circle.
+                        </div>
+                        <div class="bg-gray-900/80 p-3 rounded text-sm text-gray-300 border border-gray-700" data-lang="zh">
+                            <strong>關鍵人物洞察：</strong> Mr. Dilip Chenoy (顧問)。曾任 FICCI 秘書長，具備極強的政府關係 (GR) 處理能力。是 FOXLINK 進入電池標準化核心圈的關鍵窗口。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Core Interconnect BOM & Tech Gaps</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Focus Areas</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">核心影響領域</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Unified Battery Packs:</strong> Physical dims & CAN bus protocol.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>統一電池組：</strong> 物理尺寸與通訊協議 (CAN bus)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Swapping Cabinets:</strong> Auto-insertion mechanisms, thermal mgmt.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>換電站櫃體：</strong> 自動插拔機構、熱管理系統。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Component Needs (FOXLINK Target)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">關鍵 BOM 拆解 (機會點)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Interconnects:</strong> High-current anti-arcing Power Connectors.</li>
+                            <li data-lang="zh"><strong>互連結構：</strong> 高電流防電弧連接器。</li>
+                            
+                            <li data-lang="en"><strong>Internal Wiring:</strong> FPC (Flexible Printed Circuits) for pack signaling.</li>
+                            <li data-lang="zh"><strong>內部傳輸：</strong> 軟性電路板 (FPC) 於電池模組內傳輸。</li>
+                            
+                            <li data-lang="en"><strong>Telemetry:</strong> Cabinet IoT control boards, RFID readers.</li>
+                            <li data-lang="zh"><strong>通訊模組：</strong> 換電櫃 IoT 控制板、RFID 讀取模組。</li>
+                            
+                            <li data-lang="en"><strong>Power Distrib:</strong> HV Busbars and signal wiring harness inside stations.</li>
+                            <li data-lang="zh"><strong>線束系統：</strong> 換電站內部的高壓母線與信號線束。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Strategy</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">標準化進入戰略</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Universal Mandate:</strong> Pushing for "Universal Interface" across 48V/60V/72V.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>接口標準化：</strong> 正主導推動 48V/60V/72V 的「通用接口」設計。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>DVA Rules:</strong> 50% Domestic Value Addition needed for FAME subsidy. Setup must be local.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>政策門檻：</strong> 需達 50% 在地化價值 (DVA) 才能獲補貼，本地化生產是關鍵。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Ecosystem View)</span>
+                    <span data-lang="zh">4. 招聘情報 (會員與協會生態)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Where is the ecosystem heading?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心成員重點佈局</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: LinkedIn India, Naukri (2025-2026)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Entity</th>
+                                    <th class="w-1/3" data-lang="zh">職位與隸屬單位</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Standardization Specialist</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">IBSA Secretariat (Delhi)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">IBSA 秘書處 (德里)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Key Target:</strong> Tackling BIS/ARAI to lock battery casing IP ratings and connector mating cycle norms.</td>
+                                    <td data-lang="zh"><strong>關鍵動作：</strong> 對接 BIS，制定電池殼體防護等級與連接器插拔次數標準。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Policy Analyst (EV)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">IBSA (NCR)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">IBSA (NCR)</span>
+                                    </td>
+                                    <td data-lang="en">Decoding FAME-III & PLI 2.0. Lobbying for more localization subsidies for member OEMs.</td>
+                                    <td data-lang="zh">專注 FAME-III 與 PLI 2.0 解讀，為成員爭取在地化生產補貼。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Network Expansion Mgr</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Battery Smart / Sun Mobility</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Battery Smart / Sun Mobility</span>
+                                    </td>
+                                    <td data-lang="en">Massive infra push. Scouting locations for 2,000+ new swap points across North & South India.</td>
+                                    <td data-lang="zh">基礎設施擴張。預計在北印與南印新增 2000 個換電站點。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">BMS Firmware Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gogoro India (Pune)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Gogoro India (Pune)</span>
+                                    </td>
+                                    <td data-lang="en">Localizing protocol development. Upgrading battery management systems for Indian thermal conditions.</td>
+                                    <td data-lang="zh">優化在地通訊協議，開發適應印度高溫環境的電池管理系統。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Supply Chain & Distribution Logic</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 通路與供應鏈佈局邏輯</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Ecosystem Whitelisting</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">生態系白名單機制</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>No Direct Sales:</strong> IBSA doesn't buy. They dictate vendor dispatch via "Standard Certification".</li>
+                                <li data-lang="zh"><strong>不直接採購：</strong> IBSA 不直接買貨，而是透過「標準認證」引導採購流向。</li>
+                                
+                                <li data-lang="en"><strong>Fleet Recommendations:</strong> Certified vendors are pushed to Zomato, Swiggy, and B2B logistics fleets.</li>
+                                <li data-lang="zh"><strong>車隊推薦：</strong> 通過認證的供應商，會被強烈推薦給 Zomato, Swiggy 等大型配送車隊。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Sourcing Mandate</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">採購決策權</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Decentralized Buying:</strong> Final call rests with the Sourcing Head of individual member operators.</li>
+                                <li data-lang="zh"><strong>分散採購：</strong> 採購下單權限在各運營商 (如 Battery Smart) 的 Sourcing Head 手中。</li>
+                                
+                                <li data-lang="en"><strong>Compliance is Key:</strong> Components failing IBSA/BIS norms face zero dispatch chances as they lose FAME subsidy.</li>
+                                <li data-lang="zh"><strong>合規為王：</strong> 未達標準之組件無法獲得政府補貼，等於無法進入市場。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Members Market Position</span>
+                    <span data-lang="zh">6. 成員市場地位 (換電 Top 10)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Association Clout Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">協會綜合影響力畫像</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Based on collective lobbying, market share & PR</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India EV Swapping Players (IBSA Represented)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度換電服務商 TOP 10 (利益代言)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Operator / OEM</th><th class="p-2" data-lang="zh">運營商品牌</th>
+                                        <th class="p-2" data-lang="en">Profile / Focus</th><th class="p-2" data-lang="zh">背景 / 專注領域</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2 text-white font-bold">Battery Smart</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian (Market Leader in Stations)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (站點與活躍用戶數第一)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2 text-white">Sun Mobility</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian/JV (3W & e-Bus Focus)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">合資 (三輪車與商用重型領先)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2 text-white font-bold">Gogoro India</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Taiwan/India (Premium / Hero Tie-up)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">台灣/印度 (高端標準 / Hero 合作)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2 text-white">Honda Power Pack</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan (Deep penetration in South India)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本 (南印商業車隊合作)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Sheru</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian (V2G Software & Energy Trade)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (能源交易與軟體)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Lithium Power, Yulu, RACE Energy, Jio-bp, Mooving</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-400 mt-2 italic p-1 bg-gray-900 rounded" data-lang="en"><strong class="text-yellow-400">Strategic Play:</strong> Securing IBSA compliant status puts Foxlink in the prime position to supply connectors to all these Top 10 players simultaneously.</p>
+                            <p class="text-xs text-gray-400 mt-2 italic p-1 bg-gray-900 rounded" data-lang="zh"><strong class="text-yellow-400">戰略意義：</strong> 成為符合 IBSA 標準的供應商，等同於一次性打通上述 Top 10 企業的連接器與組件供應鏈。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Dec '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-12</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Industry News] Interoperability Whitepaper Submitted</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[產業動態] 遞交電池互換性白皮書</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Formal request to NITI Aayog to mandate unified comms protocol interfaces for 2W/3W cabinets.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">向 NITI Aayog 提交建言，要求統一機車換電櫃的通訊協議接口。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-05</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Govt Alert] BIS Swapping Connector Norms</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[政策預警] BIS 換電標準預告</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">BIS previews new safety and mating cycle norms for Swapping Connectors, effective mid-2026.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">印度標準局預計在年中釋出針對換電連接器 (Swapping Connectors) 的新版安全規範。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-25</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[PR] Dilip Chenoy at EV Expo</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[公關動態] Dilip Chenoy 出席 EV Expo</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Advocates heavily for domestic supply chain setup to cut dependency on imported cell components.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">強調印度需要建立自主的電池組件供應鏈，減少對特定國家進口的依賴。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-18</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Corporate] Gogoro & IBSA Open Initiative</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[企業動態] Gogoro 聯合倡議</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Pushing for an "Open Swapping Standard" framework to onboard local OEMs.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">推動「開放式換電標準」，呼籲更多本土品牌加入換電聯盟。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Market Intel] Battery Smart Funding</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[市場情報] Battery Smart 融資快報</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Member secures massive funding. Dispatch planned for 100k standardized battery packs.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">核心成員完成新一輪融資，計畫採購超過 10 萬組新一代標準化電池包。</p>
+                        </div>
+                    </div>
+                    <!-- Other Events Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-22:</strong> <span data-lang="en">AGM discussed lab setups in Chakan/Sriperumbudur.</span><span data-lang="zh">年度大會討論在 Chakan 等地建立測試實驗室。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-08:</strong> <span data-lang="en">MOU with Ministry of Power on BESS integration.</span><span data-lang="zh">與電力部簽約研究換電站電網儲能 (BESS) 整合。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-01:</strong> <span data-lang="en">Confirmed for Source India 2026 to scout vendors.</span><span data-lang="zh">確認帶領 15 家成員參展 Source India 尋找代工廠。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-25:</strong> <span data-lang="en">Tech committee showcases anti-arcing connector prototype.</span><span data-lang="zh">技術組展示針對高溫優化的連接器雛型。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores for IBSA (Inferred)
+        // Market Share: 9 (Represents 95%)
+        // Localization: 8 (Heavy push for 50% DVA)
+        // Brand Power: 9 (Gogoro, Honda, Jio-bp backing)
+        // Digital Reach/PR: 8 (Active lobbying, NITI Aayog connects)
+        // Financial Health: 8 (Members Turnover > 50k Cr)
+        const radarScores = [9, 8, 9, 8, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Rep.', 'Local. (DVA)', 'Brand Clout', 'GR/Lobbying', 'Member Finance'], label: 'Score (1-10)' },
+            zh: { labels: ['市場代表性', '在地化(DVA)', '品牌影響力', '政策游說(GR)', '會員資金實力'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => {
+                // Ensure page is ready for printing
+                document.title = currentLang === 'en' ? 'Deep_Dive_KYC_IBSA' : 'IBSA_KYC_報告';
+                window.print();
+            });
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

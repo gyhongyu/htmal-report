@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-17T09:23:01.531Z",
+  "lastUpdated": "2026-03-17T09:44:28.245Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -756,6 +756,19 @@
       "fileName": "report-1773739380823.html",
       "createdAt": "2026-03-17T09:23:01.531Z",
       "updatedAt": "2026-03-17T09:23:01.531Z"
+    },
+    {
+      "id": "report-1773740667749",
+      "title": "Target: India Battery Swapping Association (IBSA)",
+      "description": "目標對象：India Battery Swapping Association (IBSA)",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報"
+      ],
+      "fileName": "report-1773740667749.html",
+      "createdAt": "2026-03-17T09:44:28.245Z",
+      "updatedAt": "2026-03-17T09:44:28.245Z"
     }
   ]
 }
