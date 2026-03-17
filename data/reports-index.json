@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-17T09:54:07.137Z",
+  "lastUpdated": "2026-03-17T10:06:03.398Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -782,6 +782,19 @@
       "fileName": "report-1773741246401.html",
       "createdAt": "2026-03-17T09:54:07.137Z",
       "updatedAt": "2026-03-17T09:54:07.137Z"
+    },
+    {
+      "id": "report-1773741962075",
+      "title": "Target: ACMA India",
+      "description": "目標機構：ACMA India (印度汽車零組件協會)",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報"
+      ],
+      "fileName": "report-1773741962075.html",
+      "createdAt": "2026-03-17T10:06:03.398Z",
+      "updatedAt": "2026-03-17T10:06:03.398Z"
     }
   ]
 }
