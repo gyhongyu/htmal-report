@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: Thomas (President, Foxlink US Sales) -->
+    <!-- SUBJECT: Electronica India 2026 Visit -->
+    <title data-lang="en">Proposal: VIP Visit to Electronica India 2026</title>
+    <title data-lang="zh">提案：邀請總裁參訪 Electronica India 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">STRATEGIC ITINERARY PROPOSAL</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Proposal: VIP Visit to Electronica India 2026</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">提案：邀請總裁參訪 Electronica India 2026</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Prepared for: Thomas (President, Foxlink US Sales)</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">呈報對象：Thomas 總裁 (正崴美國銷售總部)</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. Event Overview & Highlights</span>
+                    <span data-lang="zh">壹、 展會背景與核心特色</span>
+                </div>
+
+                <!-- Event Details Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Basic Info -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Event Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">展會細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Event:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold">Electronica India 2026 (North)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-yellow-400 bg-transparent border-none p-1 font-bold">April 8, 2026 (Opening Day)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs leading-relaxed">
+                                    India Expo Mart (IEML),<br>
+                                    Greater Noida, Delhi NCR
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Format:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <span data-lang="en">1-Day VIP Floor Walk</span>
+                                    <span data-lang="zh">單日高階巡展與視察</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <!-- Core Features -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Core Features</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">展會三大核心特色</h3>
+                        <ul class="space-y-3 text-sm text-gray-300 mt-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-link text-blue-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span data-lang="en"><strong class="text-white">Full Value Chain Integration:</strong> Co-located with Productronica India. Showcases everything from R&D, components to final manufacturing equipment.</span>
+                                    <span data-lang="zh"><strong class="text-white">上下游整合：</strong> 與 Productronica (設備展) 同期舉辦，一次看足從研發、零組件到終端製造的完整產業價值鏈。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-globe text-blue-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span data-lang="en"><strong class="text-white">Government & Global Backing:</strong> Organized by Messe München, strongly supported by India's MeitY and ELCINA/IESA. Best window for policy observation.</span>
+                                    <span data-lang="zh"><strong class="text-white">國際級別與官方背書：</strong> 慕尼黑展覽集團主辦，獲印度電子資訊部(MeitY)與重量級協會支持，為觀察官方政策落地成效之最佳窗口。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-users-cog text-blue-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span data-lang="en"><strong class="text-white">High-Quality B2B Attendees:</strong> Over 80% of visitors hold purchasing/decision-making power, including major EMS companies and brands.</span>
+                                    <span data-lang="zh"><strong class="text-white">高質量 B2B 決策者：</strong> 超過 80% 參觀者具備採購決策權，包含各大 EMS 廠、品牌商及尋求供應鏈合作之全球買家。</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- PART 2: STRATEGIC OBJECTIVES -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Strategic Objectives</span>
+                    <span data-lang="zh">貳、 參訪目的與戰略效益</span>
+                </div>
+
+                <p class="text-sm text-gray-300 mb-4" data-lang="en">Integrating this expo into the April itinerary allows us to gain a macro view of the Indian electronics market efficiently. The visit will precisely focus on three strategic areas:</p>
+                <p class="text-sm text-gray-300 mb-4" data-lang="zh">將此展會納入 4 月份行程，旨在以最高效率獲取印度電子製造市場的全局視野。本次參訪將精準聚焦以下三大戰略重點，協助總部評估佈局：</p>
+
+                <div class="space-y-4 md:space-y-5">
+                    
+                    <!-- Objective 1 -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-industry mr-2 text-yellow-500"></i>
+                            <span data-lang="en">1. Evaluate "Make in India" Supply Chain Maturity</span>
+                            <span data-lang="zh">1. 實地評估「在地製造 (Make in India)」之必要性與供應鏈現況</span>
+                        </h3>
+                        <div class="text-gray-300 text-sm leading-relaxed">
+                            <p data-lang="en"><strong class="text-green-400">Import Substitution Assessment:</strong> By inspecting local EMS players, we will observe which components are completely localized and which still rely on imports. This real-world data will directly inform HQ's decision on <strong class="text-white">"which product lines must be produced in India vs. supported from China."</strong></p>
+                            <p data-lang="zh"><strong class="text-green-400">進口替代空間評估：</strong> 透過視察本土 EMS 廠與供應商，觀察目前哪些零組件已實現完全在地採購，哪些仍高度依賴海外進口。這將為決策 <strong class="text-white">「哪些產品線必須在印度生產，哪些可繼續由中國廠區支援」</strong> 提供最直接的數據。</p>
+                        </div>
+                    </div>
+
+                    <!-- Objective 2 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-expand-arrows-alt mr-2 text-green-500"></i>
+                            <span data-lang="en">2. Explore Cross-BU Expansion (Beyond Cable/SMT)</span>
+                            <span data-lang="zh">2. 探索 Cable 與 SMT 以外的 BU 產品推廣機會</span>
+                        </h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en">The expo gathers end-manufacturers across Consumer, Telecom (e.g., VIVO), and Automotive electronics (e.g., Uno Minda). We will use this to:</p>
+                            <p data-lang="zh">展會匯聚了消費性電子、通訊設備與車用電子（如 VIVO, Uno Minda）的終端製造商。我們將藉此：</p>
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en"><strong class="text-white">Identify Hidden Demand:</strong> Gauge urgent local needs for other high-end components (precision connectors, power modules, mechanical parts).</li>
+                                <li data-lang="zh"><strong class="text-white">發掘潛在需求：</strong> 透過買家詢價焦點，了解當地對高階零組件（如：精密連接器、電源模組、機構件）的迫切需求。</li>
+                                <li data-lang="en"><strong class="text-white">Competitor Benchmarking:</strong> Monitor key competitors' flagship products and localization footprint in India.</li>
+                                <li data-lang="zh"><strong class="text-white">競品動態對標：</strong> 觀察主要競爭對手在印度的主推產品與在地化佈局，評估引進 Foxlink 其他 BU 資源的可行性。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Objective 3 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-handshake mr-2 text-blue-400"></i>
+                            <span data-lang="en">3. High-Efficiency Agile Networking</span>
+                            <span data-lang="zh">3. 高效商務拓展與機動性客戶對接</span>
+                        </h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en"><strong class="text-white">One-Stop Target Gathering:</strong> Procurement heads from major EMS companies (both existing and potential clients) will be present. We will maintain an agile schedule to facilitate <strong class="text-green-400">impromptu executive meetings</strong> on-site, creating additional business breakthroughs outside our pre-planned itinerary.</p>
+                            <p data-lang="zh"><strong class="text-white">潛在客戶一站式網羅：</strong> 名單上的既有與潛在客戶（大廠採購主管）幾乎都會出席。我們將保持行程機動性，若接觸到關鍵決策者，可直接在現場進行 <strong class="text-green-400">高效會談</strong>，為出差創造額外的商務突破口。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conclusion Block -->
+                <div class="bg-gray-700/50 border-l-4 border-blue-500 p-4 mt-6 rounded">
+                    <p class="text-sm md:text-base text-gray-200" data-lang="en">
+                        <strong class="text-white">Conclusion:</strong> A single-day inspection of Electronica India fills the "macro-market gap" that individual client visits cannot provide, directly assisting executives in validating strategic assumptions for Foxlink's Indian expansion.
+                    </p>
+                    <p class="text-sm md:text-base text-gray-200" data-lang="zh">
+                        <strong class="text-white">結論：</strong> 安排單日視察 Electronica India，不僅能補足單一客戶拜訪無法看清的「整體市場宏觀格局」，更能直接協助高層驗證對印度產能配置與產品擴充的戰略假設。
+                    </p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // STRICTLY ENFORCED: Default to English as per template requirement
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
+```

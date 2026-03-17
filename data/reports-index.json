@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-17T07:39:12.080Z",
+  "lastUpdated": "2026-03-17T09:23:01.531Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -742,6 +742,20 @@
       "fileName": "report-1773733151185.html",
       "createdAt": "2026-03-17T07:39:12.080Z",
       "updatedAt": "2026-03-17T07:39:12.080Z"
+    },
+    {
+      "id": "report-1773739380823",
+      "title": "Proposal: VIP Visit to Electronica India 2026",
+      "description": "提案：邀請總裁參訪 Electronica India 2026",
+      "categories": [
+        "內部簡報",
+        "其他",
+        "客戶攻略",
+        "客戶KYC"
+      ],
+      "fileName": "report-1773739380823.html",
+      "createdAt": "2026-03-17T09:23:01.531Z",
+      "updatedAt": "2026-03-17T09:23:01.531Z"
     }
   ]
 }
