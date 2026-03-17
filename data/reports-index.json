@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-13T15:25:12.330Z",
+  "lastUpdated": "2026-03-17T07:39:12.080Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -729,6 +729,19 @@
       "fileName": "report-1773415510889.html",
       "createdAt": "2026-03-13T15:25:12.330Z",
       "updatedAt": "2026-03-13T15:25:12.330Z"
+    },
+    {
+      "id": "report-1773733151185",
+      "title": "Project: Samsung India \"Made in India\" Opportunity",
+      "description": "專案：三星印度「Made in India」戰略大單評估",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報"
+      ],
+      "fileName": "report-1773733151185.html",
+      "createdAt": "2026-03-17T07:39:12.080Z",
+      "updatedAt": "2026-03-17T07:39:12.080Z"
     }
   ]
 }

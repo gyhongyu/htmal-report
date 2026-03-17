@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: Thomas (President, Foxlink US Sales) -->
+    <!-- SUBJECT: Samsung India Strategic Opportunity -->
+    <title data-lang="en">Executive Briefing: Samsung India Strategic Opportunity</title>
+    <title data-lang="zh">高階主管簡報：三星印度戰略合作商機</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">EXECUTIVE DECISION REQUIRED</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Project: Samsung India "Made in India" Opportunity</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">專案：三星印度「Made in India」戰略大單評估</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Prepared for: Thomas (President, Foxlink US Sales)</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">呈報對象：Thomas 總裁 (正崴美國銷售總部)</p>
+                </div>
+
+                <!-- PART 1: THE CORE OPPORTUNITY (THE HOOK) -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. The Golden Opportunity (Why Now?)</span>
+                    <span data-lang="zh">壹、 核心商機 (為何現在是最佳時機？)</span>
+                </div>
+
+                <div class="recon-box opp">
+                    <div class="flex items-center mb-3">
+                        <span class="tag bg-purple-600 text-white mr-2">Confidential Intel</span>
+                        <h3 class="text-lg md:text-xl font-bold text-green-400 m-0" data-lang="en">15-20 Million Units/Year Guaranteed Volume</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-green-400 m-0" data-lang="zh">潛在保底訂單：每年 1,500 萬至 2,000 萬件</h3>
+                    </div>
+                    <div class="text-gray-200 text-sm md:text-base leading-relaxed space-y-3">
+                        <p data-lang="en">Direct offline communication from Samsung's Strategic Sourcing Group confirms they are manufacturing a minimum of <strong class="text-white text-lg">45 Million phones annually</strong> in India.</p>
+                        <p data-lang="zh">根據來自三星戰略採購部 (Strategic Sourcing Group) 的內部機密確認，三星目前在印度每年的手機產量保底高達 <strong class="text-white text-lg">4,500 萬支</strong>。</p>
+                        
+                        <div class="bg-gray-900/80 p-4 rounded border border-gray-600 border-l-4 border-l-green-500">
+                            <p data-lang="en"><i class="fas fa-bullseye text-green-500 mr-2"></i><strong>The Catch:</strong> If Foxlink establishes the required capability in India and diverts just ONE product version (e.g., the Galaxy A Series), we are looking at an immediate capture of <strong class="text-yellow-400">15-20 Million pieces per year</strong>.</p>
+                            <p data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-2"></i><strong>切入點：</strong> 如果正崴能在印度建立所需產能，僅需吃下三星其中一個產品線 (例如 Galaxy A 系列)，我們就能立即斬獲 <strong class="text-yellow-400">每年 1,500 - 2,000 萬件的巨額訂單</strong>。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: CLIENT SCALE & REQUIREMENTS -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Client Profile & Direct Requirements</span>
+                    <span data-lang="zh">貳、 客戶規模與直接需求</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+                    <!-- Samsung Scale -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3 flex items-center">
+                            <i class="fas fa-industry mr-2"></i>
+                            <span data-lang="en">Samsung India Ecosystem</span>
+                            <span data-lang="zh">三星印度生態圈規模</span>
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300 mt-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span data-lang="en"><strong class="text-white">World's Largest Plant:</strong> Located in Noida. Produces Galaxy S/Z series.</span>
+                                    <span data-lang="zh"><strong class="text-white">全球最大工廠：</strong> 位於諾伊達 (Noida)，生產頂級 Galaxy S/Z 系列。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span data-lang="en"><strong class="text-white">Market Leader:</strong> #1 Value Share in Smartphones in India.</span>
+                                    <span data-lang="zh"><strong class="text-white">市場霸主：</strong> 印度智慧型手機銷售額市佔率第一。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-circle text-yellow-500 mt-1 mr-2"></i>
+                                <div>
+                                    <span data-lang="en"><strong class="text-white">Strategic Need:</strong> Actively looking to de-risk by diversifying away from Chinese/Korean vendors. Localizing parts is a priority to cut import duty.</span>
+                                    <span data-lang="zh"><strong class="text-white">戰略痛點：</strong> 積極尋求去中化/非韓系供應商以分散風險。急需零件在地化以降低進口關稅。</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3 flex items-center">
+                            <i class="fas fa-address-card mr-2"></i>
+                            <span data-lang="en">Key Decision Maker (Client Side)</span>
+                            <span data-lang="zh">客戶端關鍵決策者</span>
+                        </h3>
+                        <div class="mt-4">
+                            <div class="text-lg md:text-xl font-bold text-white">Mr. Ayush Sharma</div>
+                            <div class="text-sm text-blue-400 mb-1">Chief Manager, Strategic Sourcing Group (India / SEA IPC)</div>
+                            <div class="text-base font-bold text-gray-200 mt-2 border-l-2 border-blue-500 pl-2">SAMSUNG ELECTRONICS</div>
+                            <div class="text-sm text-gray-400 mt-3 space-y-2">
+                                <div><i class="fas fa-mobile-alt mr-2 w-4 text-center"></i>+91.97.180.03311</div>
+                                <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>ayush.sh@samsung.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Direct Requirements -->
+                <h4 class="text-gray-400 text-sm uppercase font-bold mb-3" data-lang="en">Specific Manufacturing Requests from Samsung</h4>
+                <h4 class="text-gray-400 text-sm uppercase font-bold mb-3" data-lang="zh">三星直接提出的代工需求</h4>
+                
+                <div class="space-y-4 md:space-y-5">
+                    <!-- Req 1 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-plug mr-2 text-blue-400"></i>
+                            <span data-lang="en">Requirement 1: USB Cable Assembly</span>
+                            <span data-lang="zh">需求一：USB 線材組裝 (USB Cable Assembly)</span>
+                        </h3>
+                        <div class="text-gray-300 text-sm leading-relaxed">
+                            <p data-lang="en">Samsung specifically values Foxlink's <strong class="text-white">Raw Cable capability</strong>. While competitors offer basic assembly, Samsung prefers a CM (Contract Manufacturer) that can handle the complete process including raw cable manufacturing *in India*.</p>
+                            <p data-lang="zh">三星特別看中正崴的 <strong class="text-white">裸線 (Raw Cable) 製造能力</strong>。雖然競爭對手能提供基礎組裝，但三星強烈傾向尋找能「在印度本地」處理包含裸線生產在內之完整工序的代工廠。</p>
+                        </div>
+                    </div>
+
+                    <!-- Req 2 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-microchip mr-2 text-blue-400"></i>
+                            <span data-lang="en">Requirement 2: SMT Flex / Multi Flex PCBA</span>
+                            <span data-lang="zh">需求二：SMT 軟板 / 多層軟板打件 (SMT Flex / Multi Flex)</span>
+                        </h3>
+                        <div class="text-gray-300 text-sm leading-relaxed">
+                            <p data-lang="en">Critical for their mobile phones. Currently, Samsung <strong class="text-red-400">cannot find the right sources in India</strong> (existing sources only do basic soldering, major assembly still happens in China). They are formally asking if Foxlink can move this facility to India.</p>
+                            <p data-lang="zh">這是手機生產的關鍵零組件。目前三星在印度 <strong class="text-red-400">找不到合格的供應商</strong>（現有印廠只能做基礎焊接，核心組裝仍需仰賴中國）。他們正式詢問正崴是否能將此產能轉移至印度。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 3: THE GAME CHANGER (POLICY) -->
+                <div class="section-divider">
+                    <span data-lang="en">3. The Game Changer: Import Policy Shift</span>
+                    <span data-lang="zh">參、 局勢反轉：進口關稅政策利多</span>
+                </div>
+
+                <div class="bg-gradient-to-r from-gray-800 to-gray-900 border border-yellow-500/50 p-4 md:p-6 rounded-lg mb-6 shadow-lg">
+                    <div class="flex items-start">
+                        <i class="fas fa-balance-scale text-3xl text-yellow-500 mr-4 mt-1"></i>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Previous Roadblock Removed</h3>
+                            <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">過去的投資阻礙已消除</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed mb-2" data-lang="en">Previously, Foxlink simulated Indian production for Apple, but suspended the plan due to heavy duties on Raw Materials lacking return on investment.</p>
+                            <p class="text-sm text-gray-300 leading-relaxed mb-2" data-lang="zh">過去正崴曾為 Apple 評估過印度設廠，但當時因原物料進口關稅過重，缺乏投資報酬率而暫停。</p>
+                            <p class="text-sm text-yellow-400 font-bold leading-relaxed" data-lang="en">CURRENT STATUS: The Indian government now provides a DUTY BENEFIT (Zero duty for Raw Materials) if the ultimate end-product is used for mobile phones. This fundamentally changes the ROI calculation for Foxlink.</p>
+                            <p class="text-sm text-yellow-400 font-bold leading-relaxed" data-lang="zh">現況反轉：印度政府現已頒布關稅優惠，只要最終產品用於「手機」，其原物料即可享有【零關稅】。這從根本上改變了正崴印度建廠的 ROI (投資回報率) 試算結果。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 4: ACTION PLAN FOR THOMAS -->
+                <div class="section-divider">
+                    <span data-lang="en">4. Strategic Decision Required</span>
+                    <span data-lang="zh">肆、 需高階決策事項</span>
+                </div>
+
+                <p class="text-sm text-gray-300 mb-4" data-lang="en">To capture this immediate market share, the following authorizations are requested from the US Sales President:</p>
+                <p class="text-sm text-gray-300 mb-4" data-lang="zh">為了迅速搶佔三星釋出的這塊大餅，懇請 總裁 授權以下行動：</p>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item / Decision</th><th class="p-3" data-lang="zh">行動項目 / 決策內容</th>
+                                <th class="p-3 w-32" data-lang="en">Status</th><th class="p-3 w-32" data-lang="zh">狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-red-500 text-center"><i class="fas fa-signature"></i></td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Approve "Made in India" Feasibility & Capability Transfer</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">拍板核准「印度製造」產能轉移評估</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Authorize the internal team to formally evaluate transferring Raw Cable and SMT Flex capabilities to an Indian site to answer Samsung's direct request.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">授權內部團隊正式啟動將「裸線」與「SMT 軟板」產能轉移至印度的可行性評估，以正面回應三星的代工邀約。</span>
+                                </td>
+                                <td class="p-3 font-bold text-red-400" data-lang="en">Pending Approval</td>
+                                <td class="p-3 font-bold text-red-400" data-lang="zh">待裁決</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center"><i class="fas fa-handshake"></i></td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Executive Meeting with Samsung India Sourcing Head</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">與三星印度採購主管高階會談</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Leverage Thomas's upcoming visit to present Foxlink's commitment to localized manufacturing directly to Mr. Ayush Sharma.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">安排 Thomas 總裁於本次訪印行程中，親自向三星主管 Ayush Sharma 展現正崴在地化生產的決心。</span>
+                                </td>
+                                <td class="p-3 font-medium text-yellow-500" data-lang="en">To Schedule</td>
+                                <td class="p-3 font-medium text-yellow-500" data-lang="zh">待安排</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // STRICTLY ENFORCED: Default to English as per template requirement
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
