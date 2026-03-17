@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Uno Minda Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Uno Minda Limited (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Uno Minda Limited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Uno Minda Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Uno Minda Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月10日 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1 Leader</div>
+                            <div class="text-xs text-gray-500 uppercase">Strategic Priority</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Uno Minda Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> L74899DL1992PLC050333</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Listed on NSE/BSE: UNOMINDA)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (上市代碼 NSE/BSE: UNOMINDA)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 15,000 Cr+</span>
+                            <span class="text-xs text-gray-500 ml-2">(FY25 Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Nirmal K. Minda Family (India)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Nirmal K. Minda 家族 (印度本土控股)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plants</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Manesar (Gurugram)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Manesar (古爾岡)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">70+ Plants | Global Auto Tier-1 Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">70+ 座工廠 | 汽車 Tier-1 全球樞紐</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setups:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Manesar (Core):</strong> Switches & Sensors hub.</li>
+                                <li data-lang="zh"><strong>Manesar (核心基地):</strong> 負責開關系統與感測器。位於 IMT 工業區。</li>
+                                <li data-lang="en"><strong>Pune:</strong> Lighting & Electronic Controllers (JV specific lines).</li>
+                                <li data-lang="zh"><strong>Pune (浦那):</strong> 專注於燈具與電子控制器，包含日/德系合作產線。</li>
+                                <li data-lang="en"><strong>Hosur/Chennai:</strong> Catering to South India OEMs (Hyundai, TVS).</li>
+                                <li data-lang="zh"><strong>Hosur/Chennai:</strong> 供應南印度車廠 (如 TVS, Hyundai)。</li>
+                                <li data-lang="en"><strong>Faridabad/Pune (New):</strong> Dedicated EV components setups.</li>
+                                <li data-lang="zh"><strong>Faridabad/Pune:</strong> 新設 EV 專屬工廠 (OBC/BMS)。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech & Corporate Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與辦事處：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>CREAT (Pune & Gurgaon):</strong> Center for Research, Engineering and Advanced Technologies. Focus on Embedded HW/SW.</li>
+                                <li data-lang="zh"><strong>Uno Minda CREAT:</strong> 位於 Pune 與 Gurgaon，專攻嵌入式軟體與電控硬體研發。</li>
+                                <li data-lang="en"><strong>Corporate HQ:</strong> Nawada Fatehpur, Manesar, Haryana.</li>
+                                <li data-lang="zh"><strong>企業總部:</strong> Nawada Fatehpur, Manesar, Haryana。</li>
+                                <li data-lang="en"><strong>Reg. Office:</strong> Wazirpur Ind. Area, Delhi.</li>
+                                <li data-lang="zh"><strong>註冊辦公室:</strong> Wazirpur Industrial Area, Delhi。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Promoters)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Minda Investments Ltd & N.K. Minda</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">~ 68% Stake (Combined)</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">合計持股約 68%</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (JV Interlocks)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間合資控股)</span>
+                                <strong class="text-white">Denso, Toyoda Gosei, Tokai Rika</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Deep Japanese tech ties</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">多個策略性合資企業綁定</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-blue-300">Nirmal K. Minda Family (India)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">100% Indian Control</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">控制權高度集中於印度本土</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Switches:</strong> Automotive Switches & Controls (#1 in India)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>開關系統：</strong> 汽車開關與控制系統 (市佔第一)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Lighting:</strong> LED Headlamps/Tail lamps</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>照明系統：</strong> LED 頭燈/尾燈</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Acoustics:</strong> Horns & Infotainment systems</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>聲學與娛樂：</strong> 喇叭與車載資訊娛樂系統</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>EV Specific:</strong> Powertrain & Electronic Components</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>EV 專用：</strong> 動力控制與核心電子組件</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">EV BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">EV 零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>EV Powertrain:</strong> On-Board Chargers (OBC), DC-DC Converters, BMS PCBA.</li>
+                            <li data-lang="zh"><strong>EV 動力控制：</strong> 車載充電器 (OBC)、DC-DC 轉換器、BMS 主板。</li>
+                            
+                            <li data-lang="en"><strong>Sensors & HMI:</strong> Touchscreens, Digital Instrument Clusters, Ultrasonic Radars.</li>
+                            <li data-lang="zh"><strong>感測與人機介面：</strong> 觸控螢幕、數位儀表板、超音波雷達感測器。</li>
+                            
+                            <li data-lang="en" class="bg-blue-900/30 p-1 rounded"><strong>Interconnect (Foxlink Opp):</strong> FPC for Battery packs/lamps, High/Low-voltage Connectors, EV Harness.</li>
+                            <li data-lang="zh" class="bg-blue-900/30 p-1 rounded"><strong>電子互連 (Foxlink 機會點)：</strong> FPC (用於電池/燈具)、精密連接器、EV 高壓線束。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Certification:</strong> Strong preference for IATF 16949 certified electronics vendors.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>品質認證：</strong> 強烈尋求具備 IATF 16949 認證之供應商。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Policy Pressure:</strong> Desperately seeking "Make in India" precision electronic parts to meet PLI local value addition audits.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>政策壓力：</strong> 需能在印度在地生產精密組件，以配合 "Make in India" 及 PLI 補貼價值含量要求。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025/11 - 2026/02)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Strategic Moves</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn India</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">DGM - Strategic Sourcing (EV)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Manesar</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Manesar</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Handling new-gen EV component purchasing. Urgent push for import substitution.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 負責新一代 EV 產品線的關鍵零組件採購，顯示強大的進口替代需求。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sr. Engineer - Embedded HW</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune (CREAT)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (CREAT)</span>
+                                    </td>
+                                    <td data-lang="en">Developing high-performance PCB controllers. Moving from pure assembly to in-house design.</td>
+                                    <td data-lang="zh">開發高性能 PCB 控制板，顯示對電子元件的需求從代工轉向自主設計。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">General Manager - Operations</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">New EV Plant</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">新 EV 工廠</span>
+                                    </td>
+                                    <td data-lang="en">Setting up and running the newly established dedicated electronics manufacturing unit.</td>
+                                    <td data-lang="zh">針對新設立的電子製造工廠招募營運主管，產能即將釋放。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Quality Lead - Electronics Div</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune/Manesar</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune/Manesar</span>
+                                    </td>
+                                    <td data-lang="en">Tightening quality audits and process controls for upstream electronic component vendors.</td>
+                                    <td data-lang="zh">強化對上游電子零件供應商的品質控管與稽核標準。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Project Manager - ADAS Systems</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gurgaon</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Gurgaon</span>
+                                    </td>
+                                    <td data-lang="en">Indicates Uno Minda is aggressively stepping into high-end ADAS sensor assembly.</td>
+                                    <td data-lang="zh">顯示 Uno Minda 正跨入高階輔助駕駛感測器 (ADAS) 的組裝領域。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Market Presence</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路策略概況 (Channel Strategy)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>OEM Direct (B2B):</strong> The core engine. Direct supplies to Maruti Suzuki, Tata Motors, Mahindra, Honda 2W.</li>
+                                <li data-lang="zh"><strong>OEM 直供 (B2B)：</strong> 核心業務，直接供應 Maruti Suzuki, Tata Motors, Mahindra, Honda 等主流車廠。</li>
+                                
+                                <li data-lang="en"><strong>Aftermarket:</strong> Massive distribution network covering 30,000+ retail points and 1,000+ tier-1 distributors under "Uno Minda" brand.</li>
+                                <li data-lang="zh"><strong>售後市場：</strong> 透過 "Uno Minda" 品牌覆蓋 30,000+ 零售點與 1,000+ 一級經銷商，全印最廣。</li>
+                                
+                                <li data-lang="en"><strong>Digital B2B Portal:</strong> Dedicated supplier portal for e-tendering and material forecasting.</li>
+                                <li data-lang="zh"><strong>數位 B2B 門戶：</strong> 設有官方供應商門戶，用於電子招標與物料預測對接。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Cluster Manufacturing:</strong> Plants are strategically located adjacent to client OEM parks (e.g., inside or near Maruti's compound).</li>
+                                <li data-lang="zh"><strong>聚落製造 (Cluster Mfg)：</strong> 工廠緊貼客戶園區佈局 (例如在 Maruti Suzuki 園區旁設廠)。</li>
+                                
+                                <li data-lang="en"><strong>VMI (Vendor Managed Inventory):</strong> High expectation for vendors to maintain local buffer stocks to support JIT lines.</li>
+                                <li data-lang="zh"><strong>VMI 管理：</strong> 供應商需具備 VMI (供應商管理庫存) 能力，以支援其 JIT 生產線。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on Auto Tier-1 dominance</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Auto Components Rankings (Top Tier)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度汽車零部件 TOP 10 排名</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Motherson Sumi (MSSL)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Largest Revenue, Harness Leader)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (營收規模最大)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">2</td>
+                                        <td class="p-2 text-white font-bold">Uno Minda Limited</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">India (Target: Electronics & Switch Leader)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">印度 (目標客戶：電子與開關龍頭)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Bosch India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Systems Integration King)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (系統整合與技術標準)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Varroc Engineering</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Lighting & 2W Electronics)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (燈具與二輪車電子)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Lumax Industries</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Main Lighting Competitor)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (燈具主要競爭對手)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Continental, Gabriel, Sandhar, Lucas-TVS, Sundram Fasteners</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>FOXLINK Opportunity:</strong> While powerful in assembly, Uno Minda imports upstream precision electronics (FPC, high-end connectors). Foxlink's local India setups can solve their PLI compliance headaches directly.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>FOXLINK 機會點：</strong> Uno Minda 雖然在組裝端強大，但在精密電子元件 (FPC, 高階連接器) 上游仍依賴進口。FOXLINK 的在地化產能可協助其提升在地增值率，完美應對 PLI 審核壓力。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-12</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Financial News] PLI Payout Approved</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[財經新聞] 獲選 PLI 獎勵金發放名單</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Ministry of Heavy Industries confirmed Uno Minda's EV division meets FY25 PLI scheme targets. <span class="text-gray-500">(Opp: Huge budget for local EV parts)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">印度重工業部確認 Uno Minda 旗下 EV 事業部符合 2025 年度 PLI 獎勵發放條件。<span class="text-gray-500">(在地採購資金充足)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-05</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Press Release] Taiwan Sensor JV Talks</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[新聞稿] 與台灣技術夥伴洽談感測器合作</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Rumored to be seeking strategic contract manufacturing ties with Taiwanese optics/acoustics vendors. <span class="text-gray-500">(Direct hit for Foxlink capabilities)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">傳聞正尋求與具備光學/聲學技術背景的供應商建立戰略代工關係。<span class="text-gray-500">(精準命中正崴技術)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-20</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Factory Update] Pune Display Plant Live</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[工廠動態] Pune 顯示屏新廠投產</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Dedicated to 2-Wheeler infotainment displays. Capacity: 50,000 units/month.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">專門生產 2-Wheelers 用之車載顯示屏，月產能達 5 萬台。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-08</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Corporate] Exec Vision 2026</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[高層動向] 2026 戰略轉型</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Mr. Ravi Mehra (Dy MD) emphasized pivoting entirely towards "Electronic Architecture Integration".</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Mr. Ravi Mehra 強調公司將在 2026 年全面專注於「電子架構整合 (Electronic Architecture Integration)」。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Award] Maruti Suzuki Supplier of the Year</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[獎項] 獲得 Maruti Suzuki 年度供應商獎</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Awarded for achieving 100% on-time delivery rate in switch systems.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">憑藉其在開關系統供應的 100% 準時交付率獲獎。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exec Summary -->
+                <div class="bg-blue-900/20 border border-blue-500/30 p-4 rounded-lg mt-8 mb-4">
+                    <h3 class="text-blue-400 font-bold mb-2 uppercase text-sm" data-lang="en">Actionable Summary & Pitch Strategy</h3>
+                    <h3 class="text-blue-400 font-bold mb-2 uppercase text-sm" data-lang="zh">高管摘要與拜訪策略</h3>
+                    <p class="text-sm text-gray-300 mb-3" data-lang="en">Uno Minda is aggressively transitioning from a mechanical parts maker to a "Hardware+Software Electronics Integrator." <strong>FOXLINK must target their EV division's FPC and precision connector needs.</strong> Given Mr. Ravi Mehra's strict focus on supply chain localization, present our <strong>"India Factory Ramp-up Timeline"</strong> and a clear <strong>"PLI Value-Add Roadmap"</strong> during the meeting.</p>
+                    <p class="text-sm text-gray-300 mb-3" data-lang="zh">Uno Minda 正快速從機械組件廠轉向「軟硬體整合電子商」。<strong>FOXLINK 應主攻其 EV 事業部的 FPC 與精密連接器需求。</strong> 由於 Mr. Ravi Mehra 及其團隊高度重視供應鏈的在地化透明度，建議會面前準備好 <strong>「印度工廠投產時程表」</strong> 與 <strong>「符合 PLI 標準的在地增值計畫」</strong>。</p>
+                    <div class="flex gap-4 text-xs text-gray-400">
+                        <span data-lang="en"><i class="fas fa-user-tie text-blue-500 mr-1"></i> <strong>Key Contacts:</strong> Mr. Ravi Mehra (Dy MD), Mr. Rakesh Kher (CEO, Aftermarket)</span>
+                        <span data-lang="zh"><i class="fas fa-user-tie text-blue-500 mr-1"></i> <strong>關鍵聯絡對象：</strong> Mr. Ravi Mehra (副總經理), Mr. Rakesh Kher (售後事業群 CEO)</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores Calculated for Uno Minda:
+        // Market Share: 10 (Tier-1 Leader, #1 in Switches/Electronics)
+        // Localization: 9 (70+ plants in India, deeply rooted)
+        // Brand Power: 9 (Massive OEM footprint & Aftermarket)
+        // Digital Reach: 7 (B2B portals, some B2C but mostly industrial)
+        // Fin. Health: 10 (15,000 Cr+ Revenue, Highly profitable JV models)
+        const radarScores = [10, 9, 9, 7, 10]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
