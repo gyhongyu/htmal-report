@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-17T10:06:03.398Z",
+  "lastUpdated": "2026-03-18T13:13:52.506Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -795,6 +795,19 @@
       "fileName": "report-1773741962075.html",
       "createdAt": "2026-03-17T10:06:03.398Z",
       "updatedAt": "2026-03-17T10:06:03.398Z"
+    },
+    {
+      "id": "report-1773839630606",
+      "title": "Target: Yotta Data Services",
+      "description": "目標企業：Yotta Data Services",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報"
+      ],
+      "fileName": "report-1773839630606.html",
+      "createdAt": "2026-03-18T13:13:52.506Z",
+      "updatedAt": "2026-03-18T13:13:52.506Z"
     }
   ]
 }

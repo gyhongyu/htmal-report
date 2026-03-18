@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Yotta Data Services Private Limited -->
+    <!-- Date: March 2026 -->
+    <title data-lang="en">Deep Dive KYC: Yotta Data Services (Mar 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Yotta Data Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Yotta Data Services</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Yotta Data Services</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> March 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年3月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Hyper-Scale Prospect</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Yotta Data Services Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72900MH2019PTC325493</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 30,000 Cr+</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="en">(Est. Investment 3-5 Yrs)</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="zh">(預估 3-5 年總投資額)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Hiranandani Group (India)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Hiranandani Group (印度財團)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main DC Park</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心園區</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Navi Mumbai (NM1/NM2)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Navi Mumbai (NM1/NM2 園區)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Asia's Largest Tier IV AI Datacenter</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">亞洲最大 Tier IV AI 超算中心</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Datacenter & Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理與資料中心佈局</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Datacenter Parks (Operating/Building):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">資料中心特區 (營運/建置中)：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Navi Mumbai (NM1 & NM2):</strong> Hiranandani Fortune City, Panvel. High-density compute hub.</li>
+                                <li data-lang="zh"><strong>Navi Mumbai (NM1 & NM2):</strong> Panvel，具備超高密度運算能力。</li>
+                                <li data-lang="en"><strong>Greater Noida (D1):</strong> Knowledge Park V (20 Acres). North India's largest AI super DC.</li>
+                                <li data-lang="zh"><strong>Greater Noida (D1):</strong> 大諾伊達，佔地 20 英畝，北印度最大 AI 算力樞紐。</li>
+                                <li data-lang="en"><strong>Chennai:</strong> Hiranandani Parks, Oragadam. (Upcoming Phase)</li>
+                                <li data-lang="zh"><strong>Chennai:</strong> Oragadam 園區。(興建規劃中)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Corporate & Tech Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與企業總部：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Mumbai HQ:</strong> Powai. (Executive leadership, Core Cloud architecture)</li>
+                                <li data-lang="zh"><strong>Mumbai 總部:</strong> Powai，高階決策與採購中心。</li>
+                                <li data-lang="en"><strong>Pune R&D:</strong> Focus on Shakti Cloud platform & localized LLM infrastructure.</li>
+                                <li data-lang="zh"><strong>Pune 研發:</strong> 專注於 Shakti Cloud 平台與在地大模型架構。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong> Fully incubated by Indian real estate heavyweights.</p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong> 100% 印度本土重資產財團孵化。</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Yotta Infrastructure Holdings</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">(Hiranandani Family Trust)</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">(Hiranandani 家族信託實體)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Intermediate)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+                                <strong class="text-white">Hiranandani Group Holdings</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人</span>
+                                <strong class="text-blue-300">Hiranandani Group</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">(Niranjan & Darshan Hiranandani)</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">(決策者：Niranjan & Darshan)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Service Portfolio & Infrastructure BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要服務與基礎設施 BOM 拆解</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Services</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要服務大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-server text-gray-500 mr-2"></i><strong>AI Cloud:</strong> GPU-as-a-Service (Shakti Cloud)</li>
+                            <li data-lang="zh"><i class="fas fa-server text-gray-500 mr-2"></i><strong>AI 雲端服務：</strong> GPU 算力租賃 (Shakti Cloud)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-building text-gray-500 mr-2"></i><strong>Hyperscale Colocation:</strong> Custom DC spaces</li>
+                            <li data-lang="zh"><i class="fas fa-building text-gray-500 mr-2"></i><strong>超大型資料中心：</strong> 機房託管服務</li>
+                            
+                            <li data-lang="en"><i class="fas fa-shield-alt text-gray-500 mr-2"></i><strong>Managed IT & Security:</strong> Enterprise sec-ops</li>
+                            <li data-lang="zh"><i class="fas fa-shield-alt text-gray-500 mr-2"></i><strong>託管 IT：</strong> 網路安全與維運</li>
+                            
+                            <li data-lang="en"><i class="fas fa-cloud text-gray-500 mr-2"></i><strong>Cloud Services:</strong> Public & Private Cloud storage</li>
+                            <li data-lang="zh"><i class="fas fa-cloud text-gray-500 mr-2"></i><strong>雲端運算：</strong> 公有雲/私有雲儲存</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">DC Hardware Needs (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">硬體建置採購需求 (BOM)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Compute & Interconnect:</strong> High-density GPU boards, PCIe Gen5/6 connectors, Optical Transceivers, DAC/AOC.</li>
+                            <li data-lang="zh"><strong>高速運算與互連：</strong> GPU 伺服器主板、PCIe Gen5/6 連接器、光纖收發器、DAC/AOC 高速線束。</li>
+                            
+                            <li data-lang="en"><strong>Power Mgmt:</strong> Smart PDUs, High-cap UPS, Busbars, Titanium PSUs.</li>
+                            <li data-lang="zh"><strong>能源控制：</strong> 智慧 PDU、UPS、母線槽、鈦金級伺服器電源 (PSU)。</li>
+                            
+                            <li data-lang="en"><strong>Thermal (Crucial):</strong> Liquid Cooling Manifolds, Quick Disconnects, BLDC fans, Precision AC.</li>
+                            <li data-lang="zh"><strong>散熱系統 (關鍵)：</strong> 液冷管路、盲插快接頭、高轉速風扇、精密空調零組件。</li>
+                            
+                            <li data-lang="en"><strong>Structural:</strong> Seismic-resistant heavy-duty racks.</li>
+                            <li data-lang="zh"><strong>結構機櫃：</strong> 高負載抗震伺服器機櫃、盲板。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-green-500">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps & FOXLINK Opp</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求與 Foxlink 機會</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Localization:</strong> Actively looking for Tier-1 hardware vendors capable of "Make in India" server assembly.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>在地化製造：</strong> 尋找具備伺服器零組件能力，且能配合 Make in India 的供應商。</p>
+                            
+                            <p class="text-yellow-300" data-lang="en"><i class="fas fa-bolt mr-1"></i><strong>Foxlink Pitch:</strong> Direct entry into Yotta's White-box assembly chain via High-speed cables, Power harnesses, and Liquid Cooling connectors.</p>
+                            <p class="text-yellow-300" data-lang="zh"><i class="fas fa-bolt mr-1"></i><strong>Foxlink 切入點：</strong> 透過提供伺服器內部高速線束、大電流連接器、液冷快充接頭，打入 Yotta 白牌伺服器代工體系。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Late '25 - Early '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 年底 - 2026 年初)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Scaling AI Infrastructure</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：AI 基礎設施擴編</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn (Geographic clustering observed)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Director - Supply Chain & Procurement</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Mumbai (孟買總部)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Managing global sourcing and developing local vendors for hyper-scale DC hardware. Massive hardware influx expected.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 負責超大型資料中心硬體全球採購與在地供應商開發，顯示硬體建置需求極大。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Data Center Facility Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Greater Noida</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Greater Noida (大諾伊達)</span>
+                                    </td>
+                                    <td data-lang="en">Managing daily ops and MEP systems for D1 park to accommodate massive AI server deployments.</td>
+                                    <td data-lang="zh">負責 D1 園區日常維運與機電系統 (MEP)，因應 AI 伺服器進駐擴大編制。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">AI/ML Infrastructure Architect</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune (Hybrid)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Designing and optimizing cloud architectures based strictly on Nvidia clusters.</td>
+                                    <td data-lang="zh">設計與優化基於 Nvidia 叢集的雲端架構。</td>
+                                </tr>
+                                <tr class="bg-green-900/20">
+                                    <td>
+                                        <strong class="text-green-400">Lead Engineer - Thermal & Power</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navi Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navi Mumbai (新孟買)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Foxlink Target:</strong> Evaluating liquid cooling & power distribution for high-density racks (>30kW/rack).</td>
+                                    <td data-lang="zh"><strong>Foxlink 對接點：</strong> 評估高密度機櫃 (>30kW) 的液冷與電力分配方案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">NOC Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en">Stockpiling operations manpower for the upcoming southern expansion node.</td>
+                                    <td data-lang="zh">為即將上線或擴建的南部節點儲備網路維運人力。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Market Approach</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">市場拓展策略</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Direct B2B:</strong> Pitching long-term colo/cloud contracts to BFSI, Telcos, and local Unicorns.</li>
+                                <li data-lang="zh"><strong>B2B 企業直銷：</strong> 鎖定銀行金融、電信商、獨角獸，簽署長期合約。</li>
+                                
+                                <li data-lang="en"><strong>B2G (Government):</strong> MeitY certified. Designated cloud provider for various State and Central agencies.</li>
+                                <li data-lang="zh"><strong>B2G 政府採購：</strong> 獲 MeitY 認證，為多個邦政府與中央機構指定雲端供應商。</li>
+                                
+                                <li data-lang="en"><strong>Ecosystem:</strong> Elite Nvidia Partner. Acting as a magnet for global AI startups entering India.</li>
+                                <li data-lang="zh"><strong>生態系結盟：</strong> Nvidia Elite Partner，透過算力吸引全球 AI 新創進駐。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain & Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>End Buyer Status:</strong> Yotta is the terminal buyer, not a reseller.</li>
+                                <li data-lang="zh"><strong>終端買家定位：</strong> Yotta 是「終端買家」而非轉售商。</li>
+                                
+                                <li data-lang="en"><strong>Delivery Nodes:</strong> Direct dispatch to Panvel or Greater Noida DC zones. These have SEZ/Tech Park tax-exempt status.</li>
+                                <li data-lang="zh"><strong>交付節點：</strong> 需直接交付至 Panvel 或大諾伊達園區 (具備 SEZ 稅務優惠)。</li>
+                                
+                                <li data-lang="en"><strong>Compliance:</strong> Vendors must handle complex inter-state logistics and GST/E-way bill processing.</li>
+                                <li data-lang="zh"><strong>合規要求：</strong> 供應商需具備處理印度複雜邦際物流與稅務 (GST/E-way bill) 的能力。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Scored on Infra, AI Growth, Backing & CapEx</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Datacenter Operators (Est. Capacity Rank)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度資料中心營運商排名 (依容量/影響力)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Focus / Status</th><th class="p-2" data-lang="zh">定位 / 狀態</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">STT GDC India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Traditional Colocation Leader</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">傳統託管龍頭，市佔最大</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Nxtra by Airtel</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Telco-backed, widest footprint</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">電信背景，據點最多</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">CtrlS Datacenters</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Tier 4 Giant (Major Threat)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">亞洲最大 Tier 4，強勁對手</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">4</td>
+                                        <td class="p-2 text-white font-bold">Yotta Data Services</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">#1 in AI/High-Density Infra (Target)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">AI 算力領域第一，增速最快 (目標)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">NTT Global Data Centers</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">MNC preferred choice</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">外資龍頭，跨國企業首選</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">AdaniConneX (Green energy threat), Web Werks, Sify, Equinix, PDG</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Note:</strong> Yotta is shifting from "Space Provider" to "AI Cloud Provider", resulting in a massive surge in server procurement.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>戰略動向：</strong> Yotta 正從「空間提供者」轉型為「AI 算力提供者」，伺服器採購量暴增。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Dec '25 - Mar '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-25</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Industry News] Greater Noida D2 Phase Triggered</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[產業新聞] 啟動大諾伊達 D2 設施建置</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Accelerating North India phase 2 expansion specifically for liquid-cooled server racks due to AI compute demand.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">因應 AI 算力需求暴增，提前啟動北印度園區第二階段，專注於液冷機櫃部署。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-10</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Partner Announce] Doubling Down on Nvidia</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[夥伴動態] 擴大 Nvidia 合作佈局</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Announced induction of a massive new batch of high-performance AI GPUs to solidify Shakti Cloud dominance.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">宣布將額外導入新一批高效能 AI GPU，鞏固 Shakti Cloud 算力霸主地位。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Press Release] Green Energy Milestone</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[新聞稿] 綠能轉型達標</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">NM1 Datacenter now runs on 60% Solar/Wind power, drastically lowering PUE metrics.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Yotta NM1 宣布其電力已達 60% 來自太陽能與風能，大幅降低 PUE 值。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Contract] UP State Govt Cloud Deal</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[合約] 獲取邦政府大型 AI 雲端合約</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Signed 5-year pact to power Uttar Pradesh's Smart City & AI traffic analytics infrastructure.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">簽署 5 年協議，為北方邦 (UP) 提供智慧城市與 AI 交通分析底層雲端架構。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-20:</strong> <span data-lang="en">AI Talent initiative lab setup with IIT Bombay.</span><span data-lang="zh">與 IIT Bombay 合作設立 AI 應用實驗室。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Won "Best AI Infra Innovation 2025" at IT summit.</span><span data-lang="zh">榮獲 2025 印度最佳 AI 基礎設施創新獎。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred from Yotta Data Services Report): 
+        // Market Share: 8 (Top 4 overall, but #1 in AI niche)
+        // Localization: 9 (100% Indian backed, Make in India focus)
+        // Brand Power: 9 (Hiranandani backing, Nvidia Elite Partner)
+        // Tech & Cloud Reach: 9 (Shakti Cloud, Gov contracts)
+        // Financial Health: 10 (Massive 30,000 Cr+ CapEx capability)
+        const radarScores = [8, 9, 9, 9, 10]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Cloud Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '本土化純度', '品牌影響力', '雲端覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
