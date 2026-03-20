@@ -50,8 +50,9 @@
                         <span class="text-sm">View Map</span>
                     </a>
                     
-                    <!-- Uber 連結 (使用 Universal Link 並帶入目的地資訊) -->
-                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Cloudnine%20Hospital%20-%20Sector%2014&dropoff[formatted_address]=94%2F4%2C%20382%2F2%2C%20Mehrauli-Gurgaon%20Rd%2C%20Old%20DLF%20Colony%2C%20Sector%2014%2C%20Gurugram%2C%20Haryana%20122007" target="_blank" rel="noopener noreferrer" 
+                    <!-- Uber 連結 -->
+                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Cloudnine%20Hospital%20-%20Sector%2014&dropoff[formatted_address]=94%2F4%2C%20382%2F2%2C%20Mehrauli-Gurgaon%20Rd%2C%20Old%20DLF%20Colony%2C%20Sector%2014%2C%20Gurugram%2C%20Haryana%20122007" 
+                       onclick="openUber(event, this.href)" target="_blank" rel="noopener noreferrer" 
                        class="flex-1 bg-black text-white py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-gray-800 transition-colors shadow-md">
                         <i class="fa-brands fa-uber text-xl"></i>
                         <span class="text-sm">Book Uber</span>
@@ -79,7 +80,8 @@
                     </a>
                     
                     <!-- Uber 連結 -->
-                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Miracles%20Apollo%20Cradle%20Hospital&dropoff[formatted_address]=Sector%2014%2C%201%2C%202%20%26%203%2C%20Delhi%20Rd%2C%20Sector%2014%2C%20Gurugram%2C%20Haryana%20122007" target="_blank" rel="noopener noreferrer" 
+                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Miracles%20Apollo%20Cradle%20Hospital&dropoff[formatted_address]=Sector%2014%2C%201%2C%202%20%26%203%2C%20Delhi%20Rd%2C%20Sector%2014%2C%20Gurugram%2C%20Haryana%20122007" 
+                       onclick="openUber(event, this.href)" target="_blank" rel="noopener noreferrer" 
                        class="flex-1 bg-black text-white py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-gray-800 transition-colors shadow-md">
                         <i class="fa-brands fa-uber text-xl"></i>
                         <span class="text-sm">Book Uber</span>
@@ -107,7 +109,8 @@
                     </a>
                     
                     <!-- Uber 連結 -->
-                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Dr%20Tripathi's%20Child%20%26%20Newborn%20Clinic&dropoff[formatted_address]=Old%20Delhi%20Gurugram%20Rd%2C%20opposite%20Hanuman%20Mandir%2C%20Dundahera%20Village%2C%20Sector%2020%2C%20Gurugram%2C%20Haryana%20122016" target="_blank" rel="noopener noreferrer" 
+                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Dr%20Tripathi's%20Child%20%26%20Newborn%20Clinic&dropoff[formatted_address]=Old%20Delhi%20Gurugram%20Rd%2C%20opposite%20Hanuman%20Mandir%2C%20Dundahera%20Village%2C%20Sector%2020%2C%20Gurugram%2C%20Haryana%20122016" 
+                       onclick="openUber(event, this.href)" target="_blank" rel="noopener noreferrer" 
                        class="flex-1 bg-black text-white py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-gray-800 transition-colors shadow-md">
                         <i class="fa-brands fa-uber text-xl"></i>
                         <span class="text-sm">Book Uber</span>
@@ -118,5 +121,34 @@
 
     </div>
 
+    <!-- 加入處理 iOS / Android 差異跳轉的 JavaScript -->
+    <script>
+        function openUber(event, url) {
+            // 判斷是否為蘋果設備 (iOS 或 Mac)
+            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            
+            if (isIOS) {
+                // 阻止預設的網頁開啟行為
+                event.preventDefault();
+                
+                // 將原廠網址替換為 iOS 專用的強制喚醒協議 (uber://)
+                var appUrl = url.replace('https://m.uber.com/ul/', 'uber://');
+                
+                // 嘗試直接呼叫 Uber App
+                window.location.href = appUrl;
+                
+                // 備用方案：如果手機內沒有安裝 Uber，則在 2.5 秒後打開原本的網頁連結
+                var start = Date.now();
+                setTimeout(function() {
+                    var now = Date.now();
+                    // 如果沒有跳轉走 (代表可能沒有安裝 App)，則導向網頁版
+                    if (now - start < 3000 && !document.hidden) {
+                        window.location.href = url;
+                    }
+                }, 2500);
+            }
+            // 若為 Android，則不干擾預設行為，讓原生的 Universal Link 自行處理
+        }
+    </script>
 </body>
 </html>
