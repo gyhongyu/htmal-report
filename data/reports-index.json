@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-18T13:13:52.506Z",
+  "lastUpdated": "2026-03-20T13:33:10.956Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -808,6 +808,19 @@
       "fileName": "report-1773839630606.html",
       "createdAt": "2026-03-18T13:13:52.506Z",
       "updatedAt": "2026-03-18T13:13:52.506Z"
+    },
+    {
+      "id": "report-1774013590257",
+      "title": "Hospitals & Clinics",
+      "description": "Hospitals & Clinics",
+      "categories": [
+        "其他",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1774013590257.html",
+      "createdAt": "2026-03-20T13:33:10.956Z",
+      "updatedAt": "2026-03-20T13:33:10.956Z"
     }
   ]
 }

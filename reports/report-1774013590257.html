@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hospitals & Clinics</title>
+    <!-- 引入 Tailwind CSS 以進行快速且美觀的排版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 FontAwesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 移除點擊時的藍色高光，讓按鈕體驗更像原生APP */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: #f3f4f6; /* 淺灰色背景 */
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800 pb-10">
+
+    <!-- 頂部標題列 -->
+    <div class="bg-rose-500 text-white p-5 shadow-md sticky top-0 z-10">
+        <h1 class="text-xl font-bold text-center flex items-center justify-center gap-2">
+            <i class="fa-solid fa-notes-medical"></i>
+            Hospitals & Clinics
+        </h1>
+        <p class="text-center text-rose-100 text-sm mt-1">Click the buttons below to navigate or book a ride</p>
+    </div>
+
+    <!-- 醫院列表容器 -->
+    <div class="p-4 space-y-5 max-w-md mx-auto mt-2">
+
+        <!-- 醫院 1 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-5">
+                <h2 class="text-lg font-bold text-gray-900 mb-2">Cloudnine Hospital - Sector 14</h2>
+                <p class="text-sm text-gray-500 mb-5 leading-relaxed flex items-start gap-2">
+                    <i class="fa-solid fa-location-dot mt-1 text-gray-400"></i>
+                    94/4, 382/2, Mehrauli-Gurgaon Rd, Old DLF Colony, Sector 14, Gurugram, Haryana 122007
+                </p>
+                
+                <!-- 按鈕列 -->
+                <div class="flex gap-3">
+                    <!-- Google Maps 連結 -->
+                    <a href="https://maps.app.goo.gl/QWGm8P7Don4azHBE7" target="_blank" rel="noopener noreferrer" 
+                       class="flex-1 bg-blue-50 text-blue-600 border border-blue-200 py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-blue-100 transition-colors">
+                        <i class="fa-solid fa-map-location-dot text-xl"></i>
+                        <span class="text-sm">View Map</span>
+                    </a>
+                    
+                    <!-- Uber 連結 (使用 Universal Link 並帶入目的地資訊) -->
+                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Cloudnine%20Hospital%20-%20Sector%2014&dropoff[formatted_address]=94%2F4%2C%20382%2F2%2C%20Mehrauli-Gurgaon%20Rd%2C%20Old%20DLF%20Colony%2C%20Sector%2014%2C%20Gurugram%2C%20Haryana%20122007" target="_blank" rel="noopener noreferrer" 
+                       class="flex-1 bg-black text-white py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-gray-800 transition-colors shadow-md">
+                        <i class="fa-brands fa-uber text-xl"></i>
+                        <span class="text-sm">Book Uber</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 醫院 2 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-5">
+                <h2 class="text-lg font-bold text-gray-900 mb-2">Miracles Apollo Cradle Hospital</h2>
+                <p class="text-sm text-gray-500 mb-5 leading-relaxed flex items-start gap-2">
+                    <i class="fa-solid fa-location-dot mt-1 text-gray-400"></i>
+                    Sector 14, 1, 2 & 3, Delhi Rd, Sector 14, Gurugram, Haryana 122007
+                </p>
+                
+                <!-- 按鈕列 -->
+                <div class="flex gap-3">
+                    <!-- Google Maps 連結 -->
+                    <a href="https://maps.app.goo.gl/Ja9ppNotcTbbLmSAA" target="_blank" rel="noopener noreferrer" 
+                       class="flex-1 bg-blue-50 text-blue-600 border border-blue-200 py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-blue-100 transition-colors">
+                        <i class="fa-solid fa-map-location-dot text-xl"></i>
+                        <span class="text-sm">View Map</span>
+                    </a>
+                    
+                    <!-- Uber 連結 -->
+                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Miracles%20Apollo%20Cradle%20Hospital&dropoff[formatted_address]=Sector%2014%2C%201%2C%202%20%26%203%2C%20Delhi%20Rd%2C%20Sector%2014%2C%20Gurugram%2C%20Haryana%20122007" target="_blank" rel="noopener noreferrer" 
+                       class="flex-1 bg-black text-white py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-gray-800 transition-colors shadow-md">
+                        <i class="fa-brands fa-uber text-xl"></i>
+                        <span class="text-sm">Book Uber</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 醫院 3 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-5">
+                <h2 class="text-lg font-bold text-gray-900 mb-2">Dr Tripathi's Child & Newborn Clinic</h2>
+                <p class="text-sm text-gray-500 mb-5 leading-relaxed flex items-start gap-2">
+                    <i class="fa-solid fa-location-dot mt-1 text-gray-400"></i>
+                    Old Delhi Gurugram Rd, opposite Hanuman Mandir, Dundahera Village, Sector 20, Gurugram, Haryana 122016
+                </p>
+                
+                <!-- 按鈕列 -->
+                <div class="flex gap-3">
+                    <!-- Google Maps 連結 -->
+                    <a href="https://maps.app.goo.gl/PPxonf12wM2fAf6H6" target="_blank" rel="noopener noreferrer" 
+                       class="flex-1 bg-blue-50 text-blue-600 border border-blue-200 py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-blue-100 transition-colors">
+                        <i class="fa-solid fa-map-location-dot text-xl"></i>
+                        <span class="text-sm">View Map</span>
+                    </a>
+                    
+                    <!-- Uber 連結 -->
+                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]=Dr%20Tripathi's%20Child%20%26%20Newborn%20Clinic&dropoff[formatted_address]=Old%20Delhi%20Gurugram%20Rd%2C%20opposite%20Hanuman%20Mandir%2C%20Dundahera%20Village%2C%20Sector%2020%2C%20Gurugram%2C%20Haryana%20122016" target="_blank" rel="noopener noreferrer" 
+                       class="flex-1 bg-black text-white py-3 rounded-xl font-semibold flex flex-col items-center justify-center gap-1 active:bg-gray-800 transition-colors shadow-md">
+                        <i class="fa-brands fa-uber text-xl"></i>
+                        <span class="text-sm">Book Uber</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
