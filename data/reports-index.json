@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-20T13:40:17.884Z",
+  "lastUpdated": "2026-03-30T05:23:47.431Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -821,6 +821,19 @@
       "fileName": "report-1774013590257.html",
       "createdAt": "2026-03-20T13:33:10.956Z",
       "updatedAt": "2026-03-20T13:40:17.884Z"
+    },
+    {
+      "id": "report-1774848217667",
+      "title": "Target: Aptiv Components India",
+      "description": "目標企業：Aptiv Components India",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報"
+      ],
+      "fileName": "report-1774848217667.html",
+      "createdAt": "2026-03-30T05:23:47.431Z",
+      "updatedAt": "2026-03-30T05:23:47.431Z"
     }
   ]
 }
