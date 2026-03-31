@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-30T05:23:47.431Z",
+  "lastUpdated": "2026-03-31T11:41:18.827Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -834,6 +834,19 @@
       "fileName": "report-1774848217667.html",
       "createdAt": "2026-03-30T05:23:47.431Z",
       "updatedAt": "2026-03-30T05:23:47.431Z"
+    },
+    {
+      "id": "report-1774957276094",
+      "title": "Meeting Minutes: Strategic Alignment with Sahasra",
+      "description": "會議記錄：重啟 Foxlink 與 Sahasra 印度戰略合作",
+      "categories": [
+        "內部簡報",
+        "工作報告",
+        "年度計劃"
+      ],
+      "fileName": "report-1774957276094.html",
+      "createdAt": "2026-03-31T11:41:18.827Z",
+      "updatedAt": "2026-03-31T11:41:18.827Z"
     }
   ]
 }
