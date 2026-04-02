@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-02T12:16:41.530Z",
+  "lastUpdated": "2026-04-02T13:47:34.011Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -873,6 +873,19 @@
       "fileName": "report-1775132199161.html",
       "createdAt": "2026-04-02T12:16:41.530Z",
       "updatedAt": "2026-04-02T12:16:41.530Z"
+    },
+    {
+      "id": "report-1775137652809",
+      "title": "Project Brief: Jio 2W Battery Swapping Plan",
+      "description": "專案簡報：Jio 二輪車換電計畫戰略與執行評估",
+      "categories": [
+        "客戶KYC",
+        "內部簡報",
+        "客戶攻略"
+      ],
+      "fileName": "report-1775137652809.html",
+      "createdAt": "2026-04-02T13:47:34.011Z",
+      "updatedAt": "2026-04-02T13:47:34.011Z"
     }
   ]
 }

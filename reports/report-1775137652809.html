@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: Thomas & Project Team -->
+    <!-- FROM: Foxlink India Business Consultant -->
+    <title data-lang="en">Project Brief: Jio 2W Battery Swapping Strategy</title>
+    <title data-lang="zh">專案簡報：Jio 二輪車換電計畫戰略與執行評估</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500, .text-orange-400, .text-purple-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600/20 border border-blue-500 text-blue-400 text-xs px-3 py-1 rounded-full mb-3 font-bold tracking-widest uppercase">
+                        <i class="fas fa-briefcase mr-2"></i>
+                        <span data-lang="en">Client Meeting Prep Memo</span>
+                        <span data-lang="zh">客戶拜訪備忘錄</span>
+                    </span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 text-white" data-lang="en">Project Brief: Jio 2W Battery Swapping Plan</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 text-white" data-lang="zh">專案簡報：Jio 二輪車換電計畫戰略與執行評估</h1>
+                    <p class="text-lg md:text-xl text-gray-400 font-medium tracking-wide" data-lang="en">(Strategy & Execution Assessment - Updated)</p>
+                    <p class="text-lg md:text-xl text-gray-400 font-medium tracking-wide" data-lang="zh">(更新版)</p>
+                </div>
+
+                <!-- Basic Info -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600 mt-6 md:mt-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none m-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1" data-lang="en">To:</th>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1" data-lang="zh">致：</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold text-base text-blue-300">
+                                    <span data-lang="en">Thomas (President) & Project Team</span>
+                                    <span data-lang="zh">Thomas (President) & 專案團隊</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1" data-lang="en">From:</th>
+                                <th class="text-gray-500 bg-transparent border-none p-1" data-lang="zh">發送人：</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <span data-lang="en">Foxlink India Business Consultant</span>
+                                    <span data-lang="zh">FOXLINK 印度商業顧問</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none m-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1" data-lang="en">Date:</th>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1" data-lang="zh">日期：</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <span data-lang="en">April 2024</span>
+                                    <span data-lang="zh">2024年4月</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1" data-lang="en">Location:</th>
+                                <th class="text-gray-500 bg-transparent border-none p-1" data-lang="zh">地點：</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs">
+                                    <span data-lang="en">Reliance Corporate Park (RCP), Mumbai</span>
+                                    <span data-lang="zh">孟買 Reliance Corporate Park (RCP)</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 💡 Consultant Insights -->
+                <div class="recon-box opp mt-8 !border-yellow-500 !bg-yellow-900/10">
+                    <h3 class="font-bold text-yellow-500 text-lg mb-4 flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-xl"></i>
+                        <span data-lang="en">Core Project Insights</span>
+                        <span data-lang="zh">顧問核心洞察 (Project Insights)</span>
+                    </h3>
+                    <p class="text-sm text-gray-300 mb-4" data-lang="en">Based on Jio's (Prashant Pandey) initial requirements, this project has three major strategic characteristics:</p>
+                    <p class="text-sm text-gray-300 mb-4" data-lang="zh">根據 Jio (Prashant Pandey) 的原始需求，此專案有三大戰略特徵：</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700 border-l-4 border-l-blue-500">
+                            <strong class="text-white block mb-2" data-lang="en">1. ODM Model</strong>
+                            <strong class="text-white block mb-2" data-lang="zh">1. ODM 模式</strong>
+                            <span class="text-xs text-gray-400" data-lang="en">Jio expects us to handle R&D and design. This implies heavy initial R&D investment, but yields higher gross margins and technological barriers.</span>
+                            <span class="text-xs text-gray-400" data-lang="zh">Jio 希望我們負責研發設計。這意味著研發投入大，但毛利與技術門檻較高。</span>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700 border-l-4 border-l-green-500">
+                            <strong class="text-white block mb-2" data-lang="en">2. Specific Tech Path</strong>
+                            <strong class="text-white block mb-2" data-lang="zh">2. 具體技術路徑</strong>
+                            <span class="text-xs text-gray-400" data-lang="en">Designated <strong class="text-gray-200">LFP 32140</strong> (Large Cylindrical Cells). This indicates Jio already has preconceptions about the supply chain; we must verify the cell source.</span>
+                            <span class="text-xs text-gray-400" data-lang="zh">指定 <strong class="text-gray-200">LFP 32140 (磷酸鐵鋰大圓柱電芯)</strong>。這顯示 Jio 已對供應鏈有預設，我們需確認電芯來源。</span>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700 border-l-4 border-l-purple-500">
+                            <strong class="text-white block mb-2" data-lang="en">3. Energy Ecosystem</strong>
+                            <strong class="text-white block mb-2" data-lang="zh">3. 能源站生態</strong>
+                            <span class="text-xs text-gray-400" data-lang="en">Includes <strong class="text-gray-200">BESS (Battery Energy Storage System)</strong>. This isn't just battery swapping; Jio is trying to build microgrids utilizing their Telecom Tower resources.</span>
+                            <span class="text-xs text-gray-400" data-lang="zh">包含 <strong class="text-gray-200">BESS (儲能系統)</strong>。這不是單純的換電，而是 Jio 試圖利用其電信塔 (Telecom Tower) 資源建立微電網。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 1: Executive Questions -->
+                <div class="section-divider mt-10">
+                    <span data-lang="en">Part 1: Strategic Questions for Thomas (Executive Level)</span>
+                    <span data-lang="zh">第一部分：建議 Thomas 提出的戰略提問 (Executive Level)</span>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Q1 -->
+                    <div class="bg-gray-800 rounded-lg p-5 border border-gray-700 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                        <h4 class="font-bold text-blue-400 mb-2 flex items-center">
+                            <i class="fas fa-file-contract mr-2"></i>
+                            <span data-lang="en">1. IP Ownership in ODM</span>
+                            <span data-lang="zh">1. 知識產權與技術歸屬 (IP Ownership in ODM)</span>
+                        </h4>
+                        <div class="ml-6">
+                            <p class="text-sm text-gray-200 mb-3" data-lang="en"><strong class="text-white">Question to ask:</strong> "Since this is an ODM collaboration, how will the <strong class="text-yellow-400">IP ownership</strong> for the hardware design and firmware source code of the swap stations and BESS be divided? Can Foxlink leverage these development results in markets outside of India?"</p>
+                            <p class="text-sm text-gray-200 mb-3" data-lang="zh"><strong class="text-white">提問：</strong> 「既然是 ODM 合作模式，關於換電站與 BESS 的硬體設計與韌體原始碼，<strong class="text-yellow-400">IP 的歸屬權如何劃分？</strong> 正崴是否能在印度以外市場延用此開發成果？」</p>
+                            
+                            <div class="bg-gray-900 p-3 rounded text-xs text-gray-400 border border-gray-700">
+                                <i class="fas fa-info-circle mr-1 text-gray-500"></i>
+                                <span data-lang="en"><strong class="text-gray-300">Consultant Note:</strong> Ensure our R&D investment doesn't end up just "working for Jio" without retaining technological assets.</span>
+                                <span data-lang="zh"><strong class="text-gray-300">顧問註記：</strong> 確保研發投入不會變成「幫 Jio 打工」卻拿不到技術資產。</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="bg-gray-800 rounded-lg p-5 border border-gray-700 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
+                        <h4 class="font-bold text-green-400 mb-2 flex items-center">
+                            <i class="fas fa-battery-full mr-2"></i>
+                            <span data-lang="en">2. Cell Sourcing Strategy</span>
+                            <span data-lang="zh">2. 電芯供應鏈戰略 (Cell Sourcing Strategy)</span>
+                        </h4>
+                        <div class="ml-6">
+                            <p class="text-sm text-gray-200 mb-3" data-lang="en"><strong class="text-white">Question to ask:</strong> "Jio specified LFP 32140 cells. Considering Reliance is building its own battery Gigafactory, <strong class="text-yellow-400">will Foxlink be forced to procure cells manufactured by Reliance in the future?</strong>"</p>
+                            <p class="text-sm text-gray-200 mb-3" data-lang="zh"><strong class="text-white">提問：</strong> 「Jio 指定使用 LFP 32140 電芯。考量到 Reliance 正在建設自己的電池超級工廠 (Gigafactory)，<strong class="text-yellow-400">未來是否會要求正崴強制採購 Reliance 生產的電芯？</strong>」</p>
+                            
+                            <div class="bg-gray-900 p-3 rounded text-xs text-gray-400 border border-gray-700">
+                                <i class="fas fa-info-circle mr-1 text-gray-500"></i>
+                                <span data-lang="en"><strong class="text-gray-300">Consultant Note:</strong> This directly impacts future cost control and gross margin space.</span>
+                                <span data-lang="zh"><strong class="text-gray-300">顧問註記：</strong> 這涉及未來成本控管與毛利空間。</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="bg-gray-800 rounded-lg p-5 border border-gray-700 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+                        <h4 class="font-bold text-purple-400 mb-2 flex items-center">
+                            <i class="fas fa-solar-panel mr-2"></i>
+                            <span data-lang="en">3. BESS Integration & Microgrid Vision</span>
+                            <span data-lang="zh">3. BESS 整合與微電網願景 (Energy Ecosystem)</span>
+                        </h4>
+                        <div class="ml-6">
+                            <p class="text-sm text-gray-200 mb-3" data-lang="en"><strong class="text-white">Question to ask:</strong> "Jio mentioned BESS integration. Does this mean the swap stations will be combined with Jio's telecom towers for Load Balancing? <strong class="text-yellow-400">Does Jio plan to link this system with government green energy subsidies or carbon credits?</strong>"</p>
+                            <p class="text-sm text-gray-200 mb-3" data-lang="zh"><strong class="text-white">提問：</strong> 「Jio 提到 BESS 整合，這是否意味著換電站將與 Jio 的電信塔負載平衡（Load Balancing）結合？<strong class="text-yellow-400">Jio 是否預計將此系統與政府的綠能補貼或碳權掛鉤？</strong>」</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: Operational Questions -->
+                <div class="section-divider mt-10">
+                    <span data-lang="en">Part 2: Refined Operational Level Questions</span>
+                    <span data-lang="zh">第二部分：優化後的執行面提問 (Operational Level)</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-10 text-center">#</th>
+                                <th class="p-3 w-48" data-lang="en">Topic</th><th class="p-3 w-48" data-lang="zh">探討主題</th>
+                                <th class="p-3" data-lang="en">Refined Question to Ask</th><th class="p-3" data-lang="zh">優化提問內容</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-gray-500 text-center">1</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">ODM R&D Resources</span>
+                                    <span data-lang="zh">ODM 研發資源投入</span>
+                                </td>
+                                <td class="p-3">
+                                    <span data-lang="en">"How will Jio's anticipated <strong class="text-blue-300">NRE (Non-Recurring Engineering)</strong> costs be amortized? Will upfront development fees be paid, or will it be fully amortized into the future unit price?"</span>
+                                    <span data-lang="zh">「Jio 預計的 <strong class="text-blue-300">NRE (研發費用)</strong> 攤銷方式為何？是否會支付前置開發費用，還是全數攤銷在未來的單價中？」</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-gray-500 text-center">2</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">LFP 32140 Specs</span>
+                                    <span data-lang="zh">LFP 32140 電芯規格細節</span>
+                                </td>
+                                <td class="p-3">
+                                    <span data-lang="en">"For the 48V spec, does Jio have specific targets for the battery pack's <strong class="text-blue-300">Energy Density</strong> and <strong class="text-blue-300">Cycle Life</strong>? Is there an Approved Vendor List (AVL) for cells?"</span>
+                                    <span data-lang="zh">「針對 48V 規格，Jio 對於電池包的 <strong class="text-blue-300">能量密度</strong> 與 <strong class="text-blue-300">循環次數 (Cycle Life)</strong> 有無具體指標？是否有指定的電芯供應商清單 (AVL)？」</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-gray-500 text-center">3</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">BESS Storage Specs</span>
+                                    <span data-lang="zh">BESS 儲能規格</span>
+                                </td>
+                                <td class="p-3">
+                                    <span data-lang="en">"What capacity (kWh) is required for the BESS attached to the swap station? Is it primarily to handle grid instability, or for <strong class="text-blue-300">Peak Shaving</strong> during peak pricing hours?"</span>
+                                    <span data-lang="zh">「換電站附帶的 BESS 需具備多少容量 (kWh)？主要是為了應對電網不穩，還是為了在電價尖峰時段進行削峰填谷 (Peak Shaving)？」</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-gray-500 text-center">4</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">Firmware & Cloud API</span>
+                                    <span data-lang="zh">韌體與雲端 API 對接</span>
+                                </td>
+                                <td class="p-3">
+                                    <span data-lang="en">"Jio mentioned a 'Complete solution with firmware'. <strong class="text-blue-300">At the firmware level, do we need to open APIs to Jio's cloud platform for real-time control?</strong> What are the standards for data security and communication protocols?"</span>
+                                    <span data-lang="zh">「Jio 提到 Complete solution with firmware。<strong class="text-blue-300">韌體層面是否需開放 API 給 Jio 的雲端平台進行實時控管？</strong> 資料安全與通訊協定的標準為何？」</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-gray-500 text-center">5</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">Local Mfg Timeline</span>
+                                    <span data-lang="zh">本地化製造時程</span>
+                                </td>
+                                <td class="p-3">
+                                    <span data-lang="en">"Can the first batch of POC products be supplied from Foxlink's Taiwan or China facilities? <strong class="text-blue-300">What is the hard deadline for Jio's 'Make in India' requirement?</strong>"</span>
+                                    <span data-lang="zh">「第一批 POC 產品是否允許由正崴台灣或中國廠區供貨？<strong class="text-blue-300">Jio 要求在印度本地生產 (Make in India) 的硬性截止日期為何？</strong>」</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-gray-500 text-center">6</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">Environmental Adaptability</span>
+                                    <span data-lang="zh">環境適應性要求</span>
+                                </td>
+                                <td class="p-3">
+                                    <span data-lang="en">"Swap stations & BESS will be deployed pan-India. Regarding extreme heat and dust, what are Jio's specific requirements for <strong class="text-blue-300">Thermal Management</strong> and <strong class="text-blue-300">IP Rating</strong>?"</span>
+                                    <span data-lang="zh">「換電站與 BESS 需部署在全印度。針對印度的極端高溫與粉塵環境，Jio 對於 <strong class="text-blue-300">散熱系統 (Thermal Management)</strong> 與 <strong class="text-blue-300">防護等級 (IP Rating)</strong> 的具體要求為何？」</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-gray-500 text-center">7</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">Asset & Maintenance</span>
+                                    <span data-lang="zh">資產與維修責任</span>
+                                </td>
+                                <td class="p-3">
+                                    <span data-lang="en">"Under an ODM model, is Foxlink responsible for managing out-of-warranty repairs and <strong class="text-blue-300">Spare Parts inventory</strong>, or will this be handed over to Jio's O&M team?"</span>
+                                    <span data-lang="zh">「如果採取 ODM 模式，產品在保固期外的維修與零組件庫存 (Spare parts) 是由正崴負責管理，還是移交給 Jio 的維運團隊？」</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PART 3: Negotiation Tips -->
+                <div class="section-divider mt-10">
+                    <span data-lang="en">Part 3: Negotiation Tips for Thomas</span>
+                    <span data-lang="zh">第三部分：給 Thomas 的談判小撇步</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-5 rounded-lg border border-gray-700 shadow-md">
+                        <div class="text-center mb-3 text-2xl text-orange-400"><i class="fas fa-server"></i></div>
+                        <h4 class="font-bold text-white text-center mb-2" data-lang="en">1. Show "BESS Strength"</h4>
+                        <h4 class="font-bold text-white text-center mb-2" data-lang="zh">1. 展示「BESS 實力」</h4>
+                        <p class="text-xs text-gray-400 text-center" data-lang="en">Since Jio explicitly requested BESS, emphasize Foxlink's robust experience in large-scale energy storage containers and data center power supplies.</p>
+                        <p class="text-xs text-gray-400 text-center" data-lang="zh">既然 Jio 點名要 BESS，Thomas 可以強調正崴在大型儲能貨櫃或資料中心電源供應的經驗。</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-5 rounded-lg border border-gray-700 shadow-md">
+                        <div class="text-center mb-3 text-2xl text-red-400"><i class="fas fa-user-shield"></i></div>
+                        <h4 class="font-bold text-white text-center mb-2" data-lang="en">2. Test "Exclusivity"</h4>
+                        <h4 class="font-bold text-white text-center mb-2" data-lang="zh">2. 試探「排他性」</h4>
+                        <p class="text-xs text-gray-400 text-center" data-lang="en">Reliance loves controlling supply chains. Verify: If we develop the 32140 solution for Jio, can we still sell to other Indian clients (like Ola or Ather)?</p>
+                        <p class="text-xs text-gray-400 text-center" data-lang="zh">Reliance 喜歡控制供應鏈。Thomas 應確認：如果我們為 Jio 研發了 32140 方案，我們能否賣給印度其他客戶（如 Ola 或 Ather）？</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-5 rounded-lg border border-gray-700 shadow-md">
+                        <div class="text-center mb-3 text-2xl text-blue-400"><i class="fas fa-tachometer-alt"></i></div>
+                        <h4 class="font-bold text-white text-center mb-2" data-lang="en">3. Leverage "Jio Speed"</h4>
+                        <h4 class="font-bold text-white text-center mb-2" data-lang="zh">3. 利用「Jio 速度」</h4>
+                        <p class="text-xs text-gray-400 text-center" data-lang="en">Inform them that Foxlink has ready-made ODM platforms that can be rapidly modified to meet the expansion needs of their "Anticipated scale".</p>
+                        <p class="text-xs text-gray-400 text-center" data-lang="zh">告訴對方，正崴有現成的 ODM 平台可以快速修改，以滿足他們「Anticipated scale」的擴張需求。</p>
+                    </div>
+                </div>
+
+                <!-- Closing Note -->
+                <div class="text-center mt-8 mb-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+                    <p class="text-base md:text-lg font-bold text-blue-300" data-lang="en"><i class="fas fa-gem mr-2"></i>This email indicates a "Mega Project". Jio is looking for a long-term partner to play the energy game with, not just a contract manufacturer.</p>
+                    <p class="text-base md:text-lg font-bold text-blue-300" data-lang="zh"><i class="fas fa-gem mr-2"></i>這份郵件顯示這是一個「大項目」，Jio 在找的是能跟他們一起玩能源遊戲的長期夥伴，而不只是代工廠。</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Script -->
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
