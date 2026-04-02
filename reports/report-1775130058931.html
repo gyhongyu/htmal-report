@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: Sahasra Group -->
+    <!-- FROM: Foxlink India Business Development & Taipei HQ -->
+    <title data-lang="en">Strategic Proposal: Foxlink & Sahasra</title>
+    <title data-lang="zh">戰略聯盟提案：Foxlink & Sahasra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation (UNTOUCHED AS REQUESTED) -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">STRATEGIC PROPOSAL</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Strategic Partnership Proposal: Foxlink & Sahasra</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">戰略聯盟提案：Foxlink & Sahasra</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Co-creating North India's Tier-1 Global Flagship Manufacturing Base</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">共創北印度 Tier-1 全球旗艦製造基地</p>
+                </div>
+
+                <!-- Basic Info -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600 mt-6 md:mt-8">
+                    <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                        <tr>
+                            <th class="w-32 text-gray-500 bg-transparent border-none p-1" data-lang="en">To:</th>
+                            <th class="w-32 text-gray-500 bg-transparent border-none p-1" data-lang="zh">致：</th>
+                            <td class="text-white bg-transparent border-none p-1 font-bold text-lg">Sahasra Group <span class="text-gray-400 text-sm font-normal block md:inline md:ml-2">- Mr. Amrit Manwani (Chairman) / Mr. Varun Manwani</span></td>
+                        </tr>
+                        <tr>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="en">From:</th>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="zh">提案方：</th>
+                            <td class="text-white bg-transparent border-none p-1">
+                                <span data-lang="en">Foxlink India Business Development Team & Taipei HQ</span>
+                                <span data-lang="zh">Foxlink 印度業務開發團隊 & 台北總部</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="en">Date:</th>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="zh">日期：</th>
+                            <td class="text-white bg-transparent border-none p-1">
+                                <span data-lang="en">April 2026</span>
+                                <span data-lang="zh">2026年4月</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 1. Executive Summary & Vision -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">1. Executive Summary & Vision</span>
+                    <span data-lang="zh">壹、 執行摘要與合作願景</span>
+                </div>
+
+                <div class="recon-box info">
+                    <div class="text-gray-300 text-sm md:text-base leading-relaxed space-y-3">
+                        <p data-lang="en">Driven by global supply chain restructuring, the "China Plus One" strategy, and "Made in India" policies, Foxlink has secured massive order demands from top-tier global clients (including leading LEO satellite communications, premier North American IT giants like DELL, and Tier-1 EV manufacturers) transitioning to India.</p>
+                        <p data-lang="zh">在全球供應鏈加速重構、「China Plus One」與「Made in India」政策的強力推動下，Foxlink 掌握了全球頂級客戶（包含國際頂尖低軌衛星通訊、北美領先 IT 巨頭如 DELL、及全球一線 EV 車廠）轉移至印度的龐大訂單需求。</p>
+                        
+                        <p data-lang="en">Building on the deep mutual trust established between Foxlink and the Sahasra family from 2017 to 2020, Foxlink's Taipei HQ highly recognizes Sahasra's robust strength (surpassing $200M valuation) and views Sahasra as <strong class="text-white">our most strategic and high-priority partner in North India.</strong></p>
+                        <p data-lang="zh">基於 Foxlink 與 Sahasra 家族在 2017-2020 年間建立的深厚互信與合作歷史，Foxlink 台北總部高度認可 Sahasra 市值突破 2 億美元的強勁實力，並將 Sahasra 視為<strong class="text-white">北印度最具潛力、最優先的戰略合作夥伴。</strong></p>
+
+                        <div class="bg-blue-900/30 p-4 rounded mt-4 border border-blue-800/50">
+                            <p class="font-bold text-blue-300 mb-1" data-lang="en">Our Vision: An Unbeatable Alliance</p>
+                            <p class="font-bold text-blue-300 mb-1" data-lang="zh">我們的願景：強強聯手</p>
+                            <p data-lang="en">By combining Foxlink's world-class R&D patents and Tier-1 client resources with Sahasra's formidable 215,000 sq ft manufacturing infrastructure in North India, we aim to create India's most iconic <strong class="text-white">"High-End Electronics, Enterprise IT, and Automotive-Grade EMS Flagship Base"</strong> within 3 to 6 months.</p>
+                            <p data-lang="zh">結合 Foxlink 全球頂尖的研發專利與 Tier-1 客戶資源，以及 Sahasra 在北印度高達 215,000 平方英尺的強大在地製造基礎設施，在 3-6 個月內打造出全印度最具指標性的<strong class="text-white">「高階電子、企業級 IT 與車規 EMS 旗艦基地」。</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Track Record & Pipeline -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">2. Global Track Record & India Pipeline</span>
+                    <span data-lang="zh">貳、 全球頂級實績與印度市場訂單導入</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- A. Global Clients -->
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-3" data-lang="en">A. Foxlink's Global Flagship Client Matrix (Tech & Quality Endorsement)</h3>
+                        <h3 class="text-lg font-bold text-white mb-3" data-lang="zh">A. Foxlink 全球旗艦客戶矩陣 (技術與品質背書)</h3>
+                        <p class="text-gray-400 text-sm mb-4" data-lang="en">As the invisible champion behind global tech giants, we plan to introduce the following tiers of technology and projects to the Sahasra campus:</p>
+                        <p class="text-gray-400 text-sm mb-4" data-lang="zh">作為全球科技巨頭背後的隱形冠軍，我們計畫將以下級別的技術與專案導入 Sahasra 園區，共同開拓：</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                                <span class="tag bg-purple-600/30 text-purple-400 border border-purple-500/50 mb-2">AI / Data Center</span>
+                                <p class="text-sm text-gray-300"><strong class="text-white">NVIDIA</strong> (AI Servers / Optical Transceivers), <strong class="text-white">Google</strong> (Next-Gen High-Speed Cables), <strong class="text-white">DELL</strong> (Enterprise SSD & Server Components).</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                                <span class="tag bg-blue-600/30 text-blue-400 border border-blue-500/50 mb-2">Aerospace & Telecom</span>
+                                <p class="text-sm text-gray-300"><strong class="text-white">SpaceX</strong> (Starlink V4 Mini floating FPC & core connectors).</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                                <span class="tag bg-green-600/30 text-green-400 border border-green-500/50 mb-2">Automotive & EV</span>
+                                <p class="text-sm text-gray-300"><strong class="text-white">Tesla, Rivian</strong>, and supplying core sensors/high-voltage modules to <strong class="text-white">BMW, Volvo, Mercedes-Benz</strong> via Tier-1s (Valeo).</p>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                                <span class="tag bg-yellow-600/30 text-yellow-400 border border-yellow-500/50 mb-2">Consumer Electronics</span>
+                                <p class="text-sm text-gray-300"><strong class="text-white">Apple</strong> (iPhone/Mac components), <strong class="text-white">Amazon</strong>, <strong class="text-white">Oura</strong> (Smart Rings).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- B. Strategic Projects -->
+                    <div class="mt-8">
+                        <h3 class="text-lg font-bold text-white mb-3" data-lang="en">B. Three Strategic Projects for North India (The Pipeline for Sahasra)</h3>
+                        <h3 class="text-lg font-bold text-white mb-3" data-lang="zh">B. 預計導入北印度的三大戰略專案 (The Pipeline for Sahasra)</h3>
+                        
+                        <div class="recon-box opp">
+                            <h4 class="font-bold text-green-400 text-base mb-2" data-lang="en">1. National EV Battery Swapping Station ODM (JIO Partnership)</h4>
+                            <h4 class="font-bold text-green-400 text-base mb-2" data-lang="zh">1. 全印 EV 換電站 ODM 大單 (JIO 戰略合作)</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">Leveraging Foxlink's deep track record in manufacturing battery swap systems for <strong class="text-white">Gogoro</strong>, we are in deep ODM collaboration with India's digital giant <strong class="text-white">JIO</strong> to roll out 2W/3W EV swapping stations nationwide. Sahasra will have the opportunity to directly participate in the localized manufacturing of this national infrastructure.</p>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">憑藉 Foxlink 過去為 <strong class="text-white">Gogoro</strong> 代工電池交換系統的深厚實績與技術，我們目前正與印度數位巨頭 <strong class="text-white">JIO</strong> 展開 ODM 深度合作。計畫在全印度大規模設立二輪/三輪 EV 電池交換站。Sahasra 將有機會直接參與此國家級基礎設施的在地化製造。</p>
+                        </div>
+
+                        <div class="recon-box info">
+                            <h4 class="font-bold text-blue-400 text-base mb-2" data-lang="en">2. Next-Gen Telecom & Enterprise IT (Starlink, DELL, HP)</h4>
+                            <h4 class="font-bold text-blue-400 text-base mb-2" data-lang="zh">2. 次世代通訊與企業級 IT 設備 (Starlink, DELL, HP)</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">Executing localization for SpaceX LEO satellite terminals. Crucially, Foxlink will assist Sahasra in <strong class="text-white">scaling its existing Enterprise IT manufacturing capabilities</strong> to meet the strict RBA standards of North American IT giants like DELL and HP, enabling localized high-frequency precision assembly and L6-L10 server system integration.</p>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">承接 SpaceX 低軌衛星終端設備之印度本土化專案。更重要的是，Foxlink 將協助 Sahasra <strong class="text-white">擴展其現有的企業級 IT 製造能力</strong>，對接 DELL、HP 等北美 IT 巨頭的嚴格 RBA 規範，提供在地化的高頻精密組裝與 L6-L10 伺服器整機系統整合。</p>
+                        </div>
+
+                        <div class="recon-box neutral">
+                            <h4 class="font-bold text-yellow-400 text-base mb-2" data-lang="en">3. Local Auto Electronics Ecosystem</h4>
+                            <h4 class="font-bold text-yellow-400 text-base mb-2" data-lang="zh">3. 在地車用電子生態圈 (Local Auto Electronics)</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">Targeting India's closed-loop automotive supply chains (Hero, Maruti Suzuki, Uno Minda), we will introduce localized production of Foxlink's auto-grade connectors, FPCs, and battery modules.</p>
+                            <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">針對印度封閉型車廠供應鏈 (Hero, Maruti Suzuki, Uno Minda)，導入 Foxlink 車規級連接器、FPC 與電池模組在地化生產。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Division of Labor -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">3. Win-Win Strategy: "Foxlink Inside + Sahasra System Integration"</span>
+                    <span data-lang="zh">參、 雙贏戰略：強強聯合的專業分工</span>
+                </div>
+
+                <p class="text-gray-300 text-sm mb-6" data-lang="en">Foxlink's strategy is not to treat Sahasra as a mere contract manufacturer, but to strategically integrate our resources to conquer high-barrier, high-margin markets.</p>
+                <p class="text-gray-300 text-sm mb-6" data-lang="zh">我們深知 Sahasra 擁有 7 座先進工廠的卓越實力。Foxlink 的策略絕非將 Sahasra 視為純粹的代工廠，而是戰略性整合雙方資源，共同攻克高門檻、高毛利的市場區塊。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gray-800 p-5 rounded-lg border-t-4 border-orange-500">
+                        <h4 class="font-bold text-white mb-2" data-lang="en">Foxlink's Commitment</h4>
+                        <h4 class="font-bold text-white mb-2" data-lang="zh">Foxlink 的承諾 (核心技術)</h4>
+                        <p class="text-sm text-gray-400" data-lang="en">Foxlink absorbs upfront CAPEX for specialized machinery/R&D. We provide patent-protected "Core High-Frequency/Auto-Grade Modules (Foxlink Inside)" ensuring global MSA compliance.</p>
+                        <p class="text-sm text-gray-400" data-lang="zh">發揮全球供應鏈優勢，自行吸收前期高額專用機台與資本支出。直接提供具備專利保護的「核心高頻/車規連接控制模組 (Foxlink Inside)」。</p>
+                    </div>
+                    <div class="bg-gray-800 p-5 rounded-lg border-t-4 border-green-500">
+                        <h4 class="font-bold text-white mb-2" data-lang="en">Sahasra's Home Advantage</h4>
+                        <h4 class="font-bold text-white mb-2" data-lang="zh">Sahasra 的主場優勢</h4>
+                        <p class="text-sm text-gray-400" data-lang="en">Sahasra leads the critical <strong class="text-white">L6-L10 System Integration, localized Burn-in Testing, and final Box-build shipping</strong> utilizing its vast manufacturing foundation.</p>
+                        <p class="text-sm text-gray-400" data-lang="zh">發揮龐大的製造底蘊，主導最關鍵的 <strong class="text-white">L6-L10 整機系統整合、在地化老化測試 (Burn-in Test) 與最終 Box-build 出貨。</strong></p>
+                    </div>
+                    <div class="bg-gray-800 p-5 rounded-lg border-t-4 border-blue-500">
+                        <h4 class="font-bold text-white mb-2" data-lang="en">Joint Quality Upgrade</h4>
+                        <h4 class="font-bold text-white mb-2" data-lang="zh">聯合 RBA 與品質升級</h4>
+                        <p class="text-sm text-gray-400" data-lang="en">Ensure 100% First Article Inspection (FAI) pass rate for DELL within 3-6 months. Foxlink deploys elite NPI & QA consultants free of charge to help Sahasra pass rigorous international RBA audits.</p>
+                        <p class="text-sm text-gray-400" data-lang="zh">確保 3-6 個月內 100% 通過 DELL 等大客戶的首件檢查 (FAI)。Foxlink 將無償派出菁英 NPI 與 QA 顧問團隊進駐，全力輔導通過最嚴苛的 RBA 稽核。</p>
+                    </div>
+                </div>
+
+                <!-- 4. Why Sahasra Wins -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">4. Why Sahasra Wins</span>
+                    <span data-lang="zh">肆、 Sahasra 的戰略收益</span>
+                </div>
+
+                <div class="bg-gray-800 p-5 md:p-6 rounded-lg border border-gray-700">
+                    <ul class="space-y-4 text-sm text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-white block mb-1" data-lang="en">1. The Tier-1 Halo:</strong><strong class="text-white block mb-1" data-lang="zh">1. Tier-1 供應商光環：</strong>
+                                <span data-lang="en">Becoming a certified base for Apple, Starlink, DELL, and NVIDIA will massively boost Sahasra's valuation and influence in the global EMS industry.</span>
+                                <span data-lang="zh">成為 Apple、Starlink、DELL、NVIDIA 等客戶的「認證生產基地」，極大化提升集團在全球 EMS 業界的估值與影響力。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-server text-blue-400 mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-white block mb-1" data-lang="en">2. Explosive IT Business Growth:</strong><strong class="text-white block mb-1" data-lang="zh">2. 企業級 IT 業務爆發：</strong>
+                                <span data-lang="en">Break through current client limits to directly receive high-end orders from top IT giants (DELL/HP servers & SSDs).</span>
+                                <span data-lang="zh">突破現有客戶群，直接承接全球頂尖 IT 巨頭的高階訂單，創造穩健巨額營收。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-shield-alt text-yellow-500 mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-white block mb-1" data-lang="en">3. Zero R&D Risk for New Sectors:</strong><strong class="text-white block mb-1" data-lang="zh">3. 零研發風險切入新領域：</strong>
+                                <span data-lang="en">No trial-and-error costs for auto/aerospace parts; directly execute million-unit orders like JIO EV swap stations.</span>
+                                <span data-lang="zh">無需承擔車規與航太的試錯成本，直接承接如 JIO 換電站等百萬套級別大單。</span>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-6 bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-blue-500/30 p-5 rounded">
+                        <h4 class="text-lg font-bold text-blue-300 mb-2 flex items-center">
+                            <i class="fas fa-door-open mr-2"></i>
+                            <span data-lang="en">4. The Ultimate Tech Gateway to Taiwan</span>
+                            <span data-lang="zh">4. 進入台灣科技生態圈的「終極任意門」</span>
+                        </h4>
+                        <p class="text-sm text-gray-300 leading-relaxed italic" data-lang="en">"You don't need to search all over Taiwan; Foxlink Group is your portal."</p>
+                        <p class="text-sm text-gray-300 leading-relaxed italic" data-lang="zh">「您無需在台灣四處尋覓，Foxlink 集團就是您的任意門。」</p>
+                        <p class="text-sm text-gray-400 mt-2" data-lang="en">With dozens of high-tech subsidiaries (Semiconductors, AI Computing, Auto Electronics, Green Energy), any technology Sahasra needs to localize in India can be authorized by our HQ for exclusive <strong class="text-white">Tech-Transfer</strong> or <strong class="text-white">Joint Ventures</strong>. Foxlink will be Sahasra's ultimate arsenal to dominate India's high-end manufacturing market.</p>
+                        <p class="text-sm text-gray-400 mt-2" data-lang="zh">憑藉 Foxlink 涵蓋半導體、AI運算、車電、綠能的數十家子公司，只要 Sahasra 亟需「印度在地化」的技術，我們均可由總部授權開啟專屬的<strong class="text-white">「技術轉移 (Tech-Transfer)」</strong>或<strong class="text-white">「戰略合資 (Exclusive JV)」</strong>。Foxlink 將成為 Sahasra 稱霸高階市場的終極軍火庫。</p>
+                    </div>
+                </div>
+
+                <!-- 5. Roadmap -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">5. Phased Partnership Roadmap</span>
+                    <span data-lang="zh">伍、 合作發展路線圖</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="recon-box risk !border-blue-500">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-bold text-white" data-lang="en">Phase 1: Rapid Launch</h4>
+                            <h4 class="font-bold text-white" data-lang="zh">第一階段：閃電啟動</h4>
+                            <span class="text-xs bg-blue-600/30 text-blue-400 px-2 py-1 rounded font-mono">Months 1-6</span>
+                        </div>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en">Activate dedicated facility & import Foxlink Inside core modules.</li>
+                            <li data-lang="zh">啟動專屬廠區，導入 Foxlink Inside 核心模組。</li>
+                            <li data-lang="en">Perfectly pass international client factory audits (FAI).</li>
+                            <li data-lang="zh">「完美通過國際大客戶驗廠」，完成首批出貨 (Starlink/DELL)。</li>
+                            <li data-lang="en">Integrate resources for Enterprise SSD and Server assembly.</li>
+                            <li data-lang="zh">整合雙方企業級 SSD 與伺服器組裝資源，對接新客戶。</li>
+                        </ul>
+                    </div>
+                    <div class="recon-box risk !border-purple-500">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-bold text-white" data-lang="en">Phase 2: Deep Localization</h4>
+                            <h4 class="font-bold text-white" data-lang="zh">第二階段：深度在地化</h4>
+                            <span class="text-xs bg-purple-600/30 text-purple-400 px-2 py-1 rounded font-mono">Years 2-3</span>
+                        </div>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en">Initiate Tech-Transfer evaluation as yield stabilizes.</li>
+                            <li data-lang="zh">隨良率穩定與團隊磨合，啟動技術轉移評估。</li>
+                            <li data-lang="en">Phased licensing for Sahasra to procure and manufacture sub-systems locally (e.g., JIO swap stations, server peripherals).</li>
+                            <li data-lang="zh">逐步授權 Sahasra 在地生產 JIO 換電站次系統等零件。</li>
+                            <li data-lang="en">Maximize benefits from Indian Government PLI subsidies.</li>
+                            <li data-lang="zh">極大化獲取印度政府 PLI 補貼紅利。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6. Action Plan -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">6. Next Steps: Taipei Executive Summit</span>
+                    <span data-lang="zh">陸、 下一步行動：台北高層峰會</span>
+                </div>
+                
+                <p class="text-sm text-gray-300 mb-4" data-lang="en">We sincerely invite Sahasra Management (Mr. Varun Manwani) to visit Foxlink Taipei HQ on April 17th for a strategic convergence meeting with Foxlink Executives (Thomas / Freddy).</p>
+                <p class="text-sm text-gray-300 mb-4" data-lang="zh">我們誠摯邀請 Sahasra 管理層 (Mr. Varun Manwani) 於 4 月 17 日拜訪 Foxlink 台北總部，與 Foxlink 高層 (Thomas / Freddy) 進行戰略收斂會議。</p>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Summit Objective / Action Item</th><th class="p-3" data-lang="zh">會議重點目標與行動</th>
+                                <th class="p-3 w-40" data-lang="en">Milestone</th><th class="p-3 w-40" data-lang="zh">里程碑</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Sign MOU</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">簽署合作備忘錄 (MOU)</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Sign Non-Disclosure Agreement and Strategic Partnership MOU.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">簽署雙方保密與戰略合作備忘錄。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">April 17, 2026</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">2</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">First Project Blueprint</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">首個指標專案定案</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Confirm facility space planning and RBA upgrade schedule for Starlink/DELL/JIO.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">確立 (Starlink/DELL/JIO) 的廠房空間規劃與 RBA 升級時間表。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300" data-lang="en">Q2 2026</td>
+                                <td class="p-3 font-medium text-gray-300" data-lang="zh">2026年 第2季</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-green-500 text-center">3</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Group-Level Strategic Dialogue</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">啟動集團級戰略對話</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Review Foxlink's global tech vault for highest-level Tech-Transfer evaluation for Sahasra's future needs.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">針對 Sahasra 未來技術需求，檢視 Foxlink 技術庫，開啟最高層級的技術轉移評估。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300" data-lang="en">Ongoing</td>
+                                <td class="p-3 font-medium text-gray-300" data-lang="zh">持續進行</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center mt-10 mb-4">
+                    <p class="text-lg md:text-xl font-bold text-blue-400" data-lang="en">Foxlink looks forward to joining hands with Sahasra to redefine the heights of "Smart Manufacturing in India"!</p>
+                    <p class="text-lg md:text-xl font-bold text-blue-400" data-lang="zh">Foxlink 期待與 Sahasra 攜手，共同定義印度智造的新高度！</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Script (UNTOUCHED AS REQUESTED) -->
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

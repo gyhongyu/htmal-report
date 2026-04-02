@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-03-31T14:09:24.732Z",
+  "lastUpdated": "2026-04-02T11:41:01.197Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -847,6 +847,19 @@
       "fileName": "report-1774957276094.html",
       "createdAt": "2026-03-31T11:41:18.827Z",
       "updatedAt": "2026-03-31T14:09:24.732Z"
+    },
+    {
+      "id": "report-1775130058931",
+      "title": "Strategic Partnership Proposal: Foxlink & Sahasra",
+      "description": "戰略聯盟提案：Foxlink & Sahasra",
+      "categories": [
+        "內部簡報",
+        "對外簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1775130058931.html",
+      "createdAt": "2026-04-02T11:41:01.197Z",
+      "updatedAt": "2026-04-02T11:41:01.197Z"
     }
   ]
 }
