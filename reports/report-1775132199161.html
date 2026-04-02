@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: INTERNAL HQ (Thomas / Danny) -->
+    <!-- FROM: Michael Chen -->
+    <title data-lang="en">INTERNAL MEMO: North India Asset-Light Strategy</title>
+    <title data-lang="zh">內部機密：北印度產能戰略提案_特許代工與黑盒模式</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-red-600/20 border border-red-500 text-red-400 text-xs px-3 py-1 rounded-full mb-3 font-bold tracking-widest uppercase">
+                        <i class="fas fa-lock mr-2"></i>
+                        <span data-lang="en">Internal Strategy Memo</span>
+                        <span data-lang="zh">內部戰略機密</span>
+                    </span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-2 text-white" data-lang="en">Project Code: North India Blitz Expansion Strategy</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-2 text-white" data-lang="zh">專案代號：North India 閃電擴張戰略</h1>
+                    <p class="text-lg md:text-xl text-blue-400 font-bold tracking-wide" data-lang="en">(Asset-Light Strategy & Black Box Model)</p>
+                    <p class="text-lg md:text-xl text-blue-400 font-bold tracking-wide" data-lang="zh">(特許代工與黑盒模式)</p>
+                </div>
+
+                <!-- Basic Info -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600 mt-6 md:mt-8">
+                    <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                        <tr>
+                            <th class="w-32 text-gray-500 bg-transparent border-none p-1" data-lang="en">Report To:</th>
+                            <th class="w-32 text-gray-500 bg-transparent border-none p-1" data-lang="zh">提報對象：</th>
+                            <td class="text-white bg-transparent border-none p-1 font-bold text-lg text-blue-300">Thomas / Danny</td>
+                        </tr>
+                        <tr>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="en">Prepared By:</th>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="zh">提報人：</th>
+                            <td class="text-white bg-transparent border-none p-1">Michael Chen</td>
+                        </tr>
+                        <tr>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="en">Date:</th>
+                            <th class="text-gray-500 bg-transparent border-none p-1" data-lang="zh">日期：</th>
+                            <td class="text-white bg-transparent border-none p-1">
+                                <span data-lang="en">April 2026</span>
+                                <span data-lang="zh">2026年4月</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 0. Executive Summary -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">0. Executive Summary</span>
+                    <span data-lang="zh">零、 提案主旨與背景摘要</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="recon-box risk">
+                        <h4 class="font-bold text-red-400 text-base mb-2" data-lang="en"><i class="fas fa-exclamation-triangle mr-2"></i>Background Pain Point: Imminent North India Capacity Vacuum</h4>
+                        <h4 class="font-bold text-red-400 text-base mb-2" data-lang="zh"><i class="fas fa-exclamation-triangle mr-2"></i>【背景痛點：迫在眉睫的北印度產能真空】</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">Auditing our major clients (existing clients like TATA, potential clients like Samsung, and clients under development), they strongly demand us to implement the "De-China / Made in India" strategy. However, Foxlink currently only has one base in South India (Tirupati) and faces a <strong class="text-white">complete capacity vacuum</strong> in North India. This makes it impossible to serve key North Indian clients locally (e.g., Oppo, Samsung, VIVO, and major auto manufacturers), rendering business development extremely difficult. The previous strategy of "trading first, local manufacturing later" has proven ineffective.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">盤點大客戶（現有客戶如TATA , 潛在客戶Samsung, 及開發中的客戶）強烈要求我們落實「去中化 / 印度製造」策略。然而，正崴目前在印度僅有南印（Tirupati）一處基地，在北印度面臨<strong class="text-white">完全的產能真空</strong>，無法就近服務北印度關鍵客戶（如 Oppo, Samsung, VIVO, 各大車廠），業務開發非常困難, 之前測試的先貿易後本地製的策略沒有起到作用。</p>
+                    </div>
+
+                    <div class="recon-box neutral">
+                        <h4 class="font-bold text-yellow-400 text-base mb-2" data-lang="en"><i class="fas fa-hourglass-half mr-2"></i>Resource Constraint: Traditional Factory Building is Too Slow</h4>
+                        <h4 class="font-bold text-yellow-400 text-base mb-2" data-lang="zh"><i class="fas fa-hourglass-half mr-2"></i>【資源困境：緩不濟急的傳統建廠模式】</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">If we adopt the traditional model of purchasing land and building a factory in North India, not only will it take 2-3 years, failing to meet urgent demands, but it will also severely crowd out the capital expenditure (CapEx) currently focused on other BUs by the Headquarters.</p>
+                        <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">若採傳統模式在北印建廠，不僅耗時 2-3 年緩不濟急，且將嚴重排擠總部目前聚焦於其它BU的資本支出 (CapEx)。</p>
+                    </div>
+
+                    <div class="recon-box opp">
+                        <h4 class="font-bold text-green-400 text-base mb-2" data-lang="en"><i class="fas fa-rocket mr-2"></i>Proposal Objective: 3-6 Months "Asset-Light Strategy" Blitz</h4>
+                        <h4 class="font-bold text-green-400 text-base mb-2" data-lang="zh"><i class="fas fa-rocket mr-2"></i>【本案目的：3-6 個月閃電落地的「輕資產戰略」】</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">This proposal aims to present a breakthrough strategy to the HQ characterized by "Zero Capital Investment, Zero Equity Risk". We plan to utilize the massive existing facilities and equipment of local Tier-2 EMS providers in North India (e.g., Sahasra, VIVAAN), combined with Foxlink's exclusive "Core Material Black Box Protection" mechanism, transforming Foxlink into a "Supply Chain Control Tower".</p>
+                        <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">本提案旨在向總部彙報一項「零資本投資、零股權風險」的破局戰略。我們計畫利用北印度在地 二線EMS（如 Sahasra、VIVAAN）現成的龐大廠房與設備，搭配正崴獨家的「核心物料黑盒防護」機制，讓正崴轉型為「供應鏈控制塔」。</p>
+                        
+                        <div class="mt-3 bg-gray-900/50 p-3 rounded border-l-4 border-blue-500">
+                            <strong class="text-blue-300 block mb-1" data-lang="en">Decision Request:</strong><strong class="text-blue-300 block mb-1" data-lang="zh">【決策請求】</strong>
+                            <span class="text-sm text-gray-300" data-lang="en">We beseech the HQ executives to review this "Certified Subcontractor Defensive Model" and approve this strategic framework as our primary weapon for North India business development.</span>
+                            <span class="text-sm text-gray-300" data-lang="zh">懇請總部長官審閱此「特許代工防禦模式」，並以此戰略框架做為北印業務開發的武器。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Baseline -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">1. Strategic Baseline: HQ's Absolute Bottom Lines & Core Targets</span>
+                    <span data-lang="zh">壹、 戰略定調：總部的絕對底線與核心目標</span>
+                </div>
+                
+                <p class="text-sm text-gray-300 mb-4" data-lang="en">Facing the capacity gap (Oppo, Samsung, VIVO) and strict "China Plus One / Made in India" demands from global clients, this proposal establishes the following <strong class="text-white">absolute bottom lines</strong>:</p>
+                <p class="text-sm text-gray-300 mb-4" data-lang="zh">面對北印度產能缺口（Oppo, Samsung, VIVO）以及全球大客戶嚴格的「China Plus One / 印度製造」要求，本提案基於以下狀況設計，確立以下<strong class="text-white">絕對底線</strong>：</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gradient-to-b from-gray-800 to-gray-900 p-5 rounded border border-gray-700 text-center">
+                        <div class="text-3xl mb-2 text-blue-500"><i class="fas fa-building-slash"></i></div>
+                        <h4 class="font-bold text-white mb-2">Zero CapEx</h4>
+                        <p class="text-xs text-gray-400" data-lang="en">Foxlink will <strong class="text-red-400">NOT</strong> purchase any land, factory buildings, or heavy asset equipment in North India.</p>
+                        <p class="text-xs text-gray-400" data-lang="zh">正崴不在北印度購買任何土地、廠房或重資產設備 (零資本支出)。</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-gray-800 to-gray-900 p-5 rounded border border-gray-700 text-center">
+                        <div class="text-3xl mb-2 text-green-500"><i class="fas fa-users-slash"></i></div>
+                        <h4 class="font-bold text-white mb-2">Zero OpEx</h4>
+                        <p class="text-xs text-gray-400" data-lang="en">Foxlink will <strong class="text-red-400">NOT</strong> establish a massive resident management and staffing structure here.</p>
+                        <p class="text-xs text-gray-400" data-lang="zh">正崴不在此建立龐大的常駐管理與編制團隊 (零營運支出)。</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-gray-800 to-gray-900 p-5 rounded border border-gray-700 text-center">
+                        <div class="text-3xl mb-2 text-purple-500"><i class="fas fa-handshake-slash"></i></div>
+                        <h4 class="font-bold text-white mb-2">Zero Equity Risk</h4>
+                        <p class="text-xs text-gray-400" data-lang="en"><strong class="text-red-400">NO</strong> Joint Ventures / <strong class="text-red-400">NO</strong> Equity Investments.</p>
+                        <p class="text-xs text-gray-400" data-lang="zh">不合資 / 不入股 (零股權風險)。</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900/20 border border-blue-500/50 p-4 rounded text-sm text-gray-300">
+                    <strong class="text-blue-400 block mb-1" data-lang="en">Core Objective: The Control Tower</strong>
+                    <strong class="text-blue-400 block mb-1" data-lang="zh">核心目標：</strong>
+                    <span data-lang="en">Transform Foxlink into a "Supply Chain Control Tower", utilizing the ready-made facilities and capital of multiple potential North Indian partners (e.g., Sahasra / VIVAAN, collectively referred to as "Local Factories") to fulfill our orders. Through a <strong class="text-white">Multi-Vendor Strategy</strong>, ensure Foxlink holds absolute pricing and control power.</span>
+                    <span data-lang="zh">將正崴轉型為「供應鏈控制塔 (Control Tower)」，利用北印度多家潛在合作方（如：Sahasra / VIVAAN，以下統稱「本地廠」）的現成廠房與資金，來代工我們的北印客戶訂單。透過<strong class="text-white">多供應商競局 (Multi-Vendor Strategy)</strong>，確保正崴掌握絕對的議價與控制權。</span>
+                </div>
+
+                <!-- 2. SWOT -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">2. SWOT Analysis: Facing "Dominant Local Factories"</span>
+                    <span data-lang="zh">貳、 戰略環境評估 (SWOT)：面對「強勢本地廠」的現實</span>
+                </div>
+
+                <p class="text-sm text-gray-300 mb-4" data-lang="en">The subcontractors we seek (like Sahasra, already listed and supplying Hero; VIVAAN with TP-Link & Airtel track records) are not weak. Facing dominant and ambitious local giants, our SWOT assessment is as follows:</p>
+                <p class="text-sm text-gray-300 mb-4" data-lang="zh">我們尋求的代工方（如 Sahasra 已經上市且切入 Hero 車廠；VIVAAN 則具備 TP-Link、Airtel 代工實績）皆非弱者。面對具備規模與野心的強勢地頭蛇，戰略優劣勢評估如下：</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- S -->
+                    <div class="bg-gray-800 p-5 rounded border-t-4 border-green-500 shadow-md">
+                        <h4 class="font-bold text-green-400 text-lg mb-3 flex items-center"><i class="fas fa-shield-alt mr-2 w-6 text-center"></i>
+                            <span data-lang="en">S: Strengths (Our Moat)</span><span data-lang="zh">S (Strengths - 我們的護城河)</span>
+                        </h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en"><strong class="text-white">Tier-1 Vendor Code:</strong> No matter how big local factories are, the Master Supply Agreements (MSA) and trust of US giants (Apple, Starlink, DELL, Tesla) remain firmly in Foxlink's hands. They cannot get this on their own.</li>
+                            <li data-lang="zh"><strong class="text-white">全球頂級客戶信任 (Vendor Code)：</strong> 即使本地廠規模再大，Apple、Starlink、DELL、Tesla 等美系大廠的 MSA (主供應商合約) 與信任，仍牢牢掌握在 Foxlink 手中。這是他們目前自己拿不到的。</li>
+                            
+                            <li data-lang="en"><strong class="text-white">Core Tech Barrier:</strong> Absolute advantage in high-frequency transmission and precision auto-grade connectors.</li>
+                            <li data-lang="zh"><strong class="text-white">核心零組件技術門檻：</strong> Foxlink 在高頻傳輸、精密車規連接器等技術上具有絕對優勢。</li>
+                            
+                            <li data-lang="en"><strong class="text-white">Zero Financial Risk:</strong> Adhering to Zero CapEx avoids massive sunk costs and depreciation pressure in India.</li>
+                            <li data-lang="zh"><strong class="text-white">零財務風險：</strong> 貫徹 Zero CapEx，不承擔印度建廠的龐大沉沒成本與折舊壓力。</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- W -->
+                    <div class="bg-gray-800 p-5 rounded border-t-4 border-yellow-500 shadow-md">
+                        <h4 class="font-bold text-yellow-400 text-lg mb-3 flex items-center"><i class="fas fa-heart-broken mr-2 w-6 text-center"></i>
+                            <span data-lang="en">W: Weaknesses (Our Achilles' Heel)</span><span data-lang="zh">W (Weaknesses - 我們的軟肋)</span>
+                        </h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en"><strong class="text-white">"Rootless" Status:</strong> No physical factory or personnel in North India. Against dominant local factories, our operational control is easily diluted by physical reality (they own the land, equipment, and labor).</li>
+                            <li data-lang="zh"><strong class="text-white">缺乏實體資產與「無根」狀態：</strong> 在北印度沒有自己的實體廠房與人員。面對強勢的本地廠，我們的營運控制力容易被「物理現實」（土地、設備、工人都是對方的）所削弱。</li>
+                            
+                            <li data-lang="en"><strong class="text-white">Lack of Management Penetration:</strong> We cannot micro-manage like our own factories; we must rely entirely on audits and contractual bindings.</li>
+                            <li data-lang="zh"><strong class="text-white">管理穿透力不足：</strong> 無法像經營自家工廠一樣微觀管理 (Micro-manage)，只能依賴稽核與合約約束。</li>
+                        </ul>
+                    </div>
+
+                    <!-- O -->
+                    <div class="bg-gray-800 p-5 rounded border-t-4 border-blue-500 shadow-md">
+                        <h4 class="font-bold text-blue-400 text-lg mb-3 flex items-center"><i class="fas fa-globe mr-2 w-6 text-center"></i>
+                            <span data-lang="en">O: Opportunities (Our Leverage)</span><span data-lang="zh">O (Opportunities - 我們的槓桿)</span>
+                        </h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en"><strong class="text-white">Blitz Scaling:</strong> Borrowing mature capacity compresses time-to-production from 2 years to 3-6 months, perfectly catching urgent "China Plus One" orders.</li>
+                            <li data-lang="zh"><strong class="text-white">閃電戰搶市佔：</strong> 借用強勢廠的現成成熟產能，能將建廠投產時間從 2 年壓縮至 3-6 個月，完美接住 China Plus One 的急單。</li>
+                            
+                            <li data-lang="en"><strong class="text-white">Bidding War:</strong> Since Sahasra & VIVAAN are both strong, Foxlink can play them against each other to drive down assembly quotes and force them to absorb RBA upgrade costs.</li>
+                            <li data-lang="zh"><strong class="text-white">多方競局 (Bidding War)：</strong> 由於 Sahasra 與 VIVAAN 皆具備足夠實力，Foxlink 可利用兩強相爭，壓低代工報價並逼迫其吸收 RBA 升級成本。</li>
+                            
+                            <li data-lang="en"><strong class="text-white">Brand Halo Incentive:</strong> Local factories desperately crave the track record of being a "Global Top-Tier Brand Certified Factory" to boost stock prices or future orders.</li>
+                            <li data-lang="zh"><strong class="text-white">品牌背書誘因：</strong> 本地廠極度渴望透過 Foxlink 取得「全球頂級品牌認證工廠」的實績，以利其自身股價或未來接單。</li>
+                        </ul>
+                    </div>
+
+                    <!-- T -->
+                    <div class="bg-gray-800 p-5 rounded border-t-4 border-red-500 shadow-md">
+                        <h4 class="font-bold text-red-400 text-lg mb-3 flex items-center"><i class="fas fa-radiation mr-2 w-6 text-center"></i>
+                            <span data-lang="en">T: Threats (Our Fatal Risks)</span><span data-lang="zh">T (Threats - 我們的致命危機)</span>
+                        </h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en"><strong class="text-white">High Reverse Engineering Risk:</strong> Their engineering teams are mature. If not strictly blocked, they can crack the process/BOM and bypass Foxlink to contact end clients directly.</li>
+                            <li data-lang="zh"><strong class="text-white">高強度的逆向工程風險 (養虎為患)：</strong> 對方工程團隊成熟，若防堵不嚴密，極易被破解製程與 BOM 表，進而直接越過 Foxlink 接觸終端客戶。</li>
+                            
+                            <li data-lang="en"><strong class="text-white">Profit Sharing Conflicts:</strong> Listed/large factories won't settle for "meager assembly fees" long-term. They may threaten strikes, delays, or price hikes to force Foxlink to yield profit or technology.</li>
+                            <li data-lang="zh"><strong class="text-white">利潤分配衝突 (合作破裂)：</strong> 已上市或具規模的強勢廠，極可能不甘於長期只賺取「微薄的純代工費」，未來可能以罷工、拖延交期或威脅漲價來逼迫 Foxlink 讓利或釋放技術。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. Core Operational Model -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">3. Core Operational Model: "Buy-Sell & Black Box"</span>
+                    <span data-lang="zh">參、 核心運作模式：「特許代工」與「核心物料黑盒化」</span>
+                </div>
+
+                <p class="text-sm text-gray-300 mb-4" data-lang="en">Based on the SWOT, to mitigate the Threats of strong subcontractors, we strictly position the local factory as a <strong class="text-white">"Foxlink Exclusive Certified Subcontractor"</strong>. The mechanism is as follows:</p>
+                <p class="text-sm text-gray-300 mb-4" data-lang="zh">基於上述 SWOT 評估，為了防堵強勢代工廠的威脅 (Threats)，我們將本地廠嚴格定位為 <strong class="text-white">「正崴獨家認證的特許代工廠 (Certified Subcontractor)」</strong>。具體運作機制如下：</p>
+
+                <div class="space-y-4">
+                    <div class="bg-gray-800 p-4 border border-gray-700 rounded-lg">
+                        <h4 class="font-bold text-blue-400 mb-2" data-lang="en">A. Cracking the Strict DELL / RBA Audits: "Guided Compliance" over "Self-Building"</h4>
+                        <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">A. 破解 DELL / RBA 嚴苛稽核：以「輔導過關」取代「親自建廠」</h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en">Clients (like DELL) won't accept unverified local Indian factories. We don't pretend it's Foxlink's own factory; we declare it as a "dedicated subcontracting line under Foxlink's extreme strict control and guidance".</li>
+                            <li data-lang="zh">客戶（如 DELL）不會接受未經驗證的印度本土廠。我們不假裝這是正崴的廠，而是向客戶表明這是「受正崴極度嚴格管控與輔導的專屬代工線」。</li>
+                            <li data-lang="en"><strong class="text-white">Cost Transfer:</strong> Foxlink only sends NPI and QA teams on short-term/consultant basis for guidance. To secure this international order, <strong class="text-yellow-400">the local factory MUST fund themselves</strong> to upgrade security, improve working hour systems, and EHS conditions to meet Foxlink & client RBA standards. Foxlink is selling "the ticket and Know-how to enter the Tier-1 supply chain".</li>
+                            <li data-lang="zh"><strong class="text-white">成本轉嫁：</strong> 正崴僅派出 NPI 與 QA 團隊以「短期出差/顧問」形式前往指導。為了接下這筆國際大單，<strong class="text-yellow-400">本地廠必須自行出資</strong> 升級廠區安保、改善工時系統與 EHS 條件，直到符合正崴與客戶的 RBA 標準。正崴賣的是「帶你打入 Tier-1 供應鏈的門票與 Know-how」。</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-800 p-4 border border-gray-700 rounded-lg">
+                        <h4 class="font-bold text-red-400 mb-2" data-lang="en">B. Cracking the Order Poaching Crisis (Choke Point): BOM Control & Black Box Modules</h4>
+                        <h4 class="font-bold text-red-400 mb-2" data-lang="zh">B. 破解偷單危機 (Choke Point)：BOM 表控制與黑盒模組 (Sub-assembly)</h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li data-lang="en">To prevent local factories from learning the production and directly contacting the end client, Foxlink <strong class="text-white">ABSOLUTELY WILL NOT release full Turnkey procurement rights</strong>.</li>
+                            <li data-lang="zh">為了防止本地廠學會生產後直接找終端客戶接單，正崴<strong class="text-white">絕對不釋放完整的 Turnkey 採購權</strong>。</li>
+                            <li data-lang="en">The most core, high-margin, patent-protected parts (e.g., high-freq connectors, key chips, precision cables) are centrally manufactured by Foxlink Taiwan/China/Tirupati as <strong class="text-yellow-400">"Black Box Sub-assemblies"</strong>.</li>
+                            <li data-lang="zh">產品中最核心、高毛利、具備正崴專利的部分（例如：高頻連接器、關鍵晶片、精密線材），統一由正崴台灣/中國/Tirupati廠製作成 <strong class="text-yellow-400">「黑盒模組 (Black Box Sub-assembly)」</strong>。</li>
+                            <li data-lang="en">Foxlink provides these Black Boxes via "Consignment" or "Buy-Sell" to the local factory. The local factory can only procure zero-tech plastics/screws locally. They only earn meager "assembly processing fees", never grasp core tech, and clients cannot bypass Foxlink to buy products missing core modules.</li>
+                            <li data-lang="zh">正崴將黑盒模組以「客供料 (Consignment)」或「買賣 (Buy-Sell)」方式交給本地廠。本地廠在當地只能採購無技術含量的塑膠件、螺絲。他們只能賺取微薄的「組裝加工費」，永遠無法掌握核心技術，客戶也無法繞過正崴購買缺乏核心模組的產品。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-xs text-gray-400 border-l-2 border-gray-600 pl-3 italic">
+                    <p data-lang="en">PS. (SSSTC also imported equipment/materials to the FOXLINK India factory for processing and delivery to DELL, rather than building their own factory in India. The RBA costs were also borne by FOXLINK.)</p>
+                    <p data-lang="zh">PS. (SSSTC也是將設備/材料導入到FOXLINK印度廠加工後交DELL, 而不是自行來印度建廠, RBA費用也是 FOXLINK自行負責。)</p>
+                </div>
+
+                <!-- 4. Negotiation Strategy -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">4. Negotiation Strategy: Making Local Chairmen Agree (Trojan Horse)</span>
+                    <span data-lang="zh">肆、 談判策略：如何讓本地廠董事長點頭？ (特洛伊木馬與賽局戰略)</span>
+                </div>
+
+                <p class="text-sm text-gray-300 mb-4" data-lang="en">From the perspective of local factories, investing capital/effort only to earn assembly fees will cause immense initial resistance. Therefore, our outward negotiation must use "phased baits" coupled with "backup competition":</p>
+                <p class="text-sm text-gray-300 mb-4" data-lang="zh">站在本地廠（如 Sahasra 董事長 Amrit 或 VIVAAN MD）的角度，他們出錢出力卻只能賺代工費，初期抗拒感必然極高。因此，我們在對外談判時，必須使用「階段性誘餌」搭配「備備胎競爭」來引導入局：</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-gray-800 p-4 border border-gray-700 rounded-lg">
+                        <strong class="text-blue-400 block mb-1" data-lang="en">Bait 1: The Tier-1 Halo</strong>
+                        <strong class="text-blue-400 block mb-1" data-lang="zh">誘餌一：全球 Tier-1 的光環 (The Tier-1 Halo)</strong>
+                        <span class="text-gray-300 block" data-lang="en">Local Indian EMS factories share a pain point: inability to enter top global supply chains. We clarify we bring stepping stones for Starlink, DELL, Top Auto OEMs. The "Foxlink Certified" label acts as priceless advertising, massively boosting their valuation.</span>
+                        <span class="text-gray-300 block" data-lang="zh">印度本土 EMS 廠的共同痛點是「打不進全球頂級供應鏈」。我們明確告知，正崴帶來的不是普通的單，而是 Starlink、DELL、一線車廠的敲門磚。只要產線掛上「正崴認證生產」，該集團在印度的估值與接單能力將產生質的飛躍。這對他們來說是無價的廣告。</span>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 border border-gray-700 rounded-lg">
+                        <strong class="text-blue-400 block mb-1" data-lang="en">Bait 2: The Illusion of Localization</strong>
+                        <strong class="text-blue-400 block mb-1" data-lang="zh">誘餌二：未來的「在地化大餅」 (The Illusion of Localization)</strong>
+                        <span class="text-gray-300 block" data-lang="en">We mandate Black Box for Phase 1 to "ensure FAI pass". But we verbally promise (contingency): <em>"If Phase 1 succeeds, Phase 2 involves Phased Licensing for local procurement/production."</em> Giving them future growth imagination to force early compromise.</span>
+                        <span class="text-gray-300 block" data-lang="zh">初期以「確保品質通過客戶首件檢查 (FAI)」為由，強制實施核心料件黑盒化。但我們在口頭給予承諾：<em class="text-gray-400">「只要 Phase 1 合作順利、良率達標，Phase 2 我們會逐步授權 (Phased Licensing) 更多零件讓本地廠在地採購或生產。」</em> 給予未來成長想像空間，促使其初期妥協。</span>
+                    </div>
+
+                    <div class="bg-gray-800 p-4 border border-gray-700 rounded-lg">
+                        <strong class="text-red-400 block mb-1" data-lang="en">Moat Excuse: Tariffs & Yield Packing</strong>
+                        <strong class="text-red-400 block mb-1" data-lang="zh">護城河藉口：利用「關稅」與「良率」包裝技術封鎖</strong>
+                        <span class="text-gray-300 block" data-lang="en">Our official PR for blocking direct core procurement: "India's import tariffs on high-freq components are huge, and testers are expensive. Foxlink 'kindly' sends pre-made modules to save your CapEx and guarantee yield. We 'loan' the tester." (In reality, it's locked to HQ servers).</span>
+                        <span class="text-gray-300 block" data-lang="zh">針對為何不讓他們直接採購核心零件，官方說辭是：「印度針對某些高頻電子元件進口關稅極高，且測試機台極其昂貴。為了幫本地廠節省初期成本並確保良率，正崴『好心』將模組做好送過來，並將專用設備『借放』廠內（實則連線總部伺服器，鎖死參數）。」</span>
+                    </div>
+
+                    <div class="bg-gray-800 p-4 border border-gray-700 rounded-lg">
+                        <strong class="text-yellow-400 block mb-1" data-lang="en">Negotiation Leverage: The Bidding War</strong>
+                        <strong class="text-yellow-400 block mb-1" data-lang="zh">談判槓桿：創造「多方競局 (Bidding War)」</strong>
+                        <span class="text-gray-300 block" data-lang="en">We won't negotiate exclusively with Sahasra. We'll intentionally let them know we are evaluating VIVAAN (and vice versa). Exploiting their hunger for Tier-1 orders forces them to make maximum concessions on Margins and RBA investments.</span>
+                        <span class="text-gray-300 block" data-lang="zh">我們不會只與 Sahasra 單線談判。我們會刻意讓 Sahasra 知道我們同時在評估 VIVAAN（反之亦然）。利用他們渴望搶下 Foxlink / Tier-1 訂單的心態，迫使他們在代工費 (Margin) 與 RBA 投資上做出最大讓步。</span>
+                    </div>
+                </div>
+
+                <!-- 5. Next Steps -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">5. Next Steps (Decision Request for Thomas / Danny)</span>
+                    <span data-lang="zh">伍、 Next Steps (給 Thomas / Danny 的決策請求)</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item</th><th class="p-3" data-lang="zh">行動項目</th>
+                                <th class="p-3" data-lang="en">Details</th><th class="p-3" data-lang="zh">細節說明</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">Review & Revise</span>
+                                    <span data-lang="zh">審閱與修改</span>
+                                </td>
+                                <td class="p-3 text-gray-300">
+                                    <span data-lang="en">Review if this "Certified Subcontractor & Black Box Defense" proposal perfectly aligns with the company's strategic bottom line and leadership direction.</span>
+                                    <span data-lang="zh">審查此「特許代工與黑盒防護」提案是否完全符合公司及長官的戰略底線與領導方向。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-blue-500 text-center">2</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">HQ Summit Prep (4/17 Sahasra)</span>
+                                    <span data-lang="zh">總部會戰準備 (4/17 針對 Sahasra)</span>
+                                </td>
+                                <td class="p-3 text-gray-300">
+                                    <span data-lang="en">If meeting Varun Manwani on 4/17, HQ must unify stance: <strong class="text-white">Absolutely NO talk of equity distribution</strong>. Only discuss "How Foxlink leverages global clients to upgrade them, conditioned on absolute obedience to BOM rules & RBA guidance".</span>
+                                    <span data-lang="zh">若 4/7 初次會面後, 高層決定 4/17 與 Sahasra 少東 Varun Manwani 在台北總部見面, 總部需統一口徑：<strong class="text-white">絕不談股權分配</strong>，只談「Foxlink 如何利用我們的全球客戶名單，協助其升級為世界級的 EMS 基地，前提是完全遵守我們的 BOM 規則與 RBA 輔導」。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-green-500 text-center">3</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">Backup Activation (VIVAAN)</span>
+                                    <span data-lang="zh">備胎啟動 (VIVAAN 平行推進)</span>
+                                </td>
+                                <td class="p-3 text-gray-300">
+                                    <span data-lang="en">Authorize local India team (Michael) to continue parallel negotiations with VIVAAN MD to solidify "Bidding War" leverage.</span>
+                                    <span data-lang="zh">授權印度當地團隊 (Michael) 持續與 VIVAAN MD 進行平行談判，做實「Bidding War」的籌碼。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-purple-500 text-center">4</td>
+                                <td class="p-3 font-bold text-white">
+                                    <span data-lang="en">Legal Preparation</span>
+                                    <span data-lang="zh">法務準備</span>
+                                </td>
+                                <td class="p-3 text-gray-300">
+                                    <span data-lang="en">Draft strict NDA and "Consignment / Loaned Equipment Ownership Agreement", ensuring Foxlink has the right to instantly recall core modules/testers under any circumstances (including breakup).</span>
+                                    <span data-lang="zh">起草嚴格的《委外加工保密協議 (NDA)》與《客供料/借用設備所有權合約》，確保正崴在任何情況下（包括合作破局）皆有權即刻抽回核心模組與專用測試設備。</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 6. Consultant Pre-Audit -->
+                <div class="section-divider mt-8">
+                    <span data-lang="en">6. Consultant Pre-Audit: Execution Blind Spots & Defense Plans</span>
+                    <span data-lang="zh">陸、 顧問預審 (Consultant Pre-Audit)：落地實戰盲區與防禦備案</span>
+                </div>
+
+                <p class="text-sm text-gray-300 mb-6" data-lang="en">To prevent the strategy from backfiring due to India's complex business/tax environment, we have pre-prepared defensive solutions for potential queries from HQ Legal/Finance:</p>
+                <p class="text-sm text-gray-300 mb-6" data-lang="zh">為確保戰略落地時不被印度本地複雜的商業與稅務環境反噬，針對總部法務/財務可能提出的質疑，我們已預先備妥以下防禦性解決方案：</p>
+
+                <div class="space-y-6 text-sm">
+                    <!-- Blind Spot 1 -->
+                    <div class="recon-box neutral">
+                        <div class="flex items-start">
+                            <div class="bg-gray-800 p-2 rounded mr-3 text-yellow-500 font-bold">Q1</div>
+                            <div class="flex-1">
+                                <strong class="text-white block mb-1 text-base" data-lang="en">Blind Spot 1: Who bears responsibility if local factory invests but fails DELL RBA Audit?</strong>
+                                <strong class="text-white block mb-1 text-base" data-lang="zh">盲區一：若本地廠投入資金卻未通過客戶 RBA 稽核，誰扛責？</strong>
+                                <p class="text-gray-400 mb-2" data-lang="en"><strong class="text-gray-300">Challenge:</strong> Indian factories generally lack awareness of labor hours and security. If DELL fails them causing order loss, they will demand Foxlink compensate their hardware investments.</p>
+                                <p class="text-gray-400 mb-2" data-lang="zh"><strong class="text-gray-300">挑戰：</strong> 印度工廠普遍對工時、廠區安保認知薄弱，若 DELL 稽核死當導致訂單流失，本地廠必定回頭向正崴索賠其初期硬體投資。</p>
+                                
+                                <div class="bg-blue-900/20 border border-blue-500/50 p-3 rounded mt-2">
+                                    <strong class="text-blue-400" data-lang="en">Defense Plan [Tollgate Milestone]:</strong>
+                                    <strong class="text-blue-400" data-lang="zh">防禦備案【Tollgate 里程碑機制】：</strong>
+                                    <span class="text-gray-300" data-lang="en">Insert a hard "Pre-audit Tollgate" clause. Foxlink absolutely will NOT bind the client's Vendor Code to that line until Foxlink NPI/QA formally signs off. The contract will specify RBA passing as a "Condition Precedent" for formal orders, exempting Foxlink from joint liability.</span>
+                                    <span class="text-gray-300" data-lang="zh">在合約中強硬加入「前置稽核條款 (Pre-audit Tollgate)」。在 Foxlink NPI/QA 團隊未正式簽字放行前，正崴絕對不將客戶的 Vendor Code 綁定該產線。合約明訂 RBA 過關為正式下單之「先決條件 (Condition Precedent)」，免除正崴的連帶賠償責任。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blind Spot 2 -->
+                    <div class="recon-box neutral">
+                        <div class="flex items-start">
+                            <div class="bg-gray-800 p-2 rounded mr-3 text-yellow-500 font-bold">Q2</div>
+                            <div class="flex-1">
+                                <strong class="text-white block mb-1 text-base" data-lang="en">Blind Spot 2: Tax Traps & Working Capital Conflicts from "Black Box Buy-Sell"</strong>
+                                <strong class="text-white block mb-1 text-base" data-lang="zh">盲區二：「黑盒買賣」引發的稅務陷阱與 Working Capital 衝突</strong>
+                                <p class="text-gray-400 mb-2" data-lang="en"><strong class="text-gray-300">Challenge:</strong> Forcing local factories to "buy" our expensive Black Boxes (Buy-Sell) will trigger cross-state IGST or import tariffs, and severely freeze their working capital, causing strong resistance.</p>
+                                <p class="text-gray-400 mb-2" data-lang="zh"><strong class="text-gray-300">挑戰：</strong> 若要求本地廠「買下」正崴高單價的黑盒模組（Buy-Sell Model），將面臨印度跨邦 IGST 稅務或進口關稅，且會嚴重卡死本地廠的營運資金，導致對方強烈抗拒。</p>
+                                
+                                <div class="bg-blue-900/20 border border-blue-500/50 p-3 rounded mt-2">
+                                    <strong class="text-blue-400" data-lang="en">Defense Plan [Pure Consignment & Job Work Invoice]:</strong>
+                                    <strong class="text-blue-400" data-lang="zh">防禦備案【純客供與加工發票】：</strong>
+                                    <span class="text-gray-300" data-lang="en">Empower negotiation team with flexibility. If they refuse Buy-Sell, instantly revert to "Pure Consignment". Foxlink retains ownership of expensive modules, merely "parking" materials on the local line. They only issue a "Job Work" invoice to us. This solves their cash flow pressure and legally cements their status as a mere "processing party".</span>
+                                    <span class="text-gray-300" data-lang="zh">授權談判團隊保有彈性。若對方拒絕買賣模式，可立即退回「純客供料 (Consignment)」模式。正崴保有高價模組的所有權，僅將料件「寄放」於本地產線，本地廠僅開立「Job Work（加工服務）」發票給我們。此舉不僅解決對方的資金壓力，在法律上更進一步坐實了他們「只是純加工方」的底層地位。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blind Spot 3 -->
+                    <div class="recon-box neutral">
+                        <div class="flex items-start">
+                            <div class="bg-gray-800 p-2 rounded mr-3 text-yellow-500 font-bold">Q3</div>
+                            <div class="flex-1">
+                                <strong class="text-white block mb-1 text-base" data-lang="en">Blind Spot 3: Dominant Factories Will Absolutely Demand "Capacity Guarantee (MOQ)"</strong>
+                                <strong class="text-white block mb-1 text-base" data-lang="zh">盲區三：強勢廠絕對會反向要求「產能保證 (MOQ)」</strong>
+                                <p class="text-gray-400 mb-2" data-lang="en"><strong class="text-gray-300">Challenge:</strong> To de-risk their investment, local factories will demand: "Foxlink must commit to N thousand units/month, otherwise compensate SMT idle fees."</p>
+                                <p class="text-gray-400 mb-2" data-lang="zh"><strong class="text-gray-300">挑戰：</strong> 本地廠為了降低投資風險，合約中必會要求：「Foxlink 需承諾每月至少 N 萬套的訂單，否則需賠償 SMT 產線閒置費」。</p>
+                                
+                                <div class="bg-blue-900/20 border border-blue-500/50 p-3 rounded mt-2">
+                                    <strong class="text-blue-400" data-lang="en">Defense Plan [Back-to-Back Clause]:</strong>
+                                    <strong class="text-blue-400" data-lang="zh">防禦備案【Back-to-Back 背靠背條款】：</strong>
+                                    <span class="text-gray-300" data-lang="en">Foxlink's bottom line is "absolutely NO bearing idle costs for Indian factories". The contract will adopt a strict back-to-back mechanism: Any MOQ commitment is strictly pre-conditioned on "the formal PO from end clients (Starlink/DELL) being issued". We only act as a "Pass-through", perfectly transferring risk to actual end-market demand.</span>
+                                    <span class="text-gray-300" data-lang="zh">正崴的底線是「絕對不扛印度廠的閒置成本」。合約將採用嚴格的背靠背機制：任何對本地廠的 MOQ 承諾，其生效前提皆為「終端客戶 (如 Starlink/DELL) 的正式 PO 已下達」。我們只負責「Pass-through (轉發)」，將風險完美轉嫁給終端市場的實際需求。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Script -->
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

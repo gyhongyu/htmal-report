@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-02T11:41:01.197Z",
+  "lastUpdated": "2026-04-02T12:16:41.530Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -860,6 +860,19 @@
       "fileName": "report-1775130058931.html",
       "createdAt": "2026-04-02T11:41:01.197Z",
       "updatedAt": "2026-04-02T11:41:01.197Z"
+    },
+    {
+      "id": "report-1775132199161",
+      "title": "Project Code: North India Blitz Expansion Strategy",
+      "description": "專案代號：North India 閃電擴張戰略",
+      "categories": [
+        "客戶攻略",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1775132199161.html",
+      "createdAt": "2026-04-02T12:16:41.530Z",
+      "updatedAt": "2026-04-02T12:16:41.530Z"
     }
   ]
 }
