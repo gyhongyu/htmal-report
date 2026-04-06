@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: SAMSUNG INDIA ELECTRONICS PVT. LTD. -->
+    <!-- ATTENDEES: Thomas, Michael (Foxlink) | Minhyun Oh, Ayush Sharma, Gurdeep Singh (Samsung) -->
+    <title data-lang="en">MOM: Visit to Samsung India Headquarters</title>
+    <title data-lang="zh">會議記錄：拜訪三星印度總部</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Meeting Minutes: Visit to Samsung India Headquarters</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">會議記錄：拜訪三星印度總部</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Subject: Strategic Sourcing & Localized FPC Production</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">主題：戰略採購與 FPC 在地化生產</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold">2026/04/06</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs leading-relaxed">
+                                    Samsung India Headquarters<br>
+                                    Two Horizon Centre, Gurugram, India
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <strong class="text-blue-300">Foxlink:</strong> Thomas (President), Michael (Naven - Foxlink India Rep.)<br>
+                                    <strong class="text-blue-300">Samsung:</strong> Minhyun Oh (Senior Director), Ayush Sharma (Chief Manager), Gurdeep Singh (General Manager)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="text-base md:text-lg font-bold text-gray-200 mb-4 border-l-2 border-blue-500 pl-2">SAMSUNG INDIA ELECTRONICS PVT. LTD.</div>
+                        <div class="flex flex-col space-y-4">
+                            <!-- Minhyun Oh -->
+                            <div class="border-b border-gray-700 pb-4 last:border-0 last:pb-0">
+                                <div class="text-lg font-bold text-white">Minhyun Oh</div>
+                                <div class="text-sm text-blue-400 mb-1">Senior Director, Strategic Sourcing Group (India)</div>
+                                <div class="text-xs text-gray-400 mt-2 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-8130420035</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>minhyun.oh@samsung.com</div>
+                                </div>
+                            </div>
+                            <!-- Ayush Sharma -->
+                            <div class="border-b border-gray-700 pb-4 last:border-0 last:pb-0">
+                                <div class="text-lg font-bold text-white">Ayush Sharma</div>
+                                <div class="text-sm text-blue-400 mb-1">Chief Manager, Strategic Sourcing Group</div>
+                                <div class="text-xs text-gray-400 mt-2 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-9718003311</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>ayush.sh@samsung.com</div>
+                                </div>
+                            </div>
+                            <!-- Gurdeep Singh -->
+                            <div class="border-b border-gray-700 pb-4 last:border-0 last:pb-0">
+                                <div class="text-lg font-bold text-white">Gurdeep Singh</div>
+                                <div class="text-sm text-blue-400 mb-1">General Manager - Strategic Sourcing Group</div>
+                                <div class="text-xs text-gray-400 mt-2 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-9888178554</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>gd.singh@samsung.com</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4 md:space-y-5">
+                    
+                    <!-- Point 1 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 1: Foxlink Organizational Transformation & Global Strategy</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題一：正崴 (Foxlink) 企業組織轉型與全球戰略佈局</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                            <p data-lang="en">Foxlink is undergoing a profound organizational transformation, integrating previously siloed product lines into the <strong class="text-blue-400">CBG (Consumer Business Group)</strong> to enhance strategic execution.</p>
+                            <p data-lang="zh">正崴正進行深刻的組織變革，將以往孤島式 (Siloed) 的產品線運作整合為 <strong class="text-blue-400">CBG (Consumer Business Group)</strong> 事業群，以提升戰略執行效率。</p>
+                            
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en"><strong class="text-white">Client-Centric Mindset:</strong> President Thomas brings multinational management experience from Google (as GSM), empowering Foxlink to precisely anticipate key account requirements for supply chain transparency and resilience.</li>
+                                <li data-lang="zh"><strong class="text-white">客戶端戰略思維：</strong> 總裁 Thomas 具備在 Google 擔任全球供應經理 (GSM) 的跨國經驗，賦予正崴「以大客戶視角思考」的戰略能力，能精準預判三星等巨擘對供應鏈透明度與彈性的要求。</li>
+                                <li data-lang="en"><strong class="text-white">Global "Non-China" Footprint:</strong> Foxlink operates deeply in North America, Vietnam, Taiwan, and China. The "Made in USA" Dallas plant successfully supports top-tier clients (Apple, Meta, Google, Nvidia), proving Foxlink's ability to build complex, automated lines outside China.</li>
+                                <li data-lang="zh"><strong class="text-white">全球與「非中」生產實力：</strong> 正崴在北美、越南、台灣及中國均有深度佈局。其達拉斯廠的「Made in USA」計畫已成功支援 Apple、Meta 等頂級客戶，為「Make in India」提供了可複製的自動化成功模型。</li>
+                                <li data-lang="en"><strong class="text-white">Tirupati Base Status:</strong> The India Tirupati plant (built ground-up) has been operational for 6-7 years, equipped with mature SMT and cable assembly capacity, forming a robust industrial cluster with nearby suppliers (e.g., Sunny Optical).</li>
+                                <li data-lang="zh"><strong class="text-white">印度 Tirupati 基地現狀：</strong> 該廠已營運 6-7 年，屬自建全新廠房，具備成熟的 SMT 與線纜組裝產能，並與周邊供應鏈 (如 Sunny Optical) 形成良好的產業聚落。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 2: Samsung India Sourcing Strategy & Localization Needs</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題二：三星印度戰略採購策略與在地化需求</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en">Samsung's Strategic Sourcing Group (SSG), operating under the Singapore IPC, handles supply chain development for both the Noida (Mobile) and Chennai (Consumer Electronics) factories. They highlighted significant <strong class="text-yellow-400">supply chain vulnerabilities</strong> in the current Indian FPC market.</p>
+                            <p data-lang="zh">隸屬於新加坡 IPC 的三星印度戰略採購團隊 (SSG) 負責諾伊達 (移動設備) 與清奈 (消費電子) 兩大工廠的供應鏈開發。他們指出當前印度 FPC 市場存在嚴重的<strong class="text-yellow-400">供應鏈脆弱性</strong>。</p>
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en"><strong class="text-green-400">Market Monopoly:</strong> FPC supply is currently monopolized by a single Apple supplier in Chennai, who shows "zero interest in servicing non-Apple clients."</li>
+                                <li data-lang="zh"><strong class="text-green-400">市場壟斷現況：</strong> 目前關鍵供應來源被一家位於清奈的 Apple 供應商獨佔，且該供應商「對服務非 Apple 客戶毫無興趣」。</li>
+                                <li data-lang="en"><strong class="text-green-400">Strategic Gap:</strong> Samsung urgently requires a globally capable tech partner to break this monopoly, mitigate single-source risks, and provide sustainable technical innovation.</li>
+                                <li data-lang="zh"><strong class="text-green-400">戰略缺口：</strong> 三星亟需一個具備全球視野與技術實力的長期戰略夥伴來打破此壟斷格局，規避單一來源風險並獲取持續的技術支援。</li>
+                                <li data-lang="en"><strong class="text-green-400">Core Value:</strong> Samsung is explicitly looking for a <strong class="text-white">"Samsung Family"</strong> member for a long-term partnership, not just a short-term OEM arrangement.</li>
+                                <li data-lang="zh"><strong class="text-green-400">核心價值觀：</strong> 三星強調尋找的是 <strong class="text-white">「Samsung Family」</strong> 長期戰略成員，而非短期的代工關係，這與 Foxlink 當前的轉型目標高度契合。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="recon-box risk">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 3: FPC Partnership Intent & Logistics Bottlenecks</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題三：FPC 合作意向與物流瓶頸辯論</h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en">Discussions focused on the practicalities of localized FPC production, specifically the integration of Front-end and Back-end (SMT) processes.</p>
+                            <p data-lang="zh">雙方務實探討了 FPC 在地化生產的技術細節，特別是前段 (Front-end) 與後段 (SMT) 工藝的整合問題。</p>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600">
+                                <p data-lang="en"><strong class="text-white">Location & Logistics Risk:</strong> Samsung recommends setting up in North India (e.g., Noida). They strongly warned that for critical components like FPCs, <strong class="text-red-400">a logistics distance exceeding 100 km dramatically increases supply chain risks.</strong> Foxlink must carefully weigh utilizing the existing Tirupati base vs. proximity to Noida.</p>
+                                <p data-lang="zh"><strong class="text-white">選址與物流風險：</strong> 三星建議 Foxlink 考慮在北印度 (如諾伊達) 設廠。三星強烈警示：對於 FPC 這類關鍵組件，<strong class="text-red-400">若物流距離超過 100 公里，將大幅增加供應鏈風險。</strong> Foxlink 需權衡 Tirupati 現有基地與靠近諾伊達廠之間的效益。</p>
+                            </div>
+                            
+                            <p class="italic text-gray-400 border-l-2 border-gray-600 pl-3" data-lang="en">Brand Alignment Note: President Thomas deliberately utilized his Samsung Fold/Flip device during the meeting, visibly demonstrating strong brand alignment and partnership intent.</p>
+                            <p class="italic text-gray-400 border-l-2 border-gray-600 pl-3" data-lang="zh">品牌認同備註：Thomas 總裁在會中特意展示其日常使用的 Samsung Fold/Flip 摺疊機，展現了對三星品牌的高度認同與強烈合作意向。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 4: Competitive Dynamics & Foxlink's Negotiation Stance</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題四：市場競爭動態與 Foxlink 談判底線</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                            <p data-lang="en">Foxlink is currently operating in a strong "Seller's Market" within the Indian electronics ecosystem (highlighted by a meeting with Vivo earlier the same day). Foxlink noted the immense pressure created by Apple's strategy (demanding 25% capacity transfer to India, quarterly 20% price cuts, and exclusive capacity).</p>
+                            <p data-lang="zh">Foxlink 目前在印度電子製造生態中處於極具優勢的賣方市場地位 (會中提及今日上午剛與 Vivo 完成會談)。Foxlink 也指出 Apple 策略帶來的巨大壓力 (要求 25% 產能轉移印度、每季 20% 降價及產能獨佔)。</p>
+                            <p data-lang="en"><strong class="text-yellow-400">Key Negotiation Pillar: No Investment = No Exclusivity.</strong> Foxlink made it explicitly clear: Unless clients are willing to provide dedicated CapEx investment ("write a check"), Foxlink will firmly maintain a <strong class="text-white">non-exclusive capacity principle</strong>. Foxlink aims to build a diversified portfolio (Samsung, SpaceX, Chinese brands) to maximize equipment utilization and de-risk single-client exposure.</p>
+                            <p data-lang="zh"><strong class="text-yellow-400">戰略談判支柱：不投資即無獨佔。</strong> Foxlink 明確表態：除非客戶端提供專項投資 (Write a check)，否則 Foxlink 將堅守<strong class="text-white">非排他性 (Non-exclusive) 原則</strong>。Foxlink 傾向建立包含 Samsung、SpaceX 及中國品牌的多樣化客戶組合，以極大化稼動率並分散單一客戶風險。</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items & Milestones</span>
+                    <span data-lang="zh">叁、 下一步行動計畫與里程碑</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item</th><th class="p-3" data-lang="zh">行動項目</th>
+                                <th class="p-3 w-40" data-lang="en">Owner</th><th class="p-3 w-40" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Provide FPC Process Requirements</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">提供 FPC 基礎工藝需求細節</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Details on single/double-sided, multi-layer ratios (excluding NDA drawings). Deadline: Within Next Week.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">單雙面板、多層板比例 (不含 NDA 敏感圖紙)。期限：下週內。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Ayush Sharma<br><span class="text-xs text-gray-500">(Samsung)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">2</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Prepare FPC Business Plan</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">提出 FPC 商業可行性評估書</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Draft business viability for full-process FPC line in India. Deadline: Upon receipt of requirements.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">針對印度 FPC 全流程生產線提出評估 (Business Plan)。期限：待收到需求後啟動。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Thomas<br><span class="text-xs text-gray-500">(Foxlink)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">3</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Confirm Existing Global Cooperation Status</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">確認全球既有合作狀態</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Verify and report back on Foxlink's current partnerships with Samsung Vietnam & Korea HQ. Deadline: Within Next Week.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">確認並回覆 Foxlink 與 Samsung 越南及韓國總部的既有合作狀態。期限：下週內。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Thomas / Michael<br><span class="text-xs text-gray-500">(Foxlink)</span></td>
+                            </tr>
+                            <tr class="bg-blue-900/20">
+                                <td class="p-3 font-bold text-blue-400 text-center"><i class="fas fa-flag"></i></td>
+                                <td class="p-3">
+                                    <strong class="text-blue-300 block mb-1" data-lang="en">Milestone: Finalize Indian FPC Investment Decision</strong>
+                                    <strong class="text-blue-300 block mb-1" data-lang="zh">關鍵里程碑：落實印度 FPC 投資決策</strong>
+                                    <span class="text-xs text-blue-200/70" data-lang="en">Target: Late 2026 or Early 2027 (Q4 2026 Focus).</span>
+                                    <span class="text-xs text-blue-200/70" data-lang="zh">預計於 2026 年底或 2027 年初落實決策 (目標：2026 年 Q4)。</span>
+                                </td>
+                                <td class="p-3 font-medium text-blue-300">Joint Decision-Makers<br><span class="text-xs text-blue-400/50">(雙方決策層)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Conclusion Note -->
+                <div class="text-center mt-8 text-sm text-gray-400 border-t border-gray-700 pt-6">
+                    <p data-lang="en"><strong>Conclusion:</strong> Both parties look forward to capturing the strategic dividend of India as the next global electronics manufacturing hub through subsequent technical alignment, realizing the long-term vision of the "Samsung Family."</p>
+                    <p data-lang="zh"><strong>結語：</strong> 雙方期待透過後續的技術對接，共同捕捉印度作為下一個全球電子製造中心的戰略紅利，落實「Samsung Family」的長期發展願景。</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

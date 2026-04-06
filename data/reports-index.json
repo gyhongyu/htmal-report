@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-02T13:47:34.011Z",
+  "lastUpdated": "2026-04-06T19:15:12.459Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -886,6 +886,21 @@
       "fileName": "report-1775137652809.html",
       "createdAt": "2026-04-02T13:47:34.011Z",
       "updatedAt": "2026-04-02T13:47:34.011Z"
+    },
+    {
+      "id": "report-1775502911774",
+      "title": "Meeting Minutes: Visit to Samsung India Headquarters",
+      "description": "會議記錄：拜訪三星印度總部",
+      "categories": [
+        "客戶KYC",
+        "內部簡報",
+        "項目計劃",
+        "會議記要",
+        "客戶攻略"
+      ],
+      "fileName": "report-1775502911774.html",
+      "createdAt": "2026-04-06T19:15:12.459Z",
+      "updatedAt": "2026-04-06T19:15:12.459Z"
     }
   ]
 }
