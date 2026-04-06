@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: VIVO MOBILE INDIA PRIVATE LIMITED -->
+    <!-- ATTENDEES: Thomas, Michael (Foxlink) | Akash Malik (VIVO) -->
+    <title data-lang="en">MOM: Visit to VIVO India Headquarters</title>
+    <title data-lang="zh">會議記錄：拜訪 VIVO 印度總部</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Meeting Minutes: Visit to VIVO India Headquarters</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">會議記錄：拜訪 VIVO 印度總部</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Subject: Strategic Supply Chain Integration & Localized Manufacturing</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">主題：戰略供應鏈整合與在地化製造</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold">2026/04/06</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs leading-relaxed">
+                                    VIVO India Headquarters (Gurgaon)<br>
+                                    Plot No. 08, Sector-24, Yamuna Expressway Area,<br>
+                                    Gautam Buddha Nagar, Uttar Pradesh - 201310
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <strong class="text-blue-300">Foxlink:</strong> Thomas (Head of Global Sales - US, India, Europe), Michael<br>
+                                    <strong class="text-blue-300">VIVO:</strong> Akash Malik (Senior Manager - Procurement)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-lg md:text-xl font-bold text-white">Akash Malik</div>
+                                <div class="text-sm text-blue-400 mb-1">Senior Manager - Procurement</div>
+                                <div class="text-base md:text-lg font-bold text-gray-200 mt-3 border-l-2 border-blue-500 pl-2">VIVO MOBILE INDIA PRIVATE LIMITED</div>
+                                <div class="text-xs text-gray-400 mt-3 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-7206003604</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>akashscm@vivo.com</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4 md:space-y-5">
+                    
+                    <!-- Point 1 -->
+                    <div class="recon-box risk">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 1: Cross-Border Operational Challenges & Regional Strategy</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題一：跨國營運挑戰與區域佈局戰略分析</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p data-lang="en">Geopolitical restrictions continue to create "soft barriers" in supply chain management. Indian business visas for Chinese staff face high rejection rates and complex documentation requirements (e.g., proving multiple supplier interactions), forcing reliance on remote online collaboration for technical debugging.</p>
+                            <p data-lang="zh">當前地緣政治引發的行政限制干擾了供應鏈管理中的人才與技術流動。印度員工申請中國商務簽證面臨極高拒簽率與繁瑣文件需求，導致技術交流受阻，僅能依賴線上協作，對現場調試管理造成極大壓力。</p>
+                            
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en"><strong>Vietnam Expansion:</strong> VIVO noted Foxlink's expansion in Da Nang, Vietnam. Compared to the highly saturated and competitive Hanoi cluster, Da Nang offers strategic developmental potential despite being further from traditional component hubs.</li>
+                                <li data-lang="zh"><strong>越南佈局差異化：</strong> VIVO 關注到 Foxlink 在越南峴港 (Da Nang) 的佈局，認為其相較於供應商飽和的北越河內，具備相對低競爭的勞動力戰略開發潛力。</li>
+                            </ul>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600 mt-3">
+                                <p data-lang="en"><strong class="text-white">Implication:</strong> As VIVO's core technical and purchasing decisions remain centralized in China, Foxlink must strengthen internal coordination between its China and India teams to bridge the cross-regional management gap and ensure Indian factory needs reach decision-makers.</p>
+                                <p data-lang="zh"><strong class="text-white">戰略意涵：</strong> 由於 VIVO 的核心技術與採購決策權仍集中於中國總部，Foxlink 需在內部強化中、印兩地團隊的協作，確保印度端的需求能同步傳達至決策中樞。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 2: VIVO India Procurement Architecture & Technical Reality</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題二：VIVO 印度採購架構與技術深度解析</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en">VIVO processes an astonishing <strong class="text-blue-400">2 million components daily</strong>, necessitating a highly specialized division of labor.</p>
+                            <p data-lang="zh">VIVO 每日處理高達 <strong class="text-blue-400">200 萬個零件</strong>，為支撐此規模，其採購邏輯採高度職能化分工。</p>
+                            
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en"><strong>Organizational Split:</strong> Akash leads a 30-person "Corporate Procurement" team focused on raw materials and commercial negotiations, while CAPEX equipment and technical maintenance are handled by factory personnel.</li>
+                                <li data-lang="zh"><strong>職能分工：</strong> 區分「企業採購」與「工廠技術」。Akash 領導的 30 人團隊專注原材料商務談判，廠端人員則負責 CAPEX 設備與技術。</li>
+                                <li data-lang="en"><strong>Localization Limits:</strong> Despite increased local capabilities (like SMT), core technology components (resistors, SMT materials, LCM sensor boards) still heavily rely on imports from China.</li>
+                                <li data-lang="zh"><strong>在地化極限：</strong> 儘管印度具備 SMT 能力，但核心技術件（電阻、SMT 材料、LCM 感測電路板）仍高度依賴中國進口體系。</li>
+                            </ul>
+                            
+                            <p class="mt-2 text-blue-200" data-lang="en">With such massive daily volume, even minor delays (e.g., driver miscommunication) or accounting errors compound into massive costs. Suppliers must demonstrate extreme agility and digital tracking capabilities.</p>
+                            <p class="mt-2 text-blue-200" data-lang="zh">在巨量運作下，微小的物流延遲或財務核算錯誤皆會演變成巨大管理成本。供應商必須具備極強的即時應變與數位化追蹤能力。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 3: Supply Chain Reality & Vertical Integration Strategy</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題三：產品供應鏈現狀與垂直整合策略評估</h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en">Localization is not absolute; it is a complex calculation of cost, tariffs, and logistics volume.</p>
+                            <p data-lang="zh">電子產品的在地化並非盲目追求，而是成本預算、關稅變動與物流體積的綜合博弈。</p>
+                            
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li data-lang="en"><strong>"Reverse Localization" of FPCs:</strong> Due to a recent tariff reduction and the viability of rapid air-freight, FPC supply has strategically reverted to imports from China, where economies of scale outweigh local production benefits.</li>
+                                <li data-lang="zh"><strong>FPC「逆向在地化」：</strong> 因關稅調降及具備空運物流優勢，中國進口的規模經濟高於本地生產成本，使 FPC 策略性轉向依賴進口。</li>
+                                <li data-lang="en"><strong>100% Local Plastics:</strong> Conversely, bulky plastic components require local production for immediate quality control (feedback on black spots, transparency), though mold designs remain tightly controlled by China.</li>
+                                <li data-lang="zh"><strong>塑膠件 100% 在地化：</strong> 塑膠件因體積大且需即時解決品質變數（黑點、透明度等），必須本地生產（但模具設計仍由中方管控）。</li>
+                            </ul>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600">
+                                <p data-lang="en"><strong class="text-yellow-400">Strategic Moat (Cables & Connectors):</strong> Foxlink proposed introducing high-precision cable extrusion processes to India. Currently, the Indian market is dominated by thick automotive cables. This vertical integration builds a competitive barrier and effectively counters the de-localization risks seen with FPCs.</p>
+                                <p data-lang="zh"><strong class="text-yellow-400">戰略護城河（傳輸線與連接器）：</strong> Foxlink 提議引進高精密線材擠出 (Extrusion) 製程。填補了目前印度以厚重汽車級電纜為主的市場缺口。此垂直整合不僅提升競爭門檻，更能有效反制類 FPC 產品的去在地化風險。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 4: Market Competition & Management Philosophy</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題四：市場競爭格局與技術趨勢洞察</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                            <p data-lang="en">VIVO is actively pushing for premium brand positioning. Their X series foldables (priced at 1.5 Lakh) are engineered to rival or surpass Samsung in durability and form factor. Akash used a "Toyota vs. Lexus" analogy for BBK group brands to explain their premium perception strategy.</p>
+                            <p data-lang="zh">在紅海競爭中，VIVO 透過品牌區隔建立溢價空間。會中展示的高端 X 系列折疊機（定價 15 萬盧比），在硬體上已評估為超越三星。Akash 以「豐田與凌志」類比 BBK 集團內的品牌感知管理。</p>
+                            
+                            <p data-lang="en" class="italic border-l-2 border-gray-600 pl-3 mt-3"><strong class="text-white not-italic">AI vs. Human Trust:</strong> While acknowledging that AI tools (like DeepSeek) drastically improve efficiency, Akash stressed that business fundamentally relies on human relationships ("never eat and drink alone"). For the post-90s management tier, relationship-building and trust at the negotiation table remain irreplaceable by AI.</p>
+                            <p data-lang="zh" class="italic border-l-2 border-gray-600 pl-3 mt-3"><strong class="text-white not-italic">AI 與人際互信的平衡：</strong> 儘管 DeepSeek 等 AI 工具大幅提升了效率，但 Akash 引用其上級哲學「絕不單獨進食與飲酒」，強調採購談判的核心仍是餐桌上的溝通與互信。對於「90 後」管理者而言，AI 只是工具，真正的商業決策依賴人際信任積累。</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items & Milestones</span>
+                    <span data-lang="zh">叁、 下一步行動計畫與里程碑</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item</th><th class="p-3" data-lang="zh">行動項目</th>
+                                <th class="p-3 w-40" data-lang="en">Owner</th><th class="p-3 w-40" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Factory Audit & Assessment</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">廠區考察與評估</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Conduct an on-site audit of Foxlink Tirupati's cable extrusion and connector lines after May business trips.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">於五月結束差旅後，親自實地考察 Foxlink 提魯帕蒂 (Tirupati) 工廠線材擠出與連接器產線。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Akash Malik<br><span class="text-xs text-gray-500">(VIVO)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">2</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Strengthen RFQ Data Support</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">強化詢價 (RFQ) 數據支撐</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Provide comprehensive, data-backed RFQ documents to empower Akash to advocate for Foxlink at China HQ.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">近期提供具說服力與數據支持的 RFQ 文件，協助 Akash 向中國總部爭取訂單分配。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael<br><span class="text-xs text-gray-500">(Foxlink)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">3</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Trial Production Preparation</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">試產與技術對接</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Target June for connector trial production. Ensure automation and training readiness.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">確認 6 月為連接器產品試產關鍵期，確保產線自動化與人力培訓到位。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Thomas / Michael<br><span class="text-xs text-gray-500">(Foxlink)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-green-500 text-center">4</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Admin & Customs Clearance Support</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">行政與清關支援</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Provide local legal/admin guidance for customs clearance to ensure smooth supply chain flow.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">利用印度本土行政資源，在報關事務上提供法律指導與協助。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Akash Malik<br><span class="text-xs text-gray-500">(VIVO)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Conclusion Note -->
+                <div class="text-center mt-8 text-sm text-gray-400 border-t border-gray-700 pt-6">
+                    <p data-lang="en"><strong>Conclusion:</strong> Despite geopolitical uncertainties, both parties recognize "deep localization" and "high-quality technical integration" as the keys to future success. Foxlink will align with VIVO's expansion pace through vertical integration to build a stable, long-term supply system.</p>
+                    <p data-lang="zh"><strong>結語：</strong> 儘管面臨地緣政治不確定性，雙方一致認同「深度在地化」與「高品質技術整合」是未來的勝負關鍵。Foxlink 將持續配合 VIVO 的擴張步調，透過技術垂直整合建立長期穩定的供應體系。</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

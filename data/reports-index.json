@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-06T19:15:12.459Z",
+  "lastUpdated": "2026-04-06T19:22:32.282Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -901,6 +901,21 @@
       "fileName": "report-1775502911774.html",
       "createdAt": "2026-04-06T19:15:12.459Z",
       "updatedAt": "2026-04-06T19:15:12.459Z"
+    },
+    {
+      "id": "report-1775503351693",
+      "title": "Meeting Minutes: Visit to VIVO India Headquarters",
+      "description": "會議記錄：拜訪 VIVO 印度總部",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "會議記要",
+        "項目計劃"
+      ],
+      "fileName": "report-1775503351693.html",
+      "createdAt": "2026-04-06T19:22:32.282Z",
+      "updatedAt": "2026-04-06T19:22:32.282Z"
     }
   ]
 }
