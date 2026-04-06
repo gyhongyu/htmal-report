@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: ELECTRONIC INDUSTRIES ASSOCIATION OF INDIA (ELCINA) -->
+    <!-- ATTENDEES: Thomas, Michael (Foxlink) | Manik Kumar (ELCINA) -->
+    <title data-lang="en">MOM: ELCINA Strategic Consulting - India Market Expansion</title>
+    <title data-lang="zh">會議記錄：Foxlink 印度市場擴張與戰略合作諮詢</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Meeting Minutes: ELCINA Strategic Consulting - India Expansion</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">會議記錄：Foxlink 印度市場擴張與戰略合作諮詢</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Subject: Strategic Expansion, Supply Chain & Government Relations</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">主題：戰略擴張、供應鏈佈局與政府關係</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold">2024/03</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs leading-relaxed">
+                                    Gurgaon, India
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <strong class="text-blue-300">Foxlink:</strong> Thomas (Head of Global Sales), Michael<br>
+                                    <strong class="text-blue-300">ELCINA:</strong> Manik Kumar (Assoc. Director - Int'l Desk)
+                                </td>
+                            </tr>
+                        </table>
+                        <p class="text-xs text-gray-400 mt-4 border-t border-gray-700 pt-3" data-lang="en"><strong>Note:</strong> Under the dual wave of global supply chain "de-risking" and "Make in India," this consultation aims to identify high-growth market segments and deepen government/business networking.</p>
+                        <p class="text-xs text-gray-400 mt-4 border-t border-gray-700 pt-3" data-lang="zh"><strong>備註：</strong> 在全球電子產業「去風險化」與印度本土製造 (Make in India) 的雙重浪潮下，本次諮詢旨在透過政商網絡對接，精確識別具備結構性增長的市場細分。</p>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-lg md:text-xl font-bold text-white">Manik Kumar</div>
+                                <div class="text-sm text-blue-400 mb-1">Associate Director - International Desk</div>
+                                <div class="text-base md:text-lg font-bold text-gray-200 mt-3 border-l-2 border-blue-500 pl-2">ELECTRONIC INDUSTRIES ASSOCIATION OF INDIA (ELCINA)</div>
+                                <div class="text-xs text-gray-400 mt-3 space-y-1">
+                                    <div class="flex items-start"><i class="fas fa-map-marker-alt mr-2 w-4 mt-1 text-center"></i><span>422, Okhla Industrial Estate, Phase III<br>New Delhi 110 020</span></div>
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-95604-13613 (India) | +886-09639-30712 (Taiwan)</div>
+                                    <div><i class="fas fa-phone-alt mr-2 w-4 text-center"></i>+91 11 41615985, 41011291</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>india-desk@elcina.tw</div>
+                                    <div><i class="fas fa-globe mr-2 w-4 text-center"></i>www.elcina.com / www.elcina.tw</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record & Strategic Insights</span>
+                    <span data-lang="zh">貳、 會議討論內容與戰略洞察</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4 md:space-y-5">
+                    
+                    <!-- Point 1 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 1: Electronic & Semiconductor Cluster Analysis</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題一：印度電子與半導體產業聚落空間分析</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p data-lang="en">India's electronics industry exhibits distinct regional characteristics. Corporate site selection directly determines supply chain efficiency and the speed of acquiring government subsidies.</p>
+                            <p data-lang="zh">印度的電子產業呈現顯著的區域化特徵，企業選址直接決定了供應鏈效率與政府補貼的獲取速度。</p>
+                            
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en"><strong>Delhi NCR (North):</strong> Comprising UP, Rajasthan, and Haryana. Positioned as the "Design & EMS Hub." Most circuit design, software development, and EMS companies are clustered here, serving as the administrative and technological heart.</li>
+                                <li data-lang="zh"><strong>德里國家首都轄區 (Delhi NCR/北部):</strong> 包含 UP 邦、哈里亞納邦等，定位為「設計與 EMS 中心」。多數電路設計與 EMS 企業集中於此，為印度的行政與技術心臟。</li>
+                                <li data-lang="en"><strong>South India:</strong> Focused on "End-Products & Heavy Industry." While giants like TDK and Delta have large factories in the South, key administrative decisions often link back to the North.</li>
+                                <li data-lang="zh"><strong>南部區域:</strong> 以「終端產品與重工業」為主。大型外資 (如 TDK、台達電) 雖設廠於此，但重要行政與決策中心往往與北部聯動。</li>
+                                <li data-lang="en"><strong>Automotive Electronics:</strong> Core hubs are Pune and Chennai (which boasts port logistics advantages).</li>
+                                <li data-lang="zh"><strong>汽車電子:</strong> 核心位於 Pune (普納) 與 Chennai (清奈，具備港口物流優勢)。</li>
+                            </ul>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600 mt-3">
+                                <p data-lang="en"><strong class="text-white">Strategic Threshold (Noida):</strong> Establishing an office in Noida (UP state) is no longer an option, but a threshold. Major clients like CP Plus explicitly require supplier presence in Noida before issuing large orders. Furthermore, the UP government currently offers superior permit approval speeds and tax incentives for compliant foreign enterprises.</p>
+                                <p data-lang="zh"><strong class="text-white">Noida 門檻效應：</strong> 在 Noida (隸屬 UP 邦) 設立辦公室已是獲取大單 (如 CP Plus) 的基本門檻。此外，UP 邦政府對外資極為友善，能提供優於其他地區的准證審批時效與稅務激勵。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 2: High-Value Market Opportunities Assessment</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題二：關鍵增長領域與市場機會評估</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en">India currently faces a $2 trillion demand in electronics, but local production is only ~$200 billion (10%). This <strong class="text-green-400">90% supply gap</strong> is the core driver for Foxlink's expansion.</p>
+                            <p data-lang="zh">印度目前面臨 2 兆美元的電子產品需求，但本土產值僅約 2,000 億美元。這高達 <strong class="text-green-400">90% 的供應缺口</strong> 是 Foxlink 擴張的核心推力。</p>
+                            
+                            <table class="w-full mt-3 bg-transparent border-none text-gray-300 text-xs md:text-sm">
+                                <tr>
+                                    <td class="w-1/3 font-bold border-gray-600" data-lang="en">CCTV Surveillance<br>(Billion-Dollar Market)</td>
+                                    <td class="w-1/3 font-bold border-gray-600" data-lang="zh">CCTV 監控系統<br>(十億美元級商機)</td>
+                                    <td class="border-gray-600" data-lang="en">Policy-driven replacement of non-Chinese brands in public security. Local brands (e.g., CP Plus) offer structural dividends. Foxlink's non-Chinese background is a core advantage.</td>
+                                    <td class="border-gray-600" data-lang="zh">受政策驅動，政府要求汰換公共安全之非中國品牌設備。Foxlink 的非中國背景將成為爭取本地品牌 (如 CP Plus) 敏感訂單的核心優勢。</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold border-gray-600" data-lang="en">Defense, Aerospace & High-End PCB</td>
+                                    <td class="font-bold border-gray-600" data-lang="zh">國防、航太與高階 PCB</td>
+                                    <td class="border-gray-600" data-lang="en">ISRO and DRDO urgently need 20-50 layer PCBs. Local production is stuck at 10-12 layers, creating a golden opportunity for premium entry.</td>
+                                    <td class="border-gray-600" data-lang="zh">ISRO (太空局) 與 DRDO (國防部) 對 20-50 層高階 PCB 有剛性需求，而本地產線僅達 10-12 層，為 Foxlink 溢價切入的絕佳機會。</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold border-gray-600" data-lang="en">EV & Automotive Electronics</td>
+                                    <td class="font-bold border-gray-600" data-lang="zh">電動交通 (EV) 與汽車電子</td>
+                                    <td class="border-gray-600" data-lang="en">Govt plans to convert 10,000 diesel buses to e-buses by 2035. Design giant <strong>Magma</strong> controls 50-60% of this business and should be targeted.</td>
+                                    <td class="border-gray-600" data-lang="zh">政府計畫 2035 年前汰換一萬輛電動巴士。建議優先對接控制該領域 50-60% 業務的設計通路商 <strong>Magma</strong>。</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold border-gray-600" data-lang="en">Education E-Projects</td>
+                                    <td class="font-bold border-gray-600" data-lang="zh">教育電子化專案</td>
+                                    <td class="border-gray-600" data-lang="en">2.5M education tablet market (250K current project split among Samsung, Lava, Acer). Target Acer for low-end EMS outsourcing collaboration.</td>
+                                    <td class="border-gray-600" data-lang="zh">250 萬台教育平板市場 (近期 25 萬台專案)。建議針對低階產品線與 <strong>Acer</strong> 探討 EMS 外包協作。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 3: Operational Environment - Infrastructure & Compliance</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題三：運營環境評估：基礎建設與數位轉型</h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en">Operating in India requires abandoning the "China model" (High-Speed Rail reliance) and embracing an aviation-led logistics logic.</p>
+                            <p data-lang="zh">在印度營運必須捨棄「中國經驗」中的高鐵依賴，轉而擁抱航空導向的物流邏輯。</p>
+                            
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li data-lang="en"><strong>Logistics & Power:</strong> India's domestic aviation network is highly developed and punctual. Operations should utilize flights for single-day round trips between Tier 1 cities. Production must stay near Tier 1 cities to avoid the power outage risks still present in Tier 3/4 cities.</li>
+                                <li data-lang="zh"><strong>物流與能源穩定性：</strong> 印度國內航空網發達且準點率高，適合 Tier 1 城市間單日往返管理。因 Tier 3/4 城市仍有斷電風險，產線應集中於一線城市周邊。</li>
+                                <li data-lang="en"><strong>Compliance Dividends:</strong> The Indian government scrutinizes companies with Chinese backgrounds strictly regarding tax and documentation. Taiwanese companies possess a "clean" compliance record, offering a significant advantage in gaining government trust and expedited permits.</li>
+                                <li data-lang="zh"><strong>法規合規紅利：</strong> 政府對中國背景企業審查嚴苛，台灣企業具備「乾淨」的合規紀錄，在獲取政府信任與准證方面擁有顯著優勢。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="recon-box risk">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 4: Financial Risk Management & Supply Chain Strategy</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題四：財務風險管理與供應鏈協作策略</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p data-lang="en">In the Indian market, "Profit Repatriation" and "Cash Flow Security" must be the highest strategic priorities to mitigate the risk of customary late payments by local clients.</p>
+                            <p data-lang="zh">在印度市場，「利潤回流」與「資金流安全」是所有戰略的優先級，以規避客戶習慣性延後付款的風險。</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                                <div class="bg-gray-900 p-3 rounded">
+                                    <h4 class="font-bold text-white mb-1" data-lang="en">1. Payment & Currency</h4>
+                                    <h4 class="font-bold text-white mb-1" data-lang="zh">1. 支付模型與貨幣</h4>
+                                    <p data-lang="en">Strictly enforce a <strong>30/70 ratio</strong> (30% deposit, 70% before shipment) paired with LC initially. Only pivot to Net 30 after 1-2 years of solid track record. Establish a local entity to settle in <strong>INR (Indian Rupee)</strong> to avoid USD FX risks.</p>
+                                    <p data-lang="zh">初期嚴格執行 <strong>30/70 比例</strong> (30% 訂金，70% 出貨前付清) 並搭配信用狀 (LC)，建立實績後再轉 Net 30。建議設立在地實體並以 <strong>INR 盧比</strong> 結算規避匯率波動。</p>
+                                </div>
+                                <div class="bg-gray-900 p-3 rounded">
+                                    <h4 class="font-bold text-white mb-1" data-lang="en">2. Hybrid EMS Model</h4>
+                                    <h4 class="font-bold text-white mb-1" data-lang="zh">2. 輕資產啟動模式</h4>
+                                    <p data-lang="en">Adopt a "Profit First, Asset Light" model: Outsource production to qualified local EMS (e.g., Sahasra), dispatch a core team for strict QC, secure clients, and then gradually transition to a self-built factory.</p>
+                                    <p data-lang="zh">採取「利潤優先、輕資產啟動」的混合模式：先將生產外包給在地合格 EMS，派遣核心團隊嚴控品質 (QC)，鎖定客戶與利潤後再逐步轉向自建工廠。</p>
+                                </div>
+                            </div>
+
+                            <p data-lang="en" class="italic border-l-2 border-yellow-500 pl-3 mt-3"><strong class="text-white not-italic">Competitive Strategy (Cables vs. Connectors):</strong> To avoid direct conflict with Foxconn (historically focused on connectors in this region), Foxlink should differentiate by aggressively strengthening its traditional advantages in Wire Harness and Cables in the Indian market.</p>
+                            <p data-lang="zh" class="italic border-l-2 border-yellow-500 pl-3 mt-3"><strong class="text-white not-italic">競爭策略差異化：</strong> 為避免與 Foxconn 在連接器領域的直接衝突，Foxlink 應強化其在線束 (Wire Harness) 與電纜方面的傳統優勢，形成差異化競爭。</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items & Milestones</span>
+                    <span data-lang="zh">叁、 下一步行動計畫與里程碑</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item (Domain)</th><th class="p-3" data-lang="zh">行動項目 (領域)</th>
+                                <th class="p-3 w-40" data-lang="en">Owner</th><th class="p-3 w-40" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Supply Chain & Operations</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">供應鏈與營運對接</strong>
+                                    <ul class="list-disc pl-4 text-xs text-gray-400">
+                                        <li data-lang="en">Contact CP Plus procurement to submit preliminary quotes for CCTV cable assemblies.</li>
+                                        <li data-lang="zh">聯繫 CP Plus 採購負責人，提交 CCTV 線材組裝初步報價。</li>
+                                        <li data-lang="en">Initiate admin process for setting up a Rep Office in Noida.</li>
+                                        <li data-lang="zh">啟動在 Noida 設立代表處的行政流程，作為標案實體憑證。</li>
+                                    </ul>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">2</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Gov Relations & High-End Tech</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">政府關係與高階技術</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Leverage Manik's network to connect with ISRO and DRDO. Conduct preliminary review and sampling preparation for 20-50 layer PCB specs.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">由 Manik 牽線對接 ISRO 與 DRDO，針對 20-50 層 PCB 技術規範進行初步審核與打樣準備。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Thomas / Manik</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">3</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Financial & Legal Architecture</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">財務與法律架構</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Evaluate establishing an INR-settled financial entity and draft standard 30/70 payment agreement templates for Indian clients.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">評估設立以 INR 結算的財務實體，並擬定印度客戶標準 30/70 支付協議模板。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Thomas</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-green-500 text-center">4</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Strategic Market Development</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">戰略市場開發 (EV/平板)</strong>
+                                    <ul class="list-disc pl-4 text-xs text-gray-400">
+                                        <li data-lang="en">Connect with Magma India rep regarding 2035 EV bus wire harness technical thresholds.</li>
+                                        <li data-lang="zh">對接 Magma 駐印度代表，評估 2035 電動巴士線束需求門檻。</li>
+                                        <li data-lang="en">Communicate with Acer India regarding EMS outsourcing for the low-end segment of the 250K education tablet project.</li>
+                                        <li data-lang="zh">與 Acer 印度溝通 25 萬台教育平板低階產品線外包可能性。</li>
+                                    </ul>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Thomas / Michael</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Conclusion Note -->
+                <div class="text-center mt-8 text-sm text-gray-400 border-t border-gray-700 pt-6">
+                    <p data-lang="en"><strong>Vision Statement:</strong> Foxlink's 3-5 year vision in India is to transform itself from a pure harness supplier into a multinational hub integrating "American Design, Taiwanese Management, and Indian Manufacturing."</p>
+                    <p data-lang="zh"><strong>戰略願景：</strong> Foxlink 在印度的未來 3-5 年願景，是將自身從單一線束供應商，轉型打造為結合「美國設計、台灣管理、印度製造」的跨國戰略樞紐。</p>
+                    <p class="mt-4 text-xs text-gray-500 uppercase tracking-widest" data-lang="en">Prepared by: Strategy Consulting Team | Distribution: Thomas, Michael, Foxlink Board of Directors</p>
+                    <p class="mt-4 text-xs text-gray-500 uppercase tracking-widest" data-lang="zh">紀錄撰寫：戰略顧問團隊 | 發送對象：Thomas, Michael, Foxlink 董事會</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

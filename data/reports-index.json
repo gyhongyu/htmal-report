@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-06T19:22:32.282Z",
+  "lastUpdated": "2026-04-06T19:36:01.534Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -916,6 +916,20 @@
       "fileName": "report-1775503351693.html",
       "createdAt": "2026-04-06T19:22:32.282Z",
       "updatedAt": "2026-04-06T19:22:32.282Z"
+    },
+    {
+      "id": "report-1775504160785",
+      "title": "Meeting Minutes: ELCINA Strategic",
+      "description": "會議記錄：Foxlink 印度市場擴張與戰略合作諮詢",
+      "categories": [
+        "客戶攻略",
+        "內部簡報",
+        "項目計劃",
+        "會議記要"
+      ],
+      "fileName": "report-1775504160785.html",
+      "createdAt": "2026-04-06T19:36:01.534Z",
+      "updatedAt": "2026-04-06T19:36:01.534Z"
     }
   ]
 }
