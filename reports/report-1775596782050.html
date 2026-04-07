@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: JIO PLATFORMS LIMITED / RELIANCE -->
+    <!-- ATTENDEES: Thomas (Foxlink), Michael Chen (Foxlink), Meharban Singh (Jio), Puneet Aggarwal (Jio) -->
+    <title data-lang="en">MOM: Strategic Partnership Meeting with Jio / Reliance</title>
+    <title data-lang="zh">會議記錄：Jio / Reliance 新能源戰略合作會議</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Meeting Minutes: Strategic Partnership with Jio / Reliance</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">會議記錄：Jio / Reliance 新能源與換電戰略合作會議</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Subject: EV Mobility, Battery Swapping Ecosystem & Supply Chain Integration</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">主題：電動交通、換電生態系統與供應鏈深度整合</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold">2026/04/07</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs leading-relaxed">
+                                    Reliance Corporate Park (Jio HQ)<br>
+                                    Thane Belapur Road, Ghansoli,<br>
+                                    Navi Mumbai, Maharashtra - 400701
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <strong class="text-blue-300">Foxlink:</strong> Thomas (President USA), Michael (Manager India)<br>
+                                    <strong class="text-blue-300">Jio / Reliance:</strong> Puneet Aggarwal, Meharban Singh, Gulpit (Business Head - New Energy/IoT), R&D and Product Team
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1 align-top pt-2">Background:</th>
+                                <td class="text-gray-400 bg-transparent border-none p-1 text-xs pt-2">
+                                    <span data-lang="en">Strategic resumption of partnership initiated 2 years ago by Freddy (Chairman's son). Following Foxlink's March 2025 reorg (CBG unified under COO Eric Huang), this meeting aligns Foxlink's latest R&D and local supply chain with Jio's EV mobility roadmap.</span>
+                                    <span data-lang="zh">延續兩年前由董事長之子 Freddy 發起的合作構想。在正崴 2025 年 3 月完成組織重整（營運長 Eric Huang 統一領導 CBG）後，此會議旨在向 Jio 展現最新研發實力與在地化供應鏈承諾。</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Key Counterparts</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">核心受訪對象</h3>
+                        
+                        <!-- Contact 1 -->
+                        <div class="flex items-start mb-4 pb-4 border-b border-gray-700">
+                            <div class="flex-1">
+                                <div class="text-lg font-bold text-white">Puneet Aggarwal</div>
+                                <div class="text-sm text-blue-400 mb-1">Vice - President | Smart Emobility, IOT</div>
+                                <div class="text-sm font-bold text-gray-200 mt-1 border-l-2 border-blue-500 pl-2">Jio Platforms Limited</div>
+                                <div class="text-xs text-gray-400 mt-2 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-8451904945 / +91-2279687185</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>puneet.aggarwal@ril.com</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact 2 -->
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-lg font-bold text-white">Meharban Singh</div>
+                                <div class="text-sm text-blue-400 mb-1">Vice - President | Procurement Mobility</div>
+                                <div class="text-sm font-bold text-gray-200 mt-1 border-l-2 border-blue-500 pl-2">Jio Platforms Limited</div>
+                                <div class="text-xs text-gray-400 mt-2 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-9599592838 / +91-2279647555</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>meharban1.singh@ril.com</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4 md:space-y-5">
+                    
+                    <!-- Point 1: Environment -->
+                    <div class="recon-box info">
+                        <div class="mb-2">
+                            <span class="tag bg-blue-900 text-blue-200">Context</span>
+                            <span class="tag bg-gray-700 text-gray-300">Site Audit</span>
+                        </div>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 1: Headquarters Observation & Strategic Partner Validation</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題一：總部環境觀測與戰略夥伴實力驗證</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en"><strong>Context & Detail:</strong> The meeting at Reliance's Mumbai HQ revealed a campus that symbolizes India's economic sovereignty (contributing ~4% to national GDP). We observed an extreme, three-tier security architecture: Government armed forces (CISF - usually reserved for critical infra like nuclear plants), over 4,000 militarized private guards with armored vehicles, and 300 highly trained K9 units (including specialized sweepers for the Chairman's office).</p>
+                            <p data-lang="zh"><strong>背景與細節：</strong> 本次於孟買 Reliance 總部（貢獻印度 GDP 約 4%）的會議，展現了其國家級經濟實力。現場觀測到極為嚴密的三層安保機制：包含中央工業保安部隊 (CISF，通常僅駐紮核能等關鍵基礎設施)、4,000名受過軍事化訓練配備裝甲車的私人武力，以及300隻特種警犬部隊（包含主席辦公室專屬掃描犬）。這暗示了園區未來導入機器狗 (Robo-dog) 巡檢的高度潛力。</p>
+                            
+                            <div class="mt-3 pl-3 border-l-2 border-blue-500 bg-blue-900/10 py-2">
+                                <p data-lang="en"><strong>Strategic Implication:</strong> This unprecedented level of physical security reflects Reliance's extreme protection over its energy infrastructure and trade secrets. For Foxlink, this validates Jio/Reliance as an unshakeable, national-level strategic partner with absolute resource dominance.</p>
+                                <p data-lang="zh"><strong>對正崴的戰略意義：</strong> 此安保等級反映了 Reliance 對能源基礎設施與商業機密的高度防護。這向 Foxlink 確認了 Reliance 是一個擁有絕對資源優勢與市場主導權、穩定性極高的戰略級夥伴。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 2: Corporate Roadmap -->
+                    <div class="recon-box opp">
+                        <div class="mb-2">
+                            <span class="tag bg-green-900 text-green-200">Opportunity</span>
+                            <span class="tag bg-gray-700 text-gray-300">Ecosystem</span>
+                        </div>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 2: Jio / Reliance Diversification & New Energy Strategy</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題二：Jio 業務版圖與新能源轉型戰略</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en"><strong>Context & Detail:</strong> Jio highlighted Reliance's DNA of "disruptive innovation" (e.g., leveraging VoLTE to drive India's internet penetration to #1 globally). Beyond their core pillars (O2C oil-to-chemicals at 65% revenue, top retailer with 19k touchpoints, #2 global data company), they are aggressively building a New Energy Giga Factory in Gujarat (5x the size of Singapore). They have acquired Singapore's REC for 20GW solar capacity and US-based Lithium Works for LFP 32140 cell tech.</p>
+                            <p data-lang="zh"><strong>背景與細節：</strong> Jio 強調其「破壞式創新」的 DNA（如當年憑藉 VoLTE 將印度網路滲透率推向全球第一）。除現有三大支柱（O2C 佔65%營收、全印最大零售商、全球第二大數據公司），集團正全力推展新能源。他們在古吉拉特邦建造面積為新加坡五倍大的新能源基地，並已收購新加坡 REC (獲取20GW太陽能產能) 與美國 Lithium Works (獲取 LFP 32140 電芯技術)。</p>
+                            
+                            <div class="mt-3 pl-3 border-l-2 border-green-500 bg-green-900/10 py-2">
+                                <p data-lang="en"><strong>Strategic Implication:</strong> Jio aims for a "Generation-Transmission-Consumption" closed loop. They will wheel self-generated solar power directly to swapping stations for green energy arbitrage. Foxlink's charging/swapping hardware must align perfectly within this massive, self-sustaining ecosystem.</p>
+                                <p data-lang="zh"><strong>對正崴的戰略意義：</strong> 透過「發電-傳輸-消費」的垂直整合閉環，Jio 計劃利用電力轉供 (Power Wheeling) 將自產綠電直接輸往換電站，實現能源自給與綠電套利。Foxlink 的硬體方案必須精準定位並無縫融入此宏大的生態系統中。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 3: EV Swapping -->
+                    <div class="recon-box neutral">
+                        <div class="mb-2">
+                            <span class="tag bg-yellow-900 text-yellow-200">Analysis</span>
+                            <span class="tag bg-gray-700 text-gray-300">Market</span>
+                        </div>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 3: EV Mobility & The Battery Swapping Imperative</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題三：印度電動交通 (EV) 與換電業務分析</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en"><strong>Context & Detail:</strong> Targeting India's 200M two-wheelers, Jio sees Battery Swapping as the only viable model for the gig economy (logistics requiring 10-15 min deliveries where charging downtime equals lost income). Through Jio Financial Services, batteries will be leased, stripping 40-50% off the vehicle's initial TCO. Reliance has already invested in 3W OEM "Magenta" for pilot applications.</p>
+                            <p data-lang="zh"><strong>背景與細節：</strong> 面對印度 2 億輛二輪車市場，Jio 認定「換電」是滿足零工經濟高時效（10-15分鐘送達，無法承受付出充電停機時間）的唯一解方。透過 Jio Financial Services，電池將做為租賃資產，為營運商降低 40-50% 總體擁有成本 (TCO)。此外，Reliance 已入股三輪車商 Magenta 進行先導應用。</p>
+                            
+                            <div class="mt-3 pl-3 border-l-2 border-yellow-500 bg-yellow-900/10 py-2">
+                                <p data-lang="en"><strong>Strategic Implication:</strong> Jio explicitly warned against Gogoro's closed-patent ecosystem, citing their stalled Pune factory. Jio intends to build an open standard driven by scale. Foxlink must deliver open, non-proprietary architecture, avoiding the pitfalls of vendor lock-in that Jio actively rejects.</p>
+                                <p data-lang="zh"><strong>對正崴的戰略意義：</strong> Jio 明確表達對 Gogoro 浦那工廠停擺及其過度封閉的專利連接器設計保持高度警惕。Jio 的戰略是透過自身規模建立開放標準。Foxlink 必須提供開放式架構，絕對避免踩到 Jio 拒絕「受制單一供應商協議」的紅線。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 4: Tech Specs & Competitor Risk -->
+                    <div class="recon-box risk">
+                        <div class="mb-2">
+                            <span class="tag bg-red-900 text-red-200">Critical Requirement</span>
+                            <span class="tag bg-gray-700 text-gray-300">Engineering</span>
+                        </div>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 4: Swapping Station Specs, Cell-to-Pack, and Exclusivity</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題四：換電站技術規格與競爭對手排除條款</h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en"><strong>Context & Detail:</strong> Jio demands a "Cell-to-Pack" strategy using standardized LFP 32140 cells for 2W/3W, golf carts, and LCVs. Swapping stations must be 8/12/16 slots (push-pull/stackable) with strict bans on complex lock-and-key structures. Critical features include extreme heat thermal management, Power Wheeling firmware, Time-of-day tariff logic, and Bidirectional Metering (stations must act as backup power for Reliance Dark Stores during outages).</p>
+                            <p data-lang="zh"><strong>背景與細節：</strong> Jio 要求推動「Cell-to-Pack」標準化，採用 LFP 32140 電芯，通吃二/三輪車及小型商用車。換電站需為 8/12/16 槽位，嚴禁複雜鎖扣結構，並具備極端高溫熱管理。軟硬體需深度整合：電力轉供計量、時間分段電價邏輯，以及雙向計量（停電時需能反向供電給 Reliance 的暗倉/零售據點）。</p>
+                            
+                            <div class="bg-red-900/20 p-3 rounded border border-red-800 mt-2">
+                                <p data-lang="en"><strong class="text-red-400">Competitor Alert & Exclusivity:</strong> When Foxlink suggested co-developing with Delta Electronics, Jio flatly rejected it, stating Delta is a direct competitor in the EV space. Jio mandates Foxlink maintain exclusive and autonomous control over the R&D.</p>
+                                <p data-lang="zh"><strong class="text-red-400">競爭對手警示與排他性：</strong> 當 Foxlink 提議與台達電 (Delta) 合作時，Jio 代表明確表態 Delta 在充換電領域屬直接競爭對手。Jio 強烈要求 Foxlink 的軟硬體開發必須具備完全的自主掌控權與排他性。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 5: Business terms -->
+                    <div class="recon-box info">
+                        <div class="mb-2">
+                            <span class="tag bg-blue-900 text-blue-200">Actionable</span>
+                            <span class="tag bg-gray-700 text-gray-300">Finance & IP</span>
+                        </div>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 5: Business Model, Financial Structure & IP Ownership</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題五：商業合作模式、財務安排與 IP 歸屬</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en"><strong>Context & Detail:</strong> Jio admitted past failures (samples unpaid 2 years ago due to cloud integration gaps) and wishes to reset the relationship. Key conditions for the new engagement: Jio must own the IP and source code tailored for India to integrate seamlessly with their financial/telecom cloud. Initial manufacturing can occur in China/Vietnam, but long-term localization in India is non-negotiable. Foxlink confirmed readiness at the Delhi site.</p>
+                            <p data-lang="zh"><strong>背景與細節：</strong> Jio 坦承兩年前因雲端集成失敗導致樣品未付款，此次冀望修復關係。新合作核心條件：Jio 必須掌握針對印度市場開發的軟硬體原始碼與 IP 主導權，以確保能與其內部電信與金融雲端對接。生產方面，初期接受中越廠區供貨，但中長期必須印度在地化（Foxlink 已確認德里廠區可隨時調度產能）。</p>
+                            
+                            <div class="mt-3 pl-3 border-l-2 border-blue-500 bg-blue-900/10 py-2">
+                                <p data-lang="en"><strong>Strategic Implication (Financials):</strong> To navigate India's 20% withholding tax on services, Jio proposed amortizing the NRE (R&D fees) into the BOM (materials cost) of the first PO. This bypasses tax friction and heavily binds Foxlink to the manufacturing volume.</p>
+                                <p data-lang="zh"><strong>對正崴的戰略意義（財務）：</strong> 為避開印度高達 20% 的服務費代扣稅，Jio 建議將開發費用 (NRE) 攤提 (Amortize) 於首批訂單的材料成本中。這不僅簡化了跨境稅務，也將 Foxlink 的利益與量產訂單深度綑綁。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫與里程碑</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item & Objective</th><th class="p-3" data-lang="zh">行動項目與目標</th>
+                                <th class="p-3 w-40" data-lang="en">Owner</th><th class="p-3 w-40" data-lang="zh">負責單位/人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Specs Exchange & Turnkey Proposal</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">技術規格交換與統包方案提交</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Jio to provide LFP 32140 pack specs immediately. Foxlink to submit a mass-production-ready turnkey swapping station proposal (skipping lengthy R&D to hit the 6-month maturation window).</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">Jio 即刻提供 LFP 電池包規格；Foxlink 需跳過冗長研發期，直接運用成熟平台提交具備量產能力的換電站統包方案，以迎合 6 個月產品成熟化窗口。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">
+                                    <span data-lang="en">Michael Chen / R&D (Foxlink)<br>Puneet Aggarwal (Jio)</span>
+                                    <span data-lang="zh">Michael Chen / 研發部 (正崴)<br>Puneet Aggarwal (Jio)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">2</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Software SDK Integration & Cloud Fix</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">軟韌體 SDK 對接與雲端修復</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Foxlink to assign dedicated FW/SW engineers. Receive Jio's SDK to fundamentally resolve previous cloud integration failures.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">Foxlink 需指派專責軟韌體工程師，接收 Jio 團隊提供的 SDK，從根本上解決過去失敗的雲端對接問題。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael Chen (Coordinator)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">3</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Executive Strategic Readout</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">高層戰略對齊會議</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Convene with Freddy and COO Eric Huang upon Thomas's return to Taiwan to officially redefine the Reliance engagement specs based on these findings.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">Thomas 總裁返台後，與 Freddy 及營運長 Eric Huang 召開戰略會議，依據本次會議結論重新定義與 Reliance 的合作規格。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Thomas (President USA)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-green-500 text-center">4</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Jamnagar Pilot Site Prep</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">Jamnagar 先導試點準備</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Prepare logistical and hardware frameworks for the upcoming "micro-city" pilot (6,000 households) testing 2W/3W operations at the Jamnagar campus.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">為即將在佔地 7500 英畝、容納 6000 個家庭的 Jamnagar 園區啟動的「微縮城市」先導計畫做準備，測試二輪與三輪車換電流程。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael Chen / SC Team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
