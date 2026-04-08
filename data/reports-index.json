@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-07T21:19:44.048Z",
+  "lastUpdated": "2026-04-08T19:09:21.851Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -945,6 +945,21 @@
       "fileName": "report-1775596782050.html",
       "createdAt": "2026-04-07T21:19:44.048Z",
       "updatedAt": "2026-04-07T21:19:44.048Z"
+    },
+    {
+      "id": "report-1775675360899",
+      "title": "Meeting Minutes: Strategic Alignment with Delta Electronics India",
+      "description": "會議記錄：與 Delta 台達電（印度）高層戰略對接",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "會議記要",
+        "項目計劃"
+      ],
+      "fileName": "report-1775675360899.html",
+      "createdAt": "2026-04-08T19:09:21.851Z",
+      "updatedAt": "2026-04-08T19:09:21.851Z"
     }
   ]
 }

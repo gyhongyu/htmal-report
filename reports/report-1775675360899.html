@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: DELTA ELECTRONICS INDIA PVT. LTD. -->
+    <!-- ATTENDEES: Thomas (Foxlink), Michael Chen (Foxlink), Benjamin Lin (Delta), Joe Kao (Delta), Fangling Hsia (Delta) -->
+    <title data-lang="en">MOM: Strategic Meeting with Delta Electronics India</title>
+    <title data-lang="zh">會議記錄：與 Delta 台達電（印度）高層戰略會議</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Meeting Minutes: Strategic Alignment with Delta Electronics India</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">會議記錄：與 Delta 台達電（印度）高層戰略對接</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Subject: Supply Chain Integration & Turnkey Solutions Ecosystem</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">主題：供應鏈深度整合與 Total Solution 生態系建立</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold">2026/04/08</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs leading-relaxed">
+                                    Plot No 69-A, B, C & D, Bommasandra,<br>
+                                    Industrial Area, Hosur Main Road,<br>
+                                    Bengaluru - 560099, Karnataka, India
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <strong class="text-blue-300">Foxlink:</strong> Thomas (President, USA), Michael Chen (Manager, India)<br>
+                                    <strong class="text-blue-300">Delta:</strong> Benjamin Lin (President, India), Joe Kao (Sales Dir.), Fangling Hsia (Account Mgr.)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Key Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">主要對接高層資訊</h3>
+                        <div class="text-base font-bold text-gray-200 mb-4 border-l-2 border-blue-500 pl-2">DELTA ELECTRONICS INDIA PVT. LTD.</div>
+                        <div class="space-y-4">
+                            <!-- Person 1 -->
+                            <div class="border-b border-gray-700 pb-3 last:border-0 last:pb-0">
+                                <div class="text-base font-bold text-white">Benjamin Lin</div>
+                                <div class="text-xs text-blue-400 mb-1">President</div>
+                                <div class="text-xs text-gray-400 mt-1 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91 80 67164777</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>benjamin.lin@deltaww.com</div>
+                                </div>
+                            </div>
+                            <!-- Person 2 -->
+                            <div class="border-b border-gray-700 pb-3 last:border-0 last:pb-0">
+                                <div class="text-base font-bold text-white">Joe Kao</div>
+                                <div class="text-xs text-blue-400 mb-1">Sales Director, Customized Solutions Dept.</div>
+                                <div class="text-xs text-gray-400 mt-1 flex flex-col md:flex-row md:gap-x-4 gap-y-1">
+                                    <div><i class="fas fa-mobile-alt mr-2 w-4 text-center"></i>+91 95976 08907</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>joe.kao@deltaww.com</div>
+                                </div>
+                            </div>
+                            <!-- Person 3 -->
+                            <div class="border-b border-gray-700 pb-3 last:border-0 last:pb-0">
+                                <div class="text-base font-bold text-white">Fangling Hsia</div>
+                                <div class="text-xs text-blue-400 mb-1">Account Manager, DIN Customized Solutions</div>
+                                <div class="text-xs text-gray-400 mt-1 flex flex-col md:flex-row md:gap-x-4 gap-y-1">
+                                    <div><i class="fas fa-mobile-alt mr-2 w-4 text-center"></i>+91 87187 17778</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>fangling.hsia@deltaww.com</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4 md:space-y-5">
+                    
+                    <!-- Point 1 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 1: Strategic Context & Mutual Trust</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題一：戰略背景與企業情誼 (Strategic Context & Corporate Ties)</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                            <p data-lang="en">This high-level meeting officially established the substantive framework for Foxlink's "Year One" operational launch in India. Discussions between President Thomas and President Benjamin highlighted the core value of Taiwanese enterprises amid global supply chain restructuring.</p>
+                            <p data-lang="zh">本次高層會晤確立了 Foxlink 印度業務「開發元年」的實質性框架。在 Thomas 總裁與 Benjamin 總裁的對話中，雙方確認了台資企業在全球供應鏈重組中的核心價值。</p>
+                            
+                            <p data-lang="en"><strong class="text-blue-400">Strategic Implication:</strong> Delta’s extensive operational history (entered India in 1993) and their focus on long-term product excellence rather than financial engineering form a strong foundation of mutual trust. In India's complex business ecosystem, this shared cultural alignment serves as a "soft power" that significantly lowers communication costs and accelerates our transition from a mere component supplier to a strategic synergy partner.</p>
+                            <p data-lang="zh"><strong class="text-blue-400">戰略意義：</strong> Delta 自 1993 年進入印度市場，其「長期耕耘」與「不玩金融遊戲、專注產品」的特質，構建了兩家企業間深厚的互信。在印度的複雜商業生態中，這種基於台資文化的「人情味」與互信不僅是情感紐帶，更是降低溝通成本、加速從單純供應轉向戰略協同的「軟實力」。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 2: Delta's Scale, Moat & Manufacturing Excellence</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題二：Delta 營運規模與製造實力分析</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en">Delta has built a highly vertically integrated ecosystem designed to create technical barriers insurmountable by local manufacturers, moving well beyond merely exploiting cheap labor:</p>
+                            <p data-lang="zh">Delta 已在印度建立起高度垂直整合的生態體系。其戰略佈局並非僅為了獲取廉價勞動力，而是致力於建構難以被本地廠商跨越的技術門檻：</p>
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en"><strong class="text-green-400">Market Power:</strong> Commands a 50-60% market share in Telecom Power, granting them absolute pricing power.</li>
+                                <li data-lang="zh"><strong class="text-green-400">市場滲透：</strong> 通訊電源 (Telecom Power) 市佔率高達 50-60%，具備絕對定價權。</li>
+                                
+                                <li data-lang="en"><strong class="text-green-400">R&D & Infrastructure:</strong> Houses 400-500 R&D engineers in Bangalore. Delta heavily invested millions to secure naming rights for a metro station ("Delta Station"). This is a strategic moat to solve extreme traffic pain points and create a strong "talent retention barrier."</li>
+                                <li data-lang="zh"><strong class="text-green-400">研發與基礎建設：</strong> 班加羅爾總部配置約 500 名研發工程師。Delta 更斥資取得地鐵站「Delta Station」命名權，透過解決交通痛點構建高效的「招聘與留才屏障」。</li>
+                                
+                                <li data-lang="en"><strong class="text-green-400">De-risking via Automation:</strong> Delta's CEO enforces a strict minimum <strong class="text-yellow-400">40% automation rate</strong> (factory managers face termination if unmet). This is not to save labor costs, but to ensure "quality stability" and neutralize the uncertainties of India's infrastructure. Combined with 95% in-house tooling/CNC capability, they have completely bypassed local supply chain fragility.</li>
+                                <li data-lang="zh"><strong class="text-green-400">自動化避險策略：</strong> Delta 嚴格執行 <strong class="text-yellow-400">40% 的自動化率門檻</strong>。自動化在印度非為節省人力成本，而是為了確保「質量穩定性」並降低落後成本，抵銷基礎環境不確定性。配合 95% 的工裝與 CNC 自製能力，徹底解決當地供應鏈瓶頸。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Point 3 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 3: Technical Synergy & Product Integration (Total Solution)</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題三：核心產品領域與技術協同</h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en">Both parties explored actionable pathways to integrate Foxlink components with Delta's systems to provide comprehensive Turnkey Solutions:</p>
+                            <p data-lang="zh">雙方探討了透過整合 Foxlink 組件與 Delta 系統，提供「Total Solution」的具體路徑：</p>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600">
+                                <p data-lang="en"><strong class="text-white">1. Electric Vehicles (EV):</strong> Delta possesses Powertrain technology (Motor + Controller + Gearbox) but lacks Battery Packs. Foxlink will leverage its extensive battery pack experience (Google, Gogoro, Lyft) to form a Turnkey Solution targeted at the massive Indian 2W/3W market, significantly boosting our joint bargaining power.</p>
+                                <p data-lang="zh"><strong class="text-white">1. 電動車 (EV) 領域：</strong> Delta 具備動力總成技術（馬達+控制器+齒輪箱），但在電池組 (Battery Pack) 有缺口。Foxlink 將引入在 Google、Gogoro 等專案的電池實戰經驗，結合成一體化解決方案，針對印度兩輪/三輪車市場提供 Turnkey 方案以提升議價權。</p>
+                            </div>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600">
+                                <p data-lang="en"><strong class="text-white">2. Data Center & AI:</strong> The market is actively shifting from AOC to AEC due to US DSP supply chain limitations. Foxlink's AEC technology can be deeply integrated with Delta's CDU cooling systems, AI Server Power, and Level 13 Rack solutions.</p>
+                                <p data-lang="zh"><strong class="text-white">2. 數據中心 (Data Center)：</strong> 由於美國 DSP 供應鏈限制，市場正由主動光纜 (AOC) 轉向主動電纜 (AEC)。Foxlink 正開發的 AEC 技術可與 Delta 的 CDU 水冷系統、AI Server Power 及整機櫃解決方案進行深度配套。</p>
+                            </div>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600">
+                                <p data-lang="en"><strong class="text-white">3. Energy & Automation:</strong> Foxlink's absolute advantage in high-quality industrial cables will directly support Delta's upcoming mass production of PV Inverters, Wind Inverters, and specialized railway PQC products.</p>
+                                <p data-lang="zh"><strong class="text-white">3. 能源與工業自動化：</strong> Foxlink 在高品質線纜具備絕對優勢，可直接支援 Delta 即將量產的光伏逆變器 (PV Inverter)、風能變流器及鐵路專用產品。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="recon-box risk">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 4: Client Dynamics & Market Intelligence</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題四：客戶動態與市場競爭情報</h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en">A deep dive was conducted regarding India's extreme procurement culture and infrastructure realities:</p>
+                            <p data-lang="zh">會中對印度市場極端的採購風格與基礎設施現狀進行了深度解構：</p>
+                            
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li data-lang="en">
+                                    <strong class="text-red-400">Reliance Industries Risks:</strong> Reliance frequently utilizes information asymmetry ("closed-door" isolation tactics with 30-minute decision limits). Furthermore, their funding is opaque and centrally controlled ("Party Central"), meaning projects can halt instantly. Suppliers must deploy highly localized professional teams to manage this extreme pressure.
+                                </li>
+                                <li data-lang="zh">
+                                    <strong class="text-red-400">Reliance (信實工業) 風險剖析：</strong> 該客戶慣用「關門會議」等資訊不對稱戰術限時決策，且資金鏈受中央管控，極度不透明，專案具「說停就停」特質。供應商必須配置深諳本地文化的專業團隊以應對極限施壓。
+                                </li>
+                                <li data-lang="en">
+                                    <strong class="text-red-400">SpaceX/Starlink Leapfrog Opportunity:</strong> Terrestrial optical fiber in India is frequently destroyed by local gangs for extortion or by animals, making maintenance costs astronomical. Consequently, India is leapfrogging wired broadband directly to 5G A-Fiber and LEO satellites. As a component supplier for SpaceX, Foxlink must collaborate with Delta to capture the dividends of this infrastructure shift.
+                                </li>
+                                <li data-lang="zh">
+                                    <strong class="text-red-400">SpaceX 與 Starlink 的「跳板戰略」：</strong> 印度地面光纖常遭人為破壞勒索，維修成本極高，導致市場將直接跨越有線寬頻，進入 5G 與低軌衛星通訊。Foxlink 作為 SpaceX 之組件供應商，應與 Delta 協同搶佔此基礎設施變更紅利。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item</th><th class="p-3" data-lang="zh">行動項目</th>
+                                <th class="p-3 w-40" data-lang="en">Owner</th><th class="p-3 w-40" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Joint RFQ Pursuit: Bosch Visit</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">RFQ 突破與共同拜訪 (Bosch)</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Visit Bosch on 4/9 leveraging joint networks to target FPC/Cable RFQs and present capabilities for EV charging ECUs.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">利用雙方高層人脈於 4/9 共同拜訪 Bosch，鎖定 FPC 與 Cable RFQ 機會，並針對 ECU 及四輪 EV 充電系統進行演示。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael Chen & Delta Team</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">2</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Execute Fast-Track Entry (SMT)</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">快速落地方案 (Fast-Track Entry)</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Delta to provision SMT OEM opportunities to Foxlink to supplement Delta's capacity gaps and accelerate Foxlink's market entry.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">Delta 將給予 SMT 代工機會，用來補充其不足的產能，加速 Foxlink 落地。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael Chen</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">3</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Assess Land Integration Strategy</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">土地整合戰略評估</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Evaluate Delta's proposal to reserve 20 acres at their current site for Foxlink's potential factory relocation after the current 2-year lease.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">評估 Delta 提案（現有廠區預留 20 英畝土地），探討 Foxlink 現有廠房兩年後租約到期的遷廠可能性。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">
+                                    <span data-lang="en">Taipei HQ</span>
+                                    <span data-lang="zh">台北總部</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-green-500 text-center">4</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Technical Endorsement Exchange</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">技術背書資料互換與聯名提案</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Swap presentation assets (Foxlink battery/cable vs. Delta systems) to establish co-branded endorsements when pitching to Reliance/Bosch.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">互換 PPT 簡報，整合 Foxlink 電池/線纜與 Delta 系統方案，在面對 Reliance 或 Bosch 等客戶時進行聯名背書。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael Chen & Joe Kao</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Conclusion Section -->
+                <div class="mt-8 bg-gray-800/50 p-4 rounded-lg border border-gray-700 border-l-4 border-l-blue-500">
+                    <h3 class="text-sm font-bold text-white mb-2 uppercase tracking-wide" data-lang="en">Conclusion</h3>
+                    <h3 class="text-sm font-bold text-white mb-2 uppercase tracking-wide" data-lang="zh">結語</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed" data-lang="en">The meeting successfully concluded, marking the establishment of a critical strategic alliance for Foxlink in India. Transitioning from standalone component supply to Taiwanese-backed system integration is the core strategy ensuring the success of Foxlink's inaugural operational year. President Thomas expressed high confidence in President Benjamin's operational depth in Bangalore, anticipating substantial breakthroughs in capacity integration and market expansion over the next two years.</p>
+                    <p class="text-sm text-gray-300 leading-relaxed" data-lang="zh">本次會議圓滿結束，標誌著 Foxlink 在印度市場已建立關鍵的戰略盟友。由組件供應轉向系統整合，由單打獨鬥轉向台資強強聯手，是 Foxlink 確保印度業務開發元年成功的核心策略。Thomas 總裁對 Benjamin 總裁在班加羅爾展現的營運深度表示高度肯定，並期待未來兩年內在產能整合與市場開拓上的實質突破。</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
