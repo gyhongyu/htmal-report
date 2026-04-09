@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-08T19:09:21.851Z",
+  "lastUpdated": "2026-04-09T19:31:29.863Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -960,6 +960,21 @@
       "fileName": "report-1775675360899.html",
       "createdAt": "2026-04-08T19:09:21.851Z",
       "updatedAt": "2026-04-08T19:09:21.851Z"
+    },
+    {
+      "id": "report-1775763088622",
+      "title": "Meeting Minutes: Visit to Bosch Naganathapura & Strategic Alliance",
+      "description": "會議記錄：Bosch 班加羅爾總部訪問與策略聯盟協作",
+      "categories": [
+        "客戶攻略",
+        "內部簡報",
+        "客戶KYC",
+        "會議記要",
+        "項目計劃"
+      ],
+      "fileName": "report-1775763088622.html",
+      "createdAt": "2026-04-09T19:31:29.863Z",
+      "updatedAt": "2026-04-09T19:31:29.863Z"
     }
   ]
 }

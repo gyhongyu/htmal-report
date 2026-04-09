@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TARGET: BOSCH AUTOMOTIVE ELECTRONICS INDIA PVT.LTD. -->
+    <!-- ATTENDEES: Michael Chen (Foxlink), Suprith R (Bosch), Joe Kao (Delta), Abhinav Sharma (Pavone) -->
+    <title data-lang="en">MOM: Visit to Bosch Naganathapura & Strategic Alliance</title>
+    <title data-lang="zh">會議記錄：Bosch 班加羅爾總部訪問與策略聯盟協作</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400, .text-yellow-500, .text-green-500 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">OFFICIAL MEETING MINUTES</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">Meeting Minutes: Visit to Bosch Naganathapura & Strategic Alliance</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">會議記錄：Bosch 班加羅爾總部訪問與策略聯盟協作</h1>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="en">Subject: Strategic Alliance Case Study & Localization Supply Chain</p>
+                    <p class="text-base md:text-lg text-gray-300 mt-2" data-lang="zh">主題：策略聯盟成功案例分析與在地化供應鏈協作</p>
+                </div>
+
+                <!-- PART 1: OVERVIEW -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. Meeting Information</span>
+                    <span data-lang="zh">壹、 會議基本資訊</span>
+                </div>
+
+                <!-- Basic Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Date/Location -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Meeting Details</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">會議細節</h3>
+                        <table class="w-full text-sm text-left text-gray-300 shadow-none mt-0 mb-0">
+                            <tr>
+                                <th class="w-24 text-gray-500 bg-transparent border-none p-1">Date:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-bold">2026/04/09</td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Location:</th>
+                                <td class="text-white bg-transparent border-none p-1 font-mono text-xs leading-relaxed">
+                                    Bosch Automotive Electronics India Pvt.Ltd.<br>
+                                    Naganathapura, P.B. No. 10029<br>
+                                    Electronic City Post Office, Bangalore - 560 100, INDIA
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-gray-500 bg-transparent border-none p-1">Attendees:</th>
+                                <td class="text-white bg-transparent border-none p-1">
+                                    <strong class="text-blue-300">Foxlink:</strong> Michael Chen<br>
+                                    <strong class="text-blue-300">Bosch:</strong> Suprith R<br>
+                                    <strong class="text-blue-300">Delta Electronics:</strong> Joe Kao<br>
+                                    <strong class="text-blue-300">Pavone Tech:</strong> Abhinav Sharma
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- Counterpart -->
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="en">Counterpart Information</h3>
+                        <h3 class="text-gray-400 text-sm uppercase font-bold border-b border-gray-700 pb-2 mb-3" data-lang="zh">受訪對象資訊</h3>
+                        <div class="flex items-start">
+                            <div class="flex-1">
+                                <div class="text-lg md:text-xl font-bold text-white">Suprith R</div>
+                                <div class="text-sm text-blue-400 mb-1">Deputy Manager, Purchasing Project Management</div>
+                                <div class="text-base md:text-lg font-bold text-gray-200 mt-3 border-l-2 border-blue-500 pl-2">BOSCH AUTOMOTIVE ELECTRONICS INDIA PVT. LTD.</div>
+                                <div class="text-xs text-gray-400 mt-3 space-y-1">
+                                    <div><i class="fas fa-phone mr-2 w-4 text-center"></i>+91-90608 60717 / +91-(80)6145-5966</div>
+                                    <div><i class="fas fa-envelope mr-2 w-4 text-center"></i>R.Suprith@in.bosch.com</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: RECORD -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Discussion Record</span>
+                    <span data-lang="zh">貳、 會議討論內容</span>
+                </div>
+
+                <!-- Discussion Points -->
+                <div class="space-y-4 md:space-y-5">
+                    
+                    <!-- Point 1 -->
+                    <div class="recon-box info">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 1: Strategic Alliance Shift & Bosch's "Internal Foundry" Model</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題一：策略聯盟轉向與 Bosch 的「內部生產基地」模式</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en"><strong>Context:</strong> Bosch's Mobility business is a major target, accounting for over 70% of its global revenue, but its supply chain is notoriously closed.</p>
+                            <p data-lang="zh"><strong>背景：</strong> Bosch 移動出行業務佔其全球營收 70% 以上，為必爭之策略帳戶，但其供應鏈極度封閉且門檻嚴苛。</p>
+                            
+                            <p data-lang="en"><strong>Detail:</strong> The Naganathapura plant operates as an "Internal Foundry" serving four internal business divisions (Power Solutions, Cross-Domain Computing, Vehicle Motion, 2WP) rather than direct end-market customers.</p>
+                            <p data-lang="zh"><strong>細節：</strong> Bosch Naganathapura 廠定位為「內部生產基地 (Internal Foundry)」，負責支撐內部四大業務單位（動力系統、跨域計算、制動懸掛、兩輪車電子），而非直接面對外部終端市場。</p>
+                            
+                            <p data-lang="en"><strong>Implication:</strong> Consequently, Foxlink must transition from a traditional parts supplier to a deep localization partner to align with Bosch's internal operational demands and successfully bypass strict Tier-1 entry barriers.</p>
+                            <p data-lang="zh"><strong>影響：</strong> 因此，正崴必須從單純的零件供應商，轉型為深度在地化合作夥伴，以符合其內部採購需求並繞過嚴苛的准入門檻。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="recon-box risk">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 2: Strict Localization Threshold ("Made in India")</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題二：嚴格的在地化門檻 (Made in India)</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en"><strong>Context:</strong> Driven by high anti-dumping duties and localization commitments to OEMs (e.g., Tata, Mahindra), Bosch's procurement strategy has radically shifted.</p>
+                            <p data-lang="zh"><strong>背景：</strong> 受限於印度政府高額的反傾銷稅，以及對 OEM 客戶（如 Tata, Mahindra）的國產化承諾，Bosch 採購策略發生了巨變。</p>
+                            
+                            <div class="bg-gray-900/80 p-3 rounded border border-gray-600 mt-2 mb-2">
+                                <p data-lang="en" class="italic text-gray-200">Mr. Suprith explicitly stated: <strong class="text-red-400">"If you cannot do local production (Made in India), I will throw your proposal in the trash."</strong></p>
+                                <p data-lang="zh" class="italic text-gray-200">Suprith 先生明確警告：<strong class="text-red-400">「若無法做到在地化生產 (Made in India)，我會直接將你的提案丟進垃圾桶。」</strong></p>
+                            </div>
+                            
+                            <p data-lang="en"><strong>Detail & Implication:</strong> Bosch no longer accepts pure imported component quotes. Price is no longer the sole battleground; the core competitive challenge is leveraging our alliance to bypass the 50% localization verification threshold and tariff burdens by providing a complete, localized value chain.</p>
+                            <p data-lang="zh"><strong>細節與影響：</strong> 目前 Bosch 已完全不接受單純進口零件報價。競爭的核心已非單價，而是正崴如何透過策略聯盟，提供完整的在地產能價值鏈，成功繞過 50% 的驗證門檻與關稅重負。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="recon-box opp">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 3: The "Joint Fleet" Value Proposition (Delta, Foxlink, Pavone)</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題三：「聯合艦隊」價值主張 (台達、正崴、Pavone)</h3>
+                        <div class="text-gray-300 text-sm space-y-3 leading-relaxed">
+                            <p data-lang="en"><strong>Context:</strong> Single-supplier models fail to meet Bosch's risk and security requirements, necessitating a consolidated, one-stop approach.</p>
+                            <p data-lang="zh"><strong>背景：</strong> 單打獨鬥的供應模式已無法滿足 Bosch 的安全性與規模要求，必須提供一站式的解決方案。</p>
+                            
+                            <p data-lang="en"><strong>Detail:</strong> We presented a tripartite alliance:</p>
+                            <p data-lang="zh"><strong>細節：</strong> 我們向客戶展示了三方聯合艦隊的實力：</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong class="text-green-400">Delta Electronics:</strong> Offers 16 SMT lines and a 20-acre "Supplier Park" for JIT delivery. Crucially, Delta already holds Bosch/BSH green-list supplier status.</li>
+                                <li data-lang="zh"><strong class="text-green-400">台達電子 (Delta)：</strong> 提供 16 條 SMT 自動化產線及 20 英畝「供應商園區」以實現 JIT 近距離交付，且具備 Bosch/BSH 綠色供應商資格的信任背書。</li>
+                                <li data-lang="en"><strong class="text-green-400">Foxlink:</strong> Injects critical precision components (e.g., DCDC connectors, FPCs) via systematic technology transfer from Vietnam to India.</li>
+                                <li data-lang="zh"><strong class="text-green-400">正崴精密 (Foxlink)：</strong> 透過越南或中國廠區的技術轉移，填補 BOM 中在地化精密組件 (如 DCDC 連接器、FPC) 的缺口。</li>
+                                <li data-lang="en"><strong class="text-green-400">Pavone Tech:</strong> Accelerates AIS/BIS technical certifications and acts as a Customs House Agent (CHA) to resolve logistics friction.</li>
+                                <li data-lang="zh"><strong class="text-green-400">Pavone Technologies：</strong> 負責 AIS/BIS/WPC 等技術認證，並具備報關行 (CHA) 身份，解決清關效率與法規合規性。</li>
+                            </ul>
+                            
+                            <p data-lang="en"><strong>Implication:</strong> This unified model effectively mitigates Bosch's core anxieties regarding capacity expansion (CAPEX) risks, anti-dumping margin erosion, and lengthy 1-2 year audit cycles.</p>
+                            <p data-lang="zh"><strong>影響：</strong> 此模式完美解決了客戶在擴廠 CAPEX 風險、高額反傾銷稅侵蝕利潤，以及冗長 Tier 1 稽核週期上的核心痛點。</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="en">Item 4: Specific Product Line Requirements & Technical Boundaries</h3>
+                        <h3 class="text-base md:text-lg font-bold text-white mb-2" data-lang="zh">議題四：關鍵產品線需求與技術邊界</h3>
+                        <div class="text-gray-300 text-sm space-y-2 leading-relaxed">
+                            <p data-lang="en"><strong>Context:</strong> Clarifying the exact technical scope for Foxlink's R&D allocation to align with Bosch's internal engineering practices.</p>
+                            <p data-lang="zh"><strong>背景：</strong> 需釐清 Bosch 的具體技術需求，以精確引導正崴後續的研發資源投入方向。</p>
+                            
+                            <p data-lang="en"><strong>Detail:</strong></p>
+                            <p data-lang="zh"><strong>細節：</strong></p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li data-lang="en"><strong>10.1" LCD Modules:</strong> Bosch procures only the glass/module. Internal control PCBAs are designed and assembled in-house by Bosch.</li>
+                                <li data-lang="zh"><strong>10.1 吋 LCD 顯示屏：</strong> Bosch 僅採購面板模組 (Glass/Module)，內部驅動控制 PCBA 由其自製。</li>
+                                <li data-lang="en"><strong>EV Solutions (2W/3W):</strong> The focus is on integrated "Charger Plus Converter" solutions outside of traditional BMS.</li>
+                                <li data-lang="zh"><strong>電動車 (EV) 方案：</strong> 聚焦兩輪/三輪車的 Charger Plus Converter 整合型充電方案。</li>
+                                <li data-lang="en"><strong>DCDC Connectors:</strong> Identified as the most urgent item for import substitution.</li>
+                                <li data-lang="zh"><strong>DCDC 連接器：</strong> 為目前進口替代最急迫的項目，亟需落實印度製造。</li>
+                                <li data-lang="en"><strong>Automation & Testing:</strong> Bosch's final assembly is semi-automated; they highly prefer partners to develop custom Automated Test Equipment (ATE) jigs.</li>
+                                <li data-lang="zh"><strong>自動化測試：</strong> 最終組裝為半自動化 (Semi-auto)，對專屬自動化測試設備 (ATE) 治具開發需求極高。</li>
+                            </ul>
+                            
+                            <p data-lang="en"><strong>Implication:</strong> As Foxlink India does not have local R&D, Delta will lead and showcase its track record in control circuits and EV solutions (e.g., leveraging TVS experience). Foxlink will focus on cooperating in optoelectronic integration and preparing engineering support for custom ATE jigs.</p>
+                            <p data-lang="zh"><strong>影響：</strong> 由於正崴印度無在地研發團隊，控制電路及 EV 方案（如 TVS 經驗對標）將由台達 (Delta) 展現實績並主導開發；正崴則專注配合光電整合，並籌備針對其產線的專屬治具工程支援。</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PART 3: ACTION PLAN -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Action Items</span>
+                    <span data-lang="zh">叁、 下一步行動計畫</span>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-800 border border-gray-700 rounded-lg p-2 md:p-4 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                            <tr>
+                                <th class="p-3 w-12 text-center">#</th>
+                                <th class="p-3" data-lang="en">Action Item</th><th class="p-3" data-lang="zh">行動項目</th>
+                                <th class="p-3 w-32" data-lang="en">Owner</th><th class="p-3 w-32" data-lang="zh">負責人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="p-3 font-bold text-yellow-500 text-center">1</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">DCDC Connector Localization Quote</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">啟動 DCDC Connector 在地化報價</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Initiate cost modeling and prepare a "Vietnam to India" technology transfer timeline to demonstrate a clear tariff bypass route.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">啟動成本模型分析，並準備「越南至印度技術轉移時程表」，向客戶展現繞過進口關稅之具體路徑。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Michael Chen</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-green-500 text-center">2</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Delta KG Plant Tour & ODM Pitch</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">安排參觀台達 KG 廠與 ODM 提案</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Arrange for Bosch procurement to visit the plant, focusing on custom ODM design and production capabilities.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">安排 Bosch 採購團隊參訪 KG 廠，針對 ODM 合作模式展示客製化設計與生產能力。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Joe Kao</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-blue-500 text-center">3</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Certification Pathway Estimation</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">提供認證路徑預估</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Provide AIS-140 and EMC (AIS-004) compliance timelines for Bosch's specific electronic controllers to accelerate time-to-market.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">提供針對 Bosch 特定電子控制器的 AIS-140 與 EMC (AIS-004) 認證路徑與時程預估，加速產品上市。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">Abhinav Sharma</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-purple-500 text-center">4</td>
+                                <td class="p-3">
+                                    <strong class="text-white block mb-1" data-lang="en">Strategic Facility Evaluation</strong>
+                                    <strong class="text-white block mb-1" data-lang="zh">專屬廠區策略評估</strong>
+                                    <span class="text-xs text-gray-400" data-lang="en">Long-term: Assess the feasibility of establishing a "Dedicated Foxlink Shop Floor" within Delta's Supplier Park to consolidate the alliance.</span>
+                                    <span class="text-xs text-gray-400" data-lang="zh">長期規劃：評估在台達 KG 廠供應商園區內設立「正崴專屬車間」的可行性，進一步鞏固物理整合與聯盟關係。</span>
+                                </td>
+                                <td class="p-3 font-medium text-gray-300">
+                                    <span data-lang="en">Taipei HQ</span>
+                                    <span data-lang="zh">台北 HQ</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
