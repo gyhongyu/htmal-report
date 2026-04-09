@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">President Thomas: India Strategic Visit Summary Report</title>
+    <title data-lang="zh">Foxlink 總裁 Thomas 印度戰略訪問總結報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #374151; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2.5rem; margin-bottom: 1.5rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 1rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            .section-divider { margin-top: 3.5rem; margin-bottom: 2rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 10pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            
+            /* 強制重置所有背景為透明，文字為黑色，避免深色主題干擾列印 */
+            * { background-color: transparent !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; }
+            
+            /* 解除表格卷軸限制，避免 PDF 右側被截斷 */
+            .overflow-x-auto { overflow: visible !important; } 
+            table { border-collapse: collapse !important; width: 100% !important; page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            th { background-color: #f3f4f6 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-weight: bold !important; }
+            td, th { border: 1px solid #9ca3af !important; padding: 0.5rem !important; }
+            
+            /* 覆蓋掉我自作主張加的奇偶數行深色背景 */
+            tbody tr:nth-child(odd), tbody tr:nth-child(even), tbody tr:hover { background-color: transparent !important; }
+            
+            /* 區塊與排版優化 */
+            .recon-box { border: 1px solid #9ca3af !important; padding: 1rem !important; margin-bottom: 1rem !important; page-break-inside: avoid; }
+            h1, h2, h3, h4 { page-break-after: avoid; }
+            .section-divider { margin-top: 1.5rem; margin-bottom: 1rem; } 
+            .section-divider::before, .section-divider::after { border-bottom: 1px solid #000 !important; } 
+            .grid { display: block !important; }
+            .grid > div { margin-bottom: 1rem !important; page-break-inside: avoid; }
+            
+            /* 讓外連按鈕在 PDF 中顯示為乾淨的框線文字 */
+            a { text-decoration: none !important; font-weight: bold !important; }
+            a[target="_blank"] { border: 1px solid #9ca3af !important; padding: 2px 8px !important; border-radius: 4px !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">STRATEGIC SUMMARY REPORT</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mt-2 text-blue-400" data-lang="en">President Thomas: India Strategic Visit Summary</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mt-2 text-blue-400" data-lang="zh">總裁 Thomas 印度戰略訪問總結報告</h1>
+                </div>
+
+                <!-- PART 1: Delta -->
+                <div class="section-divider">
+                    <span class="flex items-center flex-wrap gap-3">
+                        <span data-lang="en">1. Delta Electronics India</span>
+                        <span data-lang="zh">壹、 Delta Electronics India (台達電)</span>
+                        <a href="https://html.foxlink.co.in/reports/report-1775675360899.html" target="_blank" class="bg-blue-500/20 hover:bg-blue-500/40 text-blue-300 border border-blue-500/50 px-3 py-1 rounded-md text-xs tracking-normal normal-case flex items-center gap-1 font-bold transition-colors shadow-sm" style="text-decoration: none;">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span data-lang="en">Full Report</span>
+                            <span data-lang="zh">完整會議記錄</span>
+                        </a>
+                    </span>
+                </div>
+                <div class="mb-4">
+                    <h2 class="text-lg md:text-xl font-bold text-white mb-2" data-lang="en">Taiwan-Funded Alliance & Tech Synergy</h2>
+                    <h2 class="text-lg md:text-xl font-bold text-white mb-2" data-lang="zh">台資強強聯手與技術協同</h2>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-gray-700 bg-gray-800 shadow-lg">
+                    <table class="w-full text-sm text-gray-300 m-0">
+                        <thead class="text-gray-400 uppercase bg-gray-900">
+                            <tr>
+                                <th class="w-1/6" data-lang="en">Domain</th><th class="w-1/6" data-lang="zh">戰略領域</th>
+                                <th class="w-1/4" data-lang="en">Facts & Current Status</th><th class="w-1/4" data-lang="zh">事實與現況</th>
+                                <th class="w-1/4" data-lang="en">Issues & Strategy</th><th class="w-1/4" data-lang="zh">議題與策略方向</th>
+                                <th class="w-1/3" data-lang="en">Key Action Recommendations</th><th class="w-1/3" data-lang="zh">關鍵行動建議</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="font-bold text-blue-400">
+                                    <span data-lang="en">Scale & R&D</span><span data-lang="zh">營運規模與研發</span>
+                                </td>
+                                <td>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><span data-lang="en">Delta India has >500 R&D engineers.</span><span data-lang="zh">Delta 印度編制超過 500 名研發工程師。</span></li>
+                                        <li><span data-lang="en">Production automation rate up to 40%.</span><span data-lang="zh">產線自動化率高達 40%。</span></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Target deep supply chain opportunities in Telecom and Server power equipment.</span><span data-lang="zh">鎖定電信 (Telecom) 與伺服器 (Server) 電源設備的深層供應鏈商機。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">1. <span data-lang="en">System-level Sales Push</span><span data-lang="zh">系統級銷售推動</span></strong>
+                                    <span data-lang="en">Exchange presentation resources (Foxlink wire harness/battery vs. Delta systems), establish joint quoting & technical endorsement.</span><span data-lang="zh">交換雙方簡報資源 (Foxlink 線束/電池 vs. Delta 系統)，建立聯合報價與技術背書。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-blue-400">
+                                    <span data-lang="en">EV Expansion</span><span data-lang="zh">電動車佈局</span>
+                                </td>
+                                <td>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><span data-lang="en">Highly complementary products (Delta lacks wire resources, Foxlink lacks system integration).</span><span data-lang="zh">雙方產品高度互補 (Delta 缺乏線束資源，Foxlink 缺乏系統整合方案)。</span></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Move away from solo efforts, jointly promote supply chain transformation centered on AEC standards.</span><span data-lang="zh">擺脫單打獨鬥，共同推動以 AEC (汽車電子委員會) 標準為核心的供應鏈轉型。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">2. <span data-lang="en">Joint RFQ Pursuit</span><span data-lang="zh">聯合爭取 RFQ</span></strong>
+                                    <span data-lang="en">Jointly visited Bosch on 4/9 to secure FPC/Cable RFQs via mutual networks, showcasing EV charging ECU capabilities.</span><span data-lang="zh">於 4/9 共同拜訪 Bosch，透過雙方人脈爭取 FPC/Cable RFQ，並展示 EV 充電 ECU 聯合能力。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-blue-400">
+                                    <span data-lang="en">Mfg. & Capacity</span><span data-lang="zh">在地製造與產能</span>
+                                </td>
+                                <td>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><span data-lang="en">Delta possesses abundant local land assets.</span><span data-lang="zh">Delta 具備豐富的在地土地資產。</span></li>
+                                        <li><span data-lang="en">Delta's current capacity has partial shortages.</span><span data-lang="zh">Delta 現有產能出現部分缺口。</span></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Establish local manufacturing advantage, achieve JIT delivery layout and rapid market entry.</span><span data-lang="zh">建立在地化製造優勢，達成 JIT (Just-In-Time) 交付佈局與快速市場切入。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">3. <span data-lang="en">Land Assessment</span><span data-lang="zh">廠區土地評估</span></strong>
+                                    <span data-lang="en">Evaluate Delta's 20-acre land as a potential Foxlink relocation target post 2-year lease.</span><span data-lang="zh">評估 Delta 廠區內保留的 20 英畝土地，作為 Foxlink 兩年租約到期後的潛在遷廠目標。</span>
+                                    <div class="mt-2 mb-2"></div>
+                                    <strong class="text-white block mb-1">4. <span data-lang="en">SMT Quick Entry</span><span data-lang="zh">啟動 SMT 快速切入</span></strong>
+                                    <span data-lang="en">Take over Delta's SMT OEM opportunities to fill their gaps and accelerate Foxlink's market entry.</span><span data-lang="zh">承接 Delta 釋出的 SMT OEM 機會，填補 Delta 產能缺口，同時加速 Foxlink 市場導入。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-blue-400">
+                                    <span data-lang="en">Market Insights</span><span data-lang="zh">市場情報與客情</span>
+                                </td>
+                                <td>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><span data-lang="en">Reliance has extreme/rapid procurement (e.g., 30-min decisions).</span><span data-lang="zh">Reliance 擁有極端且迅速的採購文化 (如 30 分鐘決策)。</span></li>
+                                        <li><span data-lang="en">India's fiber network vulnerabilities boost leapfrog satellite comms opportunities.</span><span data-lang="zh">印度光纖易遭破壞，推升跳躍式衛星通訊商機。</span></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Master local giants' decision rhythm, prepare for SpaceX/Starlink infrastructure.</span><span data-lang="zh">掌握在地巨頭的決策節奏，並針對 SpaceX/Starlink 相關跳躍式基礎建設預做準備。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">5. <span data-lang="en">Strategy Integration</span><span data-lang="zh">商情整合與策略擬定</span></strong>
+                                    <span data-lang="en">Incorporate the extreme procurement culture and satellite opportunities into pricing and expansion plans.</span><span data-lang="zh">將極端採購文化與衛星通訊商機納入後續定價機制與業務拓展計畫。</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PART 2: Jio / Reliance -->
+                <div class="section-divider">
+                    <span class="flex items-center flex-wrap gap-3">
+                        <span data-lang="en">2. Jio / Reliance</span>
+                        <span data-lang="zh">貳、 Jio / Reliance</span>
+                        <a href="https://html.foxlink.co.in/reports/report-1775596782050.html" target="_blank" class="bg-green-500/20 hover:bg-green-500/40 text-green-300 border border-green-500/50 px-3 py-1 rounded-md text-xs tracking-normal normal-case flex items-center gap-1 font-bold transition-colors shadow-sm" style="text-decoration: none;">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span data-lang="en">Full Report</span>
+                            <span data-lang="zh">完整會議記錄</span>
+                        </a>
+                    </span>
+                </div>
+                <div class="mb-4">
+                    <h2 class="text-lg md:text-xl font-bold text-white mb-2" data-lang="en">Deep Integration of National-Level New Energy Ecosystem</h2>
+                    <h2 class="text-lg md:text-xl font-bold text-white mb-2" data-lang="zh">國家級新能源生態系深度整合</h2>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-gray-700 bg-gray-800 shadow-lg">
+                    <table class="w-full text-sm text-gray-300 m-0">
+                        <thead class="text-gray-400 uppercase bg-gray-900">
+                            <tr>
+                                <th class="w-1/6" data-lang="en">Domain</th><th class="w-1/6" data-lang="zh">戰略領域</th>
+                                <th class="w-1/4" data-lang="en">Facts & Current Status</th><th class="w-1/4" data-lang="zh">事實與現況</th>
+                                <th class="w-1/4" data-lang="en">Issues & Strategy</th><th class="w-1/4" data-lang="zh">議題與策略方向</th>
+                                <th class="w-1/3" data-lang="en">Key Action Recommendations</th><th class="w-1/3" data-lang="zh">關鍵行動建議</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="font-bold text-green-400">
+                                    <span data-lang="en">Exclusivity & IP</span><span data-lang="zh">排他性技術與 IP</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Exclusivity:</span><span data-lang="zh">排他性技術：</span></strong>
+                                    <span data-lang="en">Jio strictly rejects closed patents (e.g., Gogoro case), demands Foxlink provide open-source solutions with IP dominance.</span><span data-lang="zh">Jio 嚴厲排斥封閉專利（如 Gogoro 停擺案例），要求 Foxlink 提供具備 IP 主導權、開放原始碼的方案。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Financial Eng:</span><span data-lang="zh">財務工程：</span></strong>
+                                    <span data-lang="en">India has a 20% service withholding tax; central fund control poses "stop-at-any-time" project risks.</span><span data-lang="zh">印度存在 20% 服務費代扣稅；Jio 資金由中央控管，專案具備「說停就停」的風險。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">1. <span data-lang="en">Submit Mature Proposal</span><span data-lang="zh">提交方案</span></strong>
+                                    <span data-lang="en">Skip lengthy R&D, directly submit a mature battery swap station turnkey solution to meet the 6-month product window.</span><span data-lang="zh">跳過冗長研發，直接提交成熟的換電站統包方案，迎合 6 個月產品窗。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-green-400">
+                                    <span data-lang="en">Ecosystem & Mfg</span><span data-lang="zh">生態圈與量產</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Ecosystem Link:</span><span data-lang="zh">生態連動：</span></strong>
+                                    <span data-lang="en">Jio invested in 3W OEM "Magenta"; building a new energy base in Gujarat (5x size of Singapore).</span><span data-lang="zh">Jio 入股 3W OEM "Magenta"；正在古吉拉特邦建設新加坡 5 倍大的新能源基地。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Software Integration:</span><span data-lang="zh">軟體對接：</span></strong>
+                                    <span data-lang="en">Past failure in cloud integration caused unpaid samples; SDK integration must be thoroughly resolved.</span><span data-lang="zh">過去曾因雲端集成失敗導致樣品未付款，需徹底解決 SDK 對接問題。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">2. <span data-lang="en">Tax & Volume Locking</span><span data-lang="zh">稅務與量產鎖定</span></strong>
+                                    <span data-lang="en">Adopt "Tax & Volume Locking Strategy", amortizing NRE costs into the initial BOM to bypass withholding taxes.</span><span data-lang="zh">採用「Tax & Volume Locking Strategy」，將 NRE 開發費攤提至首批訂單 BOM 中，規避代扣稅。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-green-400">
+                                    <span data-lang="en">Specs & R&D</span><span data-lang="zh">技術標準與研發</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Tech Specs:</span><span data-lang="zh">技術標準：</span></strong>
+                                    <span data-lang="en">Adopt LFP 32140 cells; demands bi-directional metering (reverse power to retail dark stores during outages) & thermal management.</span><span data-lang="zh">採用 LFP 32140 電芯；要求換電站具備雙向計量（停電時反向供電給零售暗倉）與熱管理。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">R&D Autonomy:</span><span data-lang="zh">研發排他性與自主權：</span></strong>
+                                    <span data-lang="en">Jio strongly rejects joint development with Delta, demanding Foxlink maintain exclusive R&D control.</span><span data-lang="zh">Jio 強烈拒絕 Foxlink 與 Delta 共同開發，要求 Foxlink 必須保持研發的專屬與自主控制權。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">3. <span data-lang="en">Pilot Program</span><span data-lang="zh">先導計畫</span></strong>
+                                    <span data-lang="en">Assign dedicated firmware engineers for SDK integration; prepare a pilot in Jamnagar campus (6,000 households).</span><span data-lang="zh">指派專責軟韌體工程師解決 SDK 對接；籌備 Jamnagar 園區（6,000 戶規模）的先導試點計畫。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-green-400">
+                                    <span data-lang="en">Internal Align.</span><span data-lang="zh">內部戰略對齊</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Org Changes:</span><span data-lang="zh">組織變革：</span></strong>
+                                    <span data-lang="en">Initiated by Freddy, coinciding with Foxlink's reshuffle (CBG unified under COO Eric Huang).</span><span data-lang="zh">專案由 Freddy 發起，並適逢 Foxlink 組織重整 (CBG 統一於 COO Eric Huang 轄下)。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">HQ Strategy Alignment:</span><span data-lang="zh">總部戰略定調：</span></strong>
+                                    <span data-lang="en">Redefine Reliance partnership specs, ensuring HQ resources and strategic support.</span><span data-lang="zh">重新定義 Reliance 合作規格，需確保總部資源與戰略支持。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">4. <span data-lang="en">Exec Level Reporting</span><span data-lang="zh">高層戰略匯報</span></strong>
+                                    <span data-lang="en">Upon Thomas's return to Taiwan, report project specs & strategy to Freddy and COO Eric Huang.</span><span data-lang="zh">待 Thomas 返台後，向 Freddy 與 COO Eric Huang 進行專案規格與戰略匯報。</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PART 3: Bosch -->
+                <div class="section-divider">
+                    <span class="flex items-center flex-wrap gap-3">
+                        <span data-lang="en">3. Bosch Bangalore</span>
+                        <span data-lang="zh">參、 Bosch Bangalore (博世)</span>
+                        <a href="https://html.foxlink.co.in/reports/report-1775763088622.html" target="_blank" class="bg-red-500/20 hover:bg-red-500/40 text-red-300 border border-red-500/50 px-3 py-1 rounded-md text-xs tracking-normal normal-case flex items-center gap-1 font-bold transition-colors shadow-sm" style="text-decoration: none;">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span data-lang="en">Full Report</span>
+                            <span data-lang="zh">完整會議記錄</span>
+                        </a>
+                    </span>
+                </div>
+                <div class="mb-4">
+                    <h2 class="text-lg md:text-xl font-bold text-white mb-2" data-lang="en">Requires Local Mfg & Tech Services (Led by Delta, Foxlink Supplies Components)</h2>
+                    <h2 class="text-lg md:text-xl font-bold text-white mb-2" data-lang="zh">需本地制造及本地技術服務, 由台達主導, Foxlink供應零組件</h2>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-gray-700 bg-gray-800 shadow-lg">
+                    <table class="w-full text-sm text-gray-300 m-0">
+                        <thead class="text-gray-400 uppercase bg-gray-900">
+                            <tr>
+                                <th class="w-1/6" data-lang="en">Domain</th><th class="w-1/6" data-lang="zh">戰略領域</th>
+                                <th class="w-1/4" data-lang="en">Facts & Current Status</th><th class="w-1/4" data-lang="zh">事實與現況</th>
+                                <th class="w-1/4" data-lang="en">Issues & Strategy</th><th class="w-1/4" data-lang="zh">議題與策略方向</th>
+                                <th class="w-1/3" data-lang="en">Key Action Recommendations</th><th class="w-1/3" data-lang="zh">關鍵行動建議</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr>
+                                <td class="font-bold text-red-400">
+                                    <span data-lang="en">Localization</span><span data-lang="zh">在地化政策</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Ultimatum:</span><span data-lang="zh">在地化通牒：</span></strong>
+                                    <span data-lang="en">Suprith R stressed: "If not Made in India, the proposal is considered garbage."</span><span data-lang="zh">Suprith R 強調「若非在地製造 (Made in India)，提案即視同垃圾」。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Import Sub Urgency:</span><span data-lang="zh">進口替代急迫性：</span></strong>
+                                    <span data-lang="en">DCDC connectors are the most urgent gap; EV sector focuses on "Integrated Charger Plus Converter".</span><span data-lang="zh">DCDC 連接器是目前最急迫的在地化缺口；EV 領域聚焦「Integrated Charger Plus Converter」。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">1. <span data-lang="en">Initiate Local Quotes</span><span data-lang="zh">啟動在地化報價</span></strong>
+                                    <span data-lang="en">Immediately initiate DCDC connector quoting, map out "Vietnam to India" tech transfer timeline to demonstrate tax evasion routing.</span><span data-lang="zh">立即啟動 DCDC 連接器報價，並規劃「越南至印度」技術轉移時程，以展示避稅路徑。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-red-400">
+                                    <span data-lang="en">Biz Complexity</span><span data-lang="zh">業務複雜度</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Multi-BU Demand:</span><span data-lang="zh">多事業部複雜度：</span></strong>
+                                    <span data-lang="en">Must simultaneously address procurement needs of 4 different BUs (e.g., Power, Mobility, 2W).</span><span data-lang="zh">需同時面對內部四個不同業務單位 (如動力、車輛運動、2W) 的採購需求。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Tier-1 Barrier Breakthrough:</span><span data-lang="zh">Tier-1 壁壘突破：</span></strong>
+                                    <span data-lang="en">Abandon pure import price wars; leverage Delta's existing Bosch/BSH green-list status to enter.</span><span data-lang="zh">放棄純進口報價戰，善用 Delta 已具備的 Bosch/BSH 綠色名單資格切入。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">2. <span data-lang="en">Plant Tour & ODM Proposal</span><span data-lang="zh">產線參訪與 ODM 提案</span></strong>
+                                    <span data-lang="en">Arrange Bosch procurement team's visit to Delta's KG plant, focusing on custom ODM design & production demo.</span><span data-lang="zh">安排 Bosch 採購團隊參訪台達 KG 廠，聚焦客製化 ODM 設計與生產能力展示。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-red-400">
+                                    <span data-lang="en">Tech & Eng.</span><span data-lang="zh">技術與工程支援</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Production Support:</span><span data-lang="zh">產線支援：</span></strong>
+                                    <span data-lang="en">Bosch's final assembly is semi-automated, requiring high volumes of custom ATE fixtures. (Foxlink lacks local R&D currently).</span><span data-lang="zh">Bosch 終端組裝為半自動化，對專屬 ATE 治具需求極高。(Foxlink 印度目前無在地 R&D)</span>
+                                </td>
+                                <td>
+                                    <strong class="text-gray-400 block"><span data-lang="en">Clear Division of Labor:</span><span data-lang="zh">明確技術邊界與分工：</span></strong>
+                                    <span data-lang="en">Delta leads electronic controls; Foxlink focuses on optoelectronic integration and ATE fixture engineering.</span><span data-lang="zh">由台達主導電控方案，Foxlink 專注於光電整合與 ATE 治具的工程支援。</span>
+                                </td>
+                                <td>
+                                    <strong class="text-white block mb-1">3. <span data-lang="en">Dedicated Workshop Eval.</span><span data-lang="zh">專屬車間評估 (長期)</span></strong>
+                                    <span data-lang="en">Evaluate the feasibility of establishing a "Foxlink Dedicated Workshop" within Delta's Supplier Park to deepen the 3-way alliance.</span><span data-lang="zh">評估在台達供應商園區 (Supplier Park) 內建立「Foxlink 專屬車間」的可行性，深化三方結盟。</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PART 4 & 5: Samsung & VIVO -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+                    
+                    <!-- Samsung -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-5">
+                        <div class="flex items-center mb-4 border-b border-gray-700 pb-3">
+                            <i class="fas fa-mobile-alt text-indigo-400 text-2xl mr-3"></i>
+                            <div class="w-full">
+                                <h3 class="text-lg font-bold text-white flex items-center justify-between flex-wrap gap-2">
+                                    <span>
+                                        <span data-lang="en">4. Samsung India</span>
+                                        <span data-lang="zh">4. Samsung India</span>
+                                    </span>
+                                    <a href="https://html.foxlink.co.in/reports/report-1775502911774.html" target="_blank" class="bg-indigo-500/20 hover:bg-indigo-500/40 text-indigo-300 border border-indigo-500/50 px-2 py-1 rounded-md text-xs tracking-normal normal-case flex items-center gap-1 font-bold transition-colors" style="text-decoration: none;">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span data-lang="en">Full Report</span>
+                                        <span data-lang="zh">完整記錄</span>
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-indigo-300 mt-1" data-lang="en">Long-term Supplier Requirements</p>
+                                <p class="text-xs text-indigo-300 mt-1" data-lang="zh">長期供應商需求</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="recon-box neutral m-0 p-3">
+                                <h4 class="text-white font-bold text-sm mb-1" data-lang="en">Market Vulnerability</h4><h4 class="text-white font-bold text-sm mb-1" data-lang="zh">市場脆弱性</h4>
+                                <p class="text-gray-400 text-xs" data-lang="en">Samsung's FPC supply is monopolized by a single Apple supplier (Zhending), who shows lack of service intent for non-Apple clients.</p>
+                                <p class="text-gray-400 text-xs" data-lang="zh">三星 FPC 供應被單一 Apple 供應商壟斷，該商(臻鼎)對非 Apple 客戶缺乏服務意願。</p>
+                            </div>
+                            <div class="recon-box risk m-0 p-3">
+                                <h4 class="text-white font-bold text-sm mb-1" data-lang="en">Logistics Red Line</h4><h4 class="text-white font-bold text-sm mb-1" data-lang="zh">物流紅線</h4>
+                                <p class="text-gray-400 text-xs" data-lang="en">Samsung requires logistics distance to not exceed 100km. Current Tirupati base is a 7-hour flight from Noida, posing significant risk.</p>
+                                <p class="text-gray-400 text-xs" data-lang="zh">三星要求物流距離不得超過 100km。目前 Tirupati 基地距諾伊達 7 小時航程，存在顯著風險。</p>
+                            </div>
+                            <div class="recon-box info m-0 p-3">
+                                <h4 class="text-white font-bold text-sm mb-1" data-lang="en">Negotiation & Investment</h4><h4 class="text-white font-bold text-sm mb-1" data-lang="zh">談判底線與投資原則</h4>
+                                <p class="text-gray-400 text-xs mb-2" data-lang="en">Apple's capacity monopoly and price-squeezing serve as a warning.</p>
+                                <p class="text-gray-400 text-xs mb-2" data-lang="zh">Apple 的產能獨佔與壓價策略是前車之鑑。</p>
+                                <p class="text-yellow-400 text-xs font-bold bg-yellow-900/30 p-2 rounded" data-lang="en">Strictly adhere to the "No Investment = No Exclusivity" principle unless the client provides dedicated CapEx.</p>
+                                <p class="text-yellow-400 text-xs font-bold bg-yellow-900/30 p-2 rounded" data-lang="zh">堅守「No Investment = No Exclusivity」原則，除非客戶提供專項 CapEx。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VIVO -->
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg p-5">
+                        <div class="flex items-center mb-4 border-b border-gray-700 pb-3">
+                            <i class="fas fa-mobile text-purple-400 text-2xl mr-3"></i>
+                            <div class="w-full">
+                                <h3 class="text-lg font-bold text-white flex items-center justify-between flex-wrap gap-2">
+                                    <span>
+                                        <span data-lang="en">5. VIVO India</span>
+                                        <span data-lang="zh">5. VIVO India</span>
+                                    </span>
+                                    <a href="https://html.foxlink.co.in/reports/report-1775503351693.html" target="_blank" class="bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 border border-purple-500/50 px-2 py-1 rounded-md text-xs tracking-normal normal-case flex items-center gap-1 font-bold transition-colors" style="text-decoration: none;">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span data-lang="en">Full Report</span>
+                                        <span data-lang="zh">完整記錄</span>
+                                    </a>
+                                </h3>
+                                <p class="text-xs text-purple-300 mt-1" data-lang="en">Decisions in China; Requires CN-driven Dev & Expansion</p>
+                                <p class="text-xs text-purple-300 mt-1" data-lang="zh">決策在中國, 應由中國開發/拓展業務</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-4 bg-gray-900 p-2 rounded" data-lang="en">Processes 2M parts daily; demands extreme agility. "Reverse localization" trend for FPCs flowing back to China.</p>
+                        <p class="text-sm text-gray-300 mb-4 bg-gray-900 p-2 rounded" data-lang="zh">每日處理 200 萬個零件，對供應鏈敏捷度要求極端。 FPC 出現「逆向在地化」回流中國的趨勢。</p>
+                        
+                        <!-- Simplified VIVO Content block -->
+                        <div class="overflow-x-auto rounded border border-gray-700">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs text-gray-400 uppercase bg-gray-900">
+                                    <tr>
+                                        <th class="p-2 w-1/2" data-lang="en">Facts</th><th class="p-2 w-1/2" data-lang="zh">事實 (Facts)</th>
+                                        <th class="p-2 w-1/4" data-lang="en">Issues</th><th class="p-2 w-1/4" data-lang="zh">議題 (Issues)</th>
+                                        <th class="p-2 w-1/4" data-lang="en">Actions</th><th class="p-2 w-1/4" data-lang="zh">行動 (Actions)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 bg-gray-800">
+                                    <tr>
+                                        <td class="p-3">
+                                            <ul class="space-y-2 text-xs">
+                                                <li><strong class="text-white" data-lang="en">Operational Pressure:</strong><strong class="text-white" data-lang="zh">營運壓力：</strong> <span data-lang="en">Minor delays cause massive costs for 2M daily parts.</span><span data-lang="zh">每日 200 萬零件規模，微小延遲即造成巨量成本。</span></li>
+                                                <li><strong class="text-white" data-lang="en">Product Divergence:</strong><strong class="text-white" data-lang="zh">產品分化：</strong> <span data-lang="en">Plastics localized, but FPCs revert to China due to tariffs.</span><span data-lang="zh">塑膠件 100% 在地化，但 FPC 因關稅調降轉向中國進口。</span></li>
+                                                <li><strong class="text-white" data-lang="en">Order Allocation:</strong><strong class="text-white" data-lang="zh">訂單分配：</strong> <span data-lang="en">Decisions centralized in China HQ.</span><span data-lang="zh">採購決策權仍集中於中國總部。</span></li>
+                                            </ul>
+                                        </td>
+                                        <td class="p-3 text-center text-gray-500 font-bold">-</td>
+                                        <td class="p-3 align-top">
+                                            <strong class="text-white block mb-1 text-xs" data-lang="en">Site Visit:</strong><strong class="text-white block mb-1 text-xs" data-lang="zh">實地考察：</strong>
+                                            <span class="text-xs" data-lang="en">Arrange Akash's visit to Tirupati plant in May.</span><span class="text-xs" data-lang="zh">安排 Akash 於 5 月訪問 Tirupati 廠區。</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div'].includes(tagName)) {
+                        el.style.display = 'block';
+                        // Keep inline elements inline
+                        if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) el.style.display = 'inline-block';
+                    } else if (['td', 'th'].includes(tagName)) {
+                        el.style.display = 'table-cell';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI(); // Initialize language view
+        });
+    </script>
+</body>
+</html>

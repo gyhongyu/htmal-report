@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-09T19:33:56.755Z",
+  "lastUpdated": "2026-04-09T22:33:20.423Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -975,6 +975,21 @@
       "fileName": "report-1775763088622.html",
       "createdAt": "2026-04-09T19:31:29.863Z",
       "updatedAt": "2026-04-09T19:33:56.755Z"
+    },
+    {
+      "id": "report-1775773999460",
+      "title": "India Strategic Visit Summary",
+      "description": "印度戰略訪問總結報告",
+      "categories": [
+        "客戶攻略",
+        "客戶KYC",
+        "內部簡報",
+        "會議記要",
+        "項目計劃"
+      ],
+      "fileName": "report-1775773999460.html",
+      "createdAt": "2026-04-09T22:33:20.423Z",
+      "updatedAt": "2026-04-09T22:33:20.423Z"
     }
   ]
 }
