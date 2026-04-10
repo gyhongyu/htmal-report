@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">Report: 2026 electronica India (Greater Noida)</title>
+    <title data-lang="zh">報告：2026 印度慕尼黑電子展 (北印大諾伊達展)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* --- Components --- */
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        
+        /* --- Tables & Collapsible --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.75rem; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 1rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* Collapsible Details */
+        details { background-color: #1f2937; border: 1px solid #374151; border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; transition: all 0.3s ease; }
+        summary { padding: 1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background-color: #2b3748; list-style: none; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; transition: transform 0.3s; color: #9ca3af; }
+        details[open] summary::after { transform: rotate(180deg); }
+        details[open] { border-color: #60a5fa; box-shadow: 0 0 10px rgba(96, 165, 250, 0.2); }
+        .details-content { padding: 1.25rem; border-top: 1px solid #374151; line-height: 1.6; font-size: 0.9rem; color: #d1d5db; }
+
+        /* Flowchart */
+        .flow-container { display: flex; flex-direction: column; md:flex-row; gap: 1rem; align-items: stretch; margin: 1.5rem 0; }
+        .flow-card { flex: 1; background: #1e293b; border: 1px solid #4b5563; border-radius: 0.5rem; padding: 1.25rem; text-align: center; }
+        .flow-arrow { display: flex; align-items: center; justify-content: center; color: #60a5fa; font-size: 1.5rem; padding: 0.5rem; }
+        
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, details, summary, .flow-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th, summary { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white, .text-blue-400, .text-yellow-400, .text-green-400, .text-red-400 { color: #000 !important; } 
+            details[open] .details-content { display: block !important; }
+            details { display: block !important; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="text-center border-b border-gray-700 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider" data-lang="en">INTELLIGENCE REPORT</span>
+                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider" data-lang="zh">情報分析報告</span>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="en">2026 electronica India: Field Report & Foxlink Strategy</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-blue-400" data-lang="zh">2026 印度慕尼黑電子展：現場實況與 Foxlink 策略評估</h1>
+                </div>
+
+                <!-- PART 1: OVERVIEW & MACRO TRENDS -->
+                <div class="section-divider mt-6 md:mt-8">
+                    <span data-lang="en">1. Exhibition Macro Overview & Strategic Shift</span>
+                    <span data-lang="zh">壹、 展會宏觀概述與戰略轉型</span>
+                </div>
+
+                <details>
+                    <summary>
+                        <span data-lang="en"><i class="fas fa-globe-asia mr-2"></i>Origin & Background</span>
+                        <span data-lang="zh"><i class="fas fa-globe-asia mr-2"></i>背景由來與發展</span>
+                    </summary>
+                    <div class="details-content">
+                        <span data-lang="en">Originating from Messe München, Germany, the combined "electronica India" and "productronica India" has grown over the past decade to become the premier B2B (Business-to-Business) trade platform for electronic components, systems, and manufacturing equipment in the South and Southeast Asia regions, capitalizing on India's rising manufacturing potential.</span>
+                        <span data-lang="zh">源自德國慕尼黑展覽集團 (Messe München) ，印度慕尼黑電子展 (electronica India) 與電子生產設備展 (productronica India) 歷經十年發展，已成為南亞與東南亞地區最具規模的企業對企業 (B2B) 電子零組件、系統及生產設備商貿平台，見證了印度製造業的崛起。</span>
+                    </div>
+                </details>
+
+                <div class="recon-box info">
+                    <h3 class="text-base font-bold text-white mb-4" data-lang="en"><i class="fas fa-exchange-alt mr-2 text-blue-400"></i>2026 Structural Transformation: Dual-Exhibition Strategy</h3>
+                    <h3 class="text-base font-bold text-white mb-4" data-lang="zh"><i class="fas fa-exchange-alt mr-2 text-blue-400"></i>2026 結構性變革：一年雙展制</h3>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 items-center w-full">
+                        <div class="flow-card w-full border-blue-500/50">
+                            <div class="tag bg-blue-600 text-white mb-2" data-lang="en">Spring Edition</div>
+                            <div class="tag bg-blue-600 text-white mb-2" data-lang="zh">春季展</div>
+                            <div class="font-bold text-lg text-white" data-lang="en">North India (Greater Noida)</div>
+                            <div class="font-bold text-lg text-white" data-lang="zh">北印 (大諾伊達)</div>
+                            <div class="text-sm text-gray-400 mt-2" data-lang="en">Date: Apr 8-10, 2026<br>Focus: Precision Test, AI Software, Auto Tech</div>
+                            <div class="text-sm text-gray-400 mt-2" data-lang="zh">時間: 2026年4月8-10日<br>焦點: 精密測試、AI 軟體、汽車科技</div>
+                        </div>
+                        <div class="flow-arrow"><i class="fas fa-plus"></i></div>
+                        <div class="flow-card w-full border-green-500/50">
+                            <div class="tag bg-green-600 text-white mb-2" data-lang="en">Autumn Edition</div>
+                            <div class="tag bg-green-600 text-white mb-2" data-lang="zh">秋季展</div>
+                            <div class="font-bold text-lg text-white" data-lang="en">South India (Bengaluru)</div>
+                            <div class="font-bold text-lg text-white" data-lang="zh">南印 (邦加羅爾)</div>
+                            <div class="text-sm text-gray-400 mt-2" data-lang="en">Date: Sep 2026<br>Focus: Semiconductors, Hardware System Giants</div>
+                            <div class="text-sm text-gray-400 mt-2" data-lang="zh">時間: 2026年9月<br>焦點: 半導體、硬體系統大廠</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-300 mt-4 border-l-2 border-yellow-500 pl-3" data-lang="en"><strong>Impact:</strong> Overall scale expands by 50%, but induces strategic budget/focus split among exhibitors. System makers migrated to the South, leaving the North focused on niche segments.</p>
+                    <p class="text-sm text-gray-300 mt-4 border-l-2 border-yellow-500 pl-3" data-lang="zh"><strong>影響：</strong> 整體規模預期擴張 50%，但導致廠商預算與焦點戰略性分流。大型系統廠移師南印，北印展轉向專注利基領域。</p>
+                </div>
+
+
+                <!-- PART 2: SUPPLY CHAIN DYNAMICS -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Supply Chain Dynamics: Key Exhibitors</span>
+                    <span data-lang="zh">貳、 供應鏈動態：指標性參展商</span>
+                </div>
+
+                <h3 class="text-lg font-bold text-white mb-2" data-lang="en">A. Taiwanese Suppliers (North India Focus)</h3>
+                <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">A. 台灣參展商實況 (北印陣容)</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="w-1/4" data-lang="en">Company</th><th class="w-1/4" data-lang="zh">企業名稱</th>
+                                <th class="w-1/4" data-lang="en">Core Product</th><th class="w-1/4" data-lang="zh">核心產品展出</th>
+                                <th class="w-1/2" data-lang="en">Target Market in India</th><th class="w-1/2" data-lang="zh">印度市場切入點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong class="text-blue-300" data-lang="en">Microtest</strong>
+                                    <strong class="text-blue-300" data-lang="zh">微測科技 (Microtest)</strong><br>
+                                    <span class="text-xs text-gray-400">Booth: H9.C54</span>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Multi-channel LCR Meters, SMPS (Switched-Mode Power Supply) Testing</span>
+                                    <span data-lang="zh">多通道 LCR 錶、SMPS (交換式電源供應器) 測試方案</span>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Resolving EV (Electric Vehicle) inductor heating/saturation issues for the Delhi automotive hub.</span>
+                                    <span data-lang="zh">解決德里首都圈 EV (電動車) 磁性元件在嚴苛環境下的過熱與飽和問題。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="text-blue-300" data-lang="en">DediProg</strong>
+                                    <strong class="text-blue-300" data-lang="zh">岱鐠科技 (DediProg)</strong><br>
+                                    <span class="text-xs text-gray-400">Booth: H15.K62</span>
+                                </td>
+                                <td>
+                                    <span data-lang="en">SPI NOR Flash & Automated IC Programming</span>
+                                    <span data-lang="zh">SPI NOR Flash 與自動化 IC 燒錄設備</span>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Capturing capital expenditure from EMS (Electronics Manufacturing Services) upgrading from SKD (Semi Knocked Down) to CKD (Completely Knocked Down) needing error-proof automation.</span>
+                                    <span data-lang="zh">精準捕捉 EMS (電子製造服務) 廠由 SKD (半散件組裝) 走向 CKD (全散件組裝) 的防呆自動化升級預算。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong class="text-blue-300" data-lang="en">Firstohm</strong>
+                                    <strong class="text-blue-300" data-lang="zh">第一電阻 (Firstohm)</strong>
+                                </td>
+                                <td>
+                                    <span data-lang="en">High-voltage, surge-resistant MELF Resistors</span>
+                                    <span data-lang="zh">耐高壓、抗突波專利級晶圓電阻</span>
+                                </td>
+                                <td>
+                                    <span data-lang="en">Targeting auto-instruments and industrial control sectors heavily reliant on imports, replacing local low-end thick film resistors.</span>
+                                    <span data-lang="zh">專攻極度依賴進口的車用儀表與工控設備，取代印度本地低階厚膜電阻。</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-lg font-bold text-white mb-2" data-lang="en">B. International Tier-1 & Tech Firms</h3>
+                <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">B. 國際特大型 Tier 1 與技術廠商</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="w-1/4" data-lang="en">Company (Origin)</th><th class="w-1/4" data-lang="zh">企業名稱 (來源地)</th>
+                                <th class="w-1/4" data-lang="en">Tech Focus</th><th class="w-1/4" data-lang="zh">技術焦點</th>
+                                <th class="w-1/2" data-lang="en">Strategic Application</th><th class="w-1/2" data-lang="zh">戰略應用場景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong class="text-green-400">SiMa.ai</strong> <span class="text-xs text-gray-400" data-lang="en">(USA)</span><span class="text-xs text-gray-400" data-lang="zh">(美國)</span></td>
+                                <td><span data-lang="en">Physical AI Platform</span><span data-lang="zh">實體 AI 平台 (Physical AI)</span></td>
+                                <td><span data-lang="en">AOI (Automated Optical Inspection) integration for factories lacking software capabilities.</span><span data-lang="zh">解決工廠缺乏軟體整合能力，導入 AOI (自動化光學檢測) 的痛點。</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-green-400">FAWEB / LE CHAMP</strong> <span class="text-xs text-gray-400" data-lang="en">(Japan)</span><span class="text-xs text-gray-400" data-lang="zh">(日本)</span></td>
+                                <td><span data-lang="en">DeviceXPlorer OPC Server</span><span data-lang="zh">工業通訊軟體 (DeviceXPlorer)</span></td>
+                                <td><span data-lang="en">Connecting 400+ PLC (Programmable Logic Controller) brands for smart manufacturing data collection.</span><span data-lang="zh">打通超過 400 種不同品牌 PLC (可程式邏輯控制器)，實現機台連網數據收集。</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-green-400">Polar Instruments</strong> <span class="text-xs text-gray-400" data-lang="en">(UK)</span><span class="text-xs text-gray-400" data-lang="zh">(英國)</span></td>
+                                <td><span data-lang="en">High-freq PCB Impedance Test</span><span data-lang="zh">高頻 PCB 阻抗測試</span></td>
+                                <td><span data-lang="en">Establishing testing standards for local high-end server/network PCB (Printed Circuit Board) manufacturing.</span><span data-lang="zh">為印度進軍高階伺服器與網通 PCB (印刷電路板) 製造提供測試標準。</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-green-400">Quectel</strong> <span class="text-xs text-gray-400" data-lang="en">(China)</span><span class="text-xs text-gray-400" data-lang="zh">(中國)</span></td>
+                                <td><span data-lang="en">5G/GNSS/Vehicle Modules</span><span data-lang="zh">5G/GNSS 與車載物聯網模組</span></td>
+                                <td><span data-lang="en">Penetrating India's massive Smart Meter and connected two-wheeler markets.</span><span data-lang="zh">搶占印度龐大的智慧電表及二輪聯網機車市場。</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PART 3: POLICY & ECOSYSTEM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Local Ecosystem & Policy Drivers</span>
+                    <span data-lang="zh">參、 印度本土生態系與政策驅動</span>
+                </div>
+
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-6">
+                    <p class="text-sm text-gray-300 mb-4" data-lang="en">The April Greater Noida exhibition functioned primarily as a policy dissemination and alliance-building hub led by government and ELCINA (Electronic Industries Association of India).</p>
+                    <p class="text-sm text-gray-300 mb-4" data-lang="zh">本次 4 月大諾伊達展的核心特色，實為印度政府與 ELCINA (印度電子工業協會) 主導的「政策宣導與結盟大會」。</p>
+
+                    <details>
+                        <summary>
+                            <span data-lang="en">UP (Uttar Pradesh) Electronics Leadership Summit</span>
+                            <span data-lang="zh">北方邦電子領袖峰會 (UP Electronics Leadership Summit)</span>
+                        </summary>
+                        <div class="details-content">
+                            <span data-lang="en">State government officials actively promoted local investment roadmaps, leveraging the exhibition's location in Uttar Pradesh to attract manufacturing capital.</span>
+                            <span data-lang="zh">由於展場位於北方邦 (Uttar Pradesh)，州政府官員積極於現場推廣當地的投資路線圖，吸引製造業資本。</span>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>
+                            <span data-lang="en">ELCINA Supply Chain Summit & Bharat PCB Tech</span>
+                            <span data-lang="zh">ELCINA 供應鏈峰會與 Bharat PCB Tech 計畫</span>
+                        </summary>
+                        <div class="details-content">
+                            <span data-lang="en">The focal point of discussion was the upcoming ECMS (Electronic Components Manufacturing Scheme). Local PCB and assembly plants convened to strategize on utilizing subsidies to increase localization rates and decrease reliance on imported components.</span>
+                            <span data-lang="zh">現場最熱門話題為印度政府即將推出的 ECMS (電子零組件製造補貼計畫)。本土 PCB 廠與組裝廠探討如何利用政府補貼提高國產化比例，降低進口依賴。</span>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>
+                            <span data-lang="en">ICEA Automotive Display Tech Forum</span>
+                            <span data-lang="zh">ICEA 汽車顯示技術論壇</span>
+                        </summary>
+                        <div class="details-content">
+                            <span data-lang="en">Reflected the anxiety and demand within the North Indian automotive cluster as it rapidly transitions towards "Software Defined Vehicles."</span>
+                            <span data-lang="zh">反映了北印作為傳統車廠聚落，正急劇向「軟體定義汽車 (Software Defined Vehicle)」轉型的產業焦慮與技術需求。</span>
+                        </div>
+                    </details>
+                </div>
+
+
+                <!-- PART 4: FOXLINK STRATEGY -->
+                <div class="section-divider">
+                    <span data-lang="en">4. Foxlink Strategic Assessment</span>
+                    <span data-lang="zh">肆、 Foxlink 參展與採購策略適切性評估</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <!-- Current Status -->
+                    <div class="recon-box neutral">
+                        <h3 class="text-base font-bold text-white mb-3" data-lang="en"><i class="fas fa-crosshairs mr-2 text-yellow-400"></i>Current Status Calibration</h3>
+                        <h3 class="text-base font-bold text-white mb-3" data-lang="zh"><i class="fas fa-crosshairs mr-2 text-yellow-400"></i>現況校準與核心前提</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Current Scope:</strong> Foxlink India solely handles mobile cable assembly, SSD (Solid State Drive), and DRAM (Dynamic Random Access Memory) module contract manufacturing.</li>
+                            <li data-lang="zh"><strong>現行業務：</strong> Foxlink 印度廠目前僅負責手機數據線組裝、SSD (固態硬碟) 以及 DRAM (動態隨機存取記憶體) 模組代工。</li>
+                            <li data-lang="en"><strong>HQ Directive:</strong> Strictly <strong class="text-yellow-400">NO further investment plans</strong> (no capacity expansion, no upgrades, no entry into Auto/AI sectors).</li>
+                            <li data-lang="zh"><strong>總部指令：</strong> 目前在印度 <strong class="text-yellow-400">無任何進一步投資計畫</strong> (無擴產、無升級、無跨足車用或 AI 領域的打算)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Final Conclusion -->
+                    <div class="recon-box risk">
+                        <h3 class="text-base font-bold text-white mb-3" data-lang="en"><i class="fas fa-shield-alt mr-2 text-red-400"></i>Strategic Conclusion</h3>
+                        <h3 class="text-base font-bold text-white mb-3" data-lang="zh"><i class="fas fa-shield-alt mr-2 text-red-400"></i>戰略最終結論</h3>
+                        <div class="text-center bg-red-500/20 border border-red-500/50 rounded py-3 mb-3">
+                            <strong class="text-red-400 text-lg" data-lang="en">Defensive Posture: ZERO Participation</strong>
+                            <strong class="text-red-400 text-lg" data-lang="zh">防禦性守成策略：不參展、不採購</strong>
+                        </div>
+                        <p class="text-sm text-gray-300" data-lang="en">Under the dual-exhibition format, neither the April North exhibition (niche/software focus) nor the September South exhibition (system giants) offers value for Foxlink's current basic OEM operations lacking HQ investment authorization.</p>
+                        <p class="text-sm text-gray-300" data-lang="zh">在一年雙展的新賽局下，無論是 4 月北印展 (利基軟體/政策導向) 或 9 月南印展 (系統硬體大廠)，對於目前僅做基礎代工且無總部投資授權的 Foxlink 而言，皆無投入資源之必要。</p>
+                    </div>
+                </div>
+
+                <!-- Detailed Breakdown -->
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <table class="w-full text-sm text-left shadow-none m-0 border-none">
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="w-1/3 bg-gray-900 font-bold border-none" data-lang="en"><i class="fas fa-store-slash text-gray-400 mr-2"></i>Exhibiting ROI</td>
+                                <td class="w-1/3 bg-gray-900 font-bold border-none" data-lang="zh"><i class="fas fa-store-slash text-gray-400 mr-2"></i>參展效益 (Exhibiting)</td>
+                                <td class="border-none">
+                                    <span data-lang="en"><strong>Zero.</strong> The North expo focuses on Edge AI, precision instruments, and ECMS localization. Foxlink's mature, standardized OEM products (cables/SSDs) mismatch the "hardcore engineering" vibe, yielding no target buyer interactions.</span>
+                                    <span data-lang="zh"><strong>毫無效益。</strong> 北印展高度聚焦邊緣 AI、精密測試與 ECMS 國產化論壇。Foxlink 標準化的 OEM 產品在此完全找不到對口採購高管，設攤與展場硬核工程氛圍格格不入。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-1/3 bg-gray-900 font-bold border-none" data-lang="en"><i class="fas fa-shopping-cart text-gray-400 mr-2"></i>Sourcing Need</td>
+                                <td class="w-1/3 bg-gray-900 font-bold border-none" data-lang="zh"><i class="fas fa-shopping-cart text-gray-400 mr-2"></i>觀展/採購需求 (Sourcing)</td>
+                                <td class="border-none">
+                                    <span data-lang="en"><strong>Zero.</strong> 1) <strong>No Capex:</strong> Lack of HQ investment means no new machinery purchases (e.g., auto-programmers or impedance testers). 2) <strong>Locked BOM (Bill of Materials):</strong> Current product materials are globally specified; local Indian components (e.g., auto-resistors, comm modules) have zero intersection with current product lines.</span>
+                                    <span data-lang="zh"><strong>需求為零。</strong> 1) <strong>無設備採購：</strong> 總部無投資計畫代表不買新機台，展出之自動化設備不在需求清單內。 2) <strong>BOM (物料清單) 受限：</strong> 現有代工產品物料皆為原廠指定或進口，展場主推之在地零組件與現有產品線毫無交集。</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'p', 'li', 'h1', 'h2', 'h3', 'h4', 'div', 'td', 'th'].includes(tagName)) {
+                        // For table cells, ensure they maintain table-cell display
+                        if (['td', 'th'].includes(tagName)) {
+                            el.style.display = 'table-cell';
+                        } 
+                        // Keep inline elements inline-block to prevent breaking layout
+                        else if (['span', 'strong', 'a', 'i', 'button'].includes(tagName)) {
+                            el.style.display = 'inline-block';
+                        } 
+                        // Default block for others
+                        else {
+                            el.style.display = 'block';
+                        }
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
