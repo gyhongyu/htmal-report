@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-10T18:09:40.201Z",
+  "lastUpdated": "2026-04-11T11:34:28.549Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1003,6 +1003,19 @@
       "fileName": "report-1775844579363.html",
       "createdAt": "2026-04-10T18:09:40.201Z",
       "updatedAt": "2026-04-10T18:09:40.201Z"
+    },
+    {
+      "id": "report-1775907267320",
+      "title": "Target: Apollo Team / Foxlink Future Strategy",
+      "description": "內部戰略洞察：Apollo 團隊與正崴未來佈局",
+      "categories": [
+        "內部簡報",
+        "會議記要",
+        "年度計劃"
+      ],
+      "fileName": "report-1775907267320.html",
+      "createdAt": "2026-04-11T11:34:28.549Z",
+      "updatedAt": "2026-04-11T11:34:28.549Z"
     }
   ]
 }
