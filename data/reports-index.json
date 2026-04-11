@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-11T12:06:02.490Z",
+  "lastUpdated": "2026-04-11T12:06:47.296Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -812,7 +812,7 @@
     {
       "id": "report-1774013590257",
       "title": "Hospitals & Clinics",
-      "description": "Hospitals & Clinics",
+      "description": "兒童醫院",
       "categories": [
         "其他",
         "內部簡報",
@@ -820,7 +820,7 @@
       ],
       "fileName": "report-1774013590257.html",
       "createdAt": "2026-03-20T13:33:10.956Z",
-      "updatedAt": "2026-03-20T13:40:17.884Z"
+      "updatedAt": "2026-04-11T12:06:47.296Z"
     },
     {
       "id": "report-1774848217667",
