@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-11T11:34:28.549Z",
+  "lastUpdated": "2026-04-11T12:06:02.490Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1016,6 +1016,19 @@
       "fileName": "report-1775907267320.html",
       "createdAt": "2026-04-11T11:34:28.549Z",
       "updatedAt": "2026-04-11T11:34:28.549Z"
+    },
+    {
+      "id": "report-1775909161280",
+      "title": "Skin & Nail Clinics",
+      "description": "皮膚科指甲診所",
+      "categories": [
+        "其他",
+        "對外簡報",
+        "市場分析"
+      ],
+      "fileName": "report-1775909161280.html",
+      "createdAt": "2026-04-11T12:06:02.490Z",
+      "updatedAt": "2026-04-11T12:06:02.490Z"
     }
   ]
 }
