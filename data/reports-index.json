@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-27T13:13:33.323Z",
+  "lastUpdated": "2026-04-27T13:23:29.963Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1058,6 +1058,20 @@
       "fileName": "report-1777295610232.html",
       "createdAt": "2026-04-27T13:13:33.323Z",
       "updatedAt": "2026-04-27T13:13:33.323Z"
+    },
+    {
+      "id": "report-1777296206808",
+      "title": "Target: Aisin India (AHL & AKL)",
+      "description": "目標企業：Aisin India (AHL & AKL)",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1777296206808.html",
+      "createdAt": "2026-04-27T13:23:29.963Z",
+      "updatedAt": "2026-04-27T13:23:29.963Z"
     }
   ]
 }
