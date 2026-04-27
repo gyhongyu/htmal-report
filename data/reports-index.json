@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-27T13:23:29.963Z",
+  "lastUpdated": "2026-04-27T13:35:08.907Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1072,6 +1072,20 @@
       "fileName": "report-1777296206808.html",
       "createdAt": "2026-04-27T13:23:29.963Z",
       "updatedAt": "2026-04-27T13:23:29.963Z"
+    },
+    {
+      "id": "report-1777296905458",
+      "title": "Target: Valeo India",
+      "description": "目標企業：Valeo India",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1777296905458.html",
+      "createdAt": "2026-04-27T13:35:08.907Z",
+      "updatedAt": "2026-04-27T13:35:08.907Z"
     }
   ]
 }

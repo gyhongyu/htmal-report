@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Valeo India Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Valeo India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Valeo India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Valeo India</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Valeo India</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Automotive Supplier</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Valeo India Private Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U51505TN2008PTC101183</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted locally)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (印度非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 2,750-3,000 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Valeo SE (VALEO) - France</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Valeo SE (泛歐交易所) - 法國</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Headcount</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與團隊規模</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Navalur, Chennai</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">清奈 (Navalur, Chennai)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">7,500+ Manpower (50% R&D Engineers)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">7,500+ 員工 (其中 50% 為研發工程師)</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint (6 Manufacturing Units)</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情 (6 座製造基地)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">主要製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Pune (Chakan/Lonikand):</strong> Powertrain Electrification. Core hub feeding Mahindra.</li>
+                                <li data-lang="zh"><strong>Pune 工廠:</strong> 位於 Chakan。專注電氣化，供應 Mahindra 驅動系統核心基地。</li>
+                                <li data-lang="en"><strong>Chennai (Oragaddam & Vallam):</strong> Clutches, Transmission, and Thermal Systems.</li>
+                                <li data-lang="zh"><strong>Chennai 工廠群:</strong> Oragaddam (離合器/傳動) 與 Vallam (熱管理系統)。</li>
+                                <li data-lang="en"><strong>Sanand & Gurgaon:</strong> Regional hubs close to Tata Motors and Maruti Suzuki.</li>
+                                <li data-lang="zh"><strong>Sanand & Gurgaon:</strong> 就近供應 Tata Motors 與 Maruti Suzuki 汽車聚落。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech Centers (R&D):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發技術中心：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Chennai VTC (Navalur):</strong> Global mega-hub for Software, Vision, ADAS & Electrification.</li>
+                                <li data-lang="zh"><strong>Chennai VTC:</strong> 全球最大軟體研發中心之一，專攻 ADAS 與電氣化。</li>
+                                <li data-lang="en"><strong>Bengaluru R&D:</strong> Pure focus on Connected Cars & SDV (Software Defined Vehicles).</li>
+                                <li data-lang="zh"><strong>Bengaluru 研發:</strong> 專注於聯網汽車與軟體定義汽車 (SDV) 開發。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up) - 100% FDI:</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯) - 純外資：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Societe Holding International B.V. (Netherlands)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 99% Stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 99% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (控股公司)</span>
+                                <strong class="text-white">Valeo International Holding</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-blue-300">Valeo SE (France)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Powertrain:</strong> e-Axle & Electrification</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電氣化動力總成：</strong> Powertrain / e-Axle</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Thermal Systems:</strong> HVAC & Battery Cooling</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>車輛熱管理系統：</strong> Thermal Systems / HVAC</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Visibility Systems:</strong> Wipers & Lighting</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>視覺與照明系統：</strong> Visibility Systems</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Brain Division:</strong> ADAS & Sensing</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>駕駛輔助與感測：</strong> ADAS / Brain Division</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Drive System:</strong> 3-in-1 e-Axle, Hairpin Stator, High-voltage Reducer Gears, BLDC.</li>
+                            <li data-lang="zh"><strong>電氣化驅動：</strong> 髮夾式繞組定子、三合一電驅動軸、高壓減速器齒輪。</li>
+                            
+                            <li data-lang="en"><strong>Power Electronics:</strong> OBC, DC/DC Converters, PDUs, Inverters, Motor-control PCBA.</li>
+                            <li data-lang="zh"><strong>電力電子：</strong> 車載充電器 (OBC)、DC/DC 轉換器、PDU、逆變器、PCBA。</li>
+                            
+                            <li data-lang="en"><strong>Thermal:</strong> Liquid Cooling Plates, e-Water Pumps, PTC Heaters.</li>
+                            <li data-lang="zh"><strong>熱管理：</strong> 水冷板、電子水泵、HVAC 鼓風機模組、PTC 加熱器。</li>
+                            
+                            <li data-lang="en"><strong>Sensors/Interconnect:</strong> LiDAR Optics, Ultrasonic Radars, High-freq Wiring, HV Connectors.</li>
+                            <li data-lang="zh"><strong>感測與互連：</strong> 超音波雷達、光達光學件、高頻線束、高壓大電流連接器。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Auto-Grade:</strong> Desperate need for IATF 16949 certified high-voltage connectors & precision die-casting vendors.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>車規認證：</strong> 急需具備 IATF 16949 認證的高壓連接器與精密鋁壓鑄件。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Local PCBA:</strong> Extreme pressure to localize OBC and PDU assembly in India to escape heavy import duties on electronics.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化 PCBA：</strong> 面臨降本壓力，需在地化組裝高階 PCBA 以取代中歐進口。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Plant Manager - e-Powertrain</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Handling new EV transmission line operations at Lonikand. Setup is gearing up for mass production dispatch.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 負責 Lonikand 廠區新電動車傳動產線營運，顯示該廠已進入量產衝刺期。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Commodity Buyer - Electronics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en">Driving aggressive localization for PCB and components to cut reliance on imported chips/boards.</td>
+                                    <td data-lang="zh">專門負責 PCB 與電子元件的印度在地化採購，降低對進口晶片與板卡的依賴。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Hardware Eng - Inverter Design</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai VTC</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai VTC (清奈研發)</span>
+                                    </td>
+                                    <td data-lang="en">Designing high-voltage inverters locally. Boosting "Make in India" R&D autonomy.</td>
+                                    <td data-lang="zh">招募高壓逆變器硬體設計工程師，強化在印度的電氣化產品自主研發能力。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Supplier Quality Engineer (SQE)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Deployed at vendor sites to strictly audit local casting and motor parts against global specs.</td>
+                                    <td data-lang="zh">派駐於供應商端的品保工程師，確保在地供應商的鑄件與馬達零件符合 Valeo 全球標準。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Systems Engineer - ADAS</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Expanding algorithms software team for Advanced Driver Assistance Systems.</td>
+                                    <td data-lang="zh">擴充自動駕駛輔助系統的演算法團隊。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Prod. Supervisor - Hairpin Winding</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Hiring experts in Hairpin winding tech—a core manufacturing process for high-end EV motors.</td>
+                                    <td data-lang="zh">招聘熟悉髮夾式繞組工藝的技師，這是高階 EV 馬達的核心製造技術。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">KAM - Tata Motors</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Sanand / Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Sanand/Pune</span>
+                                    </td>
+                                    <td data-lang="en">Securing procurement pipelines with Tata to lock in domestic EV market share.</td>
+                                    <td data-lang="zh">負責對接 Tata 的採購需求，穩固在本土 OEM 的市佔率。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Data Scientist - Smart Mfg</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en">Injecting Industry 4.0 algorithms to boost line yield and enable predictive maintenance.</td>
+                                    <td data-lang="zh">導入工業 4.0 演算法以提升產線良率與預測性維護。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Sales Approach</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">銷售模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>B2B OEM (Core):</strong> Direct tie-ups with auto majors (Mahindra, Tata, Maruti). Entering new EV platforms at early design stages as a Tier-1 giant.</li>
+                                <li data-lang="zh"><strong>B2B OEM 直供 (核心)：</strong> 與車廠 (Mahindra, Tata, Maruti) 直接簽約，以 Tier-1 身份介入新電動車型早期開發。</li>
+                                
+                                <li data-lang="en"><strong>Aftermarket:</strong> Spares handled by independent entity "Valeo Service India".</li>
+                                <li data-lang="zh"><strong>B2B 售後市場：</strong> 透過獨立實體 "Valeo Service India" 經營。</li>
+                                
+                                <li data-lang="en"><strong>Digital Focus:</strong> No B2C presence. Heavily invests in "Valeo TechAssist"—an online catalog & troubleshooting portal for mechanics/garages.</li>
+                                <li data-lang="zh"><strong>數位平台：</strong> 無 B2C 電商。主推 "Valeo TechAssist" 針對修車廠提供技術支援與零件目錄。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>"Plant-in-Plant" Setup:</strong> Units are built hyper-close to OEM clients (e.g., Sanand facility next to Tata, Pune next to Mahindra).</li>
+                                <li data-lang="zh"><strong>廠區伴生 (Plant-in-Plant)：</strong> 廠區極度靠近 OEM 客戶 (例如 Sanand 鄰近 Tata，Pune 鄰近 Mahindra)。</li>
+                                
+                                <li data-lang="en"><strong>VMI Mandate:</strong> Due to extreme proximity needs, suppliers to Valeo must set up VMI (Vendor Managed Inventory) warehouses to ensure Just-In-Time (JIT) dispatch.</li>
+                                <li data-lang="zh"><strong>VMI 供應鏈：</strong> 要求其供應商必須在汽車重鎮設立 VMI 倉庫，以實現嚴格的 JIT 交貨。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Auto Tier-1 Rankings (Top Players)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度市場 Tier-1 汽車科技排位</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Focus</th><th class="p-2" data-lang="zh">背景/主力領域</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Bosch India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Absolute Leader, Engine/EV)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (引擎管理與燃油系統霸主)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Motherson Sumi</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Global Harness/Interiors Giant)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 (本土線束與內外飾巨頭)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Denso India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan (Thermal Systems Dominator)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本 (熱管理與日系車廠統治者)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">4</td>
+                                        <td class="p-2 text-white font-bold">Valeo India</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">France (Target - Powertrain/Vision)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">法國 (本報告目標 - 電氣化與視覺)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Continental India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany (Brakes & E-Architecture)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 (煞車系統與車載電子架構)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Aptiv, Visteon, Uno Minda, Mahle, Hella (Forvia)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Foxlink Opportunity:</strong> Valeo is under extreme cost-down pressure from OEMs like Mahindra. High chance to secure their outsourced OBC/PDU assembly & high-voltage harness to replace expensive imports.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>FOXLINK 機會點：</strong> Valeo 正承受客戶極致降本壓力。FOXLINK 可切入 OBC、PDU 代工或供應客製化高壓線束，替換歐洲/中國進口元件。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-18</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Corporate News] €200M Mega Investment Plan</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[集團動態] 宣佈 2 億歐元印度投資計畫</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Valeo confirmed €200M funding for India by 2028. Expanding Pune & Sanand to triple turnover to €700M. <span class="text-gray-500">(Opp: Massive capacity expansion)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">官方證實 2028 年前注資逾 2 億歐元擴建 Pune 與 Sanand 廠區，目標營收提升三倍至 7 億歐元。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-10</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Plant Operations] Pune e-Axle Line Ready</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[工廠動態] Pune 電驅動產線進入投產準備階段</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Machinery tested at Lonikand for 3-in-1 e-Axle, exclusively built for Mahindra's "Born Electric" platform. Mass trial starting.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Lonikand 廠區專為 Mahindra 打造的三合一電驅動軸產線已完成機台測試，即將進入試量產。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-25</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[HR Expansion] Bengaluru SDV Team Scaled Up</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[研發擴編] 班加羅爾研發中心啟動 SDV 擴建</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Brain Division adding 200 techies for Software Defined Vehicle (SDV) middleware (vOS) development.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Valeo Brain Division 在班加羅爾增加 200 名軟體工程師，專攻軟體定義汽車 (SDV) 中介軟體。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Strategic Tie-up] Atul Greentech & Honda JV</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[戰略結盟] 結盟 Atul Greentech 與 Honda</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Valeo providing micro powertrains alongside Honda's battery pack to electrify India's 3-Wheeler segment.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Valeo 提供微型動力總成結合 Honda 電池技術，共同推動印度三輪車 (3-Wheeler) 都市電動化。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-20</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Product Launch] Vallam Plant Thermal Modules</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[產品發表] Vallam 工廠發表新世代熱管理模組</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched liquid cooling plates adapted for Indian heat. Secured new domestic EV OEM orders.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對印度高溫氣候發表全新液冷電池冷卻板，並宣佈已斬獲本土電動車廠新單。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Vendor meet highlights "Make in India" (230+ local vendors).</span><span data-lang="zh">供應商大會重申「印度製造」，目前在印已有 230 家本土供應商。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">Sanand plant wins State Industrial Excellence Award.</span><span data-lang="zh">Sanand 工廠獲古吉拉特邦工業卓越獎。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15:</strong> <span data-lang="en">Valeo Service drops upgraded TechAssist digital platform.</span><span data-lang="zh">Valeo Service 針對售後市場上線數位診斷平台。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-10:</strong> <span data-lang="en">Chennai hiring sprint for OBC & DC/DC hardware engineers.</span><span data-lang="zh">Chennai VTC 舉辦電力電子工程師專場招聘會。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-02:</strong> <span data-lang="en">Global CEO affirms India as core hub for "Elevate 2028".</span><span data-lang="zh">全球 CEO 重申 "Elevate 2028" 中印度的全球核心樞紐定位。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Automated mapping based on report sentiment): 
+        // Market Share: 8 (Top 4 Tier-1 in India, Leader in specific niches)
+        // Localization: 6 (Has 230+ vendors, but still heavy import reliance on PCBA/chips)
+        // Brand Power: 8 (Global Tier-1 powerhouse)
+        // Digital Reach: 7 (Strong B2B portal TechAssist, no B2C)
+        // Financial Health: 9 (Backed by France HQ, recent €200M investment confirmed)
+        const radarScores = [8, 6, 8, 7, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
