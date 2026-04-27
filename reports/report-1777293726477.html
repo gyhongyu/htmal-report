@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Nidec India Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Nidec India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Nidec India (Feb 2026)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Nidec India</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Nidec India (日本電產)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Target</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Nidec India Private Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U29100HR2010FTC041709</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 1,070 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. FY25 Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Nidec Corp (TSE: 6594)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Nidec Corporation (東京證交所)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Registration</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部註冊地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Gurugram (NCR)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Gurugram (古爾岡)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Golf Course Ext. Road, Haryana</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">哈里亞納邦，集團決策與商務中樞</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Manufacturing Footprint (Pan-India)</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與製造基地</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Key Motor & Drive Hubs:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">核心馬達與驅動基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Neemrana (Rajasthan):</strong> 120,000+ sqm mega-plant. Core base for Auto & BLDC motors.</li>
+                                <li data-lang="zh"><strong>Neemrana (拉賈斯坦邦):</strong> 12萬平方米，核心馬達基地 (車用/家電/BLDC)。</li>
+                                <li data-lang="en"><strong>Hubli (Karnataka):</strong> Emerging South India hub for drive systems & automation.</li>
+                                <li data-lang="zh"><strong>Hubli (卡納塔克邦):</strong> 南印度驅動系統與自動化設備新製造樞紐。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Expansion & Specific Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">擴張與專用廠區：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Aurangabad (Maharashtra):</strong> $120M new unit for Embraco compressors (live by H2 2026).</li>
+                                <li data-lang="zh"><strong>Aurangabad (馬哈拉施特拉邦):</strong> 投資1.2億美元新建 Embraco 壓縮機廠 (建置中)。</li>
+                                <li data-lang="en"><strong>Ranipet (Tamil Nadu):</strong> Focused on precision tools and gear cutting machines.</li>
+                                <li data-lang="zh"><strong>Ranipet (泰米爾納德邦):</strong> 專注於精密齒輪切割機與工具生產。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Nidec Asian Regional Holding</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">100% FDI</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">100% 外資持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Internal Division)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間事業體)</span>
+                                <strong class="text-white">Auto Motor & Electronic Control Dept.</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-blue-300">Nidec Corporation (Japan)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Auto & EV:</strong> EPS Motors, EV modules</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>車用與電動車：</strong> 汽車電動轉向馬達(EPS)與車用電子</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Appliance & Industrial:</strong> BLDC Motors</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>家電與工業：</strong> 商用 BLDC 無刷直流馬達</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>IT & Data Center:</strong> Cooling Fans</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>伺服器與儀器：</strong> 高階散熱風扇 (Cooling Fans)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Cooling & Energy:</strong> Embraco Compressors, BESS</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>冷凍與能源：</strong> Embraco 壓縮機與 BESS 儲能設施</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Drive Core:</strong> Stator/Rotor winding, micro-bearings, gearboxes.</li>
+                            <li data-lang="zh"><strong>動力核心：</strong> 定子轉子繞線組、微型軸承、齒輪箱。</li>
+                            
+                            <li data-lang="en"><strong>Control PCBA:</strong> Motor Control PCBs, Inverters, BMS parts.</li>
+                            <li data-lang="zh"><strong>電子控制：</strong> 馬達驅動控制板、逆變器、BMS元件。</li>
+                            
+                            <li data-lang="en"><strong>Interconnect:</strong> High-temp wiring harness, Hall sensors, connectors.</li>
+                            <li data-lang="zh"><strong>互連與感測：</strong> 耐高溫線束、連接器、霍爾感測器。</li>
+                            
+                            <li data-lang="en"><strong>Mechanical:</strong> Aluminum die-casting, heat-sink plastics.</li>
+                            <li data-lang="zh"><strong>機構件：</strong> 鋁壓鑄外殼、高階工程散熱塑膠件。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Precision:</strong> High tolerance machining & auto-grade (IATF 16949) specs.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>車規認證：</strong> 極度要求公差，需具備 IATF 16949 資格。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Urgent Need:</strong> Looking for local PCBA & wire harness vendors to support Hubli & Aurangabad expansion.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>緊急需求：</strong> 急需在地化電子互連與線束供應商，以應對四大廠區擴張。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Operational Shifts</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sourcing Mgr - Electronics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gurugram</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Gurugram (古爾岡)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Strong Signal:</strong> Sourcing local PCB, IC, Connectors. Massive push for "Make in India" vendor localization.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 積極招募在地採購，尋找 PCB、IC、連接器。配合 Make in India 政策急迫在地化。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Plant Head / Ops Mgr</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Aurangabad</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Aurangabad (奧蘭加巴德)</span>
+                                    </td>
+                                    <td data-lang="en">Preparing for the new Embraco compressor plant. Indicates mass procurement phase starting soon.</td>
+                                    <td data-lang="zh">為即將投產的 Embraco 新廠招募高階廠長，預示機電整合供應鏈即將啟動大量採購。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Sr. R&D Engineer - BMS</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Hubli</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Hubli (胡布利)</span>
+                                    </td>
+                                    <td data-lang="en">Developing Battery Mgmt Systems & EV tech. Hubli is transitioning into an R&D node for renewables.</td>
+                                    <td data-lang="zh">研發端招募 BMS 與電動車驅動工程師，顯示印度正成為其新能源方案的研發節點。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">QA Lead - Automotive</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Neemrana</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Neemrana (尼姆拉納)</span>
+                                    </td>
+                                    <td data-lang="en">Enforcing strict PPAP/APQP specs for automotive motors. Vendor audits incoming.</td>
+                                    <td data-lang="zh">強化車規級馬達的品質控制，要求熟悉 PPAP/APQP 流程。供應商稽核門檻提高。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Sales Mgr - B2B Industrial</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune / Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune / Chennai</span>
+                                    </td>
+                                    <td data-lang="en">Expanding industrial motors footprint to capture the automation upgrade boom in West/South India.</td>
+                                    <td data-lang="zh">針對西部與南部重鎮擴招業務，搶占本土工業自動化升級的市場份額。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Channel Playbook</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路策略概況</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Tier-1 Direct Model:</strong> Dominates Auto (Maruti Suzuki, Tata) & Home Appliance (Compressors) via joint-dev and direct supply.</li>
+                                <li data-lang="zh"><strong>B2B 原廠直供：</strong> 車用馬達與家電壓縮機採取 OEM 直銷與聯合開發模式。</li>
+                                
+                                <li data-lang="en"><strong>Distribution Network:</strong> Uses electro-mechanical dealers for standard industrial motors and machine tools.</li>
+                                <li data-lang="zh"><strong>代理經銷模式：</strong> 透過授權代理商銷售一般工業馬達、標準機床。</li>
+                                
+                                <li data-lang="en"><strong>Digital Focus:</strong> Heavily integrated with global B2B electronic parts platforms (DigiKey, Mouser) for IT/Server cooling fans. No local B2C e-com.</li>
+                                <li data-lang="zh"><strong>數位通路：</strong> 伺服器風扇深度綁定全球 B2B 代理商 (如 DigiKey)，無自營 B2C。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Multi-Node Dispatch:</strong> Neemrana serves the North auto cluster. Hubli covers the Southern tech corridor. Aurangabad will cover the West.</li>
+                                <li data-lang="zh"><strong>多核心產地直發：</strong> Neemrana 負責北印；Hubli 覆蓋南印；Aurangabad 輻射西部。</li>
+                                
+                                <li data-lang="en"><strong>Supplier Requirement:</strong> Vendors must possess "Multi-location JIT Delivery" capability to feed multiple plants simultaneously.</li>
+                                <li data-lang="zh"><strong>供應商要求：</strong> 必須具備多點交付 (Multi-location JIT) 的物流協同能力。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Strong Fin & Market, Needs Localizing</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Market Rankings (Electric Motors)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度市場銷量排名 (馬達電機類 TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">ABB India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Swiss (Industrial Leader)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">瑞士 (工業馬達領導者)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">CG Power</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Heavy Motors)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (重型馬達巨頭)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Bharat Bijlee</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Legacy Transformers)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (老牌電機廠)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Kirloskar Electric</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Agri/General)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (農業/通用強權)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">5</td>
+                                        <td class="p-2 text-white font-bold">Nidec India</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Japan (Target - BLDC/Auto King)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">日本 (目標企業 - 精密/車用霸主)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Siemens(Ger), BHEL(Ind), Bonfiglioli(Ita), Lucas TVS(Ind), Hindustan(Ind)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> Nidec faces price wars from local players (Lucas TVS). They are expanding Hubli/Aurangabad to counter this. Perfect window for Foxlink to offer localized Connectors, Harnesses, and Battery PCBA.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>Foxlink 機會點：</strong> Nidec 正加速「進口替代」應對本土價格戰。其 Aurangabad/Hubli 新廠房擴建，正是 Foxlink 切入其「車用電子」與「伺服器散熱 PCBA/線束」新增產能需求的完美時機。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-25</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Event] KEY 2026 Energy Expo Participation</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[活動] 宣佈參加 KEY 2026 能源展</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Showcasing new BESS and eMobility charging infrastructure specifically designed for Indian & global markets.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">展示專為印度及全球市場設計的最新電池儲能系統 (BESS) 及電動車充電基礎設施。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-10</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corporate News] Renewable Energy Push</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[新聞稿] 強化新能源轉換佈局</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Press release emphasizing their Inverters and Energy Storage tech as core drivers for emerging markets.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">發布新聞強調其逆變器與儲能技術在全球及新興市場能源轉型中的核心地位。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Product Launch] AI Server Fans via DigiKey</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[新品發佈] 透過全球通路發布 AI 伺服器風扇</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Mass release of high-speed cooling fans for AI Servers. Bangalore's IT supply chain is a key target.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">透過 DigiKey 等通路大規模發售標準型 AI 伺服器專用高速散熱風扇，鎖定班加羅爾 IT 聚落。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-11</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[CSR/Sustainability] CDP 'A' Rating</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[企業責任] 獲得 CDP 最高評級</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Secured CDP 2025 'A' rating. Indian plants will speed up Internal Carbon Pricing (ICP) integration.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">榮獲 CDP 2025 氣候變遷「A」級評分，印度所有廠區將加速導入內部碳定價 (ICP)。</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-26:</strong> <span data-lang="en">Showcased high-precision KINEX gearboxes at Int'l Robot Expo.</span><span data-lang="zh">於國際機器人展展示高精度 KINEX 齒輪箱，瞄準印度機械臂市場。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-14:</strong> <span data-lang="en">Q2 report shows strong demand for Auto & Home Appliance motors in India.</span><span data-lang="zh">Q2財報顯示，印度車用與家電馬達需求推升集團亞洲區獲利。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-01:</strong> <span data-lang="en">HQ mandates local Indian electronic vendors to provide low-carbon proofs.</span><span data-lang="zh">內部政策：要求印度在地電子零件供應商逐步提交低碳排證明。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Analyzed based on Nidec India context): 
+        // Market Share: 8 (Top 5 overall, Absolute Leader in BLDC & Precision)
+        // Localization: 6 (Building new plants, but still aggressively seeking electronic localization)
+        // Brand Power: 8 (B2B Global Giant)
+        // Digital Reach: 6 (Strong B2B on DigiKey, lack of direct B2C)
+        // Fin. Health: 9 (Backed by Nidec Japan, 1070 Cr Revenue, >30% CAGR)
+        const radarScores = [8, 6, 8, 6, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2, min: 0 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

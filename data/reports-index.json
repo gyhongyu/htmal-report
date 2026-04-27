@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-11T12:06:47.296Z",
+  "lastUpdated": "2026-04-27T12:42:08.517Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1029,6 +1029,21 @@
       "fileName": "report-1775909161280.html",
       "createdAt": "2026-04-11T12:06:02.490Z",
       "updatedAt": "2026-04-11T12:06:02.490Z"
+    },
+    {
+      "id": "report-1777293726477",
+      "title": "Target: Nidec India",
+      "description": "目標企業：Nidec India (日本電產)",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "年度計劃",
+        "項目計劃"
+      ],
+      "fileName": "report-1777293726477.html",
+      "createdAt": "2026-04-27T12:42:08.517Z",
+      "updatedAt": "2026-04-27T12:42:08.517Z"
     }
   ]
 }
