@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-27T13:35:08.907Z",
+  "lastUpdated": "2026-04-30T04:25:59.065Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1086,6 +1086,20 @@
       "fileName": "report-1777296905458.html",
       "createdAt": "2026-04-27T13:35:08.907Z",
       "updatedAt": "2026-04-27T13:35:08.907Z"
+    },
+    {
+      "id": "report-1777523158070",
+      "title": "Target: PAKO Technologies",
+      "description": "目標企業：PAKO Technologies",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "市場分析"
+      ],
+      "fileName": "report-1777523158070.html",
+      "createdAt": "2026-04-30T04:25:59.065Z",
+      "updatedAt": "2026-04-30T04:25:59.065Z"
     }
   ]
 }

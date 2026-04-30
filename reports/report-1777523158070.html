@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: PAKO Technologies Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: PAKO Technologies (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：PAKO Technologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: PAKO Technologies</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：PAKO Technologies</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Niche Tier</div>
+                            <div class="text-xs text-gray-500 uppercase">Strategic Prospect</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">PAKO Technologies Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72200PN2000PTC015172</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">SME Scale</span>
+                            <span class="text-xs text-gray-500 ml-2">(Bootstrapped)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Indian Promoters</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> 印度本土私營企業</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Pune, Maharashtra</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Pune (浦那)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Karvenagar | 50-100 Headcount</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">Karvenagar | 員工數約 50-100 人</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Pune Unit:</strong> SKD/CKD & Box Assembly. Transitioning capacities back from Taiwan to comply with "Make in India".</li>
+                                <li data-lang="zh"><strong>Pune 整合基地:</strong> 負責原型設計與系統組裝 (SKD/CKD)。正將長達 18 年的台灣代工產能移回印度。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech & Regional Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與分支辦事處：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Pune R&D:</strong> Concept to Certification. End-to-end PCB & Firmware design.</li>
+                                <li data-lang="zh"><strong>Pune 研發中心:</strong> 提供概念設計到認證一條龍服務。</li>
+                                <li data-lang="en"><strong>Taiwan Liaison:</strong> Sourcing and technical coordination window.</li>
+                                <li data-lang="zh"><strong>台灣辦事處:</strong> 設有採購與技術對接聯絡窗口。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (Direct & Ultimate Beneficiaries):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (直接控股與最終受益人)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Founders & Key Execs</span>
+                                <span class="text-gray-500 block" data-lang="zh">創辦人與核心高管</span>
+                                <strong class="text-white">Vinayak R. Pandit (CEO) & Team</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Susheelkumar Kalamkar (COO)</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">Susheelkumar Kalamkar (COO)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Corporate Structure</span>
+                                <span class="text-gray-500 block" data-lang="zh">企業架構</span>
+                                <strong class="text-white">Independent Private Entity</strong>
+                                <span class="block text-blue-400 mt-1" data-lang="en">No Complex Overseas Holdings</span>
+                                <span class="block text-blue-400 mt-1" data-lang="zh">無複雜海外控股架構</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Intelligent Transport:</strong> Telematics, VTS Systems</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>智慧交通系統：</strong> 車載遠端通訊設備 VTS</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Industrial Automation:</strong> Telecom Servers, Converters</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>工業自動化：</strong> 協議轉換器、光纖網路設備</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Rugged Projects:</strong> Aviation/Military/Medical Electronics</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>強固型專案設備：</strong> 航空/軍工/醫療領域</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Digital Signage:</strong> Surveillance Systems</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>安防與監控：</strong> 數位看板與監控設備</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Compute & Control:</strong> Multi-layer PCB, Embedded MCU, Server boards.</li>
+                            <li data-lang="zh"><strong>運算與控制：</strong> 單/多層 PCB 板、微處理器、伺服器主板。</li>
+                            
+                            <li data-lang="en"><strong>Mechanical/Thermal:</strong> Rugged dust/waterproof metal casings, Industrial heatsinks.</li>
+                            <li data-lang="zh"><strong>防護與機構件：</strong> 防震防塵防水金屬殼體、散熱模組。</li>
+                            
+                            <li data-lang="en"><strong>Comms Interface:</strong> GPS/GPRS antennas, RF Connectors, Fiber Transceivers.</li>
+                            <li data-lang="zh"><strong>通訊與介面：</strong> GPS/GPRS 天線、高頻連接器、光纖元件。</li>
+                            
+                            <li data-lang="en"><strong>Interconnect:</strong> Auto/Industrial-grade Wiring Harness, Custom Power Supplies.</li>
+                            <li data-lang="zh"><strong>電子互連：</strong> 車規/工業級線束、客製化電源模組。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Foxlink Opportunity / Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">供應鏈缺口與 Foxlink 機會點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Low Volume High Mix:</strong> Highly customized projects marginalized by big players.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>少量多樣痛點：</strong> 訂單量小遭大型代工廠排擠，極需高彈性夥伴。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Taiwan Quality, Local Sourcing:</strong> Needs "Taiwan manufacturing standards" but fulfilled locally in India.</p>
+                            <p data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>台灣 DNA：</strong> 需要能達到「台灣品質標準」的連接器、線材與 PCBA 供應商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (2025-2026)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025-2026)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they building?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn Analytics</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sr. PCB Designer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Hiring Altium/KiCAD experts. Expanding in-house front-end hardware design autonomy.</td>
+                                    <td data-lang="zh">招募熟悉 Altium 或 KiCAD 工程師。顯示其正在擴大前端硬體自主設計能量。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Technical Presales Exec</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Maharashtra</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Maharashtra (馬哈拉施特拉邦)</span>
+                                    </td>
+                                    <td data-lang="en">Targeting Agriculture & Solar monitoring sectors. Expanding niche B2B client base.</td>
+                                    <td data-lang="zh">針對農業、太陽能氣象監測設備等利基市場，擴張新領域客戶群。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Embedded Firmware Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Strengthening low-level software capabilities for Industrial IoT (IIoT) Gateways.</td>
+                                    <td data-lang="zh">持續招募韌體工程師，強化工業物聯網 (IoT) 閘道器的底層軟體實力。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-yellow-400">Supply Chain / Vendor Dev</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Searching for local electronic component vendors to rapidly cut import dependency.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 尋找具備開發本土組件供應商經驗的採購，加速擺脫對東亞純依賴。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Pure B2B & SI Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">純 B2B 專案與直銷模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Direct OEM/ODM:</strong> No general consumer market. Direct engagements with Industrial, Medical or Gov entities (e.g., AAI).</li>
+                                <li data-lang="zh"><strong>代工與直銷：</strong> 不經營大眾市場。直接對接工業客戶、醫療設備廠或政府機關。</li>
+                                
+                                <li data-lang="en"><strong>Digital Presence:</strong> Corporate showcase only. RFP-driven pipeline, no B2C e-commerce.</li>
+                                <li data-lang="zh"><strong>數位平台：</strong> 官網純粹展示解決方案。需透過聯繫進入 RFP 階段，無電商。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Project-Based:</strong> Highly erratic schedules. Build/Configure to Order (BTO/CTO).</li>
+                                <li data-lang="zh"><strong>專案導向採購：</strong> 承接 BTO/CTO 訂單，交貨排程不固定且規格殊異。</li>
+                                
+                                <li data-lang="en"><strong>Agility Required:</strong> Vendors must possess extreme flexibility to handle sudden, specialized batches.</li>
+                                <li data-lang="zh"><strong>極致彈性：</strong> 供應商必須具備高度彈性，能配合其少量多樣的特殊交期。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Market Rankings (EMS Sector)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度市場競爭排名 (EMS 代工)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Foxconn India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Market Leader (Volume EMS)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">市場絕對領導者 (大宗消費電子)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Dixon Technologies</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India's Largest Local EMS</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土最大 EMS</td>
+                                    </tr>
+                                    <tr class="bg-red-900/20">
+                                        <td class="p-2 font-bold text-center text-red-400">3</td>
+                                        <td class="p-2 text-red-400 font-bold">Kaynes Technology</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">IoT/Auto Focus (Direct Threat to PAKO)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">IoT與汽車電子 (PAKO 強勢上位競爭者)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4-8</td>
+                                        <td class="p-2" colspan="2">Bharat FIH, Syrma SGS, Avalon, VVDN, SFO Tech</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">Niche</td>
+                                        <td class="p-2 text-white font-bold">PAKO Technologies</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Target Client (Low Volume, Rugged)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">目標客戶 (利基型，低產量高複雜度)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity Insight:</strong> PAKO founder noted they are pushed out by large Taiwanese factories. Foxlink can act as their local anchor offering "High-Mix" flexibility with "Taiwan DNA".</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>決策洞察：</strong> PAKO 因訂單量小屢遭大型代工廠排擠。Foxlink 應利用印度在地產能，為其提供「無溝通障礙的台灣電子業 DNA」與高彈性模組代工，精準打中痛點。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-15</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Strategy] Local Manufacturing Push</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[戰略] 強化在地製造承諾</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Reiterated positioning as "Gateway to Make in India". Actively seeking local hardware partners to drop East Asian import reliance.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">公司強調其身為 "Gateway to Make in India" 定位，對外招商尋求本土硬體合作夥伴，降低東亞依賴。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-red-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-red-400 block text-sm" data-lang="en">[HR] Automotive Exec Departs</strong>
+                            <strong class="text-red-400 block text-sm" data-lang="zh">[人事] 汽車業務人才異動</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Sourabh Sharma (ITMS Sales Head) left for VVDN Technologies. Signals intense poaching in the automotive vertical.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">商用車交通系統業務主管 Sourabh Sharma 轉戰 VVDN 擔任副總裁。顯示該領域人才競爭白熱化。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-10</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Project] AAI ATC Deployment</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[專案] 印度機場管理局 (AAI) 航空管制專案</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Partnered with Horizon Avionics to build custom embedded ATC servers for Airports Authority of India. Huge rugged tech milestone.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">與 Horizon Avionics 合作開發客製化嵌入式航空管制伺服器，創下強固型設備重大里程碑。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-25</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Product] Telematics Line Upgraded</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[產品] 車載資通訊產品線強化</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Pushing VTS & SCU hardware for commercial fleets to grab AIS-140 compliance market share.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對商用車隊推廣 VTS 系列，搶佔符合印度政府強制追蹤法規 (AIS-140) 的硬體商機。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-05</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Expansion] R&D Hiring Spree</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[擴張] 擴招研發人才</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched recruitment drive in Pune for PCB & Firmware devs to boost vertical "Design to Manufacturing" integration.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">於 Pune 啟動 PCB 與韌體工程師招募，旨在提升「設計到生產」垂直整合技術能量。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred for PAKO Technologies): 
+        // Market Share: 4 (Niche Tier, outside Top 10)
+        // Localization: 8 (Pivoting heavily to "Make in India" from Taiwan)
+        // Brand Power: 5 (Known in B2B specific segments like AAI)
+        // Digital Reach: 3 (No e-commerce, purely RFP/Direct)
+        // Fin. Health: 6 (Unfunded, steady SME rolling operations)
+        const radarScores = [4, 8, 5, 3, 6]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場佔有率', '在地化意願', 'B2B 影響力', '數位覆蓋', '財務穩健度'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2, min: 0 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
