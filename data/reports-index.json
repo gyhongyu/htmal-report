@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-30T06:31:17.304Z",
+  "lastUpdated": "2026-04-30T09:10:40.994Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1142,6 +1142,20 @@
       "fileName": "report-1777530676372.html",
       "createdAt": "2026-04-30T06:31:17.304Z",
       "updatedAt": "2026-04-30T06:31:17.304Z"
+    },
+    {
+      "id": "report-1777540238592",
+      "title": "Target: AAEON Technology Inc.",
+      "description": "目標企業：研揚科技股份有限公司 (AAEON)",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1777540238592.html",
+      "createdAt": "2026-04-30T09:10:40.994Z",
+      "updatedAt": "2026-04-30T09:10:40.994Z"
     }
   ]
 }

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: AAEON Technology Inc. (Taiwan HQ) -->
+    <!-- Date: April 2026 -->
+    <title data-lang="en">Deep Dive KYC: AAEON Technology (Apr 2026)</title>
+    <title data-lang="zh">企業 KYC 深度調查報告：研揚科技 (AAEON)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink Global / Corporate Intel</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE - TW HQ</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: AAEON Technology Inc.</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：研揚科技股份有限公司 (AAEON)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> April 2026 | <strong>Scope:</strong> Global HQ & Supply Chain Synergy</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年4月 | <strong>調查範圍：</strong> 台灣全球總部供應鏈對接</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1 Elite</div>
+                            <div class="text-xs text-gray-500 uppercase">ASUS Group / IPC Giant</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Listed Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">上市實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">AAEON Technology Inc.</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>TWSE Code:</strong> 6579</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Public Listed (Taiwan)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：台灣證券交易所上市</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">NT$ 8.6B</span>
+                            <span class="text-xs text-gray-500 ml-2">(FY 2025 Rev)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> ASUS Group (華碩集團)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> 華碩電腦股份有限公司</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Global HQ & Mfg Hub</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">全球總部與製造樞紐</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Xindian, New Taipei</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">新北市新店區</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">1,100+ Global Headcount</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">寶高智慧園區周邊 | 1100+ 員工</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D and Manufacturing (Taiwan):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">台灣研發與製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Xindian Plant:</strong> Core SMT and high-mix low-volume assembly hub. ISO 9001/13485 certified.</li>
+                                <li data-lang="zh"><strong>新店總部廠:</strong> 首要 SMT 與系統組裝測試基地，具備少量多樣高彈性產線。</li>
+                                <li data-lang="en"><strong>ASUS Synergy:</strong> Leverages ASUS Group's global manufacturing footprint for high-volume standard products.</li>
+                                <li data-lang="zh"><strong>集團協同:</strong> 大批量標準品可依賴華碩集團 (ASUS) 全球代工資源擴充。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Global Subsidiaries:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">全球分支網路：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>US/EU/Asia:</strong> Direct B2B sales and tech support branches in California, New Jersey, Netherlands, Germany, Singapore, and China.</li>
+                                <li data-lang="zh"><strong>全球分公司:</strong> 美國、荷蘭、德國、新加坡與中國皆設有 B2B 業務與技術支援實體。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace:</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Direct Key Shareholders</span>
+                                <span class="text-gray-500 block" data-lang="zh">直接控股 / 大股東</span>
+                                <strong class="text-white">ASUS Investment Arms</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Chairman: Yung-Shun Chuang</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">董事長：莊永順 (實質決策)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Strategic Alliance</span>
+                                <span class="text-gray-500 block" data-lang="zh">集團戰略聯盟</span>
+                                <strong class="text-white">Onyx Healthcare Cross-holding</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Deep integration with medical IT</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">與醫揚科技深度交叉持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終歸屬母集團</span>
+                                <strong class="text-blue-300">ASUS Group (華碩)</strong>
+                                <span class="block text-blue-400 mt-1" data-lang="en">Massive Procurement Power</span>
+                                <span class="block text-blue-400 mt-1" data-lang="zh">具備集團級龐大採購議價優勢</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-brain text-gray-500 mr-2"></i><strong>Edge AI:</strong> NVIDIA Jetson Computing Systems</li>
+                            <li data-lang="zh"><i class="fas fa-brain text-gray-500 mr-2"></i><strong>邊緣 AI：</strong> AI 邊緣運算系統 (BOXER系列)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-microchip text-gray-500 mr-2"></i><strong>Boards:</strong> SBCs & Embedded Motherboards</li>
+                            <li data-lang="zh"><i class="fas fa-microchip text-gray-500 mr-2"></i><strong>嵌入式板卡：</strong> 單板電腦與工業主機板</li>
+                            
+                            <li data-lang="en"><i class="fas fa-desktop text-gray-500 mr-2"></i><strong>HMI:</strong> Industrial Panel PCs</li>
+                            <li data-lang="zh"><i class="fas fa-desktop text-gray-500 mr-2"></i><strong>觸控介面：</strong> 工業級平板電腦與 HMI</li>
+                            
+                            <li data-lang="en"><i class="fas fa-network-wired text-gray-500 mr-2"></i><strong>Network:</strong> Cyber-security Appliances</li>
+                            <li data-lang="zh"><i class="fas fa-network-wired text-gray-500 mr-2"></i><strong>網安通訊：</strong> 網路安全與閘道器設備</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Compute:</strong> NVIDIA Jetson Orin/Thor, Intel/AMD SoCs, High-density HDI PCBs.</li>
+                            <li data-lang="zh"><strong>運算與載板：</strong> NVIDIA Jetson、工業級 HDI 高密度互連電路板。</li>
+                            
+                            <li data-lang="en"><strong>Interconnect:</strong> M12 waterproof ports, PCIe Gen4/5 high-speed cables, Custom harnesses.</li>
+                            <li data-lang="zh"><strong>高速互連：</strong> M12 防水連接器、高頻高速連接線、內部抗干擾客製化線束。</li>
+                            
+                            <li data-lang="en"><strong>Thermal:</strong> Fanless extruded aluminum chassis, Pure copper heat-pipes.</li>
+                            <li data-lang="zh"><strong>機構與散熱：</strong> 無風扇鋁擠型機殼、純銅熱管散熱模組、強固型機構件。</li>
+                            
+                            <li data-lang="en"><strong>Power:</strong> Wide-voltage/temp power modules, Redundant SMPS.</li>
+                            <li data-lang="zh"><strong>能源管理：</strong> 寬壓/寬溫轉換模組、工業級備援電源。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Foxlink Opportunity / Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">供應鏈缺口與 Foxlink 機會點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Server-Grade Shift:</strong> AAEON's AI Box PCs now require thermal and interconnect standards close to enterprise servers. Foxlink's telecom/server connectivity expertise is a perfect match.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>伺服器規格下放：</strong> 研揚 Edge AI 產品線內部需要大量耐高溫、抗震的高階連接器與傳輸線，規格逼近伺服器等級。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Global Scale & Local Customization:</strong> Needs vendors capable of passing strict ASUS QA audits while supporting high-mix industrial runs.</p>
+                            <p data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>高階線纜切入：</strong> Foxlink 若能利用通訊研發優勢，提供高性價比的工業互連方案，可有效打入其 AVL 名單。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q1 2026)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: The AI & Thermal Pivot</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：全面轉向 AI 與散熱工程</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: 104 Job Bank, LinkedIn Taiwan</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">AI Edge Software Eng.</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Xindian HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">新店總部</span>
+                                    </td>
+                                    <td data-lang="en">Heavy recruitment. Shifting hardware products to be highly software-defined, tightly integrated with NVIDIA ecosystem.</td>
+                                    <td data-lang="zh">大量招募，顯示其正將硬體產品高度軟體化，強化與 NVIDIA 平台的軟體整合能力。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Thermal Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Xindian HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">新店總部</span>
+                                    </td>
+                                    <td data-lang="en">Surge in demand for advanced thermal design due to high-TDP AI chips used in fanless industrial environments.</td>
+                                    <td data-lang="zh">新一代 AI 晶片功耗大增，針對無風扇工業電腦的進階散熱設計人才需求激增。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Hardware R&D Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Xindian HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">新店總部</span>
+                                    </td>
+                                    <td data-lang="en">Focusing on high-speed signal routing (PCIe Gen4/Gen5) for next-gen motherboards.</td>
+                                    <td data-lang="zh">常態性擴編，專注於伺服器級高頻信號 (PCIe Gen4/Gen5) 佈線設計。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-yellow-400">Global Strategic Sourcing Mgr</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Xindian HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">新店總部</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Managing cross-border supply chain risks. Looking for Tier-1 suppliers capable of bypassing geopolitical constraints.</td>
+                                    <td data-lang="zh"><strong>戰略訊號：</strong> 負責尋源與跨國供應鏈風險管理，正尋找能在地緣政治下穩定供貨的 Tier-1 供應商。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">B2B Direct & Developer Ecosystem</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">純 B2B 專案與開發者生態圈</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Direct & SI:</strong> Deep customization (Design-in) for global System Integrators, Med-tech, and Autonomous vehicle startups.</li>
+                                <li data-lang="zh"><strong>大型 SI 直客：</strong> 對接全球大型系統整合、醫療設備或自駕車新創，提供深度客製化 (Design-in)。</li>
+                                
+                                <li data-lang="en"><strong>Maker Ecosystem:</strong> Promotes "UP Board" brand (high-value AI dev boards) to cultivate early-stage engineers and startups.</li>
+                                <li data-lang="zh"><strong>創客生態圈：</strong> 透過 "UP Board" 品牌主打小尺寸 AI 開發板，以標準品培養早期開發者生態系。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Distribution Pipeline</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">通路與發貨邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Global Catalogs:</strong> Heavily relies on mega-distributors (Mouser, DigiKey) for global standard board sales.</li>
+                                <li data-lang="zh"><strong>電子零件通路：</strong> 深度依賴全球大型電子通路商 (如 Mouser, DigiKey) 進行標準品分銷。</li>
+                                
+                                <li data-lang="en"><strong>Digital Direct:</strong> Operates "AAEON eShop" for direct sales of dev kits and peripherals to end-users.</li>
+                                <li data-lang="zh"><strong>自營電商：</strong> 運營 AAEON eShop 直接販售測試套件與周邊，具備直接面對終端的線上通路。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">Taiwan Market Rankings (Global IPC Titans)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">台灣工業電腦 (IPC) 產業競爭態勢 (Top 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Group/Note</th><th class="p-2" data-lang="zh">集團背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Advantech (研華)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Independent (Absolute Global Leader)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">獨立巨頭 (全球絕對領先)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Ennoconn (樺漢)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Foxconn Group (Volume OEM)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">鴻海集團 (大型代工)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3-5</td>
+                                        <td class="p-2" colspan="2">DFI (Qisda Group), ADLINK (AUO Group), IEI</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">6</td>
+                                        <td class="p-2 text-white font-bold">AAEON (研揚)</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Target Client (ASUS Group, Edge AI Leader)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">目標客戶 (華碩集團，邊緣 AI 領導者)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">7-10</td>
+                                        <td class="p-2" colspan="2">Axiomtek, Nexcom, Flytech, IBASE</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity Insight:</strong> Taiwan's IPC sector is dominated by tech group consortiums (Foxconn vs Qisda vs ASUS). AAEON must maintain "AI Tech Superiority" and "Cost Control" to fight Advantech. Foxlink's ability to supply server-grade interconnects at competitive rates is highly strategic for them.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>決策洞察：</strong> 台灣 IPC 已走向「集團化」競爭。研揚面對研華與樺漢的規模經濟，必須在「AI 規格」與「成本」上保持優勢。Foxlink 若提供高性價比的伺服器級互連方案，極易切入其旗艦產品線。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Q1 2026)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-04-07</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Financial] Q1 Revenue Hits Double-Digit Growth</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[財務] 公布 3 月營收雙位數增長</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Reported March consolidated revenue of NT$ 953M (YoY +16.17%). Q1 accumulated growth hit 23.07%, fueled by massive shipments of Edge AI projects.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">3 月合併營收 9.53 億元，Q1 累計年增 23.07%。受惠於邊緣 AI 專案放量，營運動能強勁。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-03-31</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corporate] Chairman Awarded for Industry Contribution</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[高層] 董事長獲傑出貢獻獎與產學投資</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Chairman Yung-Shun Chuang received "Outstanding Contribution Award" at NTUST and donated NT$ 25M via VC arm to boost industry-academia tech incubation.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">董事長莊永順獲頒台科大「傑出貢獻獎」，並透過創投捐贈 2500 萬元強化產學合作與技術探勘。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-03-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Exhibition] Showcase at Embedded World (Germany)</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[展會] 參展 Embedded World (紐倫堡)</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Unveiled latest robotics, machine vision, and Industrial AI solutions at the world's premier embedded tech trade show.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">於德國紐倫堡嵌入式電子展中，展出最新機器人、機器視覺和工業 AI 邊緣解決方案。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-01</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Strategy] AI Revenue Target Upgraded</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[戰略] AI 營收占比目標上調至 30%</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">President stated Edge AI is entering a 3-5 year boom. AI-related revenue hit 20% in 2025, now targeting 30% as the group's main profit engine.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">總經理表示邊緣 AI 進入爆發期；2025 年 AI 相關營收佔比已達 20%，未來目標將上看 30%，為獲利新引擎。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // Default to English
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred for AAEON HQ): 
+        // Market Share: 8 (Tier 1 Top 10 in Taiwan IPC, Elite in AI)
+        // Localization: 9 (Heavy HQ Mfg presence + ASUS synergy)
+        // Brand Power: 8 (NVIDIA Elite partner, strong global SI trust)
+        // Digital Reach: 8 (AAEON eShop + Mouser/Digikey global network)
+        // Fin. Health: 9 (Listed company, NT$ 8.6B record rev, ASUS backed)
+        const radarScores = [8, 9, 8, 8, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Mfg Synergy', 'Brand Power', 'Global Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場競爭地位', '集團製造協同', '品牌與生態系', '全球數位覆蓋', '財務穩健度'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2, min: 0 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
