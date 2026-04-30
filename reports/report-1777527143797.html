@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Automation Combine ISC Private Limited -->
+    <!-- Date: April 2026 -->
+    <title data-lang="en">Deep Dive KYC: Automation Combine (Apr 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Automation Combine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Automation Combine</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Automation Combine</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> April 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年4月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Local SME Tier</div>
+                            <div class="text-xs text-gray-500 uppercase">Value-Added Distributor / OEM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Automation Combine ISC Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U26517KA2023PTC174557</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Inc. 2023)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (2023年註冊成立)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 4.54 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(High Growth SME)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Indian Private Promoters</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> 印度本土私營合夥人</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Assembly Unit</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與輕組裝樞紐</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Bengaluru (North)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Bengaluru (班加羅爾)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Hennur Main Road | 11-50 Headcount</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">Hennur Main Road | 員工數約 11-50 人</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">HQ / Assembly Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">總部與輕裝配基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Bengaluru Unit:</strong> Central hub for light assembly, testing, custom labeling (Profibus/Switches), and warehousing.</li>
+                                <li data-lang="zh"><strong>Bengaluru 總部:</strong> 負責工業通訊產品的輕度組裝、測試、客製化標籤作業及倉儲發貨。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Field Sales Network:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">駐點業務支援網路：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Resident Engineers:</strong> Deployed across key industrial corridors (Ahmedabad, Chennai, Pune, Jamshedpur, etc.)</li>
+                                <li data-lang="zh"><strong>區域駐點工程師:</strong> 派駐於各大工業帶 (如 Pune 汽車重鎮、Jamshedpur 鋼鐵鎮)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (Flat Org):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (扁平化架構)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Direct Entity</span>
+                                <span class="text-gray-500 block" data-lang="zh">註冊實體</span>
+                                <strong class="text-white">Automation Combine ISC Pvt Ltd</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">10+ yrs legacy operations</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">具備 10 年以上實體營運歷史</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Founders & Directors</span>
+                                <span class="text-gray-500 block" data-lang="zh">創辦人與董事</span>
+                                <strong class="text-white">Tittu Cherian & Local Partners</strong>
+                                <span class="block text-blue-400 mt-1" data-lang="en">100% Indian Private Promoters</span>
+                                <span class="block text-blue-400 mt-1" data-lang="zh">100% 印度本土純內資</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-network-wired text-gray-500 mr-2"></i><strong>Ind. Network:</strong> Ethernet Switches, Profibus Repeaters</li>
+                            <li data-lang="zh"><i class="fas fa-network-wired text-gray-500 mr-2"></i><strong>工業網通：</strong> 網路交換機、Profibus 中繼器</li>
+                            
+                            <li data-lang="en"><i class="fas fa-plug text-gray-500 mr-2"></i><strong>Cable Assembly:</strong> Fiber Optics, Profibus Cables</li>
+                            <li data-lang="zh"><i class="fas fa-plug text-gray-500 mr-2"></i><strong>工業線材：</strong> 光纖電纜、Profibus 專用線</li>
+                            
+                            <li data-lang="en"><i class="fas fa-microchip text-gray-500 mr-2"></i><strong>Control:</strong> PLCs, Industrial PCs, HMI</li>
+                            <li data-lang="zh"><i class="fas fa-microchip text-gray-500 mr-2"></i><strong>控制系統：</strong> PLC、IPC、人機介面 (HMI)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-satellite-dish text-gray-500 mr-2"></i><strong>IoT:</strong> Protocol Converters, Remote Gateways</li>
+                            <li data-lang="zh"><i class="fas fa-satellite-dish text-gray-500 mr-2"></i><strong>物聯網通訊：</strong> 通訊協定轉換器、遠端閘道器</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">組裝層級零組件拆解 (BOM)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Comm Boards:</strong> Network switch chips, MCU, Signal isolators.</li>
+                            <li data-lang="zh"><strong>通訊控制板：</strong> 網路交換晶片、MCU、訊號隔離器 PCBA。</li>
+                            
+                            <li data-lang="en"><strong>Interfaces:</strong> Rugged M12/RJ45 jacks, D-Sub 9 connectors.</li>
+                            <li data-lang="zh"><strong>介面模組：</strong> 堅固型 M12/RJ45 連接器、D-Sub 9 針接口。</li>
+                            
+                            <li data-lang="en"><strong>Power:</strong> Wide-voltage DC-DC converters, Surge protectors.</li>
+                            <li data-lang="zh"><strong>電源元件：</strong> 寬電壓 DC-DC 電源轉換模組、突波保護器。</li>
+                            
+                            <li data-lang="en"><strong>Mechanical:</strong> DIN Rail backplanes, Aluminum extrusion heatsinks, IP67 plastics.</li>
+                            <li data-lang="zh"><strong>機構件：</strong> 導軌 (DIN Rail) 背板、鋁擠壓散熱外殼、IP67 塑膠殼。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Foxlink Opportunity / Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">供應鏈缺口與 Foxlink 機會點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Own-Brand Pivot:</strong> Transitioning from pure distributor to own-brand OEM. Highly relies on external EMS for PCBA and housing molds.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>貼牌轉型代工需求：</strong> 正從經銷商轉型建立自有品牌，極度需要外部 EMS 代工廠提供 PCBA 與外殼開模服務。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Connectors & Wiring:</strong> Direct demand for industrial-grade harnesses, fiber optics, and robust connectors to fight cheap Chinese imports.</p>
+                            <p data-lang="zh"><i class="fas fa-bullseye text-green-500 mr-1"></i><strong>連接器與線束：</strong> 需要高品質的特種通訊線材與連接器，以提升產品可靠度對抗中國廉價進口品。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q1 2026)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: VAD/Light Assembly Model</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：輕量化系統整合模式</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: LinkedIn, Local Job Boards</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Resident Sales Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Jamshedpur / Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Jamshedpur / Pune</span>
+                                    </td>
+                                    <td data-lang="en">Expanding direct B2B sales grid in Tier-2/3 heavy industry hubs (Steel, Auto).</td>
+                                    <td data-lang="zh">積極在二三線重工業城市（如鋼鐵重鎮、汽車重鎮）佈局，直接面對終端工廠。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Automation Support Eng.</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru 總部</span>
+                                    </td>
+                                    <td data-lang="en">Seeking PLC programming and network setup skills for pre/post-sales debugging.</td>
+                                    <td data-lang="zh">尋求具備 PLC 編程與工業網路架設能力的工程師，負責售前測試與售後除錯。</td>
+                                </tr>
+                                <tr class="bg-yellow-900/20">
+                                    <td colspan="2" class="p-3">
+                                        <strong class="text-yellow-400 block mb-1" data-lang="en">Intel Insight: Zero R&D/Manufacturing Hires</strong>
+                                        <strong class="text-yellow-400 block mb-1" data-lang="zh">關鍵洞察：缺乏重度研發與製造人員</strong>
+                                        <p class="text-xs text-gray-300" data-lang="en">The absence of hardware engineers confirms their "Value-Added Distributor" model. They MUST outsource hardware manufacturing to EMS partners like Foxlink to sustain their own-brand growth.</p>
+                                        <p class="text-xs text-gray-300" data-lang="zh">未大舉招募硬體研發或生產人員，印證其「技術加值經銷」的輕資產模式。若要發展自有硬體品牌，必定高度依賴外部供應鏈代工。</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">B2B Direct & Digital Mix</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">B2B 直銷與數位電商並行</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Resident Engineers:</strong> Direct B2B penetration into Auto, Metal, and Water treatment plants.</li>
+                                <li data-lang="zh"><strong>駐點直銷：</strong> 透過區域工程師直接打入汽車、金屬加工、水處理等製造業工廠。</li>
+                                
+                                <li data-lang="en"><strong>Dual Brand Play:</strong> Acts as agent for global brands (ex-VIPA) while pushing own label "Automation Combine".</li>
+                                <li data-lang="zh"><strong>雙軌策略：</strong> 同時代理國際品牌與推廣自行組裝貼牌的工業網通硬體。</li>
+                                
+                                <li data-lang="en"><strong>B2B Marketplaces:</strong> Deeply invested in IndiaMART & TradeIndia for inbound lead generation from SME factories.</li>
+                                <li data-lang="zh"><strong>B2B 採購平台：</strong> 深度佈局 IndiaMART 與 TradeIndia，為獲取中小型工廠訂單的核心通路。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain Logistics</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Central Stocking:</strong> Warehousing at Bengaluru HQ for PAN India dispatch.</li>
+                                <li data-lang="zh"><strong>中央庫存：</strong> 主要發貨地與庫存中心位於 Bengaluru 總公司。</li>
+                                
+                                <li data-lang="en"><strong>Vendor Demands:</strong> Requires "Stable Lead Times" and "High-mix Low-volume" flexibility from suppliers.</li>
+                                <li data-lang="zh"><strong>供應商要求：</strong> 極需代工廠能配合「交期穩定」與「少量多樣」的備貨彈性。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Market Context (Ind. Automation)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度工業自動化市場競爭態勢</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Tier</th>
+                                        <th class="p-2" data-lang="en">Key Players</th><th class="p-2" data-lang="zh">指標巨頭</th>
+                                        <th class="p-2" data-lang="en">Focus Area</th><th class="p-2" data-lang="zh">主導領域</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">Global Giants</td>
+                                        <td class="p-2">Siemens, Rockwell, ABB</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Process Control & Heavy Ind.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">大型製程控制與重工業</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">Asian Leaders</td>
+                                        <td class="p-2">Mitsubishi, Delta, Omron, Yaskawa</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">CNC, PLC, VFD & Robotics</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">CNC, PLC, 變頻器與機器人</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">Euro Niche</td>
+                                        <td class="p-2">B&R, Beckhoff</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">PC-based Control</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">PC-based 高階控制</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">Local SME</td>
+                                        <td class="p-2 text-white font-bold">Automation Combine</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Target: System Integration & Own-Brand Comms</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">目標：在地系統整合與白牌網通設備</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity Insight:</strong> Facing severe price wars from Chinese unbranded imports, Automation Combine's strategy to manufacture their own "Make in India" networking products relies heavily on securing a solid EMS partner for high-quality PCBs and enclosures.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>決策洞察：</strong> 面對中國廉價網通設備傾銷，Automation Combine 亟欲以 "Make in India" 政策轉型製造自有品牌設備。Foxlink 若能切入其工業級連接器與 PCBA 代工，將助其大幅提升硬體可靠度對抗白牌競爭。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Jan '26 - Apr '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-03-31</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Financial] Massive Growth Trajectory</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[財務] 營收強勁成長軌跡</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">MCA filings reveal FY25 turnover hit ₹4.54 Cr with a staggering 43% CAGR, capitalizing on the post-pandemic manufacturing automation boom in India.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">據 MCA 申報，2025財年營收達 4.54 億盧比，年複合成長率高達 43%，成功掌握疫後印度製造業升級紅利。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-15</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[B2B Channel] Aggressive IndiaMART Expansion</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[B2B 電商] 擴大線上自有品牌產品線</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Expanded catalog with own-brand "Unmanaged Ethernet Switches" & "Profibus DP Repeaters". Pricing highly competitive (e.g., Switches at ~₹6000/pc) to disrupt local markets.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">於 IndiaMART 新增多款自有品牌交換機與中繼器目錄。報價極具本土競爭力（如乙太網交換機約 ₹6000/台）。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Corporate] Stable Operations & PAN India Push</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[營運] 狀態穩定與全印佈局</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Corporate status remains active. Continuously leveraging Bengaluru as the command center while deploying Resident Engineers to tier-2 industrial nodes.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">公司狀態維持活躍。持續以 Bengaluru 為核心，並穩定向全印度二三線工業帶派駐技術支援能量。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // Set default language to English as requested
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Inferred for Automation Combine): 
+        // Market Share: 3 (SME Tier, not in top 10 India-wide)
+        // Localization: 6 (Light assembly, transitioning to "Make in India" own-brand)
+        // Brand Power: 5 (Strong regional B2B trust, but battling cheap white-label imports)
+        // Digital Reach: 7 (Highly active on IndiaMART & TradeIndia for lead gen)
+        // Fin. Health: 7 (Unfunded SME but profitable with impressive 43% CAGR & ₹4.54Cr turnover)
+        const radarScores = [3, 6, 5, 7, 7]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場排名(整體)', '在地化組裝', '品牌影響力', 'B2B 數位覆蓋', '財務成長性'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2, min: 0 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

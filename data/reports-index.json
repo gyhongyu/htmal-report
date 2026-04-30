@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-30T04:48:52.370Z",
+  "lastUpdated": "2026-04-30T05:32:24.768Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1114,6 +1114,20 @@
       "fileName": "report-1777524531504.html",
       "createdAt": "2026-04-30T04:48:52.370Z",
       "updatedAt": "2026-04-30T04:48:52.370Z"
+    },
+    {
+      "id": "report-1777527143797",
+      "title": "Target: Automation Combine",
+      "description": "目標企業：Automation Combine",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1777527143797.html",
+      "createdAt": "2026-04-30T05:32:24.768Z",
+      "updatedAt": "2026-04-30T05:32:24.768Z"
     }
   ]
 }
