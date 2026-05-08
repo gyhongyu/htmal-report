@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-04-30T09:10:40.994Z",
+  "lastUpdated": "2026-05-08T04:35:50.285Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1156,6 +1156,20 @@
       "fileName": "report-1777540238592.html",
       "createdAt": "2026-04-30T09:10:40.994Z",
       "updatedAt": "2026-04-30T09:10:40.994Z"
+    },
+    {
+      "id": "report-1778214949360",
+      "title": "Target: Advantech India",
+      "description": "目標企業：Advantech India (研華印度)",
+      "categories": [
+        "客戶攻略",
+        "客戶KYC",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1778214949360.html",
+      "createdAt": "2026-05-08T04:35:50.285Z",
+      "updatedAt": "2026-05-08T04:35:50.285Z"
     }
   ]
 }
