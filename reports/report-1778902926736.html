@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Dell India Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Dell India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Dell India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Dell India</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Dell India (戴爾印度)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Dell India Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72900KA1996PTC019619</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted in India)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (印度實體非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 25,000+ Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Dell Tech (NYSE) - USA</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Dell Technologies (紐交所) - 美國</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Bengaluru (HQ) / Sriperumbudur</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Bengaluru (總部) / Sriperumbudur</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">30,000+ Employees | PLI 2.0 Approved</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">30,000+ 員工 | PLI 2.0 擴張產能</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing & Logistics Setups:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造與物流基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Sriperumbudur (Mfg Unit):</strong> SIPCOT Park, Tamil Nadu. Sole large-scale hardware assembly unit in India (PCs, Servers).</li>
+                                <li data-lang="zh"><strong>Sriperumbudur 工廠:</strong> 泰米爾納德邦，印度唯一且最大硬體組裝廠 (PC、伺服器)。</li>
+                                <li data-lang="en"><strong>Logistics Hubs:</strong> Bonded warehouse in Chennai; Major RDCs in Bengaluru & Mumbai.</li>
+                                <li data-lang="zh"><strong>物流與倉儲:</strong> Chennai 進出口保稅倉；Bengaluru 與 Mumbai 大型配送中心。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech & Sales Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與辦公室：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Bengaluru R&D:</strong> Largest global tech center (Enterprise tech, cloud, local testing).</li>
+                                <li data-lang="zh"><strong>Bengaluru 研發:</strong> 總部園區內，全球最大研發中心之一，涵蓋企業解決方案。</li>
+                                <li data-lang="en"><strong>Pune CoE:</strong> Focuses on Infra software & storage solutions.</li>
+                                <li data-lang="zh"><strong>Pune 卓越中心:</strong> 專注基礎設施軟體與儲存方案支援。</li>
+                                <li data-lang="en"><strong>Offices:</strong> NCR/Gurugram (Govt deals), Mumbai (BFSI sales).</li>
+                                <li data-lang="zh"><strong>辦公室:</strong> NCR/Gurugram (政府標案), Mumbai (BFSI 金融客戶).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Dell International Holdings VIII B.V. (Netherlands)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">European holding entity</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">歐洲控股實體</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+                                <strong class="text-white">EMC Corp / Denali Holding Inc. (USA)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-blue-300">Dell Technologies Inc. (USA)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Laptops:</strong> Latitude, XPS, Inspiron</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>商用與消費筆電：</strong> Latitude, XPS, Inspiron</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Desktops/WS:</strong> OptiPlex, Precision</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>桌機與工作站：</strong> OptiPlex, Precision</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Servers:</strong> PowerEdge Series</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>企業伺服器：</strong> PowerEdge Servers</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Storage & Peripherals:</strong> Storage Arrays, Monitors</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>儲存與周邊：</strong> 企業資料儲存、顯示器</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Compute:</strong> PCBA, Heat Pipes, Server cooling fans, RAM.</li>
+                            <li data-lang="zh"><strong>運算與控制：</strong> 主機板 (PCBA)、CPU散熱模組、伺服器風扇。</li>
+                            
+                            <li data-lang="en"><strong>Energy:</strong> Li-ion Battery Packs, Server PSUs, Adapters.</li>
+                            <li data-lang="zh"><strong>能源模組：</strong> 筆電鋰電池組、伺服器大功率 PSU、變壓器。</li>
+                            
+                            <li data-lang="en"><strong>Interconnect:</strong> Backplane Connectors, High-speed Cables, Type-C I/O.</li>
+                            <li data-lang="zh"><strong>電子互連：</strong> 伺服器背板連接器、高速線束、Type-C 接口。</li>
+                            
+                            <li data-lang="en"><strong>Mechanical:</strong> Mag-Alloy Chassis, Server Rails, Plastics.</li>
+                            <li data-lang="zh"><strong>機構與結構件：</strong> 鎂鋁機殼/C件、伺服器金屬機架/導軌。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>PLI 2.0 Pressure:</strong> Strict "Local Value Addition" goals demanding local PCBA, battery & harness alternatives.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>PLI 2.0 考核：</strong> 嚴格的在地附加價值要求，急需電池與線束國產化。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Tech Spec:</strong> Looking for vendors with high-speed transmission & high-current power connection tech.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>技術需求：</strong> 需具備高頻高速傳輸、大電流電源連接技術之供應商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Supply Chain Mgr - Localization</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Sourcing local alternatives for Sriperumbudur unit. Clear indicator they need Indian vendors for mechanicals and cables.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 負責 Sriperumbudur 工廠料件在地化，明確指向尋找機構件與線材的印度本土替代方案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Commodity Mgr - Power/Connectors</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru (Remote)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Handling procurement negotiations for power modules and connectors. Prime entry point for new vendors.</td>
+                                    <td data-lang="zh">負責電源模組與連接器的採購談判，這是供應商切入的最佳訊號。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Server Production Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Sriperumbudur</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Sriperumbudur (斯里佩魯姆布杜爾)</span>
+                                    </td>
+                                    <td data-lang="en">Expanding enterprise equipment capacity. Likely tied to local AI server assembly.</td>
+                                    <td data-lang="zh">伺服器產線工程師，反映企業級設備產能擴充，可能與 AI 伺服器在地組裝有關。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">NPD Quality Eng - IT Hardware</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Validating quality for New Product Introductions (NPI). Shows more models are launching directly in India.</td>
+                                    <td data-lang="zh">負責新產品導入的在地質量驗證，顯示更多機種將直接在印度進行 NPI。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">BMS Firmware Developer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Deepening local R&D weight on battery and energy management systems.</td>
+                                    <td data-lang="zh">電池管理系統韌體開發，顯示其加重了能源管理的在地研發比重。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Enterprise Sales Dir - AI Solutions</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Mumbai (孟買)</span>
+                                    </td>
+                                    <td data-lang="en">Pushing high-end servers and AI enterprise architecture in the BFSI sector.</td>
+                                    <td data-lang="zh">擴大招募 AI 解決方案與高階伺服器的企業級銷售主管。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Logistics & Warehousing Lead</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en">Optimizing South India warehouses to handle surging parts import and finished goods dispatch.</td>
+                                    <td data-lang="zh">優化南印度物流倉儲，應對持續增長的零組件進口與成品出貨量。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Sustainability (ESG) Program Mgr</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Driving green manufacturing and plastic reduction in supply chain (2030 goals).</td>
+                                    <td data-lang="zh">推動供應鏈綠色製造與包裝減塑，呼應 Dell 全球 2030 碳中和目標。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Thermal Design Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Local design and optimization of heatsink modules for high-end laptops/servers.</td>
+                                    <td data-lang="zh">負責高階筆電與伺服器散熱模組的在地設計與優化。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">GeM Specialist</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Delhi</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Delhi (德里)</span>
+                                    </td>
+                                    <td data-lang="en">Targeting Government E-Marketplace (GeM) tenders using "Make in India" hardware quotas.</td>
+                                    <td data-lang="zh">專責處理印度政府採購網 (GeM) 的投標作業，搶攻政府標案國產化訂單。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Hybrid Model & Digital Reach</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">全通路佈局與數位化</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>B2B Enterprise:</strong> Handled directly via Account Managers & tied with IT System Integrators (TCS, Wipro, HCL) for data center deals.</li>
+                                <li data-lang="zh"><strong>B2B 企業級：</strong> 仰賴客戶經理與系統整合商 (TCS, Wipro, HCL) 對接伺服器與資料中心業務。</li>
+                                
+                                <li data-lang="en"><strong>Retail/LFRs:</strong> Over 600+ Dell Exclusive Stores in Tier 2/3 cities. Heavy presence in Reliance Digital, Croma.</li>
+                                <li data-lang="zh"><strong>實體經銷：</strong> 全印擁有 600+ Dell 專賣店，深度進駐 Reliance Digital 等大型 3C 賣場。</li>
+                                
+                                <li data-lang="en"><strong>E-commerce/CTOM:</strong> Top 3 seller on Amazon/Flipkart. Website offers Configure-to-Order (BTO) dispatching direct from factory.</li>
+                                <li data-lang="zh"><strong>電商與官網：</strong> 官網支援「客製化接單生產(CTOM)」，由工廠直發；Amazon/Flipkart 常年霸榜前三。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain & Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Just-in-Time & VMI:</strong> Vendors must be capable of delivering parts to Chennai bonded warehouse or directly VMI to Sriperumbudur.</li>
+                                <li data-lang="zh"><strong>VMI 與保稅倉：</strong> 零組件供應商需具備運送至 Chennai 保稅倉或直接 VMI 至 Sriperumbudur 廠區的能力。</li>
+                                
+                                <li data-lang="en"><strong>Build-to-Order Agility:</strong> Supply chain designed for highly flexible and rapid turnover to meet CTOM line requirements.</li>
+                                <li data-lang="zh"><strong>高彈性流轉：</strong> 產線高度依賴彈性物流，以滿足 BTO (客製化生產) 的快速流轉需求。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India IT Hardware/PC Market Rankings (Top 10)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度市場銷量排名 (TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">HP India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">USA (Overall PC Leader, Mfg in Chennai/Pantnagar)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">美國 (PC 市場領導者)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Lenovo India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">China (Aggressive volume & local setup)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">中國 (憑藉在地產能與性價比)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">3</td>
+                                        <td class="p-2 text-white font-bold">Dell India</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">USA (Target Client, Enterprise Server Boss)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">美國 (目標客戶，商用/伺服器霸主)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Acer India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Taiwan (Strong in Govt Tenders)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">台灣 (政府標案表現亮眼)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Asus India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Taiwan (Gaming & Consumer Growth)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">台灣 (專注電競與消費級市場)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6</td>
+                                        <td class="p-2">Apple India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">USA (Premium Segment)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">美國 (稱霸高階筆電市場)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">7-10</td>
+                                        <td class="p-2" colspan="2">Samsung (Ecosystem), MSI (Gaming), Cisco & HPE (Server Rivals)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> HP and Lenovo are major threats aggressively localizing. Dell MUST hit PLI 2.0 goals. Getting into Sriperumbudur's AML is highly strategic for Foxlink.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> HP 與 Lenovo 大舉擴充量能。Dell 必須加速在地化以應對 PLI 2.0 考核，Foxlink 若能打入 AML 將極具戰略契合度。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-10</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Press Release] Expanding Sriperumbudur Server Line</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新聞稿] 擴充 Sriperumbudur 伺服器產線</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Massive boost to Tamil Nadu unit capacity, focusing on PowerEdge models equipped with latest AI accelerators. <span class="text-gray-500">(Opp: High-speed backplanes)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">大幅提升泰米爾納德邦工廠產能，專注搭載 AI 加速器的 PowerEdge 機種在地組裝。 <span class="text-gray-500">(機會：高速背板/線材)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corp News] PLI 2.0 Year 1 Target Met</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[企業動態] 宣佈達成 PLI 2.0 首年在地化指標</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Dell leadership confirmed to Govt that Year 1 investment & incremental production targets for IT Hardware PLI 2.0 are achieved.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Dell 印度高層確認已順利達成 IT 硬體 PLI 2.0 第一年的投資額與增量生產目標。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Product] New AI PC Series Launch</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[新品發佈] 在印發佈全新 AI PC 系列</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Rolled out next-gen Latitude laptops with NPU for enterprise edge AI capabilities.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對印度商用市場推出內建 NPU 的新一代 Latitude 筆電，主打邊緣 AI 運算。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-20</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Tech Event] Dell Technologies Forum Bengaluru</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[科技盛會] 舉辦 Dell Tech Forum Bengaluru</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Gathered 2,000+ CIOs showcasing end-to-end multi-cloud and AI storage solutions.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">匯集超過 2000 名企業 CIO，展示端到端的多雲架構與 AI 儲存解決方案。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Supply Chain] Green Packaging Localization</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[供應鏈] 加速推動綠色包裝在地化</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Commercial product lines shipped in India will use 100% locally sourced recycled materials.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">宣佈印度在地出貨的商用系列將 100% 採用在地採購的回收再生包材。</p>
+                        </div>
+                    </div>
+                    <!-- Condensed List -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">Opening 50 more Dell Exclusive Stores in Tier 2/3 cities.</span><span data-lang="zh">宣佈未來一年內於二線/三線城市新增 50 家專賣店。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-18:</strong> <span data-lang="en">Donated 5,000+ locally assembled PCs to rural schools (CSR).</span><span data-lang="zh">推動偏鄉數位包容，捐贈 5000+ 印度組裝電腦至公立學校。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-12:</strong> <span data-lang="en">Won "Best IT Employer in India" for hybrid work culture.</span><span data-lang="zh">獲選印度最佳 IT 雇主，憑藉卓越的混合辦公模式。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-05:</strong> <span data-lang="en">Met Karnataka IT Minister to discuss new datacenter test lab.</span><span data-lang="zh">拜會卡納塔克邦 IT 部長，探討設立新數據中心實驗室。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-01:</strong> <span data-lang="en">Inspiron series posted double-digit growth during Diwali sales.</span><span data-lang="zh">排燈節後數據顯示，Inspiron 系列在電商創下雙位數增長。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // Defaulting to English.
+        let radarChart = null;
+
+        // KYC Radar Scores (Analyzed based on Dell India KYC Report):
+        // Market Share: 9 (Top 3 Tier 1 Player, Enterprise boss)
+        // Localization: 7 (Approved for PLI 2.0, massive Sriperumbudur expansion)
+        // Brand Power: 10 (Dell Tech - global titan)
+        // Digital Reach: 9 (CTOM direct web, top seller on E-commerce)
+        // Financial Health: 10 (>25,000 Cr turnover, strong US parent backing)
+        const radarScores = [9, 7, 10, 9, 10]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

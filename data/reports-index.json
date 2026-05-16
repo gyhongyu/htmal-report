@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-05-08T04:35:50.285Z",
+  "lastUpdated": "2026-05-16T03:42:07.455Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1170,6 +1170,20 @@
       "fileName": "report-1778214949360.html",
       "createdAt": "2026-05-08T04:35:50.285Z",
       "updatedAt": "2026-05-08T04:35:50.285Z"
+    },
+    {
+      "id": "report-1778902926736",
+      "title": "Target: Dell India",
+      "description": "目標企業：Dell India",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1778902926736.html",
+      "createdAt": "2026-05-16T03:42:07.455Z",
+      "updatedAt": "2026-05-16T03:42:07.455Z"
     }
   ]
 }
