@@ -234,6 +234,12 @@
             /* --- SVG High-Contrast Print Adjustments --- */
             .print-svg-container {
                 display: block !important;
+                overflow: visible !important;
+            }
+            .print-svg-container > div {
+                min-width: 0 !important;
+                width: 100% !important;
+                aspect-ratio: 16/9 !important;
             }
             svg {
                 background: #ffffff !important;
@@ -291,6 +297,23 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+        }
+
+        /* Custom Premium Scrollbar for Horizontal SVG Scrolling on Mobile */
+        .scrollbar-thin::-webkit-scrollbar {
+            height: 6px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 3px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.35);
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.55);
         }
     </style>
 </head>
@@ -381,9 +404,16 @@
                     <span data-lang="zh">壹、 總系統架構（L1 Overview）</span>
                 </div>
 
-                <!-- Desktop SVG Container with Absolute Overlay Buttons (16:9 Aspect Ratio) -->
-                <div class="hidden md:block w-full max-w-5xl mx-auto mb-8 print-svg-container">
-                    <div class="relative w-full aspect-[16/9] overflow-hidden select-none bg-gray-950/20 border border-gray-800/80 rounded-2xl shadow-2xl">
+                <!-- Mobile Horizontal Scroll Hint -->
+                <div class="flex items-center justify-center space-x-2 text-xs text-blue-400/80 mb-3 md:hidden animate-pulse no-print">
+                    <i class="fas fa-arrows-left-right mr-1.5"></i>
+                    <span data-lang="en">👈 Swipe left/right to explore architecture 👉</span>
+                    <span data-lang="zh">👈 左右滑動以探索系統拓撲架構 👉</span>
+                </div>
+
+                <!-- Desktop & Mobile SVG Container with Absolute Overlay Buttons (16:9 Aspect Ratio) -->
+                <div class="w-full max-w-5xl mx-auto mb-8 print-svg-container overflow-x-auto scrollbar-thin">
+                    <div class="relative w-full aspect-[16/9] min-w-[950px] overflow-hidden select-none bg-gray-950/20 border border-gray-800/80 rounded-2xl shadow-2xl">
                         <!-- High-Fidelity JIO-BSS-Arch (2).svg Inline -->
                         <svg
                            viewBox="0 0 1280 720"
@@ -903,7 +933,7 @@
                             roleEN: 'Opto-isolated high-speed bus controlling chargers, PCS parameters and ATS.', roleZH: '光電隔離電力專用 CAN 總線，用於 CCU 與充電機整流模組及雙向 PCS 的控制。',
                             specsEN: ['2kV isolated transceiver architecture', 'Dedicated path for controlling active PCS and Rectifier power outputs'],
                             specsZH: ['具備 2kV 電氣光電隔離防護', '專門用於整流模組(P3)動態電壓控制與 PCS(P4)充放電控制'],
-                            intEN: 'Connected between CCU host and PCS/Rectifier diagnostic nodes.', intZH: '接線：介接 CCU 控制主板與交直流整流器、雙向功率轉換系統的主控板。'
+                            intEN: 'Connected between CCU host and PCS/Rectifier diagnostic nodes.', intZH: '接線：介介 CCU 控制主板與交直流整流器、雙向功率轉換系統的主控板。'
                         }
                     },
                     { 
