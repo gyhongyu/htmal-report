@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">JIO BSS Solution Architecture</title>
+    <title data-lang="zh">JIO 電池交換站系統架構</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Premium Design & System Styling --- */
+        body { 
+            font-family: 'Inter', 'Noto Sans TC', sans-serif; 
+            background: linear-gradient(135deg, #070714 0%, #0d0d2b 100%);
+            color: #e2e8f0; 
+            margin: 0; 
+            padding: 0; 
+            overflow-y: auto; 
+            min-height: 100vh;
+        }
+
+        code, pre, .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Language Toggle System via CSS Class */
+        body:not(.lang-en):not(.lang-zh) [data-lang] { display: none; }
+        body.lang-en [data-lang="zh"] { display: none !important; }
+        body.lang-zh [data-lang="en"] { display: none !important; }
+
+        .content-area { 
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+            min-height: calc(100vh - 80px); 
+            padding: 1.5rem; 
+            box-sizing: border-box; 
+            max-width: 1280px; 
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); filter: blur(5px); } 
+            to { opacity: 1; transform: translateY(0); filter: blur(0); } 
+        }
+        
+        /* Glassmorphism Panels */
+        .recon-box { 
+            background: rgba(20, 24, 45, 0.6); 
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 1rem; 
+            padding: 1.5rem; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
+            margin-bottom: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .recon-box:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* Interactive Glowing Left Borders per Module */
+        .border-power { border-left: 5px solid #f59e0b !important; box-shadow: inset 5px 0 20px rgba(245, 158, 11, 0.05); }
+        .border-battery { border-left: 5px solid #10b981 !important; box-shadow: inset 5px 0 20px rgba(16, 185, 129, 0.05); }
+        .border-mech { border-left: 5px solid #6366f1 !important; box-shadow: inset 5px 0 20px rgba(99, 102, 241, 0.05); }
+        .border-ccu { border-left: 5px solid #3b82f6 !important; box-shadow: inset 5px 0 20px rgba(59, 130, 246, 0.05); }
+        .border-comm { border-left: 5px solid #8b5cf6 !important; box-shadow: inset 5px 0 20px rgba(139, 92, 246, 0.05); }
+        .border-safety { border-left: 5px solid #ef4444 !important; box-shadow: inset 5px 0 20px rgba(239, 68, 68, 0.05); }
+
+        /* --- Premium Table Styles --- */
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 0.5rem; 
+            margin-bottom: 0.5rem; 
+            table-layout: auto; 
+            font-size: 0.9rem; 
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        th, td { 
+            padding: 0.85rem 1rem; 
+            text-align: left; 
+            vertical-align: middle; 
+            word-wrap: break-word; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        th { 
+            background-color: rgba(15, 17, 36, 0.9); 
+            font-weight: 600; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tbody tr { 
+            background-color: rgba(26, 31, 58, 0.3); 
+            transition: background-color 0.2s ease;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        tbody tr:hover { 
+            background-color: rgba(255, 255, 255, 0.04); 
+        }
+
+        .section-divider { 
+            display: flex; 
+            align-items: center; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.5rem; 
+        }
+        .section-divider::before, .section-divider::after { 
+            content: ""; 
+            flex: 1; 
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15); 
+        }
+        .section-divider span { 
+            padding: 0 1.25rem; 
+            color: #94a3b8; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            font-size: 0.875rem; 
+        }
+
+        /* Login Gate & Animation */
+        #login-gate { 
+            position: fixed; 
+            inset: 0; 
+            background: radial-gradient(circle at center, #0e1126 0%, #05060f 100%);
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 9999; 
+            transition: opacity 0.5s ease-out;
+        }
+
+        .login-card {
+            background: rgba(17, 20, 38, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        /* Password Shake Animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+        .shake-effect {
+            animation: shake 0.4s ease-in-out;
+        }
+        
+        /* Details & Summary */
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+
+        /* Screen vs Print specific classes */
+        @media screen {
+            .screen-hidden { display: none !important; }
+        }
+
+        /* --- Premium SVG Dark Theme Adaptation & Glow (Auto-Contrast) --- */
+        svg {
+            filter: drop-shadow(0 0 1px rgba(59, 130, 246, 0.1));
+        }
+
+        /* 1. Force all pure black texts/tspans in the SVG to high-contrast white */
+        svg text[style*="fill:#000000"], svg tspan[style*="fill:#000000"] {
+            fill: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        /* 2. Elevate dark-gray texts to light slate gray for excellent readability */
+        svg text[style*="fill:#64748b"], svg tspan[style*="fill:#64748b"] {
+            fill: #cbd5e1 !important;
+        }
+
+        /* 3. Boost Utility Grid Substation gray text readability */
+        svg text[style*="fill:#94a3b8"], svg tspan[style*="fill:#94a3b8"] {
+            fill: #cbd5e1 !important;
+        }
+
+        /* 4. Restyle dark-gray elements (e.g. Eng. Laptop background) into premium deep blue-gray panels */
+        svg path[style*="fill:#4b5563"] {
+            fill: #1e293b !important;
+            stroke: #475569 !important;
+            stroke-width: 1px !important;
+        }
+
+        /* 5. Amplify red E-Stop alert borders and texts for striking high-contrast hazard styling */
+        svg text[style*="fill:#ef4444"], svg tspan[style*="fill:#ef4444"] {
+            fill: #fca5a5 !important;
+            filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.4));
+        }
+
+        /* 7. Secure high-contrast white text for embedded components like AC MCCB and DC Iso */
+        svg text[transform*="149.93"], svg text[transform*="160.01"], svg text[transform*="150.65"] {
+            fill: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        @media (min-width: 768px) {
+            .content-area { padding: 3rem; }
+            .recon-box { padding: 2rem; margin-bottom: 2rem; }
+            th, td { padding: 1rem 1.25rem; }
+            .section-divider { margin-top: 3.5rem; margin-bottom: 2rem; }
+            .section-divider span { padding: 0 1.5rem; }
+        }
+        
+        /* Print Configuration */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .bg-gray-800, .bg-gray-900, .recon-box { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            .text-white { color: #000 !important; } 
+            details[open] summary ~ * { display: block; }
+            details summary { pointer-events: none; }
+            #module-modal { display: none !important; } 
+            #modules-container { display: block !important; } 
+
+            /* --- SVG High-Contrast Print Adjustments --- */
+            .print-svg-container {
+                display: block !important;
+            }
+            svg {
+                background: #ffffff !important;
+            }
+            /* Override screen dark-mode rules to ensure text prints black, not white */
+            svg text, svg tspan {
+                fill: #000000 !important;
+                font-weight: 500 !important;
+            }
+            svg text[style*="fill:#000000"], svg tspan[style*="fill:#000000"] {
+                fill: #000000 !important;
+                font-weight: 700 !important;
+            }
+            /* Darken gray text to slate-700/800 for high-contrast on white paper */
+            svg text[style*="fill:#64748b"], svg tspan[style*="fill:#64748b"],
+            svg text[style*="fill:#94a3b8"], svg tspan[style*="fill:#94a3b8"] {
+                fill: #334155 !important;
+            }
+            /* Recolor dark background paths (e.g. Laptop chassis) to light slate panels */
+            svg path[style*="fill:#4b5563"] {
+                fill: #f1f5f9 !important;
+                stroke: #94a3b8 !important;
+            }
+            /* Recolor hazards (e.g. E-Stop labels) to deep readable red */
+            svg text[style*="fill:#ef4444"], svg tspan[style*="fill:#ef4444"] {
+                fill: #991b1b !important;
+                font-weight: 700 !important;
+            }
+            /* Fix specific component labels inside the SVG */
+            svg text[transform*="149.93"], svg text[transform*="160.01"], svg text[transform*="150.65"] {
+                fill: #000000 !important;
+                font-weight: 700 !important;
+            }
+        }
+
+        /* --- Foxlink Confidential Watermark --- */
+        #foxlink-confidential-watermark {
+            position: fixed;
+            inset: 0;
+            z-index: 999999; /* Topmost layer above login gate and modals */
+            pointer-events: none; /* Make clicks/hovers completely pass through */
+            opacity: 0.085; /* Optimized contrast: visible on all display types while keeping readability */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='14' font-weight='800' fill='%23ffffff' text-anchor='middle' transform='rotate(-45 150 150)'%3EFOXLINK CONFIDENTIAL ｜ 正崴機密%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
+            /* Force background graphics print on browsers */
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        @media print {
+            #foxlink-confidential-watermark {
+                opacity: 0.06;
+                /* Corrected, uncorrupted SVG data URI with black text for print contrast */
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='14' font-weight='800' fill='%23000000' text-anchor='middle' transform='rotate(-45 150 150)'%3EFOXLINK CONFIDENTIAL ｜ 正崴機密%3C/text%3E%3C/svg%3E") !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen lang-en">
+
+    <!-- Foxlink Confidential Watermark -->
+    <div id="foxlink-confidential-watermark"></div>
+
+    <!-- Login Gate -->
+    <div id="login-gate" class="flex flex-col items-center justify-center">
+        <div class="login-card p-8 w-full max-w-sm text-center">
+            <div class="text-5xl mb-4 filter drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">🔋</div>
+            <h1 class="text-2xl font-bold mb-1 text-white bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">JIO × Foxlink</h1>
+            <p class="text-gray-400 text-sm mb-6"><span data-lang="en">Architecture Portal</span><span data-lang="zh">方案架構門戶網站</span></p>
+            
+            <div class="relative mb-4">
+                <input type="password" id="pwd-input" class="w-full bg-gray-950/80 border border-gray-700/80 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-center" placeholder="Password">
+            </div>
+
+            <div class="flex justify-between items-center mb-6 px-1">
+                <label class="flex items-center text-sm text-gray-400 cursor-pointer select-none">
+                    <input type="checkbox" id="remember-cb" checked class="mr-2 rounded border-gray-700 bg-gray-900 text-blue-600 focus:ring-0">
+                    <span data-lang="en">Remember Me</span><span data-lang="zh">記住登入狀態</span>
+                </label>
+            </div>
+
+            <button id="login-btn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/20 active:scale-[0.98] transition-all">
+                <span data-lang="en">Authenticate</span><span data-lang="zh">安全登入</span>
+            </button>
+            <div id="login-error" class="text-red-500 text-sm mt-4 hidden">
+                <i class="fas fa-exclamation-circle mr-2"></i><span data-lang="en">Incorrect password</span><span data-lang="zh">密碼錯誤，請重新輸入</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Modal for Details (Hidden on Print) -->
+    <div id="module-modal" class="fixed inset-0 bg-black/85 z-50 hidden flex justify-center items-center p-4 opacity-0 transition-opacity duration-300 no-print backdrop-blur-md">
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-3xl max-h-[85vh] overflow-y-auto shadow-2xl relative transform scale-95 transition-transform duration-300" id="modal-panel">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white hover:bg-gray-800 z-10 rounded-full p-2 w-8 h-8 flex items-center justify-center transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-content" class="p-6 md:p-8">
+                <!-- Rendered Dynamically by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="app-content" class="w-full mx-auto bg-gray-900/60 md:shadow-2xl relative md:border-x border-gray-800 flex flex-col my-0 hidden min-h-screen">
+        
+        <!-- Navigation Header -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-950/80 backdrop-blur-md border-b border-gray-800 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-7 w-auto filter brightness-125">
+                <div class="border-l border-gray-700 pl-3">
+                    <span class="block text-base font-bold leading-none tracking-wide text-white" data-lang="en">JIO BSS Solution Architecture</span>
+                    <span class="block text-base font-bold leading-none tracking-wide text-white" data-lang="zh">JIO 電池交換站系統架構</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-800 hover:bg-gray-700 text-white border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center">
+                    <i class="fas fa-file-pdf mr-2 text-red-400"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">
+                    <span data-lang="en"><i class="fas fa-globe mr-1"></i>切換中文</span>
+                    <span data-lang="zh"><i class="fas fa-globe mr-1"></i>Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Title Panel -->
+                <div class="text-center border-b border-gray-800 pb-6 md:pb-8">
+                    <span class="inline-block bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs px-3 py-1 rounded-full mb-3 font-semibold tracking-wider">v1.0 | MAY 2026</span>
+                    <h1 class="text-2xl md:text-4xl font-extrabold mb-3 text-white tracking-tight" data-lang="en">Proposed BSS Solution Architecture</h1>
+                    <h1 class="text-2xl md:text-4xl font-extrabold mb-3 text-white tracking-tight" data-lang="zh">智慧型電池交換站解決方案架構提案</h1>
+                    <p class="text-sm md:text-base text-gray-400 mt-2" data-lang="en">Prepared for JIO Platforms Ltd. by Foxlink Technology</p>
+                    <p class="text-sm md:text-base text-gray-400 mt-2" data-lang="zh">正崴精密工業股份有限公司為 JIO Platforms Ltd. 提供之 ODM 提案</p>
+                </div>
+
+                <!-- PART 1: L1 Architecture -->
+                <div class="section-divider mt-6 md:mt-10">
+                    <span data-lang="en">1. System Overview Architecture</span>
+                    <span data-lang="zh">壹、 總系統架構（L1 Overview）</span>
+                </div>
+
+                <!-- Desktop SVG Container with Absolute Overlay Buttons (16:9 Aspect Ratio) -->
+                <div class="hidden md:block w-full max-w-5xl mx-auto mb-8 print-svg-container">
+                    <div class="relative w-full aspect-[16/9] overflow-hidden select-none bg-gray-950/20 border border-gray-800/80 rounded-2xl shadow-2xl">
+                        <!-- High-Fidelity JIO-BSS-Arch (2).svg Inline -->
+                        <svg
+                           viewBox="0 0 1280 720"
+                           class="absolute inset-0 w-full h-full"
+                           xml:space="preserve"
+                           id="svg2"
+                           version="1.1">
+                           <defs id="defs6">
+                             <clipPath id="clipPath18" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path16" d="M 0,1.2207e-4 H 960 V 540.00012 H 0 Z" /></clipPath>
+                             <clipPath id="clipPath32" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path30" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath48" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path46" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath64" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path62" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath76" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path74" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath88" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path86" d="M 3.0518e-5,540 H 960 V 2.4414e-4 L 6.1035e-5,1.8311e-4" /></clipPath>
+                             <clipPath id="clipPath98" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path96" d="M 0,540 H 960 V 1.2207e-4 L 0,6.1035e-5" /></clipPath>
+                             <clipPath id="clipPath112" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path110" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath124" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path122" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath140" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path138" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath156" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path154" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath172" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path170" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath184" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path182" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath196" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path194" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath208" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path206" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath220" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path218" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath232" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path230" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath244" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path242" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath256" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path254" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath268" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path266" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath280" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path278" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath292" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path290" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath304" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path302" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath316" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path314" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath328" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path326" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath340" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path338" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath356" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path354" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath372" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path370" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath388" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path386" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath400" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path398" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath412" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path410" d="M -6.1035e-5,540 H 960 V 6.1035e-5 H 0" /></clipPath>
+                             <clipPath id="clipPath434" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path432" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath446" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path444" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath462" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path460" d="M 0,540 H 960 V 2.4414e-4 L 1.5259e-5,1.8311e-4" /></clipPath>
+                             <clipPath id="clipPath476" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path474" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath488" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path486" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath500" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path498" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath512" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path510" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath528" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path526" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath540" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path538" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath552" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path550" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath564" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path562" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath576" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path574" d="M 0,540 H 960 V 1.8311e-4 H 1.5259e-5" /></clipPath>
+                             <clipPath id="clipPath586" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path584" d="M 0,540 H 960 V 0 L 0,6.1035e-5" /></clipPath>
+                             <clipPath id="clipPath596" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path594" d="M -1.2207e-4,540 H 960 V 6.1035e-5 H -6.1035e-5" /></clipPath>
+                             <clipPath id="clipPath610" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path608" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath624" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path622" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath636" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path634" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath654" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path652" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath666" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path664" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath678" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path676" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath690" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path688" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath702" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path700" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath714" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path712" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath726" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path724" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath738" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path736" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath750" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path748" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                             <clipPath id="clipPath762" clipPathUnits="userSpaceOnUse"><path style="clip-rule:evenodd" id="path760" d="M 1.4305e-5,0 H 960.00001 V 540 H 1.4305e-5 Z" /></clipPath>
+                           </defs>
+                           <g transform="matrix(1.3333333,0,0,-1.3333333,0,720)" id="g10">
+                             <g id="g12">
+                               <g clip-path="url(#clipPath18)" id="g14">
+                                 <!-- Transformed white background path to transparent for Dark Mode WOW factor -->
+                                 <path id="path20" style="fill:transparent;fill-opacity:1;fill-rule:evenodd;stroke:none" d="M 0,6.1035e-5 H 960 V 540.00006 H 0 Z" />
+                               </g>
+                             </g>
+                             <path id="path22" style="fill:#5b9bd5;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 399.12,504.28 c 0,4.22 3.42,7.64 7.64,7.64 h 111.8 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 h -111.8 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <path id="path24" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 399.12,504.28 c 0,4.22 3.42,7.64 7.64,7.64 h 111.8 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 h -111.8 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <g id="g26"><g clip-path="url(#clipPath32)" id="g28"><text id="text36" style="font-variant:normal;font-weight:normal;font-size:18px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,422.76,482.23)"><tspan id="tspan34" y="0" x="0 9 14.004 28.062 32.976002 45.972 49.896 59.903999 69.821999">JIO Cloud</tspan></text></g></g>
+                             <path id="path38" style="fill:#905bd4;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 350.88,364.12 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 358.52 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <path id="path40" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 350.88,364.12 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 358.52 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <g id="g42"><g clip-path="url(#clipPath48)" id="g44"><text id="text52" style="font-variant:normal;font-weight:normal;font-size:18px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,365.69,342.07)"><tspan id="tspan50" y="0" x="0 12.996 22.914 37.908001 52.902 62.91 72.828003 76.823997 85.823997 95.741997 100.746 104.742 114.75 124.668 129.924 141.92999 146.93401 159.92999 163.92599 173.84399 183.85201">Communication &amp; Cloud</tspan></text></g></g>
+                             <path id="path54" style="fill:#394ff7;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 353.28,249.28 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 360.92 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <path id="path56" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 353.28,249.28 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 360.92 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <g id="g58"><g clip-path="url(#clipPath64)" id="g60"><text id="text68" style="font-variant:normal;font-weight:normal;font-size:18px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,387.98,227.21)"><tspan id="tspan66" y="0" x="0 12.996 22.914 32.922001 37.925999 47.880001 53.874001 59.021999 72.017998 81.935997 91.944 96.947998 102.942 112.896 116.892 122.004 135 144.918 148.914">Center Control Unit</tspan></text></g></g>
+                             <g id="g70"><g clip-path="url(#clipPath76)" id="g72"><text id="text80" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#94a3b8;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,475.08,442.46)"><tspan id="tspan78" y="0" x="0 6 9.3360004 15.336 23.388 30.096001 33.431999 40.164001 46.164001 50.832001 53.604 56.939999 59.939999 68.603996 77.267998 84.444 89.112 96.323997 99.552002 108.216 114.216 118.152 121.488 127.488 132.81599 135.89999 147.17999 156.51601 164.56799">JioThings / CAPIF Native MQTT</tspan></text></g></g>
+                             <g id="g82"><g clip-path="url(#clipPath88)" id="g84"><path id="path90" style="fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 464.16,458.52 V 374.7 h -3 v 83.82 z m -6,-1.5 4.5,9 4.5,-9 z m 11.05,-74.08 -6.55,-11.22 -6.55,11.22 c -0.41,0.72 -0.17,1.64 0.54,2.05 0.72,0.42 1.64,0.18 2.06,-0.54 l 5.25,-9 h -2.6 l 5.25,9 v 0 c 0.42,0.72 1.34,0.96 2.06,0.54 0.71,-0.41 0.95,-1.33 0.54,-2.05 z" /></g></g>
+                             <g id="g92"><g clip-path="url(#clipPath98)" id="g94"><path id="path100" style="fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 461.42,318.31 2.01,-58.55 3,0.1 -2.01,58.56 z m 6.05,-1.29 -4.81,8.84 -4.19,-9.15 z m -9.36,-49.19 6.93,-10.99 6.15,11.44 c 0.39,0.72 0.12,1.63 -0.61,2.03 -0.73,0.39 -1.64,0.12 -2.03,-0.61 l -4.94,-9.18 2.59,0.09 -5.55,8.81 v 0 c -0.45,0.71 -1.37,0.92 -2.07,0.47 -0.7,-0.44 -0.91,-1.36 -0.47,-2.06 z" /></g></g>
+                             <path id="path102" style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 79.92,108.76 c 0,4.22 3.421,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 V 78.2 c 0,-4.219 -3.42,-7.64 -7.64,-7.64 H 87.56 c -4.219,0 -7.64,3.421 -7.64,7.64 z" />
+                             <path id="path104" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 79.92,108.76 c 0,4.22 3.421,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 V 78.2 c 0,-4.219 -3.42,-7.64 -7.64,-7.64 H 87.56 c -4.219,0 -7.64,3.421 -7.64,7.64 z" />
+                             <g id="g106"><g clip-path="url(#clipPath112)" id="g108"><text id="text116" style="font-variant:normal;font-weight:normal;font-size:18px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,107.81,86.664)"><tspan id="tspan114" y="0" x="0 12.006 21.959999 26.964001 36.972 41.976002">Safety</tspan></text></g></g>
+                             <g id="g118"><g clip-path="url(#clipPath124)" id="g120"><text id="text128" style="font-variant:normal;font-weight:normal;font-size:18px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,163.85,86.664)"><tspan id="tspan126" y="0" x="0 12.006 16.92 29.916 39.834 54.827999 64.835999 68.760002 72.755997 82.674004 92.681999 101.682">&amp; Compliance</tspan></text></g></g>
+                             <path id="path130" style="fill:#548235;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 666.36,355.48 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 674 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <path id="path132" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 666.36,355.48 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 674 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <g id="g134"><g clip-path="url(#clipPath140)" id="g136"><text id="text144" style="font-variant:normal;font-weight:normal;font-size:18.02400017px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,696.7,333.5)"><tspan id="tspan142" y="0" x="0 12.022008 21.953232 26.963903 32.010624 41.977898 47.979889 56.739552 62.00256 74.024567 83.955795 92.967789 101.97979 106.99046 119.01247 123.915 135.93701 150.951">Battery Pack &amp; BMS</tspan></text></g></g>
+                             <path id="path146" style="fill:#1f4e79;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 654.84,108.76 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 V 78.2 c 0,-4.219 -3.42,-7.64 -7.64,-7.64 H 662.48 c -4.22,0 -7.64,3.421 -7.64,7.64 z" />
+                             <path id="path148" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 654.84,108.76 c 0,4.22 3.42,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 V 78.2 c 0,-4.219 -3.42,-7.64 -7.64,-7.64 H 662.48 c -4.22,0 -7.64,3.421 -7.64,7.64 z" />
+                             <g id="g150"><g clip-path="url(#clipPath156)" id="g152"><text id="text160" style="font-variant:normal;font-weight:normal;font-size:18px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,694.63,86.664)"><tspan id="tspan158" y="0" x="0 14.994 25.002001 34.001999 43.919998 53.928001 63.846001 67.842003 76.842003 86.760002 90.755997 95.975998 107.982 112.986 124.992 135">Mechanical &amp; Env</tspan></text></g></g>
+                             <g id="g162"><path id="path164" style="fill:none;stroke:#394ff7;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:12, 9;stroke-dashoffset:0;stroke-opacity:0.4" d="m 22.02,367.52 c 0,35.38 28.681,64.06 64.061,64.06 H 862.16 c 35.38,0 64.06,-28.68 64.06,-64.06 V 111.28 c 0,-35.379 -28.68,-64.06 -64.06,-64.06 H 86.081 c -35.38,0 -64.061,28.681 -64.061,64.06 z" /></g>
+                             <g id="g166"><g clip-path="url(#clipPath172)" id="g168"><text id="text176" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,469.87,284.59)"><tspan id="tspan174" y="0" x="0 4.6680002 11.388 15.384 20.628 25.908001 32.616 38.616">Internal</tspan></text></g></g>
+                             <g id="g178"><g clip-path="url(#clipPath184)" id="g180"><text id="text188" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,469.87,270.19)"><tspan id="tspan186" y="0" x="0 8.0279999 12.024 18.695999 23.988001 29.268 35.976002 41.256001">Ethernet</tspan></text></g></g>
+                             <g id="g190"><g clip-path="url(#clipPath196)" id="g192"><text id="text200" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,622.85,285.82)"><tspan id="tspan198" y="0" x="0 6.7080002 10.704 16.704 20.628 27.336 32.004002 34.896 44.855999">Status &amp; </tspan></text></g></g>
+                             <g id="g202"><g clip-path="url(#clipPath208)" id="g204"><text id="text212" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,622.85,271.42)"><tspan id="tspan210" y="0" x="0 8.6639996 12 18 23.280001">Alarm</tspan></text></g></g>
+                             <g id="g214"><g clip-path="url(#clipPath220)" id="g216"><text id="text224" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,275.06,279.12)"><tspan id="tspan222" y="0" x="0 8.6400003 17.280001">CAN</tspan></text></g></g>
+                             <g id="g226"><g clip-path="url(#clipPath232)" id="g228"><text id="text236" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,300.98,279.12)"><tspan id="tspan234" y="0" x="0">-</tspan></text></g></g>
+                             <g id="g238"><g clip-path="url(#clipPath244)" id="g240"><text id="text248" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,304.94,279.12)"><tspan id="tspan246" y="0" x="0">B</tspan></text></g></g>
+                             <g id="g250"><g clip-path="url(#clipPath256)" id="g252"><text id="text260" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,265.1,264.72)"><tspan id="tspan258" y="0" x="0 3.9960001 12.6 18.6 25.308001 29.304001 34.548 40.548 43.883999">(Control)</tspan></text></g></g>
+                             <g id="g262"><g clip-path="url(#clipPath268)" id="g264"><text id="text272" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,556.03,113.88)"><tspan id="tspan270" y="0" x="0 8.6639996 13.92 17.916 24.587999 30.587999 34.584 37.919998 43.919998">Actuation</tspan></text></g></g>
+                             <g id="g274"><g clip-path="url(#clipPath280)" id="g276"><text id="text284" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,609.67,113.88)"><tspan id="tspan282" y="0" x="0 9.96">&amp; </tspan></text></g></g>
+                             <g id="g286"><g clip-path="url(#clipPath292)" id="g288"><text id="text296" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,556.03,99.48)"><tspan id="tspan294" y="0" x="0 6.7080002 11.988 18.695999 23.364 29.364 34.655998 37.655998 44.855999 50.136002 55.416 62.124001 68.832001 74.832001 80.112">Sensor Feedback</tspan></text></g></g>
+                             <g id="g298"><g clip-path="url(#clipPath304)" id="g300"><text id="text308" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,307.85,114.17)"><tspan id="tspan306" y="0" x="0 4.6680002 9.3360004 15.336 18.708 24.708 28.704 33.948002 40.655998 43.655998 52.32 60.936001">Isolated CAN</tspan></text></g></g>
+                             <g id="g310"><g clip-path="url(#clipPath316)" id="g312"><text id="text320" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,377.45,114.17)"><tspan id="tspan318" y="0" x="0">-</tspan></text></g></g>
+                             <g id="g322"><g clip-path="url(#clipPath328)" id="g324"><text id="text332" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,381.41,114.17)"><tspan id="tspan330" y="0" x="0">A</tspan></text></g></g>
+                             <g id="g334"><g clip-path="url(#clipPath340)" id="g336"><text id="text344" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,306.77,99.768)"><tspan id="tspan342" y="0" x="0 3.9960001 9.9960003 15.996 21.996 28.667999 35.388 42.096001 46.764 49.416 52.416 55.416 61.416 70.655998 79.32">(500kbps , 2KV)</tspan></text></g></g>
+                             <path id="path346" style="fill:#c55a11;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 61.92,355.48 c 0,4.22 3.421,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 69.56 c -4.219,0 -7.64,3.42 -7.64,7.64 z" />
+                             <path id="path348" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 61.92,355.48 c 0,4.22 3.421,7.64 7.64,7.64 h 208.16 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 69.56 c -4.219,0 -7.64,3.42 -7.64,7.64 z" />
+                             <g id="g350"><g clip-path="url(#clipPath356)" id="g352"><text id="text360" style="font-variant:normal;font-weight:normal;font-size:18.02400017px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,115.66,333.5)"><tspan id="tspan358" y="0" x="0 12.022008 21.953232 34.55201 44.519279 50.521271 56.018593 68.040604 76.782242 85.794243 90.804909 100.82626">Power System</tspan></text></g></g>
+                             <g id="g362"><path id="path364" style="fill:none;stroke:#ff0000;stroke-width:2.27999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:2.28, 2.28;stroke-dashoffset:0;stroke-opacity:1" d="m 139.74,276.66 h 57.36 v 35.4 h -57.36 z" /></g>
+                             <g id="g366"><g clip-path="url(#clipPath372)" id="g368"><text id="text376" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,149.93,289.92)"><tspan id="tspan374" y="0" x="0 8.6639996 17.280001 20.615999 23.988001 29.988001">DC Iso</tspan></text></g></g>
+                             <g id="g378"><path id="path380" style="fill:none;stroke:#ff0000;stroke-width:2.27999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:2.28, 2.28;stroke-dashoffset:0;stroke-opacity:1" d="m 139.74,368.34 h 57.36 v 35.4 h -57.36 z" /></g>
+                             <g id="g382"><g clip-path="url(#clipPath388)" id="g384"><text id="text392" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,160.01,388.82)"><tspan id="tspan390" y="0" x="0 8.0279999 16.691999">AC </tspan></text></g></g>
+                             <g id="g394"><g clip-path="url(#clipPath400)" id="g396"><text id="text404" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,150.65,374.42)"><tspan id="tspan402" y="0" x="0 9.96 18.624001 27.24">MCCB</tspan></text></g></g>
+                             <g id="g406"><g clip-path="url(#clipPath412)" id="g408"><path id="path414" style="fill:#1f4e79;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 548.76,202.65 V 91.969 h 103.65 v 3 H 550.26 l 1.5,-1.5 V 202.65 Z m 8.05,-8.24 -6.55,11.22 -6.55,-11.22 c -0.41,-0.72 -0.17,-1.64 0.54,-2.06 0.72,-0.41 1.64,-0.17 2.06,0.54 l 5.25,9 h -2.6 l 5.25,-9 v 0 c 0.42,-0.71 1.34,-0.95 2.06,-0.54 0.71,0.42 0.95,1.34 0.54,2.06 z m 87.35,-107.486 11.23,6.545 -11.23,6.551 c -0.71,0.41 -1.63,0.17 -2.05,-0.545 -0.41,-0.715 -0.17,-1.634 0.54,-2.051 l 9,-5.25 v 2.591 l -9,-5.25 c -0.71,-0.417 -0.95,-1.336 -0.54,-2.051 0.42,-0.716 1.34,-0.958 2.05,-0.54 z" /></g></g>
+                             <path id="path416" style="fill:#548235;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 580.83,226.87 h 40.2 v 110.87 l -1.5,-1.5 h 38.69 v 3 H 618.03 V 228.37 l 1.5,1.5 h -38.7 z m 8.24,8.04 -11.22,-6.54 11.22,-6.55 c 0.72,-0.42 1.64,-0.18 2.06,0.54 0.41,0.71 0.17,1.63 -0.54,2.05 l -9,5.25 v -2.59 l 9,5.25 v 0 c 0.71,0.42 0.95,1.34 0.54,2.05 -0.42,0.72 -1.34,0.96 -2.06,0.54 z m 60.91,96.28 11.22,6.55 -11.22,6.55 c -0.72,0.41 -1.64,0.17 -2.05,-0.54 -0.42,-0.72 -0.18,-1.64 0.54,-2.06 l 9,-5.25 v 2.6 l -9,-5.25 c -0.72,-0.42 -0.96,-1.34 -0.54,-2.06 0.41,-0.71 1.33,-0.95 2.05,-0.54 z" />
+                             <path id="path418" style="fill:#ef4444;fill-opacity:0.6;fill-rule:nonzero;stroke:none" d="m 131.51,387.58 h -9 v -3 h 9 z m -12,0 h -9 v -3 h 9 z m -12,0 h -8.999 v -3 h 8.999 z m -11.999,0 h -9 v -3 h 9 z m -12,0 h -9 v -3 h 9 z m -12,0 h -9 v -3 h 9 z m -12,0 h -9 v -3 h 9 z m -12.894,-2.11 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-12 v -9 h 3 v 9 z m 0,-11.997 v -3.998 h 3 v 3.998 z m 76.653,282.057 11.22,6.55 -11.22,6.54 c -0.72,0.42 -1.64,0.18 -2.05,-0.54 -0.42,-0.71 -0.18,-1.63 0.54,-2.05 l 9,-5.25 v 2.59 l -9,-5.25 v 0 c -0.72,-0.41 -0.96,-1.33 -0.54,-2.05 0.41,-0.71 1.33,-0.95 2.05,-0.54 z" />
+                             <path id="path420" style="fill:#ef4444;fill-opacity:0.6;fill-rule:nonzero;stroke:none" d="m 48.181,94.92 9,-0.007 -0.002,-3 -9,0.007 z m 12,-0.01 9,-0.007 -0.002,-3 -9,0.007 z m 12,-0.01 7.472,-0.006 -0.002,-3 -7.472,0.006 z m -0.768,5.047 11.216,-6.555 -11.227,-6.537 c -0.715,-0.417 -1.634,-0.174 -2.051,0.542 -0.416,0.716 -0.174,1.634 0.542,2.051 l 9.004,5.242 -0.002,-2.591 -8.996,5.258 v 0 c -0.715,0.418 -0.956,1.336 -0.538,2.051 0.418,0.712 1.337,0.952 2.052,0.539 z" />
+                             <path id="path422" style="fill:#ef4444;fill-opacity:0.6;fill-rule:nonzero;stroke:none" d="m 52.26,295.92 h 9 l -10e-4,-3 h -9 z m 12,0 9,-0.01 -0.001,-3 -9,0.01 z m 12,-0.01 h 9 l -0.001,-3 h -9 z m 12,0 9,-0.01 -0.001,-3 -9,0.01 z m 12,-0.01 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 7.32,-0.01 v -3 l -7.32,0.01 z m -0.92,5.04 11.22,-6.55 -11.22,-6.54 c -0.72,-0.42 -1.64,-0.18 -2.06,0.54 -0.41,0.72 -0.17,1.63 0.54,2.05 l 9.01,5.25 v -2.59 l -9,5.25 c -0.72,0.42 -0.96,1.34 -0.54,2.05 0.42,0.72 1.33,0.96 2.05,0.54 z" />
+                             <path id="path424" style="fill:#c00000;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 104.88,504.28 c 0,4.22 3.42,7.64 7.64,7.64 h 111.8 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 h -111.8 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <path id="path426" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 104.88,504.28 c 0,4.22 3.42,7.64 7.64,7.64 h 111.8 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 h -111.8 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <g id="g428"><g clip-path="url(#clipPath434)" id="g430"><text id="text438" style="font-variant:normal;font-weight:normal;font-size:18px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,126.96,489.5)"><tspan id="tspan436" y="0" x="0 12.996 18 21.996 25.92 29.916 34.919998 43.686001 48.942001 62.945999 68.940002 72.935997">Utility Grid</tspan></text></g></g>
+                             <g id="g440"><g clip-path="url(#clipPath446)" id="g442"><text id="text450" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#94a3b8;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,120,473.78)"><tspan id="tspan448" y="0" x="0 3.9960001 10.668 17.388 23.388 30.096001 32.759998 35.855999 43.883999 50.591999 57.299999 63.299999 66.636002 73.367996 76.704002 79.367996 86.075996 92.676003">(Local Substation)</tspan></text></g></g>
+                             <path id="path452" style="fill:#ef4444;fill-opacity:0.6;fill-rule:nonzero;stroke:none" d="m 306.39,91.893 h 92.12 V 200.49 h -3 V 93.393 l 1.5,1.5 h -90.62 z m 8.24,8.045 -11.22,-6.545 11.22,-6.546 c 0.72,-0.417 1.64,-0.176 2.06,0.54 0.41,0.715 0.17,1.634 -0.54,2.051 l -9,5.25 v -2.591 l 9,5.25 v 0 c 0.71,0.417 0.95,1.336 0.54,2.051 -0.42,0.712 -1.34,0.962 -2.06,0.54 z m 88.93,92.312 -6.55,11.22 -6.54,-11.22 c -0.42,-0.72 -0.18,-1.64 0.54,-2.06 0.71,-0.41 1.63,-0.17 2.05,0.54 l 5.25,9 h -2.59 l 5.25,-9 c 0.41,-0.71 1.33,-0.95 2.05,-0.54 0.71,0.42 0.96,1.34 0.54,2.06 z" />
+                             <path id="path454" style="fill:#c55a11;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 349.61,224.34 H 318.76 V 334.5 l 1.5,-1.5 h -29.35 v 3 h 30.85 V 225.84 l -1.5,1.5 h 29.35 z m -8.24,8.05 11.22,-6.55 -11.22,-6.54 c -0.72,-0.42 -1.63,-0.18 -2.05,0.54 -0.42,0.71 -0.18,1.63 0.54,2.05 l 9,5.25 v -2.59 l 9,5.25 v 0 c -0.72,0.41 -0.96,1.33 -0.54,2.05 0.42,0.71 1.33,0.95 2.05,0.54 z m -42.22,95.56 -11.22,6.55 11.22,6.55 c 0.72,0.41 1.64,0.17 2.06,-0.54 0.41,-0.72 0.17,-1.64 -0.54,-2.06 l -9,-5.25 v 2.6 l 9,-5.25 c 0.71,-0.42 0.95,-1.34 0.54,-2.06 -0.42,-0.71 -1.34,-0.95 -2.06,-0.54 z" />
+                             <g id="g456"><g clip-path="url(#clipPath462)" id="g458"><path id="path464" style="fill:#c55a11;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 169.92,466.02 v -59.36 h -3 v 59.36 z m 5.05,-51.12 -6.55,-11.22 -6.55,11.22 c -0.41,0.72 -0.17,1.64 0.54,2.06 0.72,0.41 1.64,0.17 2.06,-0.54 l 5.25,-9 h -2.6 l 5.25,9 c 0.42,0.71 1.34,0.95 2.06,0.54 0.71,-0.42 0.95,-1.34 0.54,-2.06 z" /></g></g>
+                             <path id="path466" style="fill:#548235;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 104.88,224.8 c 0,5.08 4.12,9.2 9.2,9.2 h 118.04 c 5.08,0 9.2,-4.12 9.2,-9.2 V 188 c 0,-5.08 -4.12,-9.2 -9.2,-9.2 H 114.08 c -5.08,0 -9.2,4.12 -9.2,9.2 z" />
+                             <path id="path468" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 104.88,224.8 c 0,5.08 4.12,9.2 9.2,9.2 h 118.04 c 5.08,0 9.2,-4.12 9.2,-9.2 V 188 c 0,-5.08 -4.12,-9.2 -9.2,-9.2 H 114.08 c -5.08,0 -9.2,4.12 -9.2,9.2 z" />
+                             <g id="g470"><g clip-path="url(#clipPath476)" id="g472"><text id="text480" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,128.47,209.06)"><tspan id="tspan478" y="0" x="0 9.96 16.667999 19.332001 22.667999">Multi</tspan></text></g></g>
+                             <g id="g482"><g clip-path="url(#clipPath488)" id="g484"><text id="text492" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,153.79,209.06)"><tspan id="tspan490" y="0" x="0">-</tspan></text></g></g>
+                             <g id="g494"><g clip-path="url(#clipPath500)" id="g496"><text id="text504" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,157.75,209.06)"><tspan id="tspan502" y="0" x="0 8.6639996 15.336 18.6 27.264 35.880001 39.216 47.268002 53.976002">Ch DC Bus</tspan></text></g></g>
+                             <g id="g506"><g clip-path="url(#clipPath512)" id="g508"><text id="text516" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,119.35,194.66)"><tspan id="tspan514" y="0" x="0 3.9960001 13.92 20.628 26.507999 29.976 36.683998 43.391998 51.419998 54.756001 57.900002 64.608002 71.316002 79.344002 82.68 90.732002 93.396004 100.068 103.44">(Max 54V, 20A/Slot)</tspan></text></g></g>
+                             <path id="path518" style="fill:#548235;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 709.92,246.76 c 0,5.08 4.12,9.2 9.2,9.2 h 118.04 c 5.08,0 9.2,-4.12 9.2,-9.2 v -36.8 c 0,-5.08 -4.12,-9.2 -9.2,-9.2 H 719.12 c -5.08,0 -9.2,4.12 -9.2,9.2 z" />
+                             <path id="path520" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 709.92,246.76 c 0,5.08 4.12,9.2 9.2,9.2 h 118.04 c 5.08,0 9.2,-4.12 9.2,-9.2 v -36.8 c 0,-5.08 -4.12,-9.2 -9.2,-9.2 H 719.12 c -5.08,0 -9.2,4.12 -9.2,9.2 z" />
+                             <g id="g522"><g clip-path="url(#clipPath528)" id="g524"><text id="text532" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,733.56,231.1)"><tspan id="tspan530" y="0" x="0 9.96 16.667999 19.332001 22.667999">Multi</tspan></text></g></g>
+                             <g id="g534"><g clip-path="url(#clipPath540)" id="g536"><text id="text544" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,758.88,231.1)"><tspan id="tspan542" y="0" x="0">-</tspan></text></g></g>
+                             <g id="g546"><g clip-path="url(#clipPath552)" id="g548"><text id="text556" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,762.84,231.1)"><tspan id="tspan554" y="0" x="0 8.6639996 15.336 18.6 27.264 35.880001 39.216 47.268002 53.976002">Ch DC Bus</tspan></text></g></g>
+                             <g id="g558"><g clip-path="url(#clipPath564)" id="g560"><text id="text568" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,724.44,216.7)"><tspan id="tspan566" y="0" x="0 3.9960001 13.92 20.628 26.507999 29.976 36.683998 43.391998 51.419998 54.756001 57.900002 64.608002 71.316002 79.344002 82.68 90.732002 93.396004 100.068 103.44">(Max 54V, 20A/Slot)</tspan></text></g></g>
+                             <g id="g570">
+                               <g clip-path="url(#clipPath576)" id="g572">
+                                 <path id="path578" style="fill:#c55a11;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 169.92,276.66 v -34.78 h -3 v 34.78 z m 5.05,-26.54 -6.55,-11.22 -6.55,11.22 c -0.41,0.72 -0.17,1.64 0.54,2.05 0.72,0.42 1.64,0.18 2.06,-0.54 l 5.25,-9 h -2.6 l 5.25,9 v 0 c 0.42,0.72 1.34,0.96 2.06,0.54 0.71,-0.41 0.95,-1.33 0.54,-2.05 z" />
+                               </g>
+                             </g>
+                             <g id="g580">
+                               <g clip-path="url(#clipPath586)" id="g582">
+                                 <path id="path588" style="fill:#f4b183;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 174.6,178.86 v -9 h -3 v 9 z m 0,-12 v -6 l -1.5,1.5 h 3 v -3 h -4.5 v 7.5 z m 4.5,-4.5 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 12,0 h 9 v -3 h -9 z m 9.51,-0.51 v 9 h 3 v -9 z m 0,12 v 9 h 3 v -9 z m 0,12 v 9 h 3 v -9 z m 0,12 v 0.06 h 3 v -0.06 z m -5.04,-8.18 6.54,11.22 6.55,-11.22 c 0.42,-0.72 0.18,-1.64 -0.54,-2.05 -0.72,-0.42 -1.63,-0.18 -2.05,0.54 v 0 l -5.25,9 h 2.59 l -5.25,-9 c -0.42,-0.72 -1.34,-0.96 -2.05,-0.54 -0.72,0.41 -0.96,1.33 -0.54,2.05 z" />
+                               </g>
+                             </g>
+                             <g id="g590">
+                               <g clip-path="url(#clipPath596)" id="g592">
+                                 <path id="path598" style="fill:#c55a11;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 776.6,256 v 58.37 h 3 V 256 Z m -5.05,50.12 6.55,11.22 6.54,-11.22 c 0.42,-0.71 0.18,-1.63 -0.54,-2.05 -0.71,-0.42 -1.63,-0.17 -2.05,0.54 l -5.25,9 h 2.59 l -5.25,-9 v 0 c -0.41,-0.71 -1.33,-0.96 -2.05,-0.54 -0.71,0.42 -0.95,1.34 -0.54,2.05 z" />
+                               </g>
+                             </g>
+                             <path id="path600" style="fill:#4b5563;fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 160.8,29.74 c 0,2.198 1.78,3.98 3.98,3.98 H 283.9 c 2.2,0 3.98,-1.782 3.98,-3.98 V 13.82 c 0,-2.198 -1.78,-3.98 -3.98,-3.98 H 164.78 c -2.2,0 -3.98,1.782 -3.98,3.98 z" />
+                             <path id="path602" style="fill:none;stroke:#41719c;stroke-width:0.95999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" d="m 160.8,29.74 c 0,2.198 1.78,3.98 3.98,3.98 H 283.9 c 2.2,0 3.98,-1.782 3.98,-3.98 V 13.82 c 0,-2.198 -1.78,-3.98 -3.98,-3.98 H 164.78 c -2.2,0 -3.98,1.782 -3.98,3.98 z" />
+                             <g id="g604"><g clip-path="url(#clipPath610)" id="g606"><text id="text614" style="font-variant:normal;font-weight:normal;font-size:12px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,191.88,17.232)"><tspan id="tspan612" y="0" x="0 8.0279999 14.736 21.336 24.672001 27.936001 34.644001 41.352001 48.060001 51.396 58.127998">Eng. Laptop</tspan></text></g></g>
+                             <path id="path616" style="fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 300.03,20.232 h 12 v 3 h -12 z m 21,0 h 12 v 3 h -12 z m 21,0 h 12 v 3 h -12 z m 21,0 h 12 v 3 h -12 z m 21,0 h 12 v 3 h -12 z m 21,0 h 12 v 3 h -12 z m 21,0 h 12 v 3 h -12 z m 21,0 h 12 v 3 h -12 z m 22.36,1.637 v 12 h -3 v -12 z m 0,21 v 12 h -3 v -12 z m 0,21 v 12 h -3 v -12 z m 0,21 v 12 h -3 v -12 z m 0,21.001 v 12 h -3 v -12 z m 0,21 v 12 h -3 v -12 z m 0,21 v 12 h -3 v -12 z m 0,21 v 12 h -3 v -12 z m 0,21 v 12 h -3 v -12 z M 308.27,28.278 297.05,21.732 308.27,15.187 c 0.72,-0.418 1.64,-0.176 2.06,0.54 0.41,0.715 0.17,1.634 -0.54,2.051 l -9,5.25 v -2.591 l 9,5.25 v 0 c 0.71,0.417 0.95,1.336 0.54,2.051 -0.42,0.716 -1.34,0.958 -2.06,0.54 z m 166.17,166.852 -6.55,11.22 -6.54,-11.22 c -0.42,-0.72 -0.18,-1.64 0.54,-2.06 0.71,-0.41 1.63,-0.17 2.05,0.54 l 5.25,9 h -2.59 l 5.25,-9 c 0.41,-0.71 1.33,-0.95 2.05,-0.54 0.71,0.42 0.96,1.34 0.54,2.06 z" />
+                             <g id="g618"><g clip-path="url(#clipPath624)" id="g620"><text id="text628" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,475.08,78.144)"><tspan id="tspan626" y="0" x="0 8.0279999 14.028 19.308001 25.308001 28.643999 31.775999 40.439999 43.776001 49.776001 55.776001 62.484001 68.484001 73.152 77.148003 80.484001">Local Diagnostic</tspan></text></g></g>
+                             <g id="g630"><g clip-path="url(#clipPath636)" id="g632"><text id="text640" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#64748b;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,475.08,63.744)"><tspan id="tspan638" y="0" x="0 3.9960001 12.6 19.308001 27.336 30.672001 39.335999 45.335999 51.335999 57.335999">(USB/R485)</tspan></text></g></g>
+                             <path id="path642" style="fill:rgba(15, 23, 42, 0.4);fill-opacity:1;fill-rule:evenodd;stroke:none" d="m 686.82,451.3 c 0,4.22 3.42,7.64 7.64,7.64 h 167.48 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 694.46 c -4.22,0 -7.64,3.42 -7.64,7.64 z" />
+                             <g id="g644"><path id="path646" style="fill:none;stroke:#394ff7;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:12, 9;stroke-dashoffset:0;stroke-opacity:0.4" d="m 686.82,451.3 c 0,4.22 3.42,7.64 7.64,7.64 h 167.48 c 4.22,0 7.64,-3.42 7.64,-7.64 v -30.56 c 0,-4.22 -3.42,-7.64 -7.64,-7.64 H 694.46 c -4.22,0 -7.64,3.42 -7.64,7.64 z" /></g>
+                             <g id="g648"><g clip-path="url(#clipPath654)" id="g650"><text id="text658" style="font-variant:normal;font-weight:normal;font-size:14.03999996px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,730.94,437.5)"><tspan id="tspan656" y="0" x="0 9.3646803 18.729361 28.09404 32.025242 41.389919 49.196159 56.24424 59.361118 67.167358 74.229477 82.035721 86.711037">BSS Enclosure</tspan></text></g></g>
+                             <g id="g660"><g clip-path="url(#clipPath666)" id="g662"><text id="text670" style="font-variant:normal;font-weight:normal;font-size:11.03999996px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#94a3b8;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,699.72,423.58)"><tspan id="tspan668" y="0" x="0 3.70944 12.34272 18.480961 21.550079 27.68832 33.826561 39.964802 43.541759 46.54464 49.183201 52.296478 59.616001 65.754242 71.85936 74.972641 77.85408 85.76976 91.907997 94.977119 101.11536 107.2536 110.35584 113.23728 120.5568 123.67008">(Outdoor, IP67, Rated, AIS</tspan></text></g></g>
+                             <g id="g672"><g clip-path="url(#clipPath678)" id="g674"><text id="text682" style="font-variant:normal;font-weight:normal;font-size:11.03999996px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#94a3b8;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,830.78,423.58)"><tspan id="tspan680" y="0" x="0">-</tspan></text></g></g>
+                             <g id="g684"><g clip-path="url(#clipPath690)" id="g686"><text id="text694" style="font-variant:normal;font-weight:normal;font-size:11.03999996px;font-family:ArialMT;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#94a3b8;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,834.5,423.58)"><tspan id="tspan692" y="0" x="0 6.1200399 12.24008 18.360121">156)</tspan></text></g></g>
+                             <g id="g696"><g clip-path="url(#clipPath702)" id="g698"><text id="text706" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#ef4444;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,51.744,134.78)"><tspan id="tspan704" y="0" x="0 8.6639996 15.336 21.336">Dual</tspan></text></g></g>
+                             <g id="g708"><g clip-path="url(#clipPath714)" id="g710"><text id="text718" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#ef4444;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,76.488,134.78)"><tspan id="tspan716" y="0" x="0">-</tspan></text></g></g>
+                             <g id="g720"><g clip-path="url(#clipPath726)" id="g722"><text id="text730" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#ef4444;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,80.448,134.78)"><tspan id="tspan728" y="0" x="0 7.1999998 13.2 17.195999 23.868 26.988001">Path E</tspan></text></g></g>
+                             <g id="g732"><g clip-path="url(#clipPath738)" id="g734"><text id="text742" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#ef4444;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,115.49,134.78)"><tspan id="tspan740" y="0" x="0">-</tspan></text></g></g>
+                             <g id="g744"><g clip-path="url(#clipPath750)" id="g746"><text id="text754" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#ef4444;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,119.45,134.78)"><tspan id="tspan752" y="0" x="0 6.7080002 10.704 16.704 23.375999">Stop </tspan></text></g></g>
+                             <g id="g756"><g clip-path="url(#clipPath762)" id="g758"><text id="text766" style="font-variant:normal;font-weight:bold;font-size:12px;font-family:TimesNewRomanPS;-inkscape-font-specification:TimesNewRomanPS-BoldMT;writing-mode:lr-tb;fill:#ef4444;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="matrix(1,0,0,-1,51.744,120.38)"><tspan id="tspan764" y="0" x="0 3.9960001 12.6 21.264 24.264 34.200001 37.200001 45.863998 54.48 57.48 66.143997 72.816 76.816 82.811996 86.867996 90.935997">(AC &amp; DC Cutoff)</tspan></text></g></g>
+                           </g>
+                        </svg>
+
+                        <!-- Invisible (Yet Glow-Interactive on Hover) HTML buttons positioned with absolute mathematical precision -->
+                        <!-- 1. 電力系統 (Power System) - left: 6.45%, top: 25.68%, width: 21.68%, height: 8.49% -->
+                        <button onclick="openModal('power')" class="absolute transition-all duration-300 rounded-xl cursor-pointer hover:bg-amber-500/10 border border-transparent hover:border-amber-500/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] focus:outline-none no-print" style="left: 6.45%; top: 34.17%; width: 21.68%; height: 5.66%;" title="Power System"></button>
+
+                        <!-- 2. 電池包與BMS (Battery Pack & BMS) - left: 69.41%, top: 25.68%, width: 21.68%, height: 8.49% -->
+                        <button onclick="openModal('battery')" class="absolute transition-all duration-300 rounded-xl cursor-pointer hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/30 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] focus:outline-none no-print" style="left: 69.41%; top: 34.17%; width: 21.68%; height: 5.66%;" title="Battery Pack & BMS"></button>
+
+                        <!-- 3. 機構與環境防護 (Mechanical & Env) - left: 68.21%, top: 71.37%, width: 21.68%, height: 8.49% -->
+                        <button onclick="openModal('mech')" class="absolute transition-all duration-300 rounded-xl cursor-pointer hover:bg-indigo-500/10 border border-transparent hover:border-indigo-500/30 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] focus:outline-none no-print" style="left: 68.21%; top: 79.86%; width: 21.68%; height: 5.66%;" title="Mechanical & Environmental"></button>
+
+                        <!-- 4. 中央控制單元 (Central Control Unit / CCU) - left: 36.80%, top: 45.35%, width: 21.68%, height: 8.49% -->
+                        <button onclick="openModal('ccu')" class="absolute transition-all duration-300 rounded-xl cursor-pointer hover:bg-blue-500/10 border border-transparent hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] focus:outline-none no-print" style="left: 36.80%; top: 53.84%; width: 21.68%; height: 5.66%;" title="Central Control Unit"></button>
+
+                        <!-- 5. 通訊與雲端整合 (Communication & Cloud) - left: 36.55%, top: 24.08%, width: 21.68%, height: 8.49% -->
+                        <button onclick="openModal('comm')" class="absolute transition-all duration-300 rounded-xl cursor-pointer hover:bg-violet-500/10 border border-transparent hover:border-violet-500/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] focus:outline-none no-print" style="left: 36.55%; top: 32.57%; width: 21.68%; height: 5.66%;" title="Communication & Cloud"></button>
+
+                        <!-- 6. 安全與法規 (Safety & Compliance) - left: 8.33%, top: 71.37%, width: 21.68%; height: 8.49% -->
+                        <button onclick="openModal('safety')" class="absolute transition-all duration-300 rounded-xl cursor-pointer hover:bg-red-500/10 border border-transparent hover:border-red-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.15)] focus:outline-none no-print" style="left: 8.33%; top: 79.86%; width: 21.68%; height: 5.66%;" title="Safety & Compliance"></button>
+                    </div>
+                </div>
+
+                <!-- Mobile Cards (Visible only on mobile devices instead of SVG for bulletproof responsiveness) -->
+                <div id="mobile-l1" class="md:hidden space-y-4 mb-8">
+                    <!-- Rendered via JS -->
+                </div>
+
+                <!-- PART 2: Modules Detail (Hidden on Screen, Visible on Print) -->
+                <div id="modules-container" class="space-y-6 screen-hidden">
+                    <div class="section-divider">
+                        <span data-lang="en">2. Module Architecture Details</span>
+                        <span data-lang="zh">貳、 模組架構細節</span>
+                    </div>
+                    <!-- Modules generated dynamically by JS for print layout -->
+                </div>
+
+                <!-- PART 3: Glossary (Fully Searchable & Filterable) -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Technical Glossary</span>
+                    <span data-lang="zh">參、 專業術語表</span>
+                </div>
+
+                <!-- Live Search & Filtering Toolbar -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 no-print bg-gray-950/40 p-4 rounded-xl border border-gray-800">
+                    <!-- Text Search -->
+                    <div class="relative flex-1">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="glossary-search" class="w-full bg-gray-900 border border-gray-700/80 rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" placeholder="Search by ID, abbreviation, names, or specifications...">
+                    </div>
+                    
+                    <!-- Category Dropdown Filter -->
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs text-gray-500 font-medium whitespace-nowrap">
+                            <i class="fas fa-filter mr-1"></i>
+                            <span data-lang="en">Filter by Module:</span>
+                            <span data-lang="zh">按模組篩選：</span>
+                        </span>
+                        <select id="glossary-filter" class="bg-gray-900 border border-gray-700/80 rounded-xl px-3 py-2 text-sm text-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
+                            <option value="all" data-en="All Modules" data-zh="全部模組">All Modules (全部)</option>
+                            <option value="power" data-en="⚡ Power System" data-zh="⚡ 電力系統">⚡ Power System (電力系統)</option>
+                            <option value="battery" data-en="🔋 Battery Pack & BMS" data-zh="🔋 電池包與BMS">🔋 Battery Pack & BMS (電池包與BMS)</option>
+                            <option value="mech" data-en="🏗️ Mechanical & Env" data-zh="🏗️ 機構與環境">🏗️ Mechanical & Env (機構與環境)</option>
+                            <option value="ccu" data-en="🖥️ CCU" data-zh="🖥️ 中央控制單元">🖥️ CCU (中央控制單元)</option>
+                            <option value="comm" data-en="📡 Communication" data-zh="📡 通訊與雲端">📡 Communication (通訊與雲端)</option>
+                            <option value="safety" data-en="🛡️ Safety & Compliance" data-zh="🛡️ 安全與法規">🛡️ Safety & Compliance (安全與法規)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Glossary Table -->
+                <div class="overflow-x-auto bg-gray-950/30 border border-gray-800 rounded-xl p-1 md:p-3 mb-6">
+                    <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                        <thead class="text-xs text-gray-400 uppercase bg-gray-950/70">
+                            <tr>
+                                <th class="p-3 w-1/12" data-lang="en">ID</th><th class="p-3 w-1/12" data-lang="zh">編號</th>
+                                <th class="p-3 w-1/4" data-lang="en">Abbreviation</th><th class="p-3 w-1/4" data-lang="zh">縮寫名稱</th>
+                                <th class="p-3 w-1/2" data-lang="en">Full Name / Description</th><th class="p-3 w-1/2" data-lang="zh">英文全名 / 功能說明</th>
+                                <th class="p-3 text-right" data-lang="en">Module</th><th class="p-3 text-right" data-lang="zh">所屬模組</th>
+                            </tr>
+                        </thead>
+                        <tbody id="glossary-body" class="divide-y divide-gray-800/50">
+                            <!-- Populated Dynamically by JS -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- No Results Banner -->
+                    <div id="no-results" class="hidden text-center py-10 text-gray-500">
+                        <i class="fas fa-search-minus text-3xl mb-3 block"></i>
+                        <span data-lang="en">No matching technical terms found.</span>
+                        <span data-lang="zh">未找到匹配的專業術語。</span>
+                    </div>
+                </div>
+
+                <!-- Confidential Footer -->
+                <footer class="mt-16 pt-8 border-t border-gray-800 text-center text-xs text-gray-500 pb-8">
+                    <p class="font-semibold text-gray-400 mb-1">Confidential - Foxlink Technology Co., Ltd. © 2026</p>
+                    <p>Prepared specifically for Jio Platforms Ltd. Under Non-Disclosure Agreement (NDA).</p>
+                    <p class="mt-1">All design schemas present architecture and logical interfaces exclusively. No proprietary IP is disclosed.</p>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        // 100% PRD-Aligned Complete Database of BSS (43 components)
+        const JIO_BSS_DATA = [
+            {
+                id: 'power', icon: '⚡', colorClass: 'border-power', textColor: 'text-amber-500', 
+                nameEN: 'Power System', nameZH: '電力系統',
+                descEN: 'Grid AC connection, high-efficiency power distribution, and bidirectional power conversion', descZH: '電網交流接入、高效率配電及雙向功率轉換系統',
+                components: [
+                    { 
+                        id: 'P1', abbr: '3Ø AC Input', en: 'Three-Phase AC Power Input', zh: '三相交流電源輸入',
+                        details: {
+                            roleEN: 'Primary interface receiving high-voltage utility grid connection to BSS.', roleZH: '接收市電高壓電網輸入的主要接入介面。',
+                            specsEN: ['Voltage: 440V Three-Phase AC Input', 'Frequency: 50Hz rated grid frequency', 'Power Capacity: 30kVA rated power input from the grid'],
+                            specsZH: ['電壓: 440V 三相交流輸入', '頻率: 50Hz 額定電網頻率', '功率容量: 額定接入功率 30kVA'],
+                            intEN: 'Input: External Grid Utility lines; Output: Directly routes to BDU/PDU system.', intZH: '外部介面：連接國家電網；內部介面：將三相電源接入 BSS 配電單元(PDU)。'
+                        }
+                    },
+                    { 
+                        id: 'P2', abbr: 'PDU', en: 'Power Distribution Unit', zh: '配電單元',
+                        details: {
+                            roleEN: 'Distributes raw AC input power across L1/L2/L3 phases to achieve phase balance.', roleZH: '將交流輸入電力均勻分配到 L1/L2/L3 三相，實現換電站內部各相負載平衡。',
+                            specsEN: ['Balances dynamic loads across internal phases', 'Load balance optimization among 12 active battery charging slots', 'Integrated automatic short circuit protection'],
+                            specsZH: ['提供三相動態負載平衡控制', '將負載均勻分配至 12 個快速充電槽位', '內建安全短路過載熔斷裝置'],
+                            intEN: 'Input: Receives AC power from P1; Output: Feeds sub-circuits of rectifiers, PCS and HVAC.', intZH: '輸入：自三相交流輸入(P1)取電；輸出：配送至交直流整流器(P3)、PCS(P4)及空調(M6)。'
+                        }
+                    },
+                    { 
+                        id: 'P3', abbr: 'AC/DC Rectifier', en: 'AC to DC Rectifier Module', zh: '交直流整流模組',
+                        details: {
+                            roleEN: 'Converts 440V AC to stabilized 54V DC charging power with constant-current/constant-voltage control.', roleZH: '將 440V 交流市電轉換為 54V 低壓直流電，採用恆流恆壓（CC/CV）控制算法充電。',
+                            specsEN: ['Input Voltage: 440V AC conversion', 'Output Voltage: 54V DC regulated output for safe LFP cell charging', 'CC/CV (Constant Current/Constant Voltage) high-efficiency control protocol'],
+                            specsZH: ['輸入電壓: 440V 交流輸入轉換', '輸出電壓: 穩定的 54V 直流輸出（供鋰電池安全充電）', '充電控制: 具備高精準度 CC/CV 控制協議'],
+                            intEN: 'Input: Receives AC from PDU; Output: Direct DC link to battery charging interfaces; controlled via CAN-B from CCU.', intZH: '輸入：自配電單元(PDU)取電；輸出：直流側對接電池插槽盲插連接器；控制：經由 CAN-B 接收 CCU 指令。'
+                        }
+                    },
+                    { 
+                        id: 'P4', abbr: 'PCS', en: 'Bidirectional Power Conversion System', zh: '雙向功率轉換系統',
+                        details: {
+                            roleEN: 'Enables high-performance bidirectional energy flow between the grid and station batteries.', roleZH: '負責電網與換電站電池組之間的雙向能量轉換與流動控制。',
+                            specsEN: ['Grid→Battery charging mode', 'Battery→Grid (V2G/V2B) mode supporting Dark Store backup power', 'Bidirectional flow efficiency: >95%'],
+                            specsZH: ['電網對電池充電（Grid→Battery）模式', '電池反向對電網或暗倉供電（V2G/V2B）緊急備用模式', '雙向功率轉換效率達 95% 以上'],
+                            intEN: 'Direct interfaces with DC busbar, AC power rails, and grid-tied control; commanded via CAN-B.', intZH: '實體介面：直接連接直流母線與交流電網；控制：經由 CAN-B 接口與 CCU 連動調度。'
+                        }
+                    },
+                    { 
+                        id: 'P5', abbr: 'ATS', en: 'Automatic Transfer Switch', zh: '自動切換開關',
+                        details: {
+                            roleEN: 'Performs microsecond-level automatic switching during power grid outages to secure station operations.', roleZH: '在外部電網斷電時，自動在市電模式與電池獨立孤島運行模式之間進行無縫切換。',
+                            specsEN: ['Switches dynamically between external grid power and internal battery-backed island mode', 'Automatic disconnect protection during blackout conditions'],
+                            specsZH: ['提供電網電力與電池自備孤島（Island Mode）模式間的自動切換', '在外部電網發生故障時提供自動隔離安全防護'],
+                            intEN: 'Connected physically between PDU, PCS outputs, and the external Grid line.', intZH: '實體安裝：並接於配電單元(PDU)、雙向功率轉換系統(PCS)輸出與外部電網線路之間。'
+                        }
+                    },
+                    { 
+                        id: 'P6', abbr: 'SPD', en: 'Surge Protection Device', zh: '突波保護裝置',
+                        details: {
+                            roleEN: 'Absorbs transient high-voltage grid anomalies and lightning spikes to safeguard station.', roleZH: '吸收電網內部的瞬態過電壓與高能雷擊，保障內部精密控制系統。',
+                            specsEN: ['6000V transient lightning surge protection threshold', 'Standard-compliant industrial grade voltage clamping'],
+                            specsZH: ['具備高達 6000V 的防雷擊與高壓突波吸收能力', '符合工業級安全電壓鉗位標準'],
+                            intEN: 'Parallel connected directly at the primary 3Ø AC input terminal.', intZH: '接線：並聯配置於三相交流電源輸入(P1)最前端。'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'battery', icon: '🔋', colorClass: 'border-battery', textColor: 'text-emerald-500', 
+                nameEN: 'Battery Pack & BMS', nameZH: '電池包與電池管理系統',
+                descEN: 'High-energy LFP battery cells, smart monitoring system, and AIS-156 safety standards', descZH: '高能量密度磷酸鋰鐵電芯、智慧電池管理系統及符合 AIS-156 安全標準',
+                components: [
+                    { 
+                        id: 'B1', abbr: 'LFP Cell', en: 'Lithium Iron Phosphate Cell Array', zh: '磷酸鋰鐵電芯陣列',
+                        details: {
+                            roleEN: 'High-safety chemistry cell core providing electrical power for EVs and station swap reserves.', roleZH: '電池包物理能量儲存單元，採用安全穩固的磷酸鋰鐵電芯。',
+                            specsEN: ['Configuration: 15S2P serial-parallel structure', 'Voltage: 48V nominal battery output', 'Capacity: 30Ah rated pack capacity', 'Energy capacity: ~1.4kWh per pack'],
+                            specsZH: ['配置: 15串2並（15S2P）電芯排列結構', '標稱電壓: 48V', '標稱容量: 30Ah', '單包電量: 約 1.4kWh'],
+                            intEN: 'Connected directly to BMS board inside pack; outputs power via Amphenol connector.', intZH: '內部連接：直接以 nickel 帶焊接至 BMS 板；外部輸出：經由 Amphenol 盲插端子傳輸。'
+                        }
+                    },
+                    { 
+                        id: 'B2', abbr: 'BMS', en: 'Battery Management System', zh: '電池管理系統',
+                        details: {
+                            roleEN: 'Embedded micro-controller conducting high-speed battery telemetry, safety monitoring, and cell balance.', roleZH: '智慧電池管理系統，即時採集電壓、電流與溫度，執行安全策略與被動均衡。',
+                            specsEN: ['Microprocessor-based smart controller board', 'Continuous monitoring of cell Voltage, Current, Temperature, SOC, SOH', 'Certified strictly under Indian AIS-156 regulatory standards'],
+                            specsZH: ['基於微處理器的高可靠性控制板', '即時監控電芯電壓、電流、溫度、SOC及SOH', '通過印度最新強制法規 AIS-156 認證'],
+                            intEN: 'Monitors LFP Cell array; communicates with CCU via CAN-A; supports standalone 4G upload.', intZH: '內部感測：連接電芯與NTC；通訊：經由 CAN-A 匯流排向 CCU 回報；亦支援直接 4G 雲端通訊。'
+                        }
+                    },
+                    { 
+                        id: 'B3', abbr: 'DDP', en: 'Deep Discharge Protection', zh: '深度放電防護',
+                        details: {
+                            roleEN: 'Mitigates irreversible chemical degradation by automatically shutting down battery logic during deep drop.', roleZH: '防止電池包在極低電量下持續放電，避免電芯產生不可逆的容量衰減。',
+                            specsEN: ['Activates ultra-low power Sleep Mode automatically when SOC < 20%', 'Disconnects the internal main contactor relay', 'Disables active 4G module consumption to prevent drain'],
+                            specsZH: ['智慧休眠: 當 SOC 低於 20% 時自動啟動', '硬體動作: 斷開電池包內部主接觸器繼電器', '通訊隔離: 關閉內部 4G 模組以將待機功耗降至最低'],
+                            intEN: 'Triggered by BMS firmware logic; controls internal contactors and wireless modem power.', intZH: '控制鏈路：由 BMS 核心韌體觸發，直接控制主繼電器與 4G 模組供電。'
+                        }
+                    },
+                    { 
+                        id: 'B4', abbr: 'Pre-charge', en: 'Pre-charge Wake-up Circuit', zh: '預充電喚醒電路',
+                        details: {
+                            roleEN: 'Safely revives over-discharged batteries by applying low micro-current to stabilize cell chemistry.', roleZH: '針對過度放電（Dead Battery）的電池包提供微弱電流進行初期充電，以防大電流造成化學崩潰。',
+                            specsEN: ['Applies stable 0.05C micro-current injection for battery awakening', 'Continuously monitors cell voltage recovery curve before transition to high current'],
+                            specsZH: ['注入: 0.05C 微弱電流安全喚醒充電', '檢測: 持續追蹤電壓回升曲線，確認化學系統穩定後才切換大電流充電'],
+                            intEN: 'Initiated automatically by charger rectifier; managed by BMS state-machine during connection.', intZH: '在充電初期介入，由 BMS 充電狀態機與交直流整流器進行握手確認。'
+                        }
+                    },
+                    { 
+                        id: 'B5', abbr: 'RFID', en: 'Radio-Frequency Identification Tag', zh: '射頻識別標籤',
+                        details: {
+                            roleEN: 'Provides a tamper-proof hardware identifier to log battery usage, lifecycle data, and transaction links.', roleZH: '內嵌於電池外殼內的唯一硬體識別標籤，用於電池追溯、安全追蹤與帳務管理。',
+                            specsEN: ['Embedded unique hardware identity (UID) tag', 'Facilitates complete lifecycle tracking and history logging', 'Meets AIS-156 mandates for digital recall traceability'],
+                            specsZH: ['內嵌式硬體唯一識別（UID）RFID 晶片', '提供全生命週期歷史追蹤與交易對帳', '完全符合 AIS-156 的電池追溯與召回機制'],
+                            intEN: 'Exposes telemetry wireless interface to slot RFID reader connected to CCU.', intZH: '無線介面：在插槽內由 CCU 的 RFID 掃描天線進行近距離讀取。'
+                        }
+                    },
+                    { 
+                        id: 'B6', abbr: 'NTC', en: 'Negative Temperature Coefficient Sensor', zh: '負溫度係數感測器',
+                        details: {
+                            roleEN: 'Conducts cell-level high-precision temperature logging to prevent thermal runway.', roleZH: '高靈敏度溫度感測器，分佈於電池組內部核心發熱點，預防局部過熱引發的熱失控。',
+                            specsEN: ['Minimum of 4 independent thermal sensors per battery pack', 'Provides high-speed monitoring for early thermal runaway detection'],
+                            specsZH: ['每組電池包內部至少配置 4 個獨立的溫度感測器', '提供毫秒級電芯溫度監測，用於熱失控早期預防'],
+                            intEN: 'Wired directly to BMS analog-to-digital converter (ADC) channels.', intZH: '硬體連接：感測元件線路直連至 BMS 主控芯片的 ADC 採樣通道。'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'mech', icon: '🏗️', colorClass: 'border-mech', textColor: 'text-indigo-400', 
+                nameEN: 'Mechanical & Environmental', nameZH: '機構與環境防護',
+                descEN: 'Industrial steel cabinet, blind-mate connectors, IP ratings, C5-M anti-corrosion, and HVAC systems', descZH: '工業級鋼製機櫃、盲插連接器、防塵防水等級、C5-M 防腐蝕塗裝及主動空調管理',
+                components: [
+                    { 
+                        id: 'M1', abbr: 'Cabinet', en: 'BSS Cabinet Structure', zh: '機櫃結構',
+                        details: {
+                            roleEN: 'Secured structural metal housing for outdoor deployment handling heavy electrical load.', roleZH: '機櫃主體結構，為所有電氣設備提供物理屏障，保障戶外長期部署的安全性。',
+                            specsEN: ['Structural steel enclosure designed for outdoor installation', 'Accommodates 9 to 12 sliding battery slots', 'Designed for 30kVA safe power handling and physical impact absorption'],
+                            specsZH: ['專為戶外惡劣環境設計的重載精鋼外殼機櫃', '內部容納 9 到 12 個電池換電滑動槽位', '支持 30kVA 內部高功率運行的散熱與實體防護'],
+                            intEN: 'Provides structural frames and physical anchor points for all BSS hardware components.', intZH: '實體介面：提供配電單元、CCU、整流模組與電池滑槽的安裝底架。'
+                        }
+                    },
+                    { 
+                        id: 'M2', abbr: 'Amphenol', en: 'Amphenol Blind-mate Connector', zh: 'Amphenol盲插連接器',
+                        details: {
+                            roleEN: 'Floating high-durability connection terminal ensuring smooth zero-force insertions for users.', roleZH: '插槽底部的重載導向式盲插接頭，提供導向浮動對齊，具備安全無電弧防護。',
+                            specsEN: ['Power capability: 2 heavy-duty power pins rated at 600V / 50A', 'Signal interface: 8 integrated gold-plated low-noise signal pins', 'Tolerance: ±1.5mm float tolerance design', 'Durability: Rated for ≥5000 insert-extract mating cycles'],
+                            specsZH: ['電力傳輸: 2 根 600V / 50A 重載動力針腳', '訊號傳輸: 8 根鍍金抗干擾輔助信號針腳', '盲插容差: 具備 ±1.5mm 的三維浮動對齊裕度', '壽命: 插拔壽命高達 5000 次以上'],
+                            intEN: 'Bridges physical DC power paths and CAN communication lines between the battery pack and BSS slot.', intZH: '介面關係：當電池推入槽底時，自動卡入並建立直流電能與 CAN 通訊線路的連接。'
+                        }
+                    },
+                    { 
+                        id: 'M3', abbr: 'Slot Mechanism', en: 'Pull-Push Battery Slot Mechanism', zh: '推拉式電池槽機構',
+                        details: {
+                            roleEN: 'Ensures correct slide orientation and electronic safety locking during the charging cycle.', roleZH: '引導電池推拉就位，並在充電時對電池進行電磁式防盜物理鎖定。',
+                            specsEN: ['Integrated Poka-Yoke mechanical anti-reverse insertion geometry', 'Equipped with heavy-duty solenoid-actuated locking system', 'Supports automatic spring-assisted eject action upon authentication'],
+                            specsZH: ['內建防呆防反插（Poka-Yoke）幾何形狀導軌', '配置電磁鐵控制的高拉力物理鎖定鉤鎖', '用戶身份驗證通過後支援自動電磁彈射釋放'],
+                            intEN: 'Controlled electronically by Slot Controller Array (SCA); locks/unlocks the battery pack.', intZH: '介面關係：由 CCU 的槽位控制陣列(SCA)進行電子式解鎖/鎖定控制。'
+                        }
+                    },
+                    { 
+                        id: 'M4', abbr: 'IP Rating', en: 'Ingress Protection Rating', zh: '防護等級',
+                        details: {
+                            roleEN: 'Sealing design standard preventing particle and moisture entry to preserve active electronics.', roleZH: '整機防塵防水設計，保障戶外沙塵暴及暴雨下換電站內高壓系統不漏電。',
+                            specsEN: ['Cabinet main frame body certified under IP65 (dust-tight and water jets protection)', 'Critical battery slot docking terminals certified under IP67 (immersion water protection)'],
+                            specsZH: ['機櫃整體本體: IP65 級防護（完全防塵 + 抵禦任意方向雨水噴淋）', '電池插槽接頭: IP67 級防護（短時間浸水不進水，預防局部積水損壞）'],
+                            intEN: 'Employs sealed high-durability compression gaskets on all access doors and connector flanges.', intZH: '物理介面：機櫃檢修門、過線孔及盲插接頭法蘭處皆配置三元乙丙密封膠條。'
+                        }
+                    },
+                    { 
+                        id: 'M5', abbr: 'C5-M Coating', en: 'ISO 12944 C5-M Anti-corrosion System', zh: 'ISO 12944 C5-M防腐蝕系統',
+                        details: {
+                            roleEN: 'Heavy-duty marine-grade coating standard protecting steel framework in coastal or industrial environments.', roleZH: '船舶級防腐蝕噴塗塗裝，保障換電站在沿海高濕度、高鹽霧地區不受腐蝕。',
+                            specsEN: ['Standard: ISO 12944 C5-M certified industrial protection coating', 'Three-layer composite protection: Zinc-rich epoxy primer + Epoxy barrier intermediate + Polyurethane premium topcoat', 'Thickness: Total Dry Film Thickness (DFT) ≥ 300μm', 'Design life: 15-year corrosion protection design life in extreme environments'],
+                            specsZH: ['法規標準: ISO 12944 C5-M 船舶/沿海最高腐蝕防護級別', '塗裝架構: 富鋅環氧底漆 + 環氧雲鐵中漆 + 聚氨酯高耐候面漆', '乾膜厚度: 總乾膜厚度(DFT)大於或等於 300微米', '設計壽命: 沿海鹽霧與潮濕環境下具備至少 15 年防鏽防腐壽命'],
+                            intEN: 'Applied to all exterior steel sheet panels and chassis welds on the main cabinet framework.', intZH: '物理表面：覆蓋在主機櫃的所有鋼板外部件、焊接底盤及結構件表層。'
+                        }
+                    },
+                    { 
+                        id: 'M6', abbr: 'HVAC', en: 'Heating, Ventilation & Air Conditioning', zh: '暖通空調系統',
+                        details: {
+                            roleEN: 'Performs active microclimate control within BSS to maintain ideal temperature range for LFP packs.', roleZH: '主動式空調冷卻與加熱系統，調節充電艙內部環境，防止在高溫環境充電發生過熱。',
+                            specsEN: ['Maintains internal cabinet charging chamber microclimate within stable 25-35°C', 'Coordinates active thermal management linked dynamically with compressor and fans', 'CCU coordinated intelligent control loop'],
+                            specsZH: ['充電艙環境溫度穩定維持在 25-35°C 微氣候範圍', '具備主動式冷風風道循環，壓縮機與風扇調速聯動', '控制迴路與中央控制單元（CCU）深度整合'],
+                            intEN: 'Draws power from AC PDU rails; executes thermal commands from CCU based on active BMS readings.', intZH: '介面關係：電力由配電單元(PDU)提供；通訊上接受 CCU 溫控模組的 PID 控制。'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'ccu', icon: '🖥️', colorClass: 'border-ccu', textColor: 'text-blue-500', 
+                nameEN: 'Central Control Unit', nameZH: '中央控制單元',
+                descEN: 'Embedded ARM processing, HMI transaction terminal, isolated dual CAN buses, and sensor arrays', descZH: '嵌入式 ARM 核心運算、人機交互終端、雙通道隔離 CAN 總線及感應器陣列',
+                components: [
+                    { 
+                        id: 'C1', abbr: 'SoC/CPU', en: 'System on Chip / Central Processing Unit', zh: '系統單晶片/中央處理器',
+                        details: {
+                            roleEN: 'The master microcomputer running BSS middleware, cloud client, and billing database.', roleZH: '換電站的大腦，運行 Linux 系統，管理換電交易邏輯、邊緣安全診斷及雲端通訊。',
+                            specsEN: ['Processor: Quad-core ARM Cortex-A53 running at ≥1.5GHz', 'Memory: 2GB high-speed RAM', 'Storage: 8GB onboard storage Flash', 'OS: Customized secure Linux operating system'],
+                            specsZH: ['核心處理器: 四核心 ARM Cortex-A53，時脈 ≥1.5GHz', '記憶體容量: 2GB 高速運作 RAM', '存儲空間: 板載 8GB eMMC Flash', '系統底層: 客製化嵌入式 Linux 安全操作系統'],
+                            intEN: 'Interfaces with HMI, CAN controller chips, local digital sensors, and cellular modem via standard buses.', intZH: '介面關係：透過 I2C, SPI, UART, USB 連接 HMI、CAN 晶片、IMU 傳感器及 4G 模組。'
+                        }
+                    },
+                    { 
+                        id: 'C2', abbr: 'HMI', en: 'Human-Machine Interface', zh: '人機介面',
+                        details: {
+                            roleEN: 'High-visibility visual terminal guiding the end-user through swift battery swaps.', roleZH: '供用戶操作的高亮度陽光下可視人機觸控屏，提供多語系導引與交易操作。',
+                            specsEN: ['Screen size: 10.1" capacitive high-durability multi-touch screen', 'Brightness: ≥1000 nits high luminance for clear sunlight readability', 'Integrated Ambient Light Sensor (ALS) backlighting optimization'],
+                            specsZH: ['顯示規格: 10.1吋電容式多點鋼化玻璃觸控螢幕', '亮度指標: 亮度達到 1000nits 以上，專供陽光直射環境使用', '背光調節: 支援環境光感測器(ALS)無級自動調光'],
+                            intEN: 'Connected to SoC/CPU via industrial LVDS/MIPI video and USB touch interfaces.', intZH: '介面關係：透過內置 LVDS 顯示線路與 USB 觸控控制器連接至 SoC。'
+                        }
+                    },
+                    { 
+                        id: 'C3', abbr: 'NFC/RFID', en: 'NFC & RFID Card Reader', zh: '近場通訊/射頻識別讀取器',
+                        details: {
+                            roleEN: 'Secured card reader authorizing swaps via subscriber cards or smartphone tap actions.', roleZH: '非接觸式卡片與近場通訊讀卡機，供用戶刷卡扣款或手機感應進行身份確認。',
+                            specsEN: ['Enables contactless user card authentication', 'Facilitates secondary battery identity reading and matching'],
+                            specsZH: ['支援 ISO14443A 標準的非接觸式用戶智慧卡感應認證', '提供二次校驗電池包 RFID UID 身分的安全機制'],
+                            intEN: 'Connected to CCU main board via internal secure serial UART interface.', intZH: '介面關係：通過串口(TTL UART)直接連接主板的加密晶片。'
+                        }
+                    },
+                    { 
+                        id: 'C4', abbr: 'CAN-A', en: 'CAN 2.0b Bus Channel A', zh: 'CAN 2.0b匯流排通道A',
+                        details: {
+                            roleEN: 'Opto-isolated communication bus channel gathering high-speed telemetry from active slots.', roleZH: '高安全性光電隔離 CAN 總線通道，專用於與插槽內的電池 BMS 進行實時通訊。',
+                            specsEN: ['Opto-isolated CAN 2.0b transceiver', '2kV isolated protection against ground loops and noise', 'Polling cycle rate < 100ms for continuous cell data collection', 'Supports concurrency of up to 12 battery slots'],
+                            specsZH: ['符合 CAN 2.0b 協議標準的隔離收發電路', '具備高達 2kV 的電氣光耦隔離防護，預防高壓反向擊穿', '輪詢頻率: 系統對 12 個槽位 BMS 的輪詢週期小於 100毫秒', '單總線支援同時連接併發調度 12 個充電槽位'],
+                            intEN: 'Physical connection routed through main CCU board directly to Amphenol signal contacts on slot.', intZH: '連接線路：自 CCU 經隔離中繼板，分配到每個充電槽盲插連接器(M2)的 CAN 針腳。'
+                        }
+                    },
+                    { 
+                        id: 'C5', abbr: 'CAN-B', en: 'CAN 2.0b Bus Channel B', zh: 'CAN 2.0b匯流排通道B',
+                        details: {
+                            roleEN: 'Opto-isolated high-speed bus controlling chargers, PCS parameters and ATS.', roleZH: '光電隔離電力專用 CAN 總線，用於 CCU 與充電機整流模組及雙向 PCS 的控制。',
+                            specsEN: ['2kV isolated transceiver architecture', 'Dedicated path for controlling active PCS and Rectifier power outputs'],
+                            specsZH: ['具備 2kV 電氣光電隔離防護', '專門用於整流模組(P3)動態電壓控制與 PCS(P4)充放電控制'],
+                            intEN: 'Connected between CCU host and PCS/Rectifier diagnostic nodes.', intZH: '接線：介接 CCU 控制主板與交直流整流器、雙向功率轉換系統的主控板。'
+                        }
+                    },
+                    { 
+                        id: 'C6', abbr: 'IMU', en: 'Inertial Measurement Unit (6-axis)', zh: '六軸慣性測量單元',
+                        details: {
+                            roleEN: 'Six-axis sensor monitoring physical station status to trigger anti-theft and anti-tamper alarms.', roleZH: '六軸姿態感測晶片，即時監控換電站有無遭受外力撞擊、強風傾斜或人為傾倒破壞。',
+                            specsEN: ['6-axis motion tracking sensor (integrated accelerometer and gyroscope)', 'Detects structural cabinet impact, seismic events, tilt, or tamper attempts', 'Triggers hardware interrupts for immediate local alarms and cloud alert logs'],
+                            specsZH: ['高精度六軸傳感器（整合三軸加速度計與三軸陀螺儀）', '精準識別機櫃傾斜、外部砸擊、地表震動與人為撬開行為', '異常時發出硬體中斷，啟動本地蜂鳴器並向雲端發送警報日誌'],
+                            intEN: 'Mounted onboard CCU; interfaces directly via I2C serial bus with dedicated alarm channel.', intZH: '實體配置：焊接於 CCU 主控制板上，通過 I2C 與主芯片通訊，具備中斷腳。'
+                        }
+                    },
+                    { 
+                        id: 'C7', abbr: 'ALS', en: 'Ambient Light Sensor', zh: '環境光感測器',
+                        details: {
+                            roleEN: 'Ambient light sensor optimizing HMI backlighting brightness for efficiency and longevity.', roleZH: '環境亮度傳感器，依據晝夜光照度自適應動態調光，延長螢幕壽命並節約電量。',
+                            specsEN: ['Real-time measurement of surrounding ambient light levels (lux)', 'Provides high-precision inputs for automatic HMI backlighting scaling'],
+                            specsZH: ['實時量測換電站外圍環境的照度值（Lux）', '將數據輸入 HMI 調光模組，自適應動態調光'],
+                            intEN: 'Mounted transparently next to HMI bezel; connected to CCU via direct ADC or I2C.', intZH: '物理位置：安裝於 HMI 顯示螢幕保護鋼化玻璃內側邊角；連接於 CCU I2C。'
+                        }
+                    },
+                    { 
+                        id: 'C8', abbr: 'SCA', en: 'Slot Controller Array', zh: '槽位控制陣列',
+                        details: {
+                            roleEN: 'Multi-channel digital driver board controlling physical solenoids, LED indicators, and slot sensors.', roleZH: '多通道數位控制板，負責個別充電插槽的電磁鎖驅動、狀態指示燈控制及就位檢測。',
+                            specsEN: ['Maintains direct control of solenoid locking mechanisms across 12 slots', 'Drives bi-color LED status indicators (Red: Charging/Fault, Green: Swap Ready)', 'Per-slot sensor diagnostic feedback loop'],
+                            specsZH: ['驅動與控制 12 個插槽的物理電磁安全鉤鎖電磁閥', '控制槽口上方雙色高亮度 LED 指示燈（紅燈：充電中/故障；綠燈：可換電）', '具備插槽傳感器（微動開關與光電傳感器）的實時狀態反饋與自我診斷'],
+                            intEN: 'Bridges main CCU digital I/O lines to slot actuators, locking loops, and slot indicators.', intZH: '介面關係：一端連接 CCU 的主 GPIO 匯流排，另一端引出線束連接槽底電磁鎖與指示燈。'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'comm', icon: '📡', colorClass: 'border-comm', textColor: 'text-violet-500', 
+                nameEN: 'Communication & Cloud', nameZH: '通訊與雲端整合',
+                descEN: 'OCPP 2.1 battery swapping standard, MQTT encrypted telemetry, dual WAN paths, offline transaction capability, and mTLS', descZH: 'OCPP 2.1 換電標準、MQTT 加密遙測、雙網路備援、離線交易引擎及雙向憑證安全',
+                components: [
+                    { 
+                        id: 'K1', abbr: 'OCPP 2.1', en: 'Open Charge Point Protocol v2.1', zh: '開放充電點協議2.1版',
+                        details: {
+                            roleEN: 'Standardized application protocol governing transactions, grid services, and BSS fleet swaps.', roleZH: '全球充換電產業標準通訊協議，支援換電業務對接、V2G 調度及站體對外主要商務交易。',
+                            specsEN: ['OCPP 2.1 core implementation', 'Native extension models for battery swapping operations and reservation', 'V2G / DER grid-interactive frequency regulation standard'],
+                            specsZH: ['實作 OCPP 2.1 核心協議線路', '具備原生換電業務（Battery Swapping）擴展指令集', '整合電網虛擬電廠（V2G / DER）需求響應調度模型'],
+                            intEN: 'WebSocket application layer protocol over encrypted TLS; interfaces with JIO Cloud Backend.', intZH: '協議層：基於 WebSocket (WS/WSS) 安全傳輸協議；對接 Jio 雲端中央管理系統。'
+                        }
+                    },
+                    { 
+                        id: 'K2', abbr: 'MQTT', en: 'Message Queuing Telemetry Transport', zh: '訊息佇列遙測傳輸協議',
+                        details: {
+                            roleEN: 'High-speed publish-subscribe messaging network for millisecond BSS telemetry streaming.', roleZH: '輕量級發布/訂閱協議，專用於向 IoT 網關高頻上報 12 個槽位電池與整站的遙測數據。',
+                            specsEN: ['Pub/Sub standard over TLS 1.3 protocol', 'Supports QoS 0/1/2 settings for highly critical alert delivery', 'Low network bandwidth optimization'],
+                            specsZH: ['基於 TLS 1.3 的高安全發布/訂閱協議', '支援 QoS 0/1/2 消息質量設定，確保警報與故障必達', '專為無線 4G 弱網環境設計的超低流量優化'],
+                            intEN: 'Connected between BSS local core client and JIO Things IoT broker endpoint.', intZH: '介面關係：運行於 CCU 邊緣計算層；對接 Jio Things 雲端物聯網核心網關。'
+                        }
+                    },
+                    { 
+                        id: 'K3', abbr: '4G LTE', en: '4th Generation Long-Term Evolution', zh: '第四代行動通訊',
+                        details: {
+                            roleEN: 'Primary high-speed wireless WAN interface connecting BSS to Jio telecom services.', roleZH: '主網路連線管道，搭載印度 Jio 電信專網 SIM 卡，提供高速安全的廣域無線回傳。',
+                            specsEN: ['Primary WAN communication network', 'Supports India standard telecom bands B3, B5, B40', 'Integrated GPS/GNSS satellite module for BSS absolute geolocation'],
+                            specsZH: ['換電站主 WAN 無線網路通訊通道', '完全支持印度主流頻段：B3、B5 及 B40', '內置 GPS / GNSS 衛星天線晶片，提供絕對地理坐標'],
+                            intEN: 'Wired directly into CCU central processor board; external high-gain MIMO antenna mounted on cabinet.', intZH: '硬體連接：模組焊接於 CCU，高增益 4G 天線通過饋線引至機櫃外部。'
+                        }
+                    },
+                    { 
+                        id: 'K4', abbr: 'Wi-Fi', en: 'Wireless Fidelity (802.11ac)', zh: '無線區域網路',
+                        details: {
+                            roleEN: 'Secondary network link serving as local backup connection and local service diagnostics.', roleZH: '次要備援網路，或供維護工程師在現場用手機/平板無線登入以進行調試。',
+                            specsEN: ['2.4/5 GHz dual-band high-speed wireless LAN', 'Secondary backup network interface', 'Supports IEEE 802.11ac standards'],
+                            specsZH: ['2.4/5 GHz 雙頻段高速無線區域網', '具備主網斷線後的自動熱點熱切換備援網路功能', '支援 IEEE 802.11ac/a/b/g/n 工業通訊規格'],
+                            intEN: 'Connected through CCU onboard Wi-Fi chip; provides local GUI web-based service console.', intZH: '介面關係：由 CCU 內部無線芯片驅動，本地調試時提供安全的 WPA3 接入門戶。'
+                        }
+                    },
+                    { 
+                        id: 'K5', abbr: 'BLE 5.0', en: 'Bluetooth Low Energy 5.0', zh: '低功耗藍牙5.0',
+                        details: {
+                            roleEN: 'Short-range radio beacons used for smartphone discovery and local proximity authentication.', roleZH: '低功耗藍牙近端廣播與通訊，用於當用戶靠近時感應喚醒，並支援斷網下藍牙離線換電。',
+                            specsEN: ['Low-power Bluetooth proximity standard v5.0', 'Enables near-field automatic battery awakening', 'Backup communication interface for mobile user transaction auth'],
+                            specsZH: ['藍牙 5.0 低功耗無線標準規格', '支持手機靠近換電站時的近端自動感應與喚醒', '作為斷網（Offline）狀態下與用戶 App 進行數據交換的備援安全通道'],
+                            intEN: 'Connected to CCU host; establishes local short-range encrypted radio with customer phone.', intZH: '介面關係：通過藍牙空中接口與用戶手機 App 的藍牙模組建立加密會話。'
+                        }
+                    },
+                    { 
+                        id: 'K6', abbr: 'FOTA', en: 'Firmware Over-The-Air Update', zh: '空中韌體升級',
+                        details: {
+                            roleEN: 'High-safety remote update engine for automated firmware rollout across CCU and BMS boards.', roleZH: '空中遠端韌體更新系統，以高安全性防崩潰技術升級 CCU 系統和 BMS 充電策略。',
+                            specsEN: ['Secure updates using signed and encrypted update packages', 'A/B dual-partition memory safe layout', 'Automatic hardware watchdog rollback on failure to prevent bricking'],
+                            specsZH: ['升級包採用 RSA-2048 簽名與 AES-256 加密防篡改', '硬體分區: 採用 A/B 雙系統分區，保證升級中斷時原系統可用', '自我保護: 內建看門狗，升級失敗或引導失敗時自動回退（Rollback）'],
+                            intEN: 'Downloads secure firmware from Jio Cloud; updates internal sub-controllers over CAN.', intZH: '介面關係：自 Jio 雲端 FOTA 平台下載；內部經由 CAN 總線向整流器與 BMS 推送升級。'
+                        }
+                    },
+                    { 
+                        id: 'K7', abbr: 'OTE', en: 'Offline Transaction Engine', zh: '離線交易引擎',
+                        details: {
+                            roleEN: 'Local fail-safe billing engine executing trades without active internet connection.', roleZH: '本地斷網應急處理引擎，在電信基站故障斷網時，允許用戶刷卡或掃碼進行離線換電。',
+                            specsEN: ['Allows offline transaction processing via local NFC cards or offline QR codes', 'Maintains secure offline transaction storage database on CCU flash', 'Executes automatic synchronization upon WAN reconnection'],
+                            specsZH: ['支援本地離線交易，利用預付卡或離線 QR 碼完成換電驗證', '在 CCU 本地安全加密存儲區（SQLite Encrypted）記錄離線流水帳', '當 4G 網路恢復後，自動啟動隊列同步機制將數據上報雲端'],
+                            intEN: 'Implemented locally within BSS Core system; coordinates NFC Reader and SCA slot control.', intZH: '內部關係：運行於 CCU 邊緣計算層；連動讀卡器(C3)、槽位控制器(C8)進行無網解鎖。'
+                        }
+                    },
+                    { 
+                        id: 'K8', abbr: 'CAPIF', en: 'Common API Framework', zh: '通用API框架',
+                        details: {
+                            roleEN: 'Unified TM Forum API framework for integration with JioThings IoT gateway and enterprise backend.', roleZH: '電信級標準 API 網關框架，用於換電站系統與 JioThings 平台及企業 B2B 管理平台的對接。',
+                            specsEN: ['Fully TM Forum compliant RESTful API gateway structure', 'Standardized interface layer dedicated to JioThings system integration', 'Enables unified enterprise fleet management APIs'],
+                            specsZH: ['完全符合 TM Forum 規範的 RESTful 架構 API 接口', '專為與 JioThings 物聯網大數據平台對接設計的標準數據框架', '提供企業租賃客戶、車隊管理系統的 API 呼叫對接'],
+                            intEN: 'Exposes secure endpoints on JIO Cloud; processes REST API requests between Jio and Foxlink BSS.', intZH: '介面關係：主要作為雲對雲（Cloud-to-Cloud）企業業務邏輯的統一安全訪問接口。'
+                        }
+                    },
+                    { 
+                        id: 'K9', abbr: 'mTLS', en: 'Mutual Transport Layer Security', zh: '雙向傳輸層安全',
+                        details: {
+                            roleEN: 'Compulsory cryptographic protocol providing bidirectional verification for cloud communications.', roleZH: '強制性雙向加密通訊協議，驗證站端證書與雲端證書，徹底防範中間人偽造與監聽。',
+                            specsEN: ['Mutual certificate authentication for all active communication channels', 'Cryptographic defense securing WAN endpoints against spoofing'],
+                            specsZH: ['整站通訊（MQTT, HTTPS, WebSocket）皆強制執行雙向數字證書驗證', '提供電信級金融安全防護，杜絕虛假換電站防範站端數據偽造'],
+                            intEN: 'Applied to OCPP (WebSocket/TLS) and MQTT telemetry network transport layers on CCU.', intZH: '介面關係：底層網卡驅動與雲端連接時自動握手校驗，對上層應用協議完全透明。'
+                        }
+                    }
+                ]
+            },
+            {
+                id: 'safety', icon: '🛡️', colorClass: 'border-safety', textColor: 'text-red-500', 
+                nameEN: 'Safety & Compliance', nameZH: '安全與法規',
+                descEN: 'AIS-156 EV regulations, thermal runaway active mitigation, hardwired E-Stop, anti-islanding ATS, pressure valves, high-voltage interlocks, and compliance matrices', descZH: '印度 AIS-156 充電規範、熱失控主動抑制、硬體級急停鏈路、防島效應、防爆壓力閥、高壓互鎖及完整認證矩陣',
+                components: [
+                    { 
+                        id: 'S1', abbr: 'AIS-156', en: 'Automotive Industry Standard 156', zh: '印度汽車工業標準156',
+                        details: {
+                            roleEN: 'Mandatory Indian EV safety regulation requiring certified battery smart control and tracking.', roleZH: '印度政府對電動兩輪車電池包的最上位強制性法規安全認證標準。',
+                            specsEN: ['Mandatory compliance standard for EV battery pack systems in India', 'Requires intelligent BMS, continuous onboard data logs, and RFID tracking', 'Demands compliance under certified battery cell thermal runaway safety tests'],
+                            specsZH: ['印度電動車電池系統最高級別強制合規性標準', '規定必須搭載智慧型 BMS、本地數據日誌儲存及 RFID 追溯晶片', '規定電池包必須通過擠壓、針刺、高溫等防熱失控蔓延的安全測試'],
+                            intEN: 'The core design standard enforced across BMS, Battery pack cells, and Cabinet frames.', intZH: '架構約束：作為 BMS 軟硬體設計、熱管理及主體結構安全的最高指導設計基準。'
+                        }
+                    },
+                    { 
+                        id: 'S2', abbr: 'TRP', en: 'Thermal Runaway Protection', zh: '熱失控防護',
+                        details: {
+                            roleEN: 'Millisecond-level safety system stopping thermal propagation through automated cell isolation.', roleZH: '毫秒級熱失控主動安全抑制系統，防止單顆電芯熱失控演變為整包起火。',
+                            specsEN: ['Millisecond-level high-speed temperature sensing loop', 'Triggers automatic charger shutdown when temperature > 60°C', 'Controls active high-velocity ventilation and exhaust system for gas purging'],
+                            specsZH: ['提供毫秒級的電芯溫度採樣與突升率安全檢測', '當任一電芯溫度高於 60°C 或突升率異常時，立刻通訊斷電並切斷充電迴路', '自動開啟插槽底部的高排風量防爆強制風扇進行熱量與有害氣體排除'],
+                            intEN: 'Linked through BMS NTC sensors; commands HVAC fans; registers high-priority interrupts to CCU.', intZH: '介面關係：由 BMS 熱傳感器檢測，連動 HVAC 空調，同時向 CCU 發出最高優先級中斷。'
+                        }
+                    },
+                    { 
+                        id: 'S3', abbr: 'E-Stop', en: 'Emergency Stop System', zh: '緊急停機系統',
+                        details: {
+                            roleEN: 'Independent safety bypass immediately killing BSS power upon human or software trigger.', roleZH: '實體硬接線急停系統，在火災或人員觸電時，一鍵斷開整站交流與直流高壓供電。',
+                            specsEN: ['Features highly visible physical red mushroom-head button', 'Includes web-based software remote E-Stop command capability', 'Wired directly as hardware-level priority interrupt to isolate all high-voltage loops'],
+                            specsZH: ['配置機櫃外部高能見度物理紅色磨菇頭機械急停按鈕', '整合雲端後台遠端軟體 API 一鍵指令式緊急停機功能', '硬接線：直接以物理繼電器斷開配電單元及電池直流側的接觸器，不依賴軟體'],
+                            intEN: 'Wired directly to PDU input breakers (MCCB) and PCS battery main loop relays.', intZH: '硬體連接：以安全繼電器硬拉線方式直連至配電斷路器與槽位主直流接觸器。'
+                        }
+                    },
+                    { 
+                        id: 'S4', abbr: 'Anti-Island', en: 'Anti-Islanding Protection', zh: '防島效應保護',
+                        details: {
+                            roleEN: 'Grid-tied safety device preventing power back-feed into utility line during public outages.', roleZH: '安全防護機制，防止換電站在外部電網停電時，反向將電池能量倒送回公共電網。',
+                            specsEN: ['Ensures the station immediately disconnects V2G back-feed during public blackout', 'Provides safety for public grid utility line technicians'],
+                            specsZH: ['當偵測到市電停電時，即時在微秒內切斷 PCS 的反向併網倒送電迴路', '保證外部公用電網線路停電維修人員的實體生命安全'],
+                            intEN: 'Integrated in the main ATS switching logic and PCS grid-tied inverter safety firmware.', intZH: '控制鏈路：直接整合於 ATS 自動切換開關控制晶片及 PCS 雙向變流器的併網控制韌體。'
+                        }
+                    },
+                    { 
+                        id: 'S5', abbr: 'PRV', en: 'Pressure Relief Valve', zh: '壓力釋放閥',
+                        details: {
+                            roleEN: 'Mechanical safety exhaust valve preventing pressure accumulation and explosive casing failure.', roleZH: '安裝於電池包金屬外殼上的機械式安全防爆氣閥，防止內部積壓氣體引發物理爆炸。',
+                            specsEN: ['Releases accumulated internal gas pressure during battery thermal anomalies', 'Prevents physical explosion of the high-durability battery pack enclosure', 'Maintains structural safety and cell gas containment during normal cycles'],
+                            specsZH: ['當電芯異常產生氣體膨脹時，達到設定壓強自動開啟進行排氣泄壓', '防止高強度密封電池包金屬外殼因氣壓聚積產生劇烈物理爆炸', '常態下保持高密封防水防潮，單向洩壓功能'],
+                            intEN: 'Physical mechanical safety valve mounted directly on each battery pack outer casing.', intZH: '實體配置：螺接安裝於每個電池包密封鋁合金殼體側壁上的單向機械釋壓元件。'
+                        }
+                    },
+                    { 
+                        id: 'S6', abbr: 'HVIL', en: 'High-Voltage Interlock Loop', zh: '高壓互鎖迴路',
+                        details: {
+                            roleEN: 'Continuous safety feedback loop monitoring high-voltage terminals to eliminate arcing and electric shock.', roleZH: '低壓安全檢測迴路，實時監測所有高壓插接件的物理插接完整性，預防帶電插拔引發電弧。',
+                            specsEN: ['Real-time electrical continuity check for all high-voltage cabling paths', 'Instantly isolates power system outputs if any connector starts decoupling', 'Standard shock prevention and anti-arcing mechanism'],
+                            specsZH: ['通過低壓信號迴路實時串聯檢測整站所有高壓電纜、盲插接頭的接觸完整性', '在盲插接頭（M2）剛發生鬆脫、高壓尚未分離的微秒內，即刻通訊斷開高壓電源', '防護帶電插拔（Anti-arcing）與高壓觸電事故'],
+                            intEN: 'Passes through slot Amphenol connector interlock pins; connects directly to safety logic board.', intZH: '硬體介面：低壓檢測引腳整合於盲插連接器(M2)，迴路串接至 CCU 安全中斷輸入端。'
+                        }
+                    },
+                    { 
+                        id: 'S7', abbr: 'Data Log', en: 'Regulatory Data Logging', zh: '法規數據記錄',
+                        details: {
+                            roleEN: 'Tamper-proof black-box log recording BSS charging telemetry and faults for regulatory audit.', roleZH: '符合印度 AIS-156 法規要求的本地安全「黑匣子」日誌，記錄換電運行軌跡與關鍵數據。',
+                            specsEN: ['AIS-156 mandated tamper-proof local log storage', 'Records complete records of charging parameters, connector cycles, and fault events', 'Maintains chronological diagnostic audit trails in secure hardware Flash'],
+                            specsZH: ['印度 AIS-156 法規規定的本地防篡改安全日誌記錄系統', '記錄所有充電曲線、插拔次數、過溫過流事件及所有異常安全故障代碼', '採用防擦寫的硬體 Flash 分區進行時間戳記存儲，供政府主管機關稽核'],
+                            intEN: 'Written to CCU internal non-volatile EEPROM/Flash; auto-synchronized with JIO Cloud database.', intZH: '數據接口：由 CCU 安全內核模組直接寫入硬體 Flash；通訊上定時備份至 Jio 雲端。'
+                        }
+                    },
+                    { 
+                        id: 'S8', abbr: 'Cert Matrix', en: 'Certification Matrix', zh: '認證矩陣',
+                        details: {
+                            roleEN: 'Comprehensive compliance matrix validating all international and Indian regulatory certifications.', roleZH: '換電站商用運營必須完全通過的國際與印度本地法規及安全認證矩陣。',
+                            specsEN: ['Baseline compliance required: UN38.3 (battery transport safety standard)', 'Mandatory India standards: AIS-156, ARAI certified compliance certificate', 'Industrial electrical standards: IEC 61000 (EMC), IEC 60529 (IP Ratings), ISO 9001:2015'],
+                            specsZH: ['電池運輸標準: 通過國際 UN38.3 電池安全空運陸運標準', '印度強制認證: 通過最新 AIS-156 第二階段整機與電池安全認證', '工業合規體系: 符合 IEC 61000 (電磁相容), IEC 60529 (IP防護) 及 ISO 9001 品質管理'],
+                            intEN: 'The absolute document baseline audited prior to BSS grid commissioning and Jio acceptance.', intZH: '商用驗收：作為整站進駐印度商用現場以及 JioThings 系統接入的最上位准入依據。'
+                        }
+                    }
+                ]
+            }
+        ];
+
+        // Component Detail HTML Builder
+        function getComponentHTML(comp, modTextColor) {
+            let specListEN = comp.details.specsEN.map(s => `<li>${s}</li>`).join('');
+            let specListZH = comp.details.specsZH.map(s => `<li>${s}</li>`).join('');
+            
+            return `
+                <details class="bg-gray-950/40 rounded-xl mb-2.5 border border-gray-800/80 group transition-all duration-200 hover:border-gray-700/80">
+                    <summary class="p-3.5 font-semibold text-sm hover:bg-gray-800/40 flex justify-between items-center outline-none select-none">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-gray-950/80 text-xs px-2.5 py-1 rounded-md font-mono ${modTextColor} border border-gray-850 font-bold tracking-wider">${comp.id}</span>
+                            <span class="bg-gray-900/60 text-xs px-2 py-0.5 rounded font-mono text-gray-400 border border-gray-800/30">${comp.abbr}</span>
+                            <div>
+                                <span class="block text-gray-200" data-lang="en">${comp.en}</span>
+                                <span class="block text-gray-200" data-lang="zh">${comp.zh}</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-600 text-xs transition-transform group-open:rotate-180 ml-2"></i>
+                    </summary>
+                    <div class="p-4 border-t border-gray-800/60 text-xs md:text-sm bg-gray-950/20 space-y-4">
+                        <div data-lang="en" class="space-y-3">
+                            <div><strong class="text-white font-medium"><i class="fas fa-bullseye text-blue-500 w-4 text-center mr-2"></i>Architecture Role:</strong> <span class="text-gray-400 ml-1">${comp.details.roleEN}</span></div>
+                            <div><strong class="text-white font-medium"><i class="fas fa-sliders-h text-amber-500 w-4 text-center mr-2"></i>Key Specifications:</strong>
+                                <ul class="list-disc list-outside text-gray-400 ml-6 mt-1.5 space-y-1.5">${specListEN}</ul>
+                            </div>
+                            <div><strong class="text-white font-medium"><i class="fas fa-link text-emerald-500 w-4 text-center mr-2"></i>Interfaces & Dependencies:</strong> <span class="text-gray-400 ml-1">${comp.details.intEN}</span></div>
+                        </div>
+                        <div data-lang="zh" class="space-y-3">
+                            <div><strong class="text-white font-medium"><i class="fas fa-bullseye text-blue-500 w-4 text-center mr-2"></i>架構角色:</strong> <span class="text-gray-400 ml-1">${comp.details.roleZH}</span></div>
+                            <div><strong class="text-white font-medium"><i class="fas fa-sliders-h text-amber-500 w-4 text-center mr-2"></i>關鍵規格:</strong>
+                                <ul class="list-disc list-outside text-gray-400 ml-6 mt-1.5 space-y-1.5">${specListZH}</ul>
+                            </div>
+                            <div><strong class="text-white font-medium"><i class="fas fa-link text-emerald-500 w-4 text-center mr-2"></i>介面與依賴:</strong> <span class="text-gray-400 ml-1">${comp.details.intZH}</span></div>
+                        </div>
+                    </div>
+                </details>
+            `;
+        }
+
+        // Generator Functions
+        function generateUI() {
+            const mobileL1 = document.getElementById('mobile-l1');
+            const modulesContainer = document.getElementById('modules-container');
+            
+            // Clear prior states
+            mobileL1.innerHTML = '';
+            modulesContainer.innerHTML = '';
+
+            JIO_BSS_DATA.forEach(mod => {
+                // 1. Mobile L1 Interactive Cards (Fallback for mobile screens)
+                mobileL1.innerHTML += `
+                    <div onclick="openModal('${mod.id}')" class="cursor-pointer block bg-gray-900/50 p-4 rounded-xl border border-gray-800 ${mod.colorClass} shadow hover:bg-gray-800/40 transition-all duration-200">
+                        <div class="flex items-center">
+                            <span class="text-3xl mr-4 filter drop-shadow-md">${mod.icon}</span>
+                            <div>
+                                <h3 class="font-bold text-white"><span data-lang="en">${mod.nameEN}</span><span data-lang="zh">${mod.nameZH}</span></h3>
+                                <p class="text-xs text-gray-400 mt-1"><span data-lang="en">${mod.descEN}</span><span data-lang="zh">${mod.descZH}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // 2. L2 Modules Detail (Expandable structure on Screen, forced visible for Print)
+                let compHtml = '';
+                mod.components.forEach(comp => {
+                    compHtml += getComponentHTML(comp, mod.textColor);
+                });
+
+                modulesContainer.innerHTML += `
+                    <div class="recon-box ${mod.colorClass}">
+                        <h3 class="text-lg md:text-xl font-extrabold text-white mb-2 flex items-center">
+                            <span class="mr-2.5">${mod.icon}</span> 
+                            <span data-lang="en">${mod.nameEN}</span><span data-lang="zh">${mod.nameZH}</span>
+                        </h3>
+                        <p class="text-xs md:text-sm text-gray-400 mb-5 pb-4 border-b border-gray-800/80"><span data-lang="en">${mod.descEN}</span><span data-lang="zh">${mod.descZH}</span></p>
+                        <div class="components-list">
+                            ${compHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            // 3. Render Glossary Table
+            renderGlossaryTable();
+        }
+
+        // Glossary Dynamic Table Rendering
+        function renderGlossaryTable() {
+            const glossaryBody = document.getElementById('glossary-body');
+            glossaryBody.innerHTML = '';
+            
+            JIO_BSS_DATA.forEach(mod => {
+                mod.components.forEach(comp => {
+                    glossaryBody.innerHTML += `
+                        <tr class="glossary-row" data-module="${mod.id}" data-searchable="${comp.id.toLowerCase()} ${comp.abbr.toLowerCase()} ${comp.en.toLowerCase()} ${comp.zh.toLowerCase()} ${comp.details.roleEN.toLowerCase()}">
+                            <td class="p-3 font-mono font-extrabold text-white text-sm">
+                                <span class="bg-gray-950 border border-gray-800/80 px-2 py-1 rounded-md ${mod.textColor}">${comp.id}</span>
+                            </td>
+                            <td class="p-3 font-mono font-bold text-gray-300 text-sm">${comp.abbr}</td>
+                            <td class="p-3">
+                                <span class="block text-white font-medium" data-lang="en">${comp.en}</span>
+                                <span class="block text-white font-medium" data-lang="zh">${comp.zh}</span>
+                                <span class="block text-xs text-gray-500 mt-1" data-lang="en">${comp.details.roleEN}</span>
+                                <span class="block text-xs text-gray-500 mt-1" data-lang="zh">${comp.details.roleZH}</span>
+                            </td>
+                            <td class="p-3 text-right text-gray-400 text-xs font-semibold whitespace-nowrap">
+                                <span class="bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-md">
+                                    <span data-lang="en">${mod.nameEN}</span><span data-lang="zh">${mod.nameZH}</span>
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                });
+            });
+        }
+
+        // Interactive Filtering & Search Logic for Glossary
+        function filterGlossary() {
+            const searchQuery = document.getElementById('glossary-search').value.toLowerCase().trim();
+            const moduleFilter = document.getElementById('glossary-filter').value;
+            const rows = document.querySelectorAll('.glossary-row');
+            const noResults = document.getElementById('no-results');
+            
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const rowSearchData = row.getAttribute('data-searchable');
+                const rowModule = row.getAttribute('data-module');
+                
+                const matchesSearch = rowSearchData.includes(searchQuery);
+                const matchesModule = (moduleFilter === 'all' || rowModule === moduleFilter);
+                
+                if (matchesSearch && matchesModule) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Modal Control Logic
+        function openModal(modId) {
+            const mod = JIO_BSS_DATA.find(m => m.id === modId);
+            if (!mod) return;
+            
+            let compHtml = '';
+            mod.components.forEach(comp => {
+                compHtml += getComponentHTML(comp, mod.textColor);
+            });
+
+            document.getElementById('modal-content').innerHTML = `
+                <div class="${mod.colorClass} pl-4 border-l-4 mb-6 mt-2">
+                    <h3 class="text-2xl font-black text-white mb-2 flex items-center">
+                        <span class="mr-2.5">${mod.icon}</span> 
+                        <span data-lang="en">${mod.nameEN}</span><span data-lang="zh">${mod.nameZH}</span>
+                    </h3>
+                    <p class="text-sm text-gray-400"><span data-lang="en">${mod.descEN}</span><span data-lang="zh">${mod.descZH}</span></p>
+                </div>
+                <div class="components-list pr-1 max-h-[55vh] overflow-y-auto space-y-2">
+                    ${compHtml}
+                </div>
+            `;
+
+            const modal = document.getElementById('module-modal');
+            const panel = document.getElementById('modal-panel');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                panel.classList.remove('scale-95');
+            }, 10);
+        }
+
+        // Close Modal
+        function closeModal() {
+            const modal = document.getElementById('module-modal');
+            const panel = document.getElementById('modal-panel');
+            modal.classList.add('opacity-0');
+            panel.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close modal on clicking outside card
+        document.getElementById('module-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Language State Management
+        let currentLang = 'en';
+
+        function updateLanguageUI() {
+            try {
+                document.body.classList.remove('lang-en', 'lang-zh');
+                document.body.classList.add(`lang-${currentLang}`);
+                
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+
+                // Dynamically switch option translations inside glossary-filter dropdown
+                const filterSelect = document.getElementById('glossary-filter');
+                if (filterSelect) {
+                    filterSelect.querySelectorAll('option').forEach(opt => {
+                        const enText = opt.getAttribute('data-en');
+                        const zhText = opt.getAttribute('data-zh');
+                        if (enText && zhText) {
+                            opt.textContent = currentLang === 'en' ? enText : zhText;
+                        }
+                    });
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        // DOM Initializer
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generate basic arrays
+            generateUI();
+            // Sync initial language options
+            updateLanguageUI();
+
+            // Glossary Real-time Inputs
+            document.getElementById('glossary-search').addEventListener('input', filterGlossary);
+            document.getElementById('glossary-filter').addEventListener('change', filterGlossary);
+
+            // Language Toggle Switch
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            // PDF Print Operations
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => {
+                // Expand all summaries in printed layout for detailed documentation view
+                document.querySelectorAll('#modules-container details').forEach(d => d.setAttribute('open', ''));
+                window.print();
+            });
+
+            // Authentication & Login Control
+            const pwdInput = document.getElementById('pwd-input');
+            const loginBtn = document.getElementById('login-btn');
+            const rememberCb = document.getElementById('remember-cb');
+            const loginGate = document.getElementById('login-gate');
+            const loginCard = document.querySelector('.login-card');
+            const appContent = document.getElementById('app-content');
+            const errorMsg = document.getElementById('login-error');
+
+            const targetPwd = 'JioBSS2026';
+
+            function showApp() {
+                // Fadeout Gate
+                loginGate.style.opacity = '0';
+                setTimeout(() => {
+                    loginGate.style.display = 'none';
+                    appContent.classList.remove('hidden');
+                }, 500);
+            }
+
+            // Auto Auth token check
+            if (localStorage.getItem('jio_bss_auth') === 'true') {
+                showApp();
+            }
+
+            function attemptLogin() {
+                if (pwdInput.value === targetPwd) {
+                    if (rememberCb.checked) {
+                        localStorage.setItem('jio_bss_auth', 'true');
+                    }
+                    showApp();
+                } else {
+                    errorMsg.classList.remove('hidden');
+                    // Shake UI feedback trigger
+                    loginCard.classList.add('shake-effect');
+                    pwdInput.value = '';
+                    pwdInput.focus();
+                    setTimeout(() => {
+                        loginCard.classList.remove('shake-effect');
+                    }, 400);
+                }
+            }
+
+            loginBtn.addEventListener('click', attemptLogin);
+            pwdInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') attemptLogin(); });
+        });
+    </script>
+</body>
+</html>

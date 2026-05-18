@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-05-16T03:42:07.455Z",
+  "lastUpdated": "2026-05-18T08:49:25.482Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1184,6 +1184,19 @@
       "fileName": "report-1778902926736.html",
       "createdAt": "2026-05-16T03:42:07.455Z",
       "updatedAt": "2026-05-16T03:42:07.455Z"
+    },
+    {
+      "id": "report-1779094163890",
+      "title": "Jio BSS Architecture",
+      "description": "Jio換電站架構圖",
+      "categories": [
+        "內部簡報",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1779094163890.html",
+      "createdAt": "2026-05-18T08:49:25.482Z",
+      "updatedAt": "2026-05-18T08:49:25.482Z"
     }
   ]
 }
