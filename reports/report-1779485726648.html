@@ -1,0 +1,1547 @@
+<!--
+========================================================================
+檔案路徑: /fx_risk_simulator.html
+所屬模組: 匯率風險模擬平台 (FX Risk Simulator Portal)
+核心職責: 提供主合約編輯、供應商防護與客戶雙贏的多視角互動界面，模擬四分批提貨與帳期滾動結算機制下對稱匯率走廊與 MOOWR 現金流釋放的商業價值。
+如何調用 (示例): 直接於瀏覽器中開啟該 HTML 文件。
+主要輸入: 基準匯率 E0、各批次進口匯率 E_import_i、各批次結算匯率 E_settle_i、信用帳期 T_credit、BOM 占比、物料與本地成本、目標毛利率、MOOWR 切換開關。
+主要輸出: 滾動綜合利潤對比、Value Rescued 金額、MOOWR 滾動利息節省、隱性中斷風險成本分析。
+架構約束: 單網頁 HTML 結構，CSS 樣式內嵌，無外部資料庫依賴，全繁體中文介面，符合 Sleek Dark Mode 規範。
+修訂歷史: 
+  - 2026-05-22: 由 Antigravity 建立初始版本。
+  - 2026-05-22: 根據帳期商業實務，升級為三階段匯率與信用帳期模型。
+  - 2026-05-22: 升級為分批提貨與帳期滾動結算版本，包含4分批獨立模擬與比例聯動。
+  - 2026-05-22: 修復 JavaScript 語法與聯動邏輯，完成雙向同步與四分批滾動帳期結算引擎。
+  - 2026-05-22: 清理底部殘留的冗餘 JavaScript 代碼區塊，徹底消除 ReferenceError。
+========================================================================
+-->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-XLSX 匯率風險與供應鏈防護模擬平台</title>
+    
+    <!-- 載入 Google Fonts: UI 用 Outfit, 合約用 Playfair Display (Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 載入 TailwindCSS & FontAwesome 圖標 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                    },
+                    colors: {
+                        space: {
+                            950: '#070a13',
+                            900: '#0b1120',
+                            800: '#151d30',
+                            700: '#1f2b44',
+                        },
+                        guard: {
+                            500: '#f59e0b', /* 金銅色 */
+                            600: '#d97706',
+                        },
+                        release: {
+                            500: '#10b981', /* 翠綠色 */
+                            600: '#059669',
+                        },
+                        safe: {
+                            500: '#06b6d4', /* 青色/松石綠 */
+                            600: '#0891b2',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* 玻璃擬態與精緻發光 CSS */
+        body {
+            background-color: #070a13;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(245, 158, 11, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 10%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* 仿實體合約書樣式 */
+        .contract-paper {
+            background-color: #fbf9f4;
+            color: #2c251e;
+            box-shadow: 0 15px 50px -10px rgba(0, 0, 0, 0.65);
+            border-top: 5px solid #d97706;
+            background-image: 
+                linear-gradient(rgba(220, 215, 200, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(220, 215, 200, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* 合約書內嵌輸入框 */
+        .inline-input {
+            background: transparent;
+            border-bottom: 2px dashed #d97706;
+            color: #1e1b18;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+            padding: 0 4px;
+        }
+        .inline-input:focus {
+            outline: none;
+            border-bottom-style: solid;
+            border-bottom-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.08);
+            color: #000;
+        }
+
+        /* 自定義滑動條 (Range Slider) */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 999px;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+        .slider-import::-webkit-slider-thumb {
+            background: #06b6d4;
+            box-shadow: 0 0 10px #06b6d4;
+        }
+        .slider-import::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px #06b6d4, 0 0 25px rgba(6, 182, 212, 0.5);
+        }
+        .slider-settle::-webkit-slider-thumb {
+            background: #f59e0b;
+            box-shadow: 0 0 10px #f59e0b;
+        }
+        .slider-settle::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px #f59e0b, 0 0 25px rgba(245, 158, 11, 0.5);
+        }
+
+        /* 視角切換動畫 */
+        .view-pane {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .view-pane.hidden {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        /* 金色發光文字 */
+        .glow-gold {
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+        }
+        .glow-green {
+            text-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+        }
+        .glow-cyan {
+            text-shadow: 0 0 12px rgba(6, 182, 212, 0.6);
+        }
+        .glow-red {
+            text-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+        }
+        
+        /* 霓虹發光切換開關 */
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #10b981;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="text-slate-200 font-sans min-h-screen pb-16">
+
+    <!-- 🌐 全球頂部導航列 -->
+    <header class="w-full py-5 px-6 md:px-12 flex justify-between items-center border-b border-white/5 bg-space-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-guard-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                <i class="fa-solid fa-calculator text-white text-lg"></i>
+            </div>
+            <div>
+                <span class="font-bold text-lg tracking-wider text-white">AI-XLSX 智能表格</span>
+                <span class="text-xs block text-slate-400 font-medium tracking-widest uppercase">匯率風險與供應鏈防護模擬平台</span>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center space-x-6 text-sm text-slate-400">
+            <span class="hover:text-white transition cursor-pointer"><i class="fa-solid fa-book-open mr-1.5"></i> 3階段匯率/帳期升級版</span>
+            <span class="text-white bg-slate-800/60 px-3 py-1.5 rounded-lg border border-white/5"><i class="fa-solid fa-shield-halved mr-1.5 text-guard-500"></i> DTA 雙軌綜合方案</span>
+        </div>
+    </header>
+
+    <!-- 🎯 全局內容容器 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- ⚙️ 頂部視角切換器 (Segmented Control) -->
+        <div class="w-full max-w-2xl mx-auto mb-10 p-1.5 rounded-2xl bg-space-900 border border-white/5 shadow-2xl flex relative">
+            <button onclick="switchTab('settings')" id="btn-tab-settings" class="flex-1 py-3.5 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 flex items-center justify-center space-x-2 z-10 text-white bg-gradient-to-r from-indigo-600 to-indigo-500 shadow-lg shadow-indigo-600/20">
+                <i class="fa-solid fa-file-signature text-base"></i>
+                <span>合約設定與模擬</span>
+            </button>
+            <button onclick="switchTab('supplier')" id="btn-tab-supplier" class="flex-1 py-3.5 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 flex items-center justify-center space-x-2 z-10 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-industry text-base"></i>
+                <span>供應商防護視角</span>
+            </button>
+            <button onclick="switchTab('client')" id="btn-tab-client" class="flex-1 py-3.5 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 flex items-center justify-center space-x-2 z-10 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-briefcase text-base"></i>
+                <span>品牌客戶雙贏視角</span>
+            </button>
+        </div>
+
+        <!-- 🤝 第一大部分：參數輸入與合約設定主頁 -->
+        <div id="pane-settings" class="view-pane grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- 📄 左半部：互動式商務合約書 -->
+            <div class="lg:col-span-7 contract-paper rounded-2xl p-6 sm:p-10 relative overflow-hidden transition-all duration-300">
+                <!-- 印章/浮水印 -->
+                <div class="absolute -right-8 -top-8 w-44 h-44 rounded-full border-4 border-amber-800/10 flex items-center justify-center rotate-12 select-none pointer-events-none">
+                    <span class="font-serif font-bold text-amber-800/15 text-sm tracking-widest text-center">AI-XLSX<br>STANDARD<br>AGREEMENT</span>
+                </div>
+                
+                <div class="flex justify-between items-start border-b border-amber-900/10 pb-4 mb-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-amber-800/60 font-semibold font-serif">Master Service Agreement (MSA)</span>
+                        <h2 class="font-serif font-bold text-2xl text-amber-900 leading-tight">標準服務商業協議書</h2>
+                    </div>
+                    <span class="text-xs text-amber-800/40 font-mono">DOC-ID: MSA-IN-2026-V4</span>
+                </div>
+
+                <!-- 合約正文內容 -->
+                <div class="font-serif text-sm leading-relaxed text-amber-900/90 space-y-5 text-justify">
+                    <p class="indent-6 font-semibold">
+                        本協議由買方 **品牌客戶 D (以下簡稱甲方)** 與賣方 **印度代工製造商 (以下簡稱乙方)** 於 2026 年共同締結，針對雙方於印度境內國內關稅區 (DTA) 之產品製造與供應，達成以下外匯風險管理條款：
+                    </p>
+                    
+                    <div class="border-l-2 border-amber-700/20 pl-4 py-1 my-3 bg-amber-50/50 rounded-r-lg">
+                        <p class="font-bold text-amber-900">【第 8.1 條：基準計價公式與成本結構】</p>
+                        <p class="mt-1">
+                            雙方同意以簽署合約當日之印度儲備銀行 (RBI) 官方參考匯率作為基準匯率，設定為 1 美元 = 
+                            <input type="number" id="c-E0" class="inline-input w-16" value="83.00" onchange="syncInput(this)"> 盧比 (INR)。本合約單件總製造成本包含：美元進口材料成本 
+                            <input type="number" id="c-P_usd" class="inline-input w-14" value="10.00" onchange="syncInput(this)"> 美元 (USD)，以及印度境內本地製造成本 (包含當地勞工薪資、廠房租金及折舊管銷等，不受美元匯率影響) 
+                            <input type="number" id="c-C_local" class="inline-input w-16" value="166.00" onchange="syncInput(this)"> 盧比 (INR)。
+                        </p>
+                    </div>
+
+                    <div class="border-l-2 border-amber-700/20 pl-4 py-1 my-3 bg-amber-50/50 rounded-r-lg">
+                        <p class="font-bold text-amber-900">【第 8.2 條：進口美元材料占比權重】</p>
+                        <p class="mt-1">
+                            雙方確認並同意，僅針對受美元直接影響之進口物料部分引入動態匯率調整公式。雙方依據前條數據算定進口材料在初始總成本中之基準材料權重係數為 
+                            <span id="c-W_material_show" class="font-bold text-amber-950 underline">83.3%</span>，此比例將作為後續發票價格動態調算之唯一加權基準。
+                        </p>
+                    </div>
+
+                    <div class="border-l-2 border-amber-700/20 pl-4 py-1 my-3 bg-amber-50/50 rounded-r-lg">
+                        <p class="font-bold text-amber-900">【第 8.3 條：對稱型動態匯率走廊機制】</p>
+                        <p class="mt-1">
+                            為防範匯率劇烈波動而損及任何一方權益，雙方同意設定正負 
+                            <input type="number" id="c-deadband" class="inline-input w-12" value="3" onchange="syncInput(this)"> % 作為免責死區 (Deadband/Corridor)。
+                        </p>
+                        <ul class="list-disc list-inside mt-2 space-y-1 pl-2">
+                            <li>當實際結算匯率波動在此免責死區內時，結算單價維持不變，由甲乙雙方各自在內部吸收成本變動。</li>
+                            <li>一旦實際**最終收款結算匯率**偏離基準匯率幅度**突破免責死區**時，雙方應自動啟動動態調整公式。若結算盧比貶值超過死區，甲方同意補償超出部分之材料成本；反之，若結算盧比升值，乙方同意將材料成本下降紅利 100% 扣除並回饋給甲方，確保商業對等原則。</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-2 border-amber-700/20 pl-4 py-1 my-3 bg-amber-50/50 rounded-r-lg">
+                        <p class="font-bold text-amber-900">【第 9.1 條：總量規模與目標毛利率】</p>
+                        <p class="mt-1">
+                            本專案初始約定訂單總總量為 
+                            <input type="number" id="c-Q" class="inline-input w-24" value="100000" onchange="syncInput(this)"> 件，乙方預期目標專案毛利率設定為 
+                            <input type="number" id="c-M_target" class="inline-input w-12" value="15" onchange="syncInput(this)"> %，據此以成本加成反推合約原始單價。
+                        </p>
+                    </div>
+
+                    <!-- 🔔 新增：信用帳期條款 -->
+                    <div class="border-l-2 border-amber-700/25 pl-4 py-1.5 my-3 bg-amber-100/30 rounded-r-lg">
+                        <p class="font-bold text-amber-950"><i class="fa-regular fa-clock mr-1 text-amber-700"></i>【第 9.2 條：分批交貨與滾動月結條款】</p>
+                        <p class="mt-1">
+                            買賣雙方約定，本合約總訂單量 100,000 件將採 **分批提貨、滾動月結** 模式進行，預計分為 4 個批次（每批次 25,000 件）按月交貨。每一出貨批次之結算信用帳期為出貨請款日起 
+                            <select id="c-T_credit" class="inline-input bg-amber-50 font-bold border border-amber-900/10 px-2 py-0.5 rounded cursor-pointer" onchange="syncInput(this)">
+                                <option value="0">即時付款 (0天)</option>
+                                <option value="30" selected>月結 30 天</option>
+                                <option value="60">月結 60 天</option>
+                                <option value="90">月結 90 天</option>
+                            </select>。每一批次的美元進口材料，將由乙方申請 **MOOWR 保稅製造制度** 以遞延關稅。各批次之請款單價將依據其出貨結算當月之**實際結算匯率 ($E_{settle, i}$)** 對比基準匯率 ($E_0$) 依對稱價格走廊公式獨立調算，滾動結算，共同分擔匯率風險。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-amber-900/10 flex justify-between items-center text-xs text-amber-800/60 font-serif">
+                    <span>甲方簽署蓋章：_________________</span>
+                    <span>乙方簽署蓋章：_________________</span>
+                </div>
+            </div>
+
+            <!-- 🎛️ 右半部：模擬匯率與細部參數面板 -->
+            <div class="lg:col-span-5 flex flex-col space-y-6">
+                
+                <!-- 1. 雙匯率核心模擬器 -->
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden">
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-slate-400 mb-5"><i class="fa-solid fa-arrows-split-up-and-left text-guard-500 mr-2"></i>三階段匯率流動模擬</h3>
+                    
+                    <!-- 滑桿一：進口清關匯率 E_import -->
+                    <div class="bg-space-950/40 p-4 rounded-xl border border-white/5 mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs text-safe-500 font-semibold uppercase tracking-wider"><i class="fa-solid fa-truck-ramp-box mr-1"></i> (1) 進口清關匯率 (E_import)</span>
+                            <span id="val-E_import-show" class="text-lg font-bold text-safe-500 font-mono glow-cyan">83.00 INR</span>
+                        </div>
+                        <input type="range" id="p-E_import" min="73.00" max="95.00" step="0.10" value="83.00" oninput="calculateAndSync(this)" class="w-full cursor-pointer accent-safe-500 slider-import">
+                        <span class="text-[10px] text-slate-400 block mt-1">決定海外原材料的 INR 實際成本與進口關稅申報稅基</span>
+                    </div>
+
+                    <!-- 滑桿二：最終結算匯率 E_settle -->
+                    <div class="bg-space-950/40 p-4 rounded-xl border border-white/5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs text-guard-500 font-semibold uppercase tracking-wider"><i class="fa-solid fa-hand-holding-dollar mr-1"></i> (2) 收款結算匯率 (E_settle)</span>
+                            <span id="val-E_settle-show" class="text-lg font-bold text-guard-500 font-mono glow-gold">83.00 INR</span>
+                        </div>
+                        <input type="range" id="p-E_settle" min="73.00" max="95.00" step="0.10" value="83.00" oninput="calculateAndSync(this)" class="w-full cursor-pointer accent-guard-500 slider-settle">
+                        <span class="text-[10px] text-slate-400 block mt-1">帳期結束後客戶實際付款的匯率，用作調價公式 (Corridor) 的運算</span>
+                    </div>
+                    
+                    <div class="flex justify-between text-[11px] text-slate-500 mt-4 px-1 font-mono">
+                        <span>基準 E0 = <span id="val-E0-slider-label">83.00</span></span>
+                        <span id="val-gap-show">進口與結算匯率差: 0.00</span>
+                    </div>
+                </div>
+
+                <!-- 2. 進口稅費與 MOOWR 控制卡 -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-slate-400 mb-5">海關稅則與保稅方案 (MOOWR)</h3>
+                    
+                    <!-- BCD / SWS / IGST 輸入框 -->
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="text-xs text-slate-400 block mb-1">基本關稅 (BCD)</label>
+                            <div class="relative">
+                                <input type="number" id="p-R_bcd" value="7.5" step="0.1" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 pl-3 pr-8 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                                <span class="absolute right-3 top-2.5 text-xs text-slate-500">%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400 block mb-1">社福附加稅 (SWS)</label>
+                            <div class="relative">
+                                <input type="number" id="p-R_sws" value="10" step="1" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 pl-3 pr-8 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm" readonly>
+                                <span class="absolute right-3 top-2.5 text-xs text-slate-500">%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400 block mb-1">整合增值稅 (IGST)</label>
+                            <div class="relative">
+                                <input type="number" id="p-R_igst" value="18" step="1" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 pl-3 pr-8 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                                <span class="absolute right-3 top-2.5 text-xs text-slate-500">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MOOWR 發光切換開關 -->
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-space-900/50 border border-white/5">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2.5 rounded-lg bg-release-500/10 text-release-500">
+                                <i class="fa-solid fa-warehouse text-base"></i>
+                            </div>
+                            <div>
+                                <span class="text-sm font-semibold block text-white">啟用 MOOWR 保稅製造制度</span>
+                                <span class="text-xs text-slate-400 block">通關時遞延 BCD、SWS 與 IGST</span>
+                            </div>
+                        </div>
+                        <div class="relative flex items-center">
+                            <input type="checkbox" id="p-moowr_on" checked onchange="calculateAndSync(this)" class="toggle-checkbox hidden">
+                            <label for="p-moowr_on" class="toggle-label block w-14 h-8 rounded-full bg-slate-700 cursor-pointer p-1 transition-all duration-300">
+                                <span class="toggle-dot block w-6 h-6 rounded-full bg-white transition-all duration-300"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. FEMA 2026 合規自動核銷系統開關 -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold tracking-wider uppercase text-slate-400 mb-4">FEMA 2026 跨境資金鏈配置</h3>
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-space-900/50 border border-white/5">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2.5 rounded-lg bg-safe-500/10 text-safe-500">
+                                <i class="fa-solid fa-diagram-project text-base"></i>
+                            </div>
+                            <div>
+                                <span class="text-sm font-semibold block text-white">BoE & ORM 自動核銷匹配系統</span>
+                                <span class="text-xs text-slate-400 block">實時追蹤關務入境單與海外匯款單</span>
+                            </div>
+                        </div>
+                        <div class="relative flex items-center">
+                            <input type="checkbox" id="p-rbi_matching" onchange="calculateAndSync(this)" class="toggle-checkbox hidden">
+                            <label for="p-rbi_matching" class="toggle-label block w-14 h-8 rounded-full bg-slate-700 cursor-pointer p-1 transition-all duration-300">
+                                <span class="toggle-dot block w-6 h-6 rounded-full bg-white transition-all duration-300"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 進階計算器参数面板 -->
+                <div class="glass-card rounded-2xl p-6">
+                    <div class="flex justify-between items-center mb-4 cursor-pointer" onclick="toggleAdvancedParams()">
+                        <h3 class="text-sm font-semibold tracking-wider uppercase text-slate-400">進階合同與帳期參數 (點擊展開)</h3>
+                        <i id="advanced-toggle-icon" class="fa-solid fa-chevron-right text-slate-500 transition-transform duration-300"></i>
+                    </div>
+                    
+                    <div id="advanced-params-panel" class="space-y-4 hidden opacity-0 transition-all duration-500">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">基準匯率 E0</label>
+                                <input type="number" id="p-E0" value="83.00" step="0.01" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">免責死區 (Deadband)</label>
+                                <div class="relative">
+                                    <input type="number" id="p-deadband" value="3" step="0.5" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 pl-3 pr-8 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                                    <span class="absolute right-3 top-2.5 text-xs text-slate-500">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">單件美元材料 ($P_{USD}$)</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-2.5 text-xs text-slate-500">$</span>
+                                    <input type="number" id="p-P_usd" value="10.00" step="0.01" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 pl-6 pr-3 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">印度本地成本 ($C_{local}$)</label>
+                                <input type="number" id="p-C_local" value="166.00" step="1.00" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">目標毛利率</label>
+                                <div class="relative">
+                                    <input type="number" id="p-M_target" value="15" step="1" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 pl-3 pr-8 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                                    <span class="absolute right-3 top-2.5 text-xs text-slate-500">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">專案總數量 (Q)</label>
+                                <input type="number" id="p-Q" value="100000" step="1000" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-indigo-500 font-mono text-sm">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">合約信用帳期 (T_credit)</label>
+                                <select id="p-T_credit" onchange="calculateAndSync(this)" class="w-full bg-space-900/60 border border-white/5 rounded-xl py-2 px-3 text-white focus:outline-none focus:border-indigo-500 text-sm">
+                                    <option value="0">即時付款 (0天)</option>
+                                    <option value="30">月結 30 天</option>
+                                    <option value="60">月結 60 天</option>
+                                    <option value="90">月結 90 天</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 快速加載測試原型數據 -->
+                <div class="glass-card rounded-2xl p-4 flex justify-between items-center text-sm border-dashed border-indigo-500/20">
+                    <span class="text-slate-400"><i class="fa-solid fa-flask text-indigo-400 mr-2"></i> 驗證 90天長帳期匯損極限情境？</span>
+                    <button onclick="loadPrototypeData()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs tracking-wider uppercase px-4 py-2 rounded-xl border border-indigo-400/20 shadow-lg shadow-indigo-600/10 transition-all duration-300">
+                        一鍵加載原型數據
+                    </button>
+                </div>
+
+                <!-- 確認大按鈕 -->
+                <button onclick="switchTab('supplier')" class="w-full bg-gradient-to-r from-guard-500 to-amber-600 hover:from-guard-600 hover:to-amber-700 text-white font-bold text-sm tracking-widest uppercase py-4.5 rounded-2xl shadow-xl shadow-guard-500/10 transition-all duration-300 transform active:scale-95 flex items-center justify-center space-x-2 border border-guard-400/20">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>確認合約條件並鎖定分析</span>
+                </button>
+            </div>
+
+            <!-- 全寬：分批提貨與帳期滾動結算模擬器 -->
+            <div class="lg:col-span-12 glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden mt-4">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2.5 py-1 rounded-full font-semibold uppercase tracking-wider"><i class="fa-solid fa-arrows-spin mr-1"></i> Rolling Batch Simulator</span>
+                            <span class="text-xs bg-release-500/10 text-release-400 border border-release-500/20 px-2.5 py-1 rounded-full font-semibold uppercase tracking-wider">EMS 實務專屬</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mt-2"><i class="fa-solid fa-table-list text-indigo-400 mr-2"></i>分批提貨與帳期滾動結算模擬器</h3>
+                        <p class="text-xs text-slate-400 mt-1">模擬每批 25,000 件的滾動進口清關與長帳期結算，反映真實跨國供應鏈外匯曝險。</p>
+                    </div>
+                    <!-- 快速預設按鈕 -->
+                    <div class="flex flex-wrap gap-2.5">
+                        <button onclick="applyPreset('gradual')" class="bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 hover:text-white font-semibold text-xs tracking-wider px-3.5 py-2 rounded-xl border border-indigo-500/20 shadow-md transition-all duration-300">
+                            <i class="fa-solid fa-chart-line mr-1"></i> 緩步貶值預設
+                        </button>
+                        <button onclick="applyPreset('volatile')" class="bg-amber-600/30 hover:bg-amber-600/50 text-amber-300 hover:text-white font-semibold text-xs tracking-wider px-3.5 py-2 rounded-xl border border-amber-500/20 shadow-md transition-all duration-300">
+                            <i class="fa-solid fa-chart-area mr-1"></i> 劇烈震盪預設
+                        </button>
+                        <button onclick="applyPreset('crash')" class="bg-red-600/30 hover:bg-red-600/50 text-red-300 hover:text-white font-semibold text-xs tracking-wider px-3.5 py-2 rounded-xl border border-red-500/20 shadow-md transition-all duration-300">
+                            <i class="fa-solid fa-circle-down mr-1"></i> 盧比崩盤預設
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 互動表格 -->
+                <div class="overflow-x-auto rounded-xl border border-white/5 bg-space-950/40">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-space-900/80 border-b border-white/5 text-xs text-slate-400 tracking-wider uppercase font-semibold">
+                                <th class="py-4 px-4">提貨批次</th>
+                                <th class="py-4 px-4 text-center">批量 (件)</th>
+                                <th class="py-4 px-4">提貨月份</th>
+                                <th class="py-4 px-4 min-w-[140px] text-safe-500"><i class="fa-solid fa-truck-ramp-box mr-1"></i>進口匯率 E_import (INR)</th>
+                                <th class="py-4 px-4 min-w-[140px] text-guard-500"><i class="fa-solid fa-hand-holding-dollar mr-1"></i>結算匯率 E_settle (INR)</th>
+                                <th class="py-4 px-4 text-center">結算匯差 CAF</th>
+                                <th class="py-4 px-4 text-right">調整後結算價</th>
+                                <th class="py-4 px-4 text-right text-slate-400">現狀利潤 (無保護)</th>
+                                <th class="py-4 px-4 text-right text-guard-400">本案利潤 (有保護+MOOWR)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="batch-table-body" class="divide-y divide-white/5 font-mono text-slate-300">
+                            <!-- 由 JS 動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 👁️ 第二大部分：供應商防護視角 (Supplier View) -->
+        <div id="pane-supplier" class="view-pane hidden space-y-8">
+            
+            <!-- 頂部核心利潤救回大卡片 -->
+            <div class="glass-card rounded-2xl p-8 border border-guard-500/20 relative overflow-hidden bg-gradient-to-br from-space-900 via-space-900 to-guard-500/5">
+                <div class="absolute -right-16 -bottom-16 text-guard-500/5 text-[15rem] font-bold select-none pointer-events-none">
+                    $$
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+                    <div class="space-y-1">
+                        <span class="text-xs bg-guard-500/10 text-guard-500 border border-guard-500/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Financial Safety Protection</span>
+                        <h2 class="text-3xl font-extrabold tracking-tight text-white mt-2">供應商利潤防護與財務安全分析</h2>
+                        <p class="text-sm text-slate-400">
+                            進口匯率：1 USD = <span class="font-mono text-white font-bold" id="s-val-E_import">83.00</span> INR | 
+                            結算匯率：1 USD = <span class="font-mono text-white font-bold" id="s-val-E_settle">83.00</span> INR
+                        </p>
+                    </div>
+                    <div class="bg-space-950/60 p-4.5 rounded-xl border border-white/5 text-center min-w-[200px]">
+                        <span class="text-xs text-slate-400 block font-medium">已挽回利潤效益 (Value Rescued)</span>
+                        <span id="s-value-rescued" class="text-3xl font-black font-mono text-guard-500 glow-gold block mt-1">0 INR</span>
+                    </div>
+                </div>
+
+                <!-- 📊 利潤對比雙條圖 (No Clause vs With Clause) -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- 無條款 (No Clause) -->
+                    <div class="bg-space-950/40 p-5 rounded-xl border border-white/5 relative">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-slate-400">現狀：無外匯調整條款</span>
+                            <span id="s-no-clause-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-800 text-slate-400">毛利正常</span>
+                        </div>
+                        <div class="flex items-baseline space-x-2">
+                            <span id="s-no-clause-profit" class="text-2xl font-bold font-mono text-white">0 INR</span>
+                            <span class="text-xs text-slate-400">利潤額</span>
+                        </div>
+                        <!-- CSS 長度動畫條 -->
+                        <div class="w-full bg-slate-800 h-3 rounded-full mt-3 overflow-hidden">
+                            <div id="s-no-clause-bar" class="h-full bg-slate-500 transition-all duration-500 rounded-full" style="width: 50%;"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-2 font-mono">
+                            <span>實際利潤率: <span id="s-no-clause-margin">15.0%</span></span>
+                            <span>總出貨成本: <span id="s-no-clause-cost">0 INR</span></span>
+                        </div>
+                    </div>
+
+                    <!-- 本提案 (With Symmetrical Clause) -->
+                    <div class="bg-space-950/40 p-5 rounded-xl border border-guard-500/10 relative">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-semibold text-white flex items-center"><i class="fa-solid fa-shield-halved text-guard-500 mr-2"></i> 提案：對稱型匯率走廊條款</span>
+                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded bg-guard-500/20 text-guard-500 border border-guard-500/20 glow-gold">完美保全</span>
+                        </div>
+                        <div class="flex items-baseline space-x-2">
+                            <span id="s-with-clause-profit" class="text-2xl font-bold font-mono text-guard-500 glow-gold">0 INR</span>
+                            <span class="text-xs text-slate-400">利潤額</span>
+                        </div>
+                        <!-- CSS 長度動畫條 -->
+                        <div class="w-full bg-slate-800 h-3 rounded-full mt-3 overflow-hidden">
+                            <div id="s-with-clause-bar" class="h-full bg-gradient-to-r from-guard-500 to-amber-500 transition-all duration-500 rounded-full" style="width: 50%;"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-2 font-mono">
+                            <span>實際利潤率: <span id="s-with-clause-margin">15.0%</span></span>
+                            <span>總出貨價格: <span id="s-with-clause-price">0 INR</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- 💧 核心營運現金流與保稅製造 (MOOWR) 分析卡片 (佔 7 列) -->
+                <div class="lg:col-span-7 glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="p-3 rounded-xl bg-release-500/10 text-release-500">
+                                <i class="fa-solid fa-warehouse text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold text-white">MOOWR 保稅遞延與帳期複利效益</h3>
+                                <p class="text-xs text-slate-400">當帳期拉長，關稅資金無息積壓效應呈時間級放大</p>
+                            </div>
+                        </div>
+
+                        <!-- 數據卡片 -->
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-space-950/50 p-4 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block font-medium">初期海關遞延關稅總額</span>
+                                <span id="s-moowr-deferred" class="text-2xl font-bold font-mono text-release-500 glow-green block mt-1">0 INR</span>
+                                <span class="text-[10px] text-slate-500 font-mono">(含 BCD + SWS + IGST)</span>
+                            </div>
+                            <div class="bg-space-950/50 p-4 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block font-medium">營運資金融資利息節省</span>
+                                <span id="s-moowr-interest" class="text-2xl font-bold font-mono text-release-500 glow-green block mt-1">0 INR</span>
+                                <span class="text-[10px] text-slate-500 font-mono" id="s-moowr-interest-label">(含生產製造+信用帳期)</span>
+                            </div>
+                        </div>
+
+                        <!-- 現金流優化進程條 -->
+                        <div class="space-y-4 bg-space-950/30 p-4 rounded-xl border border-white/5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400">MOOWR 資金免息遞延總週期：</span>
+                                <span id="s-moowr-upfront-status" class="font-bold text-release-500 font-mono">共 210 天</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                                <div id="s-moowr-progress-bar" class="h-full bg-release-500 transition-all duration-300 rounded-full" style="width: 0%;"></div>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-info-circle text-release-500 mr-1.5"></i>
+                                **帳期時間效益分析**：當客戶要求較長帳期（如 60/90天）時，若未啟用 MOOWR，供應商必須墊付關稅長達數月。啟用 MOOWR 後，關稅遞延週期覆蓋了整個生產期與信用帳期，**帳期越長，省下的短期週轉貸款利息越是驚人**！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⚠️ FEMA 2026 跨境監管風險紅綠燈 (佔 5 列) -->
+                <div class="lg:col-span-5 glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="p-3 rounded-xl bg-safe-500/10 text-safe-500">
+                                <i class="fa-solid fa-shield-halved text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold text-white">FEMA 2026 / RBI 監管合規紅綠燈</h3>
+                                <p class="text-xs text-slate-400">印度儲備銀行跨境進出口數據連線審核</p>
+                            </div>
+                        </div>
+
+                        <!-- 紅綠燈本體 -->
+                        <div class="flex items-center space-x-4 bg-space-950/60 p-4.5 rounded-xl border border-white/5 mb-6">
+                            <div id="rbi-traffic-glow" class="h-12 w-12 rounded-full bg-release-500/20 border-2 border-release-500 flex items-center justify-center transition-all duration-300">
+                                <div id="rbi-traffic-light" class="h-5 w-5 rounded-full bg-release-500 animate-pulse"></div>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 block font-medium">RBI 監管合規狀態</span>
+                                <span id="rbi-traffic-status" class="text-base font-bold text-release-500 block">無合規風險 (Excellent)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-space-950/30 p-4 rounded-xl border border-white/5 text-xs space-y-2.5">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 font-medium">關務入境單 (BoE) 匹配狀態：</span>
+                                <span id="rbi-matching-status-show" class="font-bold text-release-500"><i class="fa-solid fa-check-circle mr-1"></i> 已自動匹配</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 font-medium">FEMA 2026 進口付款期限：</span>
+                                <span class="text-white font-bold font-mono">遵循商務合約約定 (取消6個月限制)</span>
+                            </div>
+                            <div class="border-t border-white/5 pt-2.5 mt-2.5">
+                                <p id="rbi-compliance-desc" class="text-slate-400 leading-relaxed">
+                                    **綠色安全**：得益於雙向核銷的建立，進口外匯匯出 (ORM) 與實體清關入境單 (BoE) 於海關 IDPMS 系統內匹配無誤，完全杜絕被列入警告名單 (Caution List) 的斷鏈風險。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 💡 供應商談判心法卡片 (3卡網格) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-xl p-5 glass-card-hover">
+                    <span class="text-xs text-guard-500 font-semibold block uppercase tracking-wider mb-2"><i class="fa-solid fa-bullseye mr-1.5"></i> 核心說服論點 (1)</span>
+                    <h4 class="text-sm font-bold text-white mb-2">主打「供應鏈安定性」與帳期綁定</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        指出當客戶要求較長帳期（如 60/90天）時，若無外匯保護與 MOOWR 優化，代工廠必須單方面承受長達數月的匯率劇烈波動暴露，且初期關稅墊付資金會產生高昂融資成本，這將嚴重危及代工廠財務穩健與產能，屬於共同的系統風險。
+                    </p>
+                </div>
+                <div class="glass-card rounded-xl p-5 glass-card-hover">
+                    <span class="text-xs text-guard-500 font-semibold block uppercase tracking-wider mb-2"><i class="fa-solid fa-scale-balanced mr-1.5"></i> 核心說服論點 (2)</span>
+                    <h4 class="text-sm font-bold text-white mb-2">宣示「對稱性」的商業公平性</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        主動向買方展示合約的對稱設計：不僅盧比貶值至付款結算日 $E_{settle}$ 時由客戶加價補償，當盧比升值時，供應商也會自動將美元採購成本下降的紅利**100% 回饋**給客戶。這能有力化解採購對「變相漲價」的猜忌。
+                    </p>
+                </div>
+                <div class="glass-card rounded-xl p-5 glass-card-hover">
+                    <span class="text-xs text-guard-500 font-semibold block uppercase tracking-wider mb-2"><i class="fa-solid fa-lightbulb mr-1.5"></i> 核心說服論點 (3)</span>
+                    <h4 class="text-sm font-bold text-white mb-2">點破同業「帳期套路」的真相</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        當客戶宣稱「其他同業也接受 90 天帳期且固定匯率」時，應直言點破：這些同業在長帳期與無保護下，極易因一次 10% 的匯損而陷入資金鏈斷裂，最終要麼無預警停產，要麼在物料與品質上偷工減料，這無異於在品牌客戶的印度在地化戰略中埋下地雷。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 👁️ 第三部分：客戶雙贏視角 (Client View) -->
+        <div id="pane-client" class="view-pane hidden space-y-8">
+            
+            <!-- 頂部核心利潤救回大卡片 -->
+            <div class="glass-card rounded-2xl p-8 border border-safe-500/20 relative overflow-hidden bg-gradient-to-br from-space-900 via-space-900 to-safe-500/5">
+                <div class="absolute -right-16 -bottom-16 text-safe-500/5 text-[15rem] font-bold select-none pointer-events-none">
+                    DTA
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+                    <div class="space-y-1">
+                        <span class="text-xs bg-safe-500/10 text-safe-500 border border-safe-500/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Client Value Proposition</span>
+                        <h2 class="text-3xl font-extrabold tracking-tight text-white mt-2">品牌客戶雙贏價值與預算安定度分析</h2>
+                        <p class="text-sm text-slate-400">
+                            基準匯率：1 USD = <span class="font-mono text-white font-bold" id="c-val-E0">83.00</span> INR | 
+                            最終結算匯率：1 USD = <span class="font-mono text-white font-bold" id="c-val-E_settle-cview">83.00</span> INR
+                        </p>
+                    </div>
+                    <div class="bg-space-950/60 p-4.5 rounded-xl border border-white/5 text-center min-w-[200px]">
+                        <span class="text-xs text-slate-400 block font-medium">實際產品結算單價</span>
+                        <span id="c-final-price" class="text-3xl font-black font-mono text-safe-500 glow-cyan block mt-1">0 INR</span>
+                        <span id="c-final-price-diff" class="text-[10px] text-slate-400 block mt-0.5">(相較基準單價相同)</span>
+                    </div>
+                </div>
+
+                <!-- 📊 預算安定性與波動分析圖表 -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- 1. 價格穩定度指標 -->
+                    <div class="bg-space-950/40 p-5 rounded-xl border border-white/5 text-center">
+                        <span class="text-xs text-slate-400 block mb-2 font-medium">結算定價與預算波動區間</span>
+                        <div id="c-price-stability-glow" class="w-24 h-24 rounded-full border-4 border-safe-500 mx-auto flex flex-col items-center justify-center bg-safe-500/5 my-4 transition-all duration-300">
+                            <span id="c-price-stability-status" class="text-base font-extrabold text-safe-500">絕對鎖定</span>
+                            <span class="text-[9px] text-slate-500 font-mono mt-0.5">DEADBAND IN</span>
+                        </div>
+                        <p id="c-price-stability-desc" class="text-xs text-slate-400 mt-2">
+                            匯率波動處於死區 +/-3% 內，合約原始單價絕對維持不變。完美保護甲方終端定價 (MRP) 策略與年度財務預算。
+                        </p>
+                    </div>
+
+                    <!-- 2. 對稱降價與補償回饋 -->
+                    <div class="bg-space-950/40 p-5 rounded-xl border border-white/5">
+                        <span class="text-xs text-slate-400 block mb-3 font-medium">對稱性盈虧分擔計算</span>
+                        <div class="space-y-3 font-mono text-xs">
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">原始合約單價：</span>
+                                <span class="text-white" id="c-calc-original-price">0 INR</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">結算匯率偏離 CAF：</span>
+                                <span class="text-white" id="c-calc-caf">0.00%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">材料占比加權 $W_{material}$：</span>
+                                <span class="text-white" id="c-calc-weight">0.0%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">有效變動係數 $\Delta_{adj}$：</span>
+                                <span class="text-white" id="c-calc-delta">0.00%</span>
+                            </div>
+                            <div class="border-t border-white/5 pt-2 flex justify-between font-bold">
+                                <span class="text-slate-400">最終結算差價：</span>
+                                <span id="c-calc-diff-price" class="text-safe-500">0 INR (0.00%)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 客戶隱性中斷風險成本 (已加上帳期風險敞口加權) -->
+                    <div class="bg-space-950/40 p-5 rounded-xl border border-white/5 relative flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs text-slate-400 block font-medium">若拒絕條款：潛在隱性財務風險成本</span>
+                                <span id="c-risk-multiplier-badge" class="text-[9px] bg-red-500/10 text-red-500 border border-red-500/20 px-2 py-0.5 rounded font-mono font-bold">2.0x 帳期暴露</span>
+                            </div>
+                            
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400"><i class="fa-solid fa-triangle-exclamation text-red-500 mr-1.5"></i> 供應商財務斷鏈風險：</span>
+                                    <span class="font-bold text-red-500 font-mono" id="c-risk-cost-financial">0 INR</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400"><i class="fa-solid fa-clock-rotate-left text-red-500 mr-1.5"></i> 換商/SOP 延誤成本：</span>
+                                    <span class="font-bold text-red-500 font-mono" id="c-risk-cost-delay">0 INR</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-white/5 pt-3 mt-3">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-[10px] text-slate-500 font-semibold block uppercase">加總風險代價</span>
+                                <span id="c-total-risk-cost" class="text-lg font-black font-mono text-red-500 glow-red">0 INR</span>
+                            </div>
+                            <span class="text-[9px] text-slate-500 block leading-tight mt-1" id="c-total-risk-cost-desc">(已加權 30天帳期下之匯率波動暴露乘數)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 💡 客戶說服心法卡片 (3卡網格) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-xl p-5 glass-card-hover">
+                    <span class="text-xs text-safe-500 font-semibold block uppercase tracking-wider mb-2"><i class="fa-solid fa-circle-nodes mr-1.5"></i> 雙贏合作邏輯 (1)</span>
+                    <h4 class="text-sm font-bold text-white mb-2">如何化解採購對「預算失控」的擔憂</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        本條款精妙設定了 **+/-3% 免責死區**。在歷史數據中，有接近 90% 的常規外匯變動都在死區範圍內。這意味著客戶在絕大多數帳期內依然獲得完美的價格穩定性，僅在極端匯率大變動時才在付款結算日 $E_{settle}$ 啟動對稱微調。
+                    </p>
+                </div>
+                <div class="glass-card rounded-xl p-5 glass-card-hover">
+                    <span class="text-xs text-safe-500 font-semibold block uppercase tracking-wider mb-2"><i class="fa-solid fa-shield-cat mr-1.5"></i> 雙贏合作邏輯 (2)</span>
+                    <h4 class="text-sm font-bold text-white mb-2">長帳期下的「多米諾骨牌」斷鏈效應</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        如果客戶要求 60/90天長帳期，又強迫代工廠承擔固定匯率，一旦在此期間盧比大幅貶值，代工廠的代工利潤將徹底轉為淨虧損。在面臨資金耗竭下，代工廠只能被動拖欠上游美元料件商貨款，直接導致供應鏈斷料與產品質量黑洞。
+                    </p>
+                </div>
+                <div class="glass-card rounded-xl p-5 glass-card-hover">
+                    <span class="text-xs text-safe-500 font-semibold block uppercase tracking-wider mb-2"><i class="fa-solid fa-arrows-spin mr-1.5"></i> 雙贏合作邏輯 (3)</span>
+                    <h4 class="text-sm font-bold text-white mb-2">對應印度「在地化 KPI」政策的支撐</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        印度政府實施嚴格的「印度製造 (Make in India)」在地化比率要求。若供應商因長帳期及匯損資金斷鏈而崩潰，客戶在印度的產線將面臨「在地化 KPI 失敗」的致命裁罰。因此，建立「對稱型匯率風險共擔機制」，實質上是在為客戶自身的在地化供應鏈買保險。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 📊 全局數據運算核心 JavaScript 引擎 -->
+    <script>
+        // 1. 全局狀態變量儲存器 (State)
+        const state = {
+            E0: 83.00,
+            E_import: 83.00,
+            E_settle: 83.00,
+            P_usd: 10.00,
+            C_local: 166.00,
+            M_target: 15,
+            Q: 100000,
+            R_bcd: 7.5,
+            R_sws: 10,
+            R_igst: 18,
+            moowr_on: true,
+            deadband: 3,
+            rbi_matching: false,
+            T_credit: 30, // 預設 30 天帳期
+            batches: [
+                { id: 1, qty: 25000, name: '第一批次 (Month 1)', E_import: 83.00, E_settle: 83.00 },
+                { id: 2, qty: 25000, name: '第二批次 (Month 2)', E_import: 83.00, E_settle: 83.00 },
+                { id: 3, qty: 25000, name: '第三批次 (Month 3)', E_import: 83.00, E_settle: 83.00 },
+                { id: 4, qty: 25000, name: '第四批次 (Month 4)', E_import: 83.00, E_settle: 83.00 }
+            ]
+        };
+
+        // 進階參數面板展開/收起狀態
+        let advancedPanelExpanded = false;
+
+        function toggleAdvancedParams() {
+            const panel = document.getElementById('advanced-params-panel');
+            const icon = document.getElementById('advanced-toggle-icon');
+            if (advancedPanelExpanded) {
+                panel.classList.add('hidden');
+                panel.classList.remove('opacity-100');
+                panel.classList.add('opacity-0');
+                icon.classList.remove('rotate-90');
+            } else {
+                panel.classList.remove('hidden');
+                setTimeout(() => {
+                    panel.classList.remove('opacity-0');
+                    panel.classList.add('opacity-100');
+                }, 10);
+                icon.classList.add('rotate-90');
+            }
+            advancedPanelExpanded = !advancedPanelExpanded;
+        }
+
+        // 2. 視角切換器 (Tab Switcher)
+        function switchTab(tabId) {
+            // 隱藏所有面板
+            document.querySelectorAll('.view-pane').forEach(pane => {
+                pane.classList.add('hidden');
+            });
+            // 顯示當前面板
+            const activePane = document.getElementById('pane-' + tabId);
+            if (activePane) {
+                activePane.classList.remove('hidden');
+            }
+            
+            // 重置所有按鈕樣式
+            const btnSettings = document.getElementById('btn-tab-settings');
+            const btnSupplier = document.getElementById('btn-tab-supplier');
+            const btnClient = document.getElementById('btn-tab-client');
+            
+            [btnSettings, btnSupplier, btnClient].forEach(btn => {
+                if (btn) {
+                    btn.className = "flex-1 py-3.5 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 flex items-center justify-center space-x-2 z-10 text-slate-400 hover:text-white";
+                }
+            });
+            
+            // 設定點擊的按鈕為 Active 樣式
+            const activeBtn = document.getElementById('btn-tab-' + tabId);
+            if (activeBtn) {
+                activeBtn.className = "flex-1 py-3.5 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 flex items-center justify-center space-x-2 z-10 text-white bg-gradient-to-r from-indigo-600 to-indigo-500 shadow-lg shadow-indigo-600/20";
+            }
+        }
+
+        // 3. 雙向同步核心機制
+        // 3a. 從合約書中修改數值 -> 同步至設定面板與 state
+        function syncInput(el) {
+            const id = el.id;
+            const val = el.value;
+            
+            if (id.startsWith('c-')) {
+                const paramName = id.substring(2); // e.g. E0, P_usd, C_local, deadband, Q, M_target, T_credit
+                const targetId = 'p-' + paramName;
+                const targetEl = document.getElementById(targetId);
+                
+                let parsedVal = parseFloat(val);
+                if (isNaN(parsedVal)) return;
+                
+                // 更新 state
+                state[paramName] = parsedVal;
+                
+                // 更新設定面板中對應的 element
+                if (targetEl) {
+                    if (targetEl.type === 'checkbox') {
+                        targetEl.checked = el.checked;
+                    } else {
+                        targetEl.value = val;
+                    }
+                }
+                
+                // 特別處理：若是 E0 變動，更新 slider 顯示基準
+                if (paramName === 'E0') {
+                    const label = document.getElementById('val-E0-slider-label');
+                    if (label) label.innerText = parsedVal.toFixed(2);
+                }
+            }
+            
+            calculateEngine();
+        }
+
+        // 3b. 從設定面板修改數值 -> 同步至合約書與 state，並處理聯動
+        function calculateAndSync(el) {
+            const id = el.id;
+            const val = el.value;
+            
+            if (id.startsWith('p-')) {
+                const paramName = id.substring(2); // e.g. E0, E_import, E_settle, P_usd, C_local, M_target, Q, T_credit, R_bcd, R_sws, R_igst, moowr_on, rbi_matching
+                const targetId = 'c-' + paramName;
+                const targetEl = document.getElementById(targetId);
+                
+                let parsedVal = parseFloat(val);
+                if (el.type === 'checkbox') {
+                    parsedVal = el.checked;
+                }
+                
+                if (isNaN(parsedVal) && el.type !== 'checkbox') return;
+                
+                // 處理聯動 (特別是全域滑桿 E_import / E_settle)
+                if (paramName === 'E_import') {
+                    // 全域進口匯率滑桿被拖動 -> 批次進口匯率同等偏移
+                    const diff = parsedVal - state.E_import;
+                    state.batches.forEach(b => {
+                        b.E_import = Math.min(100.0, Math.max(70.0, b.E_import + diff));
+                    });
+                    state.E_import = parsedVal;
+                } else if (paramName === 'E_settle') {
+                    // 全域結算匯率滑桿被拖動 -> 批次結算匯率同等偏移
+                    const diff = parsedVal - state.E_settle;
+                    state.batches.forEach(b => {
+                        b.E_settle = Math.min(100.0, Math.max(70.0, b.E_settle + diff));
+                    });
+                    state.E_settle = parsedVal;
+                } else {
+                    // 一般參數直接更新 state
+                    state[paramName] = parsedVal;
+                }
+                
+                // 更新合約書中的 input/select
+                if (targetEl) {
+                    if (targetEl.type === 'checkbox') {
+                        targetEl.checked = el.checked;
+                    } else {
+                        targetEl.value = val;
+                    }
+                }
+                
+                // 特別處理：若是 E0 變動，更新 slider 顯示基準
+                if (paramName === 'E0') {
+                    const label = document.getElementById('val-E0-slider-label');
+                    if (label) label.innerText = parsedVal.toFixed(2);
+                }
+            }
+            
+            calculateEngine();
+        }
+
+        // 4. 快速加載驗證用的 PDF 典型 90 天長帳期極限數據
+        function loadPrototypeData() {
+            state.E0 = 83.00;
+            state.E_import = 91.30; // 進口清關時盧比平均貶值 10%
+            state.E_settle = 93.50; // 付款結算時平均貶值 12.65%
+            state.P_usd = 10.00;
+            state.C_local = 166.00;
+            state.M_target = 15;
+            state.Q = 100000;
+            state.R_bcd = 7.5;
+            state.R_sws = 10;
+            state.R_igst = 18;
+            state.moowr_on = true;
+            state.deadband = 3;
+            state.rbi_matching = false;
+            state.T_credit = 90; // 極限 90 天帳期墊資
+
+            // 初始化四個批次的匯率曲線，平均值剛好是 E_import = 91.30, E_settle = 93.50
+            state.batches = [
+                { id: 1, qty: 25000, name: '第一批次 (Month 1)', E_import: 88.00, E_settle: 90.00 },
+                { id: 2, qty: 25000, name: '第二批次 (Month 2)', E_import: 90.50, E_settle: 92.50 },
+                { id: 3, qty: 25000, name: '第三批次 (Month 3)', E_import: 92.50, E_settle: 94.80 },
+                { id: 4, qty: 25000, name: '第四批次 (Month 4)', E_import: 94.20, E_settle: 96.70 }
+            ];
+
+            // 同步 DOM 數值
+            document.getElementById('c-E0').value = "83.00";
+            document.getElementById('c-P_usd').value = "10.00";
+            document.getElementById('c-C_local').value = "166.00";
+            document.getElementById('c-deadband').value = "3";
+            document.getElementById('c-Q').value = "100000";
+            document.getElementById('c-M_target').value = "15";
+            document.getElementById('c-T_credit').value = "90";
+
+            document.getElementById('p-E0').value = "83.00";
+            document.getElementById('p-E_import').value = "91.30";
+            document.getElementById('p-E_settle').value = "93.50";
+            document.getElementById('p-P_usd').value = "10.00";
+            document.getElementById('p-C_local').value = "166.00";
+            document.getElementById('p-deadband').value = "3";
+            document.getElementById('p-Q').value = "100000";
+            document.getElementById('p-M_target').value = "15";
+            document.getElementById('p-R_bcd').value = "7.5";
+            document.getElementById('p-moowr_on').checked = true;
+            document.getElementById('p-rbi_matching').checked = false;
+            document.getElementById('p-T_credit').value = "90";
+
+            document.getElementById('val-E0-slider-label').innerText = "83.00";
+
+            calculateEngine();
+            
+            // 微妙發光提醒加載成功
+            const slider = document.getElementById('val-E_settle-show');
+            slider.classList.add('scale-110');
+            setTimeout(() => slider.classList.remove('scale-110'), 300);
+        }
+
+        // 5. 更新個別批次數值 (Batch Value Editor)
+        function updateBatchVal(idx, type, val) {
+            val = parseFloat(val);
+            if (isNaN(val)) return;
+            
+            // 限制合理範圍
+            val = Math.min(100.0, Math.max(70.0, val));
+            state.batches[idx][type] = val;
+            
+            // 計算新的全域平均值
+            let sum = 0;
+            state.batches.forEach(b => {
+                sum += b[type];
+            });
+            let avg = sum / 4;
+            
+            if (type === 'E_import') {
+                state.E_import = avg;
+                document.getElementById('p-E_import').value = avg.toFixed(2);
+            } else if (type === 'E_settle') {
+                state.E_settle = avg;
+                document.getElementById('p-E_settle').value = avg.toFixed(2);
+            }
+            
+            calculateEngine();
+        }
+
+        // 6. 載入匯率曲線預設 (Load Curve Presets)
+        function applyPreset(presetType) {
+            if (presetType === 'gradual') {
+                state.batches[0].E_import = 84.50; state.batches[0].E_settle = 85.50;
+                state.batches[1].E_import = 85.50; state.batches[1].E_settle = 86.80;
+                state.batches[2].E_import = 86.80; state.batches[2].E_settle = 88.00;
+                state.batches[3].E_import = 88.00; state.batches[3].E_settle = 89.20;
+            } else if (presetType === 'volatile') {
+                state.batches[0].E_import = 85.00; state.batches[0].E_settle = 82.00;
+                state.batches[1].E_import = 82.00; state.batches[1].E_settle = 88.00;
+                state.batches[2].E_import = 88.00; state.batches[2].E_settle = 84.00;
+                state.batches[3].E_import = 84.00; state.batches[3].E_settle = 90.00;
+            } else if (presetType === 'crash') {
+                state.batches[0].E_import = 88.00; state.batches[0].E_settle = 90.00;
+                state.batches[1].E_import = 90.50; state.batches[1].E_settle = 92.50;
+                state.batches[2].E_import = 92.50; state.batches[2].E_settle = 94.80;
+                state.batches[3].E_import = 94.20; state.batches[3].E_settle = 96.70;
+            }
+            
+            // 計算新的全域平均值
+            let sum_import = 0;
+            let sum_settle = 0;
+            state.batches.forEach(b => {
+                sum_import += b.E_import;
+                sum_settle += b.E_settle;
+            });
+            state.E_import = sum_import / 4;
+            state.E_settle = sum_settle / 4;
+            
+            // 同步全域滑動條數值
+            document.getElementById('p-E_import').value = state.E_import.toFixed(2);
+            document.getElementById('p-E_settle').value = state.E_settle.toFixed(2);
+            
+            calculateEngine();
+        }
+
+        // 7. 渲染批次動態表格 (Dynamic Batch Table Renderer)
+        function renderBatchTable() {
+            const tbody = document.getElementById('batch-table-body');
+            if (!tbody) return;
+            
+            let html = "";
+            const R_bcd_dec = state.R_bcd / 100;
+            const R_sws_dec = state.R_sws / 100;
+            const R_igst_dec = state.R_igst / 100;
+            
+            // 基準匯率 E0 下的單件落地材料成本 (未啟用 MOOWR)
+            const b_AV = state.P_usd * state.E0;
+            const b_BCD = b_AV * R_bcd_dec;
+            const b_SWS = b_BCD * R_sws_dec;
+            const b_Material_Cost_NoMOOWR = b_AV + b_BCD + b_SWS; 
+            
+            const Cost_unit_0 = state.moowr_on ? (b_AV + state.C_local) : (b_Material_Cost_NoMOOWR + state.C_local);
+            const W_material = (state.P_usd * state.E0) / Cost_unit_0;
+            const Price_unit_0 = Cost_unit_0 / (1 - (state.M_target / 100));
+
+            state.batches.forEach((b, idx) => {
+                // 單批次進口端成本與關稅計算
+                const av_import = state.P_usd * b.E_import;
+                const bcd_import = av_import * R_bcd_dec;
+                const sws_import = bcd_import * R_sws_dec;
+                const igst_import = (av_import + bcd_import + sws_import) * R_igst_dec;
+                
+                // 實際出貨成本
+                const cost_unit_actual = av_import + bcd_import + sws_import + state.C_local;
+                const cost_total = cost_unit_actual * b.qty;
+                
+                // 現狀無條款利潤
+                const revenue_no_clause = Price_unit_0 * b.qty;
+                const profit_no_clause = revenue_no_clause - cost_total;
+                
+                // 走廊價格調整
+                const caf = ((b.E_settle - state.E0) / state.E0) * 100;
+                let delta_adj = 0;
+                if (Math.abs(caf) > state.deadband) {
+                    if (caf > state.deadband) {
+                        delta_adj = (caf - state.deadband) / 100;
+                    } else {
+                        delta_adj = (caf + state.deadband) / 100;
+                    }
+                }
+                const price_final = Price_unit_0 * (1 + W_material * delta_adj);
+                const revenue_optimized = price_final * b.qty;
+                
+                // MOOWR 利息節省
+                const deferred_duties = (bcd_import + sws_import + igst_import) * b.qty;
+                const interest_saved = state.moowr_on ? (deferred_duties * 0.12 * ((180 + state.T_credit) / 365)) : 0;
+                
+                // 提案利潤
+                const profit_optimized = revenue_optimized - cost_total + interest_saved;
+                
+                // CAF 顯示樣式與正負號
+                let caf_class = "text-slate-400";
+                let caf_sign = "";
+                if (caf > 0.01) {
+                    caf_class = "text-red-500 font-bold";
+                    caf_sign = "+";
+                } else if (caf < -0.01) {
+                    caf_class = "text-release-500 font-bold";
+                }
+                
+                html += `
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-4 font-semibold text-white">${b.id}</td>
+                        <td class="py-3 px-4 text-center">${b.qty.toLocaleString()}</td>
+                        <td class="py-3 px-4 text-slate-400 font-sans text-xs">${b.name}</td>
+                        <td class="py-3 px-4">
+                            <div class="relative flex items-center">
+                                <input type="number" step="0.05" min="70.0" max="100.0" 
+                                    class="bg-space-950 border border-white/10 rounded-lg px-2 py-0.5 text-white w-20 font-mono text-xs focus:outline-none focus:border-safe-500 focus:ring-1 focus:ring-safe-500" 
+                                    value="${b.E_import.toFixed(2)}" 
+                                    onchange="updateBatchVal(${idx}, 'E_import', this.value)">
+                                <span class="text-[9px] text-slate-500 ml-1 font-sans">INR</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4">
+                            <div class="relative flex items-center">
+                                <input type="number" step="0.05" min="70.0" max="100.0" 
+                                    class="bg-space-950 border border-white/10 rounded-lg px-2 py-0.5 text-white w-20 font-mono text-xs focus:outline-none focus:border-guard-500 focus:ring-1 focus:ring-guard-500" 
+                                    value="${b.E_settle.toFixed(2)}" 
+                                    onchange="updateBatchVal(${idx}, 'E_settle', this.value)">
+                                <span class="text-[9px] text-slate-500 ml-1 font-sans">INR</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-center ${caf_class} text-xs">${caf_sign}${caf.toFixed(2)}%</td>
+                        <td class="py-3 px-4 text-right font-semibold text-white text-xs">${price_final.toFixed(2)} <span class="text-[9px] text-slate-500">INR</span></td>
+                        <td class="py-3 px-4 text-right text-xs ${profit_no_clause < 0 ? 'text-red-500 font-semibold' : 'text-slate-400'}">${profit_no_clause < 0 ? '-' : ''}${formatCurrency(Math.abs(profit_no_clause))} <span class="text-[9px] text-slate-500">INR</span></td>
+                        <td class="py-3 px-4 text-right text-release-400 font-semibold text-xs">${profit_optimized < 0 ? '-' : ''}${formatCurrency(Math.abs(profit_optimized))} <span class="text-[9px] text-release-500">INR</span></td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        // 8. 核心四分批滾動運算引擎 (Core 4-Batch Consolidated Calculation Engine)
+        function calculateEngine() {
+            // 滑動數值即時顯示 (全域平均)
+            document.getElementById('val-E_import-show').innerText = state.E_import.toFixed(2);
+            document.getElementById('val-E_settle-show').innerText = state.E_settle.toFixed(2);
+            document.getElementById('s-val-E_import').innerText = state.E_import.toFixed(2);
+            document.getElementById('s-val-E_settle').innerText = state.E_settle.toFixed(2);
+            document.getElementById('c-val-E_settle-cview').innerText = state.E_settle.toFixed(2);
+            document.getElementById('c-val-E0').innerText = state.E0.toFixed(2);
+
+            // 計算全域平均進口與結算匯率的價差
+            const gap = state.E_settle - state.E_import;
+            document.getElementById('val-gap-show').innerText = `全域平均匯差: ${gap >= 0 ? '+' : ''}${gap.toFixed(2)} INR`;
+
+            // 全域平均結算匯率相較基準之變動百分比
+            const caf_pct = ((state.E_settle - state.E0) / state.E0) * 100;
+            const diff_val = state.E_settle - state.E0;
+
+            // -------------------------------------------------------------
+            // 📐 模組一：基準與材料權重計算 (基於 E0)
+            // -------------------------------------------------------------
+            const R_bcd_dec = state.R_bcd / 100;
+            const R_sws_dec = state.R_sws / 100;
+            const R_igst_dec = state.R_igst / 100;
+
+            // 基準匯率 E0 下的單件落地材料成本 (未啟用 MOOWR)
+            const b_AV = state.P_usd * state.E0;
+            const b_BCD = b_AV * R_bcd_dec;
+            const b_SWS = b_BCD * R_sws_dec;
+            const b_Material_Cost_NoMOOWR = b_AV + b_BCD + b_SWS; 
+
+            // 合約基準單件預期總成本 Cost_unit_0
+            const Cost_unit_0 = state.moowr_on ? (b_AV + state.C_local) : (b_Material_Cost_NoMOOWR + state.C_local);
+
+            // 材料權重係數 W_material
+            const W_material = (state.P_usd * state.E0) / Cost_unit_0;
+            document.getElementById('c-W_material_show').innerText = `${(W_material * 100).toFixed(1)}%`;
+
+            // 合約原始單價 Price_unit_0
+            const Price_unit_0 = Cost_unit_0 / (1 - (state.M_target / 100));
+
+            // -------------------------------------------------------------
+            // 🔄 模組二：四分批滾動計算累加 (Consolidated Calculation Loop)
+            // -------------------------------------------------------------
+            let Cost_no_clause_consolidated = 0;
+            let Revenue_optimized_consolidated = 0;
+            let Total_Upfront_Duties_Deferred_consolidated = 0;
+            let Interest_Saved_consolidated = 0;
+            let sum_delta_adj = 0;
+
+            state.batches.forEach(b => {
+                // 單批次清關進口成本 (未啟用 MOOWR)
+                const av_import = state.P_usd * b.E_import;
+                const bcd_import = av_import * R_bcd_dec;
+                const sws_import = bcd_import * R_sws_dec;
+                const igst_import = (av_import + bcd_import + sws_import) * R_igst_dec;
+                
+                const cost_unit_actual = av_import + bcd_import + sws_import + state.C_local;
+                Cost_no_clause_consolidated += cost_unit_actual * b.qty;
+
+                // 價格走廊調整
+                const caf_i = ((b.E_settle - state.E0) / state.E0) * 100;
+                let delta_adj_i = 0;
+                if (Math.abs(caf_i) > state.deadband) {
+                    if (caf_i > state.deadband) {
+                        delta_adj_i = (caf_i - state.deadband) / 100;
+                    } else {
+                        delta_adj_i = (caf_i + state.deadband) / 100;
+                    }
+                }
+                sum_delta_adj += delta_adj_i;
+
+                const price_final_i = Price_unit_0 * (1 + W_material * delta_adj_i);
+                Revenue_optimized_consolidated += price_final_i * b.qty;
+
+                // MOOWR 關稅遞延與利息節省
+                const deferred_duties_i = (bcd_import + sws_import + igst_import) * b.qty;
+                Total_Upfront_Duties_Deferred_consolidated += deferred_duties_i;
+
+                const interest_saved_i = state.moowr_on ? (deferred_duties_i * 0.12 * ((180 + state.T_credit) / 365)) : 0;
+                Interest_Saved_consolidated += interest_saved_i;
+            });
+
+            // -------------------------------------------------------------
+            // 📈 模組三：綜合總損益模型指標計算
+            // -------------------------------------------------------------
+            // ❌ 案 1: 現狀 (No Clause) 總額與毛利
+            const Cost_no_clause_total = Cost_no_clause_consolidated;
+            const Revenue_no_clause = Price_unit_0 * state.Q;
+            const Profit_no_clause = Revenue_no_clause - Cost_no_clause_total;
+            const Margin_no_clause = (Profit_no_clause / Revenue_no_clause) * 100;
+
+            //  案 2: 提案 (With Clause + MOOWR) 總額與毛利
+            const Cost_optimized_total = Cost_no_clause_consolidated; // 最終關稅成本相同
+            const Revenue_optimized = Revenue_optimized_consolidated;
+            const Total_Upfront_Duties_Deferred = Total_Upfront_Duties_Deferred_consolidated;
+            const Interest_Saved = Interest_Saved_consolidated;
+
+            // 優化後實際淨利
+            const Profit_optimized = Revenue_optimized - Cost_optimized_total + Interest_Saved;
+            const Margin_optimized = (Profit_optimized / Revenue_optimized) * 100;
+
+            // 財務防護效益 (Value Rescued)
+            const Value_Rescued = Profit_optimized - Profit_no_clause;
+
+            // 客戶加權結算單價與平均變動率
+            const Price_final_1 = Revenue_optimized / state.Q;
+            const Delta_adj = sum_delta_adj / 4; // 均勻批次下之有效變動係數平均值
+
+            // -------------------------------------------------------------
+            // 🖥️ 渲染供應商視角 DOM
+            // -------------------------------------------------------------
+            document.getElementById('s-value-rescued').innerText = `${Value_Rescued >= 0 ? '+' : ''}${formatCurrency(Value_Rescued)} INR`;
+            document.getElementById('s-no-clause-profit').innerText = `${formatCurrency(Profit_no_clause)} INR`;
+            document.getElementById('s-no-clause-cost').innerText = `${formatCurrency(Cost_no_clause_total)} INR`;
+            document.getElementById('s-no-clause-margin').innerText = `${Margin_no_clause.toFixed(1)}%`;
+            
+            document.getElementById('s-with-clause-profit').innerText = `${formatCurrency(Profit_optimized)} INR`;
+            document.getElementById('s-with-clause-price').innerText = `${formatCurrency(Revenue_optimized)} INR`;
+            document.getElementById('s-with-clause-margin').innerText = `${Margin_optimized.toFixed(1)}%`;
+
+            // 預期理想利潤 (無匯損狀態，用於圖表比例基準)
+            const Profit_expected = (Price_unit_0 - Cost_unit_0) * state.Q;
+
+            // 更新供應商視角狀態徽章與顏色
+            const ncBadge = document.getElementById('s-no-clause-badge');
+            const ncProfitText = document.getElementById('s-no-clause-profit');
+            if (Profit_no_clause < -0.01) {
+                ncBadge.innerText = "赤字虧損";
+                ncBadge.className = "text-xs font-semibold px-2.5 py-0.5 rounded bg-red-500/20 text-red-500 border border-red-500/20 glow-red animate-pulse";
+                ncProfitText.className = "text-2xl font-bold font-mono text-red-500 glow-red";
+            } else if (Profit_no_clause < Profit_expected * 0.5) {
+                ncBadge.innerText = "毛利嚴重侵蝕";
+                ncBadge.className = "text-xs font-semibold px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-500 border border-amber-500/20 glow-gold";
+                ncProfitText.className = "text-2xl font-bold font-mono text-amber-500 glow-gold";
+            } else {
+                ncBadge.innerText = "利潤正常";
+                ncBadge.className = "text-xs font-semibold px-2.5 py-0.5 rounded bg-release-500/20 text-release-500 border border-release-500/20 glow-green";
+                ncProfitText.className = "text-2xl font-bold font-mono text-white";
+            }
+
+            // 更新利潤條
+            const maxProfit = Math.max(Profit_optimized, Profit_expected, 1);
+            let ncWidth = (Profit_no_clause / maxProfit) * 100;
+            if (ncWidth < 0) ncWidth = 5; 
+            let wcWidth = (Profit_optimized / maxProfit) * 100;
+            if (wcWidth < 0) wcWidth = 5;
+            
+            document.getElementById('s-no-clause-bar').style.width = `${Math.min(Math.max(ncWidth, 5), 100)}%`;
+            document.getElementById('s-no-clause-bar').className = Profit_no_clause < 0 ? "h-full bg-red-500 rounded-full" : "h-full bg-slate-500 rounded-full";
+            document.getElementById('s-with-clause-bar').style.width = `${Math.min(Math.max(wcWidth, 5), 100)}%`;
+
+            // MOOWR 卡片與帳期利息節省渲染
+            document.getElementById('s-moowr-deferred').innerText = `${formatCurrency(Total_Upfront_Duties_Deferred)} INR`;
+            document.getElementById('s-moowr-interest').innerText = `${formatCurrency(Interest_Saved)} INR`;
+            document.getElementById('s-moowr-interest-label').innerText = `(含 180天生產期 + ${state.T_credit}天帳期)`;
+            
+            const moowrStatusText = document.getElementById('s-moowr-upfront-status');
+            const moowrBar = document.getElementById('s-moowr-progress-bar');
+            const totalDays = 180 + state.T_credit;
+            
+            if (state.moowr_on) {
+                moowrStatusText.innerText = `共 ${totalDays} 天資金免息遞延`;
+                moowrStatusText.className = "font-bold text-release-500 font-mono";
+                const barWidth = 60 + (state.T_credit / 90) * 40;
+                moowrBar.style.width = `${barWidth}%`;
+                moowrBar.className = "h-full bg-release-500 transition-all duration-300 rounded-full";
+            } else {
+                moowrStatusText.innerText = `全額立即繳納 (0天遞延)`;
+                moowrStatusText.className = "font-bold text-red-500 font-mono";
+                moowrBar.style.width = "10%";
+                moowrBar.className = "h-full bg-red-500 transition-all duration-300 rounded-full";
+            }
+
+            // FEMA 合規與紅綠燈渲染 (基於平均進口匯率貶值程度)
+            const trafficGlow = document.getElementById('rbi-traffic-glow');
+            const trafficLight = document.getElementById('rbi-traffic-light');
+            const trafficStatus = document.getElementById('rbi-traffic-status');
+            const matchStatusShow = document.getElementById('rbi-matching-status-show');
+            const complianceDesc = document.getElementById('rbi-compliance-desc');
+            const import_caf_pct = ((state.E_import - state.E0) / state.E0) * 100;
+
+            if (state.rbi_matching) {
+                trafficGlow.className = "h-12 w-12 rounded-full bg-release-500/20 border-2 border-release-500 flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.4)]";
+                trafficLight.className = "h-5 w-5 rounded-full bg-release-500 animate-pulse";
+                trafficStatus.innerText = "合規卓越 (Excellent)";
+                trafficStatus.className = "text-base font-bold text-release-500 block";
+                matchStatusShow.innerText = "已自動核銷匹配";
+                matchStatusShow.className = "font-bold text-release-500";
+                complianceDesc.innerHTML = "由代工廠建立的 **BoE & ORM 自動核銷系統** 已開啟，數據精準同步至 IDPMS 系統中，完全消除了任何 Caution List 與信用凍結的法律合規風險。";
+            } else {
+                if (import_caf_pct > 10) {
+                    trafficGlow.className = "h-12 w-12 rounded-full bg-red-500/20 border-2 border-red-500 flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.4)]";
+                    trafficLight.className = "h-5 w-5 rounded-full bg-red-500 animate-ping";
+                    trafficStatus.innerText = "高合規風險 (Caution List!)";
+                    trafficStatus.className = "text-base font-bold text-red-500 block glow-red";
+                    matchStatusShow.innerText = "異常未結案 (⚠️)";
+                    matchStatusShow.className = "font-bold text-red-500 glow-red animate-pulse";
+                    complianceDesc.innerHTML = `<span class="text-red-500 font-bold"><i class="fa-solid fa-circle-exclamation mr-1"></i> 合規警報：</span> 全域平均進口時盧比已貶值達 **${import_caf_pct.toFixed(1)}%**，墊付資金劇增。在未開啟自動核銷下，**報關入境單 (BoE)** 與 **付匯 ORM** 核銷連線極易出現異常，**面臨被 RBI 列入 Caution List 警告名單**的極高危險！`;
+                } else {
+                    trafficGlow.className = "h-12 w-12 rounded-full bg-amber-500/20 border-2 border-amber-500 flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(245,158,11,0.3)]";
+                    trafficLight.className = "h-5 w-5 rounded-full bg-amber-500";
+                    trafficStatus.innerText = "常規人工核銷 (Manual Match)";
+                    trafficStatus.className = "text-base font-bold text-amber-500 block";
+                    matchStatusShow.innerText = "手動核銷申報中";
+                    matchStatusShow.className = "font-bold text-amber-500";
+                    complianceDesc.innerHTML = "採用手動申報匹配。雖然合規仍在寬限期內，但缺乏自動核銷連線，易因跨部門（採購、物流與財務）在帳期內溝通脫節而產生逾期核銷的隱性法律糾紛。";
+                }
+            }
+
+            // -------------------------------------------------------------
+            // 🖥️ 渲染客戶方視角 DOM
+            // -------------------------------------------------------------
+            document.getElementById('c-final-price').innerText = `${formatCurrency(Price_final_1)} INR`;
+            document.getElementById('c-calc-original-price').innerText = `${Price_unit_0.toFixed(2)} INR`;
+            document.getElementById('c-calc-caf').innerText = `${caf_pct >= 0 ? '+' : ''}${caf_pct.toFixed(2)}%`;
+            document.getElementById('c-calc-weight').innerText = `${(W_material * 100).toFixed(1)}%`;
+            document.getElementById('c-calc-delta').innerText = `${Delta_adj >= 0 ? '+' : ''}${(Delta_adj * 100).toFixed(2)}%`;
+
+            const priceDiffPct = ((Price_final_1 - Price_unit_0) / Price_unit_0) * 100;
+            const calcDiffPrice = document.getElementById('c-calc-diff-price');
+            const finalPriceDiff = document.getElementById('c-final-price-diff');
+
+            if (priceDiffPct > 0.01) {
+                calcDiffPrice.innerText = `+${(Price_final_1 - Price_unit_0).toFixed(2)} INR (+${priceDiffPct.toFixed(2)}%)`;
+                calcDiffPrice.className = "text-red-500 font-bold";
+                finalPriceDiff.innerText = `(結算單價調漲 +${priceDiffPct.toFixed(2)}%)`;
+                finalPriceDiff.className = "text-[10px] text-red-500 block mt-0.5 font-semibold";
+            } else if (priceDiffPct < -0.01) {
+                calcDiffPrice.innerText = `${(Price_final_1 - Price_unit_0).toFixed(2)} INR (${priceDiffPct.toFixed(2)}%)`;
+                calcDiffPrice.className = "text-release-500 font-bold";
+                finalPriceDiff.innerText = `(結算單價降價 ${priceDiffPct.toFixed(2)}%)`;
+                finalPriceDiff.className = "text-[10px] text-release-500 block mt-0.5 font-semibold";
+            } else {
+                calcDiffPrice.innerText = `0.00 INR (0.00%)`;
+                calcDiffPrice.className = "text-slate-400";
+                finalPriceDiff.innerText = "(相較基準單價相同)";
+                finalPriceDiff.className = "text-[10px] text-slate-400 block mt-0.5";
+            }
+
+            // 客戶定價安定度圓圈渲染
+            const clientStabilityGlow = document.getElementById('c-price-stability-glow');
+            const clientStabilityStatus = document.getElementById('c-price-stability-status');
+            const clientStabilityDesc = document.getElementById('c-price-stability-desc');
+            const abs_caf = Math.abs(caf_pct);
+
+            if (abs_caf <= state.deadband) {
+                clientStabilityGlow.className = "w-24 h-24 rounded-full border-4 border-safe-500 mx-auto flex flex-col items-center justify-center bg-safe-500/5 my-4 shadow-[0_0_15px_rgba(6,182,212,0.4)]";
+                clientStabilityStatus.innerText = "絕對鎖定";
+                clientStabilityStatus.className = "text-base font-extrabold text-safe-500 glow-cyan";
+                clientStabilityDesc.innerHTML = `結算匯率波動處於 **+/-${state.deadband}% 免責死區內**。在此區間內，最終結算請款單價**絕對維持固定原價**，完美保護甲方終端定價 (MRP) 策略與預算精確編列。`;
+            } else {
+                if (caf_pct > 0) {
+                    clientStabilityGlow.className = "w-24 h-24 rounded-full border-4 border-guard-500 mx-auto flex flex-col items-center justify-center bg-guard-500/5 my-4 shadow-[0_0_15px_rgba(245,158,11,0.3)]";
+                    clientStabilityStatus.innerText = "動態補償";
+                    clientStabilityStatus.className = "text-base font-extrabold text-guard-500 glow-gold";
+                    clientStabilityDesc.innerHTML = `結算匯率貶值已**突破 +${state.deadband}% 走廊限制**。依據對稱協定，甲方僅需針對超出死區的部分（即 **${(caf_pct - state.deadband).toFixed(2)}%**）按照進口材料權重比例進行微幅的差價補償。`;
+                } else {
+                    clientStabilityGlow.className = "w-24 h-24 rounded-full border-4 border-release-500 mx-auto flex flex-col items-center justify-center bg-release-500/5 my-4 shadow-[0_0_15px_rgba(16,185,129,0.3)]";
+                    clientStabilityStatus.innerText = "降價讓利";
+                    clientStabilityStatus.className = "text-base font-extrabold text-release-500 glow-green animate-bounce";
+                    clientStabilityDesc.innerHTML = `結算匯率升值已**突破 -${state.deadband}% 走廊限制**！盧比升值帶來了可觀的材料採購優勢。依據對稱原則，單價已自動扣除差價紅利並 **100% 退還給甲方**！`;
+                }
+            }
+
+            // -------------------------------------------------------------
+            // 🚨 客戶潛在隱性中斷風險成本計算 (結合信用帳期加權)
+            // -------------------------------------------------------------
+            const risk_multiplier = 1.0 + (state.T_credit / 30);
+            const import_caf_pct_val = ((state.E_import - state.E0) / state.E0) * 100;
+            const fx_stress_factor = Math.max(0, import_caf_pct_val - state.deadband);
+            
+            const risk_financial = fx_stress_factor > 0 ? (state.Q * state.P_usd * (state.E_import - state.E0) * 0.18 * risk_multiplier) : 0;
+            const risk_delay = fx_stress_factor > 0 ? (Cost_no_clause_total * 0.08 * risk_multiplier) : 0;
+            const total_risk_cost = risk_financial + risk_delay;
+
+            // 渲染客戶視角風險卡片
+            document.getElementById('c-risk-multiplier-badge').innerText = `${risk_multiplier.toFixed(1)}x 帳期暴露`;
+            document.getElementById('c-risk-cost-financial').innerText = `${formatCurrency(risk_financial)} INR`;
+            document.getElementById('c-risk-cost-delay').innerText = `${formatCurrency(risk_delay)} INR`;
+            document.getElementById('c-total-risk-cost').innerText = `${formatCurrency(total_risk_cost)} INR`;
+            document.getElementById('c-total-risk-cost-desc').innerText = `(已加權 ${state.T_credit}天帳期下之匯率波動暴露乘數)`;
+
+            if (total_risk_cost > 0.01) {
+                document.getElementById('c-total-risk-cost').className = "text-lg font-black font-mono text-red-500 glow-red animate-pulse";
+            } else {
+                document.getElementById('c-total-risk-cost').className = "text-lg font-black font-mono text-slate-500";
+            }
+
+            // -------------------------------------------------------------
+            // 🔄 渲染批次動態表格 (Render Table)
+            // -------------------------------------------------------------
+            renderBatchTable();
+        }
+
+        // 金額格式化輔助函數
+        function formatCurrency(amount) {
+            return Math.round(amount).toLocaleString('en-US');
+        }
+
+        // 初始運行計算
+        calculateEngine();
+    </script>
+</body>
+</html>
