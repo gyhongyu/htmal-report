@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-05-22T21:35:27.374Z",
+  "lastUpdated": "2026-05-25T15:08:38.296Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1210,6 +1210,19 @@
       "fileName": "report-1779485726648.html",
       "createdAt": "2026-05-22T21:35:27.374Z",
       "updatedAt": "2026-05-22T21:35:27.374Z"
+    },
+    {
+      "id": "report-1779721717417",
+      "title": "Target: Winbond Electronics India",
+      "description": "目標企業：華邦電印度",
+      "categories": [
+        "客戶KYC",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1779721717417.html",
+      "createdAt": "2026-05-25T15:08:38.296Z",
+      "updatedAt": "2026-05-25T15:08:38.296Z"
     }
   ]
 }
