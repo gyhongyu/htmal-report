@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-05-25T15:08:38.296Z",
+  "lastUpdated": "2026-05-26T14:39:54.547Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1223,6 +1223,19 @@
       "fileName": "report-1779721717417.html",
       "createdAt": "2026-05-25T15:08:38.296Z",
       "updatedAt": "2026-05-25T15:08:38.296Z"
+    },
+    {
+      "id": "report-1779806392387",
+      "title": "Target: Concentrix (India)",
+      "description": "目標企業：Concentrix (India)",
+      "categories": [
+        "客戶KYC",
+        "內部簡報",
+        "項目計劃"
+      ],
+      "fileName": "report-1779806392387.html",
+      "createdAt": "2026-05-26T14:39:54.547Z",
+      "updatedAt": "2026-05-26T14:39:54.547Z"
     }
   ]
 }

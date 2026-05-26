@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">Deep Dive KYC: Concentrix India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Concentrix India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Concentrix (India)</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Concentrix (India)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Enterprise IT Hardware Buyer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Concentrix Technologies (India) Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72300HR2010PTC112259</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted locally)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (當地非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot & Scale</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模與體量</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">> 100,000</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Employees in India)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Concentrix Corp (NASDAQ: CNXC)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Concentrix Corporation (納斯達克: CNXC)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Operations</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心運營中心</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Gurugram (Haryana)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Gurugram (古爾岡, 哈里亞納邦)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Two Horizon Centre, DLF 5, Sector 43</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">Two Horizon Centre, DLF 5, Sector 43</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint & Delivery Centers</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與交付中心</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Core Delivery Hubs (Tier-1):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">核心營運與交付樞紐：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Gurugram (DLF Cyber City):</strong> North India hub for high-end CX & IT support.</li>
+                                <li data-lang="zh"><strong>Gurugram (DLF Cyber City):</strong> 北印度核心樞紐，容納數千名高階 CX 與 IT 支援員工。</li>
+                                <li data-lang="en"><strong>Bengaluru (Manyata Tech Park):</strong> Largest South India base. Focus: Tech support & Analytics.</li>
+                                <li data-lang="zh"><strong>Bengaluru (Manyata Tech Park):</strong> 南印度最大營運基地，專注技術支援與數據分析。</li>
+                                <li data-lang="en"><strong>Pune & Hyderabad:</strong> EON Free Zone & Mindspace IT Park. Mega BPO operations.</li>
+                                <li data-lang="zh"><strong>Pune & Hyderabad:</strong> 分別位於 EON Free Zone 與 Mindspace，承接跨國後勤與客服。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Innovation & Tier-2 Expansion:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發創新與新興節點：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Bengaluru GenAI Lab:</strong> Focus on AI bots and Cloud infra R&D.</li>
+                                <li data-lang="zh"><strong>Bengaluru 數位創新實驗室:</strong> 專注 GenAI 整合與自動化客服機器人研發。</li>
+                                <li data-lang="en"><strong>Tier-2 Nodes:</strong> Bhubaneswar, Chandigarh, and Ranchi (Cost-effective talent pools).</li>
+                                <li data-lang="zh"><strong>Tier-2 新興節點:</strong> Bhubaneswar, Chandigarh, Ranchi (獲取高性價比人才庫)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding Trace</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構 (穿透分析)</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong> 100% US-based FDI</p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong> 純美資 (FDI) 跨國企業</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Holding)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Concentrix Services (Ireland) Ltd. / Concentrix CV (Netherlands)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 99% Stake via overseas entities</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 99% 持股 (海外控股實體)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Intermediate)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+                                <strong class="text-white">Concentrix International (UK) / Marnix Lux S.A. (Luxembourg)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終母公司</span>
+                                <strong class="text-blue-300">Concentrix Corporation (USA)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Enterprise IT BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Enterprise IT Procurement & BOM Analysis</span>
+                    <span data-lang="zh">3. 企業 IT 硬體基礎設施與 BOM 需求拆解</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Hardware Procurement Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要採購硬體大類 (十萬級座位)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Unified Comms:</strong> Enterprise Headsets & Audio.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>通訊終端：</strong> 企業級通訊耳機與會議設備。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Workstations:</strong> Thin Clients & Mini PCs.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>終端電腦：</strong> 瘦客戶機與微型電腦 (Thin Clients)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Infra:</strong> Servers & Datacenter Networking.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>基礎設施：</strong> 伺服器與資料中心網路設備。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Power Backup:</strong> UPS & Energy Management.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電源管理：</strong> 不斷電系統 (UPS) 與智慧插座。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Foxlink Ops)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">硬體系統/零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Audio Components:</strong> Type-C/USB-A audio bridge chips, durable wire harnesses, mic modules for ANC headsets.</li>
+                            <li data-lang="zh"><strong>音訊通訊：</strong> Type-C/USB-A 音訊轉接晶片模組、耐彎折通訊線束、麥克風收音模組。</li>
+                            
+                            <li data-lang="en"><strong>Mini PC I/O:</strong> High-density interfaces (HDMI, DP, USB 3.2), internal cooling fans, power cables.</li>
+                            <li data-lang="zh"><strong>Thin Client 介面：</strong> 高密度 I/O 接口 (HDMI, DP, USB 3.2 模組)、內部散熱與電源線。</li>
+                            
+                            <li data-lang="en"><strong>Energy Storage:</strong> High-capacity Li-ion battery packs for UPS, heavy-duty server power cords.</li>
+                            <li data-lang="zh"><strong>能源與備援：</strong> 伺服器級大電流電源線、大容量 UPS 鋰電池模組、智慧延長線。</li>
+                            
+                            <li data-lang="en"><strong>Networking:</strong> CAT6/CAT7 structured cabling, server rack interconnects.</li>
+                            <li data-lang="zh"><strong>網路佈線：</strong> CAT6/CAT7 企業級網路佈線、伺服器內部連接器。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps & Strategy</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求與 Foxlink 策略</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>OEM Dependency:</strong> Concentrix buys massive volumes via HP, Dell, Jabra, Poly.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>OEM 依賴：</strong> 龐大採購量主要透過 HP, Dell, Jabra, Poly 等大廠進行。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Foxlink Play:</strong> Become the Tier-2 "Make in India" supplier for these OEMs to win Concentrix's local BPO tenders.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>Foxlink 機會：</strong> 成為上述 OEM 大廠在印度的二階供應商，提供符合在地標案要求的高品質連接器與線材。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (2025-2026)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025-2026)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Strategic Positions Indicator</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：7 條核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed (Data Analytics)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Director - IT Procurement</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gurugram</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Gurugram (古爾岡)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Handling local vendor management and IT hardware negotiations. Commands massive local buying power.</td>
+                                    <td data-lang="zh"><strong>關鍵決策者：</strong> 負責印度區 IT 軟硬體設備在地採購與供應商議價，擁有龐大的在地硬體採購權限。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">GenAI Integration Architect</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Massive hiring for AI architects. Indicates aggressive deployment of Generative AI into existing CX systems.</td>
+                                    <td data-lang="zh">大舉招募 AI 架構師，顯示正將生成式 AI 大規模導入現有客服系統，推動系統升級。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Facilities Manager - New Sites</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+                                    </td>
+                                    <td data-lang="en">Setting up new office infra. Signals 2026 expansion plans, driving fresh IT hardware deployment needs.</td>
+                                    <td data-lang="zh">負責新辦公園區基礎設施建置，暗示 2026 年擴點計畫，將帶動新一波 IT 硬體採購。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Network & UC Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Noida</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Noida (諾伊達)</span>
+                                    </td>
+                                    <td data-lang="en">Maintaining VoIP and cloud comms for 100,000+ seats.</td>
+                                    <td data-lang="zh">負責維護十萬人級別的 VoIP 與雲端統一通訊 (UC) 架構。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">InfoSec Compliance Officer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en">Ensuring endpoint devices and data storage meet ISO 27001/GDPR strict standards.</td>
+                                    <td data-lang="zh">確保資料落地與終端硬體設備符合最高資安標準 (如 ISO 27001 / GDPR)。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Customer Success Mgr - Global</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Hyderabad</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Hyderabad (海德拉巴)</span>
+                                    </td>
+                                    <td data-lang="en">Managing B2B delivery for Fortune 500 US/EU clients. High standard for voice/comm equipment.</td>
+                                    <td data-lang="zh">對接歐美五百大客戶，維持高標準的 B2B 服務交付品質。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Cloud Infra Administrator</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Accelerating shift from on-premise servers to hybrid cloud architectures.</td>
+                                    <td data-lang="zh">顯示其基礎設施正持續從地端 (On-premise) 伺服器轉向混合雲架構。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Procurement Channel Analysis -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Procurement Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 採購決策與供應鏈網絡分析</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">B2B Procurement Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">採購與通路模式 (B2B)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Centralized Setup:</strong> Core servers & software licenses are driven by Global Master Agreements signed by US HQ with OEMs.</li>
+                                <li data-lang="zh"><strong>集中化採購：</strong> 核心伺服器與大型軟體授權，由美國總部與全球 OEM 簽訂框架協議 (Master Agreements)。</li>
+                                
+                                <li data-lang="en"><strong>Localized Deployment:</strong> Gurugram procurement holds high autonomy for endpoint devices (headsets, keyboards, UPS, network cabling), preferring local System Integrators (SIs).</li>
+                                <li data-lang="zh"><strong>在地化佈建採購：</strong> 針對終端設備 (耳機、UPS、網路佈線)，Gurugram 團隊擁有極高決策權，傾向與印度本地系統整合商及 OEM 分公司合作。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain & Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Pan-India Capability:</strong> Vendors must offer Pan-India fulfillment and warranty support.</li>
+                                <li data-lang="zh"><strong>泛印度交付能力：</strong> 供應商需具備「泛印度 (Pan-India) 交付與保固能力」。</li>
+                                
+                                <li data-lang="en"><strong>OEM Integration:</strong> If Foxlink sells to HP/Dell to win Concentrix, Foxlink must ensure steady component supply to OEM assembly plants in Tamil Nadu or UP.</li>
+                                <li data-lang="zh"><strong>OEM 供應整合：</strong> 若透過 HP/Dell 拿單，Foxlink 需確保能將關鍵組件穩定供貨至這些 OEM 在 Tamil Nadu 或 UP 邦的本地組裝廠。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Market Position & Strategy</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Scored based on BPO scale & IT infra investment</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Top 10 BPO/BPM Market Rankings</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度市場 BPO 影響力排名 (TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2" data-lang="en">Rank/Tier</th><th class="p-2" data-lang="zh">排名梯隊</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Origin / Strength</th><th class="p-2" data-lang="zh">背景 / 強項領域</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">TCS BPO</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Overall IT/BPO Giant)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (整體 IT/BPO 巨頭，規模第一)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">Top 2 (CX)</td>
+                                        <td class="p-2 text-white font-bold">Concentrix India</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">USA (Target - Post Webhelp merger, CX King)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">美國 (目標 - 併購 Webhelp 後市佔大增的 CX 巨頭)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">Top Tier</td>
+                                        <td class="p-2">Teleperformance</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">France (Biggest direct threat in pure CX)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">法國 (Concentrix 在純 CX 領域最大直接對手)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">Top Tier</td>
+                                        <td class="p-2">Infosys BPM</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Finance & Ops Automation)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (財務與後勤自動化)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">Top Tier</td>
+                                        <td class="p-2">Genpact</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">USA/India (Enterprise Ops leader)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">美國/印度 (企業營運外包領導者)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">Rest of Top 10</td>
+                                        <td class="p-2" colspan="2">Accenture Ops, Wipro, Tech Mahindra, Firstsource, WNS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Foxlink Opportunity:</strong> Facing Teleperformance, Concentrix must upgrade employee endpoints (AI-noise canceling headsets, stable Thin Clients). Foxlink should target OEM suppliers with PLI / "Make in India" cost advantages.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>Foxlink 機會點：</strong> 為了對抗競爭，Concentrix 必須升級通訊終端硬體。Foxlink 應鎖定供貨給他們的頂級 IT OEM，主打印度本地製造 (PLI) 的交期與成本優勢。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-12</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corporate] Webhelp Integration Completed</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[企業新聞] 宣佈全面完成 Webhelp 業務整合</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Indian operations and physical offices merged successfully. Employee headcount hits new record.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">印度區營運體系與辦公室順利合併，員工總數創下新高。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Expansion] Bhubaneswar Center Scaling Up</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[擴張] 宣佈擴建 Bhubaneswar 運營中心</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Adding 2,000 seats in Odisha to boost Tier-2 talent pool. <span class="text-gray-500">(Opp: New IT infra hardware demand)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">響應區域發展，在奧迪沙邦擴增 2,000 個客服席位。<span class="text-gray-500">(機會：帶動新一批 IT 建置需求)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Tech] AI-Driven CX Platform Launched</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[技術] 發佈升級版 AI 驅動型 CX 平台</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Showcased in Bengaluru. In-house GenAI assist tool reduces AHT (Average Handling Time) by 20%.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">展示內部研發的生成式 AI 輔助工具，能即時協助客服，降低 20% 平均處理時間。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-28</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Procurement] 2026 IT Hardware Refresh Initiated</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[採購] 啟動 2026 年度 IT 硬體更新計畫</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Replacing over 30,000 legacy workstations in India. Prioritizing IT brands with "Make in India" certification.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對超過 3 萬台舊型工作站啟動汰換評估，優先考慮具備 "Make in India" 資格的 IT 品牌。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News condensed -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-20:</strong> <span data-lang="en">Gurugram HQ gets 100% Green Energy certification.</span><span data-lang="zh">Gurugram 總部達成 100% 綠能，推動低功耗 IT 設備。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-10:</strong> <span data-lang="en">Won "Best D&I Workplace" (45%+ women).</span><span data-lang="zh">獲評為「印度最佳多元與包容工作場所」。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15:</strong> <span data-lang="en">Sponsored NASSCOM BPO Summit (Focus: AI & Edge Computing).</span><span data-lang="zh">贊助 NASSCOM 峰會，強調未來投資終端邊緣硬體。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-08:</strong> <span data-lang="en">Donated 1,000 PCs for rural education CSR.</span><span data-lang="zh">捐贈 1,000 套退役電腦設備給農村學校 (CSR)。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores mapping based on BPO context for Concentrix:
+        // Market Share: 9 (Top 2 pure CX, Tier 1 overall)
+        // Local Footprint: 9 (>100k seats in India, massive expansion)
+        // Brand Power: 8 (Globally recognized MNC)
+        // Tech Adoption: 8 (GenAI integration, Cloud Infra)
+        // Financial Health: 9 (NASDAQ listed, multi-billion revenue)
+        const radarScores = [9, 9, 8, 8, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Local Footprint', 'Brand Power', 'Tech Adoption', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化營運', '品牌影響力', '技術整合度', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
