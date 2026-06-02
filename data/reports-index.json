@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-05-26T14:39:54.547Z",
+  "lastUpdated": "2026-06-02T04:41:54.834Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1236,6 +1236,19 @@
       "fileName": "report-1779806392387.html",
       "createdAt": "2026-05-26T14:39:54.547Z",
       "updatedAt": "2026-05-26T14:39:54.547Z"
+    },
+    {
+      "id": "report-1780375312799",
+      "title": "Target: Nothing India",
+      "description": "目標企業：Nothing India (雙實體)",
+      "categories": [
+        "客戶KYC",
+        "項目計劃",
+        "內部簡報"
+      ],
+      "fileName": "report-1780375312799.html",
+      "createdAt": "2026-06-02T04:41:54.834Z",
+      "updatedAt": "2026-06-02T04:41:54.834Z"
     }
   ]
 }
