@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Amber Enterprises India Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Amber Enterprises India Limited (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Amber Enterprises India Limited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+    
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-b-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto" onerror="this.src='https://placehold.co/150x40/1f2937/ffffff?text=FOXLINK'">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Strategic Sourcing</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業 - 印度策略採購情報</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+            
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC STRATEGIC DEEP DIVE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Amber Enterprises India Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Amber Enterprises India Limited (安博企業)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> Foxlink India Sourcing Hub</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制單位：</strong> 正崴印度開發策略組</p>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold tracking-wider" data-lang="en">Top-Priority Target Account</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold tracking-wider" data-lang="zh">最高優先級策略客戶</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Key Setups</span>
+                    <span data-lang="zh">1. 企業身份與製造基地</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Profile</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Amber Enterprises India Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> L28910PB1990PLC010265</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="en">Status: Active (Dual Listed on NSE & BSE)</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="zh">狀態：正常營運 (印度雙板上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Turnover & Volume</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">營收規模</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 10,000 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="en">(Consolidated FY25 Turnover)</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="zh">(FY25 合併營業額)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Bosses:</strong> Jasbir Singh & Daljit Singh (Promoters)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終受益人：</strong> Jasbir Singh & Daljit Singh 創始家族</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Corporate HQ</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">集團總部</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Gurugram, Haryana</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">古爾岡 (Gurugram, Haryana)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Universal Trade Tower, Sohna Road</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">Sohna 路 Universal Trade 塔</p>
+                    </div>
+                </div>
+
+                <!-- Setup Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-industry mr-2 text-blue-400"></i>Core Setups & Manufacturing Footprint (30 Facilities Nation-wide)</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-industry mr-2 text-blue-400"></i>核心製造基地與研發中心 (全印共 30 個廠區)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Key Regional Setups:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">主力工廠節點：</strong>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li data-lang="en"><strong>Rajpura Central Unit (Punjab):</strong> Group's oldest AC and sheet metal setup; hosts the central DSIR-approved R&D lab.</li>
+                                <li data-lang="zh"><strong>Rajpura 總部工廠 (Punjab):</strong> 最早期空調及鈑金核心製造中心，中央 R&D 研發基地。</li>
+                                
+                                <li data-lang="en"><strong>Dehradun Units 1-6 (Uttarakhand):</strong> Main assembly cluster for Room AC (RAC) and high-frequency copper heat exchangers.</li>
+                                <li data-lang="zh"><strong>Dehradun 基地 (Uttarakhand, Units 1-6):</strong> 負責 Room AC (家用空調) 整機組裝與高頻熱交換器。</li>
+                                
+                                <li data-lang="en"><strong>Greater Noida & Noida (Uttar Pradesh):</strong> HQ of electronic divisions (ILJIN Electronics, Ever Electronics) specializing in AC PCBAs, smart wearables, and automotive SMT.</li>
+                                <li data-lang="zh"><strong>Greater Noida / Noida 基地 (UP):</strong> 旗下電子板塊 (ILJIN Electronics, Ever Electronics) 大本營，專注控制板、智慧穿戴與車用貼片。</li>
+                                
+                                <li data-lang="en"><strong>Pune Unit (Maharashtra):</strong> Feeding Western automotive and appliance clusters (Daikin, LG) via sheet metal stamping and injection molding with strict JIT dispatch.</li>
+                                <li data-lang="zh"><strong>Pune 工廠 (Maharashtra):</strong> 服務西部汽車與家電聚落（Daikin、LG），提供鈑金與注塑 JIT 供貨。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">High-Priority Future Capex Setups:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">關鍵高額擴產項目 (重大機遇點)：</strong>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li data-lang="en"><strong>Hosur Multi-layer PCB Plant (Tamil Nadu):</strong> Sinking ₹99 Crore in advanced Bare PCB setup. Scheduled to commence full dispatch in FY27 to target South Auto cluster.</li>
+                                <li data-lang="zh"><strong>Hosur 園區 (Tamil Nadu - 擴產中):</strong> 投資 9.9 億盧比先進 Bare PCB (裸板) 廠區，預計 2027 財年全面投產。</li>
+                                
+                                <li data-lang="en"><strong>Noida Jewar Mega Complex (YEIDA Sector 8):</strong> Allotted 100 acres (Sector 8) plus Ascent-K's 16 acres (Sector 10). Staging a combined ₹6,785 Crore investment in phases to create North India's largest hub for semiconductor substrates, Bare PCBs, and premium PCBA assemblies.</li>
+                                <li data-lang="zh"><strong>Noida Jewar 巨型新廠區:</strong> 獲得 YEIDA 撥地 100 英畝（Sector 8），旗下 Ascent-K 亦獲 16 英畝（Sector 10），總投資達 678.5 億盧比，主攻半導體載板與高階電子製造。</li>
+
+                                <li data-lang="en"><strong>Rajpura R&D Tech Hub:</strong> Features DSIR-recognized Reverb Chambers and Enthalpy Labs focusing on variable-speed inverter algorithms and BLDC motor integration.</li>
+                                <li data-lang="zh"><strong>Rajpura 研發與技術中心:</strong> 獲得印度 DSIR 認證，配備先進混響室與焓差實驗室，研發變頻算法與 BLDC 馬達整合。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Scale & Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Corporate Scale & Group Ownership Net</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權結構網格</h2>
+                    
+                    <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-4 font-semibold" data-lang="en">Shareholding & JV Ownership Trace (3 Levels Up):</p>
+                        <p class="text-sm text-gray-300 mb-4 font-semibold" data-lang="zh">股權穿透與子公司矩陣 (向上三級追溯)：</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                            <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                                <span class="text-gray-500 block font-bold uppercase" data-lang="en">Level 1 (Direct Control)</span>
+                                <span class="text-gray-500 block font-bold uppercase" data-lang="zh">第一級 (直接控制)</span>
+                                <strong class="text-white text-sm block mt-1">Promoter Group (Jasbir & Daljit Singh)</strong>
+                                <span class="block text-green-400 mt-2 font-medium" data-lang="en">~40% Direct & Indirect Stake</span>
+                                <span class="block text-green-400 mt-2 font-medium" data-lang="zh">約 40% 直接與間接持股</span>
+                                <p class="text-gray-400 mt-2 leading-relaxed" data-lang="en">Founder promoters direct the board, maintaining strong local decision-making power.</p>
+                                <p class="text-gray-400 mt-2 leading-relaxed" data-lang="zh">創辦人家族掌控董事會，在印擁有極高且直接的決策話語權。</p>
+                            </div>
+                            
+                            <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                                <span class="text-gray-500 block font-bold uppercase" data-lang="en">Level 2 (Subsidiaries & JVs)</span>
+                                <span class="text-gray-500 block font-bold uppercase" data-lang="zh">第二級 (關鍵子公司與 JV 網絡)</span>
+                                <ul class="text-gray-300 mt-2 space-y-2 leading-relaxed">
+                                    <li>• <strong>ILJIN Electronics:</strong> <span class="text-blue-400 font-bold">~70%</span> (Funded with ₹120 Cr by ChrysCapital & InCred PE in late 2025).</li>
+                                    <li>• <strong>Ever Electronics:</strong> <span class="text-blue-400 font-bold">~70%</span> (Focused on home appliance PCBA).</li>
+                                    <li>• <strong>Shogini Technoarts:</strong> <span class="text-blue-400 font-bold">80%</span> (Acquired Dec 2025 for ₹506 Cr by ILJIN for premium multilayer boards).</li>
+                                    <li>• <strong>Ascent Circuits:</strong> <span class="text-blue-400 font-bold">60% via ILJIN</span> (Defense, aerospace and automotive grade hardboards).</li>
+                                    <li>• <strong>Sidwal Refrigeration:</strong> <span class="text-blue-400 font-bold">100%</span> (Metros, Vande Bharat HVAC).</li>
+                                    <li>• <strong>Korea Circuit JV:</strong> <span class="text-blue-400 font-bold">70% via ILJIN</span> (HDI & substrates development).</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                                <span class="text-gray-500 block font-bold uppercase" data-lang="en">Level 3 (Ultimate Parent / Beneficiaries)</span>
+                                <span class="text-gray-500 block font-bold uppercase" data-lang="zh">第三級 (最終受益人與公眾資本)</span>
+                                <strong class="text-blue-300 text-sm block mt-1">Jasbir Singh, Daljit Singh & Global Institutional Public Funds</strong>
+                                <p class="text-gray-400 mt-2 leading-relaxed" data-lang="en">Listed entity backed by top global institutions including Singapore's Sovereign Fund (GIC) and domestic giants like HDFC Mutual Fund.</p>
+                                <p class="text-gray-400 mt-2 leading-relaxed" data-lang="zh">雙板上市，背後有新加坡主權基金 (GIC) 及印度本土龍頭 HDFC 共同基金等公眾機構股東。</p>
+                            </div>
+                        </div>
+
+                        <!-- Q3 FY26 Update Box -->
+                        <div class="mt-4 bg-gray-900/60 p-4 rounded border border-gray-700">
+                            <h4 class="text-xs font-bold uppercase text-yellow-400 mb-1" data-lang="en">Q3 FY25-26 Financial Update (Ended Dec 2025)</h4>
+                            <h4 class="text-xs font-bold uppercase text-yellow-400 mb-1" data-lang="zh">Q3 FY25-26 季報動態 (截至2025年12月)</h4>
+                            <p class="text-xs text-gray-300 leading-relaxed" data-lang="en">
+                                Single-quarter turnover hit <strong>₹ 2,997.58 Cr</strong>, demonstrating high-speed growth fueled by electronic expansion and railway HVAC. However, due to heavy Capex deployment (massive Noida and Hosur plant setups), the firm recorded a minor net loss of <strong>₹ 9.34 Cr</strong>.
+                            </p>
+                            <p class="text-xs text-gray-300 leading-relaxed" data-lang="zh">
+                                單季總收入高達 <strong>299.75 億盧比</strong>，受惠電子與軌道交通強勁需求，營收高速增長。但因大舉推進 Noida 及 Hosur 廠區之高額 Capex，受折舊與利息增加影響，單季錄得小幅淨虧損 <strong>9,340 萬盧比</strong>。
+                            </p>
+                            <p class="text-[11px] text-gray-500 mt-1" data-lang="en">Total Workforce: 1,600+ permanent staff, scaling up to 10,000+ contractors during peak summers.</p>
+                            <p class="text-[11px] text-gray-500 mt-1" data-lang="zh">員工規模：正式員工 1,600+ 人，加計季節合約工在旺季達 10,000 人以上。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Target Product Mix & Universal BOM Matrix</span>
+                    <span data-lang="zh">3. 主要產品與通用供應鏈 (BOM) 技術拆解</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-6 md:mb-8">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-700 pb-2 flex items-center justify-between">
+                            <span data-lang="en">Group Product Portfolio</span>
+                            <span data-lang="zh">集團產品體系</span>
+                            <i class="fas fa-boxes text-blue-500"></i>
+                        </div>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li>• <strong class="text-white" data-lang="en">Room AC Assemblies:</strong><span data-lang="en"> Split/Window RACs, IDUs/ODUs.</span>
+                                <strong class="text-white" data-lang="zh">家用空調整機:</strong><span data-lang="zh"> 分離式與窗型內外機。</span></li>
+                            <li>• <strong class="text-white" data-lang="en">Inverter PCBA Boards:</strong><span data-lang="en"> Control units for variable appliances.</span>
+                                <strong class="text-white" data-lang="zh">變頻 PCBA 主板:</strong><span data-lang="zh"> 家電及空調變頻控制板。</span></li>
+                            <li>• <strong class="text-white" data-lang="en">Multilayer PCBs:</strong><span data-lang="en"> Multi-layer boards, HDI & Flex PCBs.</span>
+                                <strong class="text-white" data-lang="zh">先進 PCB 裸板:</strong><span data-lang="zh"> 多層硬板、HDI與FPC軟板。</span></li>
+                            <li>• <strong class="text-white" data-lang="en">Railway HVAC Setups:</strong><span data-lang="en"> Vande Bharat and Metro climate units.</span>
+                                <strong class="text-white" data-lang="zh">軌道交通 HVAC:</strong><span data-lang="zh"> 地鐵、高鐵專用車載空調。</span></li>
+                            <li>• <strong class="text-white" data-lang="en">IoT Box Builds:</strong><span data-lang="en"> Smart wearables assembled via Noise JV.</span>
+                                <strong class="text-white" data-lang="zh">智慧穿戴與 IoT:</strong><span data-lang="zh"> 智慧手錶與 IoT 終端成品組裝。</span></li>
+                            <li>• <strong class="text-white" data-lang="en">BLDC Motors:</strong><span data-lang="en"> Energy-efficient AC & fan motors.</span>
+                                <strong class="text-white" data-lang="zh">BLDC 節能馬達:</strong><span data-lang="zh"> 變頻空調與風扇馬達 (PICL)。</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Teardown -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/30">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-700 pb-2 flex items-center justify-between">
+                            <span data-lang="en">Generic BOM Analysis</span>
+                            <span data-lang="zh">零組件技術拆解</span>
+                            <i class="fas fa-tools text-yellow-500"></i>
+                        </div>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li>• <strong class="text-white" data-lang="en">Power & Rotation:</strong><span data-lang="en"> Inverter compressors, BLDC motors, high-grade bearings, blowers.</span>
+                                <strong class="text-white" data-lang="zh">動力與傳動:</strong><span data-lang="zh"> 變頻壓縮機、BLDC馬達、高強度軸承、風扇葉輪。</span></li>
+                            <li>• <strong class="text-white" data-lang="en">Control Modules:</strong><span data-lang="en"> Multilayer bare PCBs, MCUs, Power Modules (IGBT/IPM), sensor cards.</span>
+                                <strong class="text-white" data-lang="zh">電子控制:</strong><span data-lang="zh"> 多層PCB裸板、微控制器、功率模組(IGBT/IPM)、傳感器板。</span></li>
+                            <li class="bg-blue-900/30 p-1.5 rounded border border-blue-800/50">• <strong class="text-blue-300" data-lang="en">Interconnect (Foxlink Opp):</strong><br>
+                                <span data-lang="en">Internal high-frequency wire harnesses, heavy-duty power connectors, board-to-board joints, weather-sealed wire assemblies.</span>
+                                <span data-lang="zh">機內高頻線束、重載電源連接器、高密度板對板連接器、耐高溫阻燃線組。</span></li>
+                            <li>• <strong class="text-white" data-lang="en">Structure & Thermal:</strong><span data-lang="en"> Copper-aluminum heat exchangers, sheet metal cabinets, flame-retardant plastic covers, piping.</span>
+                                <strong class="text-white" data-lang="zh">機械熱元件:</strong><span data-lang="zh"> 銅管熱交換器、金屬外殼、阻燃注塑殼體、冷媒管路。</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-700 pb-2 flex items-center justify-between">
+                            <span data-lang="en">Foxlink Intercept Strategic Match</span>
+                            <span data-lang="zh">正崴戰略切入評估</span>
+                            <i class="fas fa-crosshairs text-green-500"></i>
+                        </div>
+                        <div class="bg-gray-900/60 p-3 rounded text-xs text-gray-300 space-y-2">
+                            <p data-lang="en">
+                                <strong class="text-green-400"><i class="fas fa-check-circle mr-1"></i> Bare PCB Entry:</strong> While Amber partnered with Korea Circuit and bought Shogini, they still lack high-yield, complex HDI & FPC experience. Foxlink can license tech or supply sub-modules for Noida Jewar's massive projects.
+                            </p>
+                            <p data-lang="zh">
+                                <strong class="text-green-400"><i class="fas fa-check-circle mr-1"></i> 先進 PCB / FPC 合作:</strong> Amber 雖收購 Shogini 且有韓系合資，但 HDI 與軟硬結合板良率仍面臨考驗，正崴可作為 Noida 新廠的技術或產能夥伴。
+                            </p>
+                            <p data-lang="en">
+                                <strong class="text-green-400"><i class="fas fa-check-circle mr-1"></i> Precision Connectors:</strong> Amber's expansion into wearables, smart EV BMS, and Sidwal rail systems commands massive high-grade, shockproof, and high-frequency connectors—Foxlink's core specialty.
+                            </p>
+                            <p data-lang="zh">
+                                <strong class="text-green-400"><i class="fas fa-check-circle mr-1"></i> 精密連接器與線束:</strong> 其大舉跨足穿戴、新能源 BMS 及軌道空調，均需抗震、高溫、高頻精密端子與線束，此為正崴最具毛利優勢的切入點。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Sourcing Signals (Latest Key Recruiting Logs)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (對標最新擴產布局)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-base font-bold text-white" data-lang="en"><i class="fas fa-search-dollar mr-2 text-red-400"></i>Active Recruitment Radar (Noida/Hosur Project Milestones)</h3>
+                        <h3 class="text-base font-bold text-white" data-lang="zh"><i class="fas fa-search-dollar mr-2 text-red-400"></i>關鍵招聘情報動態 (映射其 Noida 及 Hosur 擴廠計劃)</h3>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left text-gray-300">
+                            <thead class="bg-gray-900/80">
+                                <tr>
+                                    <th class="p-3" data-lang="en">Role & Local Setup</th>
+                                    <th class="p-3" data-lang="zh">招聘職位與地點</th>
+                                    <th class="p-3" data-lang="en">Operational Signal / Core Mandate</th>
+                                    <th class="p-3" data-lang="zh">情報解讀 / 在地化信號</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td class="p-3"><strong class="text-blue-300 block">General Manager - Capex Project</strong><span class="text-gray-500">YEIDA Jewar / Noida</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Overseeing plant construction, machine importing, and line setups for the new 100-acre electronics complex. <strong>Heavy Capex signal.</strong></td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">統籌 100 英畝 Jewar 電子新廠區建廠工程與機台引進安裝，擴產訊號強烈。</td>
+                                </tr>
+                                <tr class="bg-blue-900/20">
+                                    <td class="p-3"><strong class="text-yellow-300 block">Senior Sourcing Executive - Connectors & Wire Harness</strong><span class="text-gray-500">Greater Noida (ILJIN)</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en"><strong>Direct Entry Point for Foxlink.</strong> Sourcing high-grade electronic connectors, terminals, and wiring setups. Pressure to buy locally.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh"><strong>正崴直接對口職位。</strong> 專職採購電子、家電用精密連接器、端子及線組，在地化降本壓力迫切。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-blue-300 block">Head of Sourcing - Electronic Components</strong><span class="text-gray-500">Greater Noida (ILJIN)</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Focusing on domestic vendor base expansion for active components, MCUs, inverter drives. Targeting duty minimization.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">尋求 IC、變頻模組等關鍵元器件在地化供應商開發，顯出去進口化關稅壓力。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">Senior Manager - Bare PCB Sourcing</strong><span class="text-gray-500">Hosur (Ascent Circuits)</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Managing supply and copper foil laminates purchase for the upcoming ₹99 Cr multi-layer board expansion.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">協調多層 PCB 生產所需的銅箔基板 (CCL)、化學原料等大宗採購。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">Quality Lead - Automotive Electronics / IATF 16949</strong><span class="text-gray-500">Pune (Shogini)</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Implementing automotive electronics quality compliance systems post-acquisition. Diversifying into EV and defense boards.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">因應 Shogini 收購，推進車規 IATF 16949 認證，大舉轉向汽車、防務硬板與軟板。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">BMS Firmware Developer</strong><span class="text-gray-500">Noida (ILJIN)</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Developing firmware for Lithium Battery Management Systems (BMS) for Telecom backup and EV 2-Wheelers.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">開發儲能系統 (BESS) 及雙輪電動車鋰電池 BMS 韌體，顯示集團向新能源延伸。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">Lead Engineer - Embedded Systems</strong><span class="text-gray-500">Rajpura R&D Hub</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Optimizing variable inverter AC control algorithms and integrating local IoT Wi-Fi/Bluetooth chip setups.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">負責家用變頻空調算法演變及 IoT 晶片模組（如 Wi-Fi/藍牙）整合。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">Senior Procurement Executive - Commodity Metals</strong><span class="text-gray-500">Gurugram HQ</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Handling raw copper tubing, aluminum, and sheet metal commodity purchasing and global price hedging.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">負責銅管、鋁材等空調核心金屬物料的全球及本地大宗商品避險採購。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">Production Supervisor - SMT Line</strong><span class="text-gray-500">Pune (Ever Electronics)</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Managing SMT high-speed placement runs for AC control boards to feed peak summer demand dispatch.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">主管 SMT 高速貼片產線擴產，因應 2026 夏季家用空調旺季提前備料。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">Regulatory Affairs Specialist - ESG Compliance</strong><span class="text-gray-500">Rajpura</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Overseeing emissions reporting, pollution board approvals, and environmental audits for 30 manufacturing units.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">負責集團旗下 30 家工廠的碳排申報、污染許可（環評）與綠色製造核查。</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><strong class="text-white block">Automation & Robotics Engineer</strong><span class="text-gray-500">Noida Ecotech Unit</span></td>
+                                    <td class="p-3 text-gray-300" data-lang="en">Setting up automated assembly arms and Automated Optical Inspection (AOI) setups on advanced SMT lines.</td>
+                                    <td class="p-3 text-gray-300" data-lang="zh">導入產線機械手臂自動化組裝及 AOI 光學自動檢測設備。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Dispatch Channels & Supply Grid Logic</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售通道、物流網格與協同邏輯</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2 text-sm uppercase tracking-wider" data-lang="en"><i class="fas fa-handshake mr-2"></i>Pure-Play B2B Embedded Supply Chain</h4>
+                            <h4 class="font-bold text-blue-400 mb-2 text-sm uppercase tracking-wider" data-lang="zh"><i class="fas fa-handshake mr-2"></i>純 B2B (OEM/ODM) 與 EMS 模式</h4>
+                            <ul class="list-disc pl-5 text-xs text-gray-300 space-y-2">
+                                <li><strong class="text-white" data-lang="en">Zero Consumer Brands:</strong><span data-lang="en"> Amber owns no retail brand. All activities act as "embedded vendor support" for major marquee brands.</span>
+                                    <strong class="text-white" data-lang="zh">無自我品牌:</strong><span data-lang="zh"> 集團本身不具備任何大眾品牌，完全是背後的產能巨人。</span></li>
+                                <li><strong class="text-white" data-lang="en">Aircon Client Net:</strong><span data-lang="en"> Feeds 70%+ of India's Room AC market. Key clients: Daikin (deepest alignment), Voltas, LG, Panasonic, Hitachi, Blue Star, Whirlpool, Godrej.</span>
+                                    <strong class="text-white" data-lang="zh">空調龍頭客戶群:</strong><span data-lang="zh"> 滿足印 70% 以上需求。大客戶包括 Daikin (最深策略夥伴)、Voltas、LG、Panasonic、Hitachi、Blue Star 等。</span></li>
+                                <li><strong class="text-white" data-lang="en">Transit HVAC (Sidwal):</strong><span data-lang="en"> Direct sales to Indian Railways (exclusive supplier for Vande Bharat trains), metro lines (DMRC Delhi, BMRCL Bengaluru), and bus OEMs (Tata Motors, Ashok Leyland).</span>
+                                    <strong class="text-white" data-lang="zh">軌道客車 HVAC (西德瓦):</strong><span data-lang="zh"> 直銷印度鐵路局 (Vande Bharat 列車專用)、各大城市地鐵營運商及客車大廠 (Tata, Ashok Leyland)。</span></li>
+                                <li><strong class="text-white" data-lang="en">Smart Wearables Box-Build:</strong><span data-lang="en"> Fast-tracked 50:50 JV with Noise (Nexxbase), handling fully finished smart watch box builds directly dispatched to leading e-com hubs.</span>
+                                    <strong class="text-white" data-lang="zh">穿戴電子 Box Build:</strong><span data-lang="zh"> 與 Noise (Nexxbase) 成立 50:50 合資，完成手錶、路由器成品組裝，出廠直接送達各大電商轉運倉。</span></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2 text-sm uppercase tracking-wider" data-lang="en"><i class="fas fa-truck-loading mr-2"></i>Distributed Setup & Customer Proximity Log</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2 text-sm uppercase tracking-wider" data-lang="zh"><i class="fas fa-truck-loading mr-2"></i>分散式設廠與客戶就近配送邏輯</h4>
+                            <ul class="list-disc pl-5 text-xs text-gray-300 space-y-2">
+                                <li><strong class="text-white" data-lang="en">Customer Proximity (50-km Radius):</strong><span data-lang="en"> AC structures, heavy metal shells, and blowers carry massive shipping overheads. Amber installs its assembly units within a 50km radius of the client's manufacturing hubs (e.g. Pune for LG, Sriperumbudur for South makers).</span>
+                                    <strong class="text-white" data-lang="zh">就近設廠 (50公里圈):</strong><span data-lang="zh"> 由於金屬殼體與熱交換器體積大、物流費用高，Amber 採取「客戶工廠 50 公里內建廠」策略（如在 Pune 服務 LG，在南部服務大金）。</span></li>
+                                <li class="bg-blue-950/40 p-2 rounded border border-blue-800/40"><strong class="text-blue-300" data-lang="en">Foxlink Collaborative Logic:</strong><br>
+                                    <span data-lang="en">To capture Amber's BOM share, Foxlink needs local JIT dispatch support near Greater Noida, Pune, or the new Hosur bare PCB cluster, or provide dedicated bonded warehouses for smooth daily drop-offs.</span>
+                                    <span data-lang="zh">正崴若與其深度合作，必須在 Greater Noida / Jewar、Hosur 園區或 Pune，具備「當地供貨」或「保稅倉快速交貨 (JIT)」之能力。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. SBD / Competitors Sector Ranking</span>
+                    <span data-lang="zh">6. 市場競爭版圖與對手排名</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1 border border-gray-700 m-0">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-xs uppercase tracking-wider" data-lang="en">Amber Group Competitive Index</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-xs uppercase tracking-wider" data-lang="zh">目標客戶 Amber Group 競爭力指標</h4>
+                        <div class="relative w-full h-52">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[9px] text-gray-500 mt-2 text-center" data-lang="en">Estimate based on consolidated turnover & rapid PCB integration</p>
+                        <p class="text-[9px] text-gray-500 mt-2 text-center" data-lang="zh">基於萬億盧比營收及高速 Bare PCB 逆向一體化推估</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-xs uppercase tracking-wider" data-lang="en">India Consumer & Appliance EMS Rankings</h4>
+                        <h4 class="font-bold text-white mb-2 text-xs uppercase tracking-wider" data-lang="zh">印度家電及電子 ODM/EMS 銷量排名 (TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-xs text-left text-gray-300 m-0 shadow-none">
+                                <thead class="bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2 w-16 text-center">Rank</th>
+                                        <th class="p-2" data-lang="en">Enterprise Name</th><th class="p-2" data-lang="zh">企業名稱</th>
+                                        <th class="p-2" data-lang="en">Competency Core / OEM Target</th><th class="p-2" data-lang="zh">核心優勢與定位</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2 font-semibold">Dixon Technologies (India) Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">MNC-level volume; Mobiles, TVs, Lighting leader. (Top EMS Scale)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土電子/手機/電視 EMS 龍頭，規模最大。</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/30 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">2</td>
+                                        <td class="p-2 text-white font-bold">Amber Enterprises India Ltd</td>
+                                        <td class="p-2 text-blue-300 font-semibold" data-lang="en">Target Client. Absolute leader in AC ODM; rapidly chasing Dixon in PCB.</td>
+                                        <td class="p-2 text-blue-300 font-semibold" data-lang="zh">本報告目標。空調與配件核心霸主，正擴產 PCB 追趕 Dixon。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">PG Electroplast Limited</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Direct aircon OEM and plastic injection molding competitor.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">家電注塑、空調 OEM/ODM 主要競爭對手。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">EPACK Durable Limited</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Focused strictly on residential RAC outsourcing. (No. 2 in RAC assembly)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">專注於 RAC OEM 的第二大整機代工廠。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Kaynes Technology India Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">High-mix, low-volume; Aerospace, Automotive, Rail PCBA master.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">專攻航太、醫療及汽車高附加值 EMS。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2" data-lang="en">Syrma SGS, Elin Electronics, Sahasra, Calcom Vision, PG Technoplast.</td>
+                                        <td class="p-2" colspan="2" data-lang="zh">Syrma SGS, Elin Electronics, Sahasra (裸板), Calcom, PG Technoplast.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Sourcing Radar (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月滾動情報)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-3">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap pt-0.5">2026-02-10</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Financial Brief] Q3 FY26 Single-Quarter Turnover Peak</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[財務簡報] Q3 FY26 單季營業額創高</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Declared a turnover of ₹ 2,997.58 Cr for Q3. Consolidated sheets start combining newly-acquired Shogini and ILJIN PCB assemblies. <span class="text-gray-500">(Sign: Multilayer PCBs are scaling up)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">公佈第三季總收入高達 299.75 億盧比，創同期新高。合併報表開始顯現 Shogini 與 ILJIN 新板塊產能。 <span class="text-gray-500">(訊號：PCB多元化推進中)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-3">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap pt-0.5">2026-02-01</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Acquisition Complete] Shogini 80% Equity Successfully Dispatched</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[股權交割] 正式完成對 Shogini 80% 股權收購</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Completed official equity dispatch of Shogini Technoarts for ₹506 Cr. Commenced integration of Pune plant's advanced FPC and multi-layer rigid boards. <span class="text-gray-500">(Opp: Foxlink FPC backup partnerships)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">宣告以 50.6 億盧比完成 Shogini 80% 股權的最終交割。開始將 Pune 廠 FPC 及多層板產能，導入空調變頻板及穿戴鏈中。 <span class="text-gray-500">(機會：FPC代工或技術合作)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-3">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap pt-0.5">2026-01-20</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Official Allotment] Land Allotted Near Jewar Airport (Sector 8)</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[官方撥地] 獲得 Jewar 新機場旁 100 英畝戰略基地</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">YEIDA officially dispatched allotment letters for 100 acres in Sector 8 to Amber. Dedicated to manufacturing advanced copper-clad laminates, PCBs, and smart home appliances. <span class="text-gray-500">(Opp: Ground-up SMT/Connector supply)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">獲得 YEIDA 正式撥地 Sector 8 的 100 英畝土地，用以建立北印最大的覆銅板(CCL)、PCB貼片及智能家電新基地。 <span class="text-gray-500">(機會：全新廠區 SMT/精密端子供貨)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-3">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap pt-0.5">2026-01-18</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Investment Filing] Staging ₹6,785 Cr Combined Noida Capex Project</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[申報備案] 攜手 Ascent-K 累計申報 678.5 億盧比投資案</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">In partnership with Ascent-K (allotted 16 acres in Sector 10), Amber filed a combined phased investment plan of ₹6,785 Crore to support local bare PCB and semiconductor substrate output. <span class="text-gray-500">(Opportunity: Bare board technical collaboration)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">攜手子公司 Ascent-K 向當局遞交兩座相鄰新廠 (Sector 8 & Sector 10) 的建廠細劃，總預算達 678.5 億盧比，鎖定高端 PCB 與載板在地化。 <span class="text-gray-500">(機會：載板/硬板技術協同)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-3">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap pt-0.5">2025-12-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Credit Rating] CRISIL Reaffirms Top-Tier "CRISIL A1+" Rating</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[信用評級] CRISIL 評級重申其最優等 "CRISIL A1+" 信用</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Rating agency highlights that despite high payouts for Shogini, Amber holds over ₹1,500 Cr in free cash via QIP, safeguarding its Hosur & Noida projects. <span class="text-gray-500">(Status: Highly Solvent)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">指出儘管因收購 Shogini 支付了 50.6 億盧比，但集團在 QIP 後仍保留逾 150 億盧比自由現金，有足夠財力支撐 Hosur 及 Noida 的重大 Capex。 <span class="text-gray-500">(狀態：資金充沛)</span></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Condensed items grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-01:</strong> 
+                            <span data-lang="en">Hosur Advanced PCB setup officially broke ground. Planning ₹99 Cr multi-layer bare board line targeting South India's automotive electronics.</span>
+                            <span data-lang="zh">Hosur 先進 PCB 廠 Capex 正式動工。投資 9.9 億盧比，佈局多層硬板，瞄準南印車用市場。</span>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-14:</strong> 
+                            <span data-lang="en">Signed definitive transaction terms to buy 80% of Pune-based Shogini Technoarts, strengthening backward integration into flexible PCB layers.</span>
+                            <span data-lang="zh">正式簽署協議以 50.6 億盧比收購 Pune 大廠 Shogini 80% 股權，拿下高階多層板及軟板關鍵拼圖。</span>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-06:</strong> 
+                            <span data-lang="en">Revealed high-margin Lithium Battery Management Systems (BMS) shipments via ILJIN to major telecom tower sites and solar inverter clients.</span>
+                            <span data-lang="zh">法說會透露 ILJIN 已成功向多家電信用戶與太陽能逆變器客戶供貨 BMS，成為 FY27 核心高毛利成長點。</span>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-09-07:</strong> 
+                            <span data-lang="en">[Funding Legacy] ILJIN secured ₹120 Cr war-chest from ChrysCapital and InCred PE. Funding is being fully deployed for Shogini payout and YEIDA land payments.</span>
+                            <span data-lang="zh">[歷史亮點] ILJIN 獲外資 ChrysCapital 與 InCred PE 注資 120 億盧比，這筆「銀彈」為近期搶地與收購 Shogini 提供核心彈藥。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Citation Info -->
+                <div class="border-t border-gray-700 pt-4 text-[10px] text-gray-500 flex flex-col md:flex-row justify-between gap-2">
+                    <div data-lang="en">
+                        <strong>Source Citations:</strong> MCA India Portal, NSE/BSE Exchange Filings, Amber Enterprises IR Reports, CRISIL Credit Reports, YEIDA Official Land Allotments (Jan 2026).
+                    </div>
+                    <div data-lang="zh">
+                        <strong>資料來源：</strong> MCA India、BSE/NSE 官方公告、安博企業投資人關係披露、CRISIL 評級報告、YEIDA 土地管理局文件 (2026年1月)。
+                    </div>
+                    <div class="text-left md:text-right" data-lang="en">
+                        © 2026 Foxlink India Corporate Intelligence Hub. Confidential.
+                    </div>
+                    <div class="text-left md:text-right" data-lang="zh">
+                        © 2026 正崴精密 - 印度企業研發總處，內部機密，嚴禁外流。
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Estimated Scores based on MD analysis:
+        // Market Share: 10 (Undisputed No.1/No.2 in Aircon ODM and Components)
+        // Localization: 8 (High localization focus with huge new YEIDA/Hosur PCB Capex)
+        // Brand Power: 9 (Known as the silent titan behind Daikin, LG, Panasonic, and Vande Bharat)
+        // Digital Reach: 6 (Primarily B2B OEM, though Noise JV adds some B2C retail box-build exposure)
+        // Financial Health: 8 (Massive ₹10,000 Cr Turnover scale, minor loss in Q3 due to ₹6,700 Cr+ Capex, heavily backed by PE & cash reserves)
+        const radarScores = [10, 8, 9, 6, 8]; 
+
+        const chartData = {
+            en: { 
+                labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], 
+                label: 'Amber Enterprises Competency (1-10)' 
+            },
+            zh: { 
+                labels: ['市場份額', '在地化自製率', '品牌影響力', '數位覆蓋率', '財務健康度'], 
+                label: '安博企業競爭畫像 (1-10分)' 
+            }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { 
+                console.error("Language UI update exception: ", e); 
+            }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) {
+                langBtn.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'zh' : 'en';
+                    updateLanguageUI();
+                });
+            }
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) {
+                pdfBtn.addEventListener('click', () => window.print());
+            }
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: { size: 10 } },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

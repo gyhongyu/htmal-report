@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-02T04:41:54.834Z",
+  "lastUpdated": "2026-06-04T04:27:18.567Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1249,6 +1249,19 @@
       "fileName": "report-1780375312799.html",
       "createdAt": "2026-06-02T04:41:54.834Z",
       "updatedAt": "2026-06-02T04:41:54.834Z"
+    },
+    {
+      "id": "report-1780547237643",
+      "title": "Target: Amber Enterprises India Limited",
+      "description": "目標企業：Amber Enterprises India Limited (安博企業)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1780547237643.html",
+      "createdAt": "2026-06-04T04:27:18.567Z",
+      "updatedAt": "2026-06-04T04:27:18.567Z"
     }
   ]
 }
