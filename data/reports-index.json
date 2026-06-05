@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-04T04:27:18.567Z",
+  "lastUpdated": "2026-06-05T04:06:31.062Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1262,6 +1262,19 @@
       "fileName": "report-1780547237643.html",
       "createdAt": "2026-06-04T04:27:18.567Z",
       "updatedAt": "2026-06-04T04:27:18.567Z"
+    },
+    {
+      "id": "report-1780632390221",
+      "title": "Target: Hirose Electric India",
+      "description": "目標企業：廣瀨電機 (Hirose Electric India)",
+      "categories": [
+        "客戶KYC",
+        "項目計劃",
+        "內部簡報"
+      ],
+      "fileName": "report-1780632390221.html",
+      "createdAt": "2026-06-05T04:06:31.062Z",
+      "updatedAt": "2026-06-05T04:06:31.062Z"
     }
   ]
 }
