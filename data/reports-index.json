@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-05T04:06:31.062Z",
+  "lastUpdated": "2026-06-09T15:02:07.979Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1275,6 +1275,19 @@
       "fileName": "report-1780632390221.html",
       "createdAt": "2026-06-05T04:06:31.062Z",
       "updatedAt": "2026-06-05T04:06:31.062Z"
+    },
+    {
+      "id": "report-1781017325883",
+      "title": "Project Indo-Phoenix",
+      "description": "Project Indo-Phoenix",
+      "categories": [
+        "對外簡報",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1781017325883.html",
+      "createdAt": "2026-06-09T15:02:07.979Z",
+      "updatedAt": "2026-06-09T15:02:07.979Z"
     }
   ]
 }

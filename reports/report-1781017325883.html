@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Project Indo-Phoenix 戰略提案</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0B1120',
+                        panelbg: '#1E293B',
+                        primary: '#F59E0B', // Amber 500
+                        secondary: '#3B82F6', // Blue 500
+                        secretbg: '#2A0A0A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #000;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #fff;
+            user-select: none; /* 防止連點時選取文字 */
+        }
+
+        /* 簡報容器：自適應 16:9 (桌面) 與 9:16 (手機) */
+        #presentation-container {
+            position: relative;
+            background-color: #0B1120; /* 修正：直接使用色碼取代 theme() */
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* 桌面版 16:9 限制 */
+        @media (min-width: 768px) {
+            #presentation-container {
+                max-width: calc(100vh * 16 / 9);
+                max-height: calc(100vw * 9 / 16);
+                border-radius: 12px;
+            }
+        }
+
+        /* 手機版 9:16 限制 */
+        @media (max-width: 767px) {
+            #presentation-container {
+                max-height: calc(100vw * 16 / 9);
+                max-width: calc(100vh * 9 / 16);
+            }
+        }
+
+        /* 簡報單頁樣式 */
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            padding: 8%;
+            transform: translateX(20px);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .slide.exit-left {
+            transform: translateX(-20px);
+        }
+
+        /* 隱藏密件頁樣式 (修復透明重疊 Bug) */
+        #secret-page {
+            position: absolute;
+            inset: 0;
+            background-color: #0f0404; /* 給予堅固的底色備案 */
+            background-image: linear-gradient(135deg, #2A0A0A, #000000); /* 修正：直接使用色碼 */
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            -webkit-overflow-scrolling: touch;
+            user-select: text; /* 允許文字選取 */
+        }
+
+        #secret-page.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 隱藏滾動條但保持可滾動 */
+        #secret-page::-webkit-scrollbar {
+            width: 8px;
+        }
+        #secret-page::-webkit-scrollbar-thumb {
+            background-color: #ef4444; 
+            border-radius: 4px;
+        }
+
+        /* 進度條 */
+        #progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background-color: #F59E0B; /* 修正：直接使用色碼 */
+            transition: width 0.3s ease;
+            z-index: 50;
+        }
+
+        /* 導覽指示 */
+        .nav-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: #64748B;
+            z-index: 50;
+        }
+
+        /* 點擊熱區 */
+        .click-zone {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 15%;
+            z-index: 40;
+            cursor: pointer;
+        }
+        .click-zone.left { left: 0; }
+        .click-zone.right { right: 0; }
+        
+        /* 避免與內容點擊衝突 */
+        .content-wrapper { position: relative; z-index: 45; height: 100%; display: flex; flex-direction: column; }
+
+        /* ================= 新增：密碼保護層樣式 ================= */
+        #auth-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: #0B1120;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        #auth-overlay.hidden-auth {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= 新增：密碼保護層 ================= -->
+    <div id="auth-overlay">
+        <div class="bg-[#1E293B] p-8 rounded-xl border border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)] text-center max-w-sm w-[90%] relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-900 via-red-500 to-red-900"></div>
+            <div class="text-red-500 text-5xl mb-4"><i class="fas fa-shield-halved"></i></div>
+            <h2 class="text-xl font-bold text-white mb-2 tracking-widest">RESTRICTED ACCESS</h2>
+            <p class="text-xs text-gray-400 mb-6 font-mono">PROJECT INDO-PHOENIX CLEARANCE REQUIRED</p>
+            
+            <form id="auth-form" onsubmit="event.preventDefault(); verifyPassword();">
+                <input type="password" id="auth-password" placeholder="Enter Access Code" class="w-full bg-[#0B1120] text-white border border-gray-600 rounded px-4 py-3 mb-4 focus:outline-none focus:border-primary text-center tracking-widest font-mono" autocomplete="off">
+                <button type="submit" class="w-full bg-gradient-to-r from-red-800 to-red-900 hover:from-red-600 hover:to-red-800 text-white font-bold py-3 px-4 rounded transition shadow-lg shadow-red-900/50">
+                    VERIFY & DECRYPT
+                </button>
+                <p id="auth-error" class="text-red-500 text-sm mt-4 hidden animate-pulse font-bold tracking-wider">ACCESS DENIED</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="presentation-container">
+        <!-- 左右翻頁熱區 -->
+        <div class="click-zone left" onclick="prevSlide()"></div>
+        <div class="click-zone right" onclick="nextSlide()"></div>
+
+        <!-- 進度條 -->
+        <div id="progress-bar" style="width: 10%;"></div>
+        
+        <!-- 頁碼 -->
+        <div class="nav-hint" id="page-indicator">1 / 10</div>
+
+        <!-- ================= Slides 區塊 ================= -->
+        
+        <!-- Slide 1: 封面 -->
+        <div class="slide active">
+            <div class="content-wrapper justify-center items-center text-center">
+                <span class="px-4 py-1 border border-red-500 text-red-500 rounded-full text-xs md:text-sm font-bold tracking-widest mb-6 animate-pulse">
+                    STRICTLY CONFIDENTIAL & BLIND TEASER
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-200 mb-4 tracking-wide leading-tight">
+                    Project Indo-Phoenix
+                </h1>
+                <h2 class="text-xl md:text-3xl font-bold text-gray-200 mb-6">
+                    印度首座航太與車載級 FPC 裸板<br class="md:hidden">一條龍移植建廠計畫
+                </h2>
+                <div class="w-24 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="text-sm md:text-lg text-gray-400 max-w-2xl">
+                    第二版：資本、政策與國防相抵（Defense Offset）多重套利盲推提案<br>
+                    <span class="text-xs mt-2 block opacity-70">For Promoters / Family Offices</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2: 真實黑洞 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">01. 執行摘要</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">印度高階 FPC 的「真實黑洞」</h2>
+                
+                <p class="text-gray-300 mb-6 md:text-lg">官方常宣稱 PCB 自給率達 30%，但這是一個嚴重的宏觀統計陷阱：</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 flex-grow content-start">
+                    <div class="bg-panelbg p-6 rounded-xl border-l-4 border-gray-500">
+                        <h3 class="text-xl font-bold text-white mb-2">🔴 低端充數</h3>
+                        <p class="text-sm md:text-base text-gray-400 leading-relaxed">
+                            30% 的份額全被技術壁壘極低的單面板、雙面硬板（Rigid PCB）及低端金屬基板佔據。多用於 LED 與玩具，生產者多為設備落後的本土作坊。
+                        </p>
+                    </div>
+                    <div class="bg-panelbg p-6 rounded-xl border-l-4 border-primary">
+                        <h3 class="text-xl font-bold text-white mb-2">🟢 高階真空 (自給率 0%)</h3>
+                        <p class="text-sm md:text-base text-gray-400 leading-relaxed">
+                            代表輕薄、高頻、細線寬 (L/S ≤ 50 μm) 的高階軟板（FPC）領域，印度自給率趨近於零。車載 BMS、折疊螢幕、軍用航太軟板 <span class="text-red-400 font-bold">100% 依賴海外進口</span>。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: 專案定位 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">01. 執行摘要</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">專案定位：高毛利與避險戰略</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-r from-panelbg to-transparent p-6 rounded-lg border border-gray-700">
+                        <h3 class="text-xl font-bold text-secondary mb-2 flex items-center"><i class="fas fa-bullseye mr-3"></i>專注「高毛利裸板」</h3>
+                        <p class="text-sm md:text-base text-gray-300">
+                            堅持「去 SMT 化」理性決策，避免元器件帶來的資金占用與呆帳風險。將毛利率牢牢鎖定在 <span class="text-primary font-bold text-xl">35% - 40%</span> 的高含金量區間。
+                        </p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-panelbg to-transparent p-6 rounded-lg border border-gray-700">
+                        <h3 class="text-xl font-bold text-green-400 mb-2 flex items-center"><i class="fas fa-shield-alt mr-3"></i>關稅倒掛避險方案</h3>
+                        <p class="text-sm md:text-base text-gray-300">
+                            針對印度對原料（FCCL、PI膜）課徵重稅 (高達 24%-46%) 的政策地雷，本項目建構完善的 <span class="text-white font-bold">東協自貿協定 (ASEAN FTA)</span> 供應鏈。關鍵基材轉由越南、泰國免稅進口，對沖成本蠶食。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: 政策補貼 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">02. 雙輪驅動戰略</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">Manik Kumar: 政策與資本優勢</h2>
+                
+                <div class="bg-panelbg rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl text-white"><i class="fas fa-landmark"></i></div>
+                    
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-4">ELCINA 核心政策綠色通道</h3>
+                    <p class="text-gray-300 mb-6 text-sm md:text-base leading-relaxed">
+                        由 ELCINA Director Manik Kumar 親自出面，直接對接印度電子資訊技術部 (MeitY)，申請最高規格 SPECS 補貼計畫與邦政府獎勵。
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-darkbg p-4 rounded-lg border border-primary/30">
+                            <div class="text-primary text-2xl font-black mb-1">25% - 50%</div>
+                            <div class="text-white font-bold text-sm">CapEx 現金返還</div>
+                            <div class="text-xs text-gray-400 mt-1">實質設備與固定資產建置補貼</div>
+                        </div>
+                        <div class="bg-darkbg p-4 rounded-lg border border-secondary/30">
+                            <div class="text-secondary text-2xl font-black mb-1">資本無成本槓桿</div>
+                            <div class="text-white font-bold text-sm">大幅削減初期實際出資</div>
+                            <div class="text-xs text-gray-400 mt-1">推高上市前 EPS 與淨利潤，實現 IPO 估值溢價</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: 國防相抵 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">03. 核心技術武器</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">國防相抵合約 (Defense Offset)</h2>
+                
+                <ul class="space-y-6 flex-grow">
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-secondary font-bold mr-4">1</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">SpaceX 與軍規級團隊</h4>
+                            <p class="text-sm md:text-base text-gray-400 mt-1">創始團隊為台商正規軍現任高管，技術直供 SpaceX 及軍用無人機 (Military Drones)。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-900 flex items-center justify-center text-red-500 font-bold mr-4">2</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">印度 30% 國防相抵鐵律</h4>
+                            <p class="text-sm md:text-base text-gray-400 mt-1">印度國防部 (MoD) 規定外國軍購需將 30% 金額轉回印度採購。本地大財團 (Tata, Adani) 空有百億額度，卻無 FPC 高階產能消化。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-900 flex items-center justify-center text-green-500 font-bold mr-4">3</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-primary">成為唯一在地化實體</h4>
+                            <p class="text-sm md:text-base text-gray-400 mt-1">本項目將是財團吃下全球軍工巨頭「免競標、高利潤」採購合約的唯一在地化技術接口。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: 運營時效 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">04. 運營時效與財務套利</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">Time-to-Market: 搶占 4 個月紅利</h2>
+                
+                <div class="relative pl-6 border-l-2 border-gray-600 space-y-8">
+                    <!-- 傳統通道 -->
+                    <div class="relative">
+                        <div class="absolute w-4 h-4 rounded-full bg-red-500 -left-[33px] top-1"></div>
+                        <h4 class="text-lg font-bold text-gray-300">傳統中國進口通道 <span class="text-red-400 text-sm">(不推薦)</span></h4>
+                        <div class="text-sm text-gray-500 mt-2 bg-black/30 p-3 rounded">
+                            中國二手設備 → 印度海關嚴審 (判定 e-waste 風險) → 延宕 <strong class="text-red-400">6-12 個月</strong> → 廠房閒置、利息損失。
+                        </div>
+                    </div>
+
+                    <!-- 台灣通道 -->
+                    <div class="relative">
+                        <div class="absolute w-4 h-4 rounded-full bg-primary -left-[33px] top-1 shadow-[0_0_10px_#F59E0B]"></div>
+                        <h4 class="text-lg font-bold text-white">台灣獨家 CEC 快速通道 <span class="text-primary text-sm">(推薦)</span></h4>
+                        <div class="text-sm text-gray-300 mt-2 bg-panelbg p-4 rounded border border-primary/30">
+                            台灣次新/全新設備 → 註冊工程師 (CEC) 正常申報 → <strong class="text-primary text-xl">2 個月內進廠安裝</strong>。
+                            <div class="mt-3 pt-3 border-t border-gray-600 text-green-400 font-bold">
+                                🌟 提早 4 個月搶占 EV BMS 排他性首發供貨地位！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: 公司治理 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">05. 公司治理架構</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">雙主體設計與防稀釋保護</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-800 p-5 rounded-lg border-t-4 border-secondary">
+                        <div class="text-secondary font-bold mb-1">India JV (印度合資公司)</div>
+                        <div class="text-2xl font-black text-white mb-2">持股 > 90%</div>
+                        <p class="text-xs md:text-sm text-gray-400">本地大股東絕對控股。主導運營、政府關係、融資，為未來 BSE/NSE 上市主體。</p>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded-lg border-t-4 border-gray-400">
+                        <div class="text-gray-300 font-bold mb-1">Taiwan Hub (台灣子公司)</div>
+                        <div class="text-2xl font-black text-white mb-2">不控股</div>
+                        <p class="text-xs md:text-sm text-gray-400">純作技術支援、全球採購通道。消除「外資抽資」與「轉移定價」稅務審查疑慮。</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-red-900/40 to-transparent p-5 rounded-lg border border-red-500/30">
+                    <h3 class="text-lg font-bold text-red-400 mb-2 flex items-center"><i class="fas fa-lock mr-2"></i>5% 技術鐵股 (Sweat Equity)</h3>
+                    <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+                        創始團隊佔 5%。在 IPO 前的歷次增資中，具備 <strong>防稀釋保護底線 (5% Floor)</strong>，確保技術核心毫無保留輸出 (True Tech Transfer)。上市後遵循常態稀釋獲取資本溢價。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: 二階段願景 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center text-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">05. 終極 IPO 故事</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-10">垂直整合的「材料帝國」願景</h2>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-3xl mx-auto">
+                    <!-- Phase 1 -->
+                    <div class="bg-panelbg p-6 rounded-xl w-full md:w-1/2 border border-gray-700">
+                        <div class="text-primary font-black text-xl mb-3">Phase 1</div>
+                        <h4 class="text-white font-bold mb-2">建廠與產能爬坡</h4>
+                        <p class="text-sm text-gray-400">專注高階 FPC 裸板製造<br>利用東協 FTA 規避關稅<br>鎖定高現金流</p>
+                    </div>
+                    
+                    <!-- Arrow -->
+                    <div class="text-gray-500 text-2xl rotate-90 md:rotate-0">
+                        <i class="fas fa-chevron-right md:block hidden"></i>
+                        <i class="fas fa-chevron-down md:hidden block"></i>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="bg-gradient-to-br from-panelbg to-blue-900/50 p-6 rounded-xl w-full md:w-1/2 border border-secondary shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                        <div class="text-secondary font-black text-xl mb-3">Phase 2</div>
+                        <h4 class="text-white font-bold mb-2">上市後垂直整合</h4>
+                        <p class="text-sm text-gray-300">建立自主 <strong class="text-white">FCCL 覆銅板</strong>與<strong class="text-white">高階 PI 膜</strong>化工基地<br>打破 100% 依賴進口困局</p>
+                    </div>
+                </div>
+                
+                <p class="mt-8 text-primary font-bold text-sm md:text-base bg-primary/10 inline-block px-4 py-2 rounded-full">
+                    🚀 推高市盈率 (P/E Multiple) 的終極資本故事
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 9: 投資人條件 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">06. 篩選指標</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">合作投資人 (Promoter) 硬性指標</h2>
+                
+                <div class="space-y-4">
+                    <div class="bg-red-900/20 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="text-white font-bold flex items-center"><i class="fas fa-ban text-red-500 mr-2"></i>必備條件 (Non-negotiable)</h4>
+                        <ul class="mt-3 space-y-2 text-sm md:text-base text-gray-300 ml-6 list-disc marker:text-gray-600">
+                            <li><strong>上市公司運作經驗：</strong>曾在 BSE/NSE 完成 IPO，深諳 SEBI 放大市值邏輯。</li>
+                            <li><strong>Sarkar & Pollution CTO：</strong>具備擺平政府官僚與全權負責環保許可 (CTO/EIA) 的絕對實力。</li>
+                            <li><strong>營運資金 (Working Capital)：</strong>極佳銀行信用，提供充足信用狀 (LC) 與信貸額度度過爬坡期。</li>
+                            <li><strong>認同防稀釋協議：</strong>尊重 5% 科技鐵股條款。</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-green-900/20 p-4 rounded-lg border-l-4 border-green-500 mt-4">
+                        <h4 class="text-white font-bold flex items-center"><i class="fas fa-star text-green-500 mr-2"></i>優先優選條件 (Preferred)</h4>
+                        <ul class="mt-2 space-y-1 text-sm md:text-base text-gray-400 ml-6 list-disc marker:text-gray-600">
+                            <li>具備 Rigid PCB 投資或合規合作經驗。</li>
+                            <li>本身為大型 EMS 貼片廠，或具備國防 (MoD) 關係，可內部消化 50% 產能 (Take-or-pay)。</li>
+                            <li>在清奈或安得拉邦擁有現成工業土地與雙路電網。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: 預算 -->
+        <div class="slide">
+            <div class="content-wrapper justify-center text-center">
+                <div class="text-primary font-bold tracking-wider mb-2 text-sm md:text-base">07. 資本支出</div>
+                <h2 class="text-2xl md:text-4xl font-bold mb-8">概略建廠預算與彈性方案</h2>
+                
+                <p class="text-gray-400 text-sm mb-8">基準：15,000 m²/month 雙面 FPC 產能</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div class="bg-gradient-to-b from-panelbg to-darkbg p-6 rounded-xl border-2 border-primary relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 bg-primary text-black font-black py-1 px-8 rotate-45 text-sm">推薦</div>
+                        <h3 class="text-xl font-bold text-white mb-1">方案 A：中高標全自動</h3>
+                        <div class="text-primary font-bold text-2xl mb-4">7,500萬 - 1億 RMB <span class="text-sm text-gray-400 block mt-1">(約 86 - 115 Crore INR)</span></div>
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>核心濕製程/LDI 採全新台製/日製</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>建置完整信賴性實驗室 (ORT)</li>
+                            <li><i class="fas fa-rocket text-yellow-500 mr-2"></i><strong>目標：</strong>SpaceX、軍工無人機、Tier-1 車載、HDI</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-panelbg p-6 rounded-xl border border-gray-600 opacity-80">
+                        <h3 class="text-xl font-bold text-gray-300 mb-1">方案 B：中標保守折衷</h3>
+                        <div class="text-gray-200 font-bold text-2xl mb-4">5,000萬 - 7,000萬 RMB <span class="text-sm text-gray-500 block mt-1">(約 57 - 80 Crore INR)</span></div>
+                        <ul class="text-sm text-gray-400 space-y-2">
+                            <li><i class="fas fa-check text-gray-500 mr-2"></i>高精度曝光全新，其餘台灣二手快通關</li>
+                            <li><i class="fas fa-bolt text-yellow-600 mr-2"></i>極速進廠 (2個月)</li>
+                            <li><i class="fas fa-car text-blue-400 mr-2"></i><strong>目標：</strong>本地消費電子、車用 BMS 打樣與中大批量</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= 隱藏彩蛋：口述劇本 ================= -->
+    <div id="secret-page">
+        <button onclick="closeSecretPage()" class="fixed top-6 right-6 w-12 h-12 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg shadow-red-900/50 flex justify-center items-center text-xl transition transform hover:scale-110 z-[1010]">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="max-w-3xl mx-auto pb-20 pt-10">
+            <div class="border-b-2 border-red-800 pb-4 mb-8 text-center">
+                <p class="text-red-500 font-mono tracking-widest text-sm mb-2">CLASSIFIED CLEARANCE LEVEL: MANIK-X</p>
+                <h1 class="text-3xl md:text-4xl font-black text-white">08. 專屬閉門談判口述劇本</h1>
+                <p class="text-gray-400 mt-2 italic text-sm">The Verbal Playbook v2.0 - 不作為公開書面文件</p>
+            </div>
+
+            <div class="space-y-8 font-serif text-gray-300 leading-relaxed text-sm md:text-base">
+                
+                <!-- 劇本內容 -->
+                <div class="bg-black/40 border border-red-900/50 p-6 rounded-lg relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
+                    <h3 class="text-red-400 font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-comment-dots mr-2"></i>第一步：拉高格局 (SpaceX級正規軍 + 競業壁壘)
+                    </h3>
+                    <p class="italic">"Chief, look. I am not here to sell you a list of machinery. Anyone can buy machines from China or Taiwan if they have the cash. I am here to co-create an <span class="text-yellow-500 font-bold">eternal 50-year business</span> with you.</p>
+                    <p class="mt-2 text-gray-400">我今天代表的，是全球前五大 FPC 上市集團的現任核心高管。這群人平常見不到，因為有嚴格競業條款。他們掌握的技術，正直接供應給 <span class="text-white font-bold">SpaceX 和頂級軍用無人機</span>。我 Manik Kumar 是他們在印度的唯一合法代表。"</p>
+                </div>
+
+                <div class="bg-black/40 border border-red-900/50 p-6 rounded-lg relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
+                    <h3 class="text-red-400 font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-comment-dots mr-2"></i>第二步：破釜沉舟決心 (True Tech Transfer)
+                    </h3>
+                    <p class="text-gray-400">"中國電子業已陷入毫無底線的流血殺價，這群高管是下定決心 <span class="text-white font-bold">『破釜沉舟，集體出走』</span>，要在印度安家立業。我們帶來的是 <span class="text-yellow-500">True Tech Transfer</span>（真正的技術轉移）。幫你培訓種子員工，等本地人能接班，台灣人就退回子公司做支援，絕不當太上皇。"</p>
+                </div>
+
+                <div class="bg-black/40 border border-red-900/50 p-6 rounded-lg relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
+                    <h3 class="text-red-400 font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-comment-dots mr-2"></i>第三步：無法拒絕的誘餌 (政策補貼 + Offset)
+                    </h3>
+                    <p class="text-gray-400">"作為 ELCINA Director，沒有人比我更清楚幾十億盧比補貼怎麼撥。我和團隊是幫你把 SPECS 補貼生出來的『魔術師』。此外，印度大財團滿手 <span class="text-white font-bold">Defense Offset</span> 卻無法消化，我們這廠一建，直接拿航太軍工認證，<span class="text-yellow-500">我可以幫你把全球軍工巨頭幾十億盧比的採購直接塞進口袋！</span>"</p>
+                </div>
+
+                <div class="bg-black/40 border border-red-900/50 p-6 rounded-lg relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
+                    <h3 class="text-red-400 font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-comment-dots mr-2"></i>第四步：時間差武器 (2個月綠色通道)
+                    </h3>
+                    <p class="text-gray-400">"建廠速度就是印鈔速度。中國設備海關卡6個月，我用台灣獨家 CEC 通道，<span class="text-white font-bold">2個月內裝機</span>！我們比對手提早4個月開工，趁他們還在跟海關吵架，我們先把 EV BMS 大廠的首發供貨合約鎖定！"</p>
+                </div>
+
+                <div class="bg-black/40 border border-red-900/50 p-6 rounded-lg relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
+                    <h3 class="text-red-400 font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-comment-dots mr-2"></i>第五步：終極畫餅 (5%鐵股與材料帝國)
+                    </h3>
+                    <p class="text-gray-400">"他們不貪，只要 <span class="text-yellow-500 font-bold">5% 技術股</span> 作為連結生命線。上市時，我們不只講裸板，第二階段會帶領公司直接向上游 FCCL 和 PI 膜整合，成為印度唯一『材料國家隊』，這能讓估值翻倍。但你必須全權負責土地、CTO 和初期 Working Capital。只要答應，我們現在就建這座帝國！"</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 互動腳本 ================= -->
+    <script>
+        // ================= 新增：密碼驗證邏輯 =================
+        const authOverlay = document.getElementById('auth-overlay');
+        const authError = document.getElementById('auth-error');
+        const authInput = document.getElementById('auth-password');
+        const targetPassword = 'Manik2026'; // 前端明文密碼（僅防非技術人員）
+
+        // 檢查 LocalStorage 是否已授權
+        if (localStorage.getItem('indo_phoenix_clearance') === 'granted') {
+            authOverlay.style.display = 'none';
+        } else {
+            // 如果未授權，將焦點自動放在輸入框上
+            setTimeout(() => authInput.focus(), 100);
+        }
+
+        function verifyPassword() {
+            if (authInput.value === targetPassword) {
+                // 密碼正確：寫入 localStorage 並解除遮罩
+                localStorage.setItem('indo_phoenix_clearance', 'granted');
+                authError.classList.add('hidden');
+                authOverlay.classList.add('hidden-auth');
+                setTimeout(() => {
+                    authOverlay.style.display = 'none';
+                }, 500); // 配合 CSS transition 等待淡出動畫結束
+            } else {
+                // 密碼錯誤
+                authError.classList.remove('hidden');
+                authInput.value = '';
+                authInput.focus();
+            }
+        }
+
+        // ================= 幻燈片邏輯 =================
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress-bar');
+        const pageIndicator = document.getElementById('page-indicator');
+        const totalSlides = slides.length;
+
+        function updateSlideUI() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'exit-left');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('exit-left');
+                }
+            });
+            // 更新進度與頁碼
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = `${progress}%`;
+            pageIndicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (isSecretOpen) return;
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlideUI();
+            }
+        }
+
+        function prevSlide() {
+            if (isSecretOpen) return;
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideUI();
+            }
+        }
+
+        // 鍵盤導覽
+        document.addEventListener('keydown', (e) => {
+            if (isSecretOpen) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // 觸控滑動導覽
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const swipeThreshold = 50;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            if (isSecretOpen) return;
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide(); // 向左滑，下一頁
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide(); // 向右滑，上一頁
+            }
+        }
+
+        // ================= 彩蛋邏輯 =================
+        let clickCount = 0;
+        let clickTimer = null;
+        let isSecretOpen = false;
+        const secretPage = document.getElementById('secret-page');
+
+        // 監聽全域點擊
+        document.addEventListener('click', (e) => {
+            // 如果點到的是左右翻頁熱區，或者已經開啟密件，不計算彩蛋點擊
+            if (isSecretOpen) return;
+            if (e.target.classList.contains('click-zone')) return;
+
+            clickCount++;
+            
+            clearTimeout(clickTimer);
+            // 2 秒內未連續點擊則重置
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 2000);
+
+            if (clickCount >= 7) {
+                openSecretPage();
+                clickCount = 0; // 重置
+            }
+        });
+
+        function openSecretPage() {
+            isSecretOpen = true;
+            secretPage.classList.remove('hidden');
+            // 利用 setTimeout 確保 display block 生效後再加 active 跑動畫
+            setTimeout(() => {
+                secretPage.classList.add('active');
+            }, 10);
+        }
+
+        function closeSecretPage() {
+            secretPage.classList.remove('active');
+            setTimeout(() => {
+                isSecretOpen = false;
+            }, 300); // 等待 transition 結束
+        }
+
+        // 初始化
+        updateSlideUI();
+    </script>
+</body>
+</html>
