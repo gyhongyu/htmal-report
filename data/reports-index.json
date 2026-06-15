@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-09T15:02:07.979Z",
+  "lastUpdated": "2026-06-15T09:44:42.865Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1288,6 +1288,19 @@
       "fileName": "report-1781017325883.html",
       "createdAt": "2026-06-09T15:02:07.979Z",
       "updatedAt": "2026-06-09T15:02:07.979Z"
+    },
+    {
+      "id": "report-1781516682004",
+      "title": "Target: NEXTRON TECHNOLOGIES LLP",
+      "description": "目標企業：NEXTRON TECHNOLOGIES LLP (印度)",
+      "categories": [
+        "項目計劃",
+        "客戶KYC",
+        "內部簡報"
+      ],
+      "fileName": "report-1781516682004.html",
+      "createdAt": "2026-06-15T09:44:42.865Z",
+      "updatedAt": "2026-06-15T09:44:42.865Z"
     }
   ]
 }

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: NEXTRON TECHNOLOGIES LLP (India) -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Nextron Technologies LLP (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Nextron Technologies LLP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: NEXTRON TECHNOLOGIES LLP</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：NEXTRON TECHNOLOGIES LLP (印度)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team (Foxlink)</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 正崴印度企業情報小組</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 2</div>
+                            <div class="text-xs text-gray-500 uppercase">Growth Prospect</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">NEXTRON TECHNOLOGIES LLP</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>LLPIN:</strong> AAL-1522</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active LLP (No Foreign Funding)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍合夥 (純本土家族，無外資背景)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 5 - 15 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Gurjar Family (Mumbai)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終受益人：</strong> Gurjar 家族 (孟買本土)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心基地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Mumbai & Thane (Bhiwandi)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">孟買總部 & 塞恩 (Bhiwandi)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">50+ Staff | CKD/SKD Assembly Line</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">50人以上員工 | 散裝進口二次組裝線</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與設施分布</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">HQ & Assembly Setups:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">管理、組裝與物流中心：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Mumbai HQ & Warehouse:</strong> Lower Parel Creative Industrial Estate. Handles quality testing, final enclosure packaging, and visual inspection of imports (GPU, Flash, PCBA).</li>
+                                <li data-lang="zh"><strong>孟買總部與主要倉庫：</strong> 位於 Lower Parel 工業園。主要負責自大中華區進口的核心組件（如 GPU、Flash 顆粒、PCB 板）的最後檢驗、散熱系統裝配、外殼封裝與品質測試。</li>
+                                <li data-lang="en"><strong>Thane (Bhiwandi) Logistics Hub:</strong> Kasheli Village, Dapoda, Mankoli Naka. Bulk distribution and PC component assembly lines.</li>
+                                <li data-lang="zh"><strong>塞恩 (Bhiwandi) 配送與組裝中心：</strong> Kasheli 村 Indian Corporation。此處為主要散裝進口 PC 組件之物流集散地及組裝線。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Affiliated EV Center:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">關聯新能源基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>NEXTRON EVC PRIVATE LIMITED:</strong> Gundecha Gardens, Chinchpokli, Parel, Mumbai. Focuses on localized electrical assembly, enclosure design, and firmware tuning for EV charging piles.</li>
+                                <li data-lang="zh"><strong>NEXTRON EVC 新能源基地：</strong> 位於 Chinchpokli, Parel。專注於新能源汽車充電樁的本地化設計、電氣裝配與韌體調校。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Owners)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接合夥人)</span>
+                                <strong class="text-white">Subhash J. Gurjar (~50%) & Harshal S. Gurjar (~50%)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">Designated Partners (LLP)</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">指定合夥人 (典型家族結構)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Sister Entities)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (關聯實體)</span>
+                                <strong class="text-white">NEXTRON EVC PVT LTD & NFORCE VENTURES LLP</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent / UBO</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人 (UBO)</span>
+                                <strong class="text-blue-300">Gurjar Family (India)</strong>
+                                <span class="block text-xs text-gray-400 mt-1" data-lang="en">Deep supply chain hooks in Shenzhen, HK & Taipei.</span>
+                                <span class="block text-xs text-gray-400 mt-1" data-lang="zh">於大中華區（深圳、香港、台北）有極深的供應鏈合作。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>SSD Storage:</strong> NFORCE Series (M.2 NVMe, 2.5" SATA)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>固態硬碟：</strong> NFORCE SSD 系列 (M.2 NVMe 與 2.5" SATA)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Graphics Cards:</strong> Entry NVIDIA cards (GeForce GT 730/GT 610/GT 1030)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>顯示卡：</strong> NVIDIA GeForce 系統低功耗桌上型顯卡</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>PC Memory:</strong> Nextron DDR4 Laptop / Desktop RAM</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電腦記憶體：</strong> Nextron DDR4 筆電/桌上型記憶體</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>EV Chargers:</strong> Nextron EVC Power Equipment (AC & DC)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>充電設備：</strong> Nextron EVC 交流/直流充電樁及電力模組</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件與技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>SSD Drive System:</strong> NAND Flash chips, controllers (e.g. SMI SM2263XT), SMD capacitors.</li>
+                            <li data-lang="zh"><strong>高速儲存系統：</strong> NAND Flash 晶片、SSD 主控晶片 (如 SMI SM2263XT)、貼片電容。</li>
+                            
+                            <li data-lang="en"><strong>Graphics Modules:</strong> GPU Core (Kepler/Pascal), VRAM chips, PCBA boards, cooling fans/heatsinks, output ports (DVI/HDMI/VGA).</li>
+                            <li data-lang="zh"><strong>圖形輸出模組：</strong> GPU核心、VRAM顆粒、PCB載板、散熱風扇與鰭片、DVI/HDMI/VGA 介面。</li>
+                            
+                            <li data-lang="en"><strong>Cables & Interconnect:</strong> SATA cables, internal wire harness, PCIe gold fingers.</li>
+                            <li data-lang="zh"><strong>互連與線束：</strong> SATA 數據線、內置電源供應線束、PCIe 金手指接口。</li>
+                            
+                            <li data-lang="en"><strong>EV Power Convertor:</strong> Transformers, relays, control PCBA, DC contactors, AC/DC guns, heat-resistant cable assembly.</li>
+                            <li data-lang="zh"><strong>電力轉換 (充電樁)：</strong> 變壓器、繼電器、控制 PCB 板、高壓直流接觸器、AC/DC 充電槍與耐高溫線束。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Foxlink Synergy & Opportunities</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">正崴精密合作機會點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Make in India:</strong> High protective tariffs on SSDs and PCBA imports create intense local manufacturing pressure on Nextron.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化製造：</strong> 印度政府對 SSD、PCBA 徵收高昂關稅，促使 Nextron 急需本地代工。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Synergy:</strong> Foxlink can offer high-precision PCBA SMT, board-to-board connectors, cable assemblies, and customized charger plastic/metal enclosures from our South/North India facilities.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>高度互補：</strong> 正崴於印度的 PCBA 產線、連接器及線束、精密模具能力，能完美解決 Nextron 在地化組裝痛點。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Business Insights from Job Openings</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘雷達：核心職缺解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Data sourced and cross-verified via Naukri, LinkedIn, and Indeed</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior Sourcing & Logistics Specialist</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai - Lower Parel</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">孟買 (Lower Parel 總部)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Managing component imports from Shenzhen, HK, and Taipei. Implies efforts to optimize shipping lead-time and customs clearance bottlenecks.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 負責大中華區（深圳、香港、台北）電子零組件的進口商務與海關清關，顯示正優化海外供應鏈交期。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Technical Support & RMA Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Thane - Bhiwandi Warehouse</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">塞恩 (Bhiwandi 倉庫)</span>
+                                    </td>
+                                    <td data-lang="en">In charge of localized testing, hardware repairs, and processing warranties for GPUs and SSDs. Highlights active RMA setup.</td>
+                                    <td data-lang="zh">負責退貨授權 (RMA) 以及顯示卡、SSD 的本地硬體檢測、維修與保固更新。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Embedded Firmware Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai (Contract)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">孟買 (約聘)</span>
+                                    </td>
+                                    <td data-lang="en">Assigned to Nextron EVC; optimizing EV charger firmware to stabilize performance during Indian grid voltage spikes.</td>
+                                    <td data-lang="zh">服務於關聯企業 Nextron EVC，主導充電樁控制韌體調校，以適應印度本土電網不穩定的電壓波動。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Business Development Manager - IT Hardware Channel</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">孟買總部</span>
+                                    </td>
+                                    <td data-lang="en">Expanding offline dealer networks in Western & Northern India, targetting traditional wholesale hubs like Delhi's Nehru Place.</td>
+                                    <td data-lang="zh">擴展西印度與北印度（如德里 Lamington Road 對應的傳統 IT 批發聚落）的線下代理通路。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Production Supervisor</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Thane - Bhiwandi</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">塞恩 (Bhiwandi 產線)</span>
+                                    </td>
+                                    <td data-lang="en">Supervising bulk assembly lines (RAM mounting, SSD enclosure packaging, GPU cooling module fixing).</td>
+                                    <td data-lang="zh">督導散裝 PC 組件（RAM 貼片、SSD 測試裝殼、GPU 散熱組裝）的本地包裝與二次組裝產線。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Field Sales Executive</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune & Ahmedabad</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">浦那與阿漢邁德巴德</span>
+                                    </td>
+                                    <td data-lang="en">Promoting NFORCE storage units within Industrial PC (IPC) and embedded systems client circles.</td>
+                                    <td data-lang="zh">推廣 Nextron 自有品牌 NFORCE 儲存產品於工業電腦及嵌入式系統通路。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Procurement Executive</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">孟買總部</span>
+                                    </td>
+                                    <td data-lang="en">Sourcing local packaging boxes, heatsink brackets, and simple wiring to boost local content ratio.</td>
+                                    <td data-lang="zh">協調本地包裝紙盒、散熱塑料模組與通用連接線之採購，提升「在地化外包比例」。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Accounts & Compliance Officer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai - Lower Parel</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">孟買 (Lower Parel 總部)</span>
+                                    </td>
+                                    <td data-lang="en">Managing GST filings, MCA declarations, and compliance with the MoEFCC's EPR electronic waste management rules.</td>
+                                    <td data-lang="zh">處理 GST 稅務、MCA 申報及進口 EPR 綠色環保法規（Electronic Waste Management Rules）合規。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">QA/QC Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Thane - Bhiwandi Assembly Line</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">塞恩 (Bhiwandi 產線)</span>
+                                    </td>
+                                    <td data-lang="en">Overseeing IQC (incoming quality check) and OQC to drag RMA failure rate below 2%.</td>
+                                    <td data-lang="zh">負責來料檢驗 (IQC) 與出貨品質把關，致力於將 RMA 退貨率降至 2% 以下。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">EVC Project Lead</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Mumbai - Parel</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">孟買 (Parel 基地)</span>
+                                    </td>
+                                    <td data-lang="en">Managing EV charger trial production batches and OEM automotive certifications.</td>
+                                    <td data-lang="zh">負責管理 Nextron EVC 的新一代充電樁試產與整車廠認證專案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">R&D Intern</strong><br>
+                                        <span class="text-xs text-gray-500">Electronics & Telecommunication</span>
+                                    </td>
+                                    <td data-lang="en">Hiring engineering talents from Mumbai colleges to assist in circuit schematic designs.</td>
+                                    <td data-lang="zh">招募自孟買本地工程學院，參與新一代嵌入式控制板的底層電路設計。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Hybrid Channel Setup</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路與分銷模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Traditional IT Hubs:</strong> Highly dependent on physical wholesale markets (Lamington Road in Mumbai, Nehru Place in Delhi).</li>
+                                <li data-lang="zh"><strong>傳統 IT 渠道：</strong> 極度依賴孟買 (Lamington Road)、德里 (Nehru Place) 等印度一線 IT 批發心臟地帶。</li>
+                                
+                                <li data-lang="en"><strong>Online Retail:</strong> Active on specialized IT e-commerce websites like EliteHubs, MdComputers, and PrimeABGB. Stores on Amazon India focus on entry-level GPU and SSD units.</li>
+                                <li data-lang="zh"><strong>線上零售：</strong> 深度進駐印度各大 IT 硬體垂直電商如 EliteHubs、MdComputers 及 PrimeABGB，並於 Amazon India 通過經銷商銷售。</li>
+                                
+                                <li data-lang="en"><strong>B2B & New Energy:</strong> Supplies components to small IPC builders and system integrators. Sister concern Nextron EVC directly sells EV charging hardware to CPOs and real estate developers.</li>
+                                <li data-lang="zh"><strong>B2B 與新能源：</strong> 大批量零件供應給中小型工業電腦製造商與系統整合商。姐妹公司 Nextron EVC 直接面向公共充電站運營商 (CPOs) 與地產開發商。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流與倉儲邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Inbound Shipments:</strong> Crucial high-tech elements imported via sea cargo (from Yantian/HK) into Mumbai Port (JNPT) or flown into Mumbai Airport (BOM).</li>
+                                <li data-lang="zh"><strong>進口海空運：</strong> 核心組件由海外港口（如深圳鹽田、香港）海運至孟買港 (JNPT) 或空運至孟買機場 (BOM)。</li>
+                                
+                                <li data-lang="en"><strong>Assembly Hub:</strong> Goods reach Thane (Bhiwandi) central warehouse for sorting, thermal module fitting, shell casing, and QA testing before shipping to regional stockists.</li>
+                                <li data-lang="zh"><strong>物流與二次組裝：</strong> 貨物進入 Thane (Bhiwandi) 倉庫後進行分揀、組裝與測試，隨後分撥至印度各地的地區渠道商。</li>
+                                
+                                <li data-lang="en"><strong>Foxlink Takeaway:</strong> Requires flexible JIT (Just-in-Time) delivery of PCBAs and connectors to support high-frequency cargo processing.</li>
+                                <li data-lang="zh"><strong>正崴啟示：</strong> 該客戶組裝模式需要本地代工廠提供「高頻率、小批量、快速交貨 (JIT)」的 PCBA 與連接器方案。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Based on low-end storage & graphic card DIY market</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">基於中低端組裝儲存與貼牌顯卡市場分析</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Entry-Level/Whitebox IT Brands (Rankings)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度高性價比/組裝型 IT 硬體品牌銷售排名</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Brand</th><th class="p-2" data-lang="zh">企業/品牌</th>
+                                        <th class="p-2" data-lang="en">Origin / Key Focus</th><th class="p-2" data-lang="zh">背景/產品重心</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Crucial India (Micron)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">USA (Market Leader - Solid SSD/RAM presence)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">美國美光 (儲存產品絕對優勢者)</td>
+                                    </tr>
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Kingston Technology India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">USA (Mainstream memory giant)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">美國金士頓 (主流記憶體霸主)</td>
+                                    </tr>
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Zebronics India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Domestic heavyweight; China import model)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土品牌 (國民級IT周邊巨頭，全印覆蓋)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">10</td>
+                                        <td class="p-2 text-white font-bold">Nextron Technologies (NFORCE)</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">India (Target - Niche budget segment, West India local assembling)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">印度本土 (目標企業 - 入門級顯卡與組裝SSD利基市場)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">Others</td>
+                                        <td class="p-2" colspan="2">Western Digital/SanDisk, Samsung Semiconductor, Adata, Gigabyte, Asus, Galax/Colorful</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> Zebronics, Ant Esports, and Nextron use "China Import, India Assembly" models. Rising "Make in India" taxes create strong push for Foxlink's local PCBA assembly.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>代工機會點：</strong> Zebronics 及 Nextron 皆採用「海外進口/印度組裝」模式，在嚴苛的在地化關稅政策下，正崴的本地 PCBA 產能是其極佳的合作對象。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-12</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Channel Expansion] NFORCE SSDs Enters West India Retail Hubs</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[通路擴張] NFORCE 固態硬碟進駐西印度主流零售通路</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Signed wholesale distribution pacts across Mumbai for PCIe Gen3 NVMe budget SSDs (M22561 series). <span class="text-gray-500">(Opp: Massive SSD board demand)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">與孟買核心 IT 渠道簽署代理協議，其 PCIe Gen3 NVMe 入門級 SSD (M22561 系列) 進入新一輪線下大宗鋪貨。 <span class="text-gray-500">(機會：本地 PCBA 代工需求增加)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-02</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Operational Update] LEI Code Renewed Successfully</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[運作更新] LEI 身份碼成功更新</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Successfully completed 2026 Legal Entity Identifier update (LEI Code: 3358004CVK8H1XSBF529), securing international component trade transaction lines.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">全球 Legal Entity Identifier 系統中順利完成 2026 年度數據更新，LEI 碼為 3358004CVK8H1XSBF529，保障其海外採購與信用狀開立通道暢通。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Product Launch] Nextron Unveils 1TB NFORCE 2.5" SATA SSD</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[產品發佈] Nextron 推出全新 1TB NFORCE 2.5" SATA SSD</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Targeted at SME desktop upgrades across India. Features aggressive pricing and a 5-year global replacement warranty.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對印度中小型辦公電腦升級市場推出超高性價比大容量固態硬碟，主打 5 年全球聯保。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-08</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Compliance News] EPR E-Waste Return Submitted</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[合規動態] EPR 電子垃圾回收申報</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Submitted official FY 2025-2026 EPR compliance returns to Central Pollution Control Board (CPCB) adhering to Indian environmental rules.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">配合印度環境部 (MoEFCC) 最新法規，正式向 CPCB (中央污染控制板) 提交了 2025-2026 年度的 EPR 合規申報。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-23</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Corporate Synergy] Power Rectifier Circuits Planned with Nextron EVC</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[企業協同] 聯合 Nextron EVC 規劃新電力整流電路設計</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Collaborating on new rectifying PCB control modules for "Smart DC Charging Piles" project in FY 2026. <span class="text-gray-500">(Opp: Ideal entry point for Foxlink PCBA)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Gurjar 創辦人家族表示，正著手為 2026 年度的「智能直流充電樁」項目研發新型整流 PCB 控制模組。<span class="text-gray-500">(機會：正崴電氣控制板 SMT 與充電槍線束代工)</span></p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed in list for space but present in code logic -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-11 [Logistics]:</strong> 
+                            <span data-lang="en">Bhiwandi Hub rolled out barcode tracking system.</span>
+                            <span data-lang="zh">Bhiwandi 倉庫啟用條碼化追蹤系統，提升出庫效率。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28 [Tech Seminar]:</strong> 
+                            <span data-lang="en">Attended Mumbai component expo, discussing SMT partnerships with Taipei/SZ PCB suppliers.</span>
+                            <span data-lang="zh">參加孟買本地電子零組件展，尋求印度 SMTA (表面貼裝技術) 戰略代工合作。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15 [Channel]:</strong> 
+                            <span data-lang="en">GT 730 / GT 610 sales reached record highs during Diwali peak shopping season.</span>
+                            <span data-lang="zh">排燈節促銷：自有品牌 GT 730 與 GT 610 顯示卡在零售通路銷量破歷史新高。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-05 [Partnership]:</strong> 
+                            <span data-lang="en">Increased procurement credit lines with HK suppliers HK Taiming & Winnfox to secure Q1 '26 chip quota.</span>
+                            <span data-lang="zh">擴大與香港供應商的採購額度：與香港台明電子、駿富科技 (Winnfox) 提高信用狀額度。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-01 [CSR]:</strong> 
+                            <span data-lang="en">Donated NFORCE SSD-equipped refurbished PCs to Mumbai suburban schools.</span>
+                            <span data-lang="zh">孟買社區 IT 普及教育合作：捐贈一批搭載 Nextron SSD 的翻新電腦予公立學校。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Nextron Technologies LLP Ratings Array (Estimated based on Report Analysis):
+        // Market Share: 3 (Niche target in entry storage, rank #10)
+        // Localization: 4 (Core items imported, only assembly & heatsink localized in Bhiwandi)
+        // Brand Power: 4 (Budget-tier brand NFORCE)
+        // Digital Reach: 6 (Active on EliteHubs, mdcomputers, Amazon)
+        // Financial Health: 5 (Stable family owned LLP structure, active import funds channel)
+        const radarScores = [3, 4, 4, 6, 5]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
