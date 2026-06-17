@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Waaree Energies Limited (NSE: WAAREEENER) -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Waaree Energies Limited (Feb 2026)</title>
+    <title data-lang="zh">印度綠能巨頭 KYC 深度調查報告：Waaree Energies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">NEW ENERGY & STORAGE KYC</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Waaree Energies Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Waaree Energies Limited (瓦里能源)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team (Source India Baseline)</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 (配合 Source India 展會基準) | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-green-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Strategic Green Giant</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與製造規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Waaree Energies Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> L29248MH1990PLC059463</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="en">Status: Listed (NSE: WAAREEENER / BSE: 544277)</p>
+                        <p class="text-xs text-green-400 mt-2" data-lang="zh">狀態：上市 (印度國家/孟買證交所上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (FY 2025-26)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (FY 2025-26)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 26,536 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Turnover ~ $3.18B USD)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>PAT:</strong> ₹ 3,762.5 Cr | <strong>Order Book:</strong> ~₹ 53,000-60,000 Cr</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>淨利：</strong> 約 3,762.5 億盧比 | <strong>手握訂單：</strong> 5.3 萬至 6 萬億盧比</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Global Scale</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">全球產能與規模</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">26 GW Modules | 5.4 GW Cells</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">26 GW 模組 | 5.4 GW 電池</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">2,500+ Staff | Tech Leader: n-type TOPCon, HJT</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">2500+ 員工 | 技術核心：n-type TOPCon / HJT 異質結</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic & Manufacturing Setup</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理分佈與製造基地</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Registered HQ & Operations:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">註冊總部與運營中心：</strong>
+                            <ul class="list-disc pl-5 space-y-1 text-xs">
+                                <li data-lang="en"><strong>Registered HQ (Borivali):</strong> Western Edge - I, Borivali (East), Mumbai.</li>
+                                <li data-lang="zh"><strong>註冊辦事處 (Borivali HQ)：</strong> 孟買 Borivali (East), Western Edge - I。</li>
+                                <li data-lang="en"><strong>Corporate Office (Goregaon):</strong> Commerz 2, Oberoi Garden City, Goregaon, Mumbai. (Core Business Center)</li>
+                                <li data-lang="zh"><strong>商務總部 (Goregaon Office)：</strong> 孟買 Goregaon, Commerz 2 (核心業務中心)。</li>
+                            </ul>
+                            
+                            <strong class="text-white block mt-3 mb-1" data-lang="en">R&D & Logistics Network:</strong>
+                            <strong class="text-white block mt-3 mb-1" data-lang="zh">研發與保稅物流：</strong>
+                            <ul class="list-disc pl-5 space-y-1 text-xs">
+                                <li data-lang="en"><strong>Chikhli PV R&D:</strong> National NABL accredited lab for TOPCon & HJT cell optimization.</li>
+                                <li data-lang="zh"><strong>Chikhli PV 研發中心：</strong> 獲國家級 NABL 認證，深耕高效率 TOPCon 與 HJT 技術。</li>
+                                <li data-lang="en"><strong>Port Warehouses:</strong> Mega transit DCs at Mundra & Pipavav Ports (Gujarat) supporting rapid global dispatch.</li>
+                                <li data-lang="zh"><strong>港口配送倉：</strong> 吉吉拉特邦 Mundra 及 Pipavav 港口保稅倉，支持快速出口。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Active Units & Expansion Projects:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">主力生產工廠與大擴產項目：</strong>
+                            <ul class="list-disc pl-5 space-y-1 text-xs">
+                                <li data-lang="en"><strong>Chikhli Unit (Gujarat):</strong> Technology core. Houses 5.4 GW Advanced Solar Cell lines & massive module fabrication.</li>
+                                <li data-lang="zh"><strong>Chikhli 工廠 (核心吉吉拉特邦)：</strong> 核心超級基地。擁有全印最大的 5.4 GW 先進電池片線與高效模組。</li>
+                                <li data-lang="en"><strong>Surat & Tumb & Nandigram Units (Gujarat):</strong> Heavy-duty manufacturing hubs handling Mono PERC, Bifacial, & US-grade export modules.</li>
+                                <li data-lang="zh"><strong>Surat / Tumb / Nandigram 工廠 (吉吉拉特邦)：</strong> 專門生產 Mono PERC、Bifacial，以及出口美歐的高規格模組組裝。</li>
+                                <li data-lang="en"><strong>Greater Noida Unit (UP):</strong> Operated via subsidiary Indosolar Ltd, adding 1.3 GW capacity.</li>
+                                <li data-lang="zh"><strong>Greater Noida 工廠 (北方邦)：</strong> 透過子公司 Indosolar Ltd 運作，提供額外 1.3 GW 電池與模組產能。</li>
+                                <li data-lang="en"><strong>Texas Assembly Unit (USA):</strong> 1.6 GW module unit in Brookshire, Texas to bypass local manufacturing trade barriers.</li>
+                                <li data-lang="zh"><strong>美國德州工廠 (海外基地)：</strong> Brookshire, TX。設有 1.6 GW 模組線，對應美國本土製造與關稅政策。</li>
+                                <li data-lang="en"><strong class="text-yellow-400">Nagpur Gigafactory (On-Going):</strong> ₹ 62,000 Crore investment across 300 acres for 10 GW Ingot/Wafer backward integration.</li>
+                                <li data-lang="zh"><strong class="text-yellow-400">Nagpur 整合超級工廠 (破土動工中)：</strong> 投資達 6,200 億盧比，佔地 300 英畝。規劃 10 GW 太陽能矽錠與矽片一體化製造。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-green-500 pl-3" data-lang="en">2. Ownership & Promoter Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-green-500 pl-3" data-lang="zh">2. 股權架構與最終受益人</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up - Highly centralized "Indian Family" conglomerate):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯 - 高度集權的本土家族型巨頭)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Control)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Waaree Sustainable Finance Pvt Ltd & Promoter Group</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 50% majority stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">持有過半絕對控股權</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding Entity)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控制體)</span>
+                                <strong class="text-white">Doshi Family Trusts, Close Associates & Corporate Holdings</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Beneficiaries / Big Boss</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人 / 決策家族</span>
+                                <strong class="text-blue-300">Hitesh C. Doshi, Viren C. Doshi, Pankaj C. Doshi (100% Indian Promoters)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與通用供應鏈 (BOM) 技術拆解</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">核心三大戰略線</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-solar-panel text-green-500 mr-2"></i><strong>Solar PV Modules:</strong> n-type TOPCon, HJT, Mono PERC, Bifacial & Flexible.</li>
+                            <li data-lang="zh"><i class="fas fa-solar-panel text-green-500 mr-2"></i><strong>光伏模組：</strong> 主打 TOPCon、HJT、Mono PERC 等高效雙面與柔性組件。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-car-battery text-blue-500 mr-2"></i><strong>BESS & Energy Storage:</strong> Mega-scale Battery Energy Storage Systems.</li>
+                            <li data-lang="zh"><i class="fas fa-car-battery text-blue-500 mr-2"></i><strong>儲能系統 (BESS)：</strong> 大型與工商業鋰電池儲能集成系統。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-plug text-yellow-500 mr-2"></i><strong>Solar Inverters:</strong> Grid-tied Inverter lines (3.05 GW scale).</li>
+                            <li data-lang="zh"><i class="fas fa-plug text-yellow-500 mr-2"></i><strong>太陽能逆變器：</strong> 併網型與智慧逆變器（開闢 3.05 GW 大廠房）。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-project-diagram text-gray-400 mr-2"></i><strong>Trackers & EPC:</strong> Solar tracking systems & turn-key utility EPCs.</li>
+                            <li data-lang="zh"><i class="fas fa-project-diagram text-gray-400 mr-2"></i><strong>追蹤支架與 EPC：</strong> 太陽能自動追蹤器與大型地面電站一體化 EPC。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">BOM 核心電子元器件</div>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li data-lang="en"><strong>Module Electrics:</strong> Junction Box (built-in Bypass Diodes), high-protection DC connectors (MC4), UV-resistant DC solar wires.</li>
+                            <li data-lang="zh"><strong>光伏電氣連接件：</strong> 防水光伏接線盒 (內置二極體)、MC4 電流連接器、抗紫外線直流太陽能電纜與線束。</li>
+                            
+                            <li data-lang="en"><strong>Inverter Power Converters:</strong> High-power IGBT modules, driver boards (PCBA with MCU/DSP), EMC filters, high-frequency inductors & transformers.</li>
+                            <li data-lang="zh"><strong>逆變器轉換與控制：</strong> 大功率 IGBT 模組、核心控制 PCBA (搭載 MCU/DSP)、EMC 濾波器、散熱器及大功率電感。</li>
+                            
+                            <li data-lang="en"><strong>BESS Pack Systems:</strong> Lithium BMS master/slave controllers, pure copper busbars, internal CAN/RS485 harness, heavy-duty DC relays, fast fuses.</li>
+                            <li data-lang="zh"><strong>儲能與電池管理：</strong> 鋰電池 BMS 主客控制板、高導電紫銅連接排 (Busbar)、內部訊號通訊線束、大電流直流繼電器與快速熔斷器。</li>
+                            
+                            <li data-lang="en"><strong>Frames & Seals:</strong> Anodized aluminum profiles, stainless steel mounting brackets, high-durability waterproof silicon seals.</li>
+                            <li data-lang="zh"><strong>結構支撐及密封件：</strong> 陽極氧化鋁擠邊框、不鏽鋼支架結構件、高耐久矽膠密封。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">FOXLINK Sourcing Opportunities</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">FOXLINK 正崴合作切入點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-xs text-gray-300">
+                            <p class="mb-3" data-lang="en"><strong class="text-green-400">Make in India Pressure:</strong> Due to extreme domestic sourcing requirements (DCR) in public bids, Waaree has a strong appetite to replace East Asian imported electrical parts with India-made certified components.</p>
+                            <p class="mb-3" data-lang="zh"><strong class="text-green-400">印度本土製造 (DCR) 限制：</strong> 受制於公標案嚴格的在地化採購比例要求，Waaree 正積極在印度本土尋找可替代東亞進口件的高端連接器、線束與 PCB 夥伴。</p>
+                            
+                            <p class="border-t border-gray-700 pt-2" data-lang="en"><i class="fas fa-bullseye text-yellow-400 mr-1"></i><strong>Key Matches:</strong> Custom heavy-duty connectors, automotive-grade wire harness, BMS masterboard PCB assembly (PCBA), and precision structural plastics.</p>
+                            <p class="border-t border-gray-700 pt-2" data-lang="zh"><i class="fas fa-bullseye text-yellow-400 mr-1"></i><strong>戰略契合點：</strong> 正崴擅長的高防護連接器、大電流特種線束、儲能 BMS 核心板代工 (PCBA) 及精密模具塑料件。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Hiring Radar)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (近期 11 條核心獵頭動態)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Sourcing & R&D Expansion Signals</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招募雷達：供應鏈重組與自研大動態</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Real-time tracking from Naukri, LinkedIn, Indeed (Nov 2025 - Feb 2026)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Work Location</th>
+                                    <th class="w-1/3" data-lang="zh">關鍵職缺與工作地點</th>
+                                    <th class="w-2/3" data-lang="en">Strategic Implications & Sourcing Signals</th>
+                                    <th class="w-2/3" data-lang="zh">戰略動向解讀 / 隱含的採購信號</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700 text-xs">
+                                <tr>
+                                    <td>
+                                        <strong class="text-green-400">Senior General Manager - Sourcing & Procurement</strong><br>
+                                        <span class="text-gray-500">Mumbai HQ (Borivali)</span>
+                                    </td>
+                                    <td data-lang="en"><strong class="text-yellow-400">Top Priority Link:</strong> Tasked with finding local "Make in India" substitutions for East-Asian imported solar components (Bypass junctions, heavy-duty connectors, cables) to satisfy strict DCR norms.</td>
+                                    <td data-lang="zh"><strong class="text-yellow-400">最關鍵對接點：</strong> 負責優化全球電子元器件供應鏈，特別是尋找台灣、東南亞光伏配套零部件 (如接線盒、連接器、特種線束) 的「印度本土替代方案」以合規 DCR。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">R&D Specialist - TOPCon & HJT Cell Technology</strong><br>
+                                        <span class="text-gray-500">Gujarat (Chikhli Super Base)</span>
+                                    </td>
+                                    <td data-lang="en">Focusing on optimizing solar cell recipe & process margins at Chikhli’s 5.4 GW line, driving proprietary technological upgrade to secure market-leader status.</td>
+                                    <td data-lang="zh">專注於高效電池片製程配方改良與大產能導入，主要配置於 Chikhli 5.4 GW 先進電池片研發線，確保其技術指標優於對手。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Assistant General Manager - SCM (Inverters & Battery Storage)</strong><br>
+                                        <span class="text-gray-500">Mumbai HQ (Goregaon)</span>
+                                    </td>
+                                    <td data-lang="en">Oversees parts procurement for the brand-new 3.05 GW Inverter facility and up-coming BESS lines. Demands deep electronics/IC/BMS sourcing background.</td>
+                                    <td data-lang="zh">專責採購「太陽能逆變器」與「鋰電池儲能 (BESS)」所需電子零部件、主控 IC 與電池組件，對應其 "Waaree 2.0" 的新儲能逆變器產線擴建。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">BMS Hardware Design Engineer</strong><br>
+                                        <span class="text-gray-500">Mumbai / Pune Research Nodes</span>
+                                    </td>
+                                    <td data-lang="en">Developing & testing in-house battery management board electronics (BMS Master & Slave PCBA) for their ambitious 20 GWh energy storage project. Excellent PCBA OEM opportunity.</td>
+                                    <td data-lang="zh">研發與測試其自建 20 GWh 儲能板塊的核心 BMS 控制板。顯示其正加速自研 BESS 軟硬體，有核心 BMS 載板 PCBA 精密代工機會。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Automation & Robotics Engineer</strong><br>
+                                        <span class="text-gray-500">Gujarat (Chikhli Facility)</span>
+                                    </td>
+                                    <td data-lang="en">Tasked with debugging robotic arms, PLCs, and factory automation algorithms in the 5.4 GW gigafactory to maximize cell throughput and yield.</td>
+                                    <td data-lang="zh">負責 Chikhli 5.4 GW 全自動化產線的六軸機械手臂與 PLC 系統調試，提升全自動化流水線良率與智慧工廠等級。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Quality Assurance Manager - Silicon & Cell Fab</strong><br>
+                                        <span class="text-gray-500">Maharashtra (Nagpur Greenfield)</span>
+                                    </td>
+                                    <td data-lang="en">Deploying standard operating procedures for the upcoming 10 GW Ingot & Wafer mega setup in Nagpur. Requires high-precision semiconductor fab cleanroom expertise.</td>
+                                    <td data-lang="zh">為即將投產的 Nagpur 10 GW 矽片與矽錠一體化超級工廠進行前期半導體級車間規劃與全面品質管理規範。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Embedded Software Developer - Inverters</strong><br>
+                                        <span class="text-gray-500">Mumbai (Goregaon)</span>
+                                    </td>
+                                    <td data-lang="en">Developing proprietary MPPT algorithms, inverter firmwares, and cloud-based IoT remote diagnostics tools to pair with their local grid setups.</td>
+                                    <td data-lang="zh">開發逆變器核心控制演算法、MPPT 最大功率追踪軟體與雲端物聯網監控界面。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Global Logistics & Tariff Compliance Manager</strong><br>
+                                        <span class="text-gray-500">Mumbai HQ</span>
+                                    </td>
+                                    <td data-lang="en">Managing trade-route compliance from India hubs to the US Texas factory, handling active global anti-dumping tariff probes and US customs clearance.</td>
+                                    <td data-lang="zh">專職協調印度至美國德州工廠的半成品 (Cell) 出口物流，並應對最新的全球反傾銷/反補貼與貿易調查壁壘。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Project Lead - Utility Scale Solar EPC</strong><br>
+                                        <span class="text-gray-500">Delhi NCR Office</span>
+                                    </td>
+                                    <td data-lang="en">Oversees the construction & grid integration of gigawatt-scale utility solar ground plants in Rajasthan, Punjab, and Northern drylands.</td>
+                                    <td data-lang="zh">負責印度北部（拉賈斯坦邦、旁遮普邦等）大型地面光伏電站工程標案施工與變電站併網端 EPC 專案管理。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-green-400">Global Sourcing Specialist (Electronics & Connectors)</strong><br>
+                                        <span class="text-gray-500">Mumbai HQ</span>
+                                    </td>
+                                    <td data-lang="en"><strong class="text-green-400">FOXLINK Direct Contact Target:</strong> Specifically requires extensive experience coordinating with premium East-Asian (Taiwan/Japan) connector & specialty cable giants.</td>
+                                    <td data-lang="zh"><strong class="text-green-400">正崴直接對接人：</strong> 強調需具備與東亞（台灣/日韓）連接器、線纜、精密端子大廠對接採購經驗。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Graduate Engineer Trainee (GET)</strong><br>
+                                        <span class="text-gray-500">Gujarat Production Facilities</span>
+                                    </td>
+                                    <td data-lang="en">Aggressive campus recruitment campaigns across IIT Bombay and NITs to feed the workforce demand for their expanding manufacturing footprint.</td>
+                                    <td data-lang="zh">於 IIT Bombay 等頂尖學府大舉招募儲備技術工程師，用於填補吉吉拉特邦快速擴產帶來的技術骨幹缺口。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-green-500 pl-3" data-lang="en">5. Sales Channel & Logistics Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-green-500 pl-3" data-lang="zh">5. 銷售通路佈局與供應鏈物流</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Dual-Track Market Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">雙軌制通路體系</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2 text-xs">
+                                <li data-lang="en"><strong>B2B Utility Megaprojects (70%):</strong> Negotiates directly with state-run and top-tier private power developers (Adani Green, SECI, Tata Power) for solar module supply and turnkey EPC grid setup.</li>
+                                <li data-lang="zh"><strong>B2B 大型公用事業電站 (約 70%)：</strong> 直接對接國營與大型民營開發商（如 Adani Green, SECI, Tata Power），提供模組及一站式變電併網 EPC 服務。</li>
+                                
+                                <li data-lang="en"><strong>B2C Retail & Distributed Rooftops (30%):</strong> Branded under "Waaree Prime+". Powered by 369+ franchisee outlets in high-radiation states (Rajasthan, Gujarat, Maharashtra).</li>
+                                <li data-lang="zh"><strong>B2C 零售與分布式屋頂 (約 30%)：</strong> 主打「Waaree Prime+」品牌。截至 2026 年初，在全印設有 369+ 個特許加盟商網點，深度覆蓋西部與南部光伏資源豐富的邦。</li>
+                                
+                                <li data-lang="en"><strong>Dealer Digital Ecosystem:</strong> Developed proprietary B2B dispatch portal <strong class="text-yellow-400">"Waaree Connect"</strong> for dealers to track live inventory, secure credit lines, and register warranty codes in one click. Does not rely on Amazon/Flipkart.</li>
+                                <li data-lang="zh"><strong>經銷商數位生態系：</strong> 建立自有的數位 B2B 採購系統 <strong>"Waaree Connect"</strong>，供全國加盟商與 EPC 承包商即時進行庫存查詢、在線下單與物流追蹤。零售端裝機則透過「Waaree Prime+」App 完成。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics & Warehousing Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流配送邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2 text-xs">
+                                <li data-lang="en"><strong>Central Dispatch Nodes:</strong> Dispatches directly from Chikhli and Tumb central assembly warehouses in Gujarat. Cargo is routed to 5 strategic Regional Distribution Centers (Regional DCs).</li>
+                                <li data-lang="zh"><strong>中央發貨節點：</strong> 產品統一由吉吉拉特邦的 Chikhli 與 Tumb 中央倉發出，輻射至印度的五大區域分撥中心 (Regional DCs)。</li>
+                                
+                                <li data-lang="en"><strong>JIT Demand for Vendors:</strong> Operates on an aggressive "Just-In-Time" (JIT) schedule due to massive daily manufacturing volume. Requires key component vendors to maintain a <strong class="text-green-400">2-4 week safety stock buffer</strong> physically located in India.</li>
+                                <li data-lang="zh"><strong>供應商 JIT 機制：</strong> 由於日均出貨量巨大，Waaree 採取「Just-In-Time (JIT)」的嚴格倉儲配送機制，要求供應商在印度的常備庫存需保持 2-4 週的安全水平。</li>
+                                
+                                <li data-lang="en"><strong>Authorized Service Network:</strong> Supported by 500+ authorized retail service and technical maintenance points for instant troubleshooting.</li>
+                                <li data-lang="zh"><strong>售後服務網絡：</strong> 擁有 500+ 個零售服務與技術維修合作網點，提供即時售後檢測。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape & Transition Strategy</span>
+                    <span data-lang="zh">6. 市場競爭格局與 "Waaree 2.0" 轉型動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (Waaree Energies)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on capacity, financial growth, and localization projects</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">基於製造產能、財務增幅與 Nagpur 矽片一體化計畫進行評估</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Solar PV Manufacturing Rankings (Top Tier)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度光伏製造銷量排名與影響力排名 (TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業名稱</th>
+                                        <th class="p-2" data-lang="en">Origin / SCM Strength</th><th class="p-2" data-lang="zh">背景與供應鏈優勢</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-green-900/40 border-l-4 border-green-500">
+                                        <td class="p-2 font-bold text-center text-white">1</td>
+                                        <td class="p-2 text-white font-bold">Waaree Energies Limited</td>
+                                        <td class="p-2 text-green-300" data-lang="en">India (Target Client - 26 GW Module leader, heavy expansion in BESS/Inverters)</td>
+                                        <td class="p-2 text-green-300" data-lang="zh">印度本土 (本報告目標客戶 - 模組產能第一，正全面大轉型儲能與逆變器)</td>
+                                    </tr>
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Adani Solar (Mundra Solar PV)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Adani Group - Unmatched backward integration & internal mega-project consumption)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (強勁對手。Adani集團旗下，擁有強大矽片垂直整合與電站內需)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Premier Energies Limited</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Recent IPO success, 4-5 GW capacity, strong TOPCon technology)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (近期 IPO 成功，產能 4-5 GW，主打高效 TOPCon 電池)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Vikram Solar</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Established brand, solid US & European export market presence, 3-4 GW)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (老牌光伏巨頭，在美歐出口與東印度擁有穩定市佔)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Tata Power Solar</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Backed by Tata Conglomerate internal EPC and retail rooftop projects)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (Tata 集團旗下，憑藉內部 EPC 渠道與品牌優勢穩健運作)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Goldi Solar (Gujarat-3GW), Renewsys India (EVA encapsulate-2GW), Ganesh Green Bharat (Integrator), Websol Energy (Cell-TOPCon transition), Insolation Energy (INA-Rajasthan rooftop focus)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>"Waaree 2.0" Strategy:</strong> Waaree is aggressively transitioning from a simple module assembler into a multi-dimensional green technology giant. Their newly commissioned 3.05 GW Solar Inverter Plant and upcoming 20 GWh BESS battery storage lines represent high-value EMS opportunities. These sectors require complex wire harnesses, heavy-duty DC connectors, and power PCB assemblies (PCBA) – directly matching <strong class="text-blue-400">FOXLINK's core manufacturing strength</strong>.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>"Waaree 2.0" 轉型契機：</strong> 瓦里正在擺脫純模組組裝商角色，轉向高附加值的新能源大版圖。其新投產的 3.05 GW 太陽能逆變器工廠和籌建中的 20 GWh 儲能 (BESS) 項目，涉及大量精密電子代工、複雜線束、電源 PCB 板與直流連接器，這與 <strong>正崴 (FOXLINK) 的核心製造優勢完美契合</strong>。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Recent Strategic Dynamics</span>
+                    <span data-lang="zh">7. 數位足跡與最新戰略動向 (近3個月動態掃描)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-24</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Trade News] Secured Mega 500 MW High-Efficiency Module Supply Contract</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[商務合同] 斬獲國內 500 MW 高效模組大訂單</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Signed supply agreement with a leading Indian private green energy developer for 500 MW Bifacial single-crystal modules, to be fully manufactured at Chikhli facility's latest line. <span class="text-gray-500">(Sign: Chikhli facility at maximum throughput)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">與印度領先的私營綠電開發商簽署 500 MW 高效單晶雙面模組供應協議，將全部採用 Chikhli 工廠最新高效模組線生產。<span class="text-gray-500">(解讀：Chikhli 工廠產能利用率持續衝高)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-20</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Government G2B] Advanced Talks with Andhra Pradesh Govt for Mega 16-20 GWh BESS Plant</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[政府對接] 與安得拉邦 (Andhra Pradesh) 政府展開 16-20 GWh 超級鋰電儲能廠談判</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Corporate executive team confirmed deep discussions with the AP government to build a 16-20 GWh Lithium Battery Energy Storage Systems (BESS) Gigafactory to capture national peak grid-balancing storage demand. <span class="text-gray-500">(Sign: Mass scale electrical interconnect & BMS demand upcoming)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">公司高層證實與安得拉邦政府密切對接，計劃投資建設一座 16-20 GWh 的鋰電池儲能系統 (BESS) 超級工廠，以配合國家的調峰電力市場需求。<span class="text-gray-500">(解讀：未來大電流連接器件與 BMS 通訊線束用量將迎來爆發)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-26</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Acquisition] Waaree RTL Acquires Associated Power Structures to Boost High-Voltage Grid Capabilities</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[企業併購] 子公司 Waaree RTL 宣布併購電力工程大廠 Associated Power Structures</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Waaree Renewable Technologies (the EPC arm) acquired majority stake in Associated Power Structures. This expands Waaree's internal capacity to execute high-voltage substation connections and grid-intertie EPC. <span class="text-gray-500">(Sign: Deepening power-grid transmission supply chains)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">旗下光伏 EPC 上市子公司 Waaree Renewable Technologies 宣布收購 Associated Power Structures 多數股權，以增強其在高壓輸配電、變電站建設及電網併網端的一體化 EPC 能力。<span class="text-gray-500">(解讀：打通電網端一體化，加強高壓電氣零部件控制力)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-22</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Financials] Q3 Earnings Hit Record High, PAT Surges 26% YoY</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[財報業績] 公布 Q3 財報，單季淨利突破 1,062 Crore 盧比創歷史新高</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Benefiting from the newly energized 2.1 GW efficient module line in Chikhli and 3 GW module line in Samakhiali, single-quarter PAT reached ₹1,062 Crore, beating industry estimates. <span class="text-gray-500">(Sign: Tremendous financial health & capital reserve)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">受惠於吉吉拉特邦 Chikhli 新投產的 2.1 GW 高效模組線以及 Samakhiali 的 3 GW 模組新線，單一季度淨利達到 1,062 Crore 盧比，增長 26% 高於市場預期。<span class="text-gray-500">(解讀：充沛的現金流確保新技術與 Nagpur 一體化廠的資金注入)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-29</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Mega Launch] 3.05 GW Solar Inverter Manufacturing Facility Commences Commercial Production in Gujarat</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[工廠投產] 吉吉拉特邦 3.05 GW 太陽能逆變器工廠正式啟用</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Waaree's newly built 3.05 GW grid inverter base officially rolled out its first batch of products. This signals a heavy push for localize components sourcing for "Make in India" compliance. <span class="text-gray-500">(Sign: High-volume PCB layout, IGBT cooling, and power wire harness opportunities)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Waaree 宣布其全新自建的 3.05 GW 太陽能逆變器製造基地正式投產。這標誌著逆變器大踏步邁入大規模「印度在地製造」，亟需穩定、高品量的元器件供應鏈對接。<span class="text-gray-500">(解讀：逆變器涉及 PCBA 控制板、散熱組件、大功率電感，為正崴精密電子代工絕佳切入期)</span></p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed in list for space but present in code logic -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">US subsidiary Waaree Americas signs 288 MW module supply contract with Texas and India joint-dispatch.</span><span data-lang="zh">美國子公司簽署 288 MW 模組合約，德州廠與印度廠協同供應。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-01:</strong> <span data-lang="en">Board approves ₹300 Crore capital injection into Waaree Energy Storage for BESS technology R&D.</span><span data-lang="zh">董事會批准向旗下儲能子公司 Waaree Energy Storage 增資 300  Crore 盧比，全力加速 BESS。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-25:</strong> <span data-lang="en">Proactively adjusting Texas Brookshire plant supply chains to counter latest US anti-dumping tariff probes.</span><span data-lang="zh">應對美國反傾銷反補貼調查與關稅壁壘，加速德州工廠供應鏈本土化，降低關稅風險。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15:</strong> <span data-lang="en">Mumbai HQ hires auto/semiconductor sourcing directors to revamp components localization.</span><span data-lang="zh">孟買總部大舉調整供應鏈管理高層，引入汽車與半導體採購總監，攻堅電子組件在地化採購。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-05:</strong> <span data-lang="en">Rated as Top Performer in PVEL module reliability ranking for 5th consecutive year.</span><span data-lang="zh">連續第 5 年獲評 PVEL 最可靠光伏模組商 (Top Performer)，奠定海外高溢價。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Waaree Energies KYC Radar Scores (Estimated based on Report):
+        // Market Share: 10 (Rank 1 Solar PV Module leader in India)
+        // Localization: 8 (Nagpur 10GW wafer project underway, 3.05GW inverter local setup, but cell components still heavily transition)
+        // Brand Power: 10 (Highest domestic recall, 5-year consecutive PVEL Top Performer)
+        // Digital Reach: 9 (Custom "Waaree Connect" B2B system and "Waaree Prime+" app ecosystem)
+        // Financial Health: 10 (Turnover doubled to ₹26,536 Crore, high single-quarter margins)
+        const radarScores = [10, 8, 10, 9, 10]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康度'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(34, 197, 94, 0.2)', // Green themed for Waaree Energies (New Energy)
+                        borderColor: 'rgba(34, 197, 94, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(34, 197, 94, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

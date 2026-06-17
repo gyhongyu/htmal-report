@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-15T09:44:42.865Z",
+  "lastUpdated": "2026-06-17T03:19:03.809Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1301,6 +1301,19 @@
       "fileName": "report-1781516682004.html",
       "createdAt": "2026-06-15T09:44:42.865Z",
       "updatedAt": "2026-06-15T09:44:42.865Z"
+    },
+    {
+      "id": "report-1781666342264",
+      "title": "Target: Waaree Energies Limited",
+      "description": "目標企業：Waaree Energies Limited (瓦里能源)",
+      "categories": [
+        "項目計劃",
+        "客戶KYC",
+        "內部簡報"
+      ],
+      "fileName": "report-1781666342264.html",
+      "createdAt": "2026-06-17T03:19:03.809Z",
+      "updatedAt": "2026-06-17T03:19:03.809Z"
     }
   ]
 }
