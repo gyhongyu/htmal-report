@@ -5,6 +5,7 @@ function ConfigModal({ isOpen, onClose, onSave }) {
         owner: '',
         repo: '',
         token: '',
+        tokenSet: false,
         port: '3030',
         baseUrl: ''
     });
@@ -20,6 +21,7 @@ function ConfigModal({ isOpen, onClose, onSave }) {
                         owner: data.config.owner || '',
                         repo: data.config.repo || '',
                         token: '',  // Token不回顯
+                        tokenSet: data.config.tokenSet || false,
                         port: data.config.port || '3030',
                         baseUrl: data.config.baseUrl || ''
                     });
@@ -33,8 +35,12 @@ function ConfigModal({ isOpen, onClose, onSave }) {
         setTestResult(null);
 
         try {
-            // 先保存配置
-            await saveConfig(config);
+            // 如果只有更新非 token 欄位，用 updateConfig
+            if (config.tokenSet && !config.token) {
+                await updateConfig(config);
+            } else {
+                await saveConfig(config);
+            }
 
             // 测试连接
             const result = await testConnection();
@@ -48,7 +54,11 @@ function ConfigModal({ isOpen, onClose, onSave }) {
 
     const handleSave = async () => {
         try {
-            await saveConfig(config);
+            if (config.tokenSet && !config.token) {
+                await updateConfig(config);
+            } else {
+                await saveConfig(config);
+            }
             onSave();
         } catch (error) {
             alert('儲存配置失敗: ' + error.message);
@@ -110,7 +120,7 @@ function ConfigModal({ isOpen, onClose, onSave }) {
                             value={config.token}
                             onChange={(e) => setConfig({ ...config, token: e.target.value })}
                             className="input-field"
-                            placeholder="ghp_xxxxxxxxxxxx"
+                            placeholder={config.tokenSet ? "•••••••••••••••• (已設定，留空表示不修改)" : "ghp_xxxxxxxxxxxx"}
                         />
                         <p className="text-xs text-gray-500 mt-1">
                             需要 <code className="bg-gray-100 px-1 rounded">repo</code> 權限
@@ -166,14 +176,14 @@ function ConfigModal({ isOpen, onClose, onSave }) {
                     <div className="flex gap-2 pt-4">
                         <button
                             onClick={handleTest}
-                            disabled={testing || !config.owner || !config.repo || !config.token}
+                            disabled={testing || !config.owner || !config.repo || (!config.token && !config.tokenSet)}
                             className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {testing ? '測試中...' : '測試連接'}
                         </button>
                         <button
                             onClick={handleSave}
-                            disabled={!config.owner || !config.repo || !config.token}
+                            disabled={!config.owner || !config.repo || (!config.token && !config.tokenSet)}
                             className="flex-1 btn-success disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             儲存配置
