@@ -127,6 +127,10 @@ htmal-report/
 4. **服务器端口**（可选）  
    默认：`3030`
 
+5. **預覽網址 (Base URL)**（可選，但強烈建議填寫）
+   - 例如：`https://html.foxlink.co.in` 或 `https://username.github.io/repo`
+   - 填寫後，Admin 介面中的「預覽 (GitHub Pages)」按鈕才會正確導向公網，否則會預設為 localhost。
+
 **保存后自动创建 `admin/.env` 文件**，无需手动操作。
 
 ---
