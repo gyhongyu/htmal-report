@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-20T08:45:19.494Z",
+  "lastUpdated": "2026-06-30T03:17:32.149Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1314,6 +1314,19 @@
       "fileName": "report-1781666342264.html",
       "createdAt": "2026-06-17T03:19:03.809Z",
       "updatedAt": "2026-06-17T03:19:03.809Z"
+    },
+    {
+      "id": "report-1782789450230",
+      "title": "Target: Neolync Electronics Private Limited",
+      "description": "目標企業：Neolync (信實集團合資體系)",
+      "categories": [
+        "項目計劃",
+        "客戶KYC",
+        "內部簡報"
+      ],
+      "fileName": "report-1782789450230.html",
+      "createdAt": "2026-06-30T03:17:32.149Z",
+      "updatedAt": "2026-06-30T03:17:32.149Z"
     }
   ]
 }
