@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Amara Raja Group (ARE&M & AREL) -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Amara Raja Group (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：阿馬拉·拉賈集團</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Amara Raja Group</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：阿馬拉·拉賈集團 (Amara Raja)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Strategic Alliance</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entities</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-sm font-bold text-white mt-2">Amara Raja Energy & Mobility Ltd (ARE&M)</p>
+                        <p class="text-xs text-gray-400"><strong>CIN:</strong> L31402AP1985PLC005305</p>
+                        <p class="text-sm font-bold text-white mt-2">Amara Raja Electronics Ltd (AREL)</p>
+                        <p class="text-xs text-gray-400"><strong>CIN:</strong> U31402AP1999PLC032257</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (ARE&M Listed / AREL Unlisted)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (ARE&M 已上市 / AREL 未上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (FY25-26)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 13,814 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(~1.66 B USD)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="en"><strong>Group Turnover:</strong> Strong 7.5%+ YoY growth. Li-ion business surged by 60%+ in FY26.</p>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="zh"><strong>合併營收：</strong> 年增長維持 7.5% 以上。鋰電新能源業務單季與年度成長超 60%。</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en"><strong>AREL Electronics:</strong> ₹ 250 - 350 Cr</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh"><strong>電子實體 (AREL) 營收:</strong> 約 2.5 - 3.5 億盧比</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant Setup</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心基地</h3>
+                        <p class="text-sm font-bold text-white mt-2" data-lang="en">HQ: Hyderabad (Telangana)</p>
+                        <p class="text-sm font-bold text-white mt-2" data-lang="zh">營運總部：Hyderabad (海得拉巴)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en"><strong>Registered Office:</strong> Tirupati (Andhra Pradesh)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh"><strong>註冊地址：</strong> Tirupati (安得拉邦)</p>
+                        <p class="text-xs text-gray-400 mt-2" data-lang="en"><strong>Total Employees:</strong> 21,800+ workforce</p>
+                        <p class="text-xs text-gray-400 mt-2" data-lang="zh"><strong>員工規模：</strong> 全集團 21,800+ 人</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Setup & Manufacturing Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>製造基地與地理佈局</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Core Manufacturing Units:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">核心製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Karakambadi (Andhra Pradesh):</strong> Flagship base for 4-wheeler/2-wheeler lead-acid & VRLA batteries (4 key plants).</li>
+                                <li data-lang="zh"><strong>Karakambadi 基地 (安得拉邦)：</strong> 四輪汽機車鉛酸與閥控鉛酸蓄電池 (VRLA) 核心生產地。</li>
+                                <li data-lang="en"><strong>Amara Raja Growth Corridor (ARGC, Nunegundlapalli):</strong> World's largest integrated MVRLA & industrial tubular battery hub.</li>
+                                <li data-lang="zh"><strong>Amara Raja 成長走廊 (ARGC)：</strong> 全球最大整合式 MVRLA 製造工廠之一，設有 2 輪、4 輪與工業儲能大容量電池廠。</li>
+                                <li data-lang="en"><strong>AREL Electronics Setup (Chittoor):</strong> 20,000 sq.m. advanced SMT & Box-build plant targeting automotive electronics & defense power modules.</li>
+                                <li data-lang="zh"><strong>AREL 電子製造基地 (安得拉邦 Chittoor)：</strong> 佔地 2 萬平米，具備 SMT、PCBA 與系統組裝線，專攻車電、消費電子與國防電源。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Next-Gen Green Projects & R&D:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">綠能布局、回收與研發中心：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>ARACT Giga Corridor (Mahabubnagar, Telangana):</strong> 300+ Acres mega site under construction for India's largest lithium plant (Planned: 16 GWh cells & 5 GWh packs).</li>
+                                <li data-lang="zh"><strong>超級綠能走廊 (ARACT Giga Corridor, 泰倫加納邦)：</strong> 佔地超 300 英畝，建設中印度最大鋰電池超級工廠（規劃 16 GWh 電芯與 5 GWh 電池包）。</li>
+                                <li data-lang="en"><strong>ARCS Recycling (Cheyyar, Tamil Nadu):</strong> Ultra-modern eco-friendly lead-acid recycling plant.</li>
+                                <li data-lang="zh"><strong>ARCS 綠色回收工廠 (泰米爾納德邦)：</strong> 先進的鉛酸電池廢料再生回收中心。</li>
+                                <li data-lang="en"><strong>Advanced Cell Tech R&D (Hyderabad):</strong> Located in GMR Aerocity, focusing on NMC/LFP cell chemistry, Solid State and smart BMS development.</li>
+                                <li data-lang="zh"><strong>海得拉巴 GMR 航空城研發中心：</strong> 專注於下一代 NMC 與 LFP 鋰電芯、固態電池與 BMS 的前瞻性研發與認證。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding Hierarchy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 股權架構與最終受益人</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Holding)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Amara Raja Enterprises Pvt Ltd</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">~ 32.86% Stake (Key Promoter)</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">~ 32.86% 持股 (核心發起人)</span>
+                                <p class="text-[10px] text-gray-400 mt-1" data-lang="en">Public: FII (17.3%), DII (17.0%) & retail public hold the remaining share.</p>
+                                <p class="text-[10px] text-gray-400 mt-1" data-lang="zh">其餘由外資機構 (17.3%)、印度本土機構 (17.0%) 及大眾股東持有。</p>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding Entity)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+                                <strong class="text-white">Galla Family Trusts & Private Investment Arms</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Family wealth protection structure.</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">家族財富保護與實質控股結構。</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Beneficiary</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人 / 決策領袖</span>
+                                <strong class="text-blue-300">Dr. Ramachandra N. Galla & Jayadev Galla</strong>
+                                <span class="block text-yellow-400 mt-1" data-lang="en">Founder & Chairman (Ex-MP)</span>
+                                <span class="block text-yellow-400 mt-1" data-lang="zh">創辦人與董事長 (前印度國會議員)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Product Segments</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Auto Batteries:</strong> Amaron / PowerZone brands.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>汽機車蓄電池：</strong> Amaron / PowerZone 品牌。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Industrial VRLA:</strong> Telecom tower standby, power grids.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>閥控鉛酸電池 (VRLA)：</strong> 電信基站與電網儲能。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Li-ion Packs:</strong> EV 2-wheeler, 3-wheeler & BESS.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>鋰電池組：</strong> 電動兩輪、三輪車與電網級儲能 (ARACT)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>EV Chargers:</strong> AC & DC fast chargers.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電動車充電樁：</strong> 交流與直流快速充電機。</li>
+
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Electronics (AREL):</strong> SMT, PCBA, IoT module assembly.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電子代工 (AREL)：</strong> SMT、PCBA、IoT 模組。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件與子系統拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>BMS Power Logic:</strong> Master/slave PCB boards, protection circuits, power distribution unit (PDU).</li>
+                            <li data-lang="zh"><strong>鋰電池 BMS 控制：</strong> 電池管理系統主/從控板、保護電路、PDU。</li>
+                            
+                            <li data-lang="en"><strong>Interconnects:</strong> HV/LV wiring harnesses, copper/aluminum busbars, heavy-duty connectors.</li>
+                            <li data-lang="zh"><strong>高低壓電能互連：</strong> 內外部高低壓線束、銅排/鋁排、大電流連接器。</li>
+                            
+                            <li data-lang="en"><strong>EV Charger Hardware:</strong> Inverter & rectifier PCBs, IoT communication modules, touch panel controllers.</li>
+                            <li data-lang="zh"><strong>充電樁控制硬體：</strong> 整流變流 PCBA、IoT 通訊卡、觸控螢幕控制板。</li>
+                            
+                            <li data-lang="en"><strong>Enclosure & Thermal:</strong> Steel/alloy heavy battery casings, silicone protective gaskets, thermal aluminum plates.</li>
+                            <li data-lang="zh"><strong>電池外殼與熱管理：</strong> 精密鋼質/鋁合金電池箱體、防護密封件、散熱鋁板。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Demands (Gaps)</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈求賢點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300 space-y-3">
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Auto-Grade SMT:</strong> Critical demand for high-end SMT with IATF 16949 certification to support high-density automotive PCBA.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>車規級 SMT 能力：</strong> 急需具備 IATF 16949 認證的高階 PCBA 貼片組裝與控制板製造能力。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>HV Components:</strong> Premium high-voltage, high-current components, connectors and heavy-duty harnesses for EV platforms.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>高壓連接部件：</strong> 鋰電池與充電樁急需耐高壓、大電流之連接器與線束夥伴。</p>
+
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Make in India:</strong> Seeking cost-competitive localized India-manufactured wire harnesses to meet PLI value-addition regulations.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地製造 (Make in India)：</strong> 迫切尋求具成本優勢的印度在地化生產線束，以符合 PLI 本地增值率規定。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Current Active Job Openings</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：11條核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed scan</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Active Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">招聘職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Strategic Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 戰略含意</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700 text-xs">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Lead Process Engineer - Cell Assembly</strong><br>
+                                        <span class="text-[10px] text-gray-500">Mahabubnagar/Divitipally</span>
+                                    </td>
+                                    <td data-lang="en">Leading the upcoming 2170 lithium-ion cell production line yield control. Active scale-up signal.</td>
+                                    <td data-lang="zh">負責即將量產的 2170 鋰電芯生產線的製程與良率控制，顯示超級工廠進入關鍵設備調試階段。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">BMS Hardware Design Engineer</strong><br>
+                                        <span class="text-[10px] text-gray-500">Hyderabad</span>
+                                    </td>
+                                    <td data-lang="en">Focusing on customized LFP energy storage systems (BESS) and electric 2-wheeler BMS hardware design.</td>
+                                    <td data-lang="zh">專注於客製化 LFP 儲能系統及電動兩輪車 BMS 架構與硬體線路設計，急需線路板設計專家。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior Manager - Sourcing & Procurement</strong><br>
+                                        <span class="text-[10px] text-gray-500">Chittoor (AREL)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Localization Move:</strong> Sourcing IC & electronics components globally and locally to bypass heavy customs duty.</td>
+                                    <td data-lang="zh"><strong>在地採購信號：</strong> 為 AREL 電子廠尋找全球與印度的 IC、主被動元件替代貨源，設法規避高進口關稅。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Senior Embedded Firmware Engineer - EV Charging</strong><br>
+                                        <span class="text-[10px] text-gray-500">Hyderabad</span>
+                                    </td>
+                                    <td data-lang="en">Developing OCPP 2.0 compliant firmware for DC fast chargers. Expanding power electronics depth.</td>
+                                    <td data-lang="zh">研發符合 OCPP 2.0 協議的直流快充樁嵌入式韌體，拓展智慧充電基礎設施。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Quality Control Engineer</strong><br>
+                                        <span class="text-[10px] text-gray-500">Tirupati Karakambadi</span>
+                                    </td>
+                                    <td data-lang="en">QC role focusing on incoming inspections, especially pressure-bearing and air-tightness profiles of imported harnesses/connectors.</td>
+                                    <td data-lang="zh">負責進料與成品 QC，重點控制進口線束與連接器的氣密與耐壓指標，把關外界部件品質。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Process Engineer - SMT Line</strong><br>
+                                        <span class="text-[10px] text-gray-500">Chittoor (AREL)</span>
+                                    </td>
+                                    <td data-lang="en">Optimizing high-density automotive PCBA First Pass Yield (FPY) on SMT lines. Foxlink-aligned domain.</td>
+                                    <td data-lang="zh">優化 AREL 高速 SMT 組裝線，針對高密度車載 PCBA 提升直通率 (FPY)，為 Foxlink 強項。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Business Development Manager - New Energy</strong><br>
+                                        <span class="text-[10px] text-gray-500">Secunderabad</span>
+                                    </td>
+                                    <td data-lang="en">Pitching lithium battery packs to big local 2-wheeler OEMs like Ola Electric, Ather Energy.</td>
+                                    <td data-lang="zh">對接印度本土大型兩輪車 OEM（如 Ola, Ather）以推廣其鋰電包產品，爭取系統訂單。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Graduate Engineer Trainee - ECE/EEE</strong><br>
+                                        <span class="text-[10px] text-gray-500">Tirupati & Hyderabad</span>
+                                    </td>
+                                    <td data-lang="en">Hiring mass engineering graduates as reserve team for future smart power and battery process lines.</td>
+                                    <td data-lang="zh">大量招募應屆工程師，作為新一代智慧能源與電池工藝的儲備幹部。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Battery Pack Test Lead</strong><br>
+                                        <span class="text-[10px] text-gray-500">Hyderabad (GMR Aerocity)</span>
+                                    </td>
+                                    <td data-lang="en">Handling safety testing, drop tests, thermal runaway prevention validations of lithium packs.</td>
+                                    <td data-lang="zh">負責 R&D 中心的電池包安全測試、跌落與熱失控防護驗證，攸關認證合格。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">CNC Stamping & Fabrication Expert</strong><br>
+                                        <span class="text-[10px] text-gray-500">Chittoor</span>
+                                    </td>
+                                    <td data-lang="en">Developing precision stamping for metal battery housings, structural frames & copper busbars.</td>
+                                    <td data-lang="zh">負責電池鋼性外殼與母排的精密加工與沖壓程序開發。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Supply Chain Management Trainee</strong><br>
+                                        <span class="text-[10px] text-gray-500">Tirupati</span>
+                                    </td>
+                                    <td data-lang="en">Assisting in group-wide Sourcing Localization program under green SCM initiative.</td>
+                                    <td data-lang="zh">支援集團綠色供應鏈，推動關鍵零部件材料在地化採購。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-gray-900/60 rounded border border-red-500/30 text-xs text-gray-300">
+                        <span class="font-bold text-red-400" data-lang="en"><i class="fas fa-bullseye mr-1"></i>Talent Cluster Analysis:</span>
+                        <span class="font-bold text-red-400" data-lang="zh"><i class="fas fa-bullseye mr-1"></i>人才分佈洞察：</span>
+                        <span data-lang="en">High-end R&D, firmware development, and BMS electronics design roles are concentrated in <strong>Hyderabad</strong>. Mega factory fabrication, SMT manufacturing, SCM sourcing, and plastic/metal tooling are highly localized around <strong>Tirupati & Chittoor</strong> (Andhra Pradesh).</span>
+                        <span data-lang="zh">高階研發、韌體編寫及 BMS 電子設計高度集中在 <strong>海得拉巴 (Hyderabad)</strong>；而大規模製造、SMT生產線、供應鏈採購及五金模組加工，則密集落在 <strong>Tirupati 與 Chittoor (安得拉邦)</strong>。</span>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Network Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局分析</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Distribution Channels</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路與分銷模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Massive B2C Network:</strong> Strong household "Amaron" brand. Operates 100,000+ retail nodes, 1,000+ franchise Power Zones, and 2,000+ authorized service centers nationwide (ranked #2 in India, close behind Exide).</li>
+                                <li data-lang="zh"><strong>極致 B2C 零售經銷：</strong> 旗下擁有王牌 Amaron 品牌，全印佈局 100,000+ 零售點、1,000+ Power Zone 加盟店與 2,000+ 服務站，規模僅次於 Exide。</li>
+                                
+                                <li data-lang="en"><strong>B2B Auto OEM Direct:</strong> Preferred battery supplier for Maruti Suzuki, Hyundai, Tata Motors, Mahindra, Honda. Just-in-Time (JIT) direct logistics.</li>
+                                <li data-lang="zh"><strong>B2B 汽車廠直銷 (OEM)：</strong> 深度綁定 Maruti Suzuki、Hyundai、Tata、Mahindra 等主流車廠，具備極強的 JIT 供貨系統。</li>
+                                
+                                <li data-lang="en"><strong>Telecom Backup Power:</strong> Dominates 50% market share (runs backup batteries in 1 out of every 2 mobile towers in India).</li>
+                                <li data-lang="zh"><strong>電信與基建標案：</strong> 電信塔蓄電池市佔高達 50%（印度每 2 座電信基站即有 1 座使用其電池）。</li>
+
+                                <li data-lang="en"><strong>E-Commerce Footprint:</strong> Flagship store presence on Amazon India & Flipkart. Partnering with Moglix, Industrybuying for B2B wholesale orders.</li>
+                                <li data-lang="zh"><strong>數位與電商：</strong> 於 Amazon 與 Flipkart 建立官方旗艦店。工業端與 Moglix 等平台合作，直採配送至中小型企業。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Central Hubs:</strong> Karakambadi & Chittoor ARGC serve as central supply dispatch nodes, feeding 20+ Regional Distribution Centers (RDC) across India.</li>
+                                <li data-lang="zh"><strong>中央發貨樞紐：</strong> 以安得拉邦 Karakambadi 與 ARGC 為核心生產中心，向全印 20+ 區域物流中心 (RDC) 及千家核心經銷商輻射配貨。</li>
+                                
+                                <li data-lang="en"><strong>JIT Requirements:</strong> To meet the "2-Hour JIT delivery window" demanded by auto OEMs, suppliers must sync and reserve safety stocks at nearby RDCs.</li>
+                                <li data-lang="zh"><strong>JIT 安全庫存限制：</strong> 為維持主機廠「2 小時內 JIT 供貨」高難度標準，供應商需配合於區域配貨中心建置安全庫存。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Market Position & Foxlink Entry Opportunities</span>
+                    <span data-lang="zh">6. 市場地位與正崴 (Foxlink) 切入契機</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">阿馬拉拉賈競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & local sourcing shift</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Battery & Green Storage Rankings</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度綠能/蓄電池領域 TOP 10 企業</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2 w-16">Rank</th>
+                                        <th class="p-2 w-1/2" data-lang="en">Company</th><th class="p-2 w-1/2" data-lang="zh">企業名稱</th>
+                                        <th class="p-2" data-lang="en">Focus Area / HQ</th><th class="p-2" data-lang="zh">主攻領域 / 總部</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Exide Industries Ltd.</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Lead-Acid Leader / Lithium Giga project (Kolkata)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">百年鉛酸龍頭 / 大力發展鋰電廠 (加爾各答)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Waaree Energies Ltd.</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Solar PV & Megawatt BESS (Mumbai)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">太陽能發電與工業大容量儲能系統 (孟買)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">3</td>
+                                        <td class="p-2 text-white font-bold">Amara Raja Energy & Mobility</td>
+                                        <td class="p-2 text-blue-300 font-semibold" data-lang="en">Target Group / Giga corridor underway (Hyderabad)</td>
+                                        <td class="p-2 text-blue-300 font-semibold" data-lang="zh">本報告目標客戶 / 鉛酸市佔極強、鋰電廠最速 (海得拉巴)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Sterling and Wilson Renewable Energy</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Utility-scale Solar & BESS EPC (Mumbai)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度主要 EPC 電廠級大型儲能巨頭 (孟買)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Luminous Power Technologies</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Schneider brand / Home UPS & Inverters (Gurugram)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">施耐德電機旗下 / 家庭備用 UPS 與逆變器 (古爾岡)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6</td>
+                                        <td class="p-2">Livguard Energy</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Fastest growing Auto battery alternative (Gurugram)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">新一代快速崛起品牌 / 主攻汽車售後 (古爾岡)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">7</td>
+                                        <td class="p-2">HBL Power Systems Ltd.</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Defense, Aerospace & Railway batteries (Hyderabad)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">專精國防、航空及鐵路專用特種高可靠性電池 (海得拉巴)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">8</td>
+                                        <td class="p-2">Okaya Power Group</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Micro-ESS & EV Charging stations (Noida)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">主攻微型儲能及電動兩輪車充電設施 (諾伊達)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">9</td>
+                                        <td class="p-2">Tata AutoComp Systems (GY Batteries)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Tata subsidiary partnering with GS Yuasa (Pune)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">與日本傑士湯淺合資 / 深耕乘用車鋰電包 (浦那)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">10</td>
+                                        <td class="p-2">Delta Electronics India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Power Management & Heavy EV Charger setups (Bengaluru)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">電源管理、工業變頻與大型 EV 充電基礎設施領頭羊 (班加羅爾)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy Match Section -->
+                <div class="recon-box opp mt-6">
+                    <h3 class="font-bold text-green-400 mb-2 text-base" data-lang="en"><i class="fas fa-handshake mr-2"></i>Foxlink Strategic Entry Analysis (Opportunities)</h3>
+                    <h3 class="font-bold text-green-400 mb-2 text-base" data-lang="zh"><i class="fas fa-handshake mr-2"></i>正崴精密 (Foxlink) 戰略切入契機與機遇</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-gray-300">
+                        <div class="bg-gray-900/60 p-3 rounded border border-green-500/30">
+                            <strong class="text-white block mb-1" data-lang="en">1. BMS & PCBA Manufacturing</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">1. BMS 與高階電子組裝代工</strong>
+                            <p data-lang="en">Amara Raja's electronics arm (AREL) lacks highly sophisticated SMT processing required for advanced automotive-grade and high-safety storage BMS. Foxlink's massive global PCBA procurement and high-precision SMT lines present an ideal manufacturing partner option.</p>
+                            <p data-lang="zh">Amara Raja 旗下電子廠 (AREL) 雖然具備 SMT 能力，但在汽車級和高安全儲能級的高階 BMS 製造經驗與良率仍有侷限。正崴領先的 PCBA 生產管理與晶片採購優勢是最佳合作切入點。</p>
+                        </div>
+                        <div class="bg-gray-900/60 p-3 rounded border border-green-500/30">
+                            <strong class="text-white block mb-1" data-lang="en">2. High-Voltage Connectors & Cables</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">2. 高壓連接器與重載動力線束</strong>
+                            <p data-lang="en">Lithium battery pack interiors, EV fast chargers, and grid-scale storage units require severe-vibration resilient, high-current connectors and high-voltage wiring harnesses. This sits perfectly within Foxlink's core capability matrix.</p>
+                            <p data-lang="zh">鋰電池包 (Battery Pack) 內部高壓串聯以及外部充電樁需要大量的重載、抗震、高氣密耐溫連接器及高壓動力線束，這正是正崴精密的核心看家本領與既有優勢。</p>
+                        </div>
+                        <div class="bg-gray-900/60 p-3 rounded border border-green-500/30">
+                            <strong class="text-white block mb-1" data-lang="en">3. PLI Scheme & Local Sourcing Push</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">3. 響應 PLI 與在地製造防線</strong>
+                            <p data-lang="en">The Indian government levies steep import duties on lithium-ion cells and EV components while offering lucrative PLI subsidies. Amara Raja urgently needs premium, localized Tier 1 suppliers within India to satisfy local value addition targets and counter Exide's advances.</p>
+                            <p data-lang="zh">印度 government 對鋰電池及電動車零部件實施高昂關稅，並給予 PLI 補貼。Amara Raja 強烈需要能在印度本地製造、且符合本土增值率規定的高品質供應商，以抵禦外資競爭並取得補貼優勢。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Corporate News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-11</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Financials] Q3 Consolidated Turnover Reaches ₹3,351 Cr</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[財務季度] ARE&M 公布第三季營收達 335.1 億盧比</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Turnover grew by 5.9% YoY. While raw material spikes (lead, copper) and labor provisioning compressed net profits, the group's New Energy vertical surged by over 60% YoY, proving to be the primary growth driver.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">季度營收年成長率 5.9%，但受制於主要原物料（鉛、銅）價格大漲與新推行的勞工法案一次性提撥準備，淨利受壓縮。其新能源業務單季成長達 60%，成為亮點。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-05</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Infrastructure] Automation Equipment Arrives at Divitipally Giga Corridor</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[基礎擴建] Divitipally 超級工廠一期產線設備入廠</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Lithium arm ARACT finalized key import contract with leading European battery equipment vendors. The first batch of fully automated lines for NMC (2170) cylindrical cells and large prismatic LFP cells is entering setup stage.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">新能源子公司 ARACT 宣布，與歐洲頂尖高精密鋰電設備商完成合約，將引進首條自動化圓柱形 (2170) NMC 及大型棱柱形 (Prismatic) LFP 製造設備。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Investment] Board Approves ₹350 Cr Infusion into Advanced Cell Technologies</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[資金加碼] 向鋰電研發子公司 Advanced Cell Technologies 加碼注資 35 億盧比</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Board cleared immediate transfer program to ensure phase 1 cell output and pack integration assembly reaches steady commercial dispatch targets by late 2027.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">集團董事會核准資金轉撥計畫，確保在 2027 年實現第一階段 2 GWh 電芯與電池包的大規模量產目標。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-18</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Defense] AREL Enters Defense Sector for Navy Sonar Battery Development</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[國防拓荒] 宣布跨入國防電子，為印度海軍開發聲納專用高性能蓄電池</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">AREL signed a development MoU with MoD (Ministry of Defense) research affiliates. AREL will steer the core sonar power module's electronic PCBA architecture, SMT assembly and specialized environmental enclosures.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">AREL 與印度國防部（MoD）附屬機構簽署協議，AREL 將主導該系統的電子 PCBA 設計與防護裝配，開啟軍品高毛利新方向。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-08</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Marketing] AMARON Renews Brand Campaign for IPL 2026 Season</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[行銷重磅] 續簽 AMARON 品牌行銷協議，搶灘板球賽事</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Kicked off prime-time television and digital ad budgets for the Indian Premier League (IPL) 2026 season to anchor Amaron's leadership in smart, long-lasting energy storage.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">啟動 2026 年印度超級板球聯賽 (IPL) 黃金檔廣告計畫，全面打響 AMARON 品牌「長壽蓄電」的智慧能源新形象。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed in list for space but present in code logic -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-green-400">2025-12-22 [Award]:</strong> 
+                            <span data-lang="en">ARCS Recycling factory in Tamil Nadu won Environmental Gold Award for 99.98% pure lead recovery.</span>
+                            <span data-lang="zh">ARCS 位於泰米爾納德邦 Cheyyar 的回收工廠獲發環保金獎，再生鉛純度可達 99.98%。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-blue-400">2025-12-10 [Milestone]:</strong> 
+                            <span data-lang="en">ARACT Lithium battery cumulative dispatches crossed 1 GWh milestone in telecom and EV.</span>
+                            <span data-lang="zh">ARACT 鋰電池出貨累計跨越 1 GWh，已大規模廣泛驗證於電信塔與電動兩三輪車。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-purple-400">2025-11-28 [Executive]:</strong> 
+                            <span data-lang="en">Mr. Rahul Sharma (ex-Tata Motors SCM) joined as SCM Director to run Local Vendor Sourcing program.</span>
+                            <span data-lang="zh">前 Tata Motors 採購資深經理 Rahul Sharma 接任 SCM 總監，推動在地化供應商提攜計畫。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15 [R&D CQP]:</strong> 
+                            <span data-lang="en">Hyderabad Aerocity Advanced Cell Act pilot line successfully produced NMC 2170 & Blade cell samples.</span>
+                            <span data-lang="zh">海得拉巴 R&D 電芯中試線 (CQP) 順利產出首批刀片型與 2170 NMC 電芯樣品並寄樣認證。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-02 [Capacity]:</strong> 
+                            <span data-lang="en">Mangal Industries expanded with 12 new high-tonnage molding machines to boost battery pack enclosure output.</span>
+                            <span data-lang="zh">集團旗下 Mangal Industries 購置 12 台精密射出機，以提升電芯外部外殼與緊固件自製率。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Footer Section -->
+                <div class="border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
+                     <p data-lang="en">Data Compiled from MCA India registers, NSE/BSE Filings, Amara Raja Investor Relations and Naukri. For internal Sourcing analysis only.</p>
+                     <p data-lang="zh">數據彙整自印度公司註冊處 (MCA)、交易所公告、Amara Raja 投資人關係及 Naukri。僅供內部合作評估使用。</p>
+                     <p class="mt-1">Report Generated on: 2026-02-12</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // Changed default to English
+        let radarChart = null;
+
+        // Amara Raja Group KYC Radar Scores:
+        // Market Share: 9 (Solid No. 2 in India battery, massive 50% telecom share)
+        // Localization: 7 (Huge Gigafactory and SMT units locally, but high dependency on imported cell gear/BMS chips currently)
+        // Brand Power: 9 (AMARON is a Tier-1 retail household brand)
+        // Digital Reach: 8 (Very strong online retail and vertical industrial e-com placement)
+        // Financial Health: 9 (Backed by powerful Galla promoter group, solid ₹13.8K+ Cr turnover)
+        const radarScores = [9, 7, 9, 8, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
