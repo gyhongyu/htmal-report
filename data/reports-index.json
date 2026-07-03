@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-03T04:07:40.303Z",
+  "lastUpdated": "2026-07-03T04:13:13.683Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1343,7 +1343,7 @@
     },
     {
       "id": "report-1783051184795",
-      "title": "arget: Lumax Industries Limited",
+      "title": "Target: Lumax Industries Limited",
       "description": "目標企業：Lumax Industries Limited",
       "categories": [
         "項目計劃",
@@ -1353,7 +1353,7 @@
       ],
       "fileName": "report-1783051184795.html",
       "createdAt": "2026-07-03T03:59:45.676Z",
-      "updatedAt": "2026-07-03T03:59:45.676Z"
+      "updatedAt": "2026-07-03T04:13:13.683Z"
     },
     {
       "id": "report-1783051659430",
