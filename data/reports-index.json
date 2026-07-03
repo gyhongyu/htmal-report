@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-03T03:59:45.676Z",
+  "lastUpdated": "2026-07-03T04:07:40.303Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1354,6 +1354,19 @@
       "fileName": "report-1783051184795.html",
       "createdAt": "2026-07-03T03:59:45.676Z",
       "updatedAt": "2026-07-03T03:59:45.676Z"
+    },
+    {
+      "id": "report-1783051659430",
+      "title": "Target: Ola Electric Mobility Ltd",
+      "description": "目標企業：Ola Electric Mobility Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783051659430.html",
+      "createdAt": "2026-07-03T04:07:40.303Z",
+      "updatedAt": "2026-07-03T04:07:40.303Z"
     }
   ]
 }

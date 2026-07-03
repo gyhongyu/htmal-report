@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Ola Electric Mobility Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Ola Electric Mobility Ltd (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Ola Electric Mobility Limited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Ola Electric Mobility Ltd</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Ola Electric Mobility Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">EV Sector Leader</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Ola Electric Mobility Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> L74999KA2017PLC099619</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Listed (BSE/NSE)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：已上市 (NSE: OLAELEC)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 4,932 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(FY25 Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Total Assets:</strong> ₹ 11,075 Cr (High Capex)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>資產總規模：</strong> 1,107 億盧比 (高折舊壓力)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant Setup</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Bengaluru (HQ) & Krishnagiri (Plant)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">班加羅爾 (總部) & 克里希納吉里 (製造基地)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">400+ Acres | Mega Futurefactory Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">400+ 英畝 | 亞洲最大單體電動雙輪車基地</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造與電芯基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Ola Futurefactory (Krishnagiri, Tamil Nadu):</strong> Pochampalli Ind. Area (SIPCOT Bargur). 400+ acres core assembly unit with high-grade robot lines.</li>
+                                <li data-lang="zh"><strong>Ola Futurefactory (泰米爾納德邦 Pochampalli):</strong> 佔地逾 400 英畝，全球最大電動雙輪車製造廠，高自動化組裝。</li>
+                                <li data-lang="en"><strong>Ola Gigafactory (Krishnagiri):</strong> Right next to Futurefactory. Focused on in-house 4680 cell (Bharat Cell) fabrication and packing. Central to Govt Cell PLI.</li>
+                                <li data-lang="zh"><strong>Ola Gigafactory 超級電池廠 (緊鄰上述基地):</strong> 專注自研 4680 圓柱電芯 (Bharat Cell) 封裝，為印度 PLI 重點項目。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech, R&D & Logistics Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發、辦事處與發貨倉：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Battery Innovation Center (BIC, Bengaluru):</strong> Koramangala. Core electrochemistry, BMS hardware & thermal safety.</li>
+                                <li data-lang="zh"><strong>電池創新中心 (BIC, 班加羅爾):</strong> 研發材料、電化學與 BMS 系統安全設計。</li>
+                                <li data-lang="en"><strong>Ola Campus R&D (Bengaluru):</strong> MoveOS vehicle software & powertrain architecture design.</li>
+                                <li data-lang="zh"><strong>Ola Campus 研發總部 (班加羅爾):</strong> 負責 MoveOS 車載軟體、動力總成與 VCU 設計。</li>
+                                <li data-lang="en"><strong>Ola Electric UK (Coventry, UK):</strong> Advanced concept designs & vehicle engineering.</li>
+                                <li data-lang="zh"><strong>英國研發基地 (Coventry, UK):</strong> 負責高階概念設計與先進車輛工程技術開發。</li>
+                                <li data-lang="en"><strong>Logistics Setup:</strong> Main dispatch yard in Krishnagiri; Regional Distribution Centers (RDCs) in Delhi, Mumbai, Chennai, Pune for direct customer dispatch (D2C).</li>
+                                <li data-lang="zh"><strong>物流發貨網路:</strong> 泰米爾納德核心發貨倉，搭配德里 NCR、孟買、欽奈、浦那等區域配送中心 (RDC) 以利 D2C 直營配送。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Shareholders)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股 / 大股東)</span>
+                                <strong class="text-white">Bhavish Aggarwal (Founder)</strong> <span class="text-blue-300 font-bold">~30.02%</span><br>
+                                <span class="text-gray-400">ANI Technologies (Ola Consumer): ~3.64%</span><br>
+                                <span class="text-gray-400" data-lang="en">Public Float: ~25%-30%</span>
+                                <span class="text-gray-400" data-lang="zh">公開市場流通股: ~25%-30%</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding Entities)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股 / 核心創投)</span>
+                                <strong class="text-white">SVF II India Holdings (SoftBank)</strong> <span class="text-green-400">~17.83%</span><br>
+                                <span class="text-gray-400">Internet Fund III (Tiger Global): ~4.90%</span><br>
+                                <span class="text-gray-400">Temasek Holdings, Matrix Partners India</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 3 (Ultimate Controller)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第三層 (最終受益與控制核心)</span>
+                                <strong class="text-blue-300" data-lang="en">Bhavish Aggarwal (Big Boss)</strong>
+                                <strong class="text-blue-300" data-lang="zh">Bhavish Aggarwal (最終實際控制人)</strong>
+                                <span class="block text-gray-400 text-[11px] mt-1" data-lang="en">Strategically backed by Global Top Tier institutional funds (SoftBank & Temasek).</span>
+                                <span class="block text-gray-400 text-[11px] mt-1" data-lang="zh">在戰略決策層面受軟銀與淡馬錫等頂級跨國機構的相互制衡。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ola S1 Pro:</strong> Premium setup, 4 kWh battery pack, flagship model.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ola S1 Pro (旗艦車款):</strong> 配備 4 kWh 電池包，主打高續航。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ola S1 Air:</strong> Mid-tier, high cost-efficiency daily city commuter.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ola S1 Air (主力車款):</strong> 輕量高性價比，通勤代步主力。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ola S1 X Series:</strong> Entry-level budget setup (2/3/4 kWh options) targeting ICE replacement.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ola S1 X 系列 (預算入門):</strong> 2/3/4 kWh 靈活配置，搶佔油車客群。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Roadster Bikes:</strong> Roadster X, Roadster, Roadster Pro. First bikes with self-made 4680 cell.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Roadster 電摩系列:</strong> 首度搭載自研 4680 電芯，全新檔車款。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Cell & Energy:</strong> In-house 4680 spec Cylindrical Lithium Cell (Bharat Cell - LFP & High-Nickel NMC chemistry).</li>
+                            <li data-lang="zh"><strong>電芯能源:</strong> 自研 4680 圓柱鋰電芯 (Bharat Cell - LFP / 高鎳 NMC 體系) 與高強度防爆模組。</li>
+                            
+                            <li data-lang="en"><strong>BMS System:</strong> Multi-layer controller PCBA modules, precise current sensors, MOSFET safety switches.</li>
+                            <li data-lang="zh"><strong>電池管理 (BMS):</strong> 多層主控 PCB 板、精密檢測傳感器與安全保護開關。</li>
+                            
+                            <li data-lang="en"><strong>Drive & MCU:</strong> Mid-mounted IPM Motors, Hub Motors (S1 Air/X series) & high-density controllers.</li>
+                            <li data-lang="zh"><strong>馬達控制器:</strong> 中置內置永磁同步馬達 (IPM)、輪轂馬達與驅動器 (MCU)。</li>
+                            
+                            <li data-lang="en"><strong>VCU & HMI:</strong> Vehicle Control Unit with integrated 4G LTE/GPS, 7-inch TFT smart display running MoveOS.</li>
+                            <li data-lang="zh"><strong>控制與人機 (VCU/HMI):</strong> 整合 4G LTE/GPS 通訊模組與 7 吋 MoveOS 觸控面板。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Certification:</strong> Demands auto-grade electronics (AEC-Q100 / ISO 26262 compliant).</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>車規資質：</strong> 廠商需備妥 AEC-Q100 或 ISO 26262 設計能力。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>PLI Sourcing Pressure:</strong> Urgently seeking EMS/Harness players to meet 50%+ Domestic Value Addition (DVA) target for big subsidy payout.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>PLI 補貼壓力：</strong> 急需滿足 50% 本地增值率 (DVA)，尋求能配合國產化零部件及高精密電子製造之 EMS 廠商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication (Indian Business Style)</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sr. Manager - Sourcing & Procurement</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru & Krishnagiri</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 & 克里希納吉里</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Sourcing Shift:</strong> Sourcing key cell pack components (BMS, connectors, harness). Focus on "Import Substitution" to lower raw material cost. Excellent target for Foxlink.</td>
+                                    <td data-lang="zh"><strong>強烈採購轉移訊號：</strong> 負責電池包關鍵零部件（BMS 板、連接器、線束）之進口替代與在地化，是正崴（FOXLINK）切入的最佳機會。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Lead Engineer - BMS Firmware Design</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru BIC</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 BIC</span>
+                                    </td>
+                                    <td data-lang="en">Writing algorithms for dynamic balancing and thermal safeguards for 4680 cell packs. Core technology upgrade in action.</td>
+                                    <td data-lang="zh">負責自研 4680 電池包 BMS 動態調配與熱管理算法優化，核心電控技術升級中。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Senior Research Scientist - Cell Electrochemistry</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾</span>
+                                    </td>
+                                    <td data-lang="en">Focusing on next-gen high-density LFP/NMC cells. R&D prep for Gigafactory phase-2 expansion.</td>
+                                    <td data-lang="zh">鎖定下世代高能量密度 LFP/NMC 電芯研發，為超級電池工廠擴張做好研發技術儲備。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Manager - Supplier Quality Assurance (SQA)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Krishnagiri</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">克里希納吉里</span>
+                                    </td>
+                                    <td data-lang="en">Audit master for Futurefactory and cell setup. Pushing local Tier-1 vendors to boost yield.</td>
+                                    <td data-lang="zh">負責 Futurefactory 與新電芯產線的本地 Tier-1 供應商現場品質稽核，提高整車品質與良率。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Lead - Power Electronics Hardware Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾</span>
+                                    </td>
+                                    <td data-lang="en">Developing high-power MCU & VCU board schematics. Boosting in-house control module packing.</td>
+                                    <td data-lang="zh">設計下世代高密度 MCU/VCU 硬體電路，旨在提升電控模組的自主組裝與自製比重。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Project Manager - Supply Chain Localization</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Tamil Nadu</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">泰米爾納德邦</span>
+                                    </td>
+                                    <td data-lang="en">Sourcing local plastic, casting & PCB assemblers to support "Just-in-Time" setup.</td>
+                                    <td data-lang="zh">整合南部在地供應鏈生態，大舉網羅可配合工廠「及時生產 (JIT)」的本地零部件及組裝商。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">R&D Lead - Electric Motorcycle Powertrain</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾</span>
+                                    </td>
+                                    <td data-lang="en">Optimizing mid-drive motors and transmission for Roadster bike series. Key target for high-power drive system components.</td>
+                                    <td data-lang="zh">主攻全新 Roadster 摩托車系列的大功率中置馬達與傳動優化，確保下半年大批交付。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Service Network Operations Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">National (Gurgaon/Mumbai/Chennai)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">全國核心大城</span>
+                                    </td>
+                                    <td data-lang="en">Heading "Hyperservice" roll-out. Handling customers' warranty backlogs to salvage brand reputation.</td>
+                                    <td data-lang="zh">推動售後網絡「Hyperservice」升級，解決客訴與軟硬體維修黑屏，改善品牌形象。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Global Logistics & Export Compliance Specialist</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾</span>
+                                    </td>
+                                    <td data-lang="en">Preparing regulatory compliance to dispatch Indian-built EVs/cells to global markets.</td>
+                                    <td data-lang="zh">負責未來將印度產 EV 整車與電池包銷往海外市場的國際關稅及出口合規作業。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">CNC Milling & Tooling Expert</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Krishnagiri Futurefactory</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">克里希納吉里 Futurefactory</span>
+                                    </td>
+                                    <td data-lang="en">Tooling adjustments for motor casing and gearbox components. Higher precision self-made parts.</td>
+                                    <td data-lang="zh">專責精密馬達外殼與傳動件的模具設計與刀具調整，強化高精度核心工件自製率。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Production Supervisor - Cell Manufacturing Line</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Krishnagiri Gigafactory</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">克里希納吉里 Gigafactory</span>
+                                    </td>
+                                    <td data-lang="en">Heading shift workflows for 4680 automated lines. Direct push to decrease dependency on Chinese cells.</td>
+                                    <td data-lang="zh">調配 4680 電芯自動化組裝線之多班制生產，加速內部電芯自給自足，擺脫對外依賴。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Direct to Consumer (D2C) Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">直營 D2C 混合模式 (Pure D2C Hybrid)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>By-passed Dealers:</strong> Bypassed traditional multi-layered dealership channels. Unified pan-India pricing, keeping profits entirely with HQ.</li>
+                                <li data-lang="zh"><strong>不設傳統經銷商：</strong> 捨棄印度傳統多級經銷商，採取線上與直營結合，全國統一售價，利潤完全收回總部。</li>
+                                
+                                <li data-lang="en"><strong>Experience Centres:</strong> Over 800+ company-owned physical centers for demo rides, MoveOS software walk-through, and direct ordering.</li>
+                                <li data-lang="zh"><strong>體驗中心佈局：</strong> 全印開設 800+ 家直營體驗店 (Experience Centres)，提供試乘、車機導覽與客戶現場下單。</li>
+                                
+                                <li data-lang="en"><strong>App Centricity:</strong> 90% of bookings, parts sourcing, insurance and finance handled directly through the official "Ola Electric App".</li>
+                                <li data-lang="zh"><strong>App 極致閉環：</strong> 90% 的新車、配件訂購與金融保險服務均於「Ola Electric App」直接成交。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Central Dispatch Hub:</strong> Component parts from Chennai Port or local Tier-1s flow to Krishnagiri; finished EVs dispatch directly to state-level Delivery Hubs or customer homes.</li>
+                                <li data-lang="zh"><strong>集中發貨中心：</strong> 零部件自欽奈港或本地廠商送往 Krishnagiri；整車出廠後直調各邦「Delivery Hub (交付中心)」或送貨上門。</li>
+                                
+                                <li data-lang="en"><strong>VMI / JIT Expectation:</strong> Suppliers must match higher frequency dispatch. Needs excellent logistics and "Zero Inventory" storage setup near plant.</li>
+                                <li data-lang="zh"><strong>高頻 JIT 需求：</strong> 供應商需具備高彈性供貨與「零庫存 (VMI/JIT)」管理能力，在工廠周邊建置對接點。</li>
+                                
+                                <li data-lang="en"><strong>Hyperservice Support:</strong> Over 600+ physical service setups matched with "Mobile Service Vans" to tackle remote breakdowns, alongside their own Hypercharger network.</li>
+                                <li data-lang="zh"><strong>售後與充電網：</strong> 設有 600+ 直營服務網點，配備「Mobile Service Van」移動維修車；全國廣佈專屬 Hypercharger 快速充電站。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India EV 2W Market Rankings (FY26 Registration Data)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度電動雙輪車銷量排名 (TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company (Model Lineup)</th><th class="p-2" data-lang="zh">企業 (核心車型)</th>
+                                        <th class="p-2" data-lang="en">Volume / Market Note</th><th class="p-2" data-lang="zh">銷量與市場備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td>TVS Motor Company (iQube Series)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">341,000 units (Deep service setup, rank #1)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">34.1 萬輛 (傳統巨頭，售後網絡完備奪冠)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td>Bajaj Auto (Chetak Series)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">290,000 units (High-grade sheet metal body)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">29.0 萬輛 (經典品牌，鈑金車身口碑穩固)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td>Ather Energy (450X, Rizta)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">239,000 units (Premium focus / family scooters)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">23.9 萬輛 (專攻精品與家庭代步，成長強勁)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">4</td>
+                                        <td class="text-white font-bold">Ola Electric (S1 Series & Roadster)</td>
+                                        <td class="p-2 text-blue-300" data-lang="en"><strong>164,000 units [Target Client]</strong> (Transitioning)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh"><strong>16.4 萬輛 [目標客戶]</strong> (電芯轉型與售後盤整期)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td>Hero MotoCorp (Vida V1)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">144,000 units (Massive dealer push)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">14.4 萬輛 (油車老大，憑藉雄厚通路高速擴張)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Greaves Electric Mobility (Ampere), BGauss Auto, River EV, Pure EV, E-Sprinto.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Strategic Chance:</strong> Ola's core goal is 100% localization of battery cells & core electronics (BMS/VCU) to lower cost and secure PLI cash. Seeking high-quality manufacturing/EMS players like Foxlink to cut imports.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>策略機會：</strong> Ola 目前核心戰略為電芯及電控（BMS/VCU）100% 國產化，以申請高額補貼並大幅降本。正崴 (FOXLINK) 的精密組裝、線束與 EMS 技術，是其急需對接、用以替代進口的黃金資源。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-15</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Press Release] Super Cell Gigafactory Phase 2 Setup Active</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新聞稿] Super Cell 超級工廠二期設備順利入廠</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Phase-2 automated cell line installed at Tamil Nadu Gigafactory. Expected to trim cell cost by 15%. <span class="text-gray-500">(Opp: Sourcing for battery module electronics)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">泰米爾納德邦 Gigafactory 完成第二階段 4680 電芯自動化組裝線安裝，可望將電池總體成本再壓縮 15%。 <span class="text-gray-500">(機會：電池包電子組件)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-05</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corporate Announcement] ₹15 Billion QIP Sourcing on Track</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[公司公告] 150 億盧比 QIP 融資計畫順利推進</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Board confirms closure of QIP book-building. Funds destined for automation and R&D in Krishnagiri Mega-complex. <span class="text-gray-500">(Opp: Factory equipment & setups)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">董事會確認完成向合資格機構買家 (QIP) 融資之詢價圈購，所集 150 億盧比全數投入 Krishnagiri 園區自動化與研發。 <span class="text-gray-500">(機會：廠區自動化組裝)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Media Release] "Hyperservice" Program Scores Big Wins</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[媒體發布] 售後「Hyperservice」轉型迎來大捷</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Over 1,000 new mechanics deployed. Single-day service resolution rate shot up from 45% to 77% in Dec, clearing backlog issues. <span class="text-gray-500">(Opp: Spare parts supply)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">新招募 1,000 名售後技術人員成效顯著，2025 年 12 月單日故障排除率由 45% 躍升至 77%，強力破除售後疑慮。 <span class="text-gray-500">(機會：維修配件高頻供應)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Product Certification] Roadster X+ Electric Bike Passes PLI Audits</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[產品認證] Roadster X+ 電腦通過政府 PLI 合規測試</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Ministry of Heavy Industries clears Roadster X+ (5.2 kWh with self-made 4680 cell) for PLI subsidies after passing Local Value Addition tests.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">重工業部確認首款搭載自製 4680 電芯的 Roadster X+ (5.2 kWh) 通過高難度本地增值測試，正式列入補貼清單。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-02</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Market Intelligence] U-Shaped Sales Rebound in Dec</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[市場情報] 12月銷量與市占迎來 U 型反彈</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">VAHAN data shows Ola registered 9,020 units in Dec, with weekly market share bouncing back to double-digits.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">根據 VAHAN 數據，Ola 於 12 月註冊量達 9,020 輛，市占率順利止跌並於月底重回雙位數大關。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed in list for space but present in code logic -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-20:</strong> 
+                            <span data-lang="en">Deployed 250 Elite Rapid Response engineers to resolve VCU screen blackout & battery bugs.</span>
+                            <span data-lang="zh">正式部署 250 名特遣高級工程師，24小時駐點排除車機黑屏與電池故障。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-10:</strong> 
+                            <span data-lang="en">Commenced commercial delivery of S1 X+ 5.2 kWh fitted with in-house "Bharat Cell" 4680s.</span>
+                            <span data-lang="zh">搭載自研「Bharat Cell」電芯的首批 S1 X+ 5.2 kWh 車型向預購車主啟動小量交付。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> 
+                            <span data-lang="en">India Govt cleared first tranche of ₹400 Crore cell PLI incentives, boosting operational cash flow.</span>
+                            <span data-lang="zh">獲得印度政府批准首筆 40 億盧比電池 PLI 獎勵金，大幅緩解其營運現金流。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15:</strong> 
+                            <span data-lang="en">Signed strategic ties with three Tamil Nadu Tier-1 casting & wiring harness makers to counter global logistics risks.</span>
+                            <span data-lang="zh">與泰米爾納德邦三大本地 Tier-1 供應商簽約，確保金屬壓鑄與線束零件本地化。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-05:</strong> 
+                            <span data-lang="en">1 Millionth EV rolls off Krishnagiri manufacturing lines. Founder Bhavish Aggarwal hosts ribbon-cutting.</span>
+                            <span data-lang="zh">慶祝第 100 萬輛電動雙輪車於 Krishnagiri 下線，創辦人親自主持剪綵仪式。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; // Defaults to English on load
+        let radarChart = null;
+
+        // KYC Radar Scores (Estimated based on Report for Ola Electric): 
+        // Market Share: 8 (Leading EV player, but currently #4 in overall registrations)
+        // Localization: 8 (Extremely aggressive cell/electronics PLI localization)
+        // Brand Power: 9 (High-profile EV brand, first to reach 1 Million units)
+        // Digital Reach: 9 (Pure D2C app-first sales booking framework)
+        // Financial Health: 7 (Huge asset base, ₹4,932 Cr turnover, but high Capex/profitability pressures)
+        const radarScores = [8, 8, 9, 9, 7]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
