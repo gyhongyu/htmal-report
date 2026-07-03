@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-03T05:09:21.585Z",
+  "lastUpdated": "2026-07-03T05:16:51.764Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1406,6 +1406,19 @@
       "fileName": "report-1783055360735.html",
       "createdAt": "2026-07-03T05:09:21.585Z",
       "updatedAt": "2026-07-03T05:09:21.585Z"
+    },
+    {
+      "id": "report-1783055810687",
+      "title": "Target: Ather Energy Limited",
+      "description": "目標企業：Ather Energy Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783055810687.html",
+      "createdAt": "2026-07-03T05:16:51.764Z",
+      "updatedAt": "2026-07-03T05:16:51.764Z"
     }
   ]
 }
