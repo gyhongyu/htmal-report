@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-30T04:44:05.501Z",
+  "lastUpdated": "2026-07-03T03:59:45.676Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1340,6 +1340,20 @@
       "fileName": "report-1782794644126.html",
       "createdAt": "2026-06-30T04:44:05.501Z",
       "updatedAt": "2026-06-30T04:44:05.501Z"
+    },
+    {
+      "id": "report-1783051184795",
+      "title": "arget: Lumax Industries Limited",
+      "description": "目標企業：Lumax Industries Limited",
+      "categories": [
+        "項目計劃",
+        "客戶KYC",
+        "內部簡報",
+        "市場分析"
+      ],
+      "fileName": "report-1783051184795.html",
+      "createdAt": "2026-07-03T03:59:45.676Z",
+      "updatedAt": "2026-07-03T03:59:45.676Z"
     }
   ]
 }

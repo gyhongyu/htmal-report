@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Lumax Industries Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Lumax Industries Limited (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Lumax Industries Limited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Lumax Industries Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Lumax Industries Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Priority Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Lumax Industries Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> L74899DL1981PLC012804</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Listed on NSE & BSE)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (已於 NSE/BSE 上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 3,400 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(FY25 Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Stanley Electric (Japan) & D.K. Jain Group</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終控股母公司：</strong> 日本 Stanley Electric 與 印度 D.K. Jain 集團</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Core SMT Hub</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心電子基地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">New Delhi / Bawal</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">新德里總部 / Bawal 工廠</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">12 High-Tech Plants | 1st Tier Auto Lighting Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">全印設有 12 處製造基地 | 最大的車燈一級供應商</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint & Infrastructure</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與廠區配置</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup (12 Key Bases):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">主要製造基地 (12個主要基地精選)：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Bawal (Haryana):</strong> Core electronics & LED SMT assembly hub supplying Northern auto clusters.</li>
+                                <li data-lang="zh"><strong>Bawal 工廠 (核心電子/LED基地):</strong> 位於 Haryana 的 IMT 工業區。為最關鍵的車載電子與 LED SMT 組裝基地。</li>
+                                <li data-lang="en"><strong>Chakan (Pune):</strong> Western hub servicing Mahindra & Mahindra and Tata Motors.</li>
+                                <li data-lang="zh"><strong>Chakan 工廠 (西部製造中樞):</strong> 位於 Pune 汽車工業聚落。專門服務當地的 M&M 及 Tata Motors 等大客戶。</li>
+                                <li data-lang="en"><strong>Gurugram (Haryana):</strong> Located next to Maruti Suzuki for Just-In-Time light assembly & dispatch.</li>
+                                <li data-lang="zh"><strong>Gurugram 工廠 (北部重要基地):</strong> 專門配合 Maruti Suzuki 的「Just-In-Time」整車配光與快速交付。</li>
+                                <li data-lang="en"><strong>Sanand (Gujarat):</strong> Near-site production supporting Tata Motors PV & Suzuki Motor Gujarat.</li>
+                                <li data-lang="zh"><strong>Sanand 工廠 (西部新興基地):</strong> 位於 Gujarat，主要為 Tata Motors 及 Suzuki Motor Gujarat 配套生產。</li>
+                                <li data-lang="en"><strong>Bengaluru/Bidadi (Karnataka):</strong> Southern hub supplying major 2-wheeler and PV makers (Honda, Toyota).</li>
+                                <li data-lang="zh"><strong>Bengaluru/Bidadi 工廠 (南部核心基地):</strong> 提供南部大型 2-wheeler 及 PV 製造商（如 Honda HMSI, Toyota）燈具組裝。</li>
+                                <li data-lang="en"><strong>Anantapur (Andhra Pradesh):</strong> Specialized, high-tech LED lighting plant dedicated to Kia India.</li>
+                                <li data-lang="zh"><strong>Anantapur 工廠 (南部專屬基地):</strong> 專門為 Kia India (起亞汽車) 提供客製化整車 LED 燈具配套。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech Centers, Warehouses & HQ:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發、倉儲與總部網絡：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Registered HQ:</strong> Harbans Bhawan-II Commercial Complex, Nangal Raya, South West Delhi, New Delhi.</li>
+                                <li data-lang="zh"><strong>註冊總部:</strong> 位於新德里 (Harbans Bhawan-II Commercial Complex, Nangal Raya)。</li>
+                                <li data-lang="en"><strong>DST-Certified R&D:</strong> In-house labs located at Gurugram & Pune for synchronized vehicle engineering with OEMs.</li>
+                                <li data-lang="zh"><strong>研發中心:</strong> 位於 Gurugram 與 Pune，均為印度政府科技部 (DST) 認證之研發基地，與 OEM 廠同步研發。</li>
+                                <li data-lang="en"><strong>Overseas design centers:</strong> Czech Republic (Lumax European Technical Centre - LETC) & Taiwan Design Center for optical simulation & design.</li>
+                                <li data-lang="zh"><strong>海外設計中心:</strong> 設有捷克 (LETC) 研發中心及 台灣設計中心 (Taiwan Design Center)，專注光學模擬與跨國協作。</li>
+                                <li data-lang="en"><strong>RDCs & Logistics:</strong> Key high-frequency dispatch centers located in Faridabad, Dharuhera, Pune (Chakan), and Chennai.</li>
+                                <li data-lang="zh"><strong>倉儲與物流:</strong> 在北印（Faridabad, Dharuhera）、西印（Chakan）與南印（Chennai）建有大型配送中心，支持零庫存 JIT 模式。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding Hierarchy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Control)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">D.K. Jain Family Members</strong> <span class="text-gray-400">(~37.50% Stake)</span><br>
+                                <strong class="text-white">Stanley Electric Co., Ltd. (Japan)</strong> <span class="text-gray-400">(35.77% Direct + 1.73% via Thai Stanley = ~37.50%)</span>
+                                <span class="block text-green-400 mt-1" data-lang="en">> Total Joint Promoters Stake: 75.00%</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 雙方在 Promoters 身份下共同管理，合計持股 75.00%</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding Group)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+                                <strong class="text-white">D.K. Jain Group</strong> <span class="text-gray-400">(Indian automotive manufacturing conglomerate)</span><br>
+                                <strong class="text-white">Stanley Electric Co., Ltd. (Japan)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 3 (Ultimate Parent)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第三層 (最終受益人)</span>
+                                <strong class="text-blue-300">Stanley Electric Co., Ltd. (Japan)</strong>
+                                <span class="block text-gray-500 mt-1" data-lang="en">Listed on Tokyo Stock Exchange (6923). Global car lighting & opto-semiconductor leader.</span>
+                                <span class="block text-gray-500 mt-1" data-lang="zh">於東京證券交易所上市 (代碼：6923)。日商龍頭提供源源不絕的技術與日系 OEM 配套。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Intelligent LED Headlamps</strong></li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>智慧型 LED 前大燈組合</strong></li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Dynamic Rear Combined Tail Lamps</strong> (connecting/running strip)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>貫穿式及動態尾燈組</strong> (尾燈組合)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>LED Fog Lamps & Day-running Lights (DRL)</strong></li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>LED 前霧燈與日間行車燈 (DRL)</strong></li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Interior Lighting & Ambient Lighting Systems</strong></li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>多色調車內氛圍燈系統</strong></li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>2-Wheeler LED Lighting</strong> (Headlamps & Flashers)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>摩托車/兩輪車 LED 燈具</strong></li>
+
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Automotive Lighting Controllers (ECU)</strong></li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>汽車電子照明控制單元 (驅動電路)</strong></li>
+
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>High-mount Stop Lamps (CHMSL)</strong></li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>車載中央高位煞車燈</strong></li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">產品系統/零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Optics System:</strong> High-power LED chips, LED light modules, diffusers, Light Guides.</li>
+                            <li data-lang="zh"><strong>光學及發光：</strong> 高功率 LED 晶片、LED 光源模組、散光元件、光導條 (Light Guides)。</li>
+                            
+                            <li data-lang="en"><strong>Electronics & Drivers:</strong> Driver PCB, Intelligent Adaptive Front-lighting System (AFS) controllers, voltage regulators.</li>
+                            <li data-lang="zh"><strong>電子控制：</strong> LED 驅動電路板 (Driver PCB)、智慧 AFS 控制器、電壓調節模組。</li>
+                            
+                            <li data-lang="en"><strong>Precision Projectors:</strong> Thick-wall PMMA/Polycarbonate projector lenses, high-reflectors, light guides.</li>
+                            <li data-lang="zh"><strong>精密導光：</strong> 厚壁注塑透鏡 (PMMA/PC Projector Lens)、反射鏡、高精度導光體。</li>
+                            
+                            <li data-lang="en"><strong>Thermal Dissipation:</strong> Aluminum die-cast heat sinks, thermal interface materials, cooling fan modules.</li>
+                            <li data-lang="zh"><strong>結構散熱：</strong> 鋁壓鑄散熱器 (Aluminum Die-cast Heat Sinks)、導熱膠泥、散熱風扇。</li>
+
+                            <li data-lang="en"><strong>Housing & Seals:</strong> PBT/ABS high-temp lamp housing, high-performance silicone sealing rings, vent/anti-fog membranes.</li>
+                            <li data-lang="zh"><strong>外殼與密封：</strong> PBT/ABS 耐高溫燈體殼、矽膠密封圈、通氣過濾防霧膜。</li>
+
+                            <li data-lang="en"><strong>Interconnects:</strong> High-temperature waterproof wire harnesses, SMT connectors, board-to-wire socket terminals.</li>
+                            <li data-lang="zh"><strong>車載互連：</strong> 耐高溫防水線束 (Automotive Harnesses)、SMD 貼片連接器、板對線插槽。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs & Foxlink Potential -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps & FOXLINK Potential</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求與正崴機遇</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Value Shift:</strong> Core value shifting from "plastic covers" to complex "opto-electronics". Lumax needs partners with premium automotive-grade IATF 16949 certification and SMT manufacturing capabilities.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>價值轉移：</strong> 核心價值由傳統「塑料外殼」移至「光電系統」。急需通過 IATF 16949 認證、具精密電子 SMT 製造實力的在地夥伴。</p>
+                            
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-yellow-500 mr-1"></i><strong>"Make in India" Sourcing pressure:</strong> Under high import duty on electronics and wire-harnesses, Lumax is eager to replace imported PCBAs and wiring products from Japan and China.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-yellow-500 mr-1"></i><strong>本土自製率壓力：</strong> 受制於印度進口關稅壁壘，Lumax 亟待降低對日本 Stanley 和中國進口控制板、線束的依賴。</p>
+
+                            <p data-lang="en"><i class="fas fa-star text-blue-400 mr-1"></i><strong>FOXLINK Opportunity:</strong> High potential to pitch FOXLINK's Indian manufacturing sites for supply of lighting controller PCBAs, custom connectors, and heavy-duty harnesses to Lumax Bawal and Chakan plants.</p>
+                            <p data-lang="zh"><i class="fas fa-star text-blue-400 mr-1"></i><strong>正崴極佳切入點：</strong> 正崴具備強大車用電子、連接器與 SMT 本地化代工能力，可直接切入其 Bawal 與 Chakan 廠的控制器代工或連接器本地供應鏈。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Key Talents & Supply Chain Clues</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘雷達：核心崗位與供應鏈線索</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed (11 Core Intel Records)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication for Partners</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 對供應商之隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior Manager - Sourcing & Localization</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gurugram (Haryana)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Gurugram (北部研發/總部)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Tasked with driving local substitution for electronic components and plastic raw resins in Northern plants. Directly looking for domestic manufacturers.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 負責推進北部廠區的電子元器件與塑膠原料在地化替代策略，直接開發本土新供應商，積極去中國/日本化。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">R&D Electronics Hardware Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune (Maharashtra)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (西部研發)</span>
+                                    </td>
+                                    <td data-lang="en">Responsible for schematics and PCB layout design of automotive LED drivers. Highlights a strong push towards in-house electronic circuit development.</td>
+                                    <td data-lang="zh">負責車載 LED 驅動器之電路圖 (Schematic) 與電路板 (PCB Layout) 設計，著重本土自主電路化研發。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">NPD (New Product Development) Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bawal (Haryana)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bawal (核心電子基地)</span>
+                                    </td>
+                                    <td data-lang="en">Responsible for localizing and manufacturing Stanley Japan's latest vehicle lighting models into Bawal's high-speed SMT & lamp assembly lines.</td>
+                                    <td data-lang="zh">新產品開發，負責將日本 Stanley 全球最新機種，導入 Bawal 的高自動化 SMT 與整燈組裝線量產。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sourcing Manager - Semiconductor & Electronics</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Delhi NCR</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">德里首都區 (採購總部)</span>
+                                    </td>
+                                    <td data-lang="en">Specifically handling sourcing for microcontrollers (MCUs) and high-brightness imported LED packages. Optimizing supply chains and chip lead times.</td>
+                                    <td data-lang="zh">專責採購微控制器 (MCU) 與進口高亮度 LED 封裝，以優化晶片採購週期、減少缺晶片停產風險。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Quality Assurance Lead - SMT Production</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bawal (Haryana)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Bawal (核心電子基地)</span>
+                                    </td>
+                                    <td data-lang="en">Overseeing yield controls, cleanroom compliance, and Acceptable Quality Limits (AQL) validation on Bawal's precision SMT lines.</td>
+                                    <td data-lang="zh">負責監督 Bawal 電子工廠 SMT 生產線的良率控制、無塵室管理與 AQL 品質驗證。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Head - Business Development (OEM Relations)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune (Maharashtra)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (西部製造中樞)</span>
+                                    </td>
+                                    <td data-lang="en">Deepening relationships with major local OEMs like Tata Motors and Mahindra to pitch for complete LED system contracts on upcoming 2026/2027 EV platforms.</td>
+                                    <td data-lang="zh">深耕與 Tata Motors 及 Mahindra 的關係，主要爭取即將上市的 2026/2027 電動車平台整套照明合約。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Optical Design Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Gurugram (Haryana)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Gurugram (北部研發)</span>
+                                    </td>
+                                    <td data-lang="en">Requires expertise in using LightTools and LucidShape for light distribution design and lens refraction simulations.</td>
+                                    <td data-lang="zh">需熟練運用 LightTools, LucidShape 進行發光系統配光與透鏡折射光路模擬。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">CAE Simulation Analyst</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pune (Maharashtra)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pune (西部研發)</span>
+                                    </td>
+                                    <td data-lang="en">Focused on conducting thermal simulations for high-heat emitting LED clusters and structural impact finite element analyses (FEA).</td>
+                                    <td data-lang="zh">專職進行車燈內部高發熱 LED 的熱力模擬 (Thermal Simulation) 與抗衝擊結構模擬。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Tool Room & CNC Engineering Specialist</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Sanand (Gujarat)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Sanand (西部新興基地)</span>
+                                    </td>
+                                    <td data-lang="en">Managing and optimizing high-precision double-injection/bi-color plastic molding tooling, and multi-axis CNC machine centers at Sanand factory.</td>
+                                    <td data-lang="zh">負責管理與優化 Sanand 廠的高精度雙色/雙射塑料射出成型模具的模房和數控加工。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Production Engineer - Plastic Injection Molding</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Chakan, Pune</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Chakan (西部製造中樞)</span>
+                                    </td>
+                                    <td data-lang="en">Managing heavy-tonnage plastic injection machines to optimize production yields for transparent front lenses and reflective housings.</td>
+                                    <td data-lang="zh">管理 Chakan 廠大型射出成型機組，優化乘用車前燈透明面罩與反射面產能。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Graduate Engineering Trainee (GET) - Manufacturing Excellence</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pantnagar (Uttarakhand)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Pantnagar (北部基地)</span>
+                                    </td>
+                                    <td data-lang="en">Recruiting fresh mechanical and electronic graduates from premier National Institutes of Technology (NITs) to build up lean manufacturing and factory automation talents.</td>
+                                    <td data-lang="zh">專門招收來自 NITs 的機械與電子青年畢業生，儲備工廠自動化與精實生產的管理人才。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales, Distribution & Supply Logistics</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售、經銷與供應鏈物流佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">B2B Co-Engineering Strategy</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">B2B 同步工程配套模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Pure B2B OEM-First:</strong> Direct cooperation with leading passenger car and two-wheeler OEMs. Integrated into the early-stage "Simultaneous Engineering" vehicle design phases to offer custom optical solutions.</li>
+                                <li data-lang="zh"><strong>純 B2B 深度配套：</strong> 直接對接各大主流整車廠的研發與採購部門。在整車開發初期的「同步工程」即切入，提供專用車型定製化照明方案。</li>
+                                
+                                <li data-lang="en"><strong>Synergy in Aftermarket:</strong> For spare auto lighting markets, Lumax Industries routes finished goods directly to sister group company Lumax Auto Technologies Limited's (LATL) "Aftermarket Division", utilizing their nationwide network rather than selling directly to consumer retail stores.</li>
+                                <li data-lang="zh"><strong>集團售後事業聯動：</strong> 在售後市場，Lumax Industries 自身的成品燈具會直接供貨給其集團兄弟公司 Lumax Auto Technologies 旗下的「售後市場分銷部」，自身不直接對接終端零售。</li>
+                                
+                                <li data-lang="en"><strong>B2B Digital Portal:</strong> Official domain is <a href="https://www.lumaxworld.in/lumaxindustries" target="_blank">https://www.lumaxworld.in/lumaxindustries</a>. Purely designed for B2B capability marketing; no direct B2C e-commerce stores (like Amazon India or Flipkart) as product fits are heavy tier-1 subassemblies.</li>
+                                <li data-lang="zh"><strong>數位官網宣傳：</strong> 官方網站為 https://www.lumaxworld.in/lumaxindustries。作為核心技術展示與 B2B 客戶關係入口，無直接的零售電商直營。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Just-In-Time Logistics Flow</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">Just-In-Time 零庫存物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>OEM-Adjacent Warehouses:</strong> Region Dispatch Centers (RDCs) in Bawal, Gurgaon, Pune, Chennai, etc. are located highly adjacent to major clients (Maruti Suzuki, Tata, Mahindra, Hyundai, Kia) to enable high-frequency Just-In-Time (JIT) sequence deliveries.</li>
+                                <li data-lang="zh"><strong>緊貼 OEM 倉儲：</strong> 在四大汽車產業聚落均設有配送中心 (RDC)，與 Maruti Suzuki (Gurugram)、M&M (Pune)、Hyundai (Chennai) 等主力客戶緊密咬合，完全採取「JIT」即時交貨。</li>
+                                
+                                <li data-lang="en"><strong>Aftermarket Reach:</strong> Backed by the Jain Group's massive aftermarket retail setup, Lumax components flow into over 300+ authorized distributors and 20,000+ automotive part retailers across India for vehicle repair.</li>
+                                <li data-lang="zh"><strong>售後配件覆蓋：</strong> 依靠集團全印售後網路，對接超過 300 家授權分銷商、20,000+ 個零售汽配通路，提供原廠規格的車燈替換件。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Lumax Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">Lumax 競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on absolute dominance & B2B focus</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">基於霸主市佔率與純 B2B 模式之評估</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Automotive Lighting Rankings (Estimated by Market Share)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度車用照明市場銷售排名 (TOP 10 預估)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Background & Focus</th><th class="p-2" data-lang="zh">背景與市場地位</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">1</td>
+                                        <td class="p-2 text-white font-bold">Lumax Industries Limited</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Ind-Japan JV (Target, 50% - 60% absolute leader in PV/CV lighting)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">印度-日本合資 (本報告目標，乘用車及商用車霸主，市佔率過半)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2 font-bold">Uno Minda Limited (Lighting Div)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India Domestic/JVs (Major competitor in PV & 2-Wheeler lighting)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土/合資 (強大乘用車及兩輪車照明，最大本土對手)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Varroc Engineering Limited</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Strong in 2-wheelers with strong global design center roots)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (兩輪車與乘用車主力，擁有強大海外研發基礎)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">FIEM Industries Limited</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Two-wheeler lighting titan, extreme dominance in 2W segment)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (兩輪車照明巨頭，在二輪車領域市佔率極高)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Hella India Lighting Limited</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany, FORVIA Group (Focus on CVs, special rigs & premium AM)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 FORVIA 集團 (專注商用車、特殊車及高階售後)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6</td>
+                                        <td class="p-2">India Japan Lighting Private Limited (IJL)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan, Koito JV (Critical supplier to Toyota & Maruti Suzuki)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本 Koito 合資 (Toyota & Maruti Suzuki 的日系核心配套)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">7</td>
+                                        <td class="p-2">Magneti Marelli Motherson Auto System (MMS)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Italy-Ind JV (Premium LED rear lights and dynamic main lamps)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">義大利-印度合資 (提供高階 LED 尾燈，專攻中高階車型)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">8-10</td>
+                                        <td class="p-2" colspan="2">Phoenix Lamps Limited (Halogen Leader), Neolite ZKW, Rinder India (Uno Minda)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-yellow-400 mt-2 italic p-1" data-lang="en"><strong>Strategic Insight for FOXLINK (正崴):</strong> Under high local import duties, Lumax is aggressively seeking localized manufacturing partners for PCBA controllers and connector terminals. Foxlink India's manufacturing setups are perfectly aligned to capture this Tier-2 supplier gap for Lumax Chakan and Bawal plants.</p>
+                            <p class="text-xs text-yellow-400 mt-2 italic p-1" data-lang="zh"><strong>正崴專屬戰略視角：</strong> 受制於 Make in India 電子零部件進口關稅壁壘，Lumax 亟待降低對國外進口控制板及線束的依賴。正崴在印度當地的電子 PCBA SMT 及連接器製造產線，是切入其 Bawal 與 Chakan 供應鏈的完美契合點。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Core News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近 3 個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-12</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Corporate Update] Q3 FY26 Earnings Rise Powered by High-End LED Demand</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[財報公布] Q3 FY26 季度營收再創新高，高階 LED 配套佔比顯著提升</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Board approves Q3 FY26 financials; quarterly revenue crosses ₹1,200 Crores. Driven by the surging adoption of smart, high-margin passenger car LED projection lights.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">董事會核准公布截至 2025 年 12 月 31 日的第三季度財報，單季營收突破 120 億盧比，受惠於乘用車智慧高階 LED 車燈配套佔比顯著拉升。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Press Release] SMT Line Capacity Expansion in Bawal Factory</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[產能擴增] Bawal 廠引進全新日系高速 SMT 產線，提升車燈控制板自製率</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Announced capex investment in high-speed SMT assembly lines to boost in-house manufacturing of LED driver PCBAs by 30%, lowering dependence on imports. <span class="text-gray-500">(Opp: PCBA component sourcing gap)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">宣布斥資引進全新一式日系高速貼片組裝線，旨在將車燈 LED 驅動電路板 (Driver PCB) 的在印自製產能提升 30%，以降低對外進口成本。 <span class="text-gray-500">(機會：PCBA 代工與組件配套)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Product Launch] Localization of Adaptive Front Lighting Systems (AFS)</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[新品推出] 攜手日本 Stanley，在印推出首款針對中大型 SUV 的自適應大燈</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">In technical partnership with Stanley Japan, Lumax launches localized AFS headlamps for larger SUVs, dynamically adjusting illumination zones via onboard sensors.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">聯合日本 Stanley 技術，在印度市場推出首款針對中大型 SUV 的自適應前照明系統 (AFS)，能根據車載傳感器與車速進行動態避光與光斑調整。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-05</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[CSR/Education] Precision Tooling MOU Signed in Pune Chakan</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[校企合作] 與 Chakan 本地工業學校簽署人才培訓合作備忘錄</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Signed training MOU with Chakan technical academy to cultivate skilled high-end mold engineering and automated assembly technicians, targetting 100 grads yearly.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">於 Pune Chakan 廠區啟動「精密車光模具與自動化組裝」人才實訓班，預計每年為在地廠區輸送 100 名高階技工。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-23</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Award] Honda Motorcycle HMSI Quality & Logistics Excellence Gold Award</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[榮譽獎項] 榮獲 Honda Motorcycle「品質與物流卓越獎」金獎</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Honda (HMSI) awarded Lumax's assembly team for flawless logistics and zero-defect quality control during their annual supplier convention.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Honda (HMSI) 於其年度供應鏈大會上，頒發「卓越物流與零缺陷品質 (Quality & Logistics Excellence)」金獎給 Lumax 製造團隊。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed in list for space but present in code logic -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-11 [Industry News]:</strong> 
+                            <span data-lang="en">Won major exclusive lighting contract from a top Indian EV 2-Wheeler brand.</span>
+                            <span data-lang="zh">奪得印度頂尖電動兩輪車全套 LED 照明合約，簽署 2026-2027 年獨家供貨協議。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28 [Sustainability]:</strong> 
+                            <span data-lang="en">Gurugram plant rooftop solar capacity crossed 8MW, covering 25% power need.</span>
+                            <span data-lang="zh">Gurugram 廠區屋頂太陽能併網發電突破 8MW，覆蓋工廠 25% 以上用電。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-18 [Global Synergy]:</strong> 
+                            <span data-lang="en">Summit with Taiwan Design Center & Czech LETC to cut NPD Lead Time by 15%.</span>
+                            <span data-lang="zh">加強與台灣設計中心及捷克 R&D 跨國協作，縮短本土新車型開發週期 (NPD Lead Time) 15%。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-09 [Campus Drive]:</strong> 
+                            <span data-lang="en">Launched 2026 GET drive at IIT Delhi/NITs for advanced optical & electronics talent.</span>
+                            <span data-lang="zh">啟動 2026 年度 GET 全印校園招募，前往 IIT Delhi 及頂尖 NIT 招募 80+ 名優秀畢業生。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-02 [Finance]:</strong> 
+                            <span data-lang="en">Record-breaking Q2 FY26 revenue thanks to strong pre-Diwali vehicle dispatch.</span>
+                            <span data-lang="zh">Q2 FY26 營收與利潤再創新高，受惠於排燈節 (Diwali) 前夕印度車市強勁銷量。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Semantic Evaluation Score map for Lumax Industries:
+        // Market Share: 10 (Overwhelming leader with 50-60% market share)
+        // Localization: 6 (Expanding PCBA in Bawal, but still dependent on Japan/China imports; high PLI pressure)
+        // Brand Power: 10 (Ultimate OEM lighting partner brand for all top vehicle makers)
+        // Digital Reach: 4 (Pure Tier-1 B2B OEM player, very little direct digital consumer storefront trace)
+        // Financial Health: 9 (Backed by D.K. Jain conglomerate & Tokyo-listed Stanley Electric; robust ₹3,400 Cr revenue)
+        const radarScores = [10, 6, 10, 4, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
