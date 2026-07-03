@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-03T04:41:16.827Z",
+  "lastUpdated": "2026-07-03T05:09:21.585Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1393,6 +1393,19 @@
       "fileName": "report-1783052880956.html",
       "createdAt": "2026-07-03T04:28:02.118Z",
       "updatedAt": "2026-07-03T04:41:16.827Z"
+    },
+    {
+      "id": "report-1783055360735",
+      "title": "(Design In)Target: Log9 Materials Scientific",
+      "description": "目標企業：Log9 Materials (印商立九材料科技)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783055360735.html",
+      "createdAt": "2026-07-03T05:09:21.585Z",
+      "updatedAt": "2026-07-03T05:09:21.585Z"
     }
   ]
 }
