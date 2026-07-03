@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-03T04:17:03.513Z",
+  "lastUpdated": "2026-07-03T04:28:02.118Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1380,6 +1380,19 @@
       "fileName": "report-1783052222619.html",
       "createdAt": "2026-07-03T04:17:03.513Z",
       "updatedAt": "2026-07-03T04:17:03.513Z"
+    },
+    {
+      "id": "report-1783052880956",
+      "title": "Target: Bosch Automotive Electronics India (RBAI)",
+      "description": "目標企業：博世汽車電子印度有限公司 (RBAI)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783052880956.html",
+      "createdAt": "2026-07-03T04:28:02.118Z",
+      "updatedAt": "2026-07-03T04:28:02.118Z"
     }
   ]
 }
