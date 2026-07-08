@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-03T06:04:59.347Z",
+  "lastUpdated": "2026-07-08T10:57:18.684Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1419,6 +1419,19 @@
       "fileName": "report-1783055810687.html",
       "createdAt": "2026-07-03T05:16:51.764Z",
       "updatedAt": "2026-07-03T06:04:59.347Z"
+    },
+    {
+      "id": "report-1783508237778",
+      "title": "Target: Raphe mPhibr Pvt Ltd",
+      "description": "目標企業：Raphe mPhibr Private Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783508237778.html",
+      "createdAt": "2026-07-08T10:57:18.684Z",
+      "updatedAt": "2026-07-08T10:57:18.684Z"
     }
   ]
 }
