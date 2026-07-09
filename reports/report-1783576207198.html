@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: IoTechWorld Avigation Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: IoTechWorld Avigation (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：IoTechWorld Avigation (農業無人機開路先鋒)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India - Client Intelligence Hub</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業 - 印度大客戶開發系統</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換繁中</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC DEEP-DIVE STRATEGY</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: IoTechWorld Avigation Private Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：印度農業無人機先驅 IoTechWorld Avigation</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Status:</strong> Active & High Growth | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>企業狀態：</strong> 營運中且高速增長 | <strong>編制：</strong> 正崴印度開發小組</p>
+                        </div>
+                        <div class="text-left md:text-right flex-shrink-0">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1 Target</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider" data-lang="en">Local Drone Indigenization Lead</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider" data-lang="zh">印度無人機本土製造開拓者</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2 leading-tight">IoTechWorld Avigation Private Limited</p>
+                        <p class="text-xs text-gray-400 mt-2"><strong>CIN:</strong> U74999HR2017PTC068600</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en"><i class="fas fa-check-circle mr-1"></i>Status: Active (Unlisted Ltd)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh"><i class="fas fa-check-circle mr-1"></i>狀態：活躍中 (非上市股份有限公司)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 50 - 100 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="en">(Est. Turnover FY25)</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="zh">(FY25 預估營收規模)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="en"><strong>Strategic Backer:</strong> Dhanuka Agritech (Listed in India)</p>
+                        <p class="text-xs text-gray-300 mt-2" data-lang="zh"><strong>戰略大股東：</strong> 印度本土農化巨頭 Dhanuka Agritech (上市)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-700">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Central Setup</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心製造基地</h3>
+                        <p class="text-lg font-bold text-white mt-2">Gurugram, Haryana</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Sector 35, Phase VI | Approved Assembly Line</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">第 35 工業區 | 具 DGCA 認證型式安全產線</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en"><i class="fas fa-users mr-1"></i>~114 Core Staff | >2,000 Drones</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh"><i class="fas fa-users mr-1"></i>約 114 名核心員工 | 運作 2,000+ 架</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic & Manufacturing Setup</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理分佈與產能基地詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing & Tech Hubs:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造與研發基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Gurugram Assembly Unit (Core Base):</strong> Plot No. 31 & 34, Sector 35, Gurugram. Fully approved by DGCA for local drone assembly and strict flight-testing.</li>
+                                <li data-lang="zh"><strong>古爾岡總部核心工廠：</strong> 位於哈里亞納邦古爾岡第 35 工業區。具備 DGCA 本土無人機組裝測試執照，是印度首批型式認證基地。</li>
+                                <li data-lang="en"><strong>Gurugram Flight & R&D Center:</strong> Adjacent to HQ factory. Focusing on FC board localization, Smart BMS, and custom BLDC components ("Bharath Components" branding).</li>
+                                <li data-lang="zh"><strong>古爾岡研發與飛控中心：</strong> 緊鄰總部。專注於本土飛控、智能 BMS 及自研「Bharath Components」品牌電機零組件開發。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Regional Channels & Support:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">區域辦事處與售後樞紐：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Pune Flagship Hub (West):</strong> Maharashtra. Active service station, technical support, and Drone-as-a-Service (DaaS) dispatch center for West India.</li>
+                                <li data-lang="zh"><strong>Pune 服務與培訓旗艦站：</strong> 位於馬哈拉施特拉邦。西印度售後重鎮，負責技術支援、維修及 DaaS (無人機即服務) 拓展。</li>
+                                <li data-lang="en"><strong>Vijayawada Center (South):</strong> Andhra Pradesh. Crucial hub connecting southern agricultural belt, distribution networks, and spray demonstration programs.</li>
+                                <li data-lang="zh"><strong>Vijayawada 服務中心：</strong> 位於安得拉邦。南印度關鍵糧倉樞紐，負責通路對接與實地噴灑推廣。</li>
+                                <li data-lang="en"><strong>Mohali Office (North):</strong> Punjab. Manages government tenders and relations with mega agricultural cooperatives in the wheat/rice belt.</li>
+                                <li data-lang="zh"><strong>Mohali 辦公室：</strong> 位於旁遮普邦。專職北印度小麥/水稻區的政府標案及大型農合社關係管理。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership, Capital & Shareholding Trace</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700 shadow-lg">
+                        <p class="text-sm text-gray-300 mb-3 font-semibold" data-lang="en">Structure Trace (3 Levels Up):</p>
+                        <p class="text-sm text-gray-300 mb-3 font-semibold" data-lang="zh">股權穿透分析 (向上三級追溯)：</p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block uppercase font-bold text-[10px]" data-lang="en">Level 1 (Direct Shareholders)</span>
+                                <span class="text-gray-500 block uppercase font-bold text-[10px]" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white block mt-1">Deepak Bhardwaj & Anoop Kumar Upadhyay (Founders)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 80.54% Stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 持股約 80.54%</span>
+                                <div class="mt-2 pt-2 border-t border-gray-700">
+                                    <strong class="text-gray-300 block">Dhanuka Agritech Limited</strong>
+                                    <span class="block text-green-400" data-lang="en">> 14.97% Strategic Stake (300M INR)</span>
+                                    <span class="block text-green-400" data-lang="zh">> 戰略持股約 14.97% (注資 3 億盧比)</span>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block uppercase font-bold text-[10px]" data-lang="en">Level 2 (Parent / Mid Holding)</span>
+                                <span class="text-gray-500 block uppercase font-bold text-[10px]" data-lang="zh">第二層 (中間控股/上市母公司)</span>
+                                <strong class="text-white">Dhanuka Agritech Limited</strong>
+                                <p class="text-[11px] text-gray-400 mt-1" data-lang="en">Listed on NSE / BSE (Ticker: DHANUKA / 507717). Handled via strict SHA with veto & affirmative vote rights on crucial auditors and governance decisions.</p>
+                                <p class="text-[11px] text-gray-400 mt-1" data-lang="zh">印度上市農化巨頭。兩者簽有股東協議 (SHA)，Dhanuka 擁有關鍵治理事項（如法定審計師任命）的戰略「否定權/同意權」。</p>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block uppercase font-bold text-[10px]" data-lang="en">Level 3 (Ultimate Parent / UBO)</span>
+                                <span class="text-gray-500 block uppercase font-bold text-[10px]" data-lang="zh">第三層 (最終受益人)</span>
+                                <strong class="text-blue-300">Deepak Bhardwaj & Anoop Kumar Upadhyay (Founders)</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">AND Agarwal Family (Dhanuka Controlling Promoters, holding ~69.71% in Dhanuka).</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">及 Agarwal 家族 (Dhanuka 的控股股東家族，掌控 Dhanuka 約 69.71% 股權)。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Teardown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-6">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-700 pb-2" data-lang="en"><i class="fas fa-cube mr-2"></i>Product Portfolio</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-700 pb-2" data-lang="zh"><i class="fas fa-cube mr-2"></i>核心產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ag-Spraying Drones:</strong> AGRIBOT MX, AGRIBOT A6, AGRIBOT A5. Main drivers.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>多功能農業無人機：</strong> AGRIBOT MX / A6 / A5 植保與播灑整機。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Defense & Security:</strong> HEAVYBOT 4, HEAVYBOT 10, NANO BEE. Military grade.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>防衛與安全無人機：</strong> HEAVYBOT 4 / 10 / NANO BEE 微型安全偵查。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>OEM Components:</strong> Custom manufactured drone hardware via "Bharath Components" brand.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>「Bharath Components」：</strong> 自研自主無人機硬體零組件對外代工與批售。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-700 pb-2" data-lang="en"><i class="fas fa-tools mr-2"></i>Component Teardown (BOM)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-700 pb-2" data-lang="zh"><i class="fas fa-tools mr-2"></i>零組件系統拆解</div>
+                        <ul class="space-y-2 text-[13px] text-gray-300">
+                            <li data-lang="en"><strong>Propulsion:</strong> 150KV/180KV BLDC motors, ESCs, carbon-fiber folded propellers, BLDC pump motors.</li>
+                            <li data-lang="zh"><strong>動力傳動：</strong> 150KV / 180KV BLDC 無刷電機、大功率電調 (ESC)、碳纖維折疊螺旋槳、噴灑專用 BLDC 水泵。</li>
+                            
+                            <li data-lang="en"><strong>Power & BMS:</strong> 22.2V NMC battery pack (IP65, 559.44Wh), proprietary smart BMS card, PDB power distribution boards.</li>
+                            <li data-lang="zh"><strong>能源系統：</strong> 22.2V 鋰離子電池組 (NMC 電芯, 559.44Wh, IP65 防護)、自研智能 BMS 板、電源分配板。</li>
+                            
+                            <li data-lang="en"><strong>Avionics & Sensing:</strong> MCU flight controller card, dual-band high-precision GNSS GPS, 2.4/5.8GHz receiver, millimetre-wave terrain radar, LiDAR sensor.</li>
+                            <li data-lang="zh"><strong>飛控導航與防禦：</strong> 內嵌式 MCU 飛控主板、高精度 GNSS GPS、2.4/5.8G 遙控模組、毫米波地形跟隨雷達、LiDAR 激光避障系統。</li>
+                            
+                            <li data-lang="en"><strong>Structures:</strong> Light carbon fiber arms, aerospace-grade aluminum joints, anti-corrosive chemical tanks (10L - 40L).</li>
+                            <li data-lang="zh"><strong>機身構造：</strong> 輕質碳纖維折疊機臂、航空級鋁合金接頭、10L 至 40L 液體防化學腐蝕藥箱。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs & Foxlink Angle -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-green-500/30">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-700 pb-2" data-lang="en"><i class="fas fa-sign-in-alt mr-2"></i>Foxlink Entry Opportunity</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-700 pb-2" data-lang="zh"><i class="fas fa-sign-in-alt mr-2"></i>正崴精密 (FOXLINK) 的切入點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-xs text-gray-300 leading-relaxed">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-bolt text-yellow-500 mr-1 font-bold"></i><strong>Indigenization Push:</strong> India bans full drone imports. All components need true local manufacturing.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-bolt text-yellow-500 mr-1 font-bold"></i><strong>本土化高壓政策：</strong> 印度禁止進口整機，民航總局 (DGCA) 型式認證要求核心電子部件逐步國產化。</p>
+                            
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1 font-bold"></i><strong>SMT/PCBA & Battery Pack:</strong> High demand for EMS of flight controller board SMT, BMS, and high-safety lithium-battery pack line in India.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1 font-bold"></i><strong>PCBA 與電池 Pack 代工：</strong> IoTechWorld 具備研發但缺乏大規模 SMT 本地貼片與高放電鋰電池 pack 量產能力。正崴印度的優質產線可作為其強大的本地 EMS 夥伴。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1 font-bold"></i><strong>Cabling & Tooling:</strong> Supply robust, waterproof wiring harnesses and precise enclosure molds to beat price war.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1 font-bold"></i><strong>線束與精細模具：</strong> 提供高抗干擾防水線束與防摔機殼精密注塑，助其降低生產成本，抵禦對手價格戰。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en"><i class="fas fa-search-dollar mr-2 text-red-400"></i>Hiring Radar: Strategic Staff Expansion</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh"><i class="fas fa-search-dollar mr-2 text-red-400"></i>招聘動態：11 條核心招聘情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Based on verified listings on Naukri, LinkedIn, and corporate portals in India.</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">整理自印度招聘平台 (Naukri, LinkedIn, Indeed) 之關鍵招聘職缺。</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-400 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Strategic Intent / Business Signal</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 戰略意圖 / 正崴潛在對接點</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700 text-xs md:text-sm">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Chief Financial Officer (CFO)</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Funding & Governance:</strong> Tasked with financial optimization, driving next-round late-stage VC investment, and managing shareholder SHA conditions set by Dhanuka.</td>
+                                    <td data-lang="zh"><strong>融資與公司治理：</strong> 優化財務結構，負責下一波後期 VC 融資，並在大股東 SHA（股東協議）框架下合規營運。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Deputy General Manager - Operations</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Scale Expansion:</strong> Managing Gurugram unit's factory expansion and assembly process optimization. Requires 10-15 years experience in hardware/electronics plant operations.</td>
+                                    <td data-lang="zh"><strong>產能擴張：</strong> 負責 Gurugram 廠區產量擴建及組裝工藝優化，尋求具備 10-15 年電子製造或機電背景的人才，工廠擴增訊號明確。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Product Sales Manager</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>B2B Institutional Expansion:</strong> Tasked with developing large bulk government tenders, institutional clients, and expanding components exports (SAARC, Southeast Asia).</td>
+                                    <td data-lang="zh"><strong>大客戶開拓：</strong> 負責 B2B 大客戶直銷、政府大宗採購標案，以及推動組件外銷與 SAARC、東南亞海外市場的代理通路開發。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sourcing & Procurement Head</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Localization Push:</strong> Lead Indian local components sourcing and import substitution strategy to comply with India's PLI scheme and DGCA rules. <em>Direct procurement interface!</em></td>
+                                    <td data-lang="zh"><strong>在地採購總監：</strong> 主導印度本地零部件採購及「進口替代」計畫，以符合 PLI 及民航新規國產化比率。<em>正崴開發的關鍵窗口！</em></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior SMT/PCBA Manufacturing Lead</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>PCBA Assembly Control:</strong> Supervise in-house SMT assembly yield for flight control and BMS. Highlights their bottlenecks in electronic assembly scalability.</td>
+                                    <td data-lang="zh"><strong>核心 SMT 製造主管：</strong> 主控自研飛控板與 BMS 板的 PCBA 貼片組裝直通率與工藝。顯示該公司急需高水準的 SMT 代工支持。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Embedded Hardware Engineer - BMS</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Next-Gen Power R&D:</strong> Developing generation-2 lithium battery management system with high discharge capacity and robust safety features.</td>
+                                    <td data-lang="zh"><strong>BMS 硬體研發：</strong> 開發具備高放電電流、防爆安全設計的第二代智能鋰電池管理系統，可探討共同開發。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">QA/QC Engineer - DGCA Compliance</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Strict Compliance:</strong> Inspect outward batches for standard compliance to maintain DGCA Type Certificate qualification.</td>
+                                    <td data-lang="zh"><strong>質量合規主管：</strong> 確保出廠的無人機和配件符合 DGCA 認證規範，對供應商交貨質量要求極高。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Drone Assembly & Testing Technician</strong><br>
+                                        <span class="text-[11px] text-gray-400">HQ - Gurugram</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Bulk Output:</strong> Assembly line technicians hiring in bulk, indicating double-shift expansion for mega cooperative crop orders (like IFFCO).</td>
+                                    <td data-lang="zh"><strong>裝配測試線工人：</strong> 大量召集產線技術工人，顯示為了因應 IFFCO 等大型化肥企業訂單而實施的多班制擴大生產。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Service Support Engineer</strong><br>
+                                        <span class="text-[11px] text-gray-400">Pune / Vijayawada</span>
+                                    </td>
+                                    <td data-lang="en"><strong>On-Ground SLA:</strong> Building localized teams in key crop zones to ensure immediate service and replacement support.</td>
+                                    <td data-lang="zh"><strong>售後工程師：</strong> 駐點西印度與南印度，加強地面維修響應。售後備件週轉快，帶來持續的零組件訂單需求。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Regional Channel Development Executive</strong><br>
+                                        <span class="text-[11px] text-gray-400">West & South India</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Retail Expansion:</strong> Acquiring offline agricultural hardware and machinery distributors to scale up commercial sales.</td>
+                                    <td data-lang="zh"><strong>區域通路拓展：</strong> 開發各邦五金及農機特許經銷商，佈局實體分銷零售網絡。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Remote Pilot Trainer</strong><br>
+                                        <span class="text-[11px] text-gray-400">Haryana / Punjab</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Education Ecosystem:</strong> Training rural youth at approved RPTO training centres, locking in customers by selling training packages first.</td>
+                                    <td data-lang="zh"><strong>飛手培訓師：</strong> 於官方 RPTO 無人機培訓學校授課，透過教育訓練培育未來的潛在購機主。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales, Distribution & Financial Logistics</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局分析</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700 shadow-md">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en"><i class="fas fa-network-wired mr-2"></i>Double-Track Channel Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh"><i class="fas fa-network-wired mr-2"></i>雙軌制銷售與大股東協同</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Dhanuka Ecosystem Tie-up:</strong> Exploits listed investor Dhanuka's offline network of 10,000+ agrochemical dealers. Selling drones hand-in-hand with agrochemicals builds a massive entry barrier.</li>
+                                <li data-lang="zh"><strong>大股東通路乘數效應：</strong> 深度捆綁 Dhanuka Agritech 在全印度超過一萬個實體農化經銷網點。將無人機定位為新型高效施藥工具搭售，建立龐大通路壁壘。</li>
+                                
+                                <li data-lang="en"><strong>Bulk Direct Tenders:</strong> Pursues bulk direct orders from public entities and mega cooperatives (e.g., IFFCO, Syngenta).</li>
+                                <li data-lang="zh"><strong>B2B 大客戶與政府直銷：</strong> 直攻政府大型採購、農合社 (IFFCO) 及國際跨國農化巨頭 (先正達) 的大宗訂單。</li>
+                                
+                                <li data-lang="en"><strong>Digital Capture via IndiaMART:</strong> Due to premium price ranges (₹ 4-8 Lakhs), direct B2C web retail is absent. However, they run verified B2B storefronts on <strong>IndiaMART</strong> to funnel global wholesale leads.</li>
+                                <li data-lang="zh"><strong>B2B 門戶與線上吸粉：</strong> 由於整機單價高 (一台約 40 萬至 80 萬盧比)，無 B2C 電商直營。但在印度大型 B2B 門戶 <strong>IndiaMART</strong> 設有星級旗艦展示館，用於採集全印批發意向。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics & Financing -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700 shadow-md">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en"><i class="fas fa-money-check-alt mr-2"></i>Supply Chain Logic & Govt Financing</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh"><i class="fas fa-money-check-alt mr-2"></i>供應鏈物流與政府融資體系</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Agri Infrastructure Fund (AIF) Tie-up:</strong> Drones are highly integrated with the AIF scheme, offering purchase-seeking farmers up to 90% collateral-free loans and 3% interest subsidy. High reliance on regulatory serial numbering.</li>
+                                <li data-lang="zh"><strong>政府農業基金 (AIF) 深植：</strong> 產品與政府 AIF（農業基礎設施基金）深度綁定。購機農民可享有高達 90% 無抵押銀行貸款與 3% 的政府利息補貼。</li>
+                                
+                                <li data-lang="en"><strong>Central Dispatch Warehouse:</strong> Main centralized component warehouse is co-located with Gurugram unit. All outward components are tracked via strict barcode registration to comply with central audits.</li>
+                                <li data-lang="zh"><strong>中央保稅配送發貨：</strong> 核心零件與組件配送倉儲完全與古爾岡工廠共址。所有配送與售後備件必須配合政府審計提供一機一碼的條碼追蹤。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. India Drone Industry & Competitive Rankings</span>
+                    <span data-lang="zh">6. 市場地位與無人機競爭對手排名</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1 shadow-lg border-gray-700">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">IoTechWorld Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">IoTechWorld 競爭力畫像</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Evaluation based on agriculture-focus and listed group synergy.</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">評估基準基於其專注農業領域及上市大股東的資源協同優勢。</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Overall Drone Market Ranking (Top 10)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度無人機市場（農業與工業）實力排名 TOP 10</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2 shadow-lg">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50 text-gray-400">
+                                    <tr>
+                                        <th class="p-2 w-16 text-center">Rank</th>
+                                        <th class="p-2" data-lang="en">Company & HQ Location</th><th class="p-2" data-lang="zh">企業名稱與總部地點</th>
+                                        <th class="p-2" data-lang="en">Key Strengths & Corporate Context</th><th class="p-2" data-lang="zh">關鍵競爭優勢與背景</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center text-gray-300">1</td>
+                                        <td class="p-2">Garuda Aerospace (Chennai)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Marketing powerhouse with huge ag-drone dispatches. Backed by celebrity endorsements and strong VC funding.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">營銷能力極強，農業無人機出貨量巨大，擁有名人代言與雄厚資本支持。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center text-gray-300">2</td>
+                                        <td class="p-2">IdeaForge Technology (Mumbai)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India's overall drone giant (Listed). Deep technology stack. Dominates military surveillance; expanding fast in industrial/agri.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度無人機整體市場霸主(已上市)。主攻軍警防務與測繪，正快速切入農業。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center text-gray-300">3</td>
+                                        <td class="p-2">Asteria Aerospace (Bengaluru)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Subsidiary of Reliance Industries (RIL). Asset-heavy. Focused on big corporate mapping, GIS, and surveillance.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度信實工業 (Reliance) 旗下控股子公司。資產與技術極重，主攻測繪與安防。</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/30 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-blue-300">4</td>
+                                        <td class="p-2 text-white font-bold">IoTechWorld Avigation (Gurugram)</td>
+                                        <td class="p-2 text-blue-300 font-medium" data-lang="en">TARGET CLIENT. Pioneers of agriculture drones. First-ever DGCA Type Certification holder. Highly specialized in plant protection.</td>
+                                        <td class="p-2 text-blue-300 font-medium" data-lang="zh">本報告目標客戶。農業無人機開創者，首個拿到 DGCA 型式認證，植保與播撒排名前三。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center text-gray-300">5</td>
+                                        <td class="p-2">Dhaksha Unmanned Systems (Chennai)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Subsidiary of fertilizer giant Coromandel International (~58% stake). Huge order pipelines in dual-use/military and agriculture.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">化肥巨頭 Coromandel 控股 58% 子公司。手握大額農業與軍民兩用訂單。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center text-gray-300">6</td>
+                                        <td class="p-2">Marut Drones (Hyderabad)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Strong tech roots. Focuses on ag-spraying, seed planting, and mosquito control. Backed by Lok Capital.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">技術派，專注農業、森林播種與驅蚊防疫，背後有 Lok Capital 等風投。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center text-gray-300">7</td>
+                                        <td class="p-2">Thanos Technologies (Hyderabad)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Elite engineering team. Famous for Syena ag-drones. Ventured recently into military armed drones testing.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">技術實力雄厚，以 Syena 農業噴灑機著稱，近期成功切入武裝無人機軍事測試。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center text-gray-300">8-10</td>
+                                        <td class="p-2" colspan="2">
+                                            <span class="text-white font-semibold">insideFPV (Surat)</span> (Consumer/Defense FPVs) | 
+                                            <span class="text-white font-semibold">Indrones (Navi Mumbai)</span> (GIS Mapping) | 
+                                            <span class="text-white font-semibold">BharatRohan (Gurugram)</span> (Hyperspectral Ag Analytics)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="bg-gray-900/50 p-2 rounded mt-2 border border-gray-700 text-[11px] text-gray-400 leading-relaxed">
+                                <span class="text-yellow-400 font-bold" data-lang="en"><i class="fas fa-lightbulb mr-1"></i>EMS Synergy Note:</span>
+                                <span class="text-yellow-400 font-bold" data-lang="zh"><i class="fas fa-lightbulb mr-1"></i>正崴精密對應提示：</span>
+                                <span data-lang="en">Most top-tier drone players face extreme localization mandates due to "Make in India" and import bans on electronics. Collaborating with FOXLINK India's high-tech PCBA and assembly facilities in Andhra Pradesh can provide them with scalable, cost-effective, and fully-compliant manufacturing to win the market.</span>
+                                <span data-lang="zh">印度的 "Make in India" 禁令讓上述前十大廠商面臨極大的本地化採購壓力（禁進口電子件）。正崴在南印度的精密 SMT 貼片、電池 Pack、防水線束代工產線，是協助其降低成本、應對產能價格戰的最強本土合作夥伴（EMS）。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News Timeline) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Recent Strategic News</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月深度追踪)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- News 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2 shadow">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap md:w-24">2026-01-18</div>
+                        <div class="flex-1">
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Tech Launch] All-New AGRIBOT A6 Secures DGCA Certification</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[技術新品] 全新一代 AGRIBOT A6 農業無人機取得 DGCA 認證</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Co-founder Deepak Bhardwaj announced their next-gen drone successfully received the Civil Aviation certification. The A6 is 30% more compact and features a highly portable "Motorcycle & Backpack Foldable" design, drastically easing rural logistics. <span class="text-gray-500">(Opp: High-precision plastic housing & folding mechanism needed)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">共同創辦人 Deepak Bhardwaj 宣布全新 AGRIBOT A6 成功拿到民航局認證。體積縮小 30%，採用創新的「機車與背包攜帶折疊」設計，解決偏遠鄉村運輸痛點。 <span class="text-gray-500">(機會：需要高強度輕量化折疊機構件與精細注塑殼體)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- News 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-red-500 flex flex-col md:flex-row gap-2 shadow">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap md:w-24">2026-01-08</div>
+                        <div class="flex-1">
+                            <strong class="text-red-400 block text-sm" data-lang="en">[Corporate Governance] Delhi High Court Rules on SHA Dispute in Favor of Dhanuka</strong>
+                            <strong class="text-red-400 block text-sm" data-lang="zh">[公司治理] 德里高等法院就股東協議 (SHA) 做出有利於 Dhanuka 的判決</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">In the dispute where Dhanuka Agritech sued IoTechWorld over shareholder agreement breaches, the HC ruled that even if the SHA was not incorporated into the Articles of Association (AoA), the company is bound to respect Dhanuka's veto / "affirmative vote" rights on appointing statutory auditors. Highly critical case on investor covenants. <span class="text-gray-500">(Business Risk Note: Financial audits are fully monitored by Dhanuka)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">德里高等法院審理戰略大股東 Dhanuka 控告 IoTechWorld 違反股東協議案。法院裁定，即使未將 SHA 完整寫入公司章程 (AoA)，IoTechWorld 仍須遵守協定中關於法定審計師任命的「投資人否決權」條款。此案強化了 Dhanuka 對其財務與治理的強大控制。 <span class="text-gray-500">(注意：其重大決策與財務審計受上市大股東高度制約)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- News 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2 shadow">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap md:w-24">2025-12-24</div>
+                        <div class="flex-1">
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Field Operation] Phase 2 of "Drone Yatra" Tour Launched with Syngenta</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[田野合作] 與 Syngenta (先正達) 啟動第二階段無人機巡迴 (Drone Yatra)</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Partnered with global agrochemical giant Syngenta to cover over 25,000 kilometres in Punjab and Haryana. Main focus is demonstrating low-volume precise spraying techniques to convert local dealers into buyers.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">雙方聯手在旁泥普、哈里亞納等重要農業邦進行超過 2.5 萬公里的實地示範，推廣無人機精準噴灑超低容量農藥技術，加速拉動下游經銷商購機量。</p>
+                        </div>
+                    </div>
+
+                    <!-- News 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2 shadow">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap md:w-24">2025-12-11</div>
+                        <div class="flex-1">
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Human Capital] Strategic Hiring Spree for CFO & Local Sourcing Head Started</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[人才擴張] 官方啟動全球招募新任 CFO 與供應鏈本地採購主管</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Officially launched an executive search for a new CFO to optimize financial strategy and a Sourcing Head to accelerate import substitution for hardware. <span class="text-gray-500">(Opp: Perfect timing for Foxlink to engage high-level procurement leads)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">官方發佈大動作招募首席財務官 (CFO) 與供應鏈本地化採購負責人，為下一階段大產能建置與降低關稅代工作好合規料件準備。 <span class="text-gray-500">(開發良機：正崴應儘早與其本地採購負責人建立對接關係)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- News 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2 shadow">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap md:w-24">2025-11-28</div>
+                        <div class="flex-1">
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Major Delivery] Successfully Dispatched 2nd Batch of 500 Drones to IFFCO</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[大宗交付] 順利交付 IFFCO (印度農民肥料合作社) 第二批 500 架訂單</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Delivered 500 AGRIBOT units to the Indian Farmers Fertiliser Cooperative (IFFCO) to scale up "Nano Urea" and Nano DAP precise spraying operations across various states.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">成功交付 IFFCO 第二批 500 架農業無人機大宗訂單，全面用於推廣 Nano Urea (納米尿素) 與 Nano DAP 的精準肥水噴灑技術。</p>
+                        </div>
+                    </div>
+
+                    <!-- Additional News Split in Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                         <div class="bg-gray-800 p-3 rounded border border-gray-700 text-gray-400 shadow">
+                            <strong class="text-gray-200">2025-11-14 | Service Network:</strong> 
+                            <span data-lang="en">Established flagship customer service stations in Pune and Vijayawada to guarantee 24-hour service SLA and prompt DaaS parts replacement support.</span>
+                            <span data-lang="zh">在 Pune 與 Vijayawada 建立大型售後服務旗艦站，保障 24 小時售後服務承諾與 DaaS 備件的高速週轉。</span>
+                         </div>
+                         <div class="bg-gray-800 p-3 rounded border border-gray-700 text-gray-400 shadow">
+                            <strong class="text-gray-200">2025-11-05 | B2B Business:</strong> 
+                            <span data-lang="en">Officially opened "Bharath Components" sales (BLDC motors, GPS systems, batteries) to other small local drone assemblers after cleared DGCA testing.</span>
+                            <span data-lang="zh">宣布自研品牌「Bharath Components」核心配件（BLDC 馬達、GNSS 接收器等）通過 DGCA 測試，開始對其他小型無人機廠進行 OEM 供貨。</span>
+                         </div>
+                         <div class="bg-gray-800 p-3 rounded border border-gray-700 text-gray-400 shadow">
+                            <strong class="text-gray-200">2025-12-18 | Recognition:</strong> 
+                            <span data-lang="en">Awarded ET Now "Leaders of Tomorrow" at the 11th edition for innovative technology contributions in automated agriculture.</span>
+                            <span data-lang="zh">榮獲第 11 屆 ET Now「明日領袖獎 (Leaders of Tomorrow)」，表彰其在農業自動化技術研發領域的創新貢獻。</span>
+                         </div>
+                         <div class="bg-gray-800 p-3 rounded border border-gray-700 text-gray-400 shadow">
+                            <strong class="text-gray-200">2025-11-20 | CSR & Education:</strong> 
+                            <span data-lang="en">Launched a youth entrepreneurship program with MANAGE (National Institute of Agricultural Extension) to groom certified drone pilots.</span>
+                            <span data-lang="zh">聯合國家農業推廣管理學院 (MANAGE) 啟動創業飛手培訓計畫，將鄉村青年轉化為微型植保服務創業主体，蓄水潛在客戶。</span>
+                         </div>
+                         <div class="bg-gray-800 p-3 rounded border border-gray-700 col-span-1 md:col-span-2 text-gray-400 shadow">
+                            <strong class="text-gray-200">2026-01-25 | Regulation:</strong> 
+                            <span data-lang="en">Passed audit for Indian Drone Rules 2026. Equipped all active AGRIBOT drones with Unique Identification Numbers (UIN) and NPNT (No Permission, No Takeoff) safety firmware.</span>
+                            <span data-lang="zh">順利通過印度無人機新規 2026 版合規審查。完成現役所有機型的 UIN (獨一無二識別號) 與「不准飛、不能飛 (NPNT)」韌體安全系統升級，確保政府採購資質完全合規。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Source Footnote -->
+                <div class="border-t border-gray-700 pt-4 text-[11px] text-gray-500">
+                    <span data-lang="en"><strong>Sources Cited:</strong> Ministry of Corporate Affairs (MCA) India database, Ministry of Civil Aviation (DGCA) Registry, Dhanuka Agritech SEC/BSE Exchange Filings, IndiaMART B2B Portal, LinkedIn Recruitment Postings, Rural Voice News Network. Report compiled on 2026-02-04.</span>
+                    <span data-lang="zh"><strong>數據來源：</strong> 印度公司註冊處 (MCA India)、民航總局 (DGCA) 數據庫、Dhanuka Agritech 交易所公告 (BSE/NSE)、IndiaMART 工業門戶、LinkedIn 招聘追蹤、Rural Voice 農業新聞網。報告編制日期：2026年2月4日。</span>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // --- Semantic Sentiment Scoring for IoTechWorld ---
+        // Market Share: 8 (Top 4 overall, leading agri player)
+        // Localization: 7 (Self-designed "Bharath Components" branding, but lacks high-end local SMT/BMS production scale)
+        // Brand Power: 8 (Pioneer, first DGCA type certified, ET Now Tomorrow's Leader winner)
+        // Digital Reach: 7 (Strong offline dealership synced with Dhanuka, IndiaMART presence)
+        // Financial Health: 8 (Backed by deep-pocket listed parent Dhanuka, stable government cooperative contracts)
+        const radarScores = [8, 7, 8, 7, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Competitiveness Score' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康度'], label: '評估指標得分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

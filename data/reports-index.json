@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-09T05:19:33.580Z",
+  "lastUpdated": "2026-07-09T05:50:08.833Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1484,6 +1484,19 @@
       "fileName": "report-1783574372691.html",
       "createdAt": "2026-07-09T05:19:33.580Z",
       "updatedAt": "2026-07-09T05:19:33.580Z"
+    },
+    {
+      "id": "report-1783576207198",
+      "title": "Target: IoTechWorld Avigation Private Limited",
+      "description": "目標企業：印度農業無人機先驅 IoTechWorld Avigation",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783576207198.html",
+      "createdAt": "2026-07-09T05:50:08.833Z",
+      "updatedAt": "2026-07-09T05:50:08.833Z"
     }
   ]
 }
