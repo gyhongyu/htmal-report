@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-09T04:53:14.634Z",
+  "lastUpdated": "2026-07-09T05:19:33.580Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1471,6 +1471,19 @@
       "fileName": "report-1783572793217.html",
       "createdAt": "2026-07-09T04:53:14.634Z",
       "updatedAt": "2026-07-09T04:53:14.634Z"
+    },
+    {
+      "id": "report-1783574372691",
+      "title": "Target: Asteria Aerospace Limited",
+      "description": "目標企業：Asteria Aerospace Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783574372691.html",
+      "createdAt": "2026-07-09T05:19:33.580Z",
+      "updatedAt": "2026-07-09T05:19:33.580Z"
     }
   ]
 }
