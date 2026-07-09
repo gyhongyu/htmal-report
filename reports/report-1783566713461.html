@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Garuda Aerospace Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Garuda Aerospace (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Garuda Aerospace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Garuda Aerospace</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Garuda Aerospace</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Drone & Defense</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Garuda Aerospace Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U74900TN2015PLC102474</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Public Limited, Pre-IPO)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (已轉制公眾公司，籌備 IPO)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 110-500 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover FY24-25)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Agnishwar Jayaprakash (Founder)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終控制人：</strong> Agnishwar Jayaprakash (創辦人)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Chennai (Tamil Nadu)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Chennai (清奈 - 泰米爾納德邦)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">20 Acres | Agri-Drone & Battery Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">20 英畝 | 農業無人機與電池製造核心基地</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Chennai (HQ & Main Unit):</strong> 35k sq ft facility. 100+ drones/day capacity. New battery assembly unit (Jan 2026).</li>
+                                <li data-lang="zh"><strong>Chennai (總部核心):</strong> 佔地20英畝，3.5萬平方英尺國產化測試中心，日產100架。2026新建電池廠。</li>
+                                <li data-lang="en"><strong>Gurugram (North Unit):</strong> 2.5 acres. JV with Defsys Solutions for defense drone testing/prototyping. (40/day cap).</li>
+                                <li data-lang="zh"><strong>Gurugram (北部國防基地):</strong> 2.5英畝，與 Defsys 合作，專注國防級無人機軟體設計與硬體試產。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech & Sales Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">銷售與服務網：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Pan-India DaaS:</strong> Network of Custom Hiring Centers (CHC) for rural agriculture spraying.</li>
+                                <li data-lang="zh"><strong>全印 DaaS 網路:</strong> 透過 CHC 加盟中心，在全印農村提供代客噴灑服務。</li>
+                                <li data-lang="en"><strong>B2G Reach:</strong> Active bidding with MoD (Ministry of Defence) and local Agri boards.</li>
+                                <li data-lang="zh"><strong>政府合作:</strong> 積極參與印度國防部 (MoD) 與各地農業部標案。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 股權架構與資金來源</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Promoters)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">A. Jayaprakash, Rithika Mohan, M.S. Dhoni</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">~ 75% Stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">~ 75% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-plus"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Institutional VCs)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (機構投資者)</span>
+                                <strong class="text-white">Venture Catalysts, Blume, SphitiCap</strong>
+                                <span class="block text-blue-400 mt-1" data-lang="en">~ 7-10% Stake</span>
+                                <span class="block text-blue-400 mt-1" data-lang="zh">~ 7-10% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Control</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終戰略決策權</span>
+                                <strong class="text-blue-300">Indian Founders (100% Domestic)</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Zero FDI interference, highly "Make in India" compliant.</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">純本土新創，無外資 (FDI) 隱患，極度配合國產化政策。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Kisan Drones:</strong> Precision agriculture spraying.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>農業無人機 (Kisan):</strong> 專注精準噴灑與植保。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Defense/Tactical:</strong> Surveillance, logistics, mine detection.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>國防與戰術:</strong> 防務監視、物流運輸、地雷探測。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Industrial:</strong> Solar inspection, LiDAR mapping.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>工業巡檢:</strong> 太陽能面板巡檢、LiDAR 測繪。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>DaaS:</strong> Drone-as-a-Service solutions.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>DaaS:</strong> 無人機即服務解決方案。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">產品系統拆解 (BOM)</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Propulsion:</strong> High-payload BLDC motors, Carbon fiber props, ESCs.</li>
+                            <li data-lang="zh"><strong>動力系統：</strong> 高負載 BLDC 無刷馬達、碳纖/尼龍螺旋槳、電子變速器 (ESC)。</li>
+                            
+                            <li data-lang="en"><strong>Power Module:</strong> 22.2V/44.4V Li-Po/Li-ion packs, Smart BMS.</li>
+                            <li data-lang="zh"><strong>能源模組：</strong> 22.2V/44.4V 高倍率鋰電池組、智慧電池管理系統 (BMS)。</li>
+                            
+                            <li data-lang="en"><strong>Flight Nav:</strong> Flight Controller PCB, RTK/GNSS, Anti-jamming TX.</li>
+                            <li data-lang="zh"><strong>飛控導航：</strong> 飛控主機板 (PCB)、RTK/GNSS 高精度定位、防干擾圖傳。</li>
+                            
+                            <li data-lang="en"><strong>Mechanical:</strong> Carbon frames, alloy parts, micro-pumps (Agri).</li>
+                            <li data-lang="zh"><strong>機構酬載：</strong> 碳纖維機架、一體成型鋁合金件、精密無刷水泵。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps & Foxlink Opp</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求 (機會點)</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization Push:</strong> Desperate to cut Chinese imports for Govt PLI subsidies.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>國產化政策：</strong> 急需降低對中國進口依賴，以符合印度政府 PLI 獎勵標準。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-bolt text-yellow-500 mr-1"></i><strong>Target Parts:</strong> Auto/Aero-grade wire harnesses, High-freq connectors, Battery pack assembly & High-end PCBA.</p>
+                            <p data-lang="zh"><i class="fas fa-bolt text-yellow-500 mr-1"></i><strong>急缺組件：</strong> 車載/航太級精密線束、高頻連接器、電池封裝代工及高階 PCB 供應商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Latest)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025-2026)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they building up?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Junior Executive - HR</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Porur, Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Porur, Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Handling onboarding for the newly inaugurated battery manufacturing unit (Jan 2026). Massive hiring for assembly lines.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 處理廠房招募與員工到職，直接對應其 2026 年初剛啟用的電池製造廠帶來的人力需求。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">HR Payroll & Ops Exec</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navalur, Chennai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navalur, Chennai (清奈)</span>
+                                    </td>
+                                    <td data-lang="en">Managing compensation for factory & tech operations. Indicates South India mfg base is in a stable expansion phase.</td>
+                                    <td data-lang="zh">負責工廠與技術營運團隊的薪酬與合規，顯示南印度製造端正處於穩定擴編期。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Agri Drone Operators/Instructors</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Pan-India (Nationwide)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">全印度</span>
+                                    </td>
+                                    <td data-lang="en">Aggressively hiring DGCA-approved pilots (₹35K-80K salary) to scale up their massive DaaS (Drone as a Service) rural network.</td>
+                                    <td data-lang="zh">持續在全國招募並培訓持證飛手，起薪區間 35K-80K 盧比，以支撐其龐大的 DaaS 農業外包服務網。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局分析</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Go-to-Market Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路策略概況 (Go-to-Market)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>B2B/B2G Direct Bidding:</strong> Direct sales and delivery to Ministry of Defence (MoD), Agri boards, and heavy infra giants (like L&T).</li>
+                                <li data-lang="zh"><strong>B2B/B2G 專案直銷：</strong> 針對印度國防部 (MoD)、基建公司及政府標案，採直接競標交機。</li>
+                                
+                                <li data-lang="en"><strong>Micro-Franchise (DaaS):</strong> Instead of selling hardware directly to farmers, they setup Custom Hiring Centers (CHC). Franchises buy drones to offer "spraying services".</li>
+                                <li data-lang="zh"><strong>微型加盟與 DaaS：</strong> 推廣 CHC 經銷加盟制。加盟主購買無人機後，提供當地農民「代客噴灑」服務。</li>
+                                
+                                <li data-lang="en"><strong>Digital Independence:</strong> Zero reliance on Amazon/B2C platforms. Heavy lead generation via official website (Dealer & Academy portals).</li>
+                                <li data-lang="zh"><strong>直營數位平台：</strong> 不依賴消費性電商平台，透過官網完整系統進行經銷商與飛手培訓註冊。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Hub & Spoke Dispatch:</strong> Finished hardware is dispatched centrally from the Chennai Plant radiating outward to CHCs and Service Centers across states.</li>
+                                <li data-lang="zh"><strong>中央輻射發貨：</strong> 憑藉各邦服務站，硬體由 Chennai 中央工廠輻射發貨至各地 CHC。</li>
+                                
+                                <li data-lang="en"><strong>Vendor Mandate:</strong> Component suppliers MUST have robust logistics capabilities to ensure stable, JIT delivery to the main Chennai warehouse.</li>
+                                <li data-lang="zh"><strong>供應鏈要求：</strong> 供應商需具備穩定交貨至清奈總倉的運籌能力，不可斷鏈。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market impact & domestic alignment</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Drone Market Rankings (Top Tier Estimates)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度無人機市場地位評估 (Top Tier)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Specialty / Note</th><th class="p-2" data-lang="zh">專長 / 備註</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">ideaForge</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Market Leader (Defense/Mapping) - Listed</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">市場領導者 (主攻防務與測繪) - 已上市</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">2</td>
+                                        <td class="p-2 text-white font-bold">Garuda Aerospace</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Target Client (Agri/DaaS King) - Pre-IPO</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">目標客戶 (最大農業與DaaS商) - 籌備IPO</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Asteria Aerospace</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Reliance Backed (Industrial/Telecom inspect)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">Reliance 投資 (專注工業電信巡檢)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Zen Technologies</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Defense Simulators & Anti-Drone systems</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">防務模擬訓練與反無人機龍頭</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Paras Defence</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Defense optics payloads</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">國防光學酬載與特種無人機</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Raphe Mphibr, Skylark Drones, Throttle Aerospace, BonV Aero, EndureAir</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> To fight ideaForge and polish its IPO pitch, Garuda is frantically pulling sub-assemblies (like batteries) in-house. Foxlink can enter as a Tier-1 local supplier for BMS and precision wire harnesses.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>FOXLINK 機會點：</strong> Garuda 為準備 IPO 並抗衡 ideaForge，近期將大量電子模組 (如電池) 轉回自製，FOXLINK 可切入其 BMS、高階機構件與精密線束的在地化供應體系。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Strategic Moves (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新戰略動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-07</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Corporate News] Chennai Drone Battery Unit Live</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新聞動態] 啟用清奈無人機電池製造廠</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Officially commenced drone battery assembly in Chennai. Becoming one of the few local players with in-house battery tech to cement the domestic supply chain.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">正式在 Chennai 啟動無人機電池工廠，成為印度少數具備電池組裝能力的無人機企業，進一步強化國內供應鏈戰略。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[HR & Ops] Expanding Agri-Drone Training Network</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[營運擴張] 大舉擴展農業無人機培訓招募</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Scaling up the DaaS network under the "Namo Drone Didi" scheme. Empowering rural women pilots and penetrating grassroots farming markets.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">大舉擴張 DaaS 服務網絡，持續推動 "Namo Drone Didi" 計畫，賦能鄉村女性飛手，強化基層市場滲透率。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Financial Move] Aggressive IPO Prep for 2026</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[資本動向] 積極籌備 2026 年 IPO</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Converted to a Public Limited company. Working with underwriters to raise ~₹1,500 Crores for BVLOS (Beyond Visual Line of Sight) testing, AI dev, and Defense scale-up.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">轉型為公眾有限公司，正推進上市流程，擬籌資高達 1,500 Crores 用於 AI 導航、BVLOS (超視距) 測試及擴充國防無人機產能。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-20</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Strategic Expansion] Deepening Dual-Use Tech</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[戰略佈局] 深化防務雙用途 (Dual-use) 技術</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Leveraging MoUs with Tata Elxsi & HAL to convert its heavy-lift Agri drone tech into tactical logistics and border surveillance platforms.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">延續與 Tata Elxsi 及 HAL 的合作，開始將農業產能紅利轉化，研發可用於物流運輸與邊境監控的「軍民雙用途」平台。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Garuda Aerospace): 
+        // Market Share: 9 (Top Tier in Agri & DaaS)
+        // Localization: 8 (Setting up battery plants, highly domestic)
+        // Brand Power: 8 (Dhoni backing, strong rural presence)
+        // Digital Reach: 7 (B2G/B2B portal driven)
+        // Financial Health: 8 (VC backed, approaching major IPO)
+        const radarScores = [9, 8, 8, 7, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

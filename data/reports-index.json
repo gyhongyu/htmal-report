@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-09T03:05:49.693Z",
+  "lastUpdated": "2026-07-09T03:11:54.667Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1445,6 +1445,19 @@
       "fileName": "report-1783566348873.html",
       "createdAt": "2026-07-09T03:05:49.693Z",
       "updatedAt": "2026-07-09T03:05:49.693Z"
+    },
+    {
+      "id": "report-1783566713461",
+      "title": "Target: Garuda Aerospace",
+      "description": "目標企業：Garuda Aerospace",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783566713461.html",
+      "createdAt": "2026-07-09T03:11:54.667Z",
+      "updatedAt": "2026-07-09T03:11:54.667Z"
     }
   ]
 }
