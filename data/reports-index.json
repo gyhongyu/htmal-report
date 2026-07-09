@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-09T05:50:08.833Z",
+  "lastUpdated": "2026-07-09T06:05:48.098Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1497,6 +1497,19 @@
       "fileName": "report-1783576207198.html",
       "createdAt": "2026-07-09T05:50:08.833Z",
       "updatedAt": "2026-07-09T05:50:08.833Z"
+    },
+    {
+      "id": "report-1783577146994",
+      "title": "Target: Sagar Defence Engineering",
+      "description": "目標企業：Sagar Defence Engineering",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783577146994.html",
+      "createdAt": "2026-07-09T06:05:48.098Z",
+      "updatedAt": "2026-07-09T06:05:48.098Z"
     }
   ]
 }
