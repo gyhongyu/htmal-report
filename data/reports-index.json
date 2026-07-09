@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-09T03:11:54.667Z",
+  "lastUpdated": "2026-07-09T04:53:14.634Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1458,6 +1458,19 @@
       "fileName": "report-1783566713461.html",
       "createdAt": "2026-07-09T03:11:54.667Z",
       "updatedAt": "2026-07-09T03:11:54.667Z"
+    },
+    {
+      "id": "report-1783572793217",
+      "title": "Target: NewSpace Research and Technologies",
+      "description": "目標企業：NewSpace Research and Technologies (NRT)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783572793217.html",
+      "createdAt": "2026-07-09T04:53:14.634Z",
+      "updatedAt": "2026-07-09T04:53:14.634Z"
     }
   ]
 }
