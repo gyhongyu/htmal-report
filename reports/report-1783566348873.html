@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: ideaForge Technology Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: ideaForge Technology (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：ideaForge Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: ideaForge Technology</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：ideaForge Technology Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Defense & Aerospace</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">ideaForge Technology Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> L31401MH2007PLC167669</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Listed: IDEAFORGE)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (已上市，代碼: IDEAFORGE)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 530 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Order Book)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Promoter Group (Pure Indian Origin)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> ideaForge Technology (純印度本土血統)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Navi Mumbai (Mahape)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Navi Mumbai (新孟買 - Mahape)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">TTC Ind. Area | Core UAV R&D & Mfg Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">TTC 工業區 | 全印度最大無人機製造基地</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing & R&D Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造與研發基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Navi Mumbai (HQ/Plant):</strong> TTC Industrial Area, Electronic Zone MIDC. (Central hub for assembly, hardware testing, and R&D)</li>
+                                <li data-lang="zh"><strong>Navi Mumbai 工廠 (核心):</strong> 位於 TTC Industrial Area，結合無人機研發、PCB佈局與整機組裝。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech & Sales Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">銷售與區域辦事處：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>NCR / New Delhi:</strong> Liaison office for MoD (Ministry of Defence) & Northern border operations.</li>
+                                <li data-lang="zh"><strong>NCR (新德里):</strong> 核心業務團隊常駐，負責對接印度國防部 (MoD) 及各邦警政高層。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Public & Institutional Investors</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">e.g., Florintree</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">包含社會公眾股與機構 (Florintree等)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Holding)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+                                <strong class="text-white">Promoter Group</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent / Decision</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人 / 決策層</span>
+                                <strong class="text-blue-300">Ankit Mehta, Rahul Singh, Ashish Bhat</strong>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3 italic" data-lang="en"><strong>Note:</strong> Pure home-grown Indian high-tech defense firm. Zero FDI interference. Procurement is entirely localized in Navi Mumbai HQ.</p>
+                        <p class="text-xs text-gray-400 mt-3 italic" data-lang="zh"><strong>備註：</strong> 純本土成長的高科技軍工企業，無外資 (FDI) 掣肘，為印度國防自主 (Atmanirbhar Bharat) 指標性企業。</p>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Military UAVs:</strong> Tactical focus (e.g., SWITCH, NETRA)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>戰術與軍用無人機：</strong> SWITCH, NETRA 等</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Commercial Drones:</strong> Mapping & Surveillance (NINJA, RYNO)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>商用/安防無人機：</strong> 測繪用途 (NINJA, RYNO)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Ground Control:</strong> Secure GCS & Comm Systems</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>地面站系統：</strong> 無人機控制站與通訊系統</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Propulsion:</strong> BLDC Motors, ESCs, Carbon Fiber/Nylon Props.</li>
+                            <li data-lang="zh"><strong>動力推進：</strong> BLDC 無刷馬達、電調 (ESC)、碳纖螺旋槳。</li>
+                            
+                            <li data-lang="en"><strong>Energy Storage:</strong> High-density LiPo/Li-ion Packs, Smart BMS, Fast Chargers.</li>
+                            <li data-lang="zh"><strong>能源模組：</strong> 高密度鋰聚/鋰電池組、BMS、快充模組。</li>
+                            
+                            <li data-lang="en"><strong>Avionics & Interconnect:</strong> FCS PCBA, RF Telemetry, HF Connectors, Anti-jamming Mil-spec Wiring.</li>
+                            <li data-lang="zh"><strong>電子與飛控：</strong> 飛控主板、射頻模組、高頻連接器、軍規線束。</li>
+                            
+                            <li data-lang="en"><strong>Opto-Mechanical:</strong> Carbon fiber airframes, Precision Camera Gimbals, Micro fasteners.</li>
+                            <li data-lang="zh"><strong>機構光電：</strong> 碳纖維機身管件、精密雲台、航太鋁壓鑄件。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Specs:</strong> Demands lightweight, shockproof, extreme temp-tolerant Mil-grade parts.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>規格要求：</strong> 輕量化、抗震、耐極端溫差的軍工級零組件。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Policy Pressure:</strong> Crucial mandate to source locally due to "Make in India" localization clauses for MoD.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>政策壓力：</strong> 必須具備在印度本地製造的能力，以符合政府 "Make in India" 高自製率規範。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025-2026)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed, Webbtree</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Tech Lead - Embedded</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navi Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navi Mumbai (新孟買)</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> KPI mandates "Indigenisation" of key electronic sub-systems. Hunting domestic vendors to slash imports.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> JD 明文強調核心 KPI 是「引領關鍵電子次系統在地化」，降低進口依賴並認證國內供應商。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Staff Eng. - Energy Storage</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navi Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navi Mumbai (新孟買)</span>
+                                    </td>
+                                    <td data-lang="en">Optimizing UAV endurance & battery safety for high-altitude/sub-zero borders.</td>
+                                    <td data-lang="zh">負責電池儲能系統整合，優化無人機續航及高海拔低溫環境的電源安全。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Engineer (HW_Payload)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navi Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navi Mumbai (新孟買)</span>
+                                    </td>
+                                    <td data-lang="en">Hardware payload integration. Heavy interaction with components/mechanical vendors.</td>
+                                    <td data-lang="zh">酬載系統硬體開發，需頻繁對接電子元件、機構製造與供應鏈。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Quality Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navi Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navi Mumbai (新孟買)</span>
+                                    </td>
+                                    <td data-lang="en">Expanding Incoming Goods Inspection (IGI). Tightening MoD-grade vendor QA.</td>
+                                    <td data-lang="zh">擴大進料檢驗(IGI)與品保編制，因應國防部高標，嚴格把關供應商零件。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">V&V Pilot</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navi Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navi Mumbai (新孟買)</span>
+                                    </td>
+                                    <td data-lang="en">Test pilot for verifying next-gen drone flight hardware parameters.</td>
+                                    <td data-lang="zh">招募無人機測試飛行員，支援次世代技術飛行測試與整機驗證。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">AI Robotics Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Navi Mumbai</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Navi Mumbai (新孟買)</span>
+                                    </td>
+                                    <td data-lang="en">Integrating AI algos into PX4 flight controllers for autonomous & swarm capabilities.</td>
+                                    <td data-lang="zh">軟韌體人才，將 AI 飛控算法整合至 PX4，強化自主決策與群飛能力。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Note:</strong> 100% of HW R&D, QA, and Sourcing leads are concentrated at Navi Mumbai HQ.</p>
+                        <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>人才地圖：</strong> 核心硬體研發、採購決策與品保 100% 集中於 Navi Mumbai 總部。</p>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局分析</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Channel Strategy</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路策略概況</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>B2B / B2G Direct Model:</strong> Avoids traditional dealers due to sensitive MoD/Police use-cases. Deals directly with large corporate infra groups.</li>
+                                <li data-lang="zh"><strong>B2B / B2G 直銷模式：</strong> 具備軍警敏感特性，主要依賴直參國防標案或對接大型集團 (基建/採礦)。</li>
+                                
+                                <li data-lang="en"><strong>Digital Presence:</strong> ZERO B2C e-commerce (No Amazon). Official website serves as the sole spec/whitepaper portal. Tied to GeM platform.</li>
+                                <li data-lang="zh"><strong>數位與實體：</strong> 無 B2C 電商存在。官網為規格核心樞紐，高度綁定政府 GeM 採購平台及國防系統整合商。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Highly Customized:</strong> Build-to-Order operations exclusively.</li>
+                                <li data-lang="zh"><strong>高度客製化：</strong> 採接單生產 (Build-to-Order) 模式。</li>
+                                
+                                <li data-lang="en"><strong>Direct Dispatch:</strong> Post Factory Acceptance Test (FAT) at Navi Mumbai, units are shipped via secure logistics directly to military forward bases/clients, deployed by on-site engineers.</li>
+                                <li data-lang="zh"><strong>直發前線：</strong> 總廠完成組裝與出廠驗收(FAT)後，專車/特殊物流直發軍方基地或企業，並由工程師實地部署。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Intel: #1 Market Share, High Brand Trust, Zero B2C.</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India UAV Market Rankings (Top Tier)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度無人機市場排名 (TOP 10 概覽)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Focus / Backing</th><th class="p-2" data-lang="zh">專注領域 / 背景</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">1</td>
+                                        <td class="p-2 text-white font-bold">ideaForge Tech</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">~50% Share. Tactical/Mapping. Target.</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">約50%市佔，戰術與測繪龍頭 (目標)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Asteria Aerospace</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Reliance backed (Surveillance)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">Reliance集團支持，專注安防</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Bharat Electronics (BEL)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Govt PSU (Heavy UAV/Radar)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">國防公企，重型無人機/雷達</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Adani Defence</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Elbit JV (MALE UAVs)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">與以色列Elbit合資，中大型平台</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">NewSpace Research</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Swarm tech & Next-Gen R&D</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">蜂群技術與次世代軍工</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-10</td>
+                                        <td class="p-2" colspan="2">Garuda (Agri), DroneAcharya, Paras Defence, TASL (Tata), Drone Destination</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Foxlink Opportunity:</strong> ideaForge faces intense rivalry from giants (Tata, Adani). They urgently need top-tier domestic PCBA/Wiring vendors to lower BOM costs while hitting strict "Make in India" quotas.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>FOXLINK 機會點：</strong> 面對大財團競爭，ideaForge 急需降本且須嚴守 "Make in India"。打入 Navi Mumbai 研發圈，提供軍規連接器/線束將直擊其痛點。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-04</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Market Report] Solid Order Book Scale</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[市場報告] 在手訂單規模穩固</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Order book remains strong at ₹500+ Cr, driven by border monitoring & infantry modernization. Defense yields ~60% revenue.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">受惠邊境監控與現代化需求，訂單穩居 50 億盧比大關，國防營收貢獻逼近 60%。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Corporate Strategy] Supply Chain "Indigenisation"</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[企業戰略] 供應鏈「在地化」戰略升級</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">HQ publicly mandates reducing electronic subsystem import dependency. Hunting local vendors aggressively. <span class="text-gray-500">(Opp: PCBA/Connector)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">釋出主管職缺，首度公開將「降低電子進口依賴、認證國內優質供應商」列核心任務。<span class="text-gray-500">(機會：組件代工)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Strategic Move] QIP Funding Prep</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[資本動態] 資本擴張計畫前期啟動</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Evaluating large-scale QIP (Qualified Inst. Placement) to fund major capacity expansions & high-end R&D tech.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">為應對產能擴建與高階研發，內部啟動 QIP 籌資評估，為數十億盧比募資鋪路。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">Ranked Top 3 globally in Dual-Use Tactical Drones (Drone Ind. Insights).</span><span data-lang="zh">獲評全球「軍民兩用」戰術無人機 Top 3。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-10:</strong> <span data-lang="en">Bolstering Mil-spec QA for extreme climate operations.</span><span data-lang="zh">強化軍規驗證能量，因應高海拔極端氣候。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Derived from ideaForge Report Intel): 
+        // Market Share: 9 (Tier 1, 50% absolute dominant share)
+        // Localization: 8 (Pure Indian origin, aggressively pushing "Make in India")
+        // Brand Power: 9 (Top choice for MoD, global Top 3 dual-use)
+        // Digital Reach: 4 (Direct B2B/B2G, no B2C/Amazon retail presence)
+        // Financial Health: 8 (Listed, strong ₹530 Cr order book)
+        const radarScores = [9, 8, 9, 4, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

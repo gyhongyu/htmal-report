@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-08T10:57:18.684Z",
+  "lastUpdated": "2026-07-09T03:05:49.693Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1432,6 +1432,19 @@
       "fileName": "report-1783508237778.html",
       "createdAt": "2026-07-08T10:57:18.684Z",
       "updatedAt": "2026-07-08T10:57:18.684Z"
+    },
+    {
+      "id": "report-1783566348873",
+      "title": "Target: ideaForge Technology",
+      "description": "目標企業：ideaForge Technology Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783566348873.html",
+      "createdAt": "2026-07-09T03:05:49.693Z",
+      "updatedAt": "2026-07-09T03:05:49.693Z"
     }
   ]
 }
