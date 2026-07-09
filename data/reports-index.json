@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-09T08:11:00.880Z",
+  "lastUpdated": "2026-07-09T09:16:02.479Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1523,6 +1523,19 @@
       "fileName": "report-1783584659026.html",
       "createdAt": "2026-07-09T08:11:00.880Z",
       "updatedAt": "2026-07-09T08:11:00.880Z"
+    },
+    {
+      "id": "report-1783588560452",
+      "title": "Target: Aarav Unmanned Systems (Aereo)",
+      "description": "目標企業：Aarav Unmanned Systems (Aereo)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783588560452.html",
+      "createdAt": "2026-07-09T09:16:02.479Z",
+      "updatedAt": "2026-07-09T09:16:02.479Z"
     }
   ]
 }
