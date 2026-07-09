@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: EndureAir Systems Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: EndureAir Systems (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：EndureAir Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: EndureAir Systems</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：EndureAir Systems</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 (Source India Defense Expo) | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 (Source India 展會期間) | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Strategic Partner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">EndureAir Systems Private Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U74999UP2018PTC106739</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 10Cr - 50Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover FY25)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Cumulative Funding:</strong> ~$10.7M (₹90 Cr)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>累計融資額：</strong> 約 1,070 萬美元 (9 億盧比)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Noida Setup</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Noida Sector 155</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Noida (諾伊達 - Sector 155)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">130+ Employees | Deep Tech & Assembly</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">130+ 員工數 | 深科技與總裝基地</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Noida Manufacturing Unit (Sector 155):</strong> Consolidating R&D, pilot production, and high-precision CFRP composite processing / avionic testing.</li>
+                                <li data-lang="zh"><strong>Noida 工廠 (Sector 155 基地):</strong> 整合研發、中試量產與高精度無人機碳纖維結構總裝與航電測試。</li>
+                                <li data-lang="en"><strong>IIT Kanpur Joint R&D Center:</strong> Original birthplace. Collaborates with Aerospace Department for flight dynamics & navigation algorithms.</li>
+                                <li data-lang="zh"><strong>IIT Kanpur 聯合研發中心:</strong> 起源地與核心算法研發據點，與航太系合作直升機動力學。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Liaison & Field Support Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">聯絡處與現地支持：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>New Delhi Office:</strong> Liaising with Ministry of Defence (MoD), Central Armed Police Forces (CAPF), and Government e-Marketplace (GeM) bidding tracking.</li>
+                                <li data-lang="zh"><strong>德里辦事處:</strong> 對接印度國防部 (MoD)、中央武警部隊 (CAPF) 及政府採購平台 (GeM) 招標。</li>
+                                <li data-lang="en"><strong>High-Altitude Transit Stations:</strong> Ladakh & Srinagar. Providing field test flight maintenance for military and civilian payloads.</li>
+                                <li data-lang="zh"><strong>高海拔邊境轉運站:</strong> 北印拉達克、斯利那加，提供軍方野外試飛與維修備件現場支援。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Setup)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Founding Team & Institutional VCs</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">Founders: ~36.37% | VCs: ~47.62% | Angels: ~7.22%</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">創辦團隊：36.37% | 風投基金：47.62% | 天使：7.22%</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Strategic Corporate Boss)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (戰略產業投資人)</span>
+                                <strong class="text-blue-300">Sagar Defence Engineering Pvt Ltd</strong>
+                                <span class="block text-blue-400 mt-1" data-lang="en">Strategic investor in military & marine autonomous systems (Invested Feb 2026)</span>
+                                <span class="block text-blue-400 mt-1" data-lang="zh">印度領先的海事防務自主系統製造商 (2026年2月引進)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Beneficiaries</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人</span>
+                                <strong class="text-yellow-300">Founders (Rama Krishna & Team) & VC Partners</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Decision center localized in India with Sagar Defence strategic supply chain synergy</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">決策留在本土，高度受 Sagar Defence 防務供應鏈協同影響</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>SABAL-20 / SABAL-40:</strong> Medium/heavy petrol-electric hybrid UAV helicopters for high-altitude logistics.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>SABAL-20 / SABAL-40：</strong> 中/重載汽油與油電混合動力無人直升機 (高原物資補給)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Vibhram Helicopter:</strong> Multi-purpose rotary platform for border reconnaissance and power line inspection.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Vibhram 直升機：</strong> 多用途無人直升機平台 (邊境偵察與電力巡檢)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Albatross eVTOL:</strong> Electric vertical takeoff & landing fixed-wing drone for border patrol and mapping.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Albatross 垂直起降翼：</strong> eVTOL 固定翼無人機 (長航時邊境巡邏)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>SABAL-200 (In Dev):</strong> 200kg super heavy-lift platform powered by a turbocharged variable-pitch rotor system.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>SABAL-200 (開發中)：</strong> 200kg 超重載平台，採渦輪增壓引擎與可變螺距設計。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Drive System:</strong> High-density BLDC motors, big ESCs, twin-cylinder engines, variable pitch control boxes.</li>
+                            <li data-lang="zh"><strong>動力傳動：</strong> 高密度無刷馬達 (BLDC)、大功率電子調速器 (ESC)、雙缸渦輪引擎、可變螺距控制箱。</li>
+                            
+                            <li data-lang="en"><strong>Energy:</strong> Customized high-rate Li-ion battery packs, smart BMS, high-power ground charger setups.</li>
+                            <li data-lang="zh"><strong>能源控制：</strong> 客製化高倍率鋰電池組、智慧 BMS、高功率地面充電器。</li>
+                            
+                            <li data-lang="en"><strong>Avionics / RF:</strong> Custom flight controller PCBs (Pixhawk-based), shielding wiring harnesses, military-grade connectors.</li>
+                            <li data-lang="zh"><strong>航電與互連：</strong> 自研飛控 PCB (Pixhawk 二次開發)、防屏蔽線束、軍規級連接器、地面站 RF 模組。</li>
+                            
+                            <li data-lang="en"><strong>Mechanical Body:</strong> Aerospace CFRP carbon-fiber composite fuselage, CNC aluminum alloy gears.</li>
+                            <li data-lang="zh"><strong>機械結構：</strong> 航太級碳纖維 (CFRP) 機身、精密 CNC 鋁合金傳動件。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Manufacturing Gap:</strong> EndureAir has stellar R&D but lacks mass-scale electronics manufacturing (PCBA assembly & waterproofing tests) experience.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>高精密代工：</strong> 研發能力極強，但缺乏百萬級電子製造 (PCBA、防水防塵測試) 工藝經驗。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Make in India Pressure:</strong> Strict local component localization policy bans Chinese imports. <strong>Foxlink Chakan</strong> can be the perfect local EMS partner for PCBA/BMS production.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>合規與關稅壓力：</strong> 面臨進口禁令，<strong>正崴 Chakan 工廠</strong>可為其代工 PCBA、BMS、客製化線束，協助其通過 "Make in India" 認證。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Key Talents Sought</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：11 條核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed (Active Vacancies at Noida Unit)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">來源：Naukri, LinkedIn, Indeed (Noida 總部與現地主要職缺)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sr. Embedded Systems Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Responsible for custom autopilot flight controllers, driver development, and Pixhawk porting in C++. Indicates heavy R&D on in-house flight controller PCBA.</td>
+                                    <td data-lang="zh">負責自研飛控 (Autopilot) 驅動開發與 Pixhawk 二次移植。顯示飛控 PCBA 有高強度自研迭代。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">UAV Assembly & Integration Technician</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Assembling mechanical systems and rotary heads of SABAL heavy-lift helicopters. Points to rising assembly volume requirements.</td>
+                                    <td data-lang="zh">負責 SABAL 重載無人直升機機械裝配與整機調試。顯示批量化交付工作加重。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sourcing & Supply Chain Manager</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Signal:</strong> Sourcing local electronic and structural vendors to replace imported components to comply with Make in India policy.</td>
+                                    <td data-lang="zh"><strong>強烈訊號：</strong> 尋找符合 Make in India 的在地電子、結構件廠商，專研替代進口件以符合政策。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Lead Mechanical Design Engineer - Rotorcraft</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Designing variable pitch rotor systems and high-stress gearboxes for heavy-lift helicopter dynamics.</td>
+                                    <td data-lang="zh">專注於可變螺距旋翼系統與動力齒輪箱的機械傳動設計。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">QA Specialist - UAV Manufacturing</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Drafting FAT/SAT test criteria for military-grade EHS, IP waterproof, and dustproof standards.</td>
+                                    <td data-lang="zh">制定滿足軍用級 EHS 與防塵防雨指標的出廠檢驗標準 (FAT/SAT)。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Flight Test Pilot / Field Operator</strong><br>
+                                        <span class="text-xs text-gray-500">Field (Ladakh / Srinagar)</span>
+                                    </td>
+                                    <td data-lang="en">Requires DGCA license. Dispatched to high-altitude cold environments for real-flight trials and on-site logistics deployment.</td>
+                                    <td data-lang="zh">需具備 DGCA 證照。長駐拉達克等高原低溫極限地區，進行現地飛行試驗與物資投送維護。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Power Systems & Battery Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Developing high-capacity Li-ion battery pack designs, BMS thermal control, and discharge trials. (Foxlink opportunity area for BMS assembly).</td>
+                                    <td data-lang="zh">負責高容量鋰電池包 (BMS 與 Pack) 設計與散熱充放測試 (Foxlink 可切入 BMS/Pack 產線代工)。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Composite Materials Specialist</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Optimizing CFRP (carbon-fiber) body weight, tooling molds, and prepreg processes for SABAL-200.</td>
+                                    <td data-lang="zh">專研碳纖維複合材料模具與預浸料工藝，優化 SABAL-200 機身重量。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Senior Control Systems Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Solving helicopter stabilization and control algorithms under high winds or asymmetric heavy loading.</td>
+                                    <td data-lang="zh">解決重載直升機在強風、不對稱載重下的姿態穩定與飛控控制算法。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Business Development Manager - Defence</strong><br>
+                                        <span class="text-xs text-gray-500">New Delhi</span>
+                                    </td>
+                                    <td data-lang="en">Tracking MoD tenders, state police procurements, and GeM portal bids. Deepening defense sales.</td>
+                                    <td data-lang="zh">長駐新德里辦公室，負責對接國防部標案、警政部門與 GeM 政府採購平台。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Project Manager - Gov R&D</strong><br>
+                                        <span class="text-xs text-gray-500">Noida HQ</span>
+                                    </td>
+                                    <td data-lang="en">Managing milestones, documentation, and funding tracking with Technology Development Board (TDB) & DST.</td>
+                                    <td data-lang="zh">負責協調與印度技術發展局 (TDB) 及政府補助項目的進度控管與交付。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Government Tenders & Alliances</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">B2G 國防標案與戰略聯盟</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>B2G Direct (Primary):</strong> Participating in Ministry of Defence (MoD), CAPF, and NDRF tenders via Government e-Marketplace (GeM) portals.</li>
+                                <li data-lang="zh"><strong>B2G 國防直銷 (主)：</strong> 通過政府採購平台 (GeM) 參與國防部 (MoD)、武警 (CAPF) 與救援隊 (NDRF) 的公開招標。</li>
+                                
+                                <li data-lang="en"><strong>Sagar Defence Integration:</strong> Joint bidding with strategic corporate shareholder Sagar Defence to enter Indian Navy & maritime coast guard procurement setups.</li>
+                                <li data-lang="zh"><strong>與 Sagar Defence 整合：</strong> 協同其產業大股東進行海軍與海岸警衛隊防務系統的聯合投標。</li>
+                                
+                                <li data-lang="en"><strong>Civilian Freight B2B:</strong> Working with civilian logistics operators (such as Skye Air Mobility) for last-mile high-altitude cargo logistics.</li>
+                                <li data-lang="zh"><strong>民用 B2B 物流：</strong> 與 Skye Air Mobility 等物流商合作，切入高海拔最後一哩路的無人機貨運。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">On-Site Dispatch & Field Support</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">現地保障物流與技術服務</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Digital Presence:</strong> www.endureair.com. Purely corporate portfolio; no B2C e-commerce footprints. Fully customized procurement cycles.</li>
+                                <li data-lang="zh"><strong>數位足跡：</strong> 官方網站為技術展示，無電商零售功能，完全屬於客製化大宗招標專案。</li>
+                                
+                                <li data-lang="en"><strong>Just-In-Time Field Support:</strong> Since rotary wing flight-systems require highly specialized tech checks, EndureAir deploys field-service engineers directly in border bases (Ladakh, Srinagar) for real-time parts swap & overhaul.</li>
+                                <li data-lang="zh"><strong>現地工程派駐：</strong> 由於無人直升機維修難度高，EndureAir 不走普通分銷，而是直接派遣工程師駐守高原基地現場，提供即時維護與零件更換。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC 推估)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Scale (1-10) based on target's rotary-wing niche dominance</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">評分基於目標企業在重載旋翼領域之優勢推估</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India UAV/Drone Manufacturer Rankings</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度無人機製造商排行榜 (技術與影響力)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業名稱</th>
+                                        <th class="p-2" data-lang="en">Niche Focus / Note</th><th class="p-2" data-lang="zh">核心優勢與定位</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">ideaForge Technology</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Largest listed player, dominant in micro-reconnaissance.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度最大無人機上市公司，主攻中小偵察機。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Asteria Aerospace</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Owned by Reliance, strong in DaaS (Drone-as-a-Service).</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">Reliance 巨頭控股，主攻全棧式無人機服務。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Garuda Aerospace</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Aggressive agri and civil drone leader, heavily funded.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">農業與民用無人機巨頭，融資與營銷能力強。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">...</td>
+                                        <td class="p-2">Adani / Tata / Raphe</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Adani/Tata rule military fixed-wing. Raphe mPhibr is direct competitor.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">Adani/Tata 霸佔固定翼。Raphe mPhibr 為直升機重載直接對手。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">9</td>
+                                        <td class="p-2">Sagar Defence</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Sagar is EndureAir's main strategic industrial shareholder.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">海事自主系統巨頭 (EndureAir 戰略股東)。</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">10</td>
+                                        <td class="p-2 text-white font-bold">EndureAir Systems</td>
+                                        <td class="p-2 text-blue-300" data-lang="en"><strong>Target Client:</strong> Unmatched deep tech heritage from IIT Kanpur. Heavy-lift leader.</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh"><strong>目標客戶：</strong> 在重載旋翼直升機技術實力最強，具備深厚學術與國防部合作背景。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Strategic Hook for Foxlink:</strong> Indian government bans imported components (BMS, ESC, PCBA) due to strict defense indigenization rules. EndureAir needs a local precision manufacturing partner to scale up. Foxlink's local setup can fulfill their "Make in India" requirement.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>正崴切入機會：</strong> 印度政府對無人機關鍵組件 (電調、BMS、PCB) 設有極嚴的進口限制。EndureAir 缺乏精密大批量製造能力。正崴可作為其在地代工 (EMS) 夥伴，助其將 PCBA、精密線束在印度本土量產以應對 "Make in India" 政策合規檢查。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近 3 個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-03</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Press Release] Sagar Defence Announces Strategic Equity Investment</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新聞稿] Sagar Defence 宣佈對 EndureAir 進行戰略股權投資</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Strategic tie-up announced in Hyderabad. Combining Sagar's coastal defense resources with EndureAir's heavy rotary lift tech to build an all-India unmanned air & marine defense platform.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">雙方在海得拉巴宣佈技術聯姻，結合 Sagar 的國防網絡與 EndureAir 的直升機技術，打造印度最完整自主空中與海事防務平台。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Trade Show] Showcased SABAL-40 at Source India Defense Expo 2026</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[展會動態] 參展 Source India 2026 國防展</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Showcased SABAL-40 hybrid helicopter designed for high altitude gusts and extreme low-pressure. Actively looking for local EMS partners for wiring harnesses & electronic components. <span class="text-gray-500">(Opp: Foxlink engagement window)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">現場展示最新 SABAL-40 汽油共軸雙旋翼無人直升機，主打強風高海拔，並公開尋找在地 EMS 線束與電子零組件代工夥伴。 <span class="text-gray-500">(機會：正崴關鍵切入窗口)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Policy Action] Tech Development Board (TDB) Verifies SABAL-200</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[政策項目] 技術發展局 (TDB) 完成 SABAL-200 重載計畫前期驗收</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">TDB verified progress on the 200kg super-heavy lift project. TRL level advanced from TRL 5 to deployment. Drives huge sourcing demands for localized high-end electronics and power controllers.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">此 200 kg 超重載無人機項目順利從 TRL 5 推進至實機部署階段。預計將大舉釋出高階航電、動力模組與精密加工代工採購需求。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-08</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Hiring Campaign] Noida Manufacturing Expansion Initiated</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[擴大招募] 啟動 2026 Noida 製造基地擴招計劃</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Released numerous assembly & QA technician roles on Naukri/Indeed. In-hand defense order backlogs are entering mass delivery dispatch phase.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">於各大平台釋出大量「組裝與品質檢驗技術員」職缺，顯示在手軍方重載訂單已步入批量化生產交付階段。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-25</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Military Trials] SABAL-20 Successfully Completes Extreme High-Altitude Trials</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[軍用測評] SABAL-20 高海拔補給試飛圓滿成功</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Completed simulator deliveries under -20°C in the extreme cold mountain regions of Ladakh (5,000m altitude). Electronics & custom motor control boards performed robustly.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">在拉達克海拔 5,000 公尺之極寒山區完成軍事物資模擬投送，電機與航電模組在零下 20 度極限環境表現優異。</p>
+                        </div>
+                    </div>
+
+                    <!-- Additional News -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-18:</strong> 
+                            <span data-lang="en">Board Setup Updated: Post Series-A funding settled, VC partners officially joined the board to optimize commercial supply chain.</span>
+                            <span data-lang="zh">董事會席位更新：配合 Series A 後期資金到位，正式引入風投代表進入決策層以推動後續供應鏈升級。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> 
+                            <span data-lang="en">Swarm Tech: Launched joint autonomous swarm coordination program with IIT Kanpur for multi-uav logistics in GPS-denied environments.</span>
+                            <span data-lang="zh">攜手 IIT Kanpur 啟動自主 Swarm 協同算法項目，解決多架直升機在無 GPS 信號下的自主補給編隊。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-20:</strong> 
+                            <span data-lang="en">Sourcing Bid: Released EoI for precision motors & ESC localization to build closer ties with local EMS setups.</span>
+                            <span data-lang="zh">發布精密電機與組件在地化招標 (EoI)，尋求國內馬達與自研電調 (ESC) 代工與組件合作。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-12:</strong> 
+                            <span data-lang="en">Awards: Awarded "2025 India Deep Tech Innovation Award" for major break-through in coaxial dual-rotor helicopter dynamics.</span>
+                            <span data-lang="zh">榮譽獎項：憑藉共軸雙旋翼直升機動力學的底層技術突破，榮獲「2025 印度深科技創新大獎」。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-02:</strong> 
+                            <span data-lang="en">Growth: Noida headquarters workforce crossed 130 headcounts, scaling from lab incubation to modern deep tech manufacturing scale.</span>
+                            <span data-lang="zh">團隊規模：Noida 總部員工突破 130 人，正式脫離早期實驗室規模，進入中型現代深科技製造體系。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores based on EndureAir Systems Profiles:
+        // Market Share: 7 (Top 10 overall, but dominant Top 3 in heavy lift helicopter VTOL sector)
+        // Localization: 8 (Extremely aggressive "Make in India" alignment, replacing imports)
+        // Brand Power: 8 (Highly recognized as an elite IIT Kanpur spin-off in defense and government circles)
+        // Digital Reach: 4 (Pure B2G/B2B project-level procurement; no consumer digital footprint)
+        // Financial Health: 9 (Backed by top VCs, Sagar Defence strategic funding, and TDB government grants)
+        const radarScores = [7, 8, 8, 4, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

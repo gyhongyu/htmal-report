@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-09T06:05:48.098Z",
+  "lastUpdated": "2026-07-09T08:11:00.880Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1510,6 +1510,19 @@
       "fileName": "report-1783577146994.html",
       "createdAt": "2026-07-09T06:05:48.098Z",
       "updatedAt": "2026-07-09T06:05:48.098Z"
+    },
+    {
+      "id": "report-1783584659026",
+      "title": "Target: EndureAir Systems",
+      "description": "目標企業：EndureAir Systems",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783584659026.html",
+      "createdAt": "2026-07-09T08:11:00.880Z",
+      "updatedAt": "2026-07-09T08:11:00.880Z"
     }
   ]
 }
