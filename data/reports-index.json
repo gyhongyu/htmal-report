@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-10T07:26:09.374Z",
+  "lastUpdated": "2026-07-10T08:16:49.656Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1549,6 +1549,19 @@
       "fileName": "report-1783668367292.html",
       "createdAt": "2026-07-10T07:26:09.374Z",
       "updatedAt": "2026-07-10T07:26:09.374Z"
+    },
+    {
+      "id": "report-1783671408103",
+      "title": "Target: Optiemus Electronics Limited (OEL)",
+      "description": "目標企業：Optiemus Electronics Limited (OEL)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783671408103.html",
+      "createdAt": "2026-07-10T08:16:49.656Z",
+      "updatedAt": "2026-07-10T08:16:49.656Z"
     }
   ]
 }
