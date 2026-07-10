@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-10T04:17:47.902Z",
+  "lastUpdated": "2026-07-10T07:26:09.374Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1536,6 +1536,19 @@
       "fileName": "report-1783588560452.html",
       "createdAt": "2026-07-09T09:16:02.479Z",
       "updatedAt": "2026-07-09T09:16:02.479Z"
+    },
+    {
+      "id": "report-1783668367292",
+      "title": "Target: NMB-Minebea India Pvt Ltd",
+      "description": "目標企業：NMB-Minebea India (美蓓亞印度)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783668367292.html",
+      "createdAt": "2026-07-10T07:26:09.374Z",
+      "updatedAt": "2026-07-10T07:26:09.374Z"
     }
   ]
 }
