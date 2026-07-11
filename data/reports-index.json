@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-10T08:16:49.656Z",
+  "lastUpdated": "2026-07-11T09:53:33.672Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1562,6 +1562,19 @@
       "fileName": "report-1783671408103.html",
       "createdAt": "2026-07-10T08:16:49.656Z",
       "updatedAt": "2026-07-10T08:16:49.656Z"
+    },
+    {
+      "id": "report-1783763612803",
+      "title": "Target: Kaynes Circuits India",
+      "description": "目標企業：Kaynes Circuits India (印度商麥索爾電路)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783763612803.html",
+      "createdAt": "2026-07-11T09:53:33.672Z",
+      "updatedAt": "2026-07-11T09:53:33.672Z"
     }
   ]
 }

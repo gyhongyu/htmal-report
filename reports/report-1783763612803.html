@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: KAYNES CIRCUITS INDIA PRIVATE LIMITED -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Kaynes Circuits India (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Kaynes Circuits India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Kaynes Circuits India</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Kaynes Circuits India (印度商麥索爾電路)</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Strategic Partner Opportunity</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">KAYNES CIRCUITS INDIA PRIVATE LIMITED</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U26104KA2023PTC176186</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private Ltd)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Scale (Parent)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模 (母公司)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 4,100 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(FY26 Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Kaynes Tech (NSE: KAYNES)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Kaynes Technology (印度上市巨頭)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plants</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Mysore & Thoothukudi</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">麥索爾 與 圖圖庫迪 (新建中)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">₹ 4,995 Cr Project | Up to 74-layer PCBs</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">4,995 億盧比投資 | 生產高達 74 層板</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Mysore HQ Unit:</strong> Belagola Food Industrial Estate. (High-difficulty, prototyping & core R&D).</li>
+                                <li data-lang="zh"><strong>Mysore 總部基地:</strong> 位於 Belagola 工業區，主攻高多層板初期研發與原型打樣（Prototyping）。</li>
+                                <li data-lang="en"><strong>Thoothukudi Super Greenfield (Tamil Nadu):</strong> India's first mega high-end PCB plant. Focuses on 74-layer boards, HDI, and Flex PCBs. <span class="text-blue-400">(Under Construction)</span></li>
+                                <li data-lang="zh"><strong>Thoothukudi 超級綠地工廠 (泰米爾納德邦):</strong> 全印首座大型高階 PCB 廠。專注高層板、HDI、柔性板與相機模組。 <span class="text-blue-400">(建設中)</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech, Logistics & Bonded Nodes:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發、物流與保稅網絡：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Bengaluru & Mysore R&D:</strong> Synergised layout, Signal Integrity (SI) simulations & embedded system designs.</li>
+                                <li data-lang="zh"><strong>班加羅爾與麥索爾研發中心:</strong> 專注於高速多層板線路設計、信號完整性 (SI) 模擬與嵌入式研發。</li>
+                                <li data-lang="en"><strong>Mysore Central Bonded Warehouse:</strong> 100% Export-Oriented Unit (EOU) with expedited green-channel customs.</li>
+                                <li data-lang="zh"><strong>麥索爾中央保稅倉庫:</strong> 享有「100% 出口導向型單位 (EOU)」資質，進口關鍵原物料無縫通關與關稅豁免。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Holder)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Kaynes Technology India Limited</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">100% Stake (Wholly-owned Subsidiary)</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">100% 全資持股子公司</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Promoters & Institutional)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (推廣人與機構股東)</span>
+                                <strong class="text-white">Ramesh Kunhikannan & Savitha Ramesh</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">~53.46% Promoter Stake (Rest: Nippon Life, HDFC, Axis, Vanguard)</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">創始人家族持股約 53.46% (其餘為外資與本土共同基金)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Beneficiary</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人</span>
+                                <strong class="text-blue-300">Ramesh Kunhikannan & Family Members</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Multilayer PCBs:</strong> Up to 74 Layers for Defence/Servers</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高多層印製電路板：</strong> 最高支持 74 層</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>HDI Boards:</strong> High-density interconnect up to 8 layers</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高密度互連板：</strong> HDI 板 (最高 8 層)</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Flex & Rigid-Flex:</strong> For compact wearables & medical electronics</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>撓性與剛柔結合板：</strong> 適用精密儀器與穿戴裝置</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Camera Modules:</strong> High-performance optics assembly</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>相機模組：</strong> 高規光學传感模組組裝</li>
+
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>PCBA & Harness:</strong> Full cable-assembly & sub-systems</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電子組裝與線束：</strong> 系統組裝與線束組件</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>High-Speed Substrates:</strong> Special high-frequency CCL (Megtron, Nelco), PI base, copper foil.</li>
+                            <li data-lang="zh"><strong>高頻高速基材：</strong> 特殊高頻覆銅板 (CCL - Megtron, Nelco)、PI 柔性基材、銅箔。</li>
+                            
+                            <li data-lang="en"><strong>Optics & Sensors:</strong> CMOS sensors, optical lenses, filters, VCM drives.</li>
+                            <li data-lang="zh"><strong>光學與傳感：</strong> CMOS 圖像傳感器、精密光學鏡頭、濾光片、VCM 馬達。</li>
+                            
+                            <li data-lang="en"><strong>Interconnect elements:</strong> Fine-pitch board-to-board connectors, FFC/FPC connectors, micro-coax cables.</li>
+                            <li data-lang="zh"><strong>微型互連結構：</strong> 細間距板對板連接器、FFC/FPC 連接器、微型同軸線。</li>
+                            
+                            <li data-lang="en"><strong>Surface Chemistry:</strong> Electroplating chemicals, copper/gold acids, solder resist.</li>
+                            <li data-lang="zh"><strong>表面化學與電鍍：</strong> 電鍍銅/化學金藥水、阻焊阻劑、高精度阻焊漆。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Foxlink Synergy Opportunities</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">正崴精密 (FOXLINK) 對接契機</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Advanced Tooling:</strong> Support high-precision HDI micro-via drilling & fine trace. Opportunity for premium connectors & harness lines.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>高階製程互補：</strong> 其高精度 HDI 及 74 層板急需高精密連接器與高速傳輸線束（Harness）配套，此為正崴強項。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>"Make in India" Localization:</strong> Thoothukudi mega greenfield unit requires immediate tier-1 parts. Ideal timing to pitch strategic localized sourcing alliances.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化採購紅利：</strong> 隨著 Thoothukudi 百億超級建廠計畫啟動，正崴可作為其補足高端組件缺口、推動「國產化替代（Make in India）」的頂級戰略夥伴。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed (11 Core Intel Records)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Diploma Engineer Trainee (DET) - ECE/EEE</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore HQ</span>
+                                    </td>
+                                    <td data-lang="en">Mass scale apprenticeship program for 2026 batches. Scaling up junior line-operators for circuit tests & assembly lines.</td>
+                                    <td data-lang="zh">面向 2026 屆大專應屆生的大規模學徒招募，為生產、線束設計與電路測試儲備技術基層。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior Engineer - Cable Harness Design</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore HQ</span>
+                                    </td>
+                                    <td data-lang="en">Tasked with high-end routing & assembly design. Focused heavily on high-margin industrial & defense clients.</td>
+                                    <td data-lang="zh">負責高階電纜線束的佈線（Routing）與工藝組裝設計，深耕工業與軍工市場。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">PCB Design & Layout Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore / Bengaluru</span>
+                                    </td>
+                                    <td data-lang="en">Routing and physical stackup design for high-frequency multilayer boards & ultra-dense HDI boards.</td>
+                                    <td data-lang="zh">負責高頻高速多層板與 HDI 板的佈線與物理層叠（Stackup）設計。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Process Engineer - Wet Process</strong><br>
+                                        <span class="text-xs text-gray-500">Thoothukudi / Mysore</span>
+                                    </td>
+                                    <td data-lang="en">Managing PCB wet-end operations (etching, acid plating, stripping). Sourcing technical leaders for new units.</td>
+                                    <td data-lang="zh">負責 PCB 製造核心的濕法工藝（蝕刻、高解析度電鍍、去乾膜），為新廠儲備建廠技術人才。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Sourcing Manager - Electronic Components</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore HQ</span>
+                                    </td>
+                                    <td data-lang="en">Requires extensive semiconductor & component vendor network in India. Expanding local supply ecosystem.</td>
+                                    <td data-lang="zh">尋找在半導體與主被動元件領域具備強大供應鏈人脈的在地採購經理。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">QA Supervisor - PCBA</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore HQ</span>
+                                    </td>
+                                    <td data-lang="en">Managing final PCBA dispatch quality & coordinating AS9100 aviation certification standards.</td>
+                                    <td data-lang="zh">負責 PCBA/組裝成品出廠的產能質量控管與 AS9100（航太級）認證對接。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Failure Analysis Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore HQ</span>
+                                    </td>
+                                    <td data-lang="en">Investigating high-layer stackup failure points & layout defects to maximize product yield.</td>
+                                    <td data-lang="zh">專注於高層數基板失效性分析與缺陷排除。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">NPD (New Product Development) Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore HQ</span>
+                                    </td>
+                                    <td data-lang="en">Coordinating localized manufacturing feasibility checks & prototyping with new B2B clients.</td>
+                                    <td data-lang="zh">協同客戶進行 PCB 製造在地化評估與打樣（Prototyping）技術對接。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Procurement Executive - Capex Equipment</strong><br>
+                                        <span class="text-xs text-gray-500">Thoothukudi project</span>
+                                    </td>
+                                    <td data-lang="en">Handling high-value import machinery (LDI exposure, high-speed CNC drills) & customs-bonded tax exemptions.</td>
+                                    <td data-lang="zh">負責高價值精密建廠設備（如 LDI 曝光機、高速鑽孔機）的全球採購與免稅進口申報。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Graduate Engineer Trainee (GET) - Testing</strong><br>
+                                        <span class="text-xs text-gray-500">Mysore HQ</span>
+                                    </td>
+                                    <td data-lang="en">Setting up flying probe tests & developing telecom/electrical board functional diagnostic parameters.</td>
+                                    <td data-lang="zh">負責飛針測試（Flying Probe Testing）與電訊功能測試開發。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Semiconductor Reliability Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Sanand/Mysore (Remote support)</span>
+                                    </td>
+                                    <td data-lang="en">Reliability test programs to support sister-entity OSAT semiconductor setup at Sanand, Gujarat.</td>
+                                    <td data-lang="zh">針對旗下半導體封測（OSAT）子公司的封裝可靠性測試工程師。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 p-3 bg-gray-900/50 rounded text-xs text-gray-400">
+                        <span data-lang="en"><strong>Talent Geography Note:</strong> Technical, R&D & design capabilities are highly clustered in Mysore HQ and Bengaluru; while project sourcing, civil procurement and wet-chemistry process engineers are actively channeled to the Thoothukudi unit.</span>
+                        <span data-lang="zh"><strong>人才地理分佈：</strong> 技術、研發與設計核心高度集中於 Mysore (麥索爾) 本部與鄰近的 IT 重鎮 Bengaluru (班加羅爾)；中高階建廠採購與製程工程師則向 Thoothukudi (圖圖庫迪) 新項目集中。</span>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Direct Industrial B2B Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">大客戶直銷與一站式服務 (Direct B2B)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Direct B2B Custom Contracts:</strong> Catering directly to high-barrier sectors like Defense, Aerospace, Railways & Industrial OEMs via long-term supply SLA agreements.</li>
+                                <li data-lang="zh"><strong>大客戶直銷 (Direct Industrial B2B)：</strong> 面向高門檻的工業、國防、航太、車用和鐵路系統，採取客製化直銷模式，直接與系統製造商 (OEM) 及大型央企 (PSU) 簽訂合約。</li>
+                                
+                                <li data-lang="en"><strong>Design-to-Box-build:</strong> Leveraging parent Kaynes' massive EMS assembly units to bundle bare PCBs with PCBA, wire harness, casing and final box build.</li>
+                                <li data-lang="zh"><strong>垂直一站式打包（Design-to-Box-build）：</strong> 利用母公司 Kaynes 的強大 EMS 能力，將 bare PCB 與 PCBA 組裝、線束、外殼與整機組裝（Box Build）打包銷售。</li>
+                                
+                                <li data-lang="en"><strong>Zero B2C Footprint:</strong> Zero retail e-commerce channels. Strictly uses B2B industrial directories (e.g. PCB Directory) & the official portal for business RFQs: <a href="https://www.kaynestechnology.co.in/" target="_blank">kaynestechnology.co.in</a>.</li>
+                                <li data-lang="zh"><strong>零零售通路：</strong> 無任何 B2C 零售平台。唯一的官方宣傳與商務入口為官方直連：<a href="https://www.kaynestechnology.co.in/" target="_blank">https://www.kaynestechnology.co.in/</a>，或通過 PCB Directory 等工業目錄進行 RFQ 詢價。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics Logic & Industrial Hubs</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯與三大核心工業區</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>South Hub (Mysore/Bengaluru):</strong> Connects with Indian defense bodies (DRDO) & Space agency (ISRO) for critical missions.</li>
+                                <li data-lang="zh"><strong>南印度（Mysore & Bengaluru）：</strong> 負責對接印度國防部（DRDO）、印度太空研究組織（ISRO）等航太與軍工客戶。</li>
+
+                                <li data-lang="en"><strong>West/South Hub (Chennai & Thoothukudi):</strong> Targets emerging automotive electronics, EV, solar inverters, and heavy hardware.</li>
+                                <li data-lang="zh"><strong>西/南印度（Chennai & Thoothukudi）：</strong> 專攻新興車載電子、綠色能源（逆變器）以及消費型硬體。</li>
+
+                                <li data-lang="en"><strong>North Hub (NCR/Manesar):</strong> Connects directly with auto component hubs (e.g., Maruti Suzuki supply chain) & major smart meter clients.</li>
+                                <li data-lang="zh"><strong>北印度（NCR/Manesar）：</strong> 對接汽車零部件中心（如 Maruti Suzuki 供應鏈）與智能電表（Smart Meters）主流客戶。</li>
+                                
+                                <li data-lang="en"><strong>EOU Green Customs:</strong> Since they hold "100% Export-Oriented Unit" status, chemical inputs and high-layer CCL imports enjoy duty-free fast customs clearance, though suppliers face extremely tight lead-time demands.</li>
+                                <li data-lang="zh"><strong>EOU 快速通關：</strong> 享有「100% 出口導向型單位」的綠色通關通道，進口化學藥水和 CCL 基板免稅，但對供應商的交期和穩定性要求極苛刻。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & financials</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India PCB Market Rankings (Top Tier)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度 PCB 市場銷量/影響力排名 (TOP 10)</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Note/Positioning</th><th class="p-2" data-lang="zh">背景/定位</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">AT&S India Pvt. Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Austrian MNC. Supreme leader in system substrates & premium automotive HDI.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">奧地利外資 - 電子系統基板及高階車載 HDI 電路板霸主。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Ascent Circuits Pvt. Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian Domestic. Largest export scale with highly automated lines.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 出口規模最大，擁有高精密自動化生產線。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Circuit Systems India Ltd (CSIL)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian Domestic. Gujarat-based massive high-volume multilayer maker.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 位於古吉拉特邦，專注於大批量多層板。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Genus Electrotech Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian Domestic. Highly backward-integrated layout.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 垂直整合度極高，backward integrated。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Shogini Technoarts Pvt. Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Dominates domestic automotive, LED & power supplies.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 在汽車、LED 照明與電源板領域市佔率極高。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6</td>
+                                        <td class="p-2">CIPSA-TEC India Pvt. Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India-Spain Joint Venture. Strong global tech backup for mid-to-large runs.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印西合資 - 具備深厚的全球技術資源與中大批量生產能力。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">7</td>
+                                        <td class="p-2">Epitome Components Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japanese tech tie-up. Dominates home appliance & consumer markets.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 與日企技術合作，本土化家電與消費電子市佔領先。</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">8</td>
+                                        <td class="p-2 text-white font-bold">Kaynes Circuits (KCIPL)</td>
+                                        <td class="p-2 text-blue-300" data-lang="en"><strong>Target Client.</strong> Strong post-entrant advantage in 74L/HDI. Backed by Thoothukudi Mega Greenfield.</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh"><strong>本報告目標。</strong> 在 74層、HDI、繞性板具備極強後發優勢，Thoothukudi 建廠案備受期待。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">9</td>
+                                        <td class="p-2">Meena Circuits Pvt. Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">US technological collaboration. Strong focus on aviation & medical.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 與美資技術合作，主攻工業、航太與醫療領域。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">10</td>
+                                        <td class="p-2">Anand Electronics & Industries</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Historic 50-year-old high-precision domestic manufacturer.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 具備近五十年歷史的老牌精密 PCB 廠。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>FOXLINK Strategy Opportunity:</strong> Kaynes Technology is consolidating upstream PCB fabrication + downstream OSAT semiconductor packaging. During the critical Thoothukudi project construction period in 2026, FOXLINK can act as an indispensable partner for premium precision connectors, high-speed data transmission lines and optical components.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>正崴精密機會點：</strong> Kaynes 集團正從純代工 (EMS) 往「裸板製造 + 晶片封測」的大產業鏈上下游垂直整合。在 2026 年 Thoothukudi 百億級超級工廠建廠期，正崴在精密連接器、高速線束與相機模組精密件的供應上，是其推動「國產化替代」不可或缺的頂級夥伴。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-05</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Corporate Earnings] Strong Q3 FY26 Performance</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[季度財報] Q3 FY26 業績發布亮眼</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Parent Kaynes Technology posted Q3 revenue of INR 804 Crores, growing 22% YoY, backed by robust aerospace and smart meter pipelines.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">母公司 Kaynes Technology 公布 Q3 財報，受惠於智慧電表與航太訂單，單季營收達 80.4 億盧比，同比增長 22%。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-27</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[NSE Announcement] Board Meeting Scheduled</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[交易所公告] 董事會召開通知</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Board formally notified the exchange regarding the Feb 5th audit and quarterly performance evaluations.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">向交易所通報定於 2026 年 2 月 5 日召開董事會，審議與發布季度業績。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Project Update] Thoothukudi Greenfield Progress</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[建廠進度] Thoothukudi 新廠環評與動工籌備</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Tamil Nadu environmental panel accepted the phase-1 environmental clearance files for KCIPL. Phase 1 foundation expected by mid-2026.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">泰米爾納德邦官方已受理第一期高精密 PCB 工廠的環評申報，預估基礎設施將於 2026 年中旬正式動工。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-25</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Recruitment] 2026 Apprentice Drive (DET)</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[大專招募] 2026 屆大專學徒招聘計劃啟動</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Cooperated with Talentise Global to run a virtual recruitment drive for EEE/ECE talents targeting Mysore and Tamil Nadu plants.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">集團與 Talentise Global 聯合啟動虛擬校園招聘，鎖定 EEE 與 ECE 基層技術人才，為 Mysore 與 Tamil Nadu 新廠做儲備。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[R&D Strategic Sourcing] Hired Core Technology Director</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[戰略引才] 引入前美資 PCB 大廠高階技術經理</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Recruited top R&D lead from US PCB giant to run the Mysore setup. To spearhead complex multi-layer HDI & flex board innovations.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">宣布聘請前美資 PCB 大廠研發總監加入 Mysore 本部，全面主導 8 層以上 HDI 與柔性板 (Flexible PCB) 的研發。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-28:</strong> 
+                            <span data-lang="en">Showcased 74-layer PCB design blueprints targeting high-end defense and data center servers at Bengaluru Tech Exhibition.</span>
+                            <span data-lang="zh">於班加羅爾電子展正式展示最新的 74 層 Multilayer PCB 設計藍圖，目標鎖定高階軍工與數據中心伺服器市場。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-04:</strong> 
+                            <span data-lang="en">Reported 101.64% YoY surge in consolidated net profits for September quarter. Solidifies massive financial muscle for building the Thoothukudi unit.</span>
+                            <span data-lang="zh">九月單季合併淨利潤同比大幅增長 101.64%，表現優異，為新一輪的大規模 PCB 建廠打下雄厚資金基礎。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Estimated based on Report): 
+        // Market Share: 6 (Rapidly rising powerful newcomer, ranked #8)
+        // Localization: 9 (Heavy "Make in India" focus, massive Tamil Nadu state greenfield setup)
+        // Brand Power: 8 (Backed by Kaynes Tech, a leading domestic ESDM name in Defense/Space)
+        // Digital Reach: 5 (Pure industrial B2B niche focus, zero direct retail e-commerce)
+        // Financial Health: 9 (Superb profit surge, strong backing by listed parent)
+        const radarScores = [6, 9, 8, 5, 9]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>
