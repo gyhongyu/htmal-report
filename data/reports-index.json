@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-11T09:53:33.672Z",
+  "lastUpdated": "2026-07-13T04:10:34.193Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1575,6 +1575,19 @@
       "fileName": "report-1783763612803.html",
       "createdAt": "2026-07-11T09:53:33.672Z",
       "updatedAt": "2026-07-11T09:53:33.672Z"
+    },
+    {
+      "id": "report-1783915832124",
+      "title": "Target: CDSpace Robotics",
+      "description": "目標企業：CDSpace Robotics",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783915832124.html",
+      "createdAt": "2026-07-13T04:10:34.193Z",
+      "updatedAt": "2026-07-13T04:10:34.193Z"
     }
   ]
 }
