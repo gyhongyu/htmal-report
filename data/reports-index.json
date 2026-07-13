@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-13T04:10:34.193Z",
+  "lastUpdated": "2026-07-13T05:00:35.410Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1588,6 +1588,19 @@
       "fileName": "report-1783915832124.html",
       "createdAt": "2026-07-13T04:10:34.193Z",
       "updatedAt": "2026-07-13T04:10:34.193Z"
+    },
+    {
+      "id": "report-1783918833436",
+      "title": "Target: Ascent-K Circuit",
+      "description": "目標企業：Ascent-K Circuit",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1783918833436.html",
+      "createdAt": "2026-07-13T05:00:35.410Z",
+      "updatedAt": "2026-07-13T05:00:35.410Z"
     }
   ]
 }
