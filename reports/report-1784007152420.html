@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Micropack Private Limited (Micropack Pvt Ltd) -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Micropack Private Limited (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Micropack Private Limited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            /* Force chart visibility in print */
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Strategic Intelligence</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業 印度戰略情報組</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC DEEP DIVE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Micropack Private Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Micropack Private Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team (V3 Equity Deep-dive)</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報小組（V3 股權深挖與全方位模板）</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+                            <div class="text-xs text-gray-500 uppercase">Defense & Aerospace Specialist</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Micropack Private Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>Former Name:</strong> Indepth Systems Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U52520TG1991PTC013493</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市私人控股)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot (FY25)</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照 (FY25)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 120 - 150 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <div class="flex justify-between mt-1 text-xs text-gray-300">
+                            <span data-lang="en"><strong>EBITDA Margin:</strong> 25% - 30%</span>
+                            <span data-lang="zh"><strong>EBITDA 利潤率：</strong> 25% - 30%</span>
+                            <span class="text-blue-300">(High-margin HMLV)</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Vedere Family (Carlyle PE in acquisition talks)</p>
+                        <p class="text-[11px] text-gray-400 mt-1" data-lang="zh"><strong>最終母公司：</strong> Vedere 家族 (2026年初卡萊爾集團密切進行收購談判中)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Key Setup & Capacity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">核心基地與產能</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Bengaluru (Jigani Unit)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Bengaluru (Jigani 工廠)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en"><strong>Total Capacity:</strong> 50,000 m² / Year</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh"><strong>總年產能：</strong> 50,000 m² 高可靠度 PCB</p>
+                        <p class="text-xs text-blue-300" data-lang="en">Personnel: ~200 Employees (198 latest)</p>
+                        <p class="text-xs text-blue-300" data-lang="zh">員工人數：約 200 人 (最新申報 198 人)</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint & Facilities</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與設施詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Jigani Plant (Core Base):</strong> Plot # 16, Jigani Industrial Area, Anekal Taluk, Bangalore - 560105. Spanning ~10 Acres with 60,000 ft² built-up area. Equipped with class-10,000 cleanrooms, high-precision lamination, and automated electroplating. Holds NADCAP and US Military standards.</li>
+                                <li data-lang="zh"><strong>Jigani 工廠 (核心基地)：</strong> 班加羅爾 Anekal Taluk，Jigani 工業區 16 號地。佔地約 10 英畝，廠房面積 60,000 ft²。配有萬級無塵室與高精密壓合、自動化電鍍產線。通過 NADCAP 認證與美軍標準。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Tech Centers, Commerce & Logistics:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發、商務與物流節點：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Jigani R&D Center:</strong> Dedicated 2,000 ft² cleanroom facility specializing in Thin GEM Foils, working in technology-partnership with BARC (Bhabha Atomic Research Centre) and CERN.</li>
+                                <li data-lang="zh"><strong>Jigani 高可靠度研發中心：</strong> 設有 2,000 ft² 薄型 GEM 箔片專用潔淨研發車間，與印度原子能署 (BARC) 及歐洲核子研究組織 (CERN) 進行技術對接。</li>
+                                <li data-lang="en"><strong>Hyderabad Commerce HQ:</strong> 3-4-496/A, Jyothi Arcade, Barkatpura, Hyderabad - 500027. Oversees central govt tenders, relations with DRDO labs, and ISRO/BEL procurement teams.</li>
+                                <li data-lang="zh"><strong>海德拉巴商務總部：</strong> 處理印軍、國防研究發展組織 (DRDO) 大實驗室、以及印度國防電子巨頭 BEL 的政府關係與專案標書對接。</li>
+                                <li data-lang="en"><strong>Bonded Warehouse (Jigani):</strong> Temp & humidity-controlled setup to stock imported high-end high-frequency / high-temperature laminates (Rogers, Arlon, Nelco) and chemistry raw materials.</li>
+                                <li data-lang="zh"><strong>溫濕度管控保稅倉 (Jigani)：</strong> 儲存與管理進口的高階高頻/高溫 CCL 基材 (Rogers, Arlon, Nelco) 與高純度化學原料。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding Structure</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Equity Ownership Trace (Upward 3 Levels):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Holder)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Sreekar Reddy Vedere (MD)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 95% Stake (with Family)</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 95% 持股 (與家族成員)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Intermediate)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股公司)</span>
+                                <strong class="text-white">Speedlam Electromaterials Private Limited</strong>
+                                <span class="block text-gray-400 mt-1" data-lang="en">Family asset & real-estate holding entity</span>
+                                <span class="block text-gray-400 mt-1" data-lang="zh">家族成員持股之原材料與物業載體</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 3 (Ultimate Parent)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第三層 (最終受益人)</span>
+                                <strong class="text-blue-300">Vedere Family Members</strong>
+                                <span class="block text-yellow-400 mt-1 text-[10px]" data-lang="en">* Carlyle Group buyout negotiation ongoing as of early 2026</span>
+                                <span class="block text-yellow-400 mt-1 text-[10px]" data-lang="zh">* 截至 2026年2月 卡萊爾集團正在密切進行控股型收購談判</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Products (HMLV)</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">核心產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Rigid Multilayer:</strong> Up to 38 Layers</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高多層硬板：</strong> 支持達 38 層</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Rigid-Flex:</strong> Up to 26 Layers</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高階軟硬複合板：</strong> 支持達 26 層</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Flexible Boards:</strong> 1 to 10 Layers</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>撓性單/雙面與多層板：</strong> 6 至 10 層</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Metal Core:</strong> High-Copper (up to 10 oz)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高厚銅/金屬芯板：</strong> 最高可加工 10 oz 銅厚</li>
+
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>HDI Technology:</strong> 2+N+2 Microvia setup</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高密度互連板 (HDI)：</strong> 2+N+2 微孔結構</li>
+
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Thin GEM Foils:</strong> Nuclear Physics Detectors</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>氣體電子倍增薄膜：</strong> 用於高能物理探測器</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">製程核心材料拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>High-Freq/High-Tg CCL:</strong> Polyimide substrate, PTFE board, Rogers/Arlon laminates.</li>
+                            <li data-lang="zh"><strong>高頻高 Tg 基材：</strong> 聚醯亞胺 (Polyimide) 基材、PTFE 板、Rogers/Arlon 高頻板。</li>
+                            
+                            <li data-lang="en"><strong>Plating & Chemistry:</strong> Electroless Nickel Immersion Gold (ENIG) chemistry, acid copper plating additives, micro-etch & stripping solution.</li>
+                            <li data-lang="zh"><strong>化學與電鍍藥水：</strong> 化學鍍鎳金 (ENIG) 藥水、酸性電鍍銅添加劑、微蝕刻與去膜化學液。</li>
+                            
+                            <li data-lang="en"><strong>Drilling Consumables:</strong> Tungsten Carbide micro drills (min diameter 0.175 mm), entry protection backing boards.</li>
+                            <li data-lang="zh"><strong>精密鑽孔耗材：</strong> 碳化鎢微型鑽針 (支持孔徑下限 0.175 mm)、雷射對位防護膜。</li>
+                            
+                            <li data-lang="en"><strong>Imaging & Lamination:</strong> Liquid Photoimageable (LPI) Solder mask, high-density Prepreg adhesive, dry film, lamination cushions, release film.</li>
+                            <li data-lang="zh"><strong>阻焊與熱壓材料：</strong> 液態感光防焊油墨 (LPI)、高密度 Prepreg 膠片、乾膜光阻、高溫壓合緩衝墊、氟素離型膜。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Sourcing Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Quality Norms:</strong> Sourcing materials requiring AS9100D or aerospace-grade full quality traceability.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>軍航規認證：</strong> 尋找可提供符合 AS9100D 或高可靠度品質管理、可追溯性的高端材料供應商。</p>
+                            
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Reliability:</strong> High resistance to extreme environments (high-temp, microwave frequency, anti-radiation).</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>極端耐受度：</strong> 高耐極端環境 (高溫、微波高頻、抗輻射) 基礎電子材料的需求。</p>
+
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization Goal:</strong> Sourcing local alternatives under "Atmanirbhar Bharat" to cut import dependency of raw laminates/chemicals.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>國產化指標：</strong> 配合印度國防部進口替代方針，急需尋找優質本地原料替代商。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Recruitment Radar: Hiring Spree indicates Peak Capacity</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘雷達：擴大招募釋放產能全開訊號</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed (11 Core Recruitment Insights)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">數據來源：Naukri, LinkedIn, Indeed (11 條核心情報分析)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與工作地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Strategic Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 戰略隱含意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Chief Operating Officer (COO)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Jigani (November 2025 Onboarding)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Jigani (2025年11月重磅入職)</span>
+                                    </td>
+                                    <td data-lang="en">Successfully headhunted semiconductor & electronics assembly veteran <strong>Deepak Tyagi</strong> (20+ yrs exp). Tasked to guide Jigani unit's "Smart Factory" digital transformation, aligning with state-level next-gen fighter aircraft and defense radar PCB contracts.</td>
+                                    <td data-lang="zh">成功延攬前業界資深專家 <strong>Deepak Tyagi</strong> 擔任首席運營官，其在半導體與高端電子組裝領域擁有近 20 年經驗，主要負責 Jigani 工廠導入「智慧工廠」轉型，對接國家級新一代戰機與雷達專案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior QA Manager - Aerospace Standards</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 (Bangalore)</span>
+                                    </td>
+                                    <td data-lang="en">In charge of aerospace and military quality standards compliance at Jigani factory. Spearheading annual NADCAP and US Military MIL-PRF-31032 regulatory audits.</td>
+                                    <td data-lang="zh">負責 Jigani 廠區的航太與軍規品質管理，主導維持 NADCAP 與美規 MIL-PRF-31032 的合規覆核。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">PCB Wet Processing Supervisor</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Jigani (Bangalore)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Jigani (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Manages multi-shift schedules for developing, acid etching, and stripping lines. Reflects that the wet processing line is running at peak capacity.</td>
+                                    <td data-lang="zh">負責濕製程產線 (如顯影、酸性蝕刻、去膜) 的多班制管理，顯示廠區正處於擴產、全稼動狀態。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Process Control Engineer - Electroplating</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Jigani (Bangalore)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Jigani (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Optimizes automated plating lines and ENIG/ENEPIG chemical gold processes. Main goal is ensuring extreme uniformity of trace copper and gold thickness.</td>
+                                    <td data-lang="zh">優化自動化電鍍線與化學金 (ENIG/ENEPIG) 製程，旨在控制精密金厚與銅 trace 的一致性。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">CNC Drilling & Laser Routing Technician</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 (Bangalore)</span>
+                                    </td>
+                                    <td data-lang="en">Operates and maintains high-speed microvia drilling setups imported from Schmoll and Posalux. Signals surging order books.</td>
+                                    <td data-lang="zh">負責維護和操作德製 Schmoll 及 Posalux 高速微孔鑽孔系統，暗示產能需求激增。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior CAM Engineer - InCamPro</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Jigani (Bangalore)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Jigani (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Performs DFM (Design for Manufacturability) verification and panelization on customer-supplied raw Gerber data. Crucial for fast RFQ of high-mix boards.</td>
+                                    <td data-lang="zh">進行客戶原始 Gerber 檔的 DFM (可製造性設計) 審查與拼板優化，應對高混合、高難度板材的快速報價。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">EHS Compliance Specialist</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Jigani (Bangalore)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Jigani (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Ensures compliant discharge of hazardous chemicals and monitors Effluent Treatment Plant (ETP) operation to satisfy strict KSPCB environmental laws.</td>
+                                    <td data-lang="zh">監控 Jigani 廠內的廢水處理廠 (ETP) 運轉與有害化學廢棄物排放，符合卡納塔克邦污染控制局 (KSPCB) 的嚴苛標準。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Technical Assistant - Slice & Cross-Section Lab</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 (Bangalore)</span>
+                                    </td>
+                                    <td data-lang="en">Performs microscopic structural analysis and blind/buried via micro-section slicing. Vital to keep yield rates at high military specs.</td>
+                                    <td data-lang="zh">負責 PCB 盲埋孔切片及顯微結構光學分析，提升軍規板出貨良率。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sourcing & Import Executive</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore / Jigani</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 / Jigani</span>
+                                    </td>
+                                    <td data-lang="en">Manages customs clearance & bonded warehouse declarations for imported Rogers boards. Explores native material substitution under "Make in India" targets.</td>
+                                    <td data-lang="zh">針對高頻板材 (Rogers) 進行進口報關與保稅倉配額申報，並尋找符合印度自給自足 (Atmanirbhar Bharat) 認證的本土材料替代方案。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Inside Sales Executive - Defense & PSU Accounts</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Hyderabad HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">海德拉巴商務總部</span>
+                                    </td>
+                                    <td data-lang="en">Drives technical specification pitching and manages bidding documentation with central govt defense organizations like DRDO labs, ISRO, and BEL.</td>
+                                    <td data-lang="zh">專門負責對接 DRDO、ISRO、Bharat Electronics Limited (BEL) 等關鍵政府大型科研單位的技術規格與標書跟進。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Graduate Engineer Trainee (GET) - Process Design</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Jigani (Bangalore)</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">Jigani (班加羅爾)</span>
+                                    </td>
+                                    <td data-lang="en">Hires top fresh engineering grads from premier institutes in Karnataka. Grooming future talent for high-frequency impedance boards and microwave circuitry design.</td>
+                                    <td data-lang="zh">面向卡納塔克邦頂尖工科院校招募，儲備多層板阻抗設計與微波高頻硬板開發人才。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales, Distribution & Supply Chain Logic</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售、通路佈局與物流邏輯</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">100% Direct Custom B2B Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">100% 直銷與深度客製化 B2B 模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Strict AVL Limits:</strong> Micropack bypasses standard distributors. Customers must execute intense, multi-stage physical factory audits to list Micropack on their Approved Vendor Lists (AVL).</li>
+                                <li data-lang="zh"><strong>極高 AVL 准入限制：</strong> 無任何零售或經銷代理，不經由第三方。客戶必須通過極其嚴格的實地廠審與准入。</li>
+                                
+                                <li data-lang="en"><strong>R&D Co-Design:</strong> Dedicated Field Application Engineers (FAE) coordinate directly with defense and aerospace client R&D teams during initial prototype (Proto-stage) design-in phases.</li>
+                                <li data-lang="zh"><strong>研發協同設計：</strong> 直銷網路由 FAE (現場應用工程師) 負責，在研發階段 (Proto-stage) 即與客戶研發團隊深度協作。</li>
+                                
+                                <li data-lang="en"><strong>Digital Presence:</strong> No online e-commerce setup due to military confidentiality. Only maintains basic yellow-page presence on IndiaMART for offline B2B client contact.</li>
+                                <li data-lang="zh"><strong>數位平台存在感：</strong> 基於軍工國防機密，絕無電商零售渠道。在 IndiaMART 等工業 B2B 平台上僅作基礎「黃頁展示」用於線下引流。</li>
+
+                                <li data-lang="en"><strong>Official Link:</strong> <a href="https://www.micropack.in/" target="_blank">https://www.micropack.in/</a> - Gateway for clients to download technical compliance certificates (AS9100D, NADCAP, etc.).</li>
+                                <li data-lang="zh"><strong>官網連結：</strong> <a href="https://www.micropack.in/" target="_blank">https://www.micropack.in/</a> - 主要用於客戶下載 AS9100D、NADCAP 等軍規認證書之官方直連窗口。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Military Grade Logistics & Geographic Hubs</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">軍規級物流邏輯與地理重鎮</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Sales & FAE Nodes:</strong> Permanently stationed in India's top three military clusters:
+                                    <ol class="list-decimal pl-5 mt-1 space-y-1">
+                                        <li><strong>Bengaluru:</strong> Serving HAL, ISRO, BEL, Wipro Infrastructure.</li>
+                                        <li><strong>Hyderabad:</strong> Serving DRDO labs, BDL, high-frequency radar research teams.</li>
+                                        <li><strong>Delhi/NCR:</strong> Aligning with central ministry tenders and defense policy bodies.</li>
+                                    </ol>
+                                </li>
+                                <li data-lang="zh"><strong>銷售與 FAE 常駐三大重鎮：</strong>
+                                    <ol class="list-decimal pl-5 mt-1 space-y-1">
+                                        <li><strong>班加羅爾 (Bengaluru)：</strong> 深度對接 HAL、ISRO、BEL、Wipro Infrastructure。</li>
+                                        <li><strong>海德拉巴 (Hyderabad)：</strong> 鎖定 DRDO、BDL 及雷達研究實驗室。</li>
+                                        <li><strong>德里/NCR：</strong> 承接中央政府標案與大型國防採購。</li>
+                                    </ol>
+                                </li>
+                                
+                                <li data-lang="en"><strong>Packaging & Dispatch:</strong> 100% visual and electrical tests on flight-grade and military-spec boards before shipping. Packed using strict vacuum, moisture-barrier, and ESD-safe methods. Dispatched via secure, temperature-monitored vehicles or premium express straight to client anti-static SMT lines.</li>
+                                <li data-lang="zh"><strong>包裝與配送：</strong> 飛行級與軍用板出廠前需通過 100% 複檢。使用嚴密的真空、防潮、防靜電封裝，以專車或特快直達客戶指定的 PCBA 軍工防靜電貼片廠。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape & Strategic Partnership</span>
+                    <span data-lang="zh">6. 市場地位與戰略合作機會</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Niche military player with extreme brand power & margins, limited mass retail</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">利基防務製造商，具備極高品牌認證壁壘與利潤率，但無大眾零售通路</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India PCB Industry Rankings (Sales & Impact)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度 PCB 產業銷量/影響力 TOP 10 排名</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company Name</th><th class="p-2" data-lang="zh">企業名稱</th>
+                                        <th class="p-2" data-lang="en">Ownership / Highlight</th><th class="p-2" data-lang="zh">控股背景與特色</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr class="bg-gray-800/30">
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">AT&S India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Austria (MNC - Absolute market leader in high-volume HDI, factory in Nanjangud)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">奧地利外資 (產業霸主，HDI 技術與量產最強，工廠位於 Nanjangud)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Ascent Circuits</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Top native player, large-scale automotive & telecom board focus)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (領先多層板製造商，具大批量產能，主攻汽車與資通訊)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Genus Electrotech</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Gujarat based, high-capacity manufacturer providing turnkey EMS)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (位於古吉拉特，提供大產能 PCB 與 Turnkey 系統組裝)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Shogini Technoarts</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Pune based, specialized in metal-core and thermal boards)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (位於浦那，專攻多層板與特殊散熱鋁基板)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">CIPSA-TEC India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">JV (Strong export focus for double-sided & multi-layer boards)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">中外合資 (具強大雙面與多層板出口能力)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-8</td>
+                                        <td class="p-2" colspan="2">Meena Circuits (Baroda MNC supplier), PCB Power Market (Prototype leader), Circuit Systems India</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">9</td>
+                                        <td class="p-2">Hi-Q Electronics</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Strong defense/aerospace niche competitor, Micropack's direct rival)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 (專注中高端國防航太板，為 Micropack 主要細分賽道對手)</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">10</td>
+                                        <td class="p-2 text-white font-bold">Micropack Private Ltd</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">India (Target Company - Holds unique joint flight-grade ISRO, NADCAP & MIL-PRF-31032 certifications)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">印度本土 (目標企業 - 全印唯一同時持有 NADCAP、MIL 及 ISRO 飛行級證書的龍頭)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <!-- Foxlink Collaboration Box -->
+                            <div class="mt-3 p-3 bg-blue-950/40 border border-blue-800/80 rounded">
+                                <h5 class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-1" data-lang="en"><i class="fas fa-handshake mr-1"></i>FOXLINK Collaboration & Strategic Synergy</h5>
+                                <h5 class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-1" data-lang="zh"><i class="fas fa-handshake mr-1"></i>FOXLINK 合作機會與戰略協同</h5>
+                                <p class="text-[11px] text-gray-300 leading-relaxed" data-lang="en">
+                                    While Micropack commands premium military certifications, it is limited by capacity and lacks experience in large-scale commercial EMS, connector integration, and cable harnesses. Under "Atmanirbhar Bharat," local defense projects are shifting from small prototypes to mass rollouts. <strong>FOXLINK</strong> can leverage its world-class automated EMS assembly expertise, connectors, and high-frequency/high-speed wiring harness design to team up with Micropack. A unified <strong>"PCB + Harness + Connector"</strong> joint bid will lock in massive Indian defense and dual-use aerospace market shares.
+                                </p>
+                                <p class="text-[11px] text-gray-300 leading-relaxed" data-lang="zh">
+                                    Micropack 技術頂尖，但受限於資金規模與產能限制，其在「大批量商業化量產」及「整機系統級 (BOM-level) 組裝與線束整合」方面經驗不足。隨著印度推行國防自主（Atmanirbhar Bharat），多個國家級專案正从小批量研發轉向大規模量產。<strong>FOXLINK</strong> 可將其強大的自動化 EMS 製造管理經驗、連接器技術、以及高頻高速線束 (Wiring Harness) 設計，與 Micropack 的國防 PCB 原生優勢進行 <strong>「PCB + 線束 + 連接器」</strong> 的整合方案探討，共同奪取印度軍民兩用高階市場。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News Timeline (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[80px]">2026-01-22</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[NCLT Court Judgement] Share Rectification Approved - Clears Path for Corporate Restructuring</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[NCLT 司法裁決] 5,750,000 股股權名簿糾正案獲正式批准，掃清大額外資重組障礙</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">The National Company Law Tribunal (NCLT) Hyderabad Bench formally approved Micropack's application (CP No. 38/59/HDB/2025) to rectify and update its register of members, successfully clearing up 5,750,000 unallotted equity shares left from historical mergers. This removes all legal hurdles for impending capital restructure, specifically rumored buyout talks with global PE giant Carlyle.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">印度國家公司法論壇（NCLT）海德拉巴分庭正式批准 Micropack 提交的股權名簿變更與補發申請（CP No. 38/59/HDB/2025），徹底理順了歷史合併案中遺留的 5,750,000 股未分配權益，為後續重大資本重組（如引進外部私募股權巨頭卡萊爾集團）掃清了法務障礙。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[80px]">2026-01-18</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Tech Audit] Successful ISRO Flight-Grade Certification Renewal</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[技術審核] ISRO 航太飛行級合格電路板證書順利通過年度更新</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">The Jigani manufacturing unit successfully cleared the latest on-site audit conducted by the Indian Space Research Organisation (ISRO). This guarantees Micropack's continuation on the elite list of qualified suppliers for flight-grade, high-reliability PCBs for national space missions.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Jigani 工廠順利通過印度太空研究組織（ISRO）最新一輪年度實地審核，成功延續 flight-grade 飛行級高可靠度 PCB 合格供應商資格，穩固航太訂單來源。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[80px]">2026-01-05</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Compliance] Jigani EHS and ETP Compliance Self-Audit Completed</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[環保合規] 啟動 Jigani 廠區廢水回用與安全合規全面自查</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">In preparation for expanded defense exports, the executive team finalized a comprehensive regulatory, safety, and wastewater treatment (RO/DM recycling) overhaul at the central Jigani base.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">為因應日益增加的軍品出口需求，管理層完成了 Jigani 廠區的全面性環保法規、消防安全與廢水回用系統（RO/DM）自檢，確保符合卡納塔克邦最新污染排放標準。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[80px]">2025-12-28</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Quality Audit] Pass Combined NADCAP & US Military Standards Review</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[品質體系] NADCAP 與美軍 MIL-PRF-31032 雙重覆核通過</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Micropack Jigani facility cleared the joint periodic audit for US Military Standard MIL-PRF-31032 and NADCAP aerospace process control, reaffirming its technical dominance in Indian defense electronics.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">Micropack Jigani 工廠再次通過美規軍用 MIL-PRF-31032 標準及 NADCAP 航空特種製程的聯合審計，鞏固其防務電路板龍頭地位。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[80px]">2025-12-15</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Academic Dispatch] Successful Delivery of Thin GEM Foils to CERN</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[科研成果] 向歐洲核子研究組織 (CERN) 順利交付新一批 Thin GEM Foils</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">In technological collaboration with BARC, Micropack successfully dispatched a new batch of large Thin GEM gas detector foils (dimensions up to 670 mm × 427 mm) to CERN in Geneva, Switzerland.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">與印度原子能署（BARC）合作，Micropack 成功向歐洲核子研究組織 (CERN) 交付新一批大型 Thin GEM 氣體電極箔片（尺寸達 670 mm × 427 mm），展現高能物理領域頂尖研製實力。</p>
+                        </div>
+                    </div>
+
+                    <!-- Condensed remaining news items -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-02:</strong> 
+                            <span data-lang="en"><strong>Award Nomination:</strong> Received nomination for the prestigious ELCINA Award for Outstanding Contribution in Defense Indigenization, for manufacturing 38-layer rigid and 26-layer rigid-flex boards locally.</span>
+                            <span data-lang="zh"><strong>獎項提名：</strong> 在印度成功實現 38 層高多層板及 26 層軟硬複合板的自主製造，榮獲 ELCINA 印度電子工業協會年度國防本土化貢獻卓越獎提名。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-25:</strong> 
+                            <span data-lang="en"><strong>Process Upgradation:</strong> Invested capital to upgrade high-copper lines at Jigani by integrating the Orbotech Novogo 1000 Direct Imaging system (LDI) for 10 oz+ ultra-thick copper boards.</span>
+                            <span data-lang="zh"><strong>產線升級：</strong> 投入全新資金引進先進的 Orbotech Novogo 1000 直接成像系統 (LDI) 與電鍍控制，針對 10 oz 以上高厚銅 PCB 產線進行數位化升級。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-15:</strong> 
+                            <span data-lang="en"><strong>Indigenous Sourcing:</strong> Convened Supply Chain Conference in Bangalore, committing to reduce imported raw laminates and process chemicals by 15% over the next two years.</span>
+                            <span data-lang="zh"><strong>國產化供應鏈：</strong> 在班加羅爾召開供應商大會，提出在未來兩年將進口基材與化學品比例調降 15% 的國產化戰略目標。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-08:</strong> 
+                            <span data-lang="en"><strong>Management:</strong> Appointed semiconductor and high-reliability assembly veteran Deepak Tyagi as Chief Operating Officer (COO) to lead smart manufacturing transformation.</span>
+                            <span data-lang="zh"><strong>管理層任命：</strong> 聘用擁有近20年高階製造經驗的 Deepak Tyagi 出任 COO，帶領 Jigani 廠區啟動「智慧工廠 (Smart Factory)」全面升級。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-02:</strong> 
+                            <span data-lang="en"><strong>Talent Hunt:</strong> Launched Q1 2026 campus hiring drives across Bangalore and Hyderabad engineering campuses for impedance analysis and micro-strip design trainees.</span>
+                            <span data-lang="zh"><strong>校園招聘：</strong> 在班加羅爾與海德拉巴啟動校園招聘計畫，招募對高頻微波 PCB 阻抗分析有研究的工程技術畢業生。</span>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Source Attributions -->
+                <div class="border-t border-gray-700 pt-4 text-xs text-gray-500">
+                    <p data-lang="en"><strong>Information Sources:</strong> Ministry of Corporate Affairs (MCA) India, National Company Law Tribunal (NCLT) Hyd Court Filings, Micropack official portals, ELCINA Database, Tofler, Raksha Anirveda Defense News.</p>
+                    <p data-lang="zh"><strong>數據與情報來源：</strong> 印度公司註冊處 (MCA)、印度國家公司法論壇 (NCLT) 裁決書、Micropack 官方直連網頁、ELCINA 數據庫、Tofler、Raksha Anirveda 國防工業新聞。</p>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Estimated based on Report): 
+        // Market Share: 7 (Top 10 overall in sales, but domestic #1 in defense-aerospace niches)
+        // Localization: 5 (Currently heavily dependent on imported Rogers/Arlon, starting a 15% substitution program)
+        // Brand Power: 9 (Unique flight-grade ISRO, NADCAP, and MIL-PRF-31032 certified)
+        // Digital Reach: 3 (Strictly custom B2B, basic IndiaMART catalog, zero retail)
+        // Financial Health: 8 (High EBITDA margins of 25%-30% due to defense pricing, Carlyle buyout negotiations)
+        const radarScores = [7, 5, 9, 3, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

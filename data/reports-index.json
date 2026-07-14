@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-13T05:00:35.410Z",
+  "lastUpdated": "2026-07-14T05:32:33.263Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1601,6 +1601,19 @@
       "fileName": "report-1783918833436.html",
       "createdAt": "2026-07-13T05:00:35.410Z",
       "updatedAt": "2026-07-13T05:00:35.410Z"
+    },
+    {
+      "id": "report-1784007152420",
+      "title": "Target: Micropack Private Limited",
+      "description": "目標企業：Micropack Private Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784007152420.html",
+      "createdAt": "2026-07-14T05:32:33.263Z",
+      "updatedAt": "2026-07-14T05:32:33.263Z"
     }
   ]
 }
