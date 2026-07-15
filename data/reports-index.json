@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-14T05:32:33.263Z",
+  "lastUpdated": "2026-07-15T15:51:37.948Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1614,6 +1614,19 @@
       "fileName": "report-1784007152420.html",
       "createdAt": "2026-07-14T05:32:33.263Z",
       "updatedAt": "2026-07-14T05:32:33.263Z"
+    },
+    {
+      "id": "report-1784130697042",
+      "title": "Target: Exide Energy Solutions Limited (EESL)",
+      "description": "目標企業：Exide Energy Solutions Limited (EESL)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784130697042.html",
+      "createdAt": "2026-07-15T15:51:37.948Z",
+      "updatedAt": "2026-07-15T15:51:37.948Z"
     }
   ]
 }
