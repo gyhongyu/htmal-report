@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Logic Fruit Technologies Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Logic Fruit Technologies (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Logic Fruit Technologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Logic Fruit Technologies</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Logic Fruit Technologies</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 (Aero India Meet Basis) | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 (航展現場對接基準) | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 2</div>
+                            <div class="text-xs text-gray-500 uppercase">Fast-Growing Defense Vendor</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Logic Fruit Technologies Private Limited</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72900DL2009PTC193699</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 85.0 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="en">(FY25 Est. Turnover)</span>
+                            <span class="text-xs text-gray-500 ml-2" data-lang="zh">(FY25 預估營收)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Ultimate Boss:</strong> Indian Founder Kings (~50%) & Paras Defence (8%)</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>大股東：</strong> 本土創辦人團隊 (~50%) 與上市軍工 Paras Defence (8%)</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Tech Base</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心技術基地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Gurugram (NCR)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">古爾岡 (首都圈 - Gurugram)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">FPGA & High-Speed Protocol R&D Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">FPGA 與高速傳輸協議研發重鎮</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與核心認證</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D and Office Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與辦公佈局：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Gurugram HQ:</strong> Sector-30, BPTP Park Centra. (Core FPGA & protocol logic)</li>
+                                <li data-lang="zh"><strong>古爾岡總部 (核心):</strong> 位於 BPTP Park Centra。為其最核心的 FPGA 與高速協議研發基地。</li>
+                                <li data-lang="en"><strong>Bengaluru Unit:</strong> Ramamurthy Nagar. (5G/6G RF, Avionics, Signal Processing)</li>
+                                <li data-lang="zh"><strong>班加羅爾研發中心:</strong> 專注於 5G/6G 射頻 (RF)、航空電子及射頻訊號處理。</li>
+                                <li data-lang="en"><strong>US Subsidiary:</strong> Silicon Valley base for North Am. semi & T&M giants.</li>
+                                <li data-lang="zh"><strong>美國代表處:</strong> 設於矽谷，對接北美半導體及跨國測試與測量儀器巨頭。</li>
+                                <li data-lang="en"><strong>Regd. Office:</strong> Connaught Place, Central Delhi.</li>
+                                <li data-lang="zh"><strong>註冊辦公室:</strong> 新德里市中心 Connaught Place。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Core Certifications (Highly Valuable to Foxlink):</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">核心體系認證 (對正崴極具價值)：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>AS 9100D:</strong> Aerospace & Defense Gold Quality Standard.</li>
+                                <li data-lang="zh"><strong>AS 9100D:</strong> 航太與國防工業黃金品質體系認證。</li>
+                                <li data-lang="en"><strong>Standard ISOs:</strong> ISO 9001:2005, ISO 14001:2015.</li>
+                                <li data-lang="zh"><strong>通用標準:</strong> ISO 9001:2005, ISO 14001:2015。</li>
+                                <li data-lang="en"><strong>Govt Badges:</strong> Dual Indian National certification by <strong>DRDO</strong> & <strong>CEMILAC</strong>. Fully qualified for military radar & electronic warfare board design.</li>
+                                <li data-lang="zh"><strong>軍工准入:</strong> 具備印度國防部 <strong>DRDO</strong> 與軍用適航 <strong>CEMILAC</strong> 雙重國家級認證，是印度少數有資格承接軍工雷達與電子戰板卡的民營企業。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Founders)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (創辦人直接控股)</span>
+                                <strong class="text-white">Founder Partners (Sanjeev Kumar, Vineet Goel, Rohit Joshi, Anil Kumar)</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 50% Actual Control (11.94% Nominal)</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 50% 實際控制權 (11.94% 名義登記)</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (VC Institutions)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (機構創投持股)</span>
+                                <strong class="text-white">Baring PE Partners (BPEP) India, FalconX, Angel Investors</strong>
+                                <span class="block text-blue-400 mt-1" data-lang="en">Total ~22.82% Stake</span>
+                                <span class="block text-blue-400 mt-1" data-lang="zh">合共持有約 22.82% 股權</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Strategic Backer (Ultimate)</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終戰略持股企業</span>
+                                <strong class="text-blue-300">Paras Defence & Space Technologies Ltd (NSE: PARAS)</strong>
+                                <span class="block text-yellow-400 mt-1" data-lang="en">8% Strategic CCPS (Acquired for ₹10 Cr, Feb 2025)</span>
+                                <span class="block text-yellow-400 mt-1" data-lang="zh">8% 策略股權 (2025年2月航展期間以1億盧比認購)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Financial Trend Table -->
+                        <div class="mt-4">
+                             <table class="w-full text-xs text-left text-gray-300">
+                                  <thead class="bg-gray-900/60 text-gray-400">
+                                      <tr>
+                                          <th>Financial Year</th>
+                                          <th data-lang="en">Turnover (INR)</th><th data-lang="zh">營業額 (盧比)</th>
+                                          <th data-lang="en">Profit Before Tax (PBT)</th><th data-lang="zh">稅前利潤 (PBT)</th>
+                                          <th data-lang="en">Scale Status / Driver</th><th data-lang="zh">規模狀態 / 驅動因素</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td><strong>FY 2024-25 (Est.)</strong></td>
+                                          <td class="text-green-400 font-bold">₹ 85.00 Crores</td>
+                                          <td class="text-green-400 font-bold">8.50 億盧比</td>
+                                          <td>-</td>
+                                          <td data-lang="en">Strong defense order pipeline synergy via strategic partner Paras.</td>
+                                          <td data-lang="zh">與 Paras Defence 策略合作，大量國防訂單協同爆發。</td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>FY 2023-24 (Audited)</strong></td>
+                                          <td class="text-white">₹ 64.50 Crores</td>
+                                          <td class="text-white">6.45 億盧比</td>
+                                          <td>₹ 5.73 Crores (5,730 萬)</td>
+                                          <td data-lang="en">Solid expansion in PCIe Gen 5/6 and hardware accelerator projects.</td>
+                                          <td data-lang="zh">PCIe Gen 5/6 IP與硬體加速卡業務穩健擴張。</td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>FY 2022-23 (Audited)</strong></td>
+                                          <td class="text-gray-400">₹ 52.48 Crores</td>
+                                          <td class="text-gray-400">5.25 億盧比</td>
+                                          <td>₹ 4.57 Crores (4,570 萬)</td>
+                                          <td data-lang="en">Steady organic growth from US semiconductor & military accounts.</td>
+                                          <td data-lang="zh">美國半導體客戶與印度本土國防項目持續貢獻。</td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>FY 2021-22 (Audited)</strong></td>
+                                          <td class="text-gray-500">₹ 37.62 Crores</td>
+                                          <td class="text-gray-500">3.76 億盧比</td>
+                                          <td>₹ 3.43 Crores (3,430 萬)</td>
+                                          <td data-lang="en">Foundation phase, setting up advanced FPGA board labs.</td>
+                                          <td data-lang="zh">奠基期，逐步建立高階 FPGA 板卡實驗室。</td>
+                                      </tr>
+                                  </tbody>
+                             </table>
+                             <p class="text-[10px] text-gray-500 mt-2" data-lang="en">*Data sourced from MCA India and Paras SEBI Disclosures. Staff scale: 250 - 500 employees.</p>
+                             <p class="text-[10px] text-gray-500 mt-2" data-lang="zh">*數據來源自印度公司註冊處 (MCA) 及 Paras Defence 交易所公告。印度在地員工規模約 250 至 500 人。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>High-Speed Interface IPs:</strong> PCIe Gen 5/6, CXL, 10G/100G Ethernet, DP, CPRI 7.0 (RTL IPs).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高速通訊協議 IP:</strong> PCIe Gen 5/6, CXL, 100G 乙太網, DP, CPRI 7.0。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Defense & Aerospace Board:</strong> Rugged VPX SBC cards, ARINC 818 digital video transit cards.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>國防航太嵌入式板卡:</strong> 基於 OpenVPX 規格的加固單板電腦 (SBC), ARINC 818 航空視頻卡。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Data Acquisition Unit:</strong> Aquila scalable real-time signal capture & playback (Main DRDO procurement project).</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>大容量數據採集系統:</strong> Aquila 實時信號採集與重放系統 (DRDO 重點採購)。</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Signal Generator boards:</strong> High-frequency RF recorders, arbitrary waveform generator cards.</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>高頻信號發生器:</strong> 射頻 (RF) 記錄器、任意波形發生器板卡。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>High-End Silicon:</strong> Advanced processing FPGAs (AMD/Xilinx Vivado/Versal/Ultrascale+, Intel/Altera Agilex).</li>
+                            <li data-lang="zh"><strong>高階核心晶片:</strong> AMD/Xilinx (Versal/Ultrascale+)、Intel/Altera (Agilex) 高階製程 FPGA。</li>
+                            
+                            <li data-lang="en"><strong>Opto-Interconnect:</strong> Multi-channel Optical Transceivers, High-frequency robust connectors, RF Cables.</li>
+                            <li data-lang="zh"><strong>高速射頻互連:</strong> 多通道光纖收發器 (Transceiver)、高頻精密連接器、高速同軸電纜。</li>
+                            
+                            <li data-lang="en"><strong>Precision Baseboard:</strong> 12 to 24-layer High-Density Interconnect (HDI) PCBs. Extremely high SI/PI standards.</li>
+                            <li data-lang="zh"><strong>高密度主板:</strong> 12 至 24 層的高難度高密度互連板 (HDI PCB)，極高信號與電源完整性 (SI/PI) 規格。</li>
+                            
+                            <li data-lang="en"><strong>Chassis & Thermal:</strong> Ruggedized aerospace-grade anodized aluminum enclosure, custom conductive thermal bars.</li>
+                            <li data-lang="zh"><strong>加固與散熱件:</strong> 航太國防級陽極氧化鋁加固外殼、定制型導熱冷卻夾條、抗震機箱結構。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">General Sourcing Gaps</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Quality Rule:</strong> Strict requirement for <strong>AS 9100D</strong> certified local manufacturers.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>品質門檻:</strong> 供應商必須通過航太國防 <strong>AS 9100D</strong> 黃金認證才可進入名錄。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Import Substitution:</strong> Massive pressure from Ministry of Defense for 100% "Make in India" compliance, forcing them to find local high-end PCB & cabling assemblers to replace imported components.</p>
+                            <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地製造壓力:</strong> 面臨印度政府 100% 國防採購在地化 (Make in India) 要求，急需將進口高頻板卡與精密線束轉化為印度本土生產，尋求進口替代夥伴。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital (Full List) -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025年11月 - 2026年2月)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Key Position Movements</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：關鍵人才動向與情報</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Job Portals DB (Last 90 Days)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">數據來源：Naukri, LinkedIn, 招聘平台大數據 (近90天)</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含戰略意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">President & CEO</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram (HQ) | 2025-11</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Big Strategic Signal:</strong> Recruited US-returned semiconductor elite Sunil Kar (30 years Global Chip exec experience). Shows aggressive pivot to become a global system-level SoC & platform giant.</td>
+                                    <td data-lang="zh"><strong>頂格戰略信號：</strong> 成功任命美歸半導體領袖 Sunil Kar (前美國一線晶片大廠高層，具 30 年全球運營經驗) 擔任全球總裁兼 CEO，代表其全力轉型為全球化 SoC 與系統板卡巨頭。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Director / Sr. Director - FPGA & HW</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram / Bengaluru | 2026-01</span>
+                                    </td>
+                                    <td data-lang="en">Recruiting senior technical leaders skilled in Altera Agilex / AMD Versal heterogeneous chip architectures.</td>
+                                    <td data-lang="zh">招聘高階硬體領袖，需精通 AMD Versal / Altera Agilex 等非均相 (Heterogeneous) 高階 FPGA 架構。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">FPGA RTL Design Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram | 2025-12</span>
+                                    </td>
+                                    <td data-lang="en">Expanding multi-million gate RTL coding staff. Shows rapid expansion in product design pipelines.</td>
+                                    <td data-lang="zh">擴招負責多百萬門級 (Multi-million gate) 複雜 RTL 代碼開發工程師，顯示接單與產品線大舉擴張。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Verification Lead - SystemVerilog/UVM</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram | 2026-01</span>
+                                    </td>
+                                    <td data-lang="en">Focusing on complex hardware IP functional verification and random constraint validation before silicon Tape-out.</td>
+                                    <td data-lang="zh">專注於高複雜度硬體 IP 在 Tape-out (流片) 前的隨機約束與功能驗證。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">RF Architect</strong><br>
+                                        <span class="text-xs text-gray-500">Bengaluru | 2025-12</span>
+                                    </td>
+                                    <td data-lang="en">Responsible for High-Freq RF system architecture and chip integration for radar systems and 5G/6G RAN.</td>
+                                    <td data-lang="zh">負責雷達及 5G/6G RAN 系統的高頻射頻（RF）系統架構與晶片整合研發。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Project Lead - FPGA</strong><br>
+                                        <span class="text-xs text-gray-500">Bengaluru | 2026-01</span>
+                                    </td>
+                                    <td data-lang="en">Dedicated to coordinating with South India defense research bodies (DRDO) to deliver critical avionics system boards.</td>
+                                    <td data-lang="zh">負責對接南印度國防研究單位 (DRDO) 的專案進度，確保航太電子系統板卡如期交付。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Executive Assistant to CEO</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram | 2026-01</span>
+                                    </td>
+                                    <td data-lang="en">Aligned with new CEO Sunil Kar to manage high-level visits and operations for Tier 1 US/EU tech clients.</td>
+                                    <td data-lang="zh">配合新 CEO Sunil Kar 的就任，專職對接歐美 Tier 1 科技客戶的跨國高層拜會。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Technical Writer</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram | 2025-11</span>
+                                    </td>
+                                    <td data-lang="en">Documenting ultra-high-speed specifications (CXL, PCIe Gen 6, ARINC 818) to boost delivery quality to global tech clients.</td>
+                                    <td data-lang="zh">負責將 ARINC 818、PCIe Gen 6 等高速規格文件化，提升對跨國半導體與航太客戶的交付品質。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">IT Expert - EDA Cluster</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram | 2025-12</span>
+                                    </td>
+                                    <td data-lang="en">Managing heavy compilation workloads on FPGA simulation servers to speed up hardware design tasks.</td>
+                                    <td data-lang="zh">專門負責高負荷 FPGA 電路模擬伺服器叢集的運維與加速，應對海量代碼編譯。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Hardware Design Engineer - High Speed</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram | 2025-12</span>
+                                    </td>
+                                    <td data-lang="en">Requires seasoned PCB engineers skilled in high-density multi-layer boards (HDI), SI/PI, and board simulation.</td>
+                                    <td data-lang="zh">招募專精於高密度多層板 (HDI)、信號完整性 (SI) 與電源完整性 (PI) 的資深工程師。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Sourcing & Component Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Gurugram | 2025-11</span>
+                                    </td>
+                                    <td data-lang="en"><strong>Critical Lead:</strong> Audit and search for local electronic and PCB manufacturers meeting AS 9100D standards. Direct move towards "Import Substitution" partner seeking.</td>
+                                    <td data-lang="zh"><strong>關鍵動向：</strong> 負責尋找並稽核符合 AS 9100D 品質標準的在地電子元件與 PCB 製造商，此動態顯示其正尋求「進口替代」的 EMS 製造商。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-400" data-lang="en">
+                         <strong>Talent Geo Distribution:</strong> Technical engineering, chip front-end and IT simulation center concentrated at Gurugram HQ (~70%). RF systems, aerospace/military project deliveries run out of Bengaluru Unit (~30%).
+                    </div>
+                    <div class="mt-3 text-xs text-gray-400" data-lang="zh">
+                         <strong>人才地理分佈：</strong> 技術總監與晶片前段設計、IT 基礎設施在古爾岡總部占 70% ；射頻系統、航太國防專案交付則以班加羅爾佔 30% 。
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Deep Customizable B2B Play (Direct)</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">B2B 深度客製化直銷模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Direct-to-Customer:</strong> No standard consumer channel. Business is built on high-barrier technology IP licensing and deep platform engineering.</li>
+                                <li data-lang="zh">不通過傳統零售通路。其銷售本質上是「高壁壘的技術協同研發與高階 IP 授權協議」。</li>
+                                
+                                <li data-lang="en"><strong>Top Client Direct Reach:</strong> Direct business liaison with tech giants (e.g. Keysight), original silicon vendors, state DPSUs, and advanced DRDO space/radar laboratories.</li>
+                                <li data-lang="zh">直接面對全球科技巨頭 (如 Keysight)、晶片原廠以及印度的「民營國防分包系統」(DPSU) 與各大航太雷達實驗室。</li>
+                                
+                                <li data-lang="en"><strong>No Public Catalog Price:</strong> Advanced items like CPRI 7.0 or PCIe Gen 6 Equalization IP have no off-the-shelf pricing; showcased via AMD/Intel partner showcase loops.</li>
+                                <li data-lang="zh">無電商通路零售。高單價 IP (如 10G/40G TCP/IP Offload IP) 無公開標價，主要透過半導體生態網絡獲取頂尖開發者流量。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics / Partnership -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Strategic Alliance Integration</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">戰略生態與國防聯營</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Defense System Integration:</strong> Since the 2025 capital entry by Paras Defence, Logic Fruit's high-speed VPX cards and IP stacks are directly integrated into Paras' Anti-Drone systems & electro-magnetic warfare radars.</li>
+                                <li data-lang="zh">自 2025 年引進 Paras Defence 的資本後，Logic Fruit 的高速板卡和 RTL 技術被深度整合至 Paras 的反無人機 (Anti-Drone) 電磁干擾系統、雷達監視系統中，藉此直接進入國防部採購網。</li>
+                                
+                                <li style="list-style-type: none;">&nbsp;</li>
+                                <li data-lang="en"><strong>Global Front Nodes:</strong> Silicon Valley branch office manages core relationships with major US technology, chip, and medical imaging makers (e.g. Stryker).</li>
+                                <li data-lang="zh"><strong>海外技術辦事處:</strong> 在美國矽谷設立代表處，專攻歐美半導體及醫療成像系統 (如 Stryker) 客戶。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape & Foxlink Entry Gaps</span>
+                    <span data-lang="zh">6. 市場地位與正崴合作機會點</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on market presence & high-speed R&D depth</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">評分基於市場營收、16nm以下製程研發與軍工資質</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Embedded R&D & Defense Electronics Rank</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度高階嵌入式 R&D 與國防電子企業排名</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Ownership / Tech Advantage</th><th class="p-2" data-lang="zh">背景 / 利基優勢</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Tessolve Semiconductor</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Global MNC (Largest chip design, packaging/test house)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">外資背景 (印度最大晶片設計、封裝與測試綜合服務商)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Mistral Solutions</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Axiscades subsidiary (Aero-defense embedded veteran)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">老牌航太國防嵌入式系統巨頭，具備最完整軍工系統整合力</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Sankalp Semiconductor</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">HCLTech subsidiary (Mixed-Signal/ASIC leader)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">背靠 HCLTech 集團，專注高階混合訊號、ASIC 開發與設計服務</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">Centum Electronics</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian Listed (High-reliability aerospace defense ESM)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">本土上市龍頭，專供高可靠度國防與航太電子設計與製造</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Accord Software & Systems</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian Native (Avionics, GNSS hardware core supplier)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">深耕航空電子與 GNSS 衛星導航硬體研發，軍方核心分包商</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6</td>
+                                        <td class="p-2">Data Patterns (India) Limited</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Indian Listed (Mega manufacturing plant for defense/space)</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">本土上市巨頭，具備超大產線規模的國防及太空硬體製造廠</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">7</td>
+                                        <td class="p-2 text-white font-bold">Logic Fruit Technologies</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Target Client (High-Speed Protocol IP & Advanced FPGA)</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh">本報告目標客戶 (高速協議 IP 授權與 16nm 以下高階 FPGA 設計)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">8-10</td>
+                                        <td class="p-2" colspan="2" data-lang="en">Argus Embedded (Industrial HDI), Lekha Wireless (5G Stack), Bit Mapper (Defense FPGA)</td>
+                                        <td class="p-2" colspan="2" data-lang="zh">Argus (工業嵌入式), Lekha Wireless (5G無線協議), Bit Mapper (軍工FPGA)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Opportunities for Foxlink -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                     <div class="recon-box opp">
+                          <h4 class="font-bold text-green-400 text-sm mb-2" data-lang="en"><i class="fas fa-link mr-2"></i>FOXLINK Opportunity 1: AS 9100D Connectors & Wiring Harness</h4>
+                          <h4 class="font-bold text-green-400 text-sm mb-2" data-lang="zh"><i class="fas fa-link mr-2"></i>正崴機遇 1: AS 9100D 連接器與軍工線束切入</h4>
+                          <p class="text-xs text-gray-300" data-lang="en">
+                               Logic Fruit’s OpenVPX VPX computer boards handle high shock, vibration, and dust defense environments. They aggressively need ruggedized I/O interfaces. Foxlink’s heavy-duty high-speed interconnects and specialized cabling assemblies can perfectly resolve their hardware interconnect weaknesses.
+                          </p>
+                          <p class="text-xs text-gray-300" data-lang="zh">
+                               Logic Fruit 在古爾岡研發的大量加固型 OpenVPX 單板電腦主要面向高抗震、防塵的嚴苛軍工環境，急需引入具有高階防護的射頻連接器與軍工級線束製造技術。正崴在高頻高速傳輸線束與精密連接器的整合能力，能完美切入其板卡組裝供應鏈。
+                          </p>
+                     </div>
+                     <div class="recon-box opp">
+                          <h4 class="font-bold text-green-400 text-sm mb-2" data-lang="en"><i class="fas fa-industry mr-2"></i>FOXLINK Opportunity 2: High-Layer PCB & Localized EMS/ODM</h4>
+                          <h4 class="font-bold text-green-400 text-sm mb-2" data-lang="zh"><i class="fas fa-industry mr-2"></i>正崴機遇 2: 12-24層高階 PCB 印度本土代工與 EMS</h4>
+                          <p class="text-xs text-gray-300" data-lang="en">
+                               Under India's strict local sourcing guidelines ("Make in India"), Logic Fruit needs to migrate all its imported board designs (12-24 layer PCBs) and complex high-frequency generators to local production. Foxlink can leverage its India setup as a premier manufacturing vendor for localized PCBA & EMS.
+                          </p>
+                          <p class="text-xs text-gray-300" data-lang="zh">
+                               在印度國防部 "Make in India" 的 100% 國產化採購壓力下，Logic Fruit 急需將其高頻板卡、射頻發生器板卡（12-24層HDI PCB）從「進口後組裝」改為「完全印度本土生產」。正崴在印度在地的先進產線可成為其幕後高階 PCB 與 EMS 代工首選。
+                          </p>
+                     </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-04</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Trade Show] Showcased VPX Rugged Hardware & CXL IP at AERO India 2026</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[航展盛事] 參展 AERO India 2026 展示加固型 VPX 硬體與 CXL IP</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">High-profile demonstration of defense-certified, multi-channel high-frequency data acquisition hardware for military radars & electronic warfare in Bengaluru. <span class="text-gray-500">(Opp: Rugged packaging & connectors)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">於班加羅爾航展上高調展示其已通過軍工認證、適用於雷達信號處理的多通道高頻數據採集硬體。 <span class="text-gray-500">(機會點：加固結構件與精密互連線束)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-22</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Tech Innovation] Released Industry-Leading PCIe Gen 6 Equalization Validation Solution</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[技術創新] 推出業界領先的 PCIe Gen 6 等效均衡 (Equalization) 驗證方案</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched breakthrough high-speed signal integrity IP for worldwide data center & AI accelerator chipmakers, directly taking on US/EU IP giants. <span class="text-gray-500">(Opp: High-frequency test boards)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">面向全球數據中心與 AI 加速晶片客戶，發表突破性的高速信號完整性 IP，正式與歐美 IP 大廠同台競技。 <span class="text-gray-500">(機會點：高階高頻測試板卡代工)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-15</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Corporate Partnership] Collaborating with Paras on Anti-Drone Electro-Magnetic Module</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[聯營開發] 聯合 Paras Anti-Drone 進行反無人機電磁干擾模組開發</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Combined Logic Fruit's real-time FPGA processing engine to supercharge Paras Defence’s anti-drone radar response time. <span class="text-gray-500">(Opp: High-layer PCB manufacturing)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">結合 Logic Fruit 的高速數據採集硬體與 FPGA 處理能力，幫助 Paras Defence 提升反無人機雷達的反應時間。 <span class="text-gray-500">(機會點：射頻板卡在地製造)</span></p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Talent Expansion] Kicked off "2026 Emerging Hardware Leaders Program"</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[人才擴張] 啟動「2026 新興硬體領袖計畫」擴大招募</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Massive recruiting campaign targeting IIT & NIT Ph.Ds/Masters in Electronics at Gurugram HQ to feed 5G RAN and high-freq radar pipelines.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">在古爾岡總部大舉招聘來自 IIT、NIT 的電子工程碩博士，因應 5G RAN 與高頻雷達的新案需求。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-20</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Academic Collaboration] Joint Computing Hardware Research with IIT Delhi FITT (Project SANKALP)</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[產學合作] 與 IIT Delhi FITT 持續進行先進運算硬體研究 (SANKALP 計畫)</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Strengthening R&D with India's premier academic institute to develop fully local edge-AI hardware accelerator platforms.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">加強與印度頂級學府合作，推進國產自主化邊緣 AI 運算硬體平台開發。</p>
+                        </div>
+                    </div>
+                    <!-- Remaining News items condensed in list for space but present in code logic -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-11:</strong> <span data-lang="en">CEO Sunil Kar interview on "超越晶圓廠：印度的設計主權", highlighting system-level design value over Fabs.</span><span data-lang="zh">CEO Sunil Kar 發表「超越晶圓廠：印度的設計主權」觀點，指出印度半導體崛起在於掌握系統級 IP 設計主權。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Surging defense local orders (DPP/IDDM policies) from national DPSUs, boosting FY25 revenue outlook.</span><span data-lang="zh">受惠於印度國防在地化採購政策 (DPP/IDDM)，透露接獲多筆國防企業的 FPGA 高速板卡委託訂單，推升 FY25 營收預期。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-06:</strong> <span data-lang="en">Official appointment of Sunil Kar as global President & CEO to drive US/EU SoC expansion.</span><span data-lang="zh">正式任命 Sunil Kar 擔任總裁兼執行長 (President & CEO)，加速歐美高增長市場的 SoC 生態佈局。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-06:</strong> <span data-lang="en">Founder Sanjeev Kumar transitioned to Chairman to focus on global alliances and ecosystem integrations.</span><span data-lang="zh">創辦人 Sanjeev Kumar 轉任董事長，宣布未來戰略將偏向於全球生態聯盟與資本整合。</span>
+                         </div>
+                         <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+                            <strong class="text-gray-200">2025-11-01:</strong> <span data-lang="en">Successfully passed annual AS 9100D Quality Management System Audit, solidifying DPSU sub-vendor status.</span><span data-lang="zh">通過 AS 9100D 質量體系年度審查，再次鞏固其作為印度國有國防企業（DPSU）合格分包商的地位。</span>
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // KYC Radar Scores (Estimated based on Logic Fruit Technologies report): 
+        // Market Share: 4 (Strong Tier 2 player, ranks 7th in high-end embedded space, fast rising)
+        // Localization: 9 (Heavy military/DRDO play, certified AS 9100D & DRDO, 100% Make in India compliant)
+        // Brand Power: 6 (Niche high-tech brand, prominent within FPGA/Protocol IP circles, less household)
+        // Digital Reach: 3 (Direct high-barrier B2B sales, zero retail e-commerce presence, mostly partner showcase showcases)
+        // Financial Health: 8 (Very healthy, profitable, backed by listed defense giant Paras Defence, revenue soaring)
+        const radarScores = [4, 9, 6, 3, 8]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 11} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

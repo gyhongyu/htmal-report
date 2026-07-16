@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-15T15:51:37.948Z",
+  "lastUpdated": "2026-07-16T07:44:40.234Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1627,6 +1627,19 @@
       "fileName": "report-1784130697042.html",
       "createdAt": "2026-07-15T15:51:37.948Z",
       "updatedAt": "2026-07-15T15:51:37.948Z"
+    },
+    {
+      "id": "report-1784187879456",
+      "title": "Target: Logic Fruit Technologies",
+      "description": "目標企業：Logic Fruit Technologies",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784187879456.html",
+      "createdAt": "2026-07-16T07:44:40.234Z",
+      "updatedAt": "2026-07-16T07:44:40.234Z"
     }
   ]
 }
