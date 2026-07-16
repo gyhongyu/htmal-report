@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target: High-Level Technical Exchange & FPC Sourcing Paradox Diagnosis -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Meeting Agenda: Cracking the Indian FPC Paradox</title>
+    <title data-lang="zh">會議議程：破譯印度 FPC 供需悖論</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Theme Settings --- */
+        body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f3f4f6; margin: 0; padding: 0; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.4s ease-out; max-width: 1200px; margin: 0 auto; padding: 1rem; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* --- Custom UI Cards --- */
+        .agenda-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; border-radius: 0.75rem; transition: all 0.2s; }
+        .agenda-card:hover { border-color: #3b82f6; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15); }
+        .bullet-point { position: relative; padding-left: 1.5rem; }
+        .bullet-point::before { content: "•"; color: #3b82f6; position: absolute; left: 0; font-size: 1.25rem; top: -2px; }
+
+        .recon-box { border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1.5rem; border-left: 4px solid; }
+        .recon-box.question { background-color: #1e1b4b; border-color: #6366f1; }
+        .recon-box.warning { background-color: #1c1917; border-color: #ea580c; }
+        .recon-box.success { background-color: #064e3b; border-color: #059669; }
+
+        /* --- Print and Layout Optimization --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff !important; color: #000 !important; }
+            .agenda-card, .recon-box { background: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; }
+            .text-white, .text-blue-400, .text-green-400 { color: #000 !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-900 md:shadow-2xl relative md:border-x border-gray-800 flex flex-col my-0 md:my-4 max-w-[1280px]">
+        
+        <!-- Navigation Header -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-900/95 backdrop-blur border-b border-gray-800 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-md font-bold leading-tight uppercase tracking-wider text-blue-400" data-lang="en">Market Research Division</span>
+                    <span class="block text-md font-bold leading-tight uppercase tracking-wider text-blue-400" data-lang="zh">市場調研與戰略發展部</span>
+                    <span class="block text-xs text-gray-400">Foxlink India</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-800 hover:bg-gray-700 text-white border border-gray-700 px-3 py-1.5 rounded text-xs font-semibold flex items-center transition-colors">
+                    <i class="fas fa-print mr-2"></i>
+                    <span data-lang="en">Print / PDF</span>
+                    <span data-lang="zh">列印 / PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-semibold transition-colors">
+                    <span data-lang="en">Switch to 中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Meeting Title Block -->
+                <div class="border-b border-gray-800 pb-6 mb-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                        <div>
+                            <span class="inline-block bg-indigo-600 text-white text-[10px] px-2.5 py-1 rounded-full mb-3 font-bold tracking-widest uppercase" data-lang="en">Expert Interview Outline</span>
+                            <span class="inline-block bg-indigo-600 text-white text-[10px] px-2.5 py-1 rounded-full mb-3 font-bold tracking-widest uppercase" data-lang="zh">專家對接與調研大綱</span>
+                            
+                            <h1 class="text-3xl font-extrabold text-white mb-2" data-lang="en">Cracking the Indian FPC Paradox</h1>
+                            <h1 class="text-3xl font-extrabold text-white mb-2" data-lang="zh">解構與破譯：印度的 FPC 供需悖論</h1>
+                            
+                            <p class="text-sm text-gray-400" data-lang="en">
+                                <strong>Consultant Target:</strong> Leading High-Speed Embedded & Defense Electronics Team <br>
+                                <strong>Context:</strong> Diagnosing why "everybody says FPC is missing on the ground, but zero Tier-1 RFQs are on the table."
+                            </p>
+                            <p class="text-sm text-gray-400" data-lang="zh">
+                                <strong>調研對象：</strong> 印度頂尖高速嵌入式與國防電子設計團隊 <br>
+                                <strong>調研背景：</strong> 破譯「業界天天高呼缺少本土 FPC 產能，但一線製造商在市面上卻碰不到任何實質 RFQ」的深層斷層。
+                            </p>
+                        </div>
+                        <div class="text-left md:text-right bg-gray-850 p-3 rounded-lg border border-gray-800">
+                            <div class="text-sm font-bold text-indigo-400" data-lang="en">Research Mindset</div>
+                            <div class="text-sm font-bold text-indigo-400" data-lang="zh">調研心態</div>
+                            <div class="text-xs text-gray-400" data-lang="en">"Learn the ecosystem rules, don't pitch products."</div>
+                            <div class="text-xs text-gray-400" data-lang="zh">「不作硬性推銷，旨在解構產業潛規則」</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 1: Meeting Agenda Timeline -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-bold text-white mb-4 flex items-center" data-lang="en">
+                        <i class="far fa-clock mr-2 text-indigo-400"></i> Meeting Agenda (45-60 Mins Split)
+                    </h2>
+                    <h2 class="text-lg font-bold text-white mb-4 flex items-center" data-lang="zh">
+                        <i class="far fa-clock mr-2 text-indigo-400"></i> 會議時間規劃與核心模組 (45-60 分鐘)
+                    </h2>
+
+                    <div class="space-y-3">
+                        
+                        <!-- Timeline Block 1 -->
+                        <div class="agenda-card p-4 flex items-start space-x-4">
+                            <div class="bg-indigo-900/50 text-indigo-300 font-bold px-3 py-1 rounded text-xs mt-1">00-10 Min</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-white text-sm" data-lang="en">Ground Setting & Research Context</h3>
+                                <h3 class="font-bold text-white text-sm" data-lang="zh">寒暄開場與調研背景說明</h3>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="en">Icebreaker: Briefly congratulate their leadership on the successful Aero India showcase. Explain our objective: Identifying high-layer PCB, FPC, and connector bottlenecks to bridge the localization gaps.</p>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="zh">開場：簡要祝賀貴司在航空展上的成功展出。說明調研初衷：正在協助梳理印度高密度多層板與 FPC 的在地化瓶頸，希望找出大廠與本土需求的對接橋樑。</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Block 2 -->
+                        <div class="agenda-card p-4 flex items-start space-x-4">
+                            <div class="bg-indigo-900/50 text-indigo-300 font-bold px-3 py-1 rounded text-xs mt-1">10-25 Min</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-white text-sm" data-lang="en">Deep Dive: The FPC Paradox (Why No RFQs?)</h3>
+                                <h3 class="font-bold text-white text-sm" data-lang="zh">核心焦點：解構 FPC 供需死結</h3>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="en">Tackling the mismatch: Everyone says high-end, reliable FPC is badly needed, but the actual RFQs are completely invisible to top-tier vendors. Is the volume too tiny, or is it a design-stage lock?</p>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="zh">探討落差：為什麼印度本土研發都抱怨本土無高可靠度 FPC 製造商，但國際一線製造商在市面上卻碰不到任何實質 RFQ？量太小？還是規格在最早期就已被鎖死？</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Block 3 -->
+                        <div class="agenda-card p-4 flex items-start space-x-4">
+                            <div class="bg-indigo-900/50 text-indigo-300 font-bold px-3 py-1 rounded text-xs mt-1">25-45 Min</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-white text-sm" data-lang="en">Sourcing Decision Pathways & Ecosystem Map</h3>
+                                <h3 class="font-bold text-white text-sm" data-lang="zh">解碼：採購決策與規格制定路徑</h3>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="en">Understand who takes the final call on component specs. Does it stay with the native R&D team, get offloaded to the major system sponsors, or go to local EMS players?</p>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="zh">摸清角色：高階板卡互連件的規格是誰說了算？是內部的研發工程師、戰略大股東，還是最終交給印度的在地 EMS 廠？</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Block 4 -->
+                        <div class="agenda-card p-4 flex items-start space-x-4">
+                            <div class="bg-indigo-900/50 text-indigo-300 font-bold px-3 py-1 rounded text-xs mt-1">45-60 Min</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-white text-sm" data-lang="en">MNC Friction Points & Future Technology Sync</h3>
+                                <h3 class="font-bold text-white text-sm" data-lang="zh">大廠與在地需求的摩擦力與後續交流</h3>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="en">Identify why global Tier-1s fail to match India's local needs (rigid MOQ barriers? long lead times for prototypes? certification hurdles?). Explore path for early tech alignment.</p>
+                                <p class="text-xs text-gray-400 mt-1" data-lang="zh">探討大廠為何服務不到在地需求？（MOQ 太高？打樣太慢？不願配合軍工認證？）並建立後續技術窗口，交流產業洞察。</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Section 2: The Core Supply Chain Paradox Diagnostic Board -->
+                <div class="mb-4">
+                    <h2 class="text-lg font-bold text-white mb-4 flex items-center" data-lang="en">
+                        <i class="fas fa-project-diagram mr-2 text-indigo-400"></i> The FPC Paradox Diagnostic Board
+                    </h2>
+                    <h2 class="text-lg font-bold text-white mb-4 flex items-center" data-lang="zh">
+                        <i class="fas fa-project-diagram mr-2 text-indigo-400"></i> 印度高階 FPC 供需矛盾分析面板
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <!-- Illusion Left Card -->
+                    <div class="bg-gray-900 p-5 rounded-lg border border-red-900/50 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-red-900/30 text-red-400 text-[10px] px-2 py-0.5 rounded-bl font-bold uppercase tracking-wider" data-lang="en">THE ILLUSION</div>
+                        <div class="absolute top-0 right-0 bg-red-900/30 text-red-400 text-[10px] px-2 py-0.5 rounded-bl font-bold uppercase tracking-wider" data-lang="zh">市場假象</div>
+                        
+                        <h3 class="text-red-400 font-bold text-sm mb-3">
+                            <i class="fas fa-bullhorn mr-2"></i> 
+                            <span data-lang="en">What the Market Shouts</span>
+                            <span data-lang="zh">市場的需求呼聲</span>
+                        </h3>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li class="bullet-point">
+                                <span data-lang="en">"India lacks local high-reliability FPC suppliers; we have to import every single board."</span>
+                                <span data-lang="zh">「印度缺乏在地的高可靠度 FPC 供應商，我們不得不進口每一片軟板。」</span>
+                            </li>
+                            <li class="bullet-point">
+                                <span data-lang="en">"We are starving for AS 9100D certified local components to build our platforms."</span>
+                                <span data-lang="zh">「我們極度渴望能有通過 AS 9100D 認證的在地零組件來打造系統。」</span>
+                            </li>
+                            <li class="bullet-point">
+                                <span data-lang="en">"Strict local sourcing policies are squeezing us; we need import substitutes immediately."</span>
+                                <span data-lang="zh">「嚴格的國產化採購政策逼得很緊，我們急需在地的進口替代品。」</span>
+                            </li>
+                            <li class="border-t border-gray-800 my-2 pt-2 text-gray-400 italic text-[11px]">
+                                <strong data-lang="en">Observer Note:</strong>
+                                <strong data-lang="zh">調研觀察：</strong>
+                                <span data-lang="en">On the surface, it seems like the market has an open, starving demand ready for the taking.</span>
+                                <span data-lang="zh">表面上看，印度本土似乎有著巨大、嗷嗷待哺的開放市場空間。</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Card: Why we get zero RFQs -->
+                    <div class="bg-gray-900 p-5 rounded-lg border border-green-900/50 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-green-900/30 text-green-400 text-[10px] px-2 py-0.5 rounded-bl font-bold uppercase tracking-wider" data-lang="en">THE REALITY</div>
+                        <div class="absolute top-0 right-0 bg-green-900/30 text-green-400 text-[10px] px-2 py-0.5 rounded-bl font-bold uppercase tracking-wider" data-lang="zh">無單真相</div>
+                        
+                        <h3 class="text-green-400 font-bold text-sm mb-3">
+                            <i class="fas fa-eye-slash mr-2"></i> 
+                            <span data-lang="en">Why We Get Zero RFQs</span>
+                            <span data-lang="zh">為什麼我們拿不到 RFQ</span>
+                        </h3>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li class="bullet-point">
+                                <span data-lang="en"><strong>Design-in Lock:</strong> Specifications are locked inside DRDO/defense labs or early chip-level reference designs before production.</span>
+                                <span data-lang="zh"><strong>研發早期鎖死：</strong> 產品規格在早期實驗室研發或晶片級參考設計階段就被直接綁定。</span>
+                            </li>
+                            <li class="bullet-point">
+                                <span data-lang="en"><strong>R&D Scale Only:</strong> Most native "demands" are small-batch prototype runs (10-100 units), never reaching commercial mass production PO volume.</span>
+                                <span data-lang="zh"><strong>純屬研發規模：</strong> 多數在地需求僅處於打樣或小批量試產（10-100片），根本未達到大廠認可的量產規模。</span>
+                            </li>
+                            <li class="bullet-point">
+                                <span data-lang="en"><strong>Ecosystem Gatekeepers:</strong> Component sourcing is tightly routed through closed inner-circle state players or direct parent investment lines.</span>
+                                <span data-lang="zh"><strong>封閉的圈內人生態：</strong> 採購管道完全被內部國有軍工集團或直屬母公司的合規清單所壟斷。</span>
+                            </li>
+                            <li class="border-t border-gray-800 my-2 pt-2 text-gray-400 italic text-[11px]">
+                                <strong data-lang="en">Observer Note:</strong>
+                                <strong data-lang="zh">調研觀察：</strong>
+                                <span data-lang="en">The real demand is highly fragmented, private, and locked inside design rooms before it ever becomes a public tender.</span>
+                                <span data-lang="zh">真正的需求高度碎片化且極其隱蔽，在產品公開招標前，規格在設計室就已塵埃落定。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 3: Conversational, Hard-Hitting Questions (Indian Spoken Style) -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-bold text-white mb-4 border-l-4 border-indigo-500 pl-3" data-lang="en">
+                        3. Conversational Questionnaire (No-Nonsense Indian Business Style)
+                    </h2>
+                    <h2 class="text-lg font-bold text-white mb-4 border-l-4 border-indigo-500 pl-3" data-lang="zh">
+                        3. 口語化診斷提問（不卑不亢，直指核心）
+                    </h2>
+                    
+                    <p class="text-xs text-gray-400 mb-4 italic" data-lang="en">
+                        *Note: Use active, direct Indian spoken patterns. Keep the tone like a peer brainstorming rather than a formal survey.
+                    </p>
+                    <p class="text-xs text-gray-400 mb-4 italic" data-lang="zh">
+                        *備註：採用直接、活潑的印度商務口語風格。保持同業腦力激盪的基調，而非刻板的問卷調查。
+                    </p>
+
+                    <!-- Question 1 -->
+                    <div class="recon-box question">
+                        <span class="inline-block bg-indigo-900 text-indigo-300 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2" data-lang="en">Issue 1: Sourcing Deadlock</span>
+                        <span class="inline-block bg-indigo-900 text-indigo-300 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2" data-lang="zh">痛點一：供需死結</span>
+                        
+                        <h4 class="text-white font-medium text-sm leading-relaxed" data-lang="en">
+                            "We keep hearing from every corner of India's hardware ecosystem that there is a severe shortage of local FPC suppliers. But on the ground, actual Tier-1 RFQs are nowhere to be seen. Where exactly is the disconnect? Are specifications getting locked directly inside the design labs before ever hitting the open market?"
+                        </h4>
+                        <h4 class="text-white font-medium text-sm leading-relaxed" data-lang="zh">
+                            「我們在印度硬體生態圈中，天天聽到大家抱怨缺乏在地的高可靠度 FPC 供應商。但當我們到一線看實質的需求時，市面上卻幾乎碰不到流轉的 RFQ。這供需斷層到底是卡在哪裡？是不是多數規格在產品研發階段就已經在實驗室內部被鎖死了？」
+                        </h4>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="recon-box question">
+                        <span class="inline-block bg-indigo-900 text-indigo-300 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2" data-lang="en">Issue 2: Sourcing Authority</span>
+                        <span class="inline-block bg-indigo-900 text-indigo-300 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2" data-lang="zh">痛點二：決策路徑</span>
+                        
+                        <h4 class="text-white font-medium text-sm leading-relaxed" data-lang="en">
+                            "When your team designs these high-reliability boards, who takes the ultimate call on FPC specification and BOM selection? Does the decision-making stay with the native R&D engineering teams, or does it get handed over to external EMS partners or major system sponsors?"
+                        </h4>
+                        <h4 class="text-white font-medium text-sm leading-relaxed" data-lang="zh">
+                            「貴司在設計高可靠度板卡時，高速 FPC 的規格與型號選用最終是由誰定案的？是完全保留在在地的 R&D 研發團隊，還是會移交給外部的 EMS 夥伴或大股東、標案發起方決定？」
+                        </h4>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="recon-box question">
+                        <span class="inline-block bg-indigo-900 text-indigo-300 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2" data-lang="en">Issue 3: MNC vs Local Gaps</span>
+                        <span class="inline-block bg-indigo-900 text-indigo-300 text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2" data-lang="zh">痛點三：大廠服務摩擦點</span>
+                        
+                        <h4 class="text-white font-medium text-sm leading-relaxed" data-lang="en">
+                            "From a veteran design perspective, where do global component Tier-1s like us fail to match local requirements? Is it our MOQ structures being too rigid for small-batch prototyping, or are there specific local certification roadblocks we need to work through together?"
+                        </h4>
+                        <h4 class="text-white font-medium text-sm leading-relaxed" data-lang="zh">
+                            「從資深設計團隊的角度看，像我們這樣的一線組件大廠在對接在地高階研發需求時，最大的摩擦點是什麼？是我們的 MOQ 規則對初期研發太不友善，還是有一些我們需要共同克服的在地認證壁壘？」
+                        </h4>
+                    </div>
+
+                </div>
+
+                <!-- Section 4: Market Dynamics & Sourcing Bottlenecks Chart -->
+                <div class="mb-4">
+                    <h2 class="text-lg font-bold text-white mb-4 flex items-center" data-lang="en">
+                        <i class="fas fa-chart-bar mr-2 text-indigo-400"></i> Indian Hardware Sourcing Bottlenecks (Research Analysis)
+                    </h2>
+                    <h2 class="text-lg font-bold text-white mb-4 flex items-center" data-lang="zh">
+                        <i class="fas fa-chart-bar mr-2 text-indigo-400"></i> 印度本土硬體採購痛點分析（數據視角）
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-900 p-5 rounded-lg border border-gray-800 flex flex-col justify-between h-full">
+                        <div>
+                            <h3 class="text-sm font-bold text-white mb-2" data-lang="en">Sourcing Bottleneck Profile</h3>
+                            <h3 class="text-sm font-bold text-white mb-2" data-lang="zh">採購核心瓶頸權重</h3>
+                            <div class="relative w-full h-52">
+                                <canvas id="opportunityRadar"></canvas>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-gray-500 text-center mt-3" data-lang="en">Higher score means a more severe bottleneck on the ground.</p>
+                        <p class="text-[10px] text-gray-500 text-center mt-3" data-lang="zh">數值越高代表該維度在印度的採購難度越高。</p>
+                    </div>
+
+                    <div class="col-span-2 flex flex-col justify-between">
+                        <div class="bg-gray-900 p-5 rounded-lg border border-gray-800 h-full">
+                            <h3 class="text-sm font-bold text-white mb-3" data-lang="en">Ground Obstacles Deconstructed</h3>
+                            <h3 class="text-sm font-bold text-white mb-3" data-lang="zh">印度本土核心採購痛點解讀</h3>
+                            <div class="space-y-3 text-xs text-gray-300">
+                                <div>
+                                    <strong class="text-indigo-400" data-lang="en">Low Volume High Mix:</strong>
+                                    <strong class="text-indigo-400" data-lang="zh">研發階段多品種、小批量：</strong>
+                                    
+                                    <p data-lang="en" class="mt-1">Most local defense, telecom, and custom projects run very low initial volumes, clashing directly with international suppliers' high MOQ expectations.</p>
+                                    <p data-lang="zh" class="mt-1">印度的國防、5G 等多數在地專案處於小量研發與試產階段，與大廠動輒數萬的起訂量（MOQ）嚴重衝突。</p>
+                                </div>
+                                <div class="pt-2 border-t border-gray-800">
+                                    <strong class="text-indigo-400" data-lang="en">Customization Complexity:</strong>
+                                    <strong class="text-indigo-400" data-lang="zh">客製化深度與難度：</strong>
+                                    
+                                    <p data-lang="en" class="mt-1">Rugged designs and unique custom dimensions require direct technical collaboration during layout, which standard catalog distributors cannot provide.</p>
+                                    <p data-lang="zh" class="mt-1">加固板卡需要深度客製化的走線與結構尺寸，一般標準化的公開通路品規無法滿足這種工程支持難度。</p>
+                                </div>
+                                <div class="pt-2 border-t border-gray-800">
+                                    <strong class="text-indigo-400" data-lang="en">Lead-Time / Sampling Delays:</strong>
+                                    <strong class="text-indigo-400" data-lang="zh">打樣時效與清關障礙：</strong>
+                                    
+                                    <p data-lang="en" class="mt-1">Lengthy customs clearance and import delays slow down fast iterative prototyping, hurting native R&D deadlines.</p>
+                                    <p data-lang="zh" class="mt-1">印度繁雜的進口清關程序，導致跨國打樣週期過長，直接卡死在地團隊快速疊代研發的死限（Deadlines）。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="p-5 border-t border-gray-800 text-center text-xs text-gray-500">
+            <p data-lang="en">Confidential Internal Document - Prepared for Foxlink India Strategic Development Team.</p>
+            <p data-lang="zh">內部機密調研資料 - 僅供正崴印度市場調研小組今晚對話準備。</p>
+        </footer>
+
+    </div>
+
+    <!-- Script Block for Language and Radar Chart Initialization -->
+    <script>
+        // Defaulting to English ('en') as Indian business operates in English.
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Custom weightings for Indian procurement bottlenecks (1-10 Scale):
+        const radarScores = [9, 8, 9, 7, 8]; 
+
+        const chartData = {
+            en: { 
+                labels: ['MOQ Barrier', 'Sampling Speed', 'Certifications', 'Customization', 'Volume Mismatch'], 
+                label: 'Sourcing Difficulty (1-10)' 
+            },
+            zh: { 
+                labels: ['起訂量限制', '打樣時效', '軍工/安全認證', '特殊客製化', '量產規模脫節'], 
+                label: '採購難度係數 (1-10)' 
+            }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                        borderColor: 'rgba(99, 102, 241, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(99, 102, 241, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: {size: 10} },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Run on load with default English state
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

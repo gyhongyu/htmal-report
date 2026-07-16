@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-16T07:44:40.234Z",
+  "lastUpdated": "2026-07-16T08:20:48.132Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1640,6 +1640,19 @@
       "fileName": "report-1784187879456.html",
       "createdAt": "2026-07-16T07:44:40.234Z",
       "updatedAt": "2026-07-16T07:44:40.234Z"
+    },
+    {
+      "id": "report-1784190047277",
+      "title": "Cracking the Indian FPC Paradox",
+      "description": "解構與破譯：印度的 FPC 供需悖論",
+      "categories": [
+        "對外簡報",
+        "市場分析",
+        "其他"
+      ],
+      "fileName": "report-1784190047277.html",
+      "createdAt": "2026-07-16T08:20:48.132Z",
+      "updatedAt": "2026-07-16T08:20:48.132Z"
     }
   ]
 }
