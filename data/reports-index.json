@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-17T03:03:08.244Z",
+  "lastUpdated": "2026-07-17T04:31:31.685Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1666,6 +1666,19 @@
       "fileName": "report-1784257386966.html",
       "createdAt": "2026-07-17T03:03:08.244Z",
       "updatedAt": "2026-07-17T03:03:08.244Z"
+    },
+    {
+      "id": "report-1784262689990",
+      "title": "Target: S.L.N Technologies Private Limited",
+      "description": "目標企業：S.L.N Technologies Private Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784262689990.html",
+      "createdAt": "2026-07-17T04:31:31.685Z",
+      "updatedAt": "2026-07-17T04:31:31.685Z"
     }
   ]
 }
