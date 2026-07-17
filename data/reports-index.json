@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-16T08:20:48.132Z",
+  "lastUpdated": "2026-07-17T03:03:08.244Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1653,6 +1653,19 @@
       "fileName": "report-1784190047277.html",
       "createdAt": "2026-07-16T08:20:48.132Z",
       "updatedAt": "2026-07-16T08:20:48.132Z"
+    },
+    {
+      "id": "report-1784257386966",
+      "title": "India FPC Project Development Proposal (Confidential)",
+      "description": "印度FPC專案開發提案 (機密版)",
+      "categories": [
+        "對外簡報",
+        "項目計劃",
+        "會議記要"
+      ],
+      "fileName": "report-1784257386966.html",
+      "createdAt": "2026-07-17T03:03:08.244Z",
+      "updatedAt": "2026-07-17T03:03:08.244Z"
     }
   ]
 }

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="en">India FPC Project Development Proposal (Confidential)</title>
+    <title data-lang="zh">印度FPC專案開發提案 (機密版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #111827;
+            color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+
+        [data-lang] {
+            display: none;
+        }
+
+        .content-area {
+            animation: fadeIn 0.5s ease-out;
+            min-height: calc(100vh - 80px);
+            padding: 1rem;
+            box-sizing: border-box;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-style: dotted;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #e0f2fe;
+            text-decoration: solid;
+        }
+
+        /* --- Components --- */
+        .partner-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 1px solid #374151;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .partner-card.active-phase {
+            border-color: #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            transform: translateY(-4px);
+        }
+
+        .recon-box {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.25rem;
+        }
+
+        .recon-box.risk {
+            border-left: 4px solid #ef4444;
+        }
+
+        .recon-box.opp {
+            border-left: 4px solid #22c55e;
+        }
+
+        .recon-box.neutral {
+            border-left: 4px solid #eab308;
+        }
+
+        .recon-box.info {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 700;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .tag-blue {
+            background-color: #1e40af;
+            color: white;
+        }
+
+        .tag-green {
+            background-color: #166534;
+            color: white;
+        }
+
+        .tag-orange {
+            background-color: #c2410c;
+            color: white;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #4b5563;
+        }
+
+        .section-divider span {
+            padding: 0 0.75rem;
+            color: #9ca3af;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.875rem;
+        }
+
+        /* --- Custom Range Input --- */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #374151;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #34d399;
+        }
+
+        /* --- Security Styles --- */
+        /* Login Gate & Animation */
+        #login-gate { 
+            position: fixed; 
+            inset: 0; 
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 9999; 
+            transition: opacity 0.5s ease-out;
+        }
+
+        .login-card {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        /* Password Shake Animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+        .shake-effect {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Foxlink Confidential Watermark */
+        #foxlink-confidential-watermark {
+            position: fixed;
+            inset: 0;
+            z-index: 999999; /* Topmost layer above login gate and modals */
+            pointer-events: none; /* Make clicks/hovers completely pass through */
+            opacity: 0.075; /* Optimized contrast: visible on all display types while keeping readability */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='14' font-weight='800' fill='%23ffffff' text-anchor='middle' transform='rotate(-45 150 150)'%3EFOXLINK CONFIDENTIAL ｜ 正崴機密%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
+            /* Force background graphics print on browsers */
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* --- Responsive Adjustments for Desktop --- */
+        @media (min-width: 768px) {
+            .content-area {
+                padding: 2.5rem;
+            }
+
+            .recon-box {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-divider {
+                margin-top: 3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-divider span {
+                padding: 0 1rem;
+            }
+        }
+
+        /* --- Print Optimization --- */
+        @media print {
+            @page {
+                margin: 20mm 15mm 20mm 15mm;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                font-size: 9pt;
+            }
+
+            .content-area {
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                animation: none;
+            }
+
+            .w-full.mx-auto {
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+            }
+
+            .bg-gray-800,
+            .bg-gray-900,
+            .recon-box,
+            .partner-card {
+                background-color: #fff !important;
+                border: 1px solid #ccc !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+
+            th {
+                background-color: #f0f0f0 !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .text-white {
+                color: #000 !important;
+            }
+
+            .text-gray-300,
+            .text-gray-400,
+            .text-blue-400,
+            .text-yellow-400,
+            .text-emerald-400 {
+                color: #333 !important;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+                color: #000 !important;
+            }
+
+            .section-divider {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            canvas {
+                max-height: 200px;
+                page-break-inside: avoid;
+            }
+
+            .recon-box {
+                page-break-inside: avoid;
+            }
+
+            .grid {
+                display: block;
+            }
+
+            .grid>div {
+                margin-bottom: 1rem;
+            }
+
+            #foxlink-confidential-watermark {
+                opacity: 0.05;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='14' font-weight='800' fill='%23000000' text-anchor='middle' transform='rotate(-45 150 150)'%3EFOXLINK CONFIDENTIAL ｜ 正崴機密%3C/text%3E%3C/svg%3E") !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <!-- Foxlink Confidential Watermark Overlay -->
+    <div id="foxlink-confidential-watermark"></div>
+
+    <!-- Login Gate Panel -->
+    <div id="login-gate" class="flex flex-col items-center justify-center">
+        <div class="login-card p-8 w-full max-w-sm text-center">
+            <div class="text-5xl mb-4 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]">📂</div>
+            <h1 class="text-2xl font-bold mb-6 text-white bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-300">India FPC Project</h1>
+            
+            <div class="relative mb-4">
+                <input type="password" id="pwd-input" class="w-full bg-gray-950/80 border border-gray-700/80 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-center" placeholder="Password">
+            </div>
+
+            <div class="flex justify-between items-center mb-6 px-1">
+                <label class="flex items-center text-sm text-gray-400 cursor-pointer select-none">
+                    <input type="checkbox" id="remember-cb" checked class="mr-2 rounded border-gray-700 bg-gray-900 text-emerald-600 focus:ring-0">
+                    <span data-lang="en">Remember Me</span><span data-lang="zh">記住登入狀態</span>
+                </label>
+            </div>
+
+            <button id="login-btn" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/20 active:scale-[0.98] transition-all">
+                <span data-lang="en">Authenticate</span><span data-lang="zh">安全登入</span>
+            </button>
+            <div id="login-error" class="text-red-500 text-sm mt-4 hidden">
+                <i class="fas fa-exclamation-circle mr-2"></i><span data-lang="en">Incorrect password</span><span data-lang="zh">密碼錯誤，請重新輸入</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area (Hidden by Default) -->
+    <div id="app-content" class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4 hidden">
+
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-4 mb-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">India FPC Project Development Proposal</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">印度FPC專案開發提案</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Responses to Invest India's Inquiries -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Responses to Invest India's Inquiries</span>
+                    <span data-lang="zh">1. 針對來函詢問事項之回覆說明</span>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 mb-8">
+                    <!-- Q1 Card -->
+                    <div class="recon-box info">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h4 class="font-bold text-white text-md" data-lang="en"><span class="text-blue-400">Q1:</span> Minimum Order Sizes & Indicative Investments</h4>
+                            <h4 class="font-bold text-white text-md" data-lang="zh"><span class="text-blue-400">Q1:</span> 最小訂單量門檻與對應的指示性資本投資</h4>
+                            <span class="tag tag-blue font-mono" data-lang="en">REVENUE & CAPEX</span>
+                            <span class="tag tag-blue font-mono" data-lang="zh">營收與資本支出</span>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-1" data-lang="en">
+                            To ensure a robust and mutually beneficial investment, our indicative local CapEx planning aligns with three progressive revenue milestones ($5M / $15M / $40M USD). This ensures a risk-managed, structured build-up of local manufacturing capacity: starting with NPI sampling supported by our Vietnam factory, upgrading to SMT assembly lines in Tirupati once baseline volumes are achieved, and ultimately establishing the Noida wet process plant when long-term market demand is secured.
+                        </p>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-1" data-lang="zh">
+                            本公司秉持穩健經營原則，將印度本地的指示性資本支出（CapEx）與實際營收規模進行三階段科學化對照規劃（500萬 / 1,500萬 / 4,000萬美元）。透過循序漸進的模式，這使我們能以穩健的商業步伐建立本地產能：第一階段由越南提供打樣與驗證支援，第二階段於訂單規模達標後在 Tirupati 建置 SMT 生產線，第三階段則在長期市場規模確立後正式重啟 Noida 全製程廠房。
+                        </p>
+                    </div>
+
+                    <!-- Q2 Card -->
+                    <div class="recon-box info">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h4 class="font-bold text-white text-md" data-lang="en"><span class="text-blue-400">Q2:</span> Vietnam Capacity Utilization & Buffer Setup</h4>
+                            <h4 class="font-bold text-white text-md" data-lang="zh"><span class="text-blue-400">Q2:</span> 越南廠產能利用率與專屬緩衝設定</h4>
+                            <span class="tag tag-blue font-mono" data-lang="en">SUPPLY CHAIN SECURITY</span>
+                            <span class="tag tag-blue font-mono" data-lang="zh">供應鏈安全</span>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-1" data-lang="en">
+                            Our IATF 16949 certified Da Nang facility runs at an average of 75% to 80% utilization. Our dynamic planning allocates the remaining 20% to 25% capacity buffer (up to 50,000 m²) as a dedicated buffer for our Indian OEM clients. This buffer perfectly absorbs Phase 1 (NPI) sampling and guarantees steady, secure bare board supply for Phase 2 SMT assembly in Tirupati.
+                        </p>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-1" data-lang="zh">
+                            本公司已獲車規級 IATF 16949 認證的越南峴港廠平均利用率目前為 75%~80%。我們特別為印度客戶規劃了佔該廠總產能 20%~25%（最高可達年產 50,000 平方米）的專屬緩衝產能。此配置不僅能 100% 確保第一階段 NPI 打樣與技術驗證的快速交期，亦能穩健支應第二階段 SMT 組裝所需的裸板進口，充分保障供應鏈安全。
+                        </p>
+                    </div>
+
+                    <!-- Q3 Card -->
+                    <div class="recon-box info">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h4 class="font-bold text-white text-md" data-lang="en"><span class="text-blue-400">Q3:</span> Strategic Stance on Joint Ventures (JV)</h4>
+                            <h4 class="font-bold text-white text-md" data-lang="zh"><span class="text-blue-400">Q3:</span> 對於印度設立合資公司 (JV) 的戰略立場</h4>
+                            
+                            <!-- Interactive route toggle -->
+                            <div class="flex items-center space-x-1 bg-gray-900/60 p-1 rounded border border-gray-700 text-[10px] font-mono no-print">
+                                <button id="route-std-btn" class="px-2 py-0.5 rounded text-white bg-blue-600 font-bold transition-all">
+                                    <span data-lang="en">Data-Driven Approach</span>
+                                    <span data-lang="zh">數據驅動評估</span>
+                                </button>
+                                <button id="route-str-btn" class="px-2 py-0.5 rounded text-gray-400 hover:text-white transition-all">
+                                    <span data-lang="en">Strategic Partnership</span>
+                                    <span data-lang="zh">戰略合作路徑</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Route 1: Standard -->
+                        <div id="route-standard-content" class="text-xs text-gray-300 leading-relaxed space-y-2">
+                            <p data-lang="en">
+                                <strong>Data-Driven Approach (Evaluation First)</strong>: While we remain open to exploring a Joint Venture (JV) partnership in India with a suitable partner, any decision must be strictly based on empirical market research data. Without sufficient hard data to support the Return on Investment (ROI) evaluation, it is extremely difficult for our Group Board to make any investment decisions, even if potential JV partners are identified. Therefore, we suggest postponing formal discussions regarding a concrete JV framework to the next stage, and urge Invest India to coordinate the release of India Customs Data for the past 3 years (please refer to the <a href="https://docs.google.com/spreadsheets/d/1rlj58tuRMwMHnyOixJmErTbFXqXMKVh2oRB9yzjQXYA/edit?usp=sharing" target="_blank" class="text-blue-400 hover:text-blue-300 underline font-semibold">List of FPC-related HS Codes</a>). Real historical data is the key driver to unlock board approval.
+                            </p>
+                            <p data-lang="zh">
+                                <strong>數據驅動評估 (常規路徑)</strong>：本公司對在印度尋找合適夥伴成立合資公司 (JV) 持開放態度，但決策必須以實質的「市場調研數據」為依據。若沒有足夠的硬數據來支持投資回報率 (ROI) 的評估，即便有潛在的合資人選，總部董事會也極難做出投資決策。因此，我們建議將具體的合資框架討論推遲至下一階段。並促請 Invest India 協調提供印度近三年海關進口數據（請點此查看 👉 <a href="https://docs.google.com/spreadsheets/d/1j9uxnVUvx_cCI3Br18be1zywILegpxtOC_b-H9rNyuQ/edit?usp=sharing" target="_blank" class="text-blue-400 hover:text-blue-300 underline font-semibold">FPC 相關 HS Code 清單</a>）。有真實進口數據做為底氣，總部董事會才有可能放行投資決策。
+                            </p>
+                        </div>
+                        
+                        <!-- Route 2: Strategic -->
+                        <div id="route-strategic-content" class="text-xs text-gray-300 leading-relaxed space-y-2 hidden">
+                            <p data-lang="en">
+                                <strong>Strategic Fast-Track (Executive-Level Collaboration)</strong>: If Invest India already holds locked-in demands or commitments from domestic anchors (e.g. Tata Group, Ola Electric) that guarantee immediate profitability for a local joint venture, this transcends regional business calculations. In this scenario, we will facilitate a fast-track channel to present a joint strategic proposal directly to our <strong>Group General Manager</strong> for a top-down decision.
+                            </p>
+                            <p data-lang="zh">
+                                <strong>戰略快速通道 (高層戰略對接)</strong>：若 Invest India 手中已掌握印度本土龍頭企業（如 Tata、Ola）對高階 FPC 軟板的剛性採購承諾，一旦成立 JV 可立竿見影實現獲利。這已超越常規區域業務評估，屬於集團最高層級合作。我們將協助開闢綠色通道，直接向本集團**總經理**遞交聯合計畫案。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Three-Phase Roadmap -->
+                <div class="section-divider">
+                    <span data-lang="en">2. Three-Phase Localization Roadmap</span>
+                    <span data-lang="zh">2. 三階段在地化投資藍圖</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Phase 1 -->
+                    <div class="partner-card rounded-lg p-5 flex flex-col justify-between" id="phase-card-1">
+                        <div>
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-700">
+                                <span class="tag tag-blue" data-lang="en">Phase 1</span>
+                                <span class="tag tag-blue" data-lang="zh">第一階段</span>
+                                <span class="text-xs text-gray-400 font-bold font-mono">NPI & Sampling</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2" data-lang="en">Phase 1: NPI & Sampling Trial</h4>
+                            <h4 class="text-lg font-bold text-white mb-2" data-lang="zh">第一階段：NPI 打樣與試產</h4>
+                            <ul class="text-xs text-gray-300 space-y-2.5 mt-3">
+                                <li><strong><span data-lang="en">Revenue Threshold:</span><span data-lang="zh">年訂單門檻：</span></strong><br><span class="text-emerald-400 font-bold font-mono" data-lang="en">&lt; ₹41.5 Cr (&lt; $5.00M USD)</span><span class="text-emerald-400 font-bold font-mono" data-lang="zh">低於 4 億 1,500 萬盧比 (500 萬美元)</span></li>
+                                <li><strong><span data-lang="en">Annual Volume Target:</span><span data-lang="zh">預計年產量：</span></strong><br><span class="font-mono">14,500 m² 以內 (Sampling Focus)</span></li>
+                                <li><strong><span data-lang="en">Indicative CapEx:</span><span data-lang="zh">投資金額 (CapEx)：</span></strong><br><span class="text-emerald-400 font-bold font-mono">₹0 (Zero CapEx)</span></li>
+                                <li><strong><span data-lang="en">Manufacturing Strategy:</span><span data-lang="zh">生產製造策略：</span></strong><br><span class="leading-relaxed" data-lang="en">100% supported by Da Nang (Vietnam) facility (IATF 16949 certified) for quick sampling and technical validation. Noida land is kept at current state, introducing zero local CapEx during this transition.</span><span class="leading-relaxed" data-lang="zh">100% 由已獲車規 IATF 16949 認證的越南峴港廠支持，引導客戶快速進行技術驗證。維持 Noida 土地現狀，在此過渡期內不新增本地資本支出。</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-700/50 flex items-center justify-between">
+                            <span class="text-[10px] text-blue-400 font-bold uppercase"><i class="fas fa-plane-departure mr-1"></i>Import Model</span>
+                            <span class="text-[10px] text-gray-500 font-mono" data-lang="en">Da Nang, VN</span>
+                            <span class="text-[10px] text-gray-500 font-mono" data-lang="zh">越南峴港廠</span>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="partner-card rounded-lg p-5 flex flex-col justify-between" id="phase-card-2">
+                        <div>
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-700">
+                                <span class="tag tag-orange" data-lang="en">Phase 2</span>
+                                <span class="tag tag-orange" data-lang="zh">第二階段</span>
+                                <span class="text-xs text-gray-400 font-bold font-mono">FPCA & SMT Assembly</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2" data-lang="en">Phase 2: FPCA & SMT Assembly</h4>
+                            <h4 class="text-lg font-bold text-white mb-2" data-lang="zh">第二階段：後段貼片 SMT 組裝</h4>
+                            <ul class="text-xs text-gray-300 space-y-2.5 mt-3">
+                                <li><strong><span data-lang="en">Revenue Threshold:</span><span data-lang="zh">年訂單門檻：</span></strong><br><span class="text-emerald-400 font-bold font-mono" data-lang="en">&gt; ₹124.5 Cr (&gt; $15.00M USD)</span><span class="text-emerald-400 font-bold font-mono" data-lang="zh">超過 12 億 4,500 萬盧比 (1,500 萬美元)</span></li>
+                                <li><strong><span data-lang="en">Annual Volume Target:</span><span data-lang="zh">預計年產量：</span></strong><br><span class="font-mono">50,000 m² (SMT Assembly Load)</span></li>
+                                <li><strong><span data-lang="en">Indicative CapEx:</span><span data-lang="zh">投資金額 (CapEx)：</span></strong><br><span class="text-emerald-400 font-bold font-mono">₹83 Crores ($10.0M USD)</span></li>
+                                <li><strong><span data-lang="en">Manufacturing Strategy:</span><span data-lang="zh">生產製造策略：</span></strong><br><span class="leading-relaxed" data-lang="en">Install Panasonic high-speed SMT assembly lines at our Tirupati facility (reflow, underfill, AOI, FCT). Bare FPC boards imported from Vietnam Da Nang facility. Active local procurement for passives.</span><span class="leading-relaxed" data-lang="zh">於 Tirupati 廠區安裝 Panasonic 高速 SMT 貼片線，進行後段製程。FPC 裸板由已通過認證的越南廠進口，被動元件與連接器於本地採購。</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-700/50 flex items-center justify-between">
+                            <span class="text-[10px] text-orange-400 font-bold uppercase"><i class="fas fa-tools mr-1"></i>Local Assembly</span>
+                            <span class="text-[10px] text-gray-500 font-mono" data-lang="en">Tirupati site</span>
+                            <span class="text-[10px] text-gray-500 font-mono" data-lang="zh">Tirupati 廠區</span>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="partner-card rounded-lg p-5 flex flex-col justify-between" id="phase-card-3">
+                        <div>
+                            <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-700">
+                                <span class="tag tag-green" data-lang="en">Phase 3</span>
+                                <span class="tag tag-green" data-lang="zh">第三階段</span>
+                                <span class="text-xs text-gray-400 font-bold font-mono">Full FPC Wet Process</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2" data-lang="en">Phase 3: Noida Full Wet Process Plant</h4>
+                            <h4 class="text-lg font-bold text-white mb-2" data-lang="zh">第三階段：完整 FPC 濕製程建廠</h4>
+                            <ul class="text-xs text-gray-300 space-y-2.5 mt-3">
+                                <li><strong><span data-lang="en">Revenue Threshold:</span><span data-lang="zh">年訂單門檻：</span></strong><br><span class="text-emerald-400 font-bold font-mono" data-lang="en">&gt; ₹332.0 Cr (&gt; $40.00M USD)</span><span class="text-emerald-400 font-bold font-mono" data-lang="zh">超過 33 億 2,000 萬盧比 (4,000 萬美元)</span></li>
+                                <li><strong><span data-lang="en">Annual Volume Target:</span><span data-lang="zh">預計年產量：</span></strong><br><span class="font-mono">200,000 m² (Full Localization)</span></li>
+                                <li><strong><span data-lang="en">Indicative CapEx:</span><span data-lang="zh">投資金額 (CapEx)：</span></strong><br><span class="text-emerald-400 font-bold font-mono">Cumulative ₹249 Cr ($30.0M USD)</span><span class="text-emerald-400 font-bold font-mono" data-lang="zh">累計投資 24 億 9,000 萬盧比 (追加 166 Cr)</span></li>
+                                <li><strong><span data-lang="en">Manufacturing Strategy:</span><span data-lang="zh">生產製造策略：</span></strong><br><span class="leading-relaxed" data-lang="en">Establish full wet process manufacturing (plating, etching, LDI, laser drilling) on Noida land. Deeply integrate with local EV batteries, CCS, and aerospace supply chains.</span><span class="leading-relaxed" data-lang="zh">在 Noida 土地上建立全製程濕法製造線（電鍍、蝕刻、雷射鑽孔、直接成像 LDI），全面對接印度在地 EV 電池 CCS 與航太/防務組裝生態圈。</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-700/50 flex items-center justify-between">
+                            <span class="text-[10px] text-green-400 font-bold uppercase"><i class="fas fa-industry mr-1"></i>Full Localization</span>
+                            <span class="text-[10px] text-gray-500 font-mono" data-lang="en">Noida site</span>
+                            <span class="text-[10px] text-gray-500 font-mono" data-lang="zh">Noida 土地</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Capacity Matching Visualizer -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Backing Capacity Analysis</span>
+                    <span data-lang="zh">3. 後端支援產能分析</span>
+                </div>
+
+                <div class="recon-box info">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-white text-md mb-2" data-lang="en"><i class="fas fa-warehouse mr-2 text-blue-400"></i>Da Nang (Vietnam) Factory Capacity Matching</h3>
+                            <h3 class="font-bold text-white text-md mb-2" data-lang="zh"><i class="fas fa-warehouse mr-2 text-blue-400"></i>越南峴港廠產能匹配驗證</h3>
+                            <p class="text-xs text-gray-300 leading-relaxed mb-3" data-lang="en">
+                                Our Da Nang (Vietnam) facility has an annual capacity of <strong>250,000 m²</strong>. The current average utilization rate is <strong>80% (200,000 m²)</strong>. The remaining <strong>20% (50,000 m²)</strong> is fully dedicated as an India-exclusive buffer to support Phase 1 (NPI) and supply Phase 2 (SMT) FPC bare boards, ensuring complete supply security.
+                            </p>
+                            <p class="text-xs text-gray-300 leading-relaxed mb-3" data-lang="zh">
+                                越南峴港廠 FPC 裸板年總產能為 <strong>250,000 平方米</strong>，目前平均利用率為 <strong>80%（200,000 平方米）</strong>。我們特別將剩餘的 <strong>20%（50,000 平方米）</strong> 產能規劃為對接印度市場的專屬緩衝，用以 100% 支應第一階段 NPI 打樣與第二階段 SMT 組裝所需的裸板進口，充分保障供應鏈安全。
+                            </p>
+                            
+                            <!-- Capacity progress bar -->
+                            <div class="w-full bg-gray-700 rounded-full h-4 relative overflow-hidden mt-3 mb-1">
+                                <div id="vn-base-bar" class="bg-gray-500 h-full absolute left-0 top-0" style="width: 80%;"></div>
+                                <div id="vn-india-bar" class="bg-emerald-500 h-full absolute left-[80%] top-0 transition-all duration-300" style="width: 20%;"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-gray-400 font-mono">
+                                <div><span class="inline-block w-2.5 h-2.5 bg-gray-500 mr-1"></span><span data-lang="en">VN Base Load (80%)</span><span data-lang="zh">越南原有負載 (80%)</span></div>
+                                <div><span class="inline-block w-2.5 h-2.5 bg-emerald-500 mr-1" id="india-legend-box"></span><span id="india-legend-text">India Project Buffer (20%)</span></div>
+                                <div id="capacity-warning-badge" class="text-emerald-400 font-bold"><i class="fas fa-check-circle mr-1"></i><span data-lang="en">Supply Safe</span><span data-lang="zh">供應安全</span></div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-48 h-48 flex justify-center items-center flex-shrink-0 bg-gray-900/50 rounded-lg p-2 no-print">
+                            <canvas id="capacityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Interactive Simulation Sandbox -->
+                <div class="section-divider no-print">
+                    <span data-lang="en">4. Interactive Capacity Simulator</span>
+                    <span data-lang="zh">4. 互動產能對照模擬</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 no-print">
+                    <!-- Simulation Controls -->
+                    <div class="bg-gray-800/80 p-5 rounded-lg border border-gray-700 lg:col-span-2 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4 border-b border-gray-700 pb-2">
+                                <h3 class="font-bold text-white text-sm" data-lang="en"><i class="fas fa-sliders-h mr-2 text-emerald-400"></i>Projected Revenue & ASP Parameters</h3>
+                                <h3 class="font-bold text-white text-sm" data-lang="zh"><i class="fas fa-sliders-h mr-2 text-emerald-400"></i>預期營收與單價對照模擬</h3>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono font-semibold" data-lang="en">Interactive Simulator</span>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono font-semibold" data-lang="zh">即時試算模擬</span>
+                            </div>
+
+                            <!-- Slider 1: Expected Revenue -->
+                            <div class="mb-5">
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <label class="text-xs text-gray-300 font-bold uppercase" data-lang="en">Expected Annual Revenue (USD)</label>
+                                    <label class="text-xs text-gray-300 font-bold uppercase" data-lang="zh">預期年訂單規模 (美金 / 盧比)</label>
+                                    <span class="text-lg font-mono font-bold text-emerald-400" id="revenue-val-display">$15.00M USD</span>
+                                </div>
+                                <input type="range" id="revenue-slider" min="1000000" max="60000000" step="500000" value="15000000">
+                                <div class="flex justify-between text-[10px] text-gray-500 mt-1 font-mono">
+                                    <span>$1M (₹8.3 Cr)</span>
+                                    <span>$15M (₹124.5 Cr)</span>
+                                    <span>$30M (₹249 Cr)</span>
+                                    <span>$45M (₹373.5 Cr)</span>
+                                    <span>$60M (₹498 Cr)</span>
+                                </div>
+                            </div>
+
+                            <!-- Slider 2: Average ASP -->
+                            <div class="mb-2">
+                                <div class="flex justify-between items-baseline mb-2">
+                                    <label class="text-xs text-gray-300 font-bold uppercase" data-lang="en">FPC Bare Board ASP (USD / m²)</label>
+                                    <label class="text-xs text-gray-300 font-bold uppercase" data-lang="zh">FPC 裸板平均單價 (美金 / 平方米)</label>
+                                    <span class="text-lg font-mono font-bold text-emerald-400" id="asp-val-display">$300 USD/m²</span>
+                                </div>
+                                <input type="range" id="asp-slider" min="100" max="500" step="10" value="300">
+                                <div class="flex justify-between text-[10px] text-gray-500 mt-1 font-mono">
+                                    <span data-lang="en">$100 (Low-end)</span>
+                                    <span data-lang="zh">$100 (低端單雙面板)</span>
+                                    <span data-lang="en">$300 (Mid-end BMS)</span>
+                                    <span data-lang="zh">$300 (中端車載BMS)</span>
+                                    <span data-lang="en">$500 (High-end)</span>
+                                    <span data-lang="zh">$500 (高階航太級)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-700/50 flex justify-between items-center text-xs text-gray-400 italic">
+                            <span data-lang="en">* Adjust sliders to dynamically map capacity load and investment thresholds.</span>
+                            <span data-lang="zh">* 調整上方參數可動態推算對應的產能負載與資本支出投資門檻。</span>
+                            <button id="reset-sim-btn" class="text-emerald-400 hover:text-emerald-300 font-semibold font-mono"><i class="fas fa-undo mr-1"></i>Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Live KPI Display -->
+                    <div class="bg-gray-800 p-5 rounded-lg border border-gray-700 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-white text-sm mb-4 border-b border-gray-700 pb-2" data-lang="en"><i class="fas fa-chart-line mr-2 text-blue-400"></i>Projected Outputs</h3>
+                            <h3 class="font-bold text-white text-sm mb-4 border-b border-gray-700 pb-2" data-lang="zh"><i class="fas fa-chart-line mr-2 text-blue-400"></i>專案產能與資本支出推估</h3>
+
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="en">Annual Volume Need:</span>
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="zh">年產能需求：</span>
+                                    <strong class="text-md font-mono text-white" id="out-volume">50,000 m²</strong>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="en">SMT Points Demand:</span>
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="zh">貼片點數需求：</span>
+                                    <strong class="text-md font-mono text-white" id="out-smt">50,000,000 Pts</strong>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="en">Indicative CapEx:</span>
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="zh">指示性資本支出：</span>
+                                    <strong class="text-md font-mono text-emerald-400" id="out-capex">₹83.0 Cr ($10.0M)</strong>
+                                </div>
+                                <div class="flex justify-between items-center" id="asset-turnover-row">
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="en">Est. Asset Turnover:</span>
+                                    <span class="text-xs text-gray-400 uppercase" data-lang="zh">估算資產週轉率：</span>
+                                    <strong class="text-md font-mono text-blue-400" id="out-turnover">1.33x</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-700 flex flex-col justify-end">
+                            <span class="text-[10px] text-gray-500 uppercase block mb-1" data-lang="en">Corresponding Phase</span>
+                            <span class="text-[10px] text-gray-500 uppercase block mb-1" data-lang="zh">對應之投資階段</span>
+                            <div class="bg-gray-900 p-2.5 rounded border border-gray-700 text-center">
+                                <span class="text-xs font-bold text-emerald-400" id="triggered-strategy-title">Phase 2: FPCA & SMT Assembly</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        let capacityChart = null;
+        let activeRoute = 'standard'; // 'standard' or 'strategic'
+
+        // Constants based on Vietnam (Da Nang) Capacity setup
+        const VN_TOTAL_CAPACITY = 250000;
+        const VN_BASE_LOAD = 200000; // 80% utilization
+        const VN_BUFFER_MAX = 50000;  // 20% dedicated buffer
+
+        // DOM elements
+        const revenueSlider = document.getElementById('revenue-slider');
+        const aspSlider = document.getElementById('asp-slider');
+        const revenueValDisplay = document.getElementById('revenue-val-display');
+        const aspValDisplay = document.getElementById('asp-val-display');
+
+        const outVolume = document.getElementById('out-volume');
+        const outSmt = document.getElementById('out-smt');
+        const outCapEx = document.getElementById('out-capex');
+        const outTurnover = document.getElementById('out-turnover');
+        const triggeredStrategyTitle = document.getElementById('triggered-strategy-title');
+        const assetTurnoverRow = document.getElementById('asset-turnover-row');
+
+        // Cards
+        const phaseCard1 = document.getElementById('phase-card-1');
+        const phaseCard2 = document.getElementById('phase-card-2');
+        const phaseCard3 = document.getElementById('phase-card-3');
+
+        // Progress bar elements
+        const vnIndiaBar = document.getElementById('vn-india-bar');
+        const vnBaseBar = document.getElementById('vn-base-bar');
+        const indiaLegendText = document.getElementById('india-legend-text');
+        const capacityWarningBadge = document.getElementById('capacity-warning-badge');
+        const indiaLegendBox = document.getElementById('india-legend-box');
+
+        // State variables for calculation
+        let calculatedVol = 50000;
+        let calculatedCapExUSD = 10.0;
+        let calculatedCapExINR = 83.0;
+        let triggeredPhase = 2;
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                
+                updateChart();
+                updateStrategyTitleLanguage();
+            } catch (e) { console.error(e); }
+        }
+
+        function formatRevenue(val) {
+            const numVal = val / 1000000;
+            return `$${numVal.toFixed(2)}M USD`;
+        }
+
+        function updateStrategyTitleLanguage() {
+            if (triggeredPhase === 1) {
+                triggeredStrategyTitle.textContent = currentLang === 'en' ? "Phase 1: NPI & Sampling Trial (Vietnam)" : "第一階段：NPI 打樣與試產 (越南廠)";
+                triggeredStrategyTitle.className = "text-xs font-bold text-blue-400";
+            } else if (triggeredPhase === 2) {
+                triggeredStrategyTitle.textContent = currentLang === 'en' ? "Phase 2: FPCA & SMT Assembly (Tirupati)" : "第二階段：SMT 貼片組裝 (Tirupati)";
+                triggeredStrategyTitle.className = "text-xs font-bold text-orange-400";
+            } else {
+                triggeredStrategyTitle.textContent = currentLang === 'en' ? "Phase 3: Noida Full Wet Process Plant" : "第三階段：Noida 完整濕製程廠房";
+                triggeredStrategyTitle.className = "text-xs font-bold text-emerald-400";
+            }
+        }
+
+        function calculateMetrics() {
+            const revenue = parseFloat(revenueSlider.value);
+            const asp = parseFloat(aspSlider.value);
+
+            revenueValDisplay.textContent = formatRevenue(revenue);
+            aspValDisplay.textContent = `$${asp} USD/m²`;
+
+            // 1. Calculate Volume Needed
+            calculatedVol = Math.round(revenue / asp);
+            outVolume.textContent = calculatedVol.toLocaleString() + " m²";
+
+            // 2. SMT Points = volume * 20 boards/m² * 50 points/board
+            const smtPoints = calculatedVol * 1000;
+            outSmt.textContent = smtPoints.toLocaleString() + " Pts";
+
+            // 3. Determine Phase and CapEx
+            if (revenue < 5000000) {
+                triggeredPhase = 1;
+                calculatedCapExUSD = 0;
+                calculatedCapExINR = 0;
+                outCapEx.textContent = "₹0 (Zero CapEx)";
+                assetTurnoverRow.style.display = 'none';
+            } else if (revenue < 25000000) {
+                triggeredPhase = 2;
+                calculatedCapExUSD = 10.0;
+                calculatedCapExINR = 83.0; // 83 Crores
+                outCapEx.textContent = `₹83 Crores ($${calculatedCapExUSD.toFixed(1)}M)`;
+                assetTurnoverRow.style.display = 'none';
+            } else {
+                triggeredPhase = 3;
+                calculatedCapExUSD = 30.0;
+                calculatedCapExINR = 249.0; // 249 Crores
+                outCapEx.textContent = `₹249 Crores ($${calculatedCapExUSD.toFixed(1)}M)`;
+                assetTurnoverRow.style.display = 'flex';
+                
+                // Asset turnover = Revenue / CapEx
+                const turnover = revenue / (calculatedCapExUSD * 1000000);
+                outTurnover.textContent = turnover.toFixed(2) + "x";
+            }
+
+            // Update Roadmap Active styling
+            phaseCard1.classList.remove('active-phase');
+            phaseCard2.classList.remove('active-phase');
+            phaseCard3.classList.remove('active-phase');
+
+            if (triggeredPhase === 1) phaseCard1.classList.add('active-phase');
+            else if (triggeredPhase === 2) phaseCard2.classList.add('active-phase');
+            else if (triggeredPhase === 3) phaseCard3.classList.add('active-phase');
+
+            updateStrategyTitleLanguage();
+
+            // 4. Update Capacity Matching
+            let indiaDemandVol = 0;
+            if (triggeredPhase === 1 || triggeredPhase === 2) {
+                indiaDemandVol = calculatedVol;
+            }
+
+            const indiaPercent = (indiaDemandVol / VN_TOTAL_CAPACITY) * 100;
+            
+            // Adjust visual bars
+            vnBaseBar.style.width = '80%';
+            
+            if (indiaPercent > 20) {
+                vnIndiaBar.style.width = '20%';
+                vnIndiaBar.className = "bg-red-500 h-full absolute left-[80%] top-0 transition-all duration-300";
+                indiaLegendBox.className = "inline-block w-2.5 h-2.5 bg-red-500 mr-1";
+                
+                capacityWarningBadge.className = "text-red-400 font-bold";
+                if (currentLang === 'en') {
+                    indiaLegendText.textContent = `India Project Buffer (${indiaPercent.toFixed(1)}% - BUFFER OVERFLOW!)`;
+                    capacityWarningBadge.innerHTML = `<i class="fas fa-exclamation-triangle mr-1"></i>Buffer Shortage`;
+                } else {
+                    indiaLegendText.textContent = `印度專案需求 (${indiaPercent.toFixed(1)}% - 緩衝產能不足!)`;
+                    capacityWarningBadge.innerHTML = `<i class="fas fa-exclamation-triangle mr-1"></i>緩衝告急`;
+                }
+            } else {
+                vnIndiaBar.style.width = indiaPercent + '%';
+                vnIndiaBar.className = "bg-emerald-500 h-full absolute left-[80%] top-0 transition-all duration-300";
+                indiaLegendBox.className = "inline-block w-2.5 h-2.5 bg-emerald-500 mr-1";
+                
+                capacityWarningBadge.className = "text-emerald-400 font-bold";
+                if (currentLang === 'en') {
+                    indiaLegendText.textContent = `India Project Buffer (${indiaPercent.toFixed(1)}%)`;
+                    capacityWarningBadge.innerHTML = `<i class="fas fa-check-circle mr-1"></i>Supply Safe`;
+                } else {
+                    indiaLegendText.textContent = `印度專案需求 (${indiaPercent.toFixed(1)}%)`;
+                    capacityWarningBadge.innerHTML = `<i class="fas fa-check-circle mr-1"></i>供應安全`;
+                }
+            }
+
+            updateChart();
+        }
+
+        function updateChart() {
+            if (!capacityChart) return;
+
+            let indiaDemandVol = (triggeredPhase === 1 || triggeredPhase === 2) ? calculatedVol : 0;
+            let excess = 0;
+            let occupiedBuffer = indiaDemandVol;
+            let remainingBuffer = VN_BUFFER_MAX - indiaDemandVol;
+
+            if (indiaDemandVol > VN_BUFFER_MAX) {
+                excess = indiaDemandVol - VN_BUFFER_MAX;
+                occupiedBuffer = VN_BUFFER_MAX;
+                remainingBuffer = 0;
+            }
+
+            const chartLangData = {
+                en: ['Base Load (MNCs)', 'India Demand (Buffer)', 'Unallocated Buffer', 'Buffer Deficit'],
+                zh: ['基礎負載 (外資客戶)', '印度專案佔用', '未分配緩衝', '產能超載缺口']
+            };
+
+            capacityChart.data.labels = chartLangData[currentLang];
+            capacityChart.data.datasets[0].data = [VN_BASE_LOAD, occupiedBuffer, Math.max(0, remainingBuffer), excess];
+            
+            // Set dynamic colors based on status
+            if (excess > 0) {
+                capacityChart.data.datasets[0].backgroundColor = [
+                    'rgba(107, 114, 128, 0.5)', // base grey
+                    'rgba(239, 68, 68, 0.7)',  // india red
+                    'rgba(31, 41, 55, 0.8)',   // remaining
+                    'rgba(239, 68, 68, 1)'     // excess red
+                ];
+            } else {
+                capacityChart.data.datasets[0].backgroundColor = [
+                    'rgba(107, 114, 128, 0.5)', // base grey
+                    'rgba(16, 185, 129, 0.7)', // india green
+                    'rgba(55, 65, 81, 0.8)',   // remaining grey
+                    'rgba(239, 68, 68, 0)'     // excess
+                ];
+            }
+            capacityChart.update();
+        }
+
+        // Initialize event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Slider handlers
+            revenueSlider.addEventListener('input', calculateMetrics);
+            aspSlider.addEventListener('input', calculateMetrics);
+
+            // Reset button
+            document.getElementById('reset-sim-btn').addEventListener('click', () => {
+                revenueSlider.value = 15000000;
+                aspSlider.value = 300;
+                calculateMetrics();
+            });
+
+            // Route buttons
+            const routeStdBtn = document.getElementById('route-std-btn');
+            const routeStrBtn = document.getElementById('route-str-btn');
+            const routeStdContent = document.getElementById('route-standard-content');
+            const routeStrContent = document.getElementById('route-strategic-content');
+
+            routeStdBtn.addEventListener('click', () => {
+                activeRoute = 'standard';
+                routeStdBtn.className = "px-2 py-0.5 rounded text-white bg-blue-600 font-bold transition-all";
+                routeStrBtn.className = "px-2 py-0.5 rounded text-gray-400 hover:text-white transition-all";
+                routeStdContent.classList.remove('hidden');
+                routeStrContent.classList.add('hidden');
+            });
+
+            routeStrBtn.addEventListener('click', () => {
+                activeRoute = 'strategic';
+                routeStrBtn.className = "px-2 py-0.5 rounded text-white bg-blue-600 font-bold transition-all";
+                routeStdBtn.className = "px-2 py-0.5 rounded text-gray-400 hover:text-white transition-all";
+                routeStrContent.classList.remove('hidden');
+                routeStdContent.classList.add('hidden');
+            });
+
+            // Init Chart.js
+            const ctx = document.getElementById('capacityChart').getContext('2d');
+            capacityChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [],
+                        backgroundColor: [],
+                        borderWidth: 1,
+                        borderColor: '#1f2937'
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    cutout: '65%',
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Language Toggle Switch
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            // Authentication Gate Logic
+            const pwdInput = document.getElementById('pwd-input');
+            const loginBtn = document.getElementById('login-btn');
+            const rememberCb = document.getElementById('remember-cb');
+            const loginGate = document.getElementById('login-gate');
+            const loginCard = document.querySelector('.login-card');
+            const appContent = document.getElementById('app-content');
+            const errorMsg = document.getElementById('login-error');
+
+            const targetPwd = 'FPC2026';
+
+            function showApp() {
+                // Fadeout Gate
+                loginGate.style.opacity = '0';
+                setTimeout(() => {
+                    loginGate.style.display = 'none';
+                    appContent.classList.remove('hidden');
+                    // Trigger first calculation and layout updates after visual display is activated
+                    calculateMetrics();
+                    updateLanguageUI();
+                }, 500);
+            }
+
+            // Auto Auth token check
+            if (localStorage.getItem('fpc_india_auth') === 'true') {
+                showApp();
+            } else {
+                // Render placeholder page language correctly inside the gate
+                updateLanguageUI();
+            }
+
+            function attemptLogin() {
+                if (pwdInput.value === targetPwd) {
+                    if (rememberCb.checked) {
+                        localStorage.setItem('fpc_india_auth', 'true');
+                    }
+                    showApp();
+                } else {
+                    errorMsg.classList.remove('hidden');
+                    // Shake UI feedback trigger
+                    loginCard.classList.add('shake-effect');
+                    pwdInput.value = '';
+                    pwdInput.focus();
+                    setTimeout(() => {
+                        loginCard.classList.remove('shake-effect');
+                    }, 400);
+                }
+            }
+
+            loginBtn.addEventListener('click', attemptLogin);
+            pwdInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') attemptLogin(); });
+        });
+    </script>
+</body>
+
+</html>
