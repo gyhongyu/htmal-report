@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Aaviza Electronics Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Aaviza Electronics Pvt Ltd (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Aaviza Electronics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        @media print { 
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC STRATEGIC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Aaviza Electronics Private Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Aaviza Electronics Private Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared For:</strong> Foxlink India BD Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制單位：</strong> 正崴印度業務與情報部門</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-blue-400">Tier 2</div>
+                            <div class="text-xs text-gray-500 uppercase">Niche Manufacturer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Manufacturing Setup</span>
+                    <span data-lang="zh">1. 企業身份與製造佈局</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Aaviza Electronics Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U74900KA2014PTC074083</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (未上市私營公司)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Turnover Range</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">營收規模區間</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 25 - 50 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Sethumadhavan Inchora</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終控制人：</strong> Sethumadhavan Inchora</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Manufacturing Hubs</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">核心製造與研發基地</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Bangalore & Coimbatore</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">班加羅爾 & 科印拜陀</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">3 Units + 1 R&D Subsidiary</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">3座製造廠房 + 1個研發子公司</p>
+                    </div>
+                </div>
+
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Setup Details</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理製造與技術佈局詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setups:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地 (Manufacturing Setups)：</strong>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li data-lang="en"><strong>Unit 1 (Bangalore HQ & Aerospace):</strong> Vijinapura Extension. AS 9100D certified. Focuses on magnetics, military cable assemblies, and box build.</li>
+                                <li data-lang="zh"><strong>班加羅爾一號廠 (Unit 1 - 總部與航太國防):</strong> Vijinapura。具 AS 9100D 軍工/航航認證，專注精密電磁線圈（Magnetics）與高階系統組裝。</li>
+                                <li data-lang="en"><strong>Unit 2 (Bangalore Industrial):</strong> Doddaballapura. Large scale industrial & automotive/EV harness and mechanical box builds.</li>
+                                <li data-lang="zh"><strong>班加羅爾二號廠 (Unit 2 - 綜合製造):</strong> Doddaballapura 工業區。大批量工業與新能源車 (EV) 線束、箱體組裝。</li>
+                                <li data-lang="en"><strong>Unit 3 (Coimbatore Expansion):</strong> Mylampatti. Formed by integrating Trucon Interconnect Solutions. Boosts southern auto and home appliances harness capacity.</li>
+                                <li data-lang="zh"><strong>科印拜陀三號廠 (Unit 3 - 擴產基地):</strong> Mylampatti。由 Trucon 整合而來，承接南部汽車、工業和家電的大規模線纜裝配。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D & Design Node:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與硬體設計子公司：</strong>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li data-lang="en"><strong>Viccacia Global Technologies:</strong> Bangalore. 100% subsidiary. Core engine for electronics R&D, hardware product design, PCBA prototyping, and complete ESDM upgrade.</li>
+                                <li data-lang="zh"><strong>Viccacia Global Technologies (100% 全資):</strong> 位於班加羅爾。專注電子產品 R&D、硬體設計、PCBA 原型開發與系統整合，是代工升級為 ESDM 的核心引擎。</li>
+                                <li data-lang="en"><strong>Web Portals:</strong> <a href="https://aaviza.com/" target="_blank">aaviza.com</a> | <a href="https://viccacia.com/" target="_blank">viccacia.com</a></li>
+                                <li data-lang="zh"><strong>官方網站直連:</strong> <a href="https://aaviza.com/" target="_blank">aaviza.com</a> | <a href="https://viccacia.com/" target="_blank">viccacia.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Financial Scale</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700 md:col-span-2">
+                            <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Direct Ownership Trace (3 Levels Up):</strong></p>
+                            <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                            <div class="flex flex-col md:flex-row gap-2 text-xs mb-4">
+                                <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                    <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Shareholders)</span>
+                                    <span class="text-gray-500 block" data-lang="zh">第一層 (直接股東)</span>
+                                    <strong class="text-white">Sethumadhavan Inchora & Uma Madai Puthiyaveedu</strong>
+                                    <span class="block text-green-400 mt-1" data-lang="en">Direct control of stakes</span>
+                                    <span class="block text-green-400 mt-1" data-lang="zh">個人持股、決策靈活</span>
+                                </div>
+                                <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                                <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                    <span class="text-gray-500 block" data-lang="en">Level 2 (Holdings)</span>
+                                    <span class="text-gray-500 block" data-lang="zh">第二層 (控股結構)</span>
+                                    <strong class="text-gray-400">None (Direct Individual Holding)</strong>
+                                    <span class="block text-gray-500 mt-1" data-lang="en">No shell company</span>
+                                    <span class="block text-gray-500 mt-1" data-lang="zh">無中間殼公司或海外控股</span>
+                                </div>
+                                <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                                <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                    <span class="text-gray-500 block" data-lang="en">Ultimate Big Boss</span>
+                                    <span class="text-gray-500 block" data-lang="zh">最終受益人 / 決策人</span>
+                                    <strong class="text-blue-300">Sethumadhavan Inchora (CEO)</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <strong class="text-white block text-sm mb-2" data-lang="en">Evolution & Split-up</strong>
+                            <strong class="text-white block text-sm mb-2" data-lang="zh">股權背景演變與戰略解讀</strong>
+                            <p class="text-xs text-gray-300 leading-relaxed" data-lang="en">
+                                Formerly known as <strong>Kaynes Interconnection Systems India Pvt. Ltd.</strong> (associated with EMS giant Kaynes Technology). In July 2022, split from the parent company's circle. Founder Sethumadhavan Inchora completely took over and rebranded it to Aaviza. Zero FDI or VC money inside - completely independent and fast-decision local private ESDM company.
+                            </p>
+                            <p class="text-xs text-gray-300 leading-relaxed" data-lang="zh">
+                                早期名為 <strong>Kaynes Interconnection Systems India Pvt. Ltd.</strong>，原為上市 EMS 巨頭 Kaynes Technology 關聯企業。2022年7月完成拆分與經營權變更，由創辦人 Sethumadhavan Inchora 獨立接掌，正式更名為 Aaviza，屬於高度敏捷的民營 ESDM 企業。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & BOM Analysis</span>
+                    <span data-lang="zh">3. 主要產品與通用 BOM 供應鏈需求</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i>Custom High-End Wiring Harness</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i>高端客製化線束</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i>Aerospace & Defense Cable Assemblies</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i>軍工與航太電纜組裝</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i>Magnetics & Solenoid Assemblies</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i>電磁線圈與螺線管裝配</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i>Electro-Mechanical Box Build Assembly</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i>機電盒建 (Box Build) 整合服務</li>
+
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i>Embedded hardware & SMPS (via Viccacia)</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i>嵌入式硬體與電源產品 (透過子公司)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Teardown -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">General BOM Teardown</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要零組件拆解需求</div>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li data-lang="en"><strong>Interconnect:</strong> Precision D-Sub, Micro-D, circular aviation connect, automotive waterproof, OBD terminals & pins.</li>
+                            <li data-lang="zh"><strong>互連器件：</strong> 精密 D-Sub、Micro-D、圓形航空接頭、車用防水連接器、OBD 接頭、端子。</li>
+                            
+                            <li data-lang="en"><strong>Wires:</strong> High-temperature FEP/PTFE fluoroplastic wire, micro-coaxial (32-44 AWG), low smoke zero halogen (LSZH) wires.</li>
+                            <li data-lang="zh"><strong>特種線材：</strong> 高溫 FEP/PTFE 氟塑料線、極細微軸電纜 (32-44 AWG)、低煙無鹵線材 (LSZH)。</li>
+                            
+                            <li data-lang="en"><strong>Protection:</strong> Tinned copper wire braiding (ATC), Nomex/Nylon fireproof shielding sleeve, heat-shrink tube, potting compound.</li>
+                            <li data-lang="zh"><strong>防護包覆：</strong> 鍍錫銅絲編織網、Nomex/Nylon 防火編織套管、熱縮管、密封灌封膠。</li>
+                            
+                            <li data-lang="en"><strong>Magnetic & Active:</strong> Enameled copper wire, ferrite core, bobbins, caps, inductors, microcontrollers, MOSFET, multi-layer PCBs.</li>
+                            <li data-lang="zh"><strong>磁性與主被動：</strong> 漆包銅線、鐵氧體磁芯、塑料骨架、電容電感、MCU、MOSFET、多層 PCB。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Gaps -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">FOXLINK Supply Chain Opportunity</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">正崴精密 (FOXLINK) 的切入機會點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-xs text-gray-300 leading-relaxed">
+                            <p class="mb-2" data-lang="en">
+                                <i class="fas fa-bullseye text-green-500 mr-1"></i><strong>Import Substitution:</strong> Under India's localization push (Atmanirbhar Bharat), Aaviza must increase local content.
+                            </p>
+                            <p class="mb-2" data-lang="zh">
+                                <i class="fas fa-bullseye text-green-500 mr-1"></i><strong>進口替代壓力：</strong> 受「印度自立自強」政策推動，Aaviza 必須持續提高原材料的印度在地採購佔比。
+                            </p>
+                            <p class="mb-2" data-lang="en">
+                                <i class="fas fa-link text-green-400 mr-1"></i><strong>High Dependence on Outsourced Connectors:</strong> Since Aaviza does not make connectors or bare wires, they import heavily. FOXLINK can offer localized, highly cost-effective precision connectors and high-frequency cables to help them replace high-cost imports.
+                            </p>
+                            <p data-lang="zh">
+                                <i class="fas fa-link text-green-400 mr-1"></i><strong>零組件對外依賴：</strong> Aaviza 本身不生產連接器和線材，對外依賴度高。FOXLINK 可提供具備在地化生產優勢、極具性價比的精密連接器與端子，協助其替換進口料件，角逐軍工及新能源車線束組裝訂單。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: Insight from Recruitment Platforms</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘雷達：核心動態與情報解讀</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Aggregated from Naukri, Indeed and Indian BD insights</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">綜合整理自 Naukri、LinkedIn 及印度在地招聘情報</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Geolocation</th>
+                                    <th class="w-1/3" data-lang="zh">招聘職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Business Implication (Indian English Focus)</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 隱含戰略意義</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Purchase & Supply Chain Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore Unit 1</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 (Unit 1)</span>
+                                    </td>
+                                    <td data-lang="en">Handling project-wise procurement of electronic components. Direct order to find local vendors and manage logistics. Heavy focus on price negotiation to bypass import custom duties.</td>
+                                    <td data-lang="zh">負責項目制電子元器件採購、進出口物流。顯示公司正強化日常採購成本控制，尋求在本地建立新的低成本供應商矩陣。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">SCM / SCM Engineer</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore Unit 1</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 (Unit 1)</span>
+                                    </td>
+                                    <td data-lang="en">In charge of running material requirement plans (MRP) and evaluating suppliers. Tracking day-to-day material dispatch to maintain zero buffer stock.</td>
+                                    <td data-lang="zh">執行日常物料需求計畫 (MRP) 與供應商評估，優化庫存管理並追蹤日常交貨進度，提升應對供應鏈風險的能力。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Senior Sales Engineer / Manager</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore Unit 1</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾 (Unit 1)</span>
+                                    </td>
+                                    <td data-lang="en">Hunting new B2B business in aerospace, medical, EV automotive and railways. Crucial role for Aaviza to scale up their total setup capacity.</td>
+                                    <td data-lang="zh">主攻航太、醫療、新能源汽車（EV）及軌道交通的 B2B 大客戶開拓，反映其積極將業務線束向高利潤的民用高階市場推進。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">IT Support Engineer (Oracle & Python)</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Ramamurthy Nagar HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">總部 (Ramamurthy Nagar)</span>
+                                    </td>
+                                    <td data-lang="en">Building Python automated decision-making dashboards by linking Oracle ERP database. Clear signal that they are automating their financial, BOM, and SCM calculation from top-down.</td>
+                                    <td data-lang="zh"><strong>重要資訊化訊號：</strong> 串接 Oracle ERP 並以 Python 開發自動數據看板。顯示公司正在將項目成本核算與 BOM 毛利分析徹底轉向自動化、透明化決策。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Management Trainee - BD / Sales</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾總部</span>
+                                    </td>
+                                    <td data-lang="en">Focusing on digital marketing and LinkedIn branding to acquire global accounts directly and boost overseas dispatches.</td>
+                                    <td data-lang="zh">側重數位行銷與 LinkedIn 開拓，提升 Aaviza 在印度本土及國際市場的品牌知名度。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Management Trainee - Project Management</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore HQ</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾總部</span>
+                                    </td>
+                                    <td data-lang="en">Coordinating clients' custom requirements from NPI (New Product Introduction) stage to mass manufacturing. Suggesting orders are growing fast.</td>
+                                    <td data-lang="zh">負責新產品開發導入（NPI）到批量生產的客戶對接，表明 Aaviza 近期開案項目呈增長態勢，亟需擴張客群專案管理團隊。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Line Assembly Operators & Technicians</strong><br>
+                                        <span class="text-xs text-gray-500" data-lang="en">Bangalore & Coimbatore</span>
+                                        <span class="text-xs text-gray-500" data-lang="zh">班加羅爾/科印拜陀工廠</span>
+                                    </td>
+                                    <td data-lang="en">Continuous recruitment of factory workers skilled in wire stripping, terminal crimping, and manual braiding to handle new high-volume jobs.</td>
+                                    <td data-lang="zh">長年期招募基礎線束加工操作員（剝皮、壓接、編織），配合 Unit 2 和 Unit 3 的新設備與大批量訂單裝配產能的釋放。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Distribution Analysis</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局分析</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en"><i class="fas fa-briefcase mr-2"></i>B2B Direct-to-OEM Model</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh"><i class="fas fa-briefcase mr-2"></i>純 B2B 深度客製直銷模式</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>100% Direct:</strong> Operating completely via direct sales to brand OEMs and key system integrators; no wholesale or standard distribution.</li>
+                                <li data-lang="zh"><strong>100% 直銷對接：</strong> 採用 Direct-to-OEM 模式，直接與大型系統整合商、OEM 品牌廠對接合作，不經過大眾分銷商。</li>
+                                
+                                <li data-lang="en"><strong>Defense Offset Partner:</strong> Officially qualified under the Indian Ministry of Defense (MOD) rules, making them a key partner for global defense giants looking to dispatch offset orders locally.</li>
+                                <li data-lang="zh"><strong>國防補償機制對接：</strong> 具備符合國防部（MOD）採購標準的資質，可作全球防務巨頭在印度履行「國防採購補償政策 (Offset)」的本地製造與代工夥伴。</li>
+                                
+                                <li data-lang="en"><strong>Digital Presence:</strong> Cataloging key capabilities on industrial platforms like IndiaMART. Showcasing certifications (AS9100, IATF 16949, ISO 13485) online to establish strong high-tier credibility.</li>
+                                <li data-lang="zh"><strong>數位展示：</strong> 在 IndiaMART 等工業 B2B 電商設立店面；官網高度凸顯各類國際管理體系認證以獲取高階客戶信任。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en"><i class="fas fa-truck mr-2"></i>Logistics & Export Setup</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh"><i class="fas fa-truck mr-2"></i>供應鏈物流與出口保稅</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Export-Oriented Unit (EOU):</strong> Utilizing dedicated EOU setups to enjoy tax holidays and duty exemption, allowing fast, duty-free dispatch of customized harnesses to Europe and Americas.</li>
+                                <li data-lang="zh"><strong>出口導向型單位 (EOU)：</strong> 設有出口保稅專區，享有免稅與快速清關政策，便利直接向歐美市場出口高信賴度軍工及航太線組。</li>
+                                
+                                <li data-lang="en"><strong>Vendor JIT Logistics:</strong> Requiring component suppliers to support tight project-wise timeline and Just-In-Time (JIT) dispatches to avoid holding dead inventory.</li>
+                                <li data-lang="zh"><strong>供應商 JIT 配合：</strong> 供應商需支持項目制發料、快速打樣，並配合「準時制（JIT）」配送至其班加羅爾或科印拜陀廠區。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape & Market Position</span>
+                    <span data-lang="zh">6. 市場地位與競爭版圖</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">Aaviza 競爭力畫像</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Sentiment score based on high-reliability niche performance</p>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">基於其高信賴度軍工利基市場表現之綜合推估</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India High-Reliability EMS & Cable Harness Industry (Top Tier Players)</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度高信賴度 EMS 與高端電纜線束行業主流玩家排名</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">主要企業</th>
+                                        <th class="p-2" data-lang="en">Strategic Profile & Background</th><th class="p-2" data-lang="zh">戰略特徵與背景</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2 font-bold text-gray-300">Motherson Sumi Systems (MSSL)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Absolute market giant in automotive, heavy commercial vehicle wiring.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度線束絕對霸主，主攻傳統與商用車大批量線束。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2 text-gray-300">Kaynes Technology India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Listed EMS titan, highly powerful in aerospace, defense, and high-speed rail.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度上市 EMS 領頭羊，航太、國防與高鐵板塊實力極強。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2 text-gray-300">Syrma SGS Technology</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Listed conglomerate with massive scale in magnetics, box builds, and PCBA.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">上市大型 EMS 集團，線束與磁性元件產線具備巨大規模。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2 text-gray-300">Avalon Technologies Ltd</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Listed premium box build & system integrator. Focuses on exports.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">上市高階線束與 Box Build 生產商，主攻美國出口與重工業。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2 text-gray-300">Centum Electronics</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Heavyweight in military/aerospace design & manufacturing.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">高階航太與國防系統裝配巨頭。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6-9</td>
+                                        <td class="p-2" colspan="2">Cyient DLM, DCX Systems, V S Lights Group, Tavas Electron</td>
+                                    </tr>
+                                    <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+                                        <td class="p-2 font-bold text-center text-white">10</td>
+                                        <td class="p-2 text-white font-bold">Aaviza Electronics (Target)</td>
+                                        <td class="p-2 text-blue-300" data-lang="en">Highly flexible, unlisted medium-scale ESDM specialist. Certified in aerospace/military, 100% focused on direct customization with no in-house connector plants. Excellent FOXLINK target.</td>
+                                        <td class="p-2 text-blue-300" data-lang="zh"><strong>本報告目標：</strong> 高度靈活的非上市中型利基 ESDM。具備多項高階認證，本身無連接器生產線，是正崴理想的零部件滲透目標。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity Analysis:</strong> While top 1-5 players have their own captive harness or connector divisions, smaller premium players like Aaviza (Rank 10) are heavily dependent on external component manufacturers. They are desperate for FOXLINK to supply high-reliability connectors and wires locally to support their military/EV contract scaling.</p>
+                            <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點深度分析：</strong> 排名前列的 EMS 巨頭多數擁有內部附屬線束廠，而第 10 位的 Aaviza 作為「小而美」的客製化玩家，其精密連接器和特殊線材完全依賴外部採購。為滿足在地採購比重，正崴提供本地化高精密組件對其有極強吸引力。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Recent Strategic Dynamics</span>
+                    <span data-lang="zh">7. 數位足跡與最新戰略動態 (近 3 個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[90px]">2026-01-20</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Product Launch] Viccacia Global Technologies Launches Industrial UPS & SMPS Lines</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新品上市] 100% 全資子公司 Viccacia 推出全新工業級 UPS 與 SMPS 電源產品線</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">
+                                Viccacia's portal went live, showcasing smart WiFi remote controllers, high-efficiency SMPS power supplies, and industrial UPS modules. This marks Aaviza's transformation from a pure assembly job-worker to a design-led ODM and system integration powerhouse. <span class="text-gray-500">(Opp: Foxlink can target PCBA/Power cord supplies)</span>
+                            </p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">
+                                子公司 Viccacia 官方網站正式上線，展示旗下研發中的遠端 WiFi 控制器、高效率工業電源（SMPS）及 UPS，標誌 Aaviza 正式向自有產品研發與 ODM 系統整合商跨越。<span class="text-gray-500">(機會：正崴可切入其電源用 PCBA 及高規格電源線供應)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[90px]">2026-01-10</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Capacity Integration] Coimbatore Unit 3 Facility Completed Consolidation</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[產能整合] 泰米爾納德邦 Coimbatore (科印拜陀) 三號廠整合重組完成</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">
+                                Declared the successful legal and operational merger of the acquired Trucon Interconnect Solutions. Functioning as Coimbatore Unit 3, it is geared to capture high-volume harness orders from southern textile machinery, electric motors, and heavy renewable industrial sectors.
+                            </p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">
+                                正式宣佈收購的 Trucon Interconnect 已完成廠房與資質重組。作為 Unit 3 基地，將重點承接南部龐大紡織機械、馬達製造、新能源重工大批量電纜裝配訂單。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[90px]">2025-12-18</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Hiring Campaign] Procurement Restructuring for "Import Substitution"</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[招聘動態] 啟動進口替代與 SCM 採購團隊重組</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">
+                                Released key hiring campaigns for SCM Managers and SCM Engineers. Mandatory requirements include experience in fighting raw-material price-wars and building robust Indian vendor ecosystems to replace high-cost imported components.
+                            </p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">
+                                發起新一輪 SCM 人才招募，重點要求具備電子組件價格談判及建立「印度本土供應商矩陣」的經驗，以降低對高關稅進口連接器件的依賴。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[90px]">2025-11-22</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Equipment Upgrade] Doddaballapura Unit 2 Upgrades Wire Processing Lines</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[設備升級] Doddaballapura 二號廠引進自動壓接與極細加工新設備</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">
+                                To support expanding automotive/EV harness portfolios, Unit 2 added semi-automatic and pneumatic high-precision crimping machines handling wires from 26 AWG down to ultra-fine 32 AWG micro-harness.
+                            </p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">
+                                為了拓展 EV 及汽車產業的多款客製線束需求，Unit 2 引入多台氣動及半自動精密端子壓接機，支援 26 AWG 到 10 AWG 壓接，以及 32 AWG 的極細特殊線路加工，顯著提升自製率。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap min-w-[90px]">2025-11-10</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[IT Operations] Oracle ERP Connected with Python Visual Dashboards</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[資訊化] Oracle ERP 結合 Python 智能可視化看板導入上線</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">
+                                The Bangalore HQ IT team completed a full deployment of Python scripts fetching Oracle ERP data. Designed to enforce project-wise raw material cost auditing and immediate BOM gross-margin analysis.
+                            </p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">
+                                總部 IT 團隊完成了基於 Python 串接 Oracle ERP 的數據看板建置，全面落實「項目制（Project-Wise）」的原材料成本精細化核算與實時毛利分析。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer and Metadata -->
+                <div class="border-t border-gray-700 pt-4 flex flex-col md:flex-row justify-between text-xs text-gray-500">
+                    <div>
+                        <span data-lang="en">Data compiled from: Ministry of Corporate Affairs (MCA) India, Zauba, Naukri, Viccacia & Aaviza Official Portals.</span>
+                        <span data-lang="zh">數據來源：印度公司註冊處 (MCA)、Zauba Corp、Naukri 招聘、Viccacia 及 Aaviza 官方網站。</span>
+                    </div>
+                    <div class="mt-2 md:mt-0 font-mono">
+                        <span data-lang="en">Report Generated: Feb 18, 2026</span>
+                        <span data-lang="zh">報告生成日期：2026年2月18日</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Sentiment-based Competitiveness Scores for Aaviza:
+        // Market Share: 4 (Niche Player, Ranked 10th in premium list)
+        // Localization: 5 (Strong Make-in-India urge, but highly dependent on imported connectors)
+        // Brand Power: 6 (Highly recognized certifications AS9100/IATF but lesser overall public volume)
+        // Digital Reach: 4 (Simple websites, no mass consumer digital campaigns)
+        // Financial Health: 7 (Stable double-digit growth, profitable INR 25-50 Cr setup, zero FDI debt)
+        const radarScores = [4, 5, 6, 4, 7]; 
+
+        const chartData = {
+            en: { 
+                labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], 
+                label: 'Aaviza Competitiveness Profile (1-10)' 
+            },
+            zh: { 
+                labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康度'], 
+                label: 'Aaviza 競爭力評分 (1-10)' 
+            }
+        };
+        
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { 
+                console.error("Language switch error: ", e); 
+            }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            // Initializing Radar Chart
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: { size: 11, weight: 'bold' } },
+                            ticks: { display: false, max: 10, stepSize: 2 }
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

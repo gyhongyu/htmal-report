@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-17T04:31:31.685Z",
+  "lastUpdated": "2026-07-17T11:16:41.448Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1679,6 +1679,19 @@
       "fileName": "report-1784262689990.html",
       "createdAt": "2026-07-17T04:31:31.685Z",
       "updatedAt": "2026-07-17T04:31:31.685Z"
+    },
+    {
+      "id": "report-1784287000615",
+      "title": "Target: Aaviza Electronics Private Limited-Thomas Lin",
+      "description": "目標企業：Aaviza Electronics Private Limited-Thomas Lin",
+      "categories": [
+        "客戶KYC",
+        "項目計劃",
+        "工作報告"
+      ],
+      "fileName": "report-1784287000615.html",
+      "createdAt": "2026-07-17T11:16:41.448Z",
+      "updatedAt": "2026-07-17T11:16:41.448Z"
     }
   ]
 }
