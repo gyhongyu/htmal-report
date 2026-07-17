@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- Target Company: VVDN Technologies Private Limited -->
+ <!-- Date: Feb 2026 -->
+ <title data-lang="en">Deep Dive KYC: VVDN Technologies (Feb 2026)</title>
+ <title data-lang="zh">印度企業 KYC 深度調查報告：VVDN Technologies (2026年2月)</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <style>
+ body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+ [data-lang] { display: none; }
+ .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+ @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+ a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+ a:hover { color: #e0f2fe; text-decoration: solid; }
+ 
+ .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+ .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+ 
+ .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+ .recon-box.risk { border-left: 4px solid #ef4444; }
+ .recon-box.opp { border-left: 4px solid #22c55e; }
+ .recon-box.neutral { border-left: 4px solid #eab308; }
+ .recon-box.info { border-left: 4px solid #3b82f6; }
+
+ .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+ .tag-blue { background-color: #1e40af; color: white; }
+ .tag-green { background-color: #166534; color: white; }
+ .tag-red { background-color: #991b1b; color: white; }
+
+ table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+ th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+ th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+ tbody tr:nth-child(odd) { background-color: #1f2937; }
+ tbody tr:nth-child(even) { background-color: #2b3748; }
+ tbody tr:hover { background-color: #4b5563; }
+
+ .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+ .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+ .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+ @media (min-width: 768px) {
+ .content-area { padding: 2.5rem; }
+ .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+ th, td { padding: 0.75rem; }
+ .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+ .section-divider span { padding: 0 1rem; }
+ }
+
+ @media print { 
+ .no-print { display: none !important; } 
+ body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+ .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+ .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+ .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+ th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+ .text-white { color: #000 !important; } 
+ .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+ h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+ .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+ canvas { max-height: 250px; page-break-inside: avoid; } 
+ table, tr, .recon-box { page-break-inside: avoid; } 
+ .grid { display: block; }
+ .grid > div { margin-bottom: 1rem; }
+ #opportunityRadar { max-width: 400px; margin: 0 auto; }
+ }
+ </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+ <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+ 
+ <!-- Navigation -->
+ <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+ <div class="flex items-center space-x-3">
+ <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+ <div>
+ <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+ <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+ </div>
+ </div>
+ <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+ <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+ <i class="fas fa-file-pdf mr-2"></i>
+ <span data-lang="en">Export PDF</span>
+ <span data-lang="zh">導出 PDF</span>
+ </button>
+ <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+ <span data-lang="en">切換中文</span>
+ <span data-lang="zh">Switch to English</span>
+ </button>
+ </div>
+ </header>
+
+ <main class="flex-1">
+ <div class="content-area">
+ 
+ <!-- Report Header -->
+ <div class="border-b border-gray-700 pb-6 mb-6">
+ <div class="flex justify-between items-end">
+ <div>
+ <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC STRATEGIC INTELLIGENCE</span>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: VVDN Technologies Private Limited</h1>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：VVDN Technologies Private Limited (印度本土 ODM 巨頭)</h1>
+ <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+ <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+ </div>
+ <div class="text-right hidden md:block">
+ <div class="text-2xl font-bold text-blue-400">Tier 1</div>
+ <div class="text-xs text-gray-500 uppercase">Strategic Partner</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 1. Corporate Identity (Dashboard) -->
+ <div class="section-divider mt-0">
+ <span data-lang="en">1. Corporate Identity & Setup Scale</span>
+ <span data-lang="zh">1. 企業身份與製造規模</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+ <!-- Registration -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+ <p class="text-lg font-bold text-white mt-2">VVDN Technologies Pvt Ltd</p>
+ <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72200HR2007PTC125241</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (未上市私營企業)</p>
+ </div>
+ 
+ <!-- Financial Scale -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Scale</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模</h3>
+ <div class="flex items-baseline mt-2">
+ <span class="text-2xl font-bold text-green-400">₹ 3,500 - 3,800 Cr</span>
+ </div>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>FY25 Projected Turnover</strong> | ~USD 450M</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>FY25 預估營收規模</strong> | 約合 4.5 億美元</p>
+ </div>
+
+ <!-- Key Base -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Global HQ & Main Parks</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">全球總部與核心園區</h3>
+ <p class="text-lg font-bold text-white mt-2" data-lang="en">Gurgaon (IMT Manesar)</p>
+ <p class="text-lg font-bold text-white mt-2" data-lang="zh">古爾岡 (Manesar 工業區)</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">8,236+ Employees | 4,000+ R&D Staff</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="zh">全印員工 8,236+ 人 | 4,000+ 研發團隊</p>
+ </div>
+ </div>
+
+ <!-- Locations Details -->
+ <div class="recon-box info">
+ <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Setup Footprint</h3>
+ <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>製造基地與研發節點地理佈局</h3>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">Manufacturing Setups (7 Main Units):</strong>
+ <strong class="text-white block mb-1" data-lang="zh">主要製造基地 (7大核心廠區)：</strong>
+ <ul class="list-disc pl-5 space-y-1 text-xs">
+ <li data-lang="en"><strong>Global Innovation Park (GIP-1) Main Assembly (Manesar):</strong> CP-07, Sector-8. High-precision SMT & complete system assembly.</li>
+ <li data-lang="zh"><strong>GIP 核心裝配廠 (Manesar):</strong> CP-07, Sector-8. 配備高精度 SMT 貼片與系統整機組裝線。</li>
+ <li data-lang="en"><strong>Mechanical Innovation Park (Manesar):</strong> M6, Sector 11. Injection molding, tooling development & structures.</li>
+ <li data-lang="zh"><strong>Mechanical 模具機械廠 (Manesar):</strong> M6, Sector 11. 精密模具開發與結構件注塑組裝。</li>
+ <li data-lang="en"><strong>Tooling Park 1 & 2 (Manesar):</strong> Plot #449, Sector 8 & M-12, Sector 11.</li>
+ <li data-lang="zh"><strong>模具一廠與二廠 (Manesar):</strong> Plot #449, Sector 8 與 M-12, Sector 11。</li>
+ <li data-lang="en"><strong>Die Casting Park (Manesar):</strong> Plot #446, Sector 8. Heavy-duty RF housing & heat sink casting.</li>
+ <li data-lang="zh"><strong>Die Casting 壓鑄工廠 (Manesar):</strong> Plot #446, Sector 8. 專注射頻外殼與金屬散熱片壓鑄。</li>
+ <li data-lang="en"><strong>Product Manufacturing Park-1 (Manesar):</strong> 430, Phase 3. Assembly node.</li>
+ <li data-lang="zh"><strong>產品組裝一廠 (Manesar):</strong> 430, Phase 3。</li>
+ <li data-lang="en"><strong>Pollachi South India Base:</strong> A1, SIPCOT Ind. Park (GIP-2) & Thippampatti. High-speed localized delivery.</li>
+ <li data-lang="zh"><strong>Pollachi 南印基地:</strong> 包含 SIPCOT (GIP-2) 與 Thippampatti 廠，負責南印訂單快速交付。</li>
+ <li data-lang="en"><strong>Medical Manufacturing Park (Vizag):</strong> AMTZ Campus. Cleanroom setup for medical electronics.</li>
+ <li data-lang="zh"><strong>醫療器械生產基地 (Vizag):</strong> 位於安得拉邦 AMTZ，專門提供醫療級電子潔淨室製造。</li>
+ </ul>
+ </div>
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">Tech & R&D Center Nodes (11 Global Sites):</strong>
+ <strong class="text-white block mb-1" data-lang="zh">研發與技術中心 (全球 11 個主要節點)：</strong>
+ <ul class="list-disc pl-5 space-y-1 text-xs">
+ <li data-lang="en"><strong>Gurugram Global HQ:</strong> Integrated engineering labs.</li>
+ <li data-lang="zh"><strong>古爾岡全球總部:</strong> 一體化研發與設計驗證實驗室。</li>
+ <li data-lang="en"><strong>Noida R&D Node:</strong> Sector-68. Focused on telecom & power.</li>
+ <li data-lang="zh"><strong>Noida 研發節點:</strong> Sector-68，主攻電信與電源控制。</li>
+ <li data-lang="en"><strong>Bengaluru Node:</strong> EPIP Ind. Area, Whitefield. Cloud engines & advanced hardware.</li>
+ <li data-lang="zh"><strong>班加羅爾研發節點:</strong> Whitefield 科技園區，專注智慧雲端與軟硬一體化。</li>
+ <li data-lang="en"><strong>Chennai R&D Node:</strong> Pacifica Tech Park, Navalur. Auto & RF Antenna technologies.</li>
+ <li data-lang="zh"><strong>清奈研發節點:</strong> Navalur 太平洋科技園區，負責車用電子與射頻研發。</li>
+ <li data-lang="en"><strong>Kochi Node:</strong> Infopark SEZ, Phase II. Embedded software designs.</li>
+ <li data-lang="zh"><strong>科欽研發節點:</strong> Infopark 軟體園，專攻嵌入式系統與底層開發。</li>
+ <li data-lang="en"><strong>Other Tech Offices:</strong> Pune, Ahmedabad, Bhubaneshwar, Pollachi & Vietnam.</li>
+ <li data-lang="zh"><strong>其餘研發分部:</strong> 浦那、阿達馬巴德、布巴內什瓦爾、Pollachi 及越南分部。</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- 2. Ownership -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership, Scale & IPO Status</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模、股權穿透與上市進程</h2>
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+ <div class="bg-gray-800 p-4 rounded border border-gray-700 col-span-2">
+ <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+ <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+ <div class="flex flex-col md:flex-row gap-2 text-xs">
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Shareholders)</span>
+ <span class="text-gray-500 block" data-lang="zh">第一層 (直接持股比例)</span>
+ <ul class="list-none text-white font-medium mt-1 space-y-1">
+ <li>• PE Funds: ~36.05%</li>
+ <li>• Founders: ~19.26%</li>
+ <li>• Strategic Investors: ~14.09%</li>
+ <li>• ESOP Pool & Public Retail</li>
+ </ul>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Level 2 (Holding & Strategic Backers)</span>
+ <span class="text-gray-500 block" data-lang="zh">第二層 (主要機構股東)</span>
+ <ul class="list-none text-white font-medium mt-1 space-y-1">
+ <li class="text-blue-300">• Motilal Oswal Alternates (IBEF Fund)</li>
+ <li>• Applied Ventures (Applied Materials VCs)</li>
+ <li>• Napino Auto & Electronics (India Local Auto Tier-1)</li>
+ </ul>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Ultimate Beneficiaries</span>
+ <span class="text-gray-500 block" data-lang="zh">第三層 (最終受益決策委員會)</span>
+ <strong class="text-blue-300">Founders & Motilal Oswal Investment Committee</strong>
+ <p class="text-[10px] text-gray-400 mt-2" data-lang="en">No foreign parent control. High local ODM autonomy.</p>
+ <p class="text-[10px] text-gray-400 mt-2" data-lang="zh">無單一外資母公司控股，為高度自主之印度本土 ODM 巨頭。</p>
+ </div>
+ </div>
+ </div>
+ 
+ <div class="bg-gray-800 p-4 rounded border border-gray-700 flex flex-col justify-between">
+ <div>
+ <h4 class="font-bold text-white text-sm" data-lang="en">IPO Status & Strategy</h4>
+ <h4 class="font-bold text-white text-sm" data-lang="zh">上市進程與估值門檻</h4>
+ <p class="text-xs text-gray-400 mt-2 leading-relaxed" data-lang="en">Currently an unlisted private entity. Setting up transition plans to hit IPO on domestic exchanges (NSE/BSE) immediately once annual turnover hits USD 1 Billion (approx. ₹8,300 Crores). Active merchant banker grooming underway.</p>
+ <p class="text-xs text-gray-400 mt-2 leading-relaxed" data-lang="zh">目前為非上市私營企業。計劃在年化營收突破 10 億美元（約 8,300 Crores 盧比）門檻後，立即於印度本土市場 (NSE/BSE) 申請首次公開募股 (IPO)，目前正在進行密集的券商輔導。</p>
+ </div>
+ <div class="border-t border-gray-700 pt-2 mt-2">
+ <span class="text-xs text-gray-500" data-lang="en">FY23 Turnover: ₹2,145 Cr</span>
+ <span class="text-xs text-gray-500" data-lang="zh">FY23 營業額：2,145 Crores 盧比</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 3. Product & BOM -->
+ <div class="section-divider">
+ <span data-lang="en">3. Product Portfolio & Universal BOM Breakdown</span>
+ <span data-lang="zh">3. 主要產品大類與通用供應鏈 (BOM) 拆解</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+ <!-- Col 1: Categories -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">5G/IoT Target Segments</div>
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">核心產品大類</div>
+ <ul class="space-y-2 text-xs text-gray-300">
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>5G & Telecom Infrastructure:</strong> O-RAN Base Stations, RU/DU systems, Wi-Fi 6E/7 APs, patch antennas.</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>5G與電信網路設備：</strong> O-RAN 基地台、RU/DU、Wi-Fi 6E/7 AP、整合天線。</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Vision AI & Compute:</strong> Smart AI edge cameras, IP-cameras, NVR hardware.</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>智慧視覺與邊緣運算：</strong> AI 相機、高解析度 IP Cameras、NVR 主機。</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Automotive & Smart Cabin:</strong> ADAS modules, EV AC/DC Chargers, Smart BMS boards.</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>汽車與智慧座艙電子：</strong> ADAS 核心模組、EV AC/DC 充電樁、BMS 系統。</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Enterprise Servers:</strong> AI-servers, Open Compute Project (OCP) cloud hardware platforms.</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電信與資料中心伺服器：</strong> 本地化 AI 伺服器、OCP 規格架構。</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Industrial IoT & IT Hardware:</strong> IoT Smart Trackers, Laptops, Tablets & defense rugged systems.</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>工業物聯與 IT 終端：</strong> 智慧追蹤器、平板與國防三防電腦。</li>
+ </ul>
+ </div>
+
+ <!-- Col 2: BOM Reverse Engineering -->
+ <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Universal BOM Components</div>
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">產品系統/零組件技術拆解</div>
+ <ul class="space-y-2 text-xs text-gray-300">
+ <li data-lang="en"><strong>Processing & Logic:</strong> SoCs, high-compute MPUs (e.g., NXP i.MX94 series), FPGAs, high-density DDR RAMs.</li>
+ <li data-lang="zh"><strong>主控與高頻處理單元：</strong> 系統單晶片 (SoC)、高算力 MPU (NXP i.MX94)、FPGA、DDR 記憶體。</li>
+ 
+ <li data-lang="en"><strong>RF & Wireless Circuitry:</strong> 5G RF transceivers, RF Filters, Power Amplifiers (PA), high-gain internal antennas.</li>
+ <li data-lang="zh"><strong>高頻無線/射頻電路：</strong> 5G 射頻發射/接收晶片、濾波器、功率放大器 (PA)、天線。</li>
+ 
+ <li data-lang="en"><strong>Power Delivery & Control:</strong> Auto-grade PMICs, power MOSFETs, high-performance DC-DC converters.</li>
+ <li data-lang="zh"><strong>電源管理與控制：</strong> 車規級 PMIC、高效能 MOSFET、DC-DC 電源轉換板。</li>
+ 
+ <li data-lang="en"><strong>Optical Capturing Module:</strong> High-end CMOS sensors, precision lens blocks, filters.</li>
+ <li data-lang="zh"><strong>光學擷取模組：</strong> 高階 CMOS 影像感測晶片、鏡頭模組、濾鏡。</li>
+ 
+ <li data-lang="en"><strong>Enclosures & Interconnects:</strong> High-layer impedance PCBs, RF connectors, internal wiring, metal heatsinks, plastic parts.</li>
+ <li data-lang="zh"><strong>互連與外殼結構：</strong> 高阻抗 PCB、高頻連接器、內部線束、金屬壓鑄散熱片、精密注塑外殼。</li>
+ </ul>
+ </div>
+
+ <!-- Col 3: Supply Chain Needs for Foxlink -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">FOXLINK Opportunity Points</div>
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">正崴 (FOXLINK) 本地化機會點</div>
+ <div class="bg-gray-900/50 p-3 rounded text-xs text-gray-300">
+ <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>RF & High-Speed Conn:</strong> High-frequency board-to-board interconnects & waterproof 5G RF jacks are heavily required for O-RAN RUs.</p>
+ <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>高頻與射頻連接：</strong> O-RAN 基地台與拉遠單元 (RU) 急需高頻板對板、5G 射頻防水連接器。</p>
+ 
+ <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Automotive Harness:</strong> Localized high-temperature engine bay wire harness & heavy-current charging gun cables for EV chargers.</p>
+ <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>車用線束：</strong> 車規耐高溫內部線束、大電流高壓充電槍及傳輸線纜需求量極大。</p>
+
+ <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Structure Sourcing:</strong> OEM outsourcing of precision die-casting heatsinks & double-shot injection molded cases to cut import tax.</p>
+ <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>結構外包：</strong> 為了規避整機進口高關稅，對高精度金屬散熱壓鑄件、精密注塑件的本地外包需求強烈。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 4. Human Capital -->
+ <div class="section-divider">
+ <span data-lang="en">4. HR & Recruitment Intelligence (Geographic & Tech Dynamic)</span>
+ <span data-lang="zh">4. 人力資本與招聘情報 (2025-2026 招聘平台動態)</span>
+ </div>
+
+ <div class="recon-box risk">
+ <div class="mb-4">
+ <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: VVDN 11 Core Tech Focus Areas</h3>
+ <h3 class="text-lg font-bold text-white" data-lang="zh">招聘雷達：11 條核心情報深度解讀</h3>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">Geographic Distribution: Tech/SW R&D concentrated in Bengaluru & Kochi. HW, tooling, and supply chain setups in Gurgaon/Manesar.</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="zh">人才地理分佈：研發與軟體中心高度位於 Bengaluru 和 Kochi；硬體設計、系統驗證與工廠製造採購集中於 Manesar 總部。</p>
+ </div>
+
+ <div class="overflow-x-auto">
+ <table class="w-full text-sm text-left text-gray-300">
+ <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+ <tr>
+ <th class="w-1/3" data-lang="en">Role & Local Setup Unit</th>
+ <th class="w-1/3" data-lang="zh">職位與工作地點</th>
+ <th class="w-2/3" data-lang="en">Intel / Implication for Sourcing & Design</th>
+ <th class="w-2/3" data-lang="zh">情報解讀 / 技術動向與意義</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700">
+ <tr>
+ <td>
+ <strong class="text-blue-300">Senior Engineer - Camera/ISP Tuning</strong><br>
+ <span class="text-xs text-gray-500">Gurugram (Manesar)</span>
+ </td>
+ <td data-lang="en">Responsible for lens calibration and optical tuning for high-res cameras. Confirms high R&D priority on Vision-AI products.</td>
+ <td data-lang="zh">負責高解析度相機的鏡頭與光學調校，顯見智慧視覺產品線研發力道增強。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">Sr. Tech Lead / Sr. Cloud Engineer</strong><br>
+ <span class="text-xs text-gray-500">Bengaluru (Whitefield)</span>
+ </td>
+ <td data-lang="en">Working on backend architecture upgrades for VVDN's proprietary "Intelligent Cloud Engine (ICE)".</td>
+ <td data-lang="zh">負責其自主研發之智慧雲引擎 (Intelligent Cloud Engine, ICE) 的後端架構升級。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Senior Data Analyst / Analytics Execution Lead</strong><br>
+ <span class="text-xs text-gray-500">Bengaluru (Whitefield)</span>
+ </td>
+ <td data-lang="en">Managing project delivery metrics and optimizing internal workflows via JIRA.</td>
+ <td data-lang="zh">管理專案交付數據並優化內部 JIRA 系統。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">NPD (New Product Development) PM - Automotive</strong><br>
+ <span class="text-xs text-gray-500">Gurugram (Manesar)</span>
+ </td>
+ <td data-lang="en">Leading development of next-generation automotive ADAS core modules and EV Charging Stations.</td>
+ <td data-lang="zh">主導次世代車載 ADAS 模組與 EV 充電樁研發，代表車用電子的研發投入激增。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Sourcing & Procurement Manager - Electronics</strong><br>
+ <span class="text-xs text-gray-500">Gurugram</span>
+ </td>
+ <td data-lang="en">Heavy focus on "Import Substitution" for semiconductors, ICs, and passive components with local vendors.</td>
+ <td data-lang="zh">重點在半導體 IC、被動元件的「印度本地化替代方案」採購，急需本土化合規供應商。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">RF Antenna Design Engineer</strong><br>
+ <span class="text-xs text-gray-500">Chennai</span>
+ </td>
+ <td data-lang="en">Expanding design capabilities for customized RF antennas, aligning with European telecom requirements.</td>
+ <td data-lang="zh">與歐洲電信巨頭本地化合約天線設計，射頻研發團隊持續擴編。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">Hardware Design Engineer - 5G Subsystems</strong><br>
+ <span class="text-xs text-gray-500">Gurugram (Manesar)</span>
+ </td>
+ <td data-lang="en">Designing schematics for 5G Base Stations and Wi-Fi 7 boards. Performing high-speed Signal Integrity (SI) tests.</td>
+ <td data-lang="zh">負責 5G 基地台、Wi-Fi 7 電路板開發、高速信號完整性 (SI) 測試。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Embedded Software Developer - QNX/AUTOSAR</strong><br>
+ <span class="text-xs text-gray-500">Pune</span>
+ </td>
+ <td data-lang="en">Software developers working on AUTOSAR compliance layer to engage global automotive Tier-1 accounts.</td>
+ <td data-lang="zh">車用嵌入式軟體工程師，對接一線 Tier 1 汽車客戶，加深車規合規性。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Key Account Manager - Western Region</strong><br>
+ <span class="text-xs text-gray-500">Pune</span>
+ </td>
+ <td data-lang="en">Opening business channels with Tier-1 vehicle manufacturers (Tata Motors, Mahindra, etc.).</td>
+ <td data-lang="zh">負責開拓西部（如塔塔汽車、馬辛達）等車廠大客戶。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">SMT Line Maintenance Engineer</strong><br>
+ <span class="text-xs text-gray-500">Gurugram (Manesar)</span>
+ </td>
+ <td data-lang="en">Maintaining high-precision SMT lines (Fuji, Siemens) at GIP setup. Ensure minimum downtime.</td>
+ <td data-lang="zh">維修並操作西門子/富士等高精密 SMT 製造產線，提升核心生產設備妥善率。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Diploma Engineer Trainee (DET)</strong><br>
+ <span class="text-xs text-gray-500">Pollachi (South India)</span>
+ </td>
+ <td data-lang="en">Technical school vocational apprentice program to staff the assembly expansions in Pollachi Unit 2.</td>
+ <td data-lang="zh">工廠技術學校建教合作計畫，擴大 Pollachi 二廠裝配線技術工儲備。</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <!-- 5. Sales & Distribution -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales, Distribution & Supply Chain Logic</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售模式、通路與物流邏輯</h2>
+ 
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+ <!-- Strategy -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="en">B2B (JDM/ODM/EMS) Channel Strategy</h4>
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">純粹的 B2B (JDM/ODM/EMS) 商業模式</h4>
+ <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2 text-xs">
+ <li data-lang="en"><strong>Direct Global Sales:</strong> Operating 6 global setup branches (US, Canada, Japan, South Korea, Vietnam, Europe) connecting to tech giants (Ericsson, Telit, AMD, Qualcomm, etc.).</li>
+ <li data-lang="zh"><strong>全球大客戶直銷：</strong> 全球設有 6 個海外辦事處（美、加、日、韓、越、歐），直接對接全球科技巨頭 (Ericsson, Telit, AMD, Qualcomm 等)。</li>
+ 
+ <li data-lang="en"><strong>Strategic JVs/MoUs for Govt Procurement:</strong> Partnering with state-backed defense giant Bharat Electronics Limited (BEL) to bypass federal security checks on 5G/Defense projects.</li>
+ <li data-lang="zh"><strong>國防與公共部門標案：</strong> 通過與國營巨頭 Bharat Electronics Limited (BEL) 簽署聯合製造協議，成功打入印度政府 5G、國防與公用網路的供應鏈。</li>
+ 
+ <li data-lang="en"><strong>Heavy Industry Alliances:</strong> Mou with Bharat Forge leveraging their deep automotive and locomotive network channels to dispatch advanced edge boxes.</li>
+ <li data-lang="zh"><strong>大型工業集團同盟：</strong> 與 Bharat Forge 等重工業與工程製造巨頭簽署 MoU，透過其通路進入高階工業、車載安全與國防硬體市場。</li>
+
+ <li data-lang="en"><strong>Zero Consumer Retail presence:</strong> Only utilizes official website (https://www.vvdntech.com) as a B2B project portal. However, its "Intelligent Cloud Engine (ICE)" is launched on Google Cloud Marketplace as a SaaS integration.</li>
+ <li data-lang="zh"><strong>零大眾消費零售通路：</strong> 無 B2C 零售平台。官方網站為純 B2B 接單門戶，但旗下「智慧雲端引擎 (ICE)」已上線 Google Cloud Marketplace 提供軟硬一體 SaaS。</li>
+ </ul>
+ </div>
+ 
+ <!-- Logistics -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700 flex flex-col justify-between">
+ <div>
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics & Supply Chain Hubbing</h4>
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流與保稅倉儲邏輯</h4>
+ <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2 text-xs">
+ <li data-lang="en"><strong>"One-Stop-Shop" Manesar Complex:</strong> Integrates SMT, mold injection, metal casting, validation labs, and packing warehouses inside one centralized industrial park.</li>
+ <li data-lang="zh"><strong>「一站式」Manesar 核心區：</strong> 從研發、SMT、壓鑄、注塑到認證實驗室，全部集中於同一個 Manesar 工業園區，大幅壓縮轉運時間。</li>
+ 
+ <li data-lang="en"><strong>Strict Just-in-Time (JIT) Delivery:</strong> Suppliers must hold buffer stock at adjacent warehouses near IMT Manesar CP-07 and Pollachi base, dispatching within hours of trigger signals.</li>
+ <li data-lang="zh"><strong>極致的 JIT 配送：</strong> 供應商必須能夠提供「Just-In-Time (JIT) 快速配送至 Manesar CP-07 園區與 Pollachi 廠」的物流與前置倉儲服務。</li>
+ </ul>
+ </div>
+ <div class="bg-gray-900/40 p-3 rounded border border-gray-700 mt-2">
+ <p class="text-[11px] text-gray-400" data-lang="en"><strong>Global Logistics Support:</strong> Utilizing satellite hubs in USA and Japan to buffer international component dispatch flows.</p>
+ <p class="text-[11px] text-gray-400" data-lang="zh"><strong>全球物流支持：</strong> 在美國與日本設有海外前置倉，支持全球客戶國際物流件調度與緩衝。</p>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 6. Market Position (Radar & Ranking) -->
+ <div class="section-divider">
+ <span data-lang="en">6. India Competitive Landscape</span>
+ <span data-lang="zh">6. 印度市場地位與戰略分析</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+ <!-- Radar Chart -->
+ <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">VVDN Competitiveness Profile</h4>
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">VVDN 競爭力畫像</h4>
+ <div class="relative w-full h-56">
+ <canvas id="opportunityRadar"></canvas>
+ </div>
+ <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on technical capabilities & financial scale</p>
+ <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">基於專利研發實力與營收增速綜合推估之雷達評分</p>
+ </div>
+
+ <!-- Top 10 Table -->
+ <div class="col-span-2">
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Market Rankings: Top 10 EMS/ODM players (Estimated by Revenue/Scale)</h4>
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度市場銷售與製造實力排名 (TOP 10 巨頭)</h4>
+ 
+ <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+ <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+ <thead class="text-xs uppercase bg-gray-900/50">
+ <tr>
+ <th class="p-2">Rank</th>
+ <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+ <th class="p-2" data-lang="en">Local Context / Background</th><th class="p-2" data-lang="zh">背景特點與優勢領域</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700 text-xs">
+ <tr class="bg-gray-800/30">
+ <td class="p-2 font-bold text-center">1</td>
+ <td class="p-2">Dixon Technologies (India) Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">India Domestic Leader | Consumer electronics & Mobile EMS king</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土 EMS 全能型霸主，手機/家電出貨規模最大</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">2</td>
+ <td class="p-2">Foxconn India (Hon Hai)</td>
+ <td class="p-2 text-gray-400" data-lang="en">Taiwan Giant | High-end smartphone contract assembly</td>
+ <td class="p-2 text-gray-400" data-lang="zh">台資巨頭，高階智慧型手機主要組裝者</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">3</td>
+ <td class="p-2">Tata Electronics</td>
+ <td class="p-2 text-gray-400" data-lang="en">Tata Conglomerate | Aggressive semiconductor foundry & case machining</td>
+ <td class="p-2 text-gray-400" data-lang="zh">塔塔旗艦，強攻晶圓代工與高階手機/精密機構件組裝</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">4</td>
+ <td class="p-2">Kaynes Technology India Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed EMS | Strong in aerospace, defense & medical electronics</td>
+ <td class="p-2 text-gray-400" data-lang="zh">本土上市 EMS，稱霸航太、國防與醫療等高毛利領域</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">5</td>
+ <td class="p-2">Syrma SGS Technology Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed EMS | High focus on RFID, industrial power & automotive</td>
+ <td class="p-2 text-gray-400" data-lang="zh">本土上市 EMS，專注於車用、工業及 RFID 技術</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">6</td>
+ <td class="p-2">Sanmina SCI India Pvt Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">US-based EMS | High-end backbone networking & medical hub in Chennai</td>
+ <td class="p-2 text-gray-400" data-lang="zh">美資高階 EMS，側重於醫療與骨幹網絡，基地在清奈</td>
+ </tr>
+ <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+ <td class="p-2 font-bold text-center text-white">7</td>
+ <td class="p-2 text-white font-bold">VVDN Technologies Pvt Ltd</td>
+ <td class="p-2 text-blue-300" data-lang="en">Local ODM Unicorn [Target] | R&D-Led, leading in 5G, IoT & AI Servers</td>
+ <td class="p-2 text-blue-300" data-lang="zh">印度本土 [本報告目標] | 以研發設計起家的 ODM 獨角獸，5G/IoT 全面領先</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">8</td>
+ <td class="p-2">PG Electroplast Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed EMS | Consumer plastic moldings & appliance assembly</td>
+ <td class="p-2 text-gray-400" data-lang="zh">本土上市 EMS，主打家電代工與大型注塑件製造</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">9</td>
+ <td class="p-2">Amber Enterprises India Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed EMS | Dominated HVAC and refrigeration components</td>
+ <td class="p-2 text-gray-400" data-lang="zh">本土家電 EMS，稱霸暖通空調與製冷領域</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">10</td>
+ <td class="p-2">Jabil Circuit India Pvt Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">US-based EMS | Massive assembly capacity base in Pune</td>
+ <td class="p-2 text-gray-400" data-lang="zh">美資 EMS，在 Pune 有巨大產能支撐跨國電子訂單</td>
+ </tr>
+ </tbody>
+ </table>
+ <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Competitive Threat & Strategy:</strong> Dixon presents heavy cost pressure in mass manufacturing. Syrma/Kaynes challenge in aerospace/automotive. To win, FOXLINK can cooperate as a component supplier for VVDN’s high-precision 5G RU filters, automotive BMS elements, and localized high-density charging connections.</p>
+ <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>競爭版圖與戰略方向：</strong> 面臨 Dixon 的規模成本優勢與 Kaynes/Syrma 在車用國防的正面遭遇。正崴 (FOXLINK) 的切入點是協同 VVDN 設計，作為 5G 高頻、車用 BMS 與 EV 槍纜的本地精密組件首選供應夥伴，協助其實現「進口替代」。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 7. Digital Footprint -->
+ <div class="section-divider">
+ <span data-lang="en">7. Digital Footprint & Recent Dynamic Timeline (Nov 2025 - Feb 2026)</span>
+ <span data-lang="zh">7. 數位足跡與最新動向 (依時間倒序排列)</span>
+ </div>
+
+ <div class="space-y-3 mb-6 md:mb-8">
+ <!-- Item 1 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-18</div>
+ <div>
+ <strong class="text-green-400 block text-sm" data-lang="en">[MoU signed] Strategic alliance with Bharat Forge</strong>
+ <strong class="text-green-400 block text-sm" data-lang="zh">[策略結盟] 與 Bharat Forge 簽署戰略合作協議</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">MoU signed in Pune targeting technology joint setups on automotive electronics, defense, and high-compute AI Server platforms. <span class="text-gray-500">(Opp: Foxlink server connector assembly)</span></p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">在浦那簽署 MoU，雙方將在汽車電子 (Automotive)、國防 (Defence) 與 AI 伺服器平台進行技術與精密製造戰略合作。<span class="text-gray-500">(機會：伺服器連接組件)</span></p>
+ </div>
+ </div>
+ <!-- Item 2 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-16</div>
+ <div>
+ <strong class="text-blue-400 block text-sm" data-lang="en">[Event] Live Demo at India AI Expo 2026</strong>
+ <strong class="text-blue-400 block text-sm" data-lang="zh">[行業參展] 亮相 India AI Expo 2026</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">VVDN showcased its newly designed domestic 8-GPU high-density AI Server and localized high-res Vision-AI edge devices.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">展示其在印度本地設計與製造的 8-GPU 全功能 AI 伺服器與高精密工業級 Vision-AI 相機，展現高算力設計實力。</p>
+ </div>
+ </div>
+ <!-- Item 3 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+ <div>
+ <strong class="text-gray-200 block text-sm" data-lang="en">[M&A] GGS Engineering restructuring integration phase-1 done</strong>
+ <strong class="text-gray-200 block text-sm" data-lang="zh">[團隊整合] GGS Engineering 完成第一階段重組</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">After acquiring GGS Engineering, design teams were integrated, boosting automotive and aerospace engineering R&D capacity by 35%.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">2025 下半年收購 GGS Engineering 後，於 2026 年初完成團隊整合，正式將高階航太與汽車工程研發 (ER&D) 的設計產能提升 35%。</p>
+ </div>
+ </div>
+ <!-- Item 4 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+ <div>
+ <strong class="text-purple-400 block text-sm" data-lang="en">[GenAI] Google Gemini Integrated for R&D optimization</strong>
+ <strong class="text-purple-400 block text-sm" data-lang="zh">[數位化升級] 深度導入 Google GenAI 提效設計</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Google Cloud partners to integrate Google Gemini to streamline project tracking, codebase generation, and system simulation times.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">VVDN 宣佈在內部專案管理、代碼優化與軟硬體協同設計工具中引入 Google Gemini 的生成式 AI 生態。</p>
+ </div>
+ </div>
+ <!-- Item 5 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-25</div>
+ <div>
+ <strong class="text-green-400 block text-sm" data-lang="en">[Production] 5G RF Remote Radio Units (RU) surpassed 10k Dispatches</strong>
+ <strong class="text-green-400 block text-sm" data-lang="zh">[生產里程碑] 5G 射頻拉遠單元 (RU) 出貨破萬套</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Aided by telecom PLI subsidies, VVDN fulfilled high-volume localized dispatches of its self-designed O-RAN telecom systems. <span class="text-gray-500">(Opp: High-frequency RF connectors)</span></p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">配合政府電信 PLI (生產補貼) 政策，VVDN 自研的本土 5G O-RAN 電信設備完成階段性大批量交付。<span class="text-gray-500">(機會：高頻射頻連接線)</span></p>
+ </div>
+ </div>
+
+ <!-- Detailed News List (Grid Layout) -->
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+ <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-blue-300 block mb-1">2025-12-15: Cybersecurity Roadmap</strong>
+ <span data-lang="en">Inked security firmware integration with SecureThings.ai for connected vehicle BMS and OBD systems.</span>
+ <span data-lang="zh">與 SecureThings.ai 達成安全防禦方案部署，將車聯網加密固件成功寫入現行生產的 BMS 與 OBD 控制板。</span>
+ </div>
+ <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-blue-300 block mb-1">2025-12-05: Corporate AGM & IPO Roadmap</strong>
+ <span data-lang="en">Board & Motilal Oswal confirm timeline targeting domestic IPO once the USD 1B annual turnover rate is reached in late 2026.</span>
+ <span data-lang="zh">召開年度股東大會，創辦人與 Motilal Oswal 私募團隊確認將在 2026 年底前實現 10 億美元年營收，全力衝刺 IPO。</span>
+ </div>
+ <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-blue-300 block mb-1">2025-11-20: HR Campaign & Campus Sourcing</strong>
+ <span data-lang="en">Launched 2026 recruiting at IIT Madras & IIT Delhi targeting antenna design and Wi-Fi 7 power transmission graduates.</span>
+ <span data-lang="zh">啟動 2026 年校園招聘。重點招募 IIT Madras, IIT Delhi 畢業生，因應 5G 高頻天線與次世代 Wi-Fi 7 的開發。</span>
+ </div>
+ <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-blue-300 block mb-1">2025-11-12: MWC Barcelona 2026 Plans</strong>
+ <span data-lang="en">Pre-announced demonstrations featuring Qualcomm-based high-speed Wi-Fi 7 wireless AP reference designs.</span>
+ <span data-lang="zh">公佈 MWC 2026 巴塞隆納大會展示計畫，將展示基於 Qualcomm 平台設計的全新 AI 驅動型 Wi-Fi 7 參考設計。</span>
+ </div>
+ <div class="bg-gray-800 p-3 rounded border border-gray-700 text-xs text-gray-400 col-span-1 md:col-span-2">
+ <strong class="text-blue-300 block mb-1">2025-10-29: Global Strategic Partnership (ADAS)</strong>
+ <span data-lang="en">Signed MoU with Mobileye to design and manufacture next-generation ADAS hardware modules tailored for complex Indian driving environments.</span>
+ <span data-lang="zh">與 Mobileye 展開深度本地化 ADAS 合作，共同在印度設計製造專門應對印度複雜路況的次世代高階輔助駕駛晶片模組。</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Report Footer -->
+ <div class="border-t border-gray-700 pt-4 mt-6 text-xs text-gray-500 flex flex-col md:flex-row justify-between">
+ <p data-lang="en"><strong>Sources:</strong> MCA India Database, VVDNtech Portal, Economic Times Telecom, Tracxn Pro, Motilal Oswal Financial Disclosures.</p>
+ <p data-lang="zh"><strong>資料來源：</strong> MCA India 印度商工部、VVDN 官方網站、ET Telecom、Tracxn、Motilal Oswal 投資財務報告。</p>
+ <p><strong>Generated On:</strong> 2026-02-18</p>
+ </div>
+
+ </div>
+ </main>
+
+ </div>
+
+ <script>
+ let currentLang = 'en'; 
+ let radarChart = null;
+
+ // VVDN Radar Scores (Estimated based on Report): 
+ // Market Share: 7 (Leader in niche 5G/IoT ODM, ranked #7 overall in India EMS/ODM)
+ // Localization: 8 (High level of Make-in-India engineering integration and 7 setup parks)
+ // Brand Power: 8 (High OEM/ODM brand reputation with Global Giants like Qualcomm & BEL)
+ // Digital Reach: 6 (Pure-play B2B/SaaS platform focus, no consumer-facing retail)
+ // Financial Health: 9 (Near 80% YoY growth, PE backed, actively preparing for IPO)
+ const radarScores = [7, 8, 8, 6, 9]; 
+
+ const chartData = {
+ en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Competitiveness Score (1-10)' },
+ zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+ };
+ 
+ function updateLanguageUI() {
+ try {
+ document.querySelectorAll('[data-lang]').forEach(el => {
+ if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+ });
+ document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+ const tagName = el.tagName.toLowerCase();
+ if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+ if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+ else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+ else el.style.display = 'block';
+ } else {
+ el.style.display = 'block';
+ }
+ });
+ document.querySelectorAll('title').forEach(title => {
+ if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+ });
+ updateChart();
+ } catch (e) { console.error(e); }
+ }
+
+ function updateChart() {
+ if (!radarChart) return;
+ const data = chartData[currentLang];
+ radarChart.data.labels = data.labels;
+ radarChart.data.datasets[0].label = data.label;
+ radarChart.update();
+ }
+
+ document.addEventListener('DOMContentLoaded', () => {
+ const langBtn = document.getElementById('lang-toggle');
+ if (langBtn) langBtn.addEventListener('click', () => {
+ currentLang = currentLang === 'en' ? 'zh' : 'en';
+ updateLanguageUI();
+ });
+
+ const pdfBtn = document.getElementById('export-pdf-btn');
+ if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+ const ctx = document.getElementById('opportunityRadar').getContext('2d');
+ radarChart = new Chart(ctx, {
+ type: 'radar',
+ data: {
+ labels: chartData[currentLang].labels,
+ datasets: [{
+ label: chartData[currentLang].label,
+ data: radarScores, 
+ backgroundColor: 'rgba(59, 130, 246, 0.2)',
+ borderColor: 'rgba(59, 130, 246, 1)',
+ borderWidth: 2,
+ pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+ }]
+ },
+ options: {
+ scales: {
+ r: {
+ angleLines: { color: '#374151' },
+ grid: { color: '#374151' },
+ pointLabels: { color: '#9ca3af', font: {size: 11} },
+ ticks: { display: false, max: 10, stepSize: 2 }
+ }
+ },
+ plugins: { legend: { display: false } },
+ maintainAspectRatio: false
+ }
+ });
+
+ updateLanguageUI();
+ });
+ </script>
+</body>
+</html>

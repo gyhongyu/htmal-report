@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-17T11:16:41.448Z",
+  "lastUpdated": "2026-07-17T11:21:45.578Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1692,6 +1692,19 @@
       "fileName": "report-1784287000615.html",
       "createdAt": "2026-07-17T11:16:41.448Z",
       "updatedAt": "2026-07-17T11:16:41.448Z"
+    },
+    {
+      "id": "report-1784287304532",
+      "title": "Target: VVDN Technologies Private Limited-Thomas",
+      "description": "目標企業：VVDN Technologies Private Limited (印度本土 ODM 巨頭)-Thomas",
+      "categories": [
+        "客戶KYC",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1784287304532.html",
+      "createdAt": "2026-07-17T11:21:45.578Z",
+      "updatedAt": "2026-07-17T11:21:45.578Z"
     }
   ]
 }
