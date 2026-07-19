@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-17T11:21:45.578Z",
+  "lastUpdated": "2026-07-19T07:17:17.047Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1705,6 +1705,19 @@
       "fileName": "report-1784287304532.html",
       "createdAt": "2026-07-17T11:21:45.578Z",
       "updatedAt": "2026-07-17T11:21:45.578Z"
+    },
+    {
+      "id": "report-1784445436114",
+      "title": "Target: Ambit Private Limited",
+      "description": "目標企業：Ambit Private Limited",
+      "categories": [
+        "客戶KYC",
+        "對外簡報",
+        "數據分析"
+      ],
+      "fileName": "report-1784445436114.html",
+      "createdAt": "2026-07-19T07:17:17.047Z",
+      "updatedAt": "2026-07-19T07:17:17.047Z"
     }
   ]
 }
