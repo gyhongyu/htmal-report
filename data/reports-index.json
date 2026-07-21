@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-21T04:11:20.200Z",
+  "lastUpdated": "2026-07-21T04:48:36.842Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1744,6 +1744,19 @@
       "fileName": "report-1784607078595.html",
       "createdAt": "2026-07-21T04:11:20.200Z",
       "updatedAt": "2026-07-21T04:11:20.200Z"
+    },
+    {
+      "id": "report-1784609315910",
+      "title": "Target: Duracell India Operations Private Limited",
+      "description": "目標企業：Duracell India Operations Private Limited(金頂)",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784609315910.html",
+      "createdAt": "2026-07-21T04:48:36.842Z",
+      "updatedAt": "2026-07-21T04:48:36.842Z"
     }
   ]
 }
