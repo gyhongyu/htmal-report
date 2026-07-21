@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-21T03:25:07.055Z",
+  "lastUpdated": "2026-07-21T04:11:20.200Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1731,6 +1731,19 @@
       "fileName": "report-1784604306059.html",
       "createdAt": "2026-07-21T03:25:07.055Z",
       "updatedAt": "2026-07-21T03:25:07.055Z"
+    },
+    {
+      "id": "report-1784607078595",
+      "title": "Target: Portronics Digital Private Limited",
+      "description": "目標企業：Portronics Digital Private Limited",
+      "categories": [
+        "項目計劃",
+        "市場分析",
+        "客戶KYC"
+      ],
+      "fileName": "report-1784607078595.html",
+      "createdAt": "2026-07-21T04:11:20.200Z",
+      "updatedAt": "2026-07-21T04:11:20.200Z"
     }
   ]
 }
