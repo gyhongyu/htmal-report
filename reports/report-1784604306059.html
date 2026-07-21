@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- Target Company: Ambrane India Private Limited -->
+ <!-- Date: Feb 2026 -->
+ <title data-lang="en">Deep Dive KYC: Ambrane India Private Limited (Feb 2026)</title>
+ <title data-lang="zh">印度企業 KYC 深度調查報告：Ambrane India Private Limited</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <style>
+ body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+ [data-lang] { display: none; }
+ .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+ @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+ a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+ a:hover { color: #e0f2fe; text-decoration: solid; }
+ 
+ /* --- Components --- */
+ .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+ .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+ 
+ .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+ .recon-box.risk { border-left: 4px solid #ef4444; }
+ .recon-box.opp { border-left: 4px solid #22c55e; }
+ .recon-box.neutral { border-left: 4px solid #eab308; }
+ .recon-box.info { border-left: 4px solid #3b82f6; }
+
+ .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+ .tag-blue { background-color: #1e40af; color: white; }
+ .tag-green { background-color: #166534; color: white; }
+ .tag-red { background-color: #991b1b; color: white; }
+
+ /* --- Tables --- */
+ table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+ th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+ th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+ tbody tr:nth-child(odd) { background-color: #1f2937; }
+ tbody tr:nth-child(even) { background-color: #2b3748; }
+ tbody tr:hover { background-color: #4b5563; }
+
+ .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+ .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+ .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+ /* --- Responsive Adjustments for Desktop --- */
+ @media (min-width: 768px) {
+ .content-area { padding: 2.5rem; }
+ .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+ th, td { padding: 0.75rem; }
+ .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+ .section-divider span { padding: 0 1rem; }
+ }
+
+ /* --- Print Optimization --- */
+ @media print { 
+ @page { margin: 20mm 15mm 20mm 15mm; }
+ .no-print { display: none !important; } 
+ body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+ .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+ .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+ .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+ th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+ .text-white { color: #000 !important; } 
+ .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+ h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+ .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+ canvas { max-height: 250px; page-break-inside: avoid; } 
+ table, tr, .recon-box { page-break-inside: avoid; } 
+ .grid { display: block; }
+ .grid > div { margin-bottom: 1rem; }
+ #opportunityRadar { max-width: 400px; margin: 0 auto; }
+ }
+ </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+ <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+ 
+<!-- Navigation -->
+ <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+ <div class="flex items-center space-x-3">
+ <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+ <div>
+ <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+ <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+ </div>
+ </div>
+ <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+ <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+ <i class="fas fa-file-pdf mr-2"></i>
+ <span data-lang="en">Export PDF</span>
+ <span data-lang="zh">導出 PDF</span>
+ </button>
+ <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+ <span data-lang="en">切換中文</span>
+ <span data-lang="zh">Switch to English</span>
+ </button>
+ </div>
+ </header>
+
+ <main class="flex-1">
+ <div class="content-area">
+ 
+ <!-- Report Header -->
+ <div class="border-b border-gray-700 pb-6 mb-6">
+ <div class="flex justify-between items-end">
+ <div>
+ <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Ambrane India Private Limited</h1>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Ambrane India Private Limited</h1>
+ <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+ <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+ </div>
+ <div class="text-right hidden md:block">
+ <div class="text-2xl font-bold text-blue-400">Tier 2 Leader</div>
+ <div class="text-xs text-gray-500 uppercase">#1 Local Power Bank Brand</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 1. Corporate Identity (Dashboard) -->
+ <div class="section-divider mt-0">
+ <span data-lang="en">1. Corporate Identity & Scale</span>
+ <span data-lang="zh">1. 企業身份與規模</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+ <!-- Registration -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+ <p class="text-lg font-bold text-white mt-2">Ambrane India Private Limited</p>
+ <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72200DL2012PTC243949</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：營業中 (非上市非公開)</p>
+ </div>
+ 
+ <!-- Financial Scale -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+ <div class="flex items-baseline mt-2">
+ <span class="text-2xl font-bold text-green-400">₹ 230 Cr</span>
+ <span class="text-xs text-gray-500 ml-2">(FY24-25 Turnover)</span>
+ </div>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Promoter Family (100% Bootstrapped)</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終控制者：</strong> 創辦人家族 (100% 本土全資)</p>
+ </div>
+
+ <!-- Key Base -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Main Plant</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心工廠</h3>
+ <p class="text-lg font-bold text-white mt-2" data-lang="en">Kundli, Sonipat (Haryana)</p>
+ <p class="text-lg font-bold text-white mt-2" data-lang="zh">Sonipat (哈里亞納邦 Kundli)</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">83,000 sq.ft | 1.5M Monthly Units</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="zh">83,000 平方英呎 | 月產量 150 萬台</p>
+ </div>
+ </div>
+
+ <!-- Locations Details -->
+ <div class="recon-box info">
+ <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint & Units</h3>
+ <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與廠區詳情</h3>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup & Central Hub:</strong>
+ <strong class="text-white block mb-1" data-lang="zh">製造基地與中央物流總倉：</strong>
+ <ul class="list-disc pl-5 space-y-1">
+ <li data-lang="en"><strong>Kundli Setup (Core Plant):</strong> Plot 331, Phase 5, Sec 56, Kundli Industrial Area, Sonipat, Haryana. (83,000 sq ft, high auto SMT lines, 600+ plant staff).</li>
+ <li data-lang="zh"><strong>Kundli 核心工廠：</strong> 哈里亞納邦 Sonipat Kundli 工業區。投資 5,000 萬盧比完成擴建，8.3 萬平方英呎，配備高自動化 SMT 貼片與組裝線，雇用 600+ 名員工。</li>
+ <li data-lang="en"><strong>Central Logistics Hub:</strong> Adjacent to Sonipat plant. Central fulfillment hub servicing 20+ states, Amazon/Flipkart FCs.</li>
+ <li data-lang="zh"><strong>Kundli 中央配送總倉：</strong> 緊鄰 Sonipat 工廠，負責全印 20 多個邦與電商 Fulfillment 倉之配送。</li>
+ </ul>
+ </div>
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">HQ, R&D & Regional Offices:</strong>
+ <strong class="text-white block mb-1" data-lang="zh">總部、研發與區域辦事處：</strong>
+ <ul class="list-disc pl-5 space-y-1">
+ <li data-lang="en"><strong>HQ / Registered Office:</strong> Pitampura, New Delhi (Admin HQ) & Wazirpur Industrial Area, Delhi (Registered Office).</li>
+ <li data-lang="zh"><strong>行政總部與註冊地：</strong> 新德里 Pitampura (營運總部) 與 Wazirpur 工業區 (註冊辦公室)。</li>
+ <li data-lang="en"><strong>Kundli / Delhi R&D:</strong> Focus on BMS, GaN Fast Charging, Qi2 magnetic modules, haptic smartwatch tech.</li>
+ <li data-lang="zh"><strong>R&D 研發中心：</strong> 位於 Kundli 新廠區，專注 BMS、GaN 快充、Qi2 無線充電與智慧手錶研發。</li>
+ <li data-lang="en"><strong>Regional Setup:</strong> Mumbai Office (West India B2B & Gifting); Bengaluru Office (South sales & e-com warehouse).</li>
+ <li data-lang="zh"><strong>區域分公司：</strong> 孟買辦事處 (西印 B2B 與企業禮品)；班加羅爾辦事處 (南印市場與倉儲)。</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- 2. Ownership -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding Analysis</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+ <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+ <div class="flex flex-col md:flex-row gap-2 text-xs mb-4">
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Shareholding)</span>
+ <span class="text-gray-500 block" data-lang="zh">第一層 (直接持股)</span>
+ <strong class="text-white">Ashok Rajpal (~47.5%) & Sanjay Rajpal (~47.5%)</strong>
+ <span class="block text-green-400 mt-1" data-lang="en">Promoter Founders Direct Control</span>
+ <span class="block text-green-400 mt-1" data-lang="zh">創辦人團隊直接控制</span>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Level 2 (Intermediate)</span>
+ <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+ <strong class="text-white">None (Direct Family Ownership)</strong>
+ <span class="block text-gray-400 mt-1" data-lang="en">No overseas shell or offshore entity</span>
+ <span class="block text-gray-400 mt-1" data-lang="zh">無海外或複雜中間控股公司</span>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Level 3 (Ultimate Parent)</span>
+ <span class="text-gray-500 block" data-lang="zh">第三層 (最終受益人)</span>
+ <strong class="text-blue-300">Ambrane India Promoter Group (India)</strong>
+ <span class="block text-blue-400 mt-1" data-lang="en">100% Indian Capital & Control</span>
+ <span class="block text-blue-400 mt-1" data-lang="zh">100% 印度本土資金與控制權</span>
+ </div>
+ </div>
+ <p class="text-xs text-gray-400" data-lang="en"><strong>Key Insight:</strong> Bootstrapped growth model with no external VC/PE control. Super fast decision cycle. Highly aligned with Govt of India's "Make in India" and PLI local manufacturing incentives. Target revenue for FY25-26 is ₹ 500 Cr.</p>
+ <p class="text-xs text-gray-400" data-lang="zh"><strong>核心洞察：</strong> 典型的印度本土自籌資金 (Bootstrapped) 成長企業，無外部 VC/PE 或外資股東掌控。決策鏈極短且反應敏捷，戰略高度貼合印度政府 "Make in India" 與在地製造政策。目標於 2025-2026 財年達成 50 億盧比營收。</p>
+ </div>
+ </div>
+
+ <!-- 3. Product & BOM -->
+ <div class="section-divider">
+ <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+ <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+ <!-- Col 1: Categories -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Product Categories</div>
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類 (Categories)</div>
+ <ul class="space-y-2 text-sm text-gray-300">
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Power Banks:</strong> Li-Po, MagSafe, Qi2, Laptop fast charging</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>行動電源：</strong> Li-Po, MagSafe 磁吸, Qi2 認證, 筆電高功率快充</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Fast Chargers:</strong> GaN Chargers, PD/QC Car & Wall Adapters</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>快速充電器：</strong> GaN 氮化鎵、PD/QC 車充與牆充</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Smart Cables:</strong> Type-C, Lightning, High-durability braided cables</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>充電與傳輸線：</strong> Type-C, Lightning, 編織耐用線材</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Smart Wearables:</strong> Smartwatches & Fitness Bands</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>智慧穿戴設備：</strong> 智慧手錶、運動手環</li>
+
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Personal Audio:</strong> TWS Earbuds, Neckbands, Wireless Speakers</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>個人音訊設備：</strong> TWS 藍牙耳機、頸掛式耳機、藍牙喇叭</li>
+
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Car & Lifestyle:</strong> Car mounts, Wireless chargers, Power stations</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>車用與生活週邊：</strong> 車用支架、無線充電座、便攜電源</li>
+ </ul>
+ </div>
+
+ <!-- Col 2: BOM Teardown -->
+ <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">產品系統/零組件技術拆解</div>
+ <ul class="space-y-2 text-xs text-gray-300">
+ <li data-lang="en"><strong>Battery Cells:</strong> High-density Li-Po cells, 21700/18650 Li-ion cells.</li>
+ <li data-lang="zh"><strong>電池單元：</strong> 高密度鋰聚合物電芯 (Li-Po)、21700/18650 鋰電芯。</li>
+ 
+ <li data-lang="en"><strong>BMS Protection:</strong> Charge PCBA, Coulomb gauge IC, NTC thermistor.</li>
+ <li data-lang="zh"><strong>BMS 電池管理：</strong> 充放電保護 PCBA、電量計 IC、NTC 溫控元件。</li>
+ 
+ <li data-lang="en"><strong>Fast Charge & Main Logic:</strong> GaN devices, PD/QC ICs, SMT mainboards.</li>
+ <li data-lang="zh"><strong>快充與主控：</strong> GaN 功率器件、PD/QC 快充 IC、SMT 主板總成。</li>
+ 
+ <li data-lang="en"><strong>Wireless & Magnetic:</strong> Qi2 Wireless Tx coils, NdFeB positioning magnets.</li>
+ <li data-lang="zh"><strong>無線與磁吸：</strong> Qi2 發射線圈、釹鐵硼 (NdFeB) 定位磁環。</li>
+
+ <li data-lang="en"><strong>Interconnect:</strong> Type-C sockets, USB-A, Pogo Pins, Internal wiring.</li>
+ <li data-lang="zh"><strong>連接與互連：</strong> 強化 Type-C 母座、USB-A、鍍金 Pogo Pin、線束。</li>
+
+ <li data-lang="en"><strong>Display & Audio:</strong> TFT/AMOLED panels, PPG optical HR, BT 5.4 SoC.</li>
+ <li data-lang="zh"><strong>螢幕與聲學：</strong> TFT/AMOLED 觸控屏、PPG 心率感測器、BT 5.4 SoC。</li>
+ </ul>
+ </div>
+
+ <!-- Col 3: Supply Chain Needs -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+ <div class="bg-gray-900/50 p-3 rounded text-xs text-gray-300 space-y-2">
+ <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>SMT Assembly:</strong> Urgent demand for precision SMT assembly partners in Delhi NCR / North India.</p>
+ <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>貼片加工：</strong> 急需具備優質 SMT 貼片代工與精密 PCBA 加工之在地夥伴。</p>
+
+ <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>BMS & Connectors:</strong> Require BIS certified local BMS boards, Type-C connectors & wire harness.</p>
+ <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>BMS 與連接器：</strong> 需符合 BIS 與 Make in India 認證的高安全性電池保護板與連接器。</p>
+
+ <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization Push:</strong> Transitioning away from overseas SKD/CKD to 100% in-house/local manufacturing.</p>
+ <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化升級：</strong> 從海外 SKD/CKD 組裝全面轉型為 100% 本土生產，需要強大 OEM/ODM 支持。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 4. Human Capital -->
+ <div class="section-divider">
+ <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+ <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+ </div>
+
+ <div class="recon-box risk">
+ <div class="mb-4">
+ <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for? (11 Core Intel)</h3>
+ <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀 (11 條核心情報)</h3>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri India, Indeed, Placement India (2025-2026 Job postings analysis)</p>
+ </div>
+
+ <div class="overflow-x-auto">
+ <table class="w-full text-sm text-left text-gray-300">
+ <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+ <tr>
+ <th class="w-1/3" data-lang="en">Role & Location</th>
+ <th class="w-1/3" data-lang="zh">職位與地點</th>
+ <th class="w-2/3" data-lang="en">Intel / Implication</th>
+ <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700 text-xs">
+ <tr>
+ <td>
+ <strong class="text-blue-300">Sr. Material Procurement / Purchase Mgr</strong><br>
+ <span class="text-xs text-gray-500">Kundli, Sonipat</span>
+ </td>
+ <td data-lang="en">Handling electronic components, Li-Po cells & plastic parts purchase for Kundli new plant. Driving supply chain localization.</td>
+ <td data-lang="zh">負責 Kundli 新廠的電子零組件、電芯與塑料件採購，積極推動供應鏈在地化。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">Vendor Development Manager</strong><br>
+ <span class="text-xs text-gray-500">Sonipat</span>
+ </td>
+ <td data-lang="en">Developing & auditing local SMT & component vendors in India to lower overseas import dependency.</td>
+ <td data-lang="zh">專責開發與評估印度在地 SMT 及零組件供應商，以降低對海外進口模組之依賴。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Production & Quality Manager</strong><br>
+ <span class="text-xs text-gray-500">Kundli</span>
+ </td>
+ <td data-lang="en">Managing multi SMT & assembly lines across expanded 83,000 sq ft factory. Pushing yield & throughput.</td>
+ <td data-lang="zh">管理擴建後 8.3 萬平方英呎工廠的多條 SMT 與組裝產線，提升良率與產出。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Quality Assurance Incharge / Head Quality</strong><br>
+ <span class="text-xs text-gray-500">Kundli, Sonipat</span>
+ </td>
+ <td data-lang="en">Setting up strict Incoming Quality Control (IQC) and finished product reliability test lab.</td>
+ <td data-lang="zh">建立嚴格的進料檢驗 (IQC) 與成品可靠度測試體系。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">Process Engineer / Electronics Quality Engineer</strong><br>
+ <span class="text-xs text-gray-500">Sonipat</span>
+ </td>
+ <td data-lang="en">Optimizing SMT placement lines and auto assembly processes; performing root cause analysis.</td>
+ <td data-lang="zh">負責 SMT 貼片與自動化組裝線的製程優化與 Root Cause 分析。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Store Operations Manager</strong><br>
+ <span class="text-xs text-gray-500">Kundli</span>
+ </td>
+ <td data-lang="en">Managing raw materials & finished goods warehouse to back monthly 1.5M units production dispatch.</td>
+ <td data-lang="zh">負責原材料與成品倉庫管理，支援每月 150 萬台產能之物料調配。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">NPD (New Product Development) Engineer</strong><br>
+ <span class="text-xs text-gray-500">Delhi NCR</span>
+ </td>
+ <td data-lang="en">Designing structural & circuit boards for Qi2 magnetic power banks and GaN adapters.</td>
+ <td data-lang="zh">新產品開發工程師，專注於 Qi2 磁吸行動電源與 GaN 快充頭之結構與電路研發。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">SMT Line Operator & Technician</strong><br>
+ <span class="text-xs text-gray-500">Kundli</span>
+ </td>
+ <td data-lang="en">Bulk hiring for automated surface mount machinery operators for multi-shift expansion.</td>
+ <td data-lang="zh">常態性招募自動化表面貼裝機台操作員，因應擴產後多班制運作。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Key Accounts Manager - E-Commerce</strong><br>
+ <span class="text-xs text-gray-500">Delhi NCR</span>
+ </td>
+ <td data-lang="en">Driving brand store ops and sales campaigns on Amazon India & Flipkart.</td>
+ <td data-lang="zh">負責 Amazon India 與 Flipkart 品牌旗艦館之營運與銷售策略。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Trade Marketing Executive</strong><br>
+ <span class="text-xs text-gray-500">Tier 2/3 Cities</span>
+ </td>
+ <td data-lang="en">Expanding retail presence and dealer network in Tier 2/3 markets across India.</td>
+ <td data-lang="zh">負責二三線城市的實體門市陳列與經銷商渠道拓展。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Customer Support Coordinator</strong><br>
+ <span class="text-xs text-gray-500">Delhi</span>
+ </td>
+ <td data-lang="en">Coordinating spare parts flow & warranty cases across 400+ authorized service centers nationwide.</td>
+ <td data-lang="zh">協調全印 400+ 授權服務中心之售後零件供應與客訴處理。</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <!-- 5. Sales & Distribution -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Distribution Strategy</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局分析</h2>
+ 
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+ <!-- Strategy -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Omnichannel Model</h4>
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">全通路雙軌模式 (Omnichannel Model)</h4>
+ <ul class="list-disc pl-5 text-xs text-gray-300 space-y-2">
+ <li data-lang="en"><strong>D2C Official Portal:</strong> Direct webstore <a href="https://ambraneindia.com/" target="_blank">ambraneindia.com</a> for product sales & warranty registration.</li>
+ <li data-lang="zh"><strong>官方直營網站：</strong> <a href="https://ambraneindia.com/" target="_blank">ambraneindia.com</a> 直營銷售與保固註冊。</li>
+ 
+ <li data-lang="en"><strong>E-Commerce B2C:</strong> Top 3 power bank brand on Amazon India & Flipkart; present on JioMart, Myntra, Nykaa.</li>
+ <li data-lang="zh"><strong>B2C 零售平台：</strong> Amazon India & Flipkart 行動電源常年銷量前三名；進駐 JioMart, Myntra, Nykaa 等。</li>
+ 
+ <li data-lang="en"><strong>B2B & Corporate Gifting:</strong> Strong presence in corporate gifting sales, listed on Moglix & Industrybuying.</li>
+ <li data-lang="zh"><strong>B2B 與企業採購：</strong> 深耕企業禮品 (Corporate Gifting) 通路，進駐 Moglix 及 Industrybuying 等工業採購平台。</li>
+ </ul>
+ </div>
+ 
+ <!-- Logistics -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Physical & Logistics Network</h4>
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">實體經銷與物流網路</h4>
+ <ul class="list-disc pl-5 text-xs text-gray-300 space-y-2">
+ <li data-lang="en"><strong>Retail Footprint:</strong> Covering 20+ states, 100+ cities with over 10,000 active retail partners.</li>
+ <li data-lang="zh"><strong>實體經銷網絡：</strong> 涵蓋全印 20 多個邦、100 多個二三線城市，超過 10,000 家合作零售商。</li>
+
+ <li data-lang="en"><strong>Modern Retail Chains:</strong> Present in Reliance Digital, Croma, Vijay Sales, Sangeeta Electronics, Go Mobile, Spencer's.</li>
+ <li data-lang="zh"><strong>現代大型零售：</strong> 深度進駐 Reliance Digital, Croma, Vijay Sales, Sangeeta, Go Mobile 等大型賣場。</li>
+ 
+ <li data-lang="en"><strong>After-sales & Service:</strong> Over 400+ Authorized Service Centers (ASC) across India providing warranty support.</li>
+ <li data-lang="zh"><strong>售後服務網絡：</strong> 全印設有 400+ 授權服務中心 (Authorized Service Centers)，提供完善維修保固。</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- 6. Market Position (Radar & Ranking) -->
+ <div class="section-divider">
+ <span data-lang="en">6. Competitive Landscape & Market Position</span>
+ <span data-lang="zh">6. 市場地位與戰略動向</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+ <!-- Radar Chart -->
+ <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC Radar)</h4>
+ <div class="relative w-full h-56">
+ <canvas id="opportunityRadar"></canvas>
+ </div>
+ <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Sentiment score based on KYC Intel</p>
+ </div>
+
+ <!-- Top 10 Table -->
+ <div class="col-span-2">
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Power Bank & Accessories Market Top 10</h4>
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度行動電源與配件銷量榜 (TOP 10)</h4>
+ 
+ <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+ <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+ <thead class="text-xs uppercase bg-gray-900/50">
+ <tr>
+ <th class="p-2">Rank</th>
+ <th class="p-2" data-lang="en">Brand / Entity</th><th class="p-2" data-lang="zh">品牌 / 企業</th>
+ <th class="p-2" data-lang="en">Origin / Category Role</th><th class="p-2" data-lang="zh">背景 / 市場定位</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700 text-xs">
+ <tr>
+ <td class="p-2 font-bold text-center">1</td>
+ <td class="p-2">Xiaomi India (Mi)</td>
+ <td class="p-2 text-gray-400" data-lang="en">China/India (Overall Volume Leader)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">中國/印度 (整體銷量領導者)</td>
+ </tr>
+ <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+ <td class="p-2 font-bold text-center text-white">2</td>
+ <td class="p-2 text-white font-bold">Ambrane India</td>
+ <td class="p-2 text-blue-300" data-lang="en">India (#1 Indian Local Power Bank Brand)</td>
+ <td class="p-2 text-blue-300" data-lang="zh">印度本土 (目標客戶：本土製造與銷量第 1)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">3</td>
+ <td class="p-2">boAt (Imagine Marketing)</td>
+ <td class="p-2 text-gray-400" data-lang="en">India (Audio & Wearables Leader)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土 (音訊與穿戴龍頭)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">4</td>
+ <td class="p-2">Portronics Digital</td>
+ <td class="p-2 text-gray-400" data-lang="en">India (Portable 3C Accessories)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土 (可攜式 3C 週邊)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">5</td>
+ <td class="p-2">Anker Innovations</td>
+ <td class="p-2 text-gray-400" data-lang="en">China/Global (Premium Fast Charge & MagSafe)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">中國/全球 (高階快充與 MagSafe)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">6-10</td>
+ <td class="p-2" colspan="2">Realme India, URBN (Inbase), Zebronics, Syska Accessories, Stuffcool</td>
+ </tr>
+ </tbody>
+ </table>
+ <p class="text-xs text-gray-400 mt-2 italic p-1" data-lang="en"><strong>FOXLINK Opportunity:</strong> Ambrane is shifting from SKD/CKD to 100% local manufacturing. Their Kundli 8.3万 sq.ft. plant needs strong SMT, connector, BMS, and wire harness OEM partners like FOXLINK to meet PLI standards.</p>
+ <p class="text-xs text-gray-400 mt-2 italic p-1" data-lang="zh"><strong>正崴 (FOXLINK) 切入機會點：</strong> Ambrane 正擺脫純 SKD/CKD 組裝，全面轉型 100% 本土製造。隨著 Kundli 新自動化工廠啟用，極需精密 SMT 貼片、連接器、高階 BMS 電路及線束等專業代工夥伴。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 7. Digital Footprint (News) -->
+ <div class="section-divider">
+ <span data-lang="en">7. Digital Footprint & Recent News (Nov '25 - Feb '26)</span>
+ <span data-lang="zh">7. 數位足跡與最新動向 (近3個月倒序)</span>
+ </div>
+
+ <div class="space-y-3 mb-6 md:mb-8">
+ <!-- Item 1 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-22</div>
+ <div>
+ <strong class="text-green-400 block text-sm" data-lang="en">[Press Release] Kundli ₹50 Cr Automated Plant Opened</strong>
+ <strong class="text-green-400 block text-sm" data-lang="zh">[新聞稿] Kundli 5,000 萬盧比新自動化工廠正式啟用</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Inaugurated 83,000 sq ft unit in Sonipat. High-speed SMT lines added. Capacity doubled to 1.5M units/mo. <span class="text-gray-500">(Opp: SMT & PCBA outsourcing)</span></p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">於哈里亞納邦 Kundli 啟用 83,000 平方英呎新廠，引入高精度 SMT 線，月產能翻倍至 150 萬台。<span class="text-gray-500">(機會：SMT 代工)</span></p>
+ </div>
+ </div>
+
+ <!-- Item 2 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-20</div>
+ <div>
+ <strong class="text-blue-400 block text-sm" data-lang="en">[Product Launch] AerosynQ Orbit 20K & Qi2 Magnetic Lineup</strong>
+ <strong class="text-blue-400 block text-sm" data-lang="zh">[新品發布] AerosynQ Orbit 20K 與 Qi2 磁吸快充系列上市</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Launched Qi2.2 certified 35W wireless magnetic power banks for premium iPhone/Android users.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">推出通過 Qi2.2 認證的 35W 無線磁吸行動電源及內建 Type-C 線材機種，搶攻高階快充市場。</p>
+ </div>
+ </div>
+
+ <!-- Item 3 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-14</div>
+ <div>
+ <strong class="text-gray-200 block text-sm" data-lang="en">[Milestone] 40 Million Units Sales Benchmark Reached</strong>
+ <strong class="text-gray-200 block text-sm" data-lang="zh">[企業里程碑] 印度市場累計銷量突破 4,000 萬台</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Crossed 40M total products sold in India, solidifying status as #1 domestic power bank brand under Make in India.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">官方宣布累計售出超過 4,000 萬組配件，重申其「Make in India」本土行動電源市佔第一地位。</p>
+ </div>
+ </div>
+
+ <!-- Item 4 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-08</div>
+ <div>
+ <strong class="text-purple-400 block text-sm" data-lang="en">[Hiring] Kundli Plant Recruitment Drive for 600+ Staff</strong>
+ <strong class="text-purple-400 block text-sm" data-lang="zh">[招募擴張] Kundli 擴產大規模招募啟動</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Hiring 600+ shopfloor workers and 20+ R&D / Quality engineers for expanded Kundli unit.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對 Kundli 新廠發布招募計畫，預計新增 600+ 名生產工人與 20+ 名研發及品質控制工程師。</p>
+ </div>
+ </div>
+
+ <!-- Item 5 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+ <div>
+ <strong class="text-gray-200 block text-sm" data-lang="en">[Channel] Retail Network Upgraded to 10,000 Outlets</strong>
+ <strong class="text-gray-200 block text-sm" data-lang="zh">[通路升級] 線下 10,000 家經銷門市戰略升級</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Deepened offline presence in Tier 2/3 cities and tied up with Reliance Digital and Croma.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">宣布強化二三線城市實體通路覆蓋，深化與 Reliance Digital、Croma 等現代零售巨頭展櫃合作。</p>
+ </div>
+ </div>
+
+ <!-- Remaining Items Condensed Grid -->
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-12-05:</strong> <span data-lang="en">Charge R65 65W GaN adapter launched for IT/MacBook market.</span><span data-lang="zh">Charge R65 65W GaN 氮化鎵快充適配器上市，跨足筆電週邊。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">IIT Kanpur MOU signed for visually impaired haptic smartwatch.</span><span data-lang="zh">與 IIT Kanpur 簽署 MOU 合作開發視障專用觸覺智慧手錶。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-20:</strong> <span data-lang="en">Diwali e-com sales jump 35% on Amazon & Flipkart.</span><span data-lang="zh">Diwali 年末促銷期間行動電源銷量同比增長 35%。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-12:</strong> <span data-lang="en">Switched to 100% plastic-free recyclable paper packaging.</span><span data-lang="zh">新品包裝全面轉型 100% 可回收全紙質無塑化包裝。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-03:</strong> <span data-lang="en">Reaffirmed FY25-26 ₹500 Cr revenue target by Ashok Rajpal.</span><span data-lang="zh">創辦人 Ashok Rajpal 重申 FY25-26 50 億盧比營收目標。</span>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </main>
+
+ </div>
+
+ <script>
+ let currentLang = 'en'; 
+ let radarChart = null;
+
+ // KYC Radar Scores (Inferred based on Sentiment Analysis of Ambrane Intel): 
+ // Market Share: 9 (#1 Indian domestic power bank brand)
+ // Localization: 8 (Kundli 8.3万 sq ft plant, massive local SMT focus)
+ // Brand Power: 8 (Top 3 on Amazon/Flipkart, 40M+ units sold)
+ // Digital Reach: 9 (D2C, Amazon, Flipkart, Reliance, JioMart)
+ // Financial Health: 8 (₹230 Cr FY25 revenue, targeting ₹500 Cr, zero external debt pressure)
+ const radarScores = [9, 8, 8, 9, 8]; 
+
+ const chartData = {
+ en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+ zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+ };
+ 
+ function updateLanguageUI() {
+ try {
+ document.querySelectorAll('[data-lang]').forEach(el => {
+ if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+ });
+ document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+ const tagName = el.tagName.toLowerCase();
+ if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+ if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+ else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+ else el.style.display = 'block';
+ } else {
+ el.style.display = 'block';
+ }
+ });
+ document.querySelectorAll('title').forEach(title => {
+ if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+ });
+ updateChart();
+ } catch (e) { console.error(e); }
+ }
+
+ function updateChart() {
+ if (!radarChart) return;
+ const data = chartData[currentLang];
+ radarChart.data.labels = data.labels;
+ radarChart.data.datasets[0].label = data.label;
+ radarChart.update();
+ }
+
+ document.addEventListener('DOMContentLoaded', () => {
+ const langBtn = document.getElementById('lang-toggle');
+ if (langBtn) langBtn.addEventListener('click', () => {
+ currentLang = currentLang === 'en' ? 'zh' : 'en';
+ updateLanguageUI();
+ });
+
+ const pdfBtn = document.getElementById('export-pdf-btn');
+ if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+ const ctx = document.getElementById('opportunityRadar').getContext('2d');
+ radarChart = new Chart(ctx, {
+ type: 'radar',
+ data: {
+ labels: chartData[currentLang].labels,
+ datasets: [{
+ label: chartData[currentLang].label,
+ data: radarScores, 
+ backgroundColor: 'rgba(59, 130, 246, 0.2)',
+ borderColor: 'rgba(59, 130, 246, 1)',
+ borderWidth: 2,
+ pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+ }]
+ },
+ options: {
+ scales: {
+ r: {
+ angleLines: { color: '#374151' },
+ grid: { color: '#374151' },
+ pointLabels: { color: '#9ca3af', font: {size: 11} },
+ ticks: { display: false, max: 10, stepSize: 2 }
+ }
+ },
+ plugins: { legend: { display: false } },
+ maintainAspectRatio: false
+ }
+ });
+
+ updateLanguageUI();
+ });
+ </script>
+</body>
+</html>

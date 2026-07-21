@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-19T07:17:17.047Z",
+  "lastUpdated": "2026-07-21T03:25:07.055Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1718,6 +1718,19 @@
       "fileName": "report-1784445436114.html",
       "createdAt": "2026-07-19T07:17:17.047Z",
       "updatedAt": "2026-07-19T07:17:17.047Z"
+    },
+    {
+      "id": "report-1784604306059",
+      "title": "Target: Ambrane India Private Limited",
+      "description": "目標企業：Ambrane India Private Limited",
+      "categories": [
+        "客戶KYC",
+        "項目計劃",
+        "市場分析"
+      ],
+      "fileName": "report-1784604306059.html",
+      "createdAt": "2026-07-21T03:25:07.055Z",
+      "updatedAt": "2026-07-21T03:25:07.055Z"
     }
   ]
 }
