@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-21T04:48:36.842Z",
+  "lastUpdated": "2026-07-21T05:01:19.022Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1757,6 +1757,19 @@
       "fileName": "report-1784609315910.html",
       "createdAt": "2026-07-21T04:48:36.842Z",
       "updatedAt": "2026-07-21T04:48:36.842Z"
+    },
+    {
+      "id": "report-1784610078074",
+      "title": "Target: Hammer Lifestyle Private Limited",
+      "description": "目標企業：Hammer Lifestyle Private Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784610078074.html",
+      "createdAt": "2026-07-21T05:01:19.022Z",
+      "updatedAt": "2026-07-21T05:01:19.022Z"
     }
   ]
 }
