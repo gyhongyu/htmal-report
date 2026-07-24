@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-24T16:03:34.308Z",
+  "lastUpdated": "2026-07-24T16:25:35.925Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1796,6 +1796,19 @@
       "fileName": "report-1784909013194.html",
       "createdAt": "2026-07-24T16:03:34.308Z",
       "updatedAt": "2026-07-24T16:03:34.308Z"
+    },
+    {
+      "id": "report-1784910334573",
+      "title": "Target: Aqtronics Technologies Pvt Ltd",
+      "description": "目標企業：Aqtronics Technologies Pvt Ltd",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784910334573.html",
+      "createdAt": "2026-07-24T16:25:35.925Z",
+      "updatedAt": "2026-07-24T16:25:35.925Z"
     }
   ]
 }
