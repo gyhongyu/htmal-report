@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-24T16:25:35.925Z",
+  "lastUpdated": "2026-07-24T16:33:27.496Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1809,6 +1809,19 @@
       "fileName": "report-1784910334573.html",
       "createdAt": "2026-07-24T16:25:35.925Z",
       "updatedAt": "2026-07-24T16:25:35.925Z"
+    },
+    {
+      "id": "report-1784910806832",
+      "title": "Target: Zettaone Technologies India",
+      "description": "目標企業：Zettaone Technologies India",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784910806832.html",
+      "createdAt": "2026-07-24T16:33:27.496Z",
+      "updatedAt": "2026-07-24T16:33:27.496Z"
     }
   ]
 }

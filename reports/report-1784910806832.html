@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- Target Company: Zettaone Technologies India Private Limited -->
+ <!-- Date: Feb 2026 -->
+ <title data-lang="en">Deep Dive KYC: Zettaone Technologies India (Feb 2026)</title>
+ <title data-lang="zh">印度企業 KYC 深度調查報告：Zettaone Technologies India</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <style>
+ body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+ [data-lang] { display: none; }
+ .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+ @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+ a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+ a:hover { color: #e0f2fe; text-decoration: solid; }
+ 
+/* --- Components --- */
+ .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+ .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+ 
+.recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+ .recon-box.risk { border-left: 4px solid #ef4444; }
+ .recon-box.opp { border-left: 4px solid #22c55e; }
+ .recon-box.neutral { border-left: 4px solid #eab308; }
+ .recon-box.info { border-left: 4px solid #3b82f6; }
+
+ .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+ .tag-blue { background-color: #1e40af; color: white; }
+ .tag-green { background-color: #166534; color: white; }
+ .tag-red { background-color: #991b1b; color: white; }
+
+ /* --- Tables --- */
+ table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+ th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+ th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+ tbody tr:nth-child(odd) { background-color: #1f2937; }
+ tbody tr:nth-child(even) { background-color: #2b3748; }
+ tbody tr:hover { background-color: #4b5563; }
+
+ .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+ .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+ .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+ /* --- Responsive Adjustments for Desktop --- */
+ @media (min-width: 768px) {
+ .content-area { padding: 2.5rem; }
+ .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+ th, td { padding: 0.75rem; }
+ .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+ .section-divider span { padding: 0 1rem; }
+ }
+
+ /* --- Print Optimization --- */
+ @media print { 
+@page { 
+margin: 20mm 15mm 20mm 15mm; 
+}
+ .no-print { display: none !important; } 
+body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+.content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+.w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+.bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+.text-white { color: #000 !important; } 
+.text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+.section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+canvas { max-height: 250px; page-break-inside: avoid; } 
+table, tr, .recon-box { page-break-inside: avoid; } 
+.grid { display: block; }
+ .grid > div { margin-bottom: 1rem; }
+ /* Force chart visibility in print */
+ #opportunityRadar { max-width: 400px; margin: 0 auto; }
+ }
+ </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+ <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+ 
+<!-- Navigation -->
+ <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+ <div class="flex items-center space-x-3">
+ <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+ <div>
+ <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+ <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+ </div>
+ </div>
+ <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+ <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+ <i class="fas fa-file-pdf mr-2"></i>
+ <span data-lang="en">Export PDF</span>
+ <span data-lang="zh">導出 PDF</span>
+ </button>
+ <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+ <span data-lang="en">切換中文</span>
+ <span data-lang="zh">Switch to English</span>
+ </button>
+ </div>
+ </header>
+
+ <main class="flex-1">
+ <div class="content-area">
+ 
+<!-- Report Header -->
+ <div class="border-b border-gray-700 pb-6 mb-6">
+ <div class="flex justify-between items-end">
+ <div>
+ <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Zettaone Technologies India</h1>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Zettaone Technologies India</h1>
+ <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+ <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+ </div>
+ <div class="text-right hidden md:block">
+ <div class="text-2xl font-bold text-blue-400">Tier 2</div>
+ <div class="text-xs text-gray-500 uppercase">Strategic Partner / EMS Target</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 1. Corporate Identity (Dashboard) -->
+ <div class="section-divider mt-0">
+ <span data-lang="en">1. Corporate Identity & Scale</span>
+ <span data-lang="zh">1. 企業身份與規模</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+ <!-- Registration -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+ <p class="text-lg font-bold text-white mt-2">Zettaone Technologies India Pvt Ltd</p>
+ <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72200KA2014PTC075293</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市私營)</p>
+ </div>
+ 
+<!-- Financial Scale -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+ <div class="flex items-baseline mt-2">
+ <span class="text-2xl font-bold text-green-400">₹ 85 Cr</span>
+ <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+ </div>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Promoters:</strong> Suresh Kumar & Indian Founders</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>創辦人團隊：</strong> Suresh Kumar 及印度本土發起人</p>
+ </div>
+
+ <!-- Key Base -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Manufacturing Hub</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心製造基地</h3>
+ <p class="text-lg font-bold text-white mt-2" data-lang="en">Bengaluru & Krishnagiri</p>
+ <p class="text-lg font-bold text-white mt-2" data-lang="zh">Bengaluru (電子城) & Krishnagiri</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">350+ Staff | Turnkey Hardware & PCB Unit</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="zh">350+ 團隊 | 硬件與 PCB 軟硬整合基地</p>
+ </div>
+ </div>
+
+ <!-- Locations Details -->
+ <div class="recon-box info">
+ <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint</h3>
+ <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局詳情</h3>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">R&D & Manufacturing Setup:</strong>
+ <strong class="text-white block mb-1" data-lang="zh">研發與製造基地：</strong>
+ <ul class="list-disc pl-5 space-y-1">
+ <li data-lang="en"><strong>Bengaluru (HQ):</strong> Electronic City Phase 1. (Product Design & R&D Hub)</li>
+ <li data-lang="zh"><strong>Bengaluru (總部):</strong> Electronic City Phase 1，產品設計與研發中心。</li>
+ <li data-lang="en"><strong>Krishnagiri (Plant):</strong> SIDCO Industrial Estate. (PCB Design & SMT Assembly)</li>
+ <li data-lang="zh"><strong>Krishnagiri (工廠):</strong> 泰米爾納德邦 SIDCO 工業區，PCB 與 SMT 核心產線。</li>
+ </ul>
+ </div>
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">Design Nodes & Overseas BD:</strong>
+ <strong class="text-white block mb-1" data-lang="zh">工程據點與海外拓展：</strong>
+ <ul class="list-disc pl-5 space-y-1">
+ <li data-lang="en"><strong>Chennai Office:</strong> Perungudi. (Embedded Systems & SI/PI Simulation)</li>
+ <li data-lang="zh"><strong>Chennai 辦事處:</strong> Perungudi，嵌入式系統與電磁/熱模擬。</li>
+ <li data-lang="en"><strong>Pune Node:</strong> Pimpri. (Automotive & Industrial Business Development)</li>
+ <li data-lang="zh"><strong>Pune 據點:</strong> Pimpri，專注汽車與工業客戶BD。</li>
+ <li data-lang="en"><strong>USA Outposts:</strong> Cupertino, CA & Chicago, IL. (North America BD Support)</li>
+ <li data-lang="zh"><strong>美國據點:</strong> 加州 Cupertino 與芝加哥，北美業務前哨站。</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- 2. Ownership -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (Corporate & Holding Nodes):</strong></p>
+ <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (實體與全球推廣節點)：</strong></p>
+ <div class="flex flex-col md:flex-row gap-2 text-xs">
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Operating Entity (India)</span>
+ <span class="text-gray-500 block" data-lang="zh">營運實體 (印度)</span>
+ <strong class="text-white">Zettaone Technologies India Pvt Ltd</strong>
+ <span class="block text-green-400 mt-1" data-lang="en">Promoter Controlled (100%)</span>
+ <span class="block text-green-400 mt-1" data-lang="zh">創辦人團隊全資控權 (100%)</span>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Key Directors</span>
+ <span class="text-gray-500 block" data-lang="zh">核心董事局</span>
+ <strong class="text-white">Suresh Kumar / Prabu Murugan</strong>
+ <span class="block text-gray-400 mt-1" data-lang="en">Active Management Board</span>
+ <span class="block text-gray-400 mt-1" data-lang="zh">技術與管理高層持股</span>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Global Front</span>
+ <span class="text-gray-500 block" data-lang="zh">海外前哨機構</span>
+ <strong class="text-blue-300">Zettaone Technologies Inc. (USA)</strong>
+ <span class="block text-gray-400 mt-1" data-lang="en">Wholly Owned Overseas BD Arm</span>
+ <span class="block text-gray-400 mt-1" data-lang="zh">北美市場全資業務代表處</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 3. Product & BOM -->
+ <div class="section-divider">
+ <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+ <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+ <!-- Col 1: Categories -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Service Portfolios</div>
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要服務領域</div>
+ <ul class="space-y-2 text-sm text-gray-300">
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Turnkey Hardware:</strong> FPGA & Embedded System Design</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>硬體方案：</strong> FPGA 與嵌入式系統開發</li>
+ 
+<li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>PCB Engineering:</strong> High-density HDI Layout & Library</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>PCB 工程：</strong> 高密度多層板佈線與庫管理</li>
+ 
+<li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Manufacturing & SMT:</strong> PCBA, Prototyping & Box Build</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>代工組裝：</strong> SMT 貼片、打樣與整機 Box Build</li>
+ 
+<li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Simulation & V&V:</strong> SI/PI/Thermal & DFM Analysis</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>模擬驗證：</strong> 信號/電源完整性與熱模擬</li>
+ </ul>
+ </div>
+
+ <!-- Col 2: BOM Reverse Engineering -->
+ <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+ <ul class="space-y-2 text-sm text-gray-300">
+ <li data-lang="en"><strong>Bare Boards:</strong> Multi-layer Rigid FR4, High-speed Low-loss Laminates.</li>
+ <li data-lang="zh"><strong>基板材料：</strong> 多層高頻 FR4、高功耗/低損耗電路板。</li>
+ 
+<li data-lang="en"><strong>Active Components:</strong> Microcontrollers (ST/TI), FPGAs (AMD/Intel), Power ICs.</li>
+ <li data-lang="zh"><strong>主動元件：</strong> 微控制器 (ST/TI)、FPGA (AMD/Intel)、電源管理芯片。</li>
+ 
+<li data-lang="en"><strong>Interconnects:</strong> High-density Board-to-Board, RF Connectors, Custom Harness.</li>
+ <li data-lang="zh"><strong>連接組件：</strong> 高密度板對板連接器、RF 射頻頭、定制線束。</li>
+ 
+<li data-lang="en"><strong>Enclosures:</strong> Precision Sheet Metal Chassis, Custom Die-cast Heatsinks.</li>
+ <li data-lang="zh"><strong>機構件：</strong> 精密鈑金外殼、客製化散熱器與鋁壓鑄件。</li>
+ </ul>
+ </div>
+
+ <!-- Col 3: Supply Chain Needs -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain & Synergy Gaps</div>
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈與合作機會</div>
+ <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+ <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Foxlink Synergy:</strong> Potential partner for high-volume SMT expansion and connector sourcing.</p>
+ <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>正崴戰略切入：</strong> 可作為其高階連接器、線束與大批量 SMT 外包擴產夥伴。</p>
+ 
+<p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Import Pressure:</strong> Sourcing local passive & active electronics to trim lead time and import taxes.</p>
+ <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>關稅與交期：</strong> 積極推動電子被動/主動組件在地採購以降低進口稅率。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 4. Human Capital (Full List) -->
+ <div class="section-divider">
+ <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+ <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+ </div>
+
+ <div class="recon-box risk">
+ <div class="mb-4">
+ <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+ <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed</p>
+ </div>
+
+ <div class="overflow-x-auto">
+ <table class="w-full text-sm text-left text-gray-300">
+ <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+ <tr>
+ <th class="w-1/3" data-lang="en">Role & Location</th>
+ <th class="w-1/3" data-lang="zh">職位與地點</th>
+ <th class="w-2/3" data-lang="en">Intel / Implication</th>
+ <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700">
+ <tr>
+ <td>
+ <strong class="text-blue-300">Sr. Hardware Design Engineer</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+ </td>
+ <td data-lang="en"><strong>Big Signal:</strong> Designing high-speed multi-layer boards (Allegro/Altium). Focus on Automotive ECU & Telecom projects.</td>
+ <td data-lang="zh"><strong>強烈訊號：</strong> 負責高頻多層板設計，主打車載 ECU 與電信基站硬體專案。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">PCB Layout Lead (HDI)</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+ </td>
+ <td data-lang="en">Focusing on blind/buried via micro-HDI board design. Expanding high-density layout services for overseas OEMs.</td>
+ <td data-lang="zh">專注微孔 HDI 盲埋孔設計，為海外 OEMs 客戶擴充高密度 Layout 設計量能。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Component & Sourcing Engineer</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Krishnagiri</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Krishnagiri (克里斯納吉里)</span>
+ </td>
+ <td data-lang="en">Handling local BOM sourcing & component obsolescence. Driving import replacement for manufacturing.</td>
+ <td data-lang="zh">負責在地化 BOM 採購與料號替代，降低進口依賴以提高 Krishnagiri 廠利潤。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Embedded Firmware Specialist</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Bengaluru</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Bengaluru (班加羅爾)</span>
+ </td>
+ <td data-lang="en">Developing FreeRTOS/Linux drivers and Board Support Packages (BSP) for IoT clients.</td>
+ <td data-lang="zh">開發 FreeRTOS/Linux 驅動程式與板級支援套件 (BSP)，增強物聯網整合力。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">SMT Quality & DFM Lead</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Krishnagiri</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Krishnagiri (克里斯納吉里)</span>
+ </td>
+ <td data-lang="en">Managing AOI testing, yield enhancement, and ISO 13485 / IATF 16949 audit compliance.</td>
+ <td data-lang="zh">管控 AOI 光學檢測與良率，強化車規 (IATF 16949) 與醫療級生產認證。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">BD Manager - Auto & Industrial</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Pune</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Pune (浦那)</span>
+ </td>
+ <td data-lang="en">Hunting for EV powertrain & auto-electronics clients in Western India automotive cluster.</td>
+ <td data-lang="zh">拓展印度西部汽車聚落 (Tata, Mahindra) 之電動車動力與車電組件代工業務。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">SI/PI Simulation Engineer</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Chennai</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Chennai (清奈)</span>
+ </td>
+ <td data-lang="en">Executing Hyperlynx/Sigrity GHz high-speed signal & power integrity checks for Silicon vendors.</td>
+ <td data-lang="zh">執行 GHz 級訊號與電源完整性模擬，深耕半導體與晶片原廠合作。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">Box Build Production Executive</strong><br>
+ <span class="text-xs text-gray-500" data-lang="en">Krishnagiri</span>
+ <span class="text-xs text-gray-500" data-lang="zh">Krishnagiri (克里斯納吉里)</span>
+ </td>
+ <td data-lang="en">Overseeing final assembly line for industrial IoT units & medical devices.</td>
+ <td data-lang="zh">督導工業物聯網與醫療控制盒之整機組裝 (Box Build) 產線運營。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">FPGA Application Engineer</strong><br>
+ <span class="text-xs text-gray-500">Bengaluru</span>
+ </td>
+ <td data-lang="en">Verilog/VHDL design for high-performance defense & avionics communication systems.</td>
+ <td data-lang="zh">負責國防與航航通訊系統之 FPGA 邏輯開發與系統驗證。</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <!-- 5. Sales & Distribution -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+ 
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+ <!-- Strategy -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="en">B2B Turnkey Model</h4>
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">B2B 設計與製造整合模式</h4>
+ <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+ <li data-lang="en"><strong>Direct OEM Account:</strong> Direct engagement with Automotive, Semiconductor, and Industrial tier-1s.</li>
+ <li data-lang="zh"><strong>大廠直供：</strong> 直攻汽車、半導體與工業巨頭 (Direct OEM engagement)。</li>
+ 
+<li data-lang="en"><strong>Design-to-Manufacture:</strong> Lock in clients from PoC stage, converting hardware design to Krishnagiri SMT production.</li>
+ <li data-lang="zh"><strong>設計轉代工：</strong> 從概念驗證 (PoC) 開始鎖定客戶，再導入自家 SMT 產線。</li>
+ 
+<li data-lang="en"><strong>Global Front-End:</strong> California & Chicago offices channel US chipmaker projects to India R&D.</li>
+ <li data-lang="zh"><strong>海外管道：</strong> 透過美國 California/Chicago 前哨接單，引流至印度工程團隊。</li>
+ </ul>
+ </div>
+ 
+<!-- Logistics -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply & Logistics Logic</h4>
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流與交付邏輯</h4>
+ <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+ <li data-lang="en"><strong>Hub Location:</strong> Krishnagiri plant benefits from proximity to Chennai Port & Bengaluru tech corridor.</li>
+ <li data-lang="zh"><strong>地理優勢：</strong> Krishnagiri 廠位處清奈港與班加羅爾科技廊道間，物流極順暢。</li>
+ 
+<li data-lang="en"><strong>Rapid Prototyping:</strong> Quick-turn SMT line setup for 48-hour prototype dispatches.</li>
+ <li data-lang="zh"><strong>快速打樣：</strong> 設有快速打樣專用 SMT 產線，提供 48 小時急件交付服務。</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- 6. Market Position (Radar & Ranking) -->
+ <div class="section-divider">
+ <span data-lang="en">6. Competitive Landscape</span>
+ <span data-lang="zh">6. 市場地位與戰略動向</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+ <!-- Radar Chart -->
+ <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC)</h4>
+ <div class="relative w-full h-56">
+ <canvas id="opportunityRadar"></canvas>
+ </div>
+ <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Analysis based on EMS capabilities & R&D scale</p>
+ </div>
+
+ <!-- Top 10 Table -->
+ <div class="col-span-2">
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Design & EMS Peers (Mid-tier/Turnkey)</h4>
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度硬體設計與 EMS 同業排名</h4>
+ 
+<div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+ <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+ <thead class="text-xs uppercase bg-gray-900/50">
+ <tr>
+ <th class="p-2">Rank</th>
+ <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+ <th class="p-2" data-lang="en">Origin/Note</th><th class="p-2" data-lang="zh">背景/備註</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700 text-xs">
+ <tr>
+ <td class="p-2 font-bold text-center">1</td>
+ <td class="p-2">Kaynes Technology</td>
+ <td class="p-2 text-gray-400" data-lang="en">India Listed (Market Leader)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度上市 (產業龍頭)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">2</td>
+ <td class="p-2">Cyient DLM</td>
+ <td class="p-2 text-gray-400" data-lang="en">India Listed (Aerospace/Defense)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度上市 (航太國防)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">3</td>
+ <td class="p-2">Vinyas Innovative Tech</td>
+ <td class="p-2 text-gray-400" data-lang="en">India Listed (EMS Specialist)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度上市 (專業代工)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">4</td>
+ <td class="p-2">Sienna ECAD</td>
+ <td class="p-2 text-gray-400" data-lang="en">India (PCB Design & Assembly)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度 (PCB 設計與組裝)</td>
+ </tr>
+ <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+ <td class="p-2 font-bold text-center text-white">5</td>
+ <td class="p-2 text-white font-bold">Zettaone Technologies</td>
+ <td class="p-2 text-blue-300" data-lang="en">Target (Turnkey Design + SMT)</td>
+ <td class="p-2 text-blue-300" data-lang="zh">目標企業 (軟硬整合 + SMT)</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">6-10</td>
+ <td class="p-2" colspan="2">SLN Technologies, Incap Contract Mfg, Signovus, CoiNel, Neural Systems</td>
+ </tr>
+ </tbody>
+ </table>
+ <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Opportunity:</strong> Zettaone possesses strong design capability but seeks strategic partners like Foxlink to scale high-volume SMT and connector supply.</p>
+ <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>機會點：</strong> Zettaone 研發設計實力強，但在大批量產與連接器組件上可與正崴 (Foxlink) 形成強強補位。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 7. Digital Footprint (News) -->
+ <div class="section-divider">
+ <span data-lang="en">7. Digital Footprint & News (Nov '25 - Feb '26)</span>
+ <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+ </div>
+
+ <div class="space-y-3 mb-6 md:mb-8">
+ <!-- Item 1 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-22</div>
+ <div>
+ <strong class="text-green-400 block text-sm" data-lang="en">[Press Release] Krishnagiri SMT Capacity Upgraded</strong>
+ <strong class="text-green-400 block text-sm" data-lang="zh">[新聞稿] Krishnagiri SMT 產線擴建</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Added high-precision 0201 component placement lines to boost automotive PCBA production. <span class="text-gray-500">(Opp: SMT & connector supply)</span></p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">新增高精度 0201 貼片生產線，全面提升車規級 PCBA 產能。<span class="text-gray-500">(機會：連接器與 SMT 合作)</span></p>
+ </div>
+ </div>
+ <!-- Item 2 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+ <div>
+ <strong class="text-blue-400 block text-sm" data-lang="en">[Product] System-on-Module (SoM) Launch</strong>
+ <strong class="text-blue-400 block text-sm" data-lang="zh">[新品] 工業級 System-on-Module (SoM) 發表</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Unveiled compact ARM-based SoM for Industrial IoT and Smart Metering applications. <span class="text-gray-500">(Opp: Box build partnership)</span></p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">發布針對工業物聯網與智慧電錶之 ARM 核心核心板 (SoM)。<span class="text-gray-500">(機會：代工整機組裝)</span></p>
+ </div>
+ </div>
+ <!-- Item 3 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-18</div>
+ <div>
+ <strong class="text-gray-200 block text-sm" data-lang="en">[Partnership] Simulation Suite Upgrade</strong>
+ <strong class="text-gray-200 block text-sm" data-lang="zh">[合作] SI/PI 模擬驗證工具升級</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Upgraded Ghz Hyperlynx and Ansys HFSS tools for advanced 5G PCB thermal analysis.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">引入高階 GHz Hyperlynx 及 Ansys HFSS 模擬軟體，升級 5G 高頻板測試。</p>
+ </div>
+ </div>
+ <!-- Item 4 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-05</div>
+ <div>
+ <strong class="text-purple-400 block text-sm" data-lang="en">[Corporate] Engineering Team Surpasses 350+</strong>
+ <strong class="text-purple-400 block text-sm" data-lang="zh">[企業] 研發與工程團隊突破 350 人</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Expanded Electronic City R&D desk capacity to accommodate growing US client base.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">擴建班加羅爾電子城 R&D 辦公區，以因應北美 IC 與硬體客群需求。</p>
+ </div>
+ </div>
+ <!-- Item 5 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-11-20</div>
+ <div>
+ <strong class="text-gray-200 block text-sm" data-lang="en">[Event] Exibited at electronica India</strong>
+ <strong class="text-gray-200 block text-sm" data-lang="zh">[展會] 參展 electronica India 2025</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Demonstrated turnkey PCB engineering and rapid prototyping capabilities in Greater Noida.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">於 Greater Noida 展會現場展示高密度 PCB 設計與 48 小時急件打樣能力。</p>
+ </div>
+ </div>
+
+ <!-- Additional news items -->
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-12:</strong> <span data-lang="en">Secured ISO 13485 medical device EMS certification line.</span><span data-lang="zh">取得 ISO 13485 醫療器材代工品質體系認證。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-02:</strong> <span data-lang="en">Initiated campus talent hiring at RV College of Engineering.</span><span data-lang="zh">啟動 RV 工程學院校園招聘，吸納電子設計人才。</span>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </main>
+
+ </div>
+
+ <script>
+ let currentLang = 'en'; 
+let radarChart = null;
+
+ // KYC Radar Scores for Zettaone Technologies:
+ // Market Share: 6 (Niche Design & EMS Player)
+ // Localization: 9 (High local manufacturing in Krishnagiri & local R&D in Electronic City)
+ // Brand Power: 7 (Recognized turnkey PCB/Engineering partner in India)
+ // Digital Reach: 6 (B2B focused, direct & digital channels)
+ // Financial Health: 8 (Growing, turnover ~₹85 Cr)
+ const radarScores = [6, 9, 7, 6, 8]; 
+
+const chartData = {
+ en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+ zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+ };
+ 
+function updateLanguageUI() {
+ try {
+ document.querySelectorAll('[data-lang]').forEach(el => {
+ if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+ });
+ document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+ const tagName = el.tagName.toLowerCase();
+ if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+ if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+ else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+ else el.style.display = 'block';
+ } else {
+ el.style.display = 'block';
+ }
+ });
+ document.querySelectorAll('title').forEach(title => {
+ if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+ });
+ updateChart();
+ } catch (e) { console.error(e); }
+ }
+
+ function updateChart() {
+ if (!radarChart) return;
+ const data = chartData[currentLang];
+ radarChart.data.labels = data.labels;
+ radarChart.data.datasets[0].label = data.label;
+ radarChart.update();
+ }
+
+ document.addEventListener('DOMContentLoaded', () => {
+ const langBtn = document.getElementById('lang-toggle');
+ if (langBtn) langBtn.addEventListener('click', () => {
+ currentLang = currentLang === 'en' ? 'zh' : 'en';
+ updateLanguageUI();
+ });
+
+ const pdfBtn = document.getElementById('export-pdf-btn');
+ if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+ const ctx = document.getElementById('opportunityRadar').getContext('2d');
+ radarChart = new Chart(ctx, {
+ type: 'radar',
+ data: {
+ labels: chartData[currentLang].labels,
+ datasets: [{
+ label: chartData[currentLang].label,
+ data: radarScores, 
+backgroundColor: 'rgba(59, 130, 246, 0.2)',
+ borderColor: 'rgba(59, 130, 246, 1)',
+ borderWidth: 2,
+ pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+ }]
+ },
+ options: {
+ scales: {
+ r: {
+ angleLines: { color: '#374151' },
+ grid: { color: '#374151' },
+ pointLabels: { color: '#9ca3af', font: {size: 11} },
+ ticks: { display: false, max: 10, stepSize: 2 }
+ }
+ },
+ plugins: { legend: { display: false } },
+ maintainAspectRatio: false
+ }
+ });
+
+ updateLanguageUI();
+ });
+ </script>
+</body>
+</html>
