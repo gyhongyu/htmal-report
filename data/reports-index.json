@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-24T16:33:27.496Z",
+  "lastUpdated": "2026-07-24T17:35:05.631Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1822,6 +1822,19 @@
       "fileName": "report-1784910806832.html",
       "createdAt": "2026-07-24T16:33:27.496Z",
       "updatedAt": "2026-07-24T16:33:27.496Z"
+    },
+    {
+      "id": "report-1784914503989",
+      "title": "Target: Tescom Electronics Private Limited",
+      "description": "目標企業：Tescom Electronics Private Limited (泰斯康電子)",
+      "categories": [
+        "客戶KYC",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1784914503989.html",
+      "createdAt": "2026-07-24T17:35:05.631Z",
+      "updatedAt": "2026-07-24T17:35:05.631Z"
     }
   ]
 }
