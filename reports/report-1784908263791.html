@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- Target Company: Unistring Tech Solutions Private Limited (UTS) -->
+ <!-- Date Reference: Feb 2026 -->
+ <title data-lang="en">Deep Dive KYC: Unistring Tech Solutions (Feb 2026)</title>
+ <title data-lang="zh">印度企業 KYC 深度調查報告：Unistring Tech Solutions (UTS)</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <style>
+ body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+ [data-lang] { display: none; }
+ .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+ @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+ a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+ a:hover { color: #e0f2fe; text-decoration: solid; }
+ 
+ /* --- Components --- */
+ .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+ .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+ 
+ .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+ .recon-box.risk { border-left: 4px solid #ef4444; }
+ .recon-box.opp { border-left: 4px solid #22c55e; }
+ .recon-box.neutral { border-left: 4px solid #eab308; }
+ .recon-box.info { border-left: 4px solid #3b82f6; }
+
+ .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+ .tag-blue { background-color: #1e40af; color: white; }
+ .tag-green { background-color: #166534; color: white; }
+ .tag-red { background-color: #991b1b; color: white; }
+
+ /* --- Tables --- */
+ table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+ th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+ th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+ tbody tr:nth-child(odd) { background-color: #1f2937; }
+ tbody tr:nth-child(even) { background-color: #2b3748; }
+ tbody tr:hover { background-color: #4b5563; }
+
+ .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+ .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+ .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+ /* --- Responsive Adjustments --- */
+ @media (min-width: 768px) {
+ .content-area { padding: 2.5rem; }
+ .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+ th, td { padding: 0.75rem; }
+ .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+ .section-divider span { padding: 0 1rem; }
+ }
+
+ /* --- Print Optimization --- */
+ @media print { 
+ @page { margin: 20mm 15mm 20mm 15mm; }
+ .no-print { display: none !important; } 
+ body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+ .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+ .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+ .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+ th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+ .text-white { color: #000 !important; } 
+ .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+ h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+ .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+ canvas { max-height: 250px; page-break-inside: avoid; } 
+ table, tr, .recon-box { page-break-inside: avoid; } 
+ .grid { display: block; }
+ .grid > div { margin-bottom: 1rem; }
+ #opportunityRadar { max-width: 400px; margin: 0 auto; }
+ }
+ </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+ <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+ 
+ <!-- Navigation -->
+ <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+ <div class="flex items-center space-x-3">
+ <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+ <div>
+ <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+ <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+ </div>
+ </div>
+ <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+ <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+ <i class="fas fa-file-pdf mr-2"></i>
+ <span data-lang="en">Export PDF</span>
+ <span data-lang="zh">導出 PDF</span>
+ </button>
+ <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+ <span data-lang="en">切換中文</span>
+ <span data-lang="zh">Switch to English</span>
+ </button>
+ </div>
+ </header>
+
+ <main class="flex-1">
+ <div class="content-area">
+ 
+ <!-- Report Header -->
+ <div class="border-b border-gray-700 pb-6 mb-6">
+ <div class="flex justify-between items-end">
+ <div>
+ <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Unistring Tech Solutions Pvt Ltd (UTS)</h1>
+ <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Unistring Tech Solutions Private Limited (UTS)</h1>
+ <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+ <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+ </div>
+ <div class="text-right hidden md:block">
+ <div class="text-2xl font-bold text-blue-400">Tier 2</div>
+ <div class="text-xs text-gray-500 uppercase">Defense Specialist</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- 1. Corporate Identity (Dashboard) -->
+ <div class="section-divider mt-0">
+ <span data-lang="en">1. Corporate Identity & Scale</span>
+ <span data-lang="zh">1. 企業身份與規模</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+ <!-- Registration -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+ <p class="text-lg font-bold text-white mt-2">Unistring Tech Solutions Pvt Ltd</p>
+ <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U72200TG2014PTC094580</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+ <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+ </div>
+ 
+ <!-- Financial Scale -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+ <div class="flex items-baseline mt-2">
+ <span class="text-2xl font-bold text-green-400">₹ 80 - 150 Cr</span>
+ <span class="text-xs text-gray-500 ml-2">(Turnover)</span>
+ </div>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Astra Microwave (NSE: ASTRAMICRO)</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Astra Microwave Products Ltd</p>
+ </div>
+
+ <!-- Key Base -->
+ <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Core Unit</h3>
+ <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與核心基地</h3>
+ <p class="text-lg font-bold text-white mt-2" data-lang="en">Hyderabad (Telangana)</p>
+ <p class="text-lg font-bold text-white mt-2" data-lang="zh">Hyderabad (海德拉巴 - Hardware Park)</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">Hardware Park | ESD Defense Electronics Setup</p>
+ <p class="text-xs text-gray-400 mt-1" data-lang="zh">Hardware Park | 防靜電軍規 SMT 與測試產線</p>
+ </div>
+ </div>
+
+ <!-- Locations Details -->
+ <div class="recon-box info">
+ <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint & Facilities</h3>
+ <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與設施詳情</h3>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">Registered Office & Core Unit:</strong>
+ <strong class="text-white block mb-1" data-lang="zh">註冊辦公室與核心製造基地：</strong>
+ <ul class="list-disc pl-5 space-y-1">
+ <li data-lang="en"><strong>Hyderabad HQ & Plant:</strong> Plot No. 8 & 9, Hardware Park, Shamshabad, Hyderabad, Telangana - 501218. Equipped with ESD military-grade SMT and high-frequency RF assembly/testing setup.</li>
+ <li data-lang="zh"><strong>Hyderabad 核心基地：</strong> Shamshabad Hardware Park (TSIIC 工業區)，具備防靜電軍規 SMT 貼片與高頻電子組裝測試產線。</li>
+ <li data-lang="en"><strong>Logistics & Inspection:</strong> Temperature/humidity controlled warehouse for sensitive defense electronics located within Hyderabad plant.</li>
+ <li data-lang="zh"><strong>倉儲與驗收區：</strong> Hyderabad 工廠內附屬資產倉儲與軍規驗收區，具備高敏感電子零組件之恆溫恆濕控管系統。</li>
+ </ul>
+ </div>
+ <div>
+ <strong class="text-white block mb-1" data-lang="en">R&D & Regional Offices:</strong>
+ <strong class="text-white block mb-1" data-lang="zh">研發中心與區域辦事處：</strong>
+ <ul class="list-disc pl-5 space-y-1">
+ <li data-lang="en"><strong>Hyderabad Defense R&D Center:</strong> Focuses on FPGA high-speed DSP, wideband RF/microwave antenna design, and Anti-Drone jammer tech.</li>
+ <li data-lang="zh"><strong>Hyderabad 國防電子研發中心：</strong> 位於海德拉巴總部，專注 FPGA 高速數位訊號處理、寬頻 RF/微波天線設計與反無人機電子干擾技術。</li>
+ <li data-lang="en"><strong>New Delhi Regional Office:</strong> Handles government affairs, liaison with Ministry of Defence (MoD), DRDO, and armed forces tender management.</li>
+ <li data-lang="zh"><strong>New Delhi 辦務處：</strong> 位於新德里，主要負責與印度國防部 (MoD)、DRDO 及印度三軍標案對接與商務聯繫。</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- 2. Ownership -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Financial Scale</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+ <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+ <div class="flex flex-col md:flex-row gap-2 text-xs">
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Level 1 (Direct Holding)</span>
+ <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+ <strong class="text-white">Astra Microwave Products Ltd</strong>
+ <span class="block text-green-400 mt-1" data-lang="en">51% - 57% Stake</span>
+ <span class="block text-green-400 mt-1" data-lang="zh">51% - 57% 戰略控股</span>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Level 2 (Intermediate)</span>
+ <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+ <strong class="text-white">Astra Microwave Products Ltd</strong>
+ <span class="block text-blue-300 mt-1">NSE / BSE Listed (ASTRAMICRO)</span>
+ </div>
+ <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+ <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+ <span class="text-gray-500 block" data-lang="en">Ultimate Beneficial Owner</span>
+ <span class="text-gray-500 block" data-lang="zh">最終受益人</span>
+ <strong class="text-blue-300">Promoter Family (C. Pradeep) & Institutional Investors</strong>
+ <span class="block text-gray-400 mt-1" data-lang="en">Astra Microwave Founders & Public</span>
+ <span class="block text-gray-400 mt-1" data-lang="zh">創辦人家族與公開市場機構股東</span>
+ </div>
+ </div>
+ <p class="text-xs text-gray-400 mt-3" data-lang="en"><strong>Investor Context:</strong> Strategically acquired by defense giant Astra Microwave to form an integrated RF hardware + Software Defined Radio (SDR) / EW defense value chain. Group Turnover: ₹ 800 - 1000 Cr; UTS Workforce: 200 - 300 engineers and technicians.</p>
+ <p class="text-xs text-gray-400 mt-3" data-lang="zh"><strong>投資人背景：</strong> 由印度國防微波通訊巨頭 Astra Microwave 策略投資併購，形成「射頻硬體 + 軟體無線電 (SDR) / 電戰系統」的國防產業鏈高度垂直整合。母公司集團年營收約 80 億 - 100 億盧比，UTS 團隊約 200 - 300 人。</p>
+ </div>
+ </div>
+
+ <!-- 3. Product & BOM -->
+ <div class="section-divider">
+ <span data-lang="en">3. Product Portfolio & BOM Breakdown</span>
+ <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM)</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+ <!-- Col 1: Categories -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+ <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+ <ul class="space-y-2 text-sm text-gray-300">
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Software Defined Radios:</strong> High-bandwidth SDR systems</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>軟體無線電系統：</strong> Software Defined Radios (SDR)</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Radar & EW:</strong> Radar signal processors & EW systems</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>雷達與電子戰系統：</strong> Radar & EW Systems</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Anti-Drone Tech:</strong> RF Drone Detector & Jammer</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>反無人機系統：</strong> RF Drone Detector & Jammer</li>
+ 
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Wideband RF:</strong> Antenna modules & RF front-ends</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>寬頻射頻與天線：</strong> Indigenous Wideband RF Modules</li>
+
+ <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>FPGA Boards:</strong> High-speed DAQ & DSP processing cards</li>
+ <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>多通道 FPGA 板卡：</strong> High-Speed DAQ & FPGA Boards</li>
+ </ul>
+ </div>
+
+ <!-- Col 2: BOM Reverse Engineering -->
+ <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+ <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+ <ul class="space-y-2 text-sm text-gray-300">
+ <li data-lang="en"><strong>RF Front-End:</strong> Power Amplifiers (PA), LNAs, Broadband Switches, Antenna Arrays.</li>
+ <li data-lang="zh"><strong>射頻與微波前端：</strong> 功率放大器 (PA)、LNA、寬頻開關、天線陣列。</li>
+ 
+ <li data-lang="en"><strong>Digital Processing:</strong> High-tier FPGA boards (Xilinx/Intel), High-speed ADC/DACs, DSP cards.</li>
+ <li data-lang="zh"><strong>數位訊號處理核心：</strong> 高階 FPGA 板卡 (Xilinx/Intel)、高速 ADC/DAC、主控 DSP 板卡。</li>
+ 
+ <li data-lang="en"><strong>Power & Thermal:</strong> MIL-spec DC-DC converter modules, heat dissipation substrates, rugged enclosures.</li>
+ <li data-lang="zh"><strong>電源與熱管理：</strong> 軍規 DC-DC 電源轉換模組、散熱基板、強固機構件。</li>
+ 
+ <li data-lang="en"><strong>Interconnect & Chassis:</strong> Aluminum CNC enclosures, SMA/SMP connectors, MIL circular connectors, Multilayer RF PCBs, Wire Harness.</li>
+ <li data-lang="zh"><strong>電子互連與機箱：</strong> 抗震鋁合金機箱、SMA/SMP 高頻連接器、軍規圓形連接器、多層高頻 PCB、軍規線束。</li>
+ </ul>
+ </div>
+
+ <!-- Col 3: Supply Chain Needs -->
+ <div class="partner-card p-4 md:p-5 rounded-lg">
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps</div>
+ <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求</div>
+ <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+ <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Military Spec:</strong> Need vendors with precision high-frequency connectors and MIL-STD compliance.</p>
+ <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>軍規精密度：</strong> 尋找具備精密高頻連接器與符合軍規認證的製造夥伴。</p>
+ 
+ <p data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Foxlink Synergy:</strong> High-density multi-layer PCB, custom rugged metal enclosures, and wiring harness localized assembly.</p>
+ <p data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>Foxlink 切入點：</strong> 高密度多層 PCB、客製化強固型機箱及在地化線束代工。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 4. Human Capital -->
+ <div class="section-divider">
+ <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+ <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+ </div>
+
+ <div class="recon-box risk">
+ <div class="mb-4">
+ <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they building?</h3>
+ <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀</h3>
+ <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed (11 Active Profiles Identified)</p>
+ </div>
+
+ <div class="overflow-x-auto">
+ <table class="w-full text-sm text-left text-gray-300">
+ <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+ <tr>
+ <th class="w-1/3" data-lang="en">Role & Location</th>
+ <th class="w-1/3" data-lang="zh">職位與地點</th>
+ <th class="w-2/3" data-lang="en">Intel / Strategic Implication</th>
+ <th class="w-2/3" data-lang="zh">情報解讀 / 隱含意義</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700">
+ <tr>
+ <td>
+ <strong class="text-blue-300">Senior RF Design Engineer</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Designing X-band/Ku-band RF modules. Upgrading radar front-end components.</td>
+ <td data-lang="zh">負責 X-band / Ku-band 射頻模組與微波電路設計，顯示正升級雷達前端組件。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">FPGA Firmware Developer</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">High-speed data acquisition and DSP algorithm implementation on FPGA.</td>
+ <td data-lang="zh">專注於高速數據採集與 DSP 演算法在 FPGA 上之實現。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">Manager - Procurement (Defense)</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Managing defense grade electronic parts sourcing and import substitution evaluation.</td>
+ <td data-lang="zh">負責國防級電子零件之在地採購與進口替代評估 (Foxlink 切入機會)。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Embedded C/C++ Software Engineer</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Low-level driver development & embedded Linux programming for SDR systems.</td>
+ <td data-lang="zh">負責 SDR 系統之底層驅動程式與嵌入式 Linux 開發。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-blue-300">PCB Layout Engineer (RF)</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">10+ layer high-speed RF PCB routing, SI/PI integrity analysis.</td>
+ <td data-lang="zh">負責 10 層以上高頻訊號與電源完整性 (SI/PI) PCB 佈線。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Defense Business Dev Manager</strong><br>
+ <span class="text-xs text-gray-500">New Delhi</span>
+ </td>
+ <td data-lang="en">Deepening Ministry of Defence (MoD) & DRDO relations, expanding tripartite military tenders.</td>
+ <td data-lang="zh">深耕國防部 (MoD) 及 DRDO 專案，拓展三軍採購合約。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">QA/QC Manager - MIL Standards</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Managing MIL-STD-810G & JSS 55555 environmental and quality compliance workflows.</td>
+ <td data-lang="zh">負責 MIL-STD-810G 與 JSS 55555 軍規環境與品質測試流程。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">System Integration & Field Test Eng</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Outdoor field testing and system integration for anti-drone jammers and radars.</td>
+ <td data-lang="zh">負責反無人機干擾系統與雷達之戶外場域整合測試。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Mechanical Enclosure Design Eng</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Designing IP67 waterproof & high-vibration resistant defense electronic enclosures.</td>
+ <td data-lang="zh">設計具備 IP67 防水防塵與高抗震等級之防禦電子機箱。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">Graduate Engineer Trainee - Electronics</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Grooming fresh defense electronics tech pipeline to expand R&D depth.</td>
+ <td data-lang="zh">招聘研發梯隊，深化國防電子研發實力。</td>
+ </tr>
+ <tr>
+ <td>
+ <strong class="text-white">SMT Line Supervisor</strong><br>
+ <span class="text-xs text-gray-500">Hyderabad</span>
+ </td>
+ <td data-lang="en">Monitoring operational efficiency on precision prototype and mass SMT lines.</td>
+ <td data-lang="zh">負責 Hyderabad 工廠精密電子打樣與量產線之營運監控。</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <!-- 5. Sales & Distribution -->
+ <div class="mb-6 md:mb-8">
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+ <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+ 
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+ <!-- Strategy -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="en">B2G & Tier-1 Integration Model</h4>
+ <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">標案直銷與 Tier-1 供應模式</h4>
+ <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+ <li data-lang="en"><strong>B2G Government Sales:</strong> Direct tenders with Indian Ministry of Defence (MoD), DRDO, Armed Forces, and DPSUs (BEL, BDL, HAL).</li>
+ <li data-lang="zh"><strong>B2G 政府標案：</strong> 以印度國防部 (MoD)、DRDO、印度三軍及國營國防企業 (DPSUs) 之標案直銷為主。</li>
+ 
+ <li data-lang="en"><strong>Tier-1/2 Sub-system Partner:</strong> Key sub-system vendor to prime defense integrators like parent company Astra Microwave.</li>
+ <li data-lang="zh"><strong>B2B 系統整合：</strong> 作為大型國防系統整合商 (如母公司 Astra Microwave) 的關鍵次系統 (Sub-system) 供應商。</li>
+ 
+ <li data-lang="en"><strong>GeM Portal Presence:</strong> Officially registered on Government e-Marketplace (GeM) for direct public procurement.</li>
+ <li data-lang="zh"><strong>GeM 採購平台：</strong> 登錄為印度政府電子採購網 (Government e-Marketplace) 核可供應商。</li>
+ </ul>
+ </div>
+ 
+ <!-- Logistics -->
+ <div class="bg-gray-800 p-4 rounded border border-gray-700">
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Logistics & Expo Strategy</h4>
+ <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">物流邏輯與展會曝光</h4>
+ <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+ <li data-lang="en"><strong>Dispatch Logic:</strong> High-security military packaging; directly dispatched from Hyderabad plant to defense testing fields or DPSU warehouses.</li>
+ <li data-lang="zh"><strong>供應鏈物流：</strong> Hyderabad 廠區高規品管後直發國防試驗場或國營國防企業 (DPSU) 倉庫。</li>
+ 
+ <li data-lang="en"><strong>Exhibition Footprint:</strong> Regular participation in DefExpo, Source India, and India Electronics Week for government networking.</li>
+ <li data-lang="zh"><strong>實體展會：</strong> 積極參加 DefExpo、India Electronics Week、Source India 等國防專業展覽。</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- 6. Market Position (Radar & Ranking) -->
+ <div class="section-divider">
+ <span data-lang="en">6. Competitive Landscape</span>
+ <span data-lang="zh">6. 市場地位與戰略動向</span>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+ <!-- Radar Chart -->
+ <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Competitiveness Profile</h4>
+ <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">競爭力畫像 (KYC Radar)</h4>
+ <div class="relative w-full h-56">
+ <canvas id="opportunityRadar"></canvas>
+ </div>
+ <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Score derived from indigenous tech strength & backing</p>
+ <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="zh">評分基於自主研發實力與母集團支持分析</p>
+ </div>
+
+ <!-- Top 10 Table -->
+ <div class="col-span-2">
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Defense Electronics Rankings (Top 10)</h4>
+ <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度國防電子與雷達/電戰領域 TOP 10 排名</h4>
+ 
+ <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+ <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+ <thead class="text-xs uppercase bg-gray-900/50">
+ <tr>
+ <th class="p-2">Rank</th>
+ <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+ <th class="p-2" data-lang="en">Category / Note</th><th class="p-2" data-lang="zh">背景 / 備註</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-gray-700 text-xs">
+ <tr>
+ <td class="p-2 font-bold text-center">1</td>
+ <td class="p-2">Bharat Electronics Ltd (BEL)</td>
+ <td class="p-2 text-gray-400" data-lang="en">State PSU (Undisputed Leader)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">國營 DPSU 絕對龍頭</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">2</td>
+ <td class="p-2">Data Patterns (India) Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed Defense Electronics Giant</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土上市國防與航太巨頭</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">3</td>
+ <td class="p-2">Astra Microwave Products Ltd</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed RF & Microwave Major (UTS Parent)</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土上市 - 目標客戶 UTS 之母公司</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">4</td>
+ <td class="p-2">TATA Advanced Systems (TASL)</td>
+ <td class="p-2 text-gray-400" data-lang="en">Private Conglomerate Integrator</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度民營巨頭 - 國防系統整合商</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">5</td>
+ <td class="p-2">L&T Defense</td>
+ <td class="p-2 text-gray-400" data-lang="en">Heavy Defense & Electronics</td>
+ <td class="p-2 text-gray-400" data-lang="zh">重型國防裝備與電子系統</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">6</td>
+ <td class="p-2">Paras Defence & Space Tech</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed Optics & Rugged Tech</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土上市 - 防禦光電與強固電子</td>
+ </tr>
+ <tr class="bg-blue-900/40 border-l-4 border-blue-500">
+ <td class="p-2 font-bold text-center text-white">7</td>
+ <td class="p-2 text-white font-bold">Unistring Tech Solutions (UTS)</td>
+ <td class="p-2 text-blue-300" data-lang="en">Target: Tier 2 SDR, Radar & Anti-Drone Specialist</td>
+ <td class="p-2 text-blue-300" data-lang="zh">本報告目標 - SDR、雷達電戰與反無人機專精</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">8</td>
+ <td class="p-2">Centum Electronics</td>
+ <td class="p-2 text-gray-400" data-lang="en">Listed Defense Module Manufacturing</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土上市 - 航太與國防電子製造</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">9</td>
+ <td class="p-2">Alpha Design Technologies (Adani)</td>
+ <td class="p-2 text-gray-400" data-lang="en">Private Defense Comms & Electro-optics</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度民營 - 國防通訊與光電系統</td>
+ </tr>
+ <tr>
+ <td class="p-2 font-bold text-center">10</td>
+ <td class="p-2">Sahasra Electronics</td>
+ <td class="p-2 text-gray-400" data-lang="en">Defense PCB & SMT Assembly Services</td>
+ <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 國防與工業 PCB / SMT 製造</td>
+ </tr>
+ </tbody>
+ </table>
+ <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="en"><strong>Foxlink Opportunity:</strong> Driven by "Make in India" & Atmanirbhar Bharat policies, UTS urgently requires localized high-precision connectors, custom rugged enclosures, and cable harness assembly to scale R&D outputs into mass production.</p>
+ <p class="text-xs text-gray-500 mt-2 italic p-1" data-lang="zh"><strong>FOXLINK 機會點：</strong> 在 Make in India 政策下，UTS 急需高品質精密連接器、客製化機箱及高階線束組裝交付能力 (如 FOXLINK)，以將研發成果快速量產。</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 7. Digital Footprint (News) -->
+ <div class="section-divider">
+ <span data-lang="en">7. Digital Footprint & Recent News (Nov '25 - Feb '26)</span>
+ <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+ </div>
+
+ <div class="space-y-3 mb-6 md:mb-8">
+ <!-- Item 1 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-02-12</div>
+ <div>
+ <strong class="text-green-400 block text-sm" data-lang="en">[Trade Show] Source India Exhibition Participation</strong>
+ <strong class="text-green-400 block text-sm" data-lang="zh">[展會動向] 參展 Source India 展會</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Exhibited latest RF Drone Detector & Jammer and multi-channel SDR modules at Booth C10.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">於 C10 展位展示最新型 RF 無人機偵測與干擾系統 (RF Drone Detector & Jammer) 及多通道 SDR 模組。</p>
+ </div>
+ </div>
+ <!-- Item 2 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-28</div>
+ <div>
+ <strong class="text-blue-400 block text-sm" data-lang="en">[Technical Milestone] Wideband Antenna Military Clearance</strong>
+ <strong class="text-blue-400 block text-sm" data-lang="zh">[技術突破] 寬頻天線軍規認證通過</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Indigenously developed broadband RF antenna unit successfully cleared DRDO lab temperature and vibration tests.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">自主研發之寬頻 RF 天線單元順利通過 DRDO 實驗室之高低溫與極端環境震動測試。</p>
+ </div>
+ </div>
+ <!-- Item 3 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-18</div>
+ <div>
+ <strong class="text-purple-400 block text-sm" data-lang="en">[Expansion] Hyderabad HQ R&D Center Upgraded</strong>
+ <strong class="text-purple-400 block text-sm" data-lang="zh">[企業擴建] Hyderabad 研發中心擴建</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Commissioned a new High-Speed DSP Simulation Lab for radar electronic countermeasure algorithm validation.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">新設高速 DSP 模擬測試實驗室，著重於雷達訊號反制與訊號處理演算法驗證。</p>
+ </div>
+ </div>
+ <!-- Item 4 -->
+ <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+ <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-05</div>
+ <div>
+ <strong class="text-yellow-400 block text-sm" data-lang="en">[Product Launch] Portable Anti-Drone Jammer Released</strong>
+ <strong class="text-yellow-400 block text-sm" data-lang="zh">[新品發布] 發布可攜式反無人機干擾機</strong>
+ <p class="text-xs text-gray-300 mt-1" data-lang="en">Unveiled modular band-switching portable jammer tailored for border and vital point defense.</p>
+ <p class="text-xs text-gray-300 mt-1" data-lang="zh">針對邊境與要塞防衛，推出具備模組化頻段切換功能之可攜式電戰干擾設備。</p>
+ </div>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-12-20:</strong> <span data-lang="en">Won Indian Army SDR pilot trial production order.</span><span data-lang="zh">獲得印度陸軍多通道軟體無線電 (SDR) 試量產合約。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-12-10:</strong> <span data-lang="en">Kickstarted 2026 talent drive with Telangana engineering colleges.</span><span data-lang="zh">與 Telangana 院校合作啟動 2026 射頻與軟體人才招募。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-28:</strong> <span data-lang="en">Conferred Defense Innovation Enterprise Award for indigenous RF tech.</span><span data-lang="zh">憑藉 Indigenous Wideband RF 獲頒國防創新企業獎。</span>
+ </div>
+ <div class="bg-gray-800 p-2 rounded border border-gray-700 text-xs text-gray-400">
+ <strong class="text-gray-200">2025-11-15:</strong> <span data-lang="en">Joint showcase with Astra Microwave for integrated defense systems.</span><span data-lang="zh">與 Astra Microwave 聯合展示微波前端與 SDR 整合方案。</span>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </main>
+
+ </div>
+
+ <script>
+ let currentLang = 'en'; 
+ let radarChart = null;
+
+ // Radar Scores for UTS based on Sentiment Analysis:
+ // Market Share: 7 (Tier 2 Specialist in India defense electronics)
+ // Localization: 9 (High indigenous DRDO-compliant R&D, Atmanirbhar Bharat)
+ // Brand Power: 7 (Well respected defense specialist backed by Astra Microwave)
+ // Digital Reach: 6 (Niche defense portal presence, GeM portal listed, non-consumer)
+ // Financial Health: 8 (Profitable ₹80-150 Cr revenue backed by listed parent ASTRAMICRO)
+ const radarScores = [7, 9, 7, 6, 8]; 
+
+ const chartData = {
+ en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Score (1-10)' },
+ zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '評分 (1-10)' }
+ };
+ 
+ function updateLanguageUI() {
+ try {
+ document.querySelectorAll('[data-lang]').forEach(el => {
+ if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+ });
+ document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+ const tagName = el.tagName.toLowerCase();
+ if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+ if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+ else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+ else el.style.display = 'block';
+ } else {
+ el.style.display = 'block';
+ }
+ });
+ document.querySelectorAll('title').forEach(title => {
+ if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+ });
+ updateChart();
+ } catch (e) { console.error(e); }
+ }
+
+ function updateChart() {
+ if (!radarChart) return;
+ const data = chartData[currentLang];
+ radarChart.data.labels = data.labels;
+ radarChart.data.datasets[0].label = data.label;
+ radarChart.update();
+ }
+
+ document.addEventListener('DOMContentLoaded', () => {
+ const langBtn = document.getElementById('lang-toggle');
+ if (langBtn) langBtn.addEventListener('click', () => {
+ currentLang = currentLang === 'en' ? 'zh' : 'en';
+ updateLanguageUI();
+ });
+
+ const pdfBtn = document.getElementById('export-pdf-btn');
+ if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+ const ctx = document.getElementById('opportunityRadar').getContext('2d');
+ radarChart = new Chart(ctx, {
+ type: 'radar',
+ data: {
+ labels: chartData[currentLang].labels,
+ datasets: [{
+ label: chartData[currentLang].label,
+ data: radarScores, 
+ backgroundColor: 'rgba(59, 130, 246, 0.2)',
+ borderColor: 'rgba(59, 130, 246, 1)',
+ borderWidth: 2,
+ pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+ }]
+ },
+ options: {
+ scales: {
+ r: {
+ angleLines: { color: '#374151' },
+ grid: { color: '#374151' },
+ pointLabels: { color: '#9ca3af', font: {size: 11} },
+ ticks: { display: false, max: 10, stepSize: 2 }
+ }
+ },
+ plugins: { legend: { display: false } },
+ maintainAspectRatio: false
+ }
+ });
+
+ updateLanguageUI();
+ });
+ </script>
+</body>
+</html>

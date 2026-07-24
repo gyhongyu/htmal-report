@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-21T05:01:19.022Z",
+  "lastUpdated": "2026-07-24T15:51:06.162Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1770,6 +1770,19 @@
       "fileName": "report-1784610078074.html",
       "createdAt": "2026-07-21T05:01:19.022Z",
       "updatedAt": "2026-07-21T05:01:19.022Z"
+    },
+    {
+      "id": "report-1784908263791",
+      "title": "Target: Unistring Tech Solutions Pvt Ltd (UTS)",
+      "description": "目標企業：Unistring Tech Solutions Private Limited (UTS)",
+      "categories": [
+        "客戶KYC",
+        "項目計劃",
+        "市場分析"
+      ],
+      "fileName": "report-1784908263791.html",
+      "createdAt": "2026-07-24T15:51:06.162Z",
+      "updatedAt": "2026-07-24T15:51:06.162Z"
     }
   ]
 }
