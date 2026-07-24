@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Target Company: Inceram Materials Private Limited -->
+    <!-- Date: Feb 2026 -->
+    <title data-lang="en">Deep Dive KYC: Inceram Materials (Feb 2026)</title>
+    <title data-lang="zh">印度企業 KYC 深度調查報告：Inceram Materials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Core Styles --- */
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #111827; color: #f3f4f6; margin: 0; padding: 0; overflow-y: auto; }
+        [data-lang] { display: none; }
+        .content-area { animation: fadeIn 0.5s ease-out; min-height: calc(100vh - 80px); padding: 1rem; box-sizing: border-box; max-width: 1280px; margin: 0 auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        a { color: #60a5fa; text-decoration: underline; text-underline-offset: 3px; text-decoration-style: dotted; transition: color 0.2s; }
+        a:hover { color: #e0f2fe; text-decoration: solid; }
+        
+        /* --- Components --- */
+        .partner-card { background: linear-gradient(145deg, #1f2937, #111827); border: 1px solid #374151; transition: transform 0.2s, border-color 0.2s; height: 100%; }
+        .partner-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        
+        .recon-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.2); margin-bottom: 1.25rem; }
+        .recon-box.risk { border-left: 4px solid #ef4444; }
+        .recon-box.opp { border-left: 4px solid #22c55e; }
+        .recon-box.neutral { border-left: 4px solid #eab308; }
+        .recon-box.info { border-left: 4px solid #3b82f6; }
+
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; font-weight: 700; display: inline-block; margin-right: 4px; }
+        .tag-blue { background-color: #1e40af; color: white; }
+        .tag-green { background-color: #166534; color: white; }
+        .tag-red { background-color: #991b1b; color: white; }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.3); table-layout: auto; font-size: 0.9rem; }
+        th, td { border: 1px solid #4b5563; padding: 0.5rem; text-align: left; vertical-align: top; }
+        th { background-color: #374151; font-weight: 600; color: #e5e7eb; }
+        tbody tr:nth-child(odd) { background-color: #1f2937; }
+        tbody tr:nth-child(even) { background-color: #2b3748; }
+        tbody tr:hover { background-color: #4b5563; }
+
+        .section-divider { display: flex; align-items: center; margin-top: 2rem; margin-bottom: 1.25rem; }
+        .section-divider::before, .section-divider::after { content: ""; flex: 1; border-bottom: 1px solid #4b5563; }
+        .section-divider span { padding: 0 0.75rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+
+        /* --- Responsive Adjustments --- */
+        @media (min-width: 768px) {
+            .content-area { padding: 2.5rem; }
+            .recon-box { padding: 1.5rem; margin-bottom: 1.5rem; }
+            th, td { padding: 0.75rem; }
+            .section-divider { margin-top: 3rem; margin-bottom: 1.5rem; }
+            .section-divider span { padding: 0 1rem; }
+        }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            @page { margin: 20mm 15mm 20mm 15mm; }
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; animation: none; } 
+            .w-full.mx-auto { border: none !important; box-shadow: none !important; margin: 0 !important; } 
+            .bg-gray-800, .bg-gray-900, .recon-box, .partner-card { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f0f0f0 !important; color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .text-white { color: #000 !important; } 
+            .text-gray-300, .text-gray-400, .text-blue-400, .text-yellow-400 { color: #333 !important; } 
+            h1, h2, h3, h4 { page-break-after: avoid; color: #000 !important; } 
+            .section-divider { margin-top: 1rem; margin-bottom: 1rem; } 
+            canvas { max-height: 250px; page-break-inside: avoid; } 
+            table, tr, .recon-box { page-break-inside: avoid; } 
+            .grid { display: block; }
+            .grid > div { margin-bottom: 1rem; }
+            #opportunityRadar { max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-gray-800 md:shadow-2xl relative md:border border-gray-700 flex flex-col my-0 md:my-4">
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-20 bg-gray-800/95 backdrop-blur border-b border-gray-700 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight" data-lang="en">Foxlink India Electric Pvt Ltd</span>
+                    <span class="block text-lg font-bold leading-tight" data-lang="zh">正崴精密工業股份有限公司</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <button id="export-pdf-btn" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    <span data-lang="en">Export PDF</span>
+                    <span data-lang="zh">導出 PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors">
+                    <span data-lang="en">切換中文</span>
+                    <span data-lang="zh">Switch to English</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+            
+                <!-- Report Header -->
+                <div class="border-b border-gray-700 pb-6 mb-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 font-bold tracking-wider">KYC INTELLIGENCE</span>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="en">Target: Inceram Materials Private Limited</h1>
+                            <h1 class="text-3xl font-bold text-white mb-2" data-lang="zh">目標企業：Inceram Materials Private Limited</h1>
+                            <p class="text-sm text-gray-400" data-lang="en"><strong>Date Reference:</strong> Feb 2026 | <strong>Prepared By:</strong> India Corporate Intel Team</p>
+                            <p class="text-sm text-gray-400" data-lang="zh"><strong>數據基準：</strong> 2026年2月 | <strong>編制：</strong> 印度企業情報總監</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="text-2xl font-bold text-yellow-400">Tier 3</div>
+                            <div class="text-xs text-gray-500 uppercase">Growth Potential Partner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Corporate Identity (Dashboard) -->
+                <div class="section-divider mt-0">
+                    <span data-lang="en">1. Corporate Identity & Scale</span>
+                    <span data-lang="zh">1. 企業身份與規模</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <!-- Registration -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Registered Entity</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">註冊實體信息</h3>
+                        <p class="text-lg font-bold text-white mt-2">Inceram Materials Pvt Ltd</p>
+                        <p class="text-xs text-gray-400 mt-1"><strong>CIN:</strong> U26990GJ2018PTC104521</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="en">Status: Active (Unlisted Private)</p>
+                        <p class="text-xs text-blue-400 mt-2" data-lang="zh">狀態：活躍 (非上市)</p>
+                    </div>
+                    
+                    <!-- Financial Scale -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">Financial Snapshot</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">財務規模快照</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-2xl font-bold text-green-400">₹ 45 - 80 Cr</span>
+                            <span class="text-xs text-gray-500 ml-2">(Est. Turnover)</span>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="en"><strong>Big Boss:</strong> Inceram Founder Group</p>
+                        <p class="text-xs text-gray-300 mt-1" data-lang="zh"><strong>最終母公司：</strong> Inceram 創辦人集團與控股夥伴</p>
+                    </div>
+
+                    <!-- Key Base -->
+                    <div class="bg-gray-800 p-4 md:p-5 rounded-lg border border-gray-600">
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="en">HQ & Headcount</h3>
+                        <h3 class="text-gray-400 text-xs uppercase font-bold" data-lang="zh">總部與人員規模</h3>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="en">Vadodara (Gujarat)</p>
+                        <p class="text-lg font-bold text-white mt-2" data-lang="zh">Vadodara (古吉拉特邦)</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">~180 Staff | Precision Ceramic Hub</p>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="zh">約 180 名員工 | 精密陶瓷製造樞紐</p>
+                    </div>
+                </div>
+
+                <!-- Locations Details -->
+                <div class="recon-box info">
+                    <h3 class="font-bold text-white mb-3" data-lang="en"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>Geographic Footprint & Units</h3>
+                    <h3 class="font-bold text-white mb-3" data-lang="zh"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>地理佈局與廠區詳情</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">Manufacturing Setup:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">製造基地：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Vadodara Main Unit (HQ):</strong> Plot 42, GIDC, Makarpura. High-purity Alumina sintering, high-temp kilns & CNC grinding.</li>
+                                <li data-lang="zh"><strong>Vadodara 精密陶瓷總廠 (HQ)：</strong> GIDC Makarpura 工業區，技術陶瓷與高純度氧化鋁燒結基地。</li>
+                                <li data-lang="en"><strong>Morbi Auxiliary Setup:</strong> Ceramic cluster hub for structural component shaping & pre-sintering.</li>
+                                <li data-lang="zh"><strong>Morbi 輔助加工廠：</strong> 陶瓷產業聚落，基礎結構件成型與預燒結。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1" data-lang="en">R&D & Regional Offices:</strong>
+                            <strong class="text-white block mb-1" data-lang="zh">研發與區域辦事處：</strong>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li data-lang="en"><strong>Vadodara R&D Center:</strong> Focus on AlN, Al2O3, dielectric & thermal optimization.</li>
+                                <li data-lang="zh"><strong>Vadodara 材料研發中心：</strong> 專注 AlN, Al2O3 介電與散熱優化工程。</li>
+                                <li data-lang="en"><strong>Bengaluru Branch:</strong> Electronic City Phase 1 (South India electronics & semicon account handling).</li>
+                                <li data-lang="zh"><strong>Bengaluru 辦事處：</strong> Electronic City Phase 1，對接南印度電子/半導體客戶。</li>
+                                <li data-lang="en"><strong>NCR Noida Branch:</strong> Sector 63, Noida (Power grid, auto electronics, govt tender biz).</li>
+                                <li data-lang="zh"><strong>NCR/Delhi 辦事處：</strong> Sector 63, Noida，負責重電、車用電子與政府標案。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Ownership -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">2. Ownership & Shareholding Hierarchy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">2. 財務規模與股權架構</h2>
+                    <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                        <p class="text-sm text-gray-300 mb-3" data-lang="en"><strong>Structure Trace (3 Levels Up):</strong></p>
+                        <p class="text-sm text-gray-300 mb-3" data-lang="zh"><strong>股權穿透分析 (向上三級追溯)：</strong></p>
+                        <div class="flex flex-col md:flex-row gap-2 text-xs">
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 1 (Direct)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第一層 (直接控股)</span>
+                                <strong class="text-white">Inceram Promoters / Indian Angel Investment Group</strong>
+                                <span class="block text-green-400 mt-1" data-lang="en">> 90% Stake</span>
+                                <span class="block text-green-400 mt-1" data-lang="zh">> 90% 持股</span>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Level 2 (Intermediary)</span>
+                                <span class="text-gray-500 block" data-lang="zh">第二層 (中間控股)</span>
+                                <strong class="text-white">Inceram Advanced Materials Holding (India)</strong>
+                            </div>
+                            <div class="hidden md:flex items-center text-gray-500"><i class="fas fa-arrow-right"></i></div>
+                            <div class="bg-gray-900 p-3 rounded flex-1 border border-gray-600">
+                                <span class="text-gray-500 block" data-lang="en">Ultimate Parent</span>
+                                <span class="text-gray-500 block" data-lang="zh">最終受益人 / Ultimate Parent</span>
+                                <strong class="text-blue-300">Inceram Founder Group & Managing Directors</strong>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3" data-lang="en"><strong>Investor Profile:</strong> Homegrown tech enterprise founded by local materials engineering experts with strong in-house R&D. Actively seeking partnerships with international assembly & module players for local supply chain integration.</p>
+                        <p class="text-xs text-gray-400 mt-3" data-lang="zh"><strong>投資人背景：</strong> 本土技術型工程專家創辦之特種材料企業，具備高自主研發能力，目前正尋求與國際電子組裝及模組大廠合作以實現供應鏈在地化。</p>
+                    </div>
+                </div>
+
+                <!-- 3. Product & BOM -->
+                <div class="section-divider">
+                    <span data-lang="en">3. Product Portfolio & Supply Chain (BOM) Breakdown</span>
+                    <span data-lang="zh">3. 主要產品與供應鏈拆解 (BOM Analysis)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Col 1: Categories -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Core Categories</div>
+                        <div class="text-blue-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">主要產品大類</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Technical Ceramics:</strong> Industrial Alumina components</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>工業技術陶瓷：</strong> 氧化鋁組件</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Electrical Insulators:</strong> High-voltage & high-freq substrates</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>電子電器絕緣件：</strong> 高壓/高頻陶瓷基材</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Structural Ceramics:</strong> High-temp & wear-resistant parts</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>耐高溫結構件：</strong> 高耐磨陶瓷結構件</li>
+                            
+                            <li data-lang="en"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>Thermal Management:</strong> Heat dissipating ceramic media</li>
+                            <li data-lang="zh"><i class="fas fa-angle-right text-gray-500 mr-2"></i><strong>溫控與散熱介質：</strong> 導熱陶瓷元件</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 2: BOM Reverse Engineering -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg border-blue-500/50">
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">BOM Analysis (Teardown)</div>
+                        <div class="text-yellow-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">零組件技術拆解</div>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li data-lang="en"><strong>Powders & Powders:</strong> High-purity Al2O3, Si3N4, AlN powders.</li>
+                            <li data-lang="zh"><strong>陶瓷基材與粉體：</strong> 高純度氧化鋁粉、氮化矽、氮化鋁粉末。</li>
+                            
+                            <li data-lang="en"><strong>Forming & Kilns:</strong> CIP machines, Dry presses, Continuous high-temp tunnel kilns.</li>
+                            <li data-lang="zh"><strong>成型與燒結：</strong> 冷等靜壓 (CIP) 成型機、乾壓機、高溫連續隧道窯。</li>
+                            
+                            <li data-lang="en"><strong>Precision Finish:</strong> CNC Diamond grinders, Laser drillers, Metallization setups.</li>
+                            <li data-lang="zh"><strong>精密加工：</strong> 數控金剛石研磨機、激光鑽孔機、陶瓷表面金屬化鍍膜。</li>
+                            
+                            <li data-lang="en"><strong>Interconnect Parts:</strong> Leadframes, Silver/Copper conductive paste, Brazing metals.</li>
+                            <li data-lang="zh"><strong>電子連接/封裝：</strong> 金屬引線框架、導電銀/銅漿、高溫硬焊接口件。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Supply Chain Needs & Foxlink Synergy -->
+                    <div class="partner-card p-4 md:p-5 rounded-lg">
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="en">Supply Chain Gaps & FOXLINK Opportunity</div>
+                        <div class="text-green-400 font-bold mb-3 border-b border-gray-600 pb-2" data-lang="zh">通用供應鏈需求與 FOXLINK 機會點</div>
+                        <div class="bg-gray-900/50 p-3 rounded text-sm text-gray-300">
+                            <p class="mb-3" data-lang="en"><i class="fas fa-check text-green-500 mr-1"></i><strong>Localization Gap:</strong> Seeking vendors with precision stamping, modular connectors, TIMs, and "Make in India" compliance.</p>
+                            <p class="mb-3" data-lang="zh"><i class="fas fa-check text-green-500 mr-1"></i><strong>在地化需求：</strong> 尋求精密金屬沖壓、模組化連接器、導熱介質 (TIM) 及符合 "Make in India" 的合作夥伴。</p>
+                            
+                            <p data-lang="en"><i class="fas fa-handshake text-blue-400 mr-1"></i><strong>FOXLINK Pitch:</strong> Inceram handles ceramic sintering but lacks wire harness, metal stamping & connector packaging. Foxlink can offer a turnkey "Ceramic + Metal + Connector" module to tap into global OEM electronics supply chains.</p>
+                            <p data-lang="zh"><i class="fas fa-handshake text-blue-400 mr-1"></i><strong>FOXLINK 綜效：</strong> Inceram 具備陶瓷燒結，但缺乏線束與連接器整合。Foxlink 可提供「陶瓷+金屬+連接器」模組化組裝方案，共同切入國際 OEM 供應鏈。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital -->
+                <div class="section-divider">
+                    <span data-lang="en">4. HR & Recruitment Intelligence (Q4 '25 - Q1 '26)</span>
+                    <span data-lang="zh">4. 人力資本與招聘情報 (2025 Q4 - 2026 Q1)</span>
+                </div>
+
+                <div class="recon-box risk">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-bold text-white" data-lang="en">Hiring Radar: What are they looking for?</h3>
+                        <h3 class="text-lg font-bold text-white" data-lang="zh">招聘動態：核心情報解讀 (11 條關鍵情報)</h3>
+                        <p class="text-xs text-gray-400 mt-1" data-lang="en">Source: Naukri, LinkedIn, Indeed hiring platform telemetry</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs text-gray-500 uppercase bg-gray-900/80">
+                                <tr>
+                                    <th class="w-1/3" data-lang="en">Role & Location</th>
+                                    <th class="w-1/3" data-lang="zh">職位與地點</th>
+                                    <th class="w-2/3" data-lang="en">Intel / Implication (Indian Business English)</th>
+                                    <th class="w-2/3" data-lang="zh">情報解讀 / 戰略意圖</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Senior Ceramic Engineer - R&D</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara Unit</span>
+                                    </td>
+                                    <td data-lang="en">Developing high-thermal AlN substrates. Pushing aggressively into electronic thermal management market.</td>
+                                    <td data-lang="zh">負責研發高導熱電子基板材料，顯示其正強攻電子散熱領域。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Procurement Manager - Raw Materials</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara Unit</span>
+                                    </td>
+                                    <td data-lang="en">Sourcing high-purity Al2O3 and chemical additives. Speeding up import substitution.</td>
+                                    <td data-lang="zh">負責高純度氧化鋁與化學添加劑之供應商開發，加速進口替代。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-blue-300">Quality Control Manager - IATF 16949</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara Unit</span>
+                                    </td>
+                                    <td data-lang="en">Setting up automotive QA standards to enter EV component supply chains.</td>
+                                    <td data-lang="zh">導入汽車業品質體系，反映其準備切入車用電子供應鏈。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Key Account Manager - Electronics & EV</strong><br>
+                                        <span class="text-xs text-gray-500">Bengaluru Office</span>
+                                    </td>
+                                    <td data-lang="en">Driving business expansion across EV & electronics accounts in South India.</td>
+                                    <td data-lang="zh">專注於南印度電動車與電子製造業之客戶拓展。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Kiln Operation Lead Engineer</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara Unit</span>
+                                    </td>
+                                    <td data-lang="en">Running 1600°C+ ultra-high temperature kilns for stable output & yield.</td>
+                                    <td data-lang="zh">負責管理 1600°C 以上高溫燒結窯爐，穩定良率與產能。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Precision CNC Grinding Technician</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara Unit</span>
+                                    </td>
+                                    <td data-lang="en">Expanding manpower for backend precision ceramic grinding.</td>
+                                    <td data-lang="zh">針對陶瓷後段精密加工擴充技術人力。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Process Engineer - CIM</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara Unit</span>
+                                    </td>
+                                    <td data-lang="en">Introducing Ceramic Injection Molding (CIM) process for custom shapes.</td>
+                                    <td data-lang="zh">引進陶瓷注射成型新技術，應對複雜異形件需求。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Export Documentation Executive</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara / Ahmedabad</span>
+                                    </td>
+                                    <td data-lang="en">Handling export filings and shipping paperwork to support overseas growth.</td>
+                                    <td data-lang="zh">處理海外訂單與出口報關，反映其外銷業務成長。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">EHS & Safety Officer</strong><br>
+                                        <span class="text-xs text-gray-500">Vadodara Plant</span>
+                                    </td>
+                                    <td data-lang="en">Strengthening factory safety & environmental compliance around high-temp kilns.</td>
+                                    <td data-lang="zh">強化高溫生產環境之安衛環合規。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Business Development Executive - Power Grid</strong><br>
+                                        <span class="text-xs text-gray-500">NCR Noida</span>
+                                    </td>
+                                    <td data-lang="en">Tapping into grid gear and solar inverter insulator markets in North India.</td>
+                                    <td data-lang="zh">開拓電力設備與太陽能逆變器之絕緣組件市場。</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="text-white">Graduate Engineer Trainee (GET) - Materials</strong><br>
+                                        <span class="text-xs text-gray-500">Campus Hiring</span>
+                                    </td>
+                                    <td data-lang="en">Grooming fresh engineering talent for materials R&D and shop-floor operations.</td>
+                                    <td data-lang="zh">儲備材料工程研發與生產人才。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5. Sales & Distribution -->
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="en">5. Sales & Channel Strategy</h2>
+                    <h2 class="text-xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-3" data-lang="zh">5. 銷售與通路佈局</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <!-- Strategy -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="en">Channel Architecture</h4>
+                            <h4 class="font-bold text-blue-400 mb-2" data-lang="zh">通路策略概況 (Channel Strategy)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Direct B2B Supply:</strong> Direct engineering-to-engineering sales model for EMS, Auto Tier-1s, and heavy electrical clients.</li>
+                                <li data-lang="zh"><strong>B2B 工業直銷：</strong> 針對 EMS、車用零件廠與重電廠採用「工程技術對接 (E2E)」直銷模式。</li>
+                                
+                                <li data-lang="en"><strong>Specialized Distributors:</strong> Regional industrial zone distributors supplying stock insulator rods and structural parts.</li>
+                                <li data-lang="zh"><strong>特種經銷模式：</strong> 透過工業區特約經銷商提供標準化絕緣棒與結構件現貨。</li>
+                                
+                                <li data-lang="en"><strong>Digital Portals:</strong> Showcasing custom technical ceramic capabilities on IndiaMART and TradeIndia. Direct website portal for RFQs.</li>
+                                <li data-lang="zh"><strong>數位平台：</strong> 於 IndiaMART / TradeIndia 設展示館，並透過官網提供 RFQ 與規格下載。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Logistics -->
+                        <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="en">Supply Chain & Logistics Logic</h4>
+                            <h4 class="font-bold text-yellow-400 mb-2" data-lang="zh">供應鏈物流邏輯 (Supply Chain Logic)</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                                <li data-lang="en"><strong>Central Warehouse:</strong> Dispatches originate from Vadodara Central Hub.</li>
+                                <li data-lang="zh"><strong>中央發貨倉：</strong> 成品統一由 Vadodara 廠區中央倉點發貨。</li>
+                                
+                                <li data-lang="en"><strong>VMI Warehousing:</strong> Bengaluru warehouse operating VMI (Vendor Managed Inventory) for 24-48 hr replenishment to South India key accounts.</li>
+                                <li data-lang="zh"><strong>VMI 倉儲機制：</strong> 於 Bengaluru 設 VMI 倉，確保 24-48 小時內補給南印度電子客戶。</li>
+                                
+                                <li data-lang="en"><strong>Field FAE Support:</strong> Field Application Engineers present in Vadodara-Ahmedabad, Bengaluru-Hosur, and Gurgaon-Noida belts.</li>
+                                <li data-lang="zh"><strong>FAE 現場支援：</strong> 應用工程師團隊覆蓋西部、南部與北部三大主要工業帶。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Market Position (Radar & Ranking) -->
+                <div class="section-divider">
+                    <span data-lang="en">6. Competitive Landscape & Positioning</span>
+                    <span data-lang="zh">6. 市場地位與戰略動向</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Radar Chart -->
+                    <div class="recon-box flex flex-col items-center justify-center bg-gray-800 col-span-1">
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="en">Inceram Capability Radar</h4>
+                        <h4 class="font-bold text-white mb-2 w-full text-left text-sm" data-lang="zh">Inceram 綜合競爭力畫像</h4>
+                        <div class="relative w-full h-56">
+                            <canvas id="opportunityRadar"></canvas>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-center" data-lang="en">Sentiment score based on KYC investigation</p>
+                    </div>
+
+                    <!-- Top 10 Table -->
+                    <div class="col-span-2">
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="en">India Technical & Electronic Ceramics Top 10 Rankings</h4>
+                        <h4 class="font-bold text-white mb-2 text-sm" data-lang="zh">印度技術陶瓷與電子陶瓷銷量 TOP 10 排名</h4>
+                        
+                        <div class="overflow-x-auto bg-gray-800 rounded border border-gray-700 p-2">
+                            <table class="w-full text-sm text-left text-gray-300 m-0 shadow-none">
+                                <thead class="text-xs uppercase bg-gray-900/50">
+                                    <tr>
+                                        <th class="p-2">Rank</th>
+                                        <th class="p-2" data-lang="en">Company</th><th class="p-2" data-lang="zh">企業</th>
+                                        <th class="p-2" data-lang="en">Background / Market Focus</th><th class="p-2" data-lang="zh">背景 / 市場優勢</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700 text-xs">
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">1</td>
+                                        <td class="p-2">Morgan Advanced Materials India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">UK - Global leader, top market share in India high-end industrial/electrical ceramics.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">英國 - 全球龍頭，高階工業與電器陶瓷市佔最高。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">2</td>
+                                        <td class="p-2">Kyocera Asia Pacific / India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Japan - Dominant player in semicon & high-end electronic packaging.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">日本 - 高階電子封裝與半導體陶瓷霸主。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">3</td>
+                                        <td class="p-2">Saint-Gobain Performance Ceramics</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">France - Market leader in refractory & structural ceramics.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">法國 - 耐火與高溫結構陶瓷市場領導者。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">4</td>
+                                        <td class="p-2">CeramTec India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">Germany - Top-tier supplier for medical & industrial precision ceramics.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">德國 - 醫用與工業精密陶瓷頂級供應商。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">5</td>
+                                        <td class="p-2">Carborundum Universal (CUMI)</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (Murugappa) - Largest Indian domestic giant in wear & industrial ceramics.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度 Murugappa 集團 - 本土最大的工業陶瓷巨頭。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">6</td>
+                                        <td class="p-2">Jyoti Ceramic Industries</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India - Established precision technical ceramic player with strong exports.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 老牌特種精密陶瓷製造商，出口強勁。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">7</td>
+                                        <td class="p-2">CoorsTek India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">USA - High-end structural & electronic supplier for heavy industry.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">美國 - 重工業與電子陶瓷高階供應商。</td>
+                                    </tr>
+                                    <tr class="bg-yellow-900/40 border-l-4 border-yellow-500">
+                                        <td class="p-2 font-bold text-center text-white">8</td>
+                                        <td class="p-2 text-white font-bold">Inceram Materials (Target)</td>
+                                        <td class="p-2 text-yellow-300" data-lang="en">India - Tier 3. Fast-growing niche player focused on localized EV & insulator ceramics.</td>
+                                        <td class="p-2 text-yellow-300" data-lang="zh">印度 - 第三梯隊 (目標企業)。在中階電子絕緣與車用結構件成長迅速。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">9</td>
+                                        <td class="p-2">BHEL Ceramic Business Unit</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India (PSU) - Focused on high-voltage power transmission insulators.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度國營 - 專注高壓輸配電絕緣陶瓷。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold text-center">10</td>
+                                        <td class="p-2">Precision Ceramics India</td>
+                                        <td class="p-2 text-gray-400" data-lang="en">India - Niche technical ceramic component manufacturer.</td>
+                                        <td class="p-2 text-gray-400" data-lang="zh">印度本土 - 利基型技術陶瓷元件加工廠。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Digital Footprint (News) -->
+                <div class="section-divider">
+                    <span data-lang="en">7. Digital Footprint & Recent News (Nov '25 - Feb '26)</span>
+                    <span data-lang="zh">7. 數位足跡與最新動向 (近3個月)</span>
+                </div>
+
+                <div class="space-y-3 mb-6 md:mb-8">
+                    <!-- Item 1 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-green-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-25</div>
+                        <div>
+                            <strong class="text-green-400 block text-sm" data-lang="en">[Press Release] Vadodara Unit Sintering Line Upgrade</strong>
+                            <strong class="text-green-400 block text-sm" data-lang="zh">[新聞稿] Vadodara 工廠燒結產線升級</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Invested ₹12 Cr for automated high-temp kiln to boost high-purity alumina capacity by 30%. <span class="text-gray-500">(Opp: Expansion underway)</span></p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">投入 1.2 億盧比新增自動化高溫連續燒結產線，旨在提升高純度氧化鋁產能 30%。</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-blue-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-18</div>
+                        <div>
+                            <strong class="text-blue-400 block text-sm" data-lang="en">[Trade Show] Showcased at Source India 2026</strong>
+                            <strong class="text-blue-400 block text-sm" data-lang="zh">[展會] 參展 Source India 2026</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Demonstrated new EV auto ceramic insulators & thermal substrates. Attracted interest from major EMS players.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">展示新一代車用電子高壓絕緣陶瓷與導熱基板技術，吸引多家 EMS 大廠洽談。</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-yellow-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2026-01-10</div>
+                        <div>
+                            <strong class="text-yellow-400 block text-sm" data-lang="en">[Quality] Cleared IATF 16949 Audit</strong>
+                            <strong class="text-yellow-400 block text-sm" data-lang="zh">[品質認證] 通過 IATF 16949 複查</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Passed auto quality system review to supply EV battery module insulating pads.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">順利通過汽車品質管理體系審查，獲准為新能源車 (EV) 電池模組供應絕緣陶瓷墊片。</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-purple-500 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-28</div>
+                        <div>
+                            <strong class="text-purple-400 block text-sm" data-lang="en">[Recruitment] R&D Team Expansion Drive</strong>
+                            <strong class="text-purple-400 block text-sm" data-lang="zh">[招聘] 啟動 2026 材料研發團隊擴招</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Opened senior R&D roles on LinkedIn to localize high-conductivity AlN substrates.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">在 LinkedIn 發布多個資深工程師職缺，重點發展高導熱氮化鋁陶瓷國產化。</p>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-gray-800 p-3 rounded border-l-4 border-gray-600 flex flex-col md:flex-row gap-2">
+                        <div class="text-xs font-mono text-gray-400 whitespace-nowrap">2025-12-15</div>
+                        <div>
+                            <strong class="text-gray-200 block text-sm" data-lang="en">[Award] Ceramic Asia Innovation Award</strong>
+                            <strong class="text-gray-200 block text-sm" data-lang="zh">[產業活動] 參加 Ceramic Asia 展會獲獎</strong>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="en">Received "India Localized Material Manufacturing Innovation Award" for import substitution.</p>
+                            <p class="text-xs text-gray-300 mt-1" data-lang="zh">獲頒「印度在地化材料製造創新獎」，強調其減少進口依賴之貢獻。</p>
+                        </div>
+                    </div>
+
+                    <!-- Items 6 to 10 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="bg-gray-800 p-2.5 rounded border border-gray-700 text-xs text-gray-300">
+                            <strong class="text-blue-400">2025-12-05:</strong> 
+                            <span data-lang="en">Signed MOU with Gujarat Technological University for Ceramic-to-Metal Sealing.</span>
+                            <span data-lang="zh">與古吉拉特科技大學產學合作，開發陶瓷與金屬封裝技術。</span>
+                        </div>
+                        <div class="bg-gray-800 p-2.5 rounded border border-gray-700 text-xs text-gray-300">
+                            <strong class="text-blue-400">2025-11-28:</strong> 
+                            <span data-lang="en">Broke into Auto supply chain: Secured North India Tier-1 order for ceramic bushings.</span>
+                            <span data-lang="zh">打入車用電子供應鏈，成功獲得北印度一級車用零件廠訂單。</span>
+                        </div>
+                        <div class="bg-gray-800 p-2.5 rounded border border-gray-700 text-xs text-gray-300">
+                            <strong class="text-blue-400">2025-11-20:</strong> 
+                            <span data-lang="en">Sustainability milestone: Rooftop solar system live at Vadodara plant (-15% power cost).</span>
+                            <span data-lang="zh">綠色製造：廠區屋頂太陽能併網，預計降低窯爐整體用電成本 15%。</span>
+                        </div>
+                        <div class="bg-gray-800 p-2.5 rounded border border-gray-700 text-xs text-gray-300">
+                            <strong class="text-blue-400">2025-11-12:</strong> 
+                            <span data-lang="en">Appointed former CUMI Ops Manager as new Production Operations Director.</span>
+                            <span data-lang="zh">高層任命：前 CUMI 資深營運經理出任生產營運總監，強化良率。</span>
+                        </div>
+                        <div class="bg-gray-800 p-2.5 rounded border border-gray-700 text-xs text-gray-300">
+                            <strong class="text-blue-400">2025-11-02:</strong> 
+                            <span data-lang="en">Achieved EU RoHS & REACH certification for European export readiness.</span>
+                            <span data-lang="zh">歐盟環境規範認證：全線通過 RoHS 及 REACH 規範，奠定出口基礎。</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let radarChart = null;
+
+        // Inceram Sentiment Analysis Scores:
+        // Market Share: 4 (Tier 3 player, moderate share in niche, INR 45-80 Cr turnover)
+        // Localization: 9 (Strong Make in India, indigenous sintering, GTU research)
+        // Brand Power: 5 (Mid-tier industrial B2B vendor)
+        // Digital Reach: 6 (Active on B2B portals like IndiaMART / TradeIndia)
+        // Financial Health: 7 (Profitable, expanding plant with ₹12 Cr kiln investment)
+        const radarScores = [4, 9, 5, 6, 7]; 
+
+        const chartData = {
+            en: { labels: ['Market Share', 'Localization', 'Brand Power', 'Digital Reach', 'Fin. Health'], label: 'Capability Score (1-10)' },
+            zh: { labels: ['市場份額', '在地化程度', '品牌影響力', '數位覆蓋', '財務健康'], label: '能力評分 (1-10)' }
+        };
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+                updateChart();
+            } catch (e) { console.error(e); }
+        }
+
+        function updateChart() {
+            if (!radarChart) return;
+            const data = chartData[currentLang];
+            radarChart.data.labels = data.labels;
+            radarChart.data.datasets[0].label = data.label;
+            radarChart.update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) langBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                updateLanguageUI();
+            });
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
+
+            const ctx = document.getElementById('opportunityRadar').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: chartData[currentLang].labels,
+                    datasets: [{
+                        label: chartData[currentLang].label,
+                        data: radarScores, 
+                        backgroundColor: 'rgba(59, 130, 246, 0.25)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#374151' },
+                            grid: { color: '#374151' },
+                            pointLabels: { color: '#9ca3af', font: { size: 11 } },
+                            ticks: { display: false, max: 10, stepSize: 2 },
+                            min: 0,
+                            max: 10
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false
+                }
+            });
+
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

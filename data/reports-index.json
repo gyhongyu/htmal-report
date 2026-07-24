@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-24T17:35:05.631Z",
+  "lastUpdated": "2026-07-24T17:41:32.666Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1835,6 +1835,19 @@
       "fileName": "report-1784914503989.html",
       "createdAt": "2026-07-24T17:35:05.631Z",
       "updatedAt": "2026-07-24T17:35:05.631Z"
+    },
+    {
+      "id": "report-1784914891663",
+      "title": "Target: Inceram Materials Private Limited",
+      "description": "目標企業：Inceram Materials Private Limited",
+      "categories": [
+        "客戶KYC",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1784914891663.html",
+      "createdAt": "2026-07-24T17:41:32.666Z",
+      "updatedAt": "2026-07-24T17:41:32.666Z"
     }
   ]
 }
