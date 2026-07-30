@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-07-24T17:41:32.666Z",
+  "lastUpdated": "2026-07-30T11:34:06.680Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1848,6 +1848,19 @@
       "fileName": "report-1784914891663.html",
       "createdAt": "2026-07-24T17:41:32.666Z",
       "updatedAt": "2026-07-24T17:41:32.666Z"
+    },
+    {
+      "id": "report-1785411245676",
+      "title": "Target: Adiva Technology (Adiva Tech Services Pvt Ltd)",
+      "description": "目標企業：Adiva Technology (Adiva Tech Services Private Limited)",
+      "categories": [
+        "客戶KYC",
+        "項目計劃",
+        "市場分析"
+      ],
+      "fileName": "report-1785411245676.html",
+      "createdAt": "2026-07-30T11:34:06.680Z",
+      "updatedAt": "2026-07-30T11:34:06.680Z"
     }
   ]
 }
