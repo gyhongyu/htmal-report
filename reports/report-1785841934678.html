@@ -1117,7 +1117,7 @@
   </div>
 
   <script>
-    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby45EQ7ECz0tFqw6M10sOB1VwP01kvBsGL-976jmxSlC0OPNvkqn5DT1BTYtIjbmpzj/exec";
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIGSon61ZQYFAGhWmFqUOmyK0YAoe2MsAnqgoldOLaKQnn6YFXLZFsBmm3dJ74aa0UAA/exec";
 
     // STRICT i18n DICTIONARY - ZERO CHINESE IN ENGLISH MODE!
     const i18n = {
@@ -1950,7 +1950,7 @@
       }
 
       try {
-        localStorage.setItem('SSSTC_ROADMAP_TASKS_CACHE_V40', JSON.stringify(masterTasks));
+        // Pure Cloud Persistence Mode
       } catch(e) {}
 
       renderTable();
@@ -2006,7 +2006,64 @@
       }
     }
 
-    async function saveTaskToCloud(taskId) {
+    
+    // Pure GAS Cloud Fetch Engine (Source of Truth: Google Sheet Database)
+    async function loadTasksFromCloud() {
+      const badge = document.getElementById('cloudBadge');
+      if (badge) {
+        badge.innerText = "⏳ 讀取 Google Sheet 雲端資料庫中...";
+        badge.classList.add('syncing');
+      }
+
+      try {
+        const res = await fetch(GAS_WEBAPP_URL + '?action=getTasks');
+        const jsonRes = await res.json();
+        const list = (jsonRes && (jsonRes.data || jsonRes.tasks)) ? (jsonRes.data || jsonRes.tasks) : (Array.isArray(jsonRes) ? jsonRes : null);
+
+        if (Array.isArray(list) && list.length > 0) {
+          // Smart Merge Engine: Update local masterTasks attributes with cloud data while preserving local styling/colors
+          list.forEach(cloudItem => {
+            let local = masterTasks.find(t => t.id === cloudItem.id);
+            const sDate = (cloudItem.startDate && cloudItem.startDate.includes('T')) ? cloudItem.startDate.split('T')[0] : cloudItem.startDate;
+            const eDate = (cloudItem.endDate && cloudItem.endDate.includes('T')) ? cloudItem.endDate.split('T')[0] : cloudItem.endDate;
+
+            if (local) {
+              if (cloudItem.name_zh) local.name_zh = cloudItem.name_zh;
+              if (cloudItem.name_en) local.name_en = cloudItem.name_en;
+              if (cloudItem.progressPct !== undefined && cloudItem.progressPct !== null) local.progressPct = Number(cloudItem.progressPct);
+              if (cloudItem.status) local.status = cloudItem.status;
+              if (sDate) local.startDate = sDate;
+              if (eDate) local.endDate = eDate;
+              if (cloudItem.owner) local.owner = cloudItem.owner;
+              if (cloudItem.workstream) local.workstream = cloudItem.workstream;
+            } else {
+              cloudItem.color = cloudItem.color || "#3B82F6";
+              cloudItem.startDate = sDate;
+              cloudItem.endDate = eDate;
+              masterTasks.push(cloudItem);
+            }
+          });
+
+          renderTable();
+          renderTimeline();
+          updateCharts();
+
+          if (badge) {
+            badge.innerText = "☁️ 已成功同步 Google Sheet 雲端數據 (" + list.length + "項)";
+            badge.classList.remove('syncing');
+          }
+          return;
+        }
+      } catch (err) {
+        console.warn("GAS fetch notice:", err);
+        if (badge) {
+          badge.innerText = "☁️ 已連線至雲端 (等待回應)";
+          badge.classList.remove('syncing');
+        }
+      }
+    }
+
+async function saveTaskToCloud(taskId) {
       const local = masterTasks.find(t => t.id === taskId);
       if (!local) return;
 
@@ -2034,6 +2091,7 @@
 
         badge.innerText = i18n[currentLang].cloudSynced;
         badge.classList.remove('syncing');
+        loadTasksFromCloud();
       } catch (err) {
         console.warn("GAS save notice:", err);
         badge.innerText = "☁️ Local Mode";
@@ -2080,6 +2138,8 @@
     let wsChartInstance = null;
 
     function initCharts() {
+      if (statusChartInstance) { statusChartInstance.destroy(); statusChartInstance = null; }
+      if (wsChartInstance) { wsChartInstance.destroy(); wsChartInstance = null; }
       const t = i18n[currentLang];
       const ctx1 = document.getElementById('statusChart').getContext('2d');
       statusChartInstance = new Chart(ctx1, {
@@ -2197,22 +2257,16 @@
       }
     });
 
-    // Automatic Page Initialization on Load
+    // Automatic Page Initialization on Load (100% Pure GAS Cloud Fetch)
     window.addEventListener('DOMContentLoaded', () => {
-      try {
-        const cached = localStorage.getItem('SSSTC_ROADMAP_TASKS_CACHE_V40');
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            masterTasks = parsed;
-          }
-        }
-      } catch(e) { console.warn(e); }
       renderTable();
       renderTimeline();
       renderMilestones();
       updateTodayNeedle();
       initCharts();
+
+      // Always load the single source of truth from Google Sheet Database on page load!
+      loadTasksFromCloud();
     });
 
     // Immediate fallback execution
