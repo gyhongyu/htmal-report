@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D1 Audit Management System - QSA Observations 管理系統 (v3.0 單一滾動軸終極版)</title>
+    <title>D1 Audit Management System - QSA Observations 管理系統 (v3.9 預設英文版)</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -541,11 +541,102 @@
             border-radius: 12px;
             box-shadow: var(--shadow-lg);
             position: relative;
+            width: 100%;
+        }
+
+        /* ⚡ Compact View 強制 100% 滿版無橫向滾動條 (No Horizontal Scroll) */
+        .table-container.compact-mode {
+            overflow-x: hidden !important;
+        }
+
+        .table-container.compact-mode table {
+            width: 100% !important;
+            min-width: 100% !important;
+            table-layout: fixed !important;
+        }
+
+        /* ⚡ Compact View 右側邊界防推爆專屬 Padding 與字體控制 */
+        .table-container.compact-mode th,
+        .table-container.compact-mode td {
+            padding: 0.45rem 0.35rem !important;
+            box-sizing: border-box;
+        }
+
+        .table-container.compact-mode .status-pill {
+            padding: 0.2rem 0.4rem !important;
+            font-size: 0.69rem !important;
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+        }
+
+        .table-container.compact-mode .btn-capa-view {
+            padding: 0.25rem 0.45rem !important;
+            font-size: 0.72rem !important;
+            white-space: nowrap;
+        }
+
+        /* 📊 Classic Full Sheet 保留 14 欄橫向滾動 */
+        .table-container.classic-mode {
+            overflow-x: auto !important;
+        }
+
+        .table-container.classic-mode table {
+            width: max-content !important;
+            min-width: 100% !important;
+            table-layout: auto !important;
+        }
+
+        /* Compact View 儲存格優化 */
+        .compact-cell-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            width: 100%;
+        }
+
+        .compact-cell-clamp2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.35;
+            max-height: 2.7em;
+            word-break: break-word;
+        }
+
+        .dri-due-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.15rem;
+            cursor: pointer;
+            padding: 0.2rem 0;
+        }
+
+        .dri-title {
+            font-weight: 800;
+            font-size: 0.82rem;
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .due-date-sub {
+            font-size: 0.73rem;
+            color: #94a3b8;
+            font-family: var(--font-mono);
+            font-weight: 600;
         }
 
         table {
-            width: max-content;
-            min-width: 100%;
             border-collapse: separate;
             border-spacing: 0;
             font-size: 0.84rem;
@@ -1330,8 +1421,8 @@
             EN: 'https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1395973215'
         };
 
-        // 當前語系 ('ZH' 或 'EN')
-        let currentLang = localStorage.getItem('app_lang') || 'ZH';
+        // 當前語系 ('ZH' 或 'EN' - 預設為 EN 英文版)
+        let currentLang = localStorage.getItem('app_lang') || 'EN';
 
         // 當前檢視模式 ('COMPACT' 或 'CLASSIC')
         let currentViewMode = localStorage.getItem('qsa_view_mode') || 'COMPACT';
@@ -1342,7 +1433,7 @@
         // 100% 硬編碼多語系 UI 字典 (純潔雙語)
         const I18N = {
             ZH: {
-                appTitle: 'D1 Audit QSA Observations 管理系統 (v3.1 單一滾動軸版)',
+                appTitle: 'D1 Audit QSA Observations 管理系統',
                 statusText: '在線資料庫連線中 (Live API Connected)',
                 btnSheetLinkText: '🟢 Google Sheet 繁中表',
                 btnRefreshText: '重新整理',
@@ -1391,7 +1482,7 @@
                 chipHl: '🟣 重點關注'
             },
             EN: {
-                appTitle: 'D1 Audit QSA Observations Management System (v3.1 Single Scroll)',
+                appTitle: 'D1 Audit QSA Observations Management System',
                 statusText: 'Live API Connected',
                 btnSheetLinkText: '🟢 Live Sheet (EN)',
                 btnRefreshText: 'Refresh',
@@ -1444,9 +1535,9 @@
         const HARDCODED_OBS_HEADERS_CLASSIC = {
             ZH: {
                 group: [
-                    { name: '主類', span: 3, class: 'group-cat' },
-                    { name: '次類', span: 4, class: 'group-sub' },
-                    { name: '缺失 (NC)', span: 4, class: 'group-nc' },
+                    { name: '主類別', span: 3, class: 'group-cat' },
+                    { name: '次類別流程', span: 4, class: 'group-sub' },
+                    { name: '缺失條款與要求', span: 4, class: 'group-nc' },
                     { name: 'CAPA 整改對策', span: 2, class: 'group-capa' }
                 ],
                 sub: ['序號', '主類別', '分數', '狀況', '次類別', '目標分', '實得分', '狀況', '缺失號', '要求', '嚴重度', '稽核意見', '負責人 / 截止日', 'CAPA 詳情']
@@ -1465,19 +1556,19 @@
         const HARDCODED_OBS_HEADERS_COMPACT = {
             ZH: {
                 group: [
-                    { name: '次類指標與得分', span: 4, class: 'group-sub' },
-                    { name: '缺失與要求 (NC)', span: 4, class: 'group-nc' },
-                    { name: 'CAPA 對策追蹤', span: 2, class: 'group-capa' }
+                    { name: '主要類別與次類別流程', span: 2, class: 'group-cat' },
+                    { name: 'NC 缺失與要求細節', span: 2, class: 'group-nc' },
+                    { name: 'CAPA 整改對策', span: 2, class: 'group-capa' }
                 ],
-                sub: ['序號', '次類別', '目標分', '實得分', '狀況', '缺失號', '要求', '嚴重度', '稽核意見', '負責人 / 截止日', 'CAPA 詳情']
+                sub: ['項次', '主類別 / 子流程', '得分 / 狀態', 'NC 要求與缺失說明', '嚴重度', 'DRI / 截止日', 'CAPA 詳情']
             },
             EN: {
                 group: [
-                    { name: 'Sub-Process & Metrics', span: 4, class: 'group-sub' },
-                    { name: 'NC Details', span: 4, class: 'group-nc' },
+                    { name: 'Category & Sub-Process', span: 2, class: 'group-cat' },
+                    { name: 'NC Details', span: 2, class: 'group-nc' },
                     { name: 'CAPA Tracker', span: 2, class: 'group-capa' }
                 ],
-                sub: ['No', 'Sub-Process', 'Target Score', 'Actual Score', 'Status', 'Ref No.', 'Requirement', 'Severity', 'Audit Finding', 'DRI / Due Date', 'CAPA Detail']
+                sub: ['No', 'Topic & Sub-Process', 'Score & Status', 'Requirement & Finding', 'Severity', 'DRI / Due Date', 'CAPA Detail']
             }
         };
 
@@ -1957,11 +2048,20 @@
             }
         }
 
-        // ⚡ 精簡平鋪視圖渲染 (Clean Compact View - 無中斷 Banner，乾淨暢快)
+        // ⚡ 精簡平鋪視圖渲染 (Clean Compact View - 100% 視窗滿版，colgroup 強效寬度定標)
         function renderCompactView(container, formulaMask) {
+            container.classList.add('compact-mode');
+            container.classList.remove('classic-mode');
+
             const obsDef = HARDCODED_OBS_HEADERS_COMPACT[currentLang] || HARDCODED_OBS_HEADERS_COMPACT['ZH'];
             const groupHeaders = obsDef.group;
             const subHeaders = obsDef.sub;
+
+            // 定義 7 大精簡欄位黃金防爆配比 (3% No + 16% Topic + 10% Score + 45% Req + 10% Sev + 8% DRI + 8% CAPA = 100%)
+            const colWidths = ['3%', '16%', '10%', '45%', '10%', '8%', '8%'];
+
+            // 🟢 強效核心修復：利用 <colgroup> 鎖死每欄寬度，完全封死 Chrome table-layout: fixed 對 colspan 的寬度忽視 Bug！
+            let colgroupHtml = `<colgroup>${colWidths.map(w => `<col style="width: ${w};">`).join('')}</colgroup>`;
 
             let headerHtml = `
                 <thead>
@@ -1972,16 +2072,12 @@
                     <tr>
             `;
 
-            const mappedCols = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-            for (let i = 0; i < mappedCols.length; i++) {
-                const c = mappedCols[i];
-                const hName = subHeaders[i + 1];
-                const widthStyle = getColWidthStyle(c, true);
-                headerHtml += `<th style="${widthStyle}">${hName}</th>`;
+            for (let i = 1; i < subHeaders.length; i++) {
+                headerHtml += `<th>${subHeaders[i]}</th>`;
             }
             headerHtml += `</tr></thead>`;
 
-            let html = `<table>${headerHtml}<tbody>`;
+            let html = `<table>${colgroupHtml}${headerHtml}<tbody>`;
 
             currentDisplayRowsList.forEach(({ rIdx, r }, dispIdx) => {
                 const realRow = rIdx + 2;
@@ -1990,79 +2086,80 @@
 
                 html += `<tr ${rowClass}>`;
 
-                // Col 0: 序號 (No)
+                // Col 0: 序號 (No) - 4%
                 const noVal = getCellDisplayVal(rIdx, 0, r[0]);
-                html += `<td style="${getColWidthStyle(0, true)}" style="text-align:center; font-weight:700;">${escapeHtml(noVal)}</td>`;
+                html += `<td style="text-align:center; font-weight:700;">${escapeHtml(noVal)}</td>`;
 
-                // 繪製 Col 4 ~ 11 (次類別 到 稽核意見)
-                for (let cIdx = 4; cIdx <= 11; cIdx++) {
-                    const realCol = cIdx + 1;
-                    const subHeaderIdx = mappedCols.indexOf(cIdx) + 1;
-                    const hName = subHeaders[subHeaderIdx];
-                    const rawVal = (r && r[cIdx] !== undefined) ? r[cIdx] : '';
-
-                    const isFormula = (formulaMask && formulaMask[rIdx] && formulaMask[rIdx][cIdx]) ? true : false;
-                    const widthStyle = getColWidthStyle(cIdx, true);
-
-                    const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
-                    const changeKey = `${realRow}_${realCol}`;
-                    const hasDirty = pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined;
-                    const displayVal = hasDirty ? pendingChanges[activeTargetSheet][changeKey] : rawVal;
-
-                    let cellClass = 'cell-clickable ';
-                    if (isFormula) cellClass += 'cell-formula';
-                    else if (hasDirty) cellClass += 'cell-dirty';
-                    else cellClass += 'cell-editable';
-
-                    let formattedContent = escapeHtml(displayVal);
-                    const cleanStr = String(displayVal).trim();
-                    const isBadgeColumn = (cIdx === 7 || cIdx === 10);
-
-                    if (isBadgeColumn) {
-                        const badgeCls = getBadgeClass(cleanStr);
-                        if (badgeCls) {
-                            formattedContent = `<span class="status-pill ${badgeCls}">${escapeHtml(cleanStr)}</span>`;
-                        }
-                    } else if (cleanStr.endsWith('%') && !isNaN(parseFloat(cleanStr))) {
-                        const pct = parseFloat(cleanStr);
-                        formattedContent = `
-                            <div style="font-weight:600;">${escapeHtml(cleanStr)}</div>
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${Math.min(100, Math.max(0, pct))}%;"></div></div>
-                        `;
-                    }
-
-                    html += `
-                        <td class="${cellClass}" 
-                            style="${widthStyle}"
-                            data-row="${realRow}" 
-                            data-col="${realCol}" 
-                            data-rindex="${rIdx}" 
-                            data-cindex="${cIdx}" 
-                            data-formula="${isFormula}"
-                            data-header="${escapeHtml(hName)}"
-                            title="💡 點擊儲存格查看完整內文與修改"
-                            onclick="handleCellClick(this, event)">
-                            ${formattedContent}
-                        </td>
-                    `;
-                }
-
-                // Col 12: DRI 與 Due Date
-                const driVal = getCellDisplayVal(rIdx, 12, r[12]);
-                const dueVal = getCellDisplayVal(rIdx, 14, r[14]);
-                const width12 = getColWidthStyle(12, true);
+                // Col 1: 主類別與子流程 (Topic & Sub-Process) - 17% (雙列自動斷行)
+                const topicVal = getCellDisplayVal(rIdx, 1, r[1]);
+                const subVal = getCellDisplayVal(rIdx, 4, r[4]);
                 html += `
-                    <td style="${width12} text-align:center; font-size:0.78rem;" onclick="openCapaDrawer(${dispIdx})">
-                        <div style="font-weight:700; color:var(--text-main);">${escapeHtml(driVal || '--')}</div>
-                        <div style="font-size:0.72rem; color:var(--text-muted);">${escapeHtml(dueVal || '--')}</div>
+                    <td style="cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
+                        <div style="font-weight:700; color:#f8fafc; font-size:0.8rem; line-height:1.25; word-break:break-word;" class="compact-cell-clamp2" title="${escapeHtml(topicVal)}">${escapeHtml(topicVal || '--')}</div>
+                        <div style="font-size:0.73rem; color:#94a3b8; line-height:1.2; word-break:break-word; margin-top:0.15rem;" class="compact-cell-clamp2" title="${escapeHtml(subVal)}">${escapeHtml(subVal || '--')}</div>
                     </td>
                 `;
 
-                // Col 13: CAPA 詳情按鈕
-                const width13 = getColWidthStyle(13, true);
+                // Col 2: 得分與狀態 (Score & Status) - 11%
+                const targetScore = getCellDisplayVal(rIdx, 5, r[5]);
+                const actualScore = getCellDisplayVal(rIdx, 6, r[6]);
+                const statusStr = getCellDisplayVal(rIdx, 7, r[7]);
+                const badgeCls = getBadgeClass(statusStr);
+                let badgeHtml = badgeCls ? `<span class="status-pill ${badgeCls}">${escapeHtml(statusStr)}</span>` : escapeHtml(statusStr);
+
+                let scorePct = 0;
+                if (actualScore.endsWith('%') && !isNaN(parseFloat(actualScore))) {
+                    scorePct = parseFloat(actualScore);
+                }
+
+                html += `
+                    <td style="cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.15rem;">
+                            <span style="font-weight:700; font-size:0.78rem;">${escapeHtml(actualScore || '--')}</span>
+                            ${badgeHtml}
+                        </div>
+                        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${Math.min(100, Math.max(0, scorePct))}%;"></div></div>
+                    </td>
+                `;
+
+                // Col 3: NC 要求與缺失說明 (NC Requirement & Finding) - 47% (colgroup 鋪滿硬核寬度，2列流暢換行)
+                const reqVal = getCellDisplayVal(rIdx, 9, r[9]);
+                const findingVal = getCellDisplayVal(rIdx, 11, r[11]);
+                const combinedNcText = reqVal || findingVal || '--';
+                html += `
+                    <td style="cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
+                        <div class="compact-cell-clamp2" style="font-size:0.81rem; line-height:1.35; max-height:2.8em;" title="📌 Requirement:\n${escapeHtml(reqVal)}\n\n🔍 Finding:\n${escapeHtml(findingVal)}">
+                            ${escapeHtml(combinedNcText)}
+                        </div>
+                    </td>
+                `;
+
+                // Col 4: 嚴重度 (Severity) - 7%
+                const sevVal = getCellDisplayVal(rIdx, 10, r[10]);
+                const sevBadgeCls = getBadgeClass(sevVal);
+                let sevBadgeHtml = sevBadgeCls ? `<span class="status-pill ${sevBadgeCls}">${escapeHtml(sevVal)}</span>` : escapeHtml(sevVal || '--');
+                html += `
+                    <td style="text-align:center; cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
+                        ${sevBadgeHtml}
+                    </td>
+                `;
+
+                // Col 5: DRI / 截止日 (DRI / Due Date) - 8%
+                const driVal = getCellDisplayVal(rIdx, 12, r[12]);
+                const dueVal = getCellDisplayVal(rIdx, 14, r[14]);
+                html += `
+                    <td style="text-align:center;" onclick="openCapaDrawer(${dispIdx})">
+                        <div class="dri-due-box">
+                            <div class="dri-title">${escapeHtml(driVal || 'QUALITY')}</div>
+                            <div class="due-date-sub">${escapeHtml(dueVal || '--')}</div>
+                        </div>
+                    </td>
+                `;
+
+                // Col 6: CAPA 詳情按鈕 - 6%
                 const btnLabel = I18N[currentLang].btnCapaView;
                 html += `
-                    <td style="${width13} text-align:center;" onclick="openCapaDrawer(${dispIdx})">
+                    <td style="text-align:center;" onclick="openCapaDrawer(${dispIdx})">
                         <button class="btn-capa-view" onclick="event.stopPropagation(); openCapaDrawer(${dispIdx});">
                             ${btnLabel}
                         </button>
@@ -2077,6 +2174,8 @@
         }
 
         function renderClassicView(container, formulaMask) {
+            container.classList.add('classic-mode');
+            container.classList.remove('compact-mode');
             const obsDef = HARDCODED_OBS_HEADERS_CLASSIC[currentLang] || HARDCODED_OBS_HEADERS_CLASSIC['ZH'];
             const groupHeaders = obsDef.group;
             const subHeaders = obsDef.sub;
