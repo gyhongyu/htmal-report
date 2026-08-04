@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-08-04T08:49:16.853Z",
+  "lastUpdated": "2026-08-04T11:07:24.673Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1864,8 +1864,8 @@
     },
     {
       "id": "report-1785814934614",
-      "title": "SSSTC_Foxlink_Interactive_Roadmap_v3.5",
-      "description": "SSSTC_Foxlink_Interactive_Roadmap_v3.5",
+      "title": "SSSTC_Foxlink_Interactive_Roadmap_v4.2",
+      "description": "SSSTC_Foxlink_Interactive_Roadmap_v4.2",
       "categories": [
         "對外簡報",
         "內部簡報",
@@ -1873,7 +1873,7 @@
       ],
       "fileName": "report-1785814934614.html",
       "createdAt": "2026-08-04T03:42:15.706Z",
-      "updatedAt": "2026-08-04T08:49:16.853Z"
+      "updatedAt": "2026-08-04T11:07:24.673Z"
     },
     {
       "id": "report-1785820067291",

@@ -367,22 +367,31 @@
     }
 
     /* Subtle left-edge vertical drop line connecting left border to W1, W2 header ticks */
+    .milestone-item-v2.milestone-align-right {
+      transform: translateX(-100%);
+    }
+
+    .milestone-item-v2.milestone-align-right .milestone-connector-line {
+      left: 100%;
+    }
+
     .milestone-connector-line {
       position: absolute;
       left: 0;
       width: 0;
-      border-left: 1.5px dashed rgba(180, 83, 9, 0.65);
+      border-left: 2px dashed #D97706;
       pointer-events: none;
+      z-index: 15;
     }
 
     .milestone-level-top .milestone-connector-line {
       top: 24px;
-      height: 42px;
+      height: 52px;
     }
 
     .milestone-level-bottom .milestone-connector-line {
       top: 24px;
-      height: 10px;
+      height: 20px;
     }
 
     /* Two-Tier Month & Week Header Grid */
@@ -1108,7 +1117,7 @@
   </div>
 
   <script>
-    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIGSon61ZQYFAGhWmFqUOmyK0YAoe2MsAnqgoldOLaKQnn6YFXLZFsBmm3dJ74aa0UAA/exec";
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby45EQ7ECz0tFqw6M10sOB1VwP01kvBsGL-976jmxSlC0OPNvkqn5DT1BTYtIjbmpzj/exec";
 
     // STRICT i18n DICTIONARY - ZERO CHINESE IN ENGLISH MODE!
     const i18n = {
@@ -1247,7 +1256,7 @@
       return wks > 1 ? `${wks} Wks` : `${wks} Wk`;
     }
 
-    // Master Workstream Activities
+    // Master Workstream Activities (Exact 11 Tasks Aligned with Latest Excel Roadmap)
     let masterTasks = [
       {
         id: "ACT-1",
@@ -1257,11 +1266,11 @@
         color: "#3B82F6",
         status: "Completed",
         progressPct: 100,
-        startDate: "2026-06-01",
-        endDate: "2026-06-21",
+        startDate: "2026-05-25",
+        endDate: "2026-06-15",
         owner: "Team / Sateesh",
-        auditPoint: "Team started work on audit observations",
-        rootCause_en: "Initial alignment & root cause collection",
+        auditPoint: "Team started work on Audit observations",
+        rootCause_en: "Team started work on Audit observations & initial alignment",
         rootCause_zh: "對策小組成立與全廠稽核發現點初審分析",
         deliverable_en: "Audit observation master breakdown list",
         deliverable_zh: "稽核缺失條款總體歸納清單"
@@ -1274,7 +1283,7 @@
         color: "#3B82F6",
         status: "In Progress",
         progressPct: 65,
-        startDate: "2026-06-15",
+        startDate: "2026-06-01",
         endDate: "2026-08-31",
         owner: "Sateesh / Vishnu / Yanlin Li",
         auditPoint: "Received 112 Observations in QPA",
@@ -1301,7 +1310,7 @@
         color: "#8B5CF6",
         status: "In Progress",
         progressPct: 80,
-        startDate: "2026-06-20",
+        startDate: "2026-07-01",
         endDate: "2026-08-31",
         owner: "Sateesh - QC / Roger",
         auditPoint: "Received 15 Observations in QSA",
@@ -1322,113 +1331,155 @@
       },
       {
         id: "ACT-4",
-        name_en: "Equipment & System Purchase",
-        name_zh: "4. 專案設備與系統採購",
+        name_en: "Purchase (except Feeder calibrator)",
+        name_zh: "4. 專案設備與系統採購 (Feeder校正儀除外)",
         workstream: "EQUIPMENT",
         color: "#10B981",
         status: "In Progress",
         progressPct: 40,
-        startDate: "2026-06-25",
+        startDate: "2026-06-01",
         endDate: "2026-10-31",
         owner: "Steering Committee / IT / Purchase",
-        auditPoint: "9 Major Equipment & Software Systems",
-        rootCause_en: "Lead times for automated equipment & software systems procurement",
-        rootCause_zh: "自動化檢測設備與智慧軟體系統採購前置交期籌備",
+        auditPoint: "All items purchased by end of October (except Feeder calibrator)",
+        rootCause_en: "All items will be purchased and installed by end of October <span style='color:#EF4444; font-weight:700;'>(except Feeder calibrator)</span>",
+        rootCause_zh: "所有專案設備與 SFC 系統於 10 月底前全數採購與安裝到位 <span style='color:#EF4444; font-weight:700;'>(Feeder 校正儀除外)</span>",
         deliverable_en: "PO copies, FAT/SAT reports, Commissioning sign-off",
         deliverable_zh: "採購單據、出廠與現場驗收報告、上線運轉證明",
         reportLink: "",
         subSummary: { total: 9, closed: 3, open: 6 },
         subList_en: [
           "• Total 9 Budget Items: 3 closed, 6 open in procurement pipeline",
-          "• Key focus: Automatic Stencil Cleaner, Turnstile ESD Gate, WMS System"
+          "1) Peak stand Microscope(100x): pending for arrangement from supplier (est. 8/15)",
+          "2) SPI training: completed.",
+          "3) AOI training: plan to raise PR before target date; supplier arrangement pending.",
+          "4) Temperature & Humidity meter: plan to raise PR on est. 8/9 (3 quotations received).",
+          "5) ESD turnstile gate: plan to raise PR on est. 8/10 (1 supplier quotation received)."
         ],
         subList_zh: [
           "• 總計 9 項資本支出設備：已到位 3 項，6 項發單採購進度推進中",
-          "• 關鍵焦點：自動鋼網清洗機、門禁 ESD 閘門、WMS 庫房管理系統"
+          "1) Peak 100x 顯微鏡：待供應商發貨安排 (預計 8/15)",
+          "2) SPI 專案培訓：已完成",
+          "3) AOI 培訓計畫：預計於目標日前提出請購 (PR)，後續由供應商派員",
+          "4) 溫濕度監測計：預計 8/9 前提出請購 (已取得 3 家最終報價與比價定案)",
+          "5) 靜電門禁閘門 (ESD Turnstile Gate)：預計 8/10 前提出請購 (現已拿到 1 家報價)"
         ]
       },
       {
         id: "ACT-5",
-        name_en: "Operator SOP Training",
-        name_zh: "5. 全線人員 SOP 資格培訓",
+        name_en: "Training (QSA & QPA)",
+        name_zh: "5. QSA & QPA 項目對策培訓",
         workstream: "TRAINING",
         color: "#F59E0B",
         status: "In Progress",
         progressPct: 20,
-        startDate: "2026-09-15",
-        endDate: "2026-10-07",
+        startDate: "2026-08-20",
+        endDate: "2026-09-10",
         owner: "Trainer / HR / QA",
-        auditPoint: "All Operators SOP Qualification",
-        rootCause_en: "Workstation WI/SOP refresh & operator certification for Dell physical line",
-        rootCause_zh: "專屬產線作業指導書 retraining 與全體作業員技能認證",
-        deliverable_en: "Training logs, Exam sheets, Operator Skills Matrix",
-        deliverable_zh: "培訓簽到表、考卷、作業員技能矩陣圖"
+        auditPoint: "QSA & QPA 3-Week Training",
+        rootCause_en: "Training will be started and completed within 3 weeks for QSA and QPA",
+        rootCause_zh: "針對 QSA 與 QPA 體系發現點，於 3 週內完成全員對策與 SOP 培訓",
+        deliverable_en: "QSA & QPA Training attendance logs & sign-offs",
+        deliverable_zh: "QSA/QPA 專案培訓簽到表與紀錄"
       },
       {
         id: "ACT-6",
-        name_en: "Internal Mock Audit",
-        name_zh: "6. 廠內自我稽核模擬全檢",
+        name_en: "Training (Purchase Items)",
+        name_zh: "6. 採購新設備與系統專案培訓",
+        workstream: "TRAINING",
+        color: "#F59E0B",
+        status: "Scheduled",
+        progressPct: 0,
+        startDate: "2026-11-01",
+        endDate: "2026-11-14",
+        owner: "Equipment Suppliers / HR",
+        auditPoint: "Purchase Items 2-Week Training",
+        rootCause_en: "Training will be started and completed within 2 weeks for purchase items",
+        rootCause_zh: "新進採購設備與過站軟體到位後，於 2 週內完成操作員實操培訓",
+        deliverable_en: "Equipment Supplier Training Certifications",
+        deliverable_zh: "原廠設備操作培訓合格證書"
+      },
+      {
+        id: "ACT-7",
+        name_en: "Foxlink Self Check",
+        name_zh: "7. 廠內自我稽核模擬全檢",
         workstream: "SELF CHECK",
         color: "#8B5CF6",
         status: "Scheduled",
         progressPct: 0,
-        startDate: "2026-10-05",
-        endDate: "2026-10-21",
-        owner: "Internal Audit Lead / QA Manager",
-        auditPoint: "Full Mock Audit against Dell QPA/QSA",
-        rootCause_en: "Internal pre-verification to validate 100% CAPA compliance before customer audit",
-        rootCause_zh: "正式稽核前內部 100% 擬真全評，確保缺失無漏網之魚",
-        deliverable_en: "Internal Mock Audit Scoring Report & Action Items",
-        deliverable_zh: "內部模擬稽核評分報告與快速整改清單"
-      },
-      {
-        id: "ACT-7",
-        name_en: "SSSTC Pre-audit",
-        name_zh: "7. SSSTC 線上預審稽核",
-        workstream: "AUDIT",
-        color: "#EF4444",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-10-20",
-        endDate: "2026-10-31",
-        owner: "SSSTC Steering Committee",
-        auditPoint: "SSSTC Executive Milestone Audit",
-        rootCause_en: "Pre-audit conducted jointly by SSSTC team before final customer physical audit",
-        rootCause_zh: "SSSTC 專家小組預審評估，關卡核准確認",
-        deliverable_en: "SSSTC Pre-audit Sign-off & Gap Resolution Checklist",
-        deliverable_zh: "SSSTC 預審發現點改善對照證明"
+        startDate: "2026-11-15",
+        endDate: "2026-11-21",
+        owner: "Internal Audit Lead / Yanlin Li",
+        auditPoint: "1-Week Internal Self Check",
+        rootCause_en: "After completion of training within 1 week will complete all self check points",
+        rootCause_zh: "培訓完成後，於 1 週內執行 Check-sheet 擬真自我全檢",
+        deliverable_en: "Full Internal Self Check Verification Report",
+        deliverable_zh: "廠內自我稽核 Check-sheet 驗證報告"
       },
       {
         id: "ACT-8",
-        name_en: "D1 Audit Readiness Check",
-        name_zh: "8. Dell D1 最終準備度確認",
-        workstream: "AUDIT",
-        color: "#EF4444",
+        name_en: "Foxlink Observations",
+        name_zh: "8. 廠內缺失對策快速改善閉環",
+        workstream: "ACTION PLAN",
+        color: "#3B82F6",
         status: "Scheduled",
         progressPct: 0,
-        startDate: "2026-11-01",
-        endDate: "2026-11-15",
-        owner: "All Workstream Leads",
-        auditPoint: "Pre-event final walkthrough",
-        rootCause_en: "Final dry-run walkthrough of plant environment, documentation, and personnel readiness",
-        rootCause_zh: "廠容廠貌、文件看板、人員應答最終演練",
-        deliverable_en: "Readiness sign-off checklist",
-        deliverable_zh: "SSSTC 預審發現點改善對照證明"
+        startDate: "2026-11-22",
+        endDate: "2026-12-05",
+        owner: "Foxlink QA / Operation Team",
+        auditPoint: "2-Week Corrective Actions",
+        rootCause_en: "After completion self check will complete Corrective within 2 weeks",
+        rootCause_zh: "自我全檢完成後，於 2 週內快速整改與閉環內部缺失",
+        deliverable_en: "Internal Corrective Action Closure Log",
+        deliverable_zh: "內部自我稽核發現點快速改善對照表"
       },
       {
         id: "ACT-9",
-        name_en: "D1 Re-audit",
-        name_zh: "9. D1 客戶最終現場正式稽核",
+        name_en: "SSSTC Online Audit",
+        name_zh: "9. SSSTC 線上預審稽核",
         workstream: "AUDIT",
         color: "#EF4444",
         status: "Scheduled",
         progressPct: 0,
-        startDate: "2026-11-20",
-        endDate: "2026-12-15",
-        owner: "Steering Committee / Foxlink & SSSTC",
-        auditPoint: "Dell D1 Final Audit",
-        rootCause_en: "Final physical line audit by Dell & SSSTC team for mass production qualification",
-        rootCause_zh: "Dell 與 SSSTC 聯合現場產線正式稽核，取得量產認證證書",
+        startDate: "2026-12-06",
+        endDate: "2026-12-12",
+        owner: "SSSTC Steering Committee / Kevin Gu",
+        auditPoint: "In 2nd week of December SSSTC Audit",
+        rootCause_en: "In 2nd week of December planning to schedule a SSSTC Online Audit",
+        rootCause_zh: "排定於 12 月第 2 週正式執行 SSSTC 線上預審稽核",
+        deliverable_en: "SSSTC Online Pre-audit Official Report",
+        deliverable_zh: "SSSTC 線上預審發現點追蹤表"
+      },
+      {
+        id: "ACT-10",
+        name_en: "SSSTC Observation Closure",
+        name_zh: "10. SSSTC 預審發現點對策閉環",
+        workstream: "AUDIT",
+        color: "#EF4444",
+        status: "Scheduled",
+        progressPct: 0,
+        startDate: "2026-12-13",
+        endDate: "2027-01-05",
+        owner: "Sateesh / Stephan",
+        auditPoint: "3-Week SSSTC Points Closure",
+        rootCause_en: "Based on the observations we will take 3 weeks of time to close those",
+        rootCause_zh: "針對 SSSTC 預審提報之發現點，於 3 週內完成對策與佐證閉環",
+        deliverable_en: "SSSTC Observation Final Closure Package",
+        deliverable_zh: "SSSTC 預審發現點改善對照證明"
+      },
+      {
+        id: "ACT-11",
+        name_en: "D1 Re-audit",
+        name_zh: "11. Dell D1 最終現場正式稽核",
+        workstream: "AUDIT",
+        color: "#EF4444",
+        status: "Scheduled",
+        progressPct: 0,
+        startDate: "2027-01-06",
+        endDate: "2027-01-14",
+        owner: "Dell Customer Audit Team / SSSTC",
+        auditPoint: "In 2nd week of January D1 Re-Audit",
+        rootCause_en: "In 2nd week of January planning to schedule a D1 Re-Audit for mass production qualification",
+        rootCause_zh: "排定於 2027 年 1 月第 2 週迎接 Dell 客戶聯合現場稽核，取得量產認證",
         deliverable_en: "Official D1 Audit Approval Letter & Certification",
         deliverable_zh: "Dell D1 稽核閉環官方核准函與量產認證證書"
       }
@@ -1540,9 +1591,10 @@
 
         const desc = (currentLang === 'en') ? ms.desc_en : ms.desc_zh;
         const levelClass = ms.level === 'top' ? 'milestone-level-top' : 'milestone-level-bottom';
+        const alignRightClass = (pct > 65) ? 'milestone-align-right' : '';
 
         return `
-          <div class="milestone-item-v2 ${levelClass}" style="left:${pct}%;" 
+          <div class="milestone-item-v2 ${levelClass} ${alignRightClass}" style="left:${pct}%;" 
                title="${desc.replace(/"/g, '&quot;')}"
                onclick="showMilestoneModal('${ms.id}')">
             <div class="milestone-card-content" id="${ms.id}_label">
@@ -1897,6 +1949,37 @@
         local.status = statusVal;
       }
 
+      try {
+        localStorage.setItem('SSSTC_ROADMAP_TASKS_CACHE_V40', JSON.stringify(masterTasks));
+      } catch(e) {}
+
+      renderTable();
+      renderTimeline();
+      updateCharts();
+      closeModal();
+
+      saveTaskToCloud(taskId);
+    }
+
+    function _old_saveTaskFromModal(taskId) {
+      const nameVal = document.getElementById('editTaskName') ? document.getElementById('editTaskName').value : null;
+      const startVal = document.getElementById('editStartDate').value;
+      const endVal = document.getElementById('editEndDate').value;
+      const sliderVal = parseInt(document.getElementById('editSlider').value, 10);
+      const statusVal = document.getElementById('editStatusSelect').value;
+
+      const local = masterTasks.find(t => t.id === taskId);
+      if (local) {
+        if (nameVal) {
+          if (currentLang === 'en') local.name_en = nameVal;
+          else local.name_zh = nameVal;
+        }
+        if (startVal) local.startDate = startVal;
+        if (endVal) local.endDate = endVal;
+        local.progressPct = sliderVal;
+        local.status = statusVal;
+      }
+
       renderTable();
       renderTimeline();
       updateCharts();
@@ -2116,6 +2199,15 @@
 
     // Automatic Page Initialization on Load
     window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const cached = localStorage.getItem('SSSTC_ROADMAP_TASKS_CACHE_V40');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            masterTasks = parsed;
+          }
+        }
+      } catch(e) { console.warn(e); }
       renderTable();
       renderTimeline();
       renderMilestones();
