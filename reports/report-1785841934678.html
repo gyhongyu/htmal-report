@@ -1487,48 +1487,12 @@
 
     let fullDetailTasks = []; // Managed by JS fallback
 
-    // Dynamic Decoupled Milestone Model
+    // Dynamic Cloud Milestone Model (Source of Truth: Google Sheet Database)
     const defaultMilestones = [
-      {
-        id: "MS-1",
-        name_en: "CAPA Alignment Proposal",
-        name_zh: "整改對策提案",
-        date: "2026-08-07",
-        icon: "★",
-        desc_en: "Complete preliminary alignment & submit action plan proposal to SSSTC QA",
-        desc_zh: "完成對策初審並向 SSSTC 品質團隊提交整改對策提案",
-        level: "top"
-      },
-      {
-        id: "MS-2",
-        name_en: "Non-budget Points 100% Closure",
-        name_zh: "非預算缺失 100% 閉環",
-        date: "2026-08-31",
-        icon: "◆",
-        desc_en: "Complete 100% closure for all non-budget QPA/QSA audit observations",
-        desc_zh: "完成所有非預算項之 QPA/QSA 稽核缺失 100% 佐證閉環",
-        level: "bottom"
-      },
-      {
-        id: "MS-3",
-        name_en: "Equipment Arrival & SSSTC Review",
-        name_zh: "設備到位與 SSSTC 預審",
-        date: "2026-10-31",
-        icon: "▲",
-        desc_en: "100% budget equipment onsite commissioning & SSSTC executive pre-audit sign-off",
-        desc_zh: "資本支出設備全數到位調試完成，並通過 SSSTC 高階預審",
-        level: "top"
-      },
-      {
-        id: "MS-4",
-        name_en: "Dell Customer Final Audit",
-        name_zh: "Dell 客戶最終稽核",
-        date: "2026-11-20",
-        icon: "🏁",
-        desc_en: "Host Dell customer physical line audit and obtain mass production qualification approval",
-        desc_zh: "迎接 Dell 客戶現場正式稽核，取得 D1 量產閉環認證",
-        level: "bottom"
-      }
+      { id: "MS-1", name_en: "CAPA Alignment Proposal", name_zh: "整改對策提案", date: "2026-08-07", icon: "★", desc_en: "Complete preliminary alignment & submit action plan proposal to SSSTC QA", desc_zh: "完成對策初審並向 SSSTC 品質團隊提交整改對策提案", level: "top" },
+      { id: "MS-2", name_en: "Non-budget Points 100% Closure", name_zh: "非預算缺失 100% 閉環", date: "2026-08-31", icon: "◆", desc_en: "Complete 100% closure for all non-budget QPA/QSA audit observations", desc_zh: "完成所有非預算項之 QPA/QSA 稽核缺失 100% 佐證閉環", level: "bottom" },
+      { id: "MS-3", name_en: "Equipment Arrival & SSSTC Review", name_zh: "設備到位與 SSSTC 預審", date: "2026-10-31", icon: "▲", desc_en: "100% budget equipment onsite commissioning & SSSTC executive pre-audit sign-off", desc_zh: "資本支出設備全數到位調試完成，並通過 SSSTC 高階預審", level: "top" },
+      { id: "MS-4", name_en: "Dell Customer Final Audit", name_zh: "Dell 客戶最終稽核", date: "2027-01-06", icon: "🏁", desc_en: "Host Dell customer physical line audit and obtain mass production qualification approval", desc_zh: "迎接 Dell 客戶現場正式稽核，取得 D1 量產閉環認證", level: "bottom" }
     ];
 
     function sanitizeMilestoneName(name) {
@@ -1536,24 +1500,7 @@
       return name.replace(/^[A-Za-z]{3}\s*\d{1,2}\s*:\s*/, '').replace(/^\d{1,2}\s*月\s*\d{1,2}\s*日\s*[:：]\s*/, '').replace(/^Nov-Dec:\s*/, '');
     }
 
-    let masterMilestones = loadMilestonesFromCache();
-
-    function loadMilestonesFromCache() {
-      try {
-        const cached = localStorage.getItem('SSSTC_ROADMAP_MILESTONES_V35');
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            parsed.forEach(ms => {
-              ms.name_en = sanitizeMilestoneName(ms.name_en);
-              ms.name_zh = sanitizeMilestoneName(ms.name_zh);
-            });
-            return parsed;
-          }
-        }
-      } catch(e) { console.warn('Milestone cache notice:', e); }
-      return defaultMilestones;
-    }
+    let masterMilestones = defaultMilestones;
 
     function saveMilestonesToCache() {
       try {
@@ -2044,8 +1991,34 @@
             }
           });
 
+          // Sync Cloud Milestones if returned
+          if (jsonRes && Array.isArray(jsonRes.milestones) && jsonRes.milestones.length > 0) {
+            jsonRes.milestones.forEach(cloudMs => {
+              let localMs = masterMilestones.find(m => m.id === cloudMs.id);
+              const mDate = (cloudMs.date && cloudMs.date.includes('T')) ? cloudMs.date.split('T')[0] : cloudMs.date;
+              if (localMs) {
+                if (cloudMs.name_zh) localMs.name_zh = cloudMs.name_zh;
+                if (cloudMs.name_en) localMs.name_en = cloudMs.name_en;
+                if (mDate) localMs.date = mDate;
+                if (cloudMs.desc_zh) localMs.desc_zh = cloudMs.desc_zh;
+                if (cloudMs.desc_en) localMs.desc_en = cloudMs.desc_en;
+              } else {
+                cloudMs.date = mDate;
+                masterMilestones.push(cloudMs);
+              }
+            });
+          } else {
+            // Dynamic Auto-Binding: Bind MS-4 date to ACT-11 startDate from Google Sheet
+            const act11 = masterTasks.find(t => t.id === "ACT-11");
+            const ms4 = masterMilestones.find(m => m.id === "MS-4");
+            if (act11 && act11.startDate && ms4) {
+              ms4.date = act11.startDate;
+            }
+          }
+
           renderTable();
           renderTimeline();
+          renderMilestones();
           updateCharts();
 
           if (badge) {
