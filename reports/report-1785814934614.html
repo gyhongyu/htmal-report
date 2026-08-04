@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SSSTC & Foxlink Project Management Roadmap v2.4</title>
+  <title>SSSTC & Foxlink Project Management Roadmap</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -260,7 +260,7 @@
     }
 
     .chart-header {
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -312,53 +312,77 @@
       box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
     }
 
-    /* Upward Shifted Milestone Strip */
+    /* REFINED MILESTONE STRIP WITH LEFT-EDGE DOWNWARD DASHED CONNECTOR LINES */
     .milestones-strip-v2 {
       display: flex;
       margin-left: 270px;
-      height: 62px;
+      height: 66px;
       position: relative;
-      border-bottom: 2px dashed #94A3B8;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.4rem;
     }
 
     .milestone-item-v2 {
       position: absolute;
-      transform: translateX(-50%);
+      /* Anchors exactly at milestone target date % from left edge */
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+      z-index: 35;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Staggered levels to prevent horizontal capsule collision */
+    .milestone-level-top { top: 0px; }
+    .milestone-level-bottom { top: 32px; }
+
+    .milestone-card-content {
+      display: inline-flex;
       align-items: center;
-      z-index: 20;
-    }
-
-    .milestone-level-top { top: -6px; }
-    .milestone-level-bottom { top: 22px; }
-
-    .milestone-icon {
-      font-size: 0.95rem;
-      line-height: 1;
-      color: #D97706;
-    }
-
-    .milestone-label-v2 {
+      gap: 0.3rem;
       font-size: 0.73rem;
       font-weight: 700;
       color: #B45309;
       white-space: nowrap;
       background: #FEF3C7;
-      padding: 2px 8px;
-      border-radius: 12px;
+      padding: 3px 9px;
+      border-radius: 6px 12px 12px 6px;
       border: 1px solid #FCD34D;
-      margin-top: 1px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+      transition: all 0.15s;
       cursor: pointer;
-      transition: transform 0.15s, background 0.15s;
     }
 
-    .milestone-label-v2:hover {
-      transform: scale(1.05);
-      z-index: 25;
+    .milestone-card-content:hover {
+      transform: translateY(-2px);
       background: #FDE68A;
+      box-shadow: 0 4px 10px rgba(180, 83, 9, 0.18);
+      z-index: 50;
+    }
+
+    .milestone-icon {
+      font-size: 0.85rem;
+      line-height: 1;
+      color: #D97706;
+    }
+
+    /* Subtle left-edge vertical drop line connecting left border to W1, W2 header ticks */
+    .milestone-connector-line {
+      position: absolute;
+      left: 0;
+      width: 0;
+      border-left: 1.5px dashed rgba(180, 83, 9, 0.65);
+      pointer-events: none;
+    }
+
+    .milestone-level-top .milestone-connector-line {
+      top: 24px;
+      height: 42px;
+    }
+
+    .milestone-level-bottom .milestone-connector-line {
+      top: 24px;
+      height: 10px;
     }
 
     /* Two-Tier Month & Week Header Grid */
@@ -369,6 +393,8 @@
       border-bottom: 1.5px solid #475569;
       margin-bottom: 0.5rem;
       background: #F8FAFC;
+      position: relative;
+      z-index: 20;
     }
 
     .month-col-group {
@@ -785,7 +811,107 @@
       .header-actions { justify-content: space-between; gap: 0.35rem; flex-wrap: wrap; }
       .btn { padding: 0.35rem 0.6rem; font-size: 0.75rem; }
     }
-  </style>
+  
+    /* Sub-detail expandable card styles */
+    .timeline-row-group {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .btn-expand-sub {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      cursor: pointer;
+      font-size: 0.7rem;
+      color: #2563EB;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1px 5px;
+      border-radius: 10px;
+      transition: all 0.2s;
+      margin-left: 4px;
+      font-weight: 700;
+    }
+    .btn-expand-sub:hover { background: #DBEAFE; transform: scale(1.05); }
+    .btn-expand-sub.active { background: #2563EB; color: #FFF; border-color: #2563EB; }
+
+    .sub-detail-drawer {
+      margin-left: 270px;
+      display: none;
+      background: #F8FAFC;
+      border: 1.5px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 0.85rem 1.1rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.82rem;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+      position: relative;
+      z-index: 15;
+      max-width: 680px;
+      width: fit-content;
+      min-width: 480px;
+    }
+
+    .btn-report-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: #2563EB;
+      color: #FFF !important;
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(37, 99, 235, 0.25);
+    }
+    .btn-report-link:hover {
+      background: #1D4ED8;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+      transform: translateY(-1px);
+    }
+    .btn-report-pending {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: #E2E8F0;
+      color: #64748B;
+      font-size: 0.73rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: not-allowed;
+    }
+    .sub-detail-drawer.active { display: block; animation: fadeInDown 0.25s ease-out; }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sub-kpi-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      margin-right: 0.5rem;
+    }
+    .sub-kpi-closed { background: #DCFCE7; color: #15803D; border: 1px solid #86EFAC; }
+    .sub-kpi-open { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+    .sub-list-item {
+      margin-top: 0.3rem;
+      color: #1E293B;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+
+</style>
 </head>
 <body>
 
@@ -795,7 +921,7 @@
     <div class="top-header">
       <div class="project-info">
         <h1 id="uiTitle">
-          SSSTC & Foxlink Project Management Roadmap v2.4
+          SSSTC & Foxlink Project Management Roadmap
           <span class="cloud-badge" id="cloudBadge">☁️ Connected</span>
         </h1>
         <p id="uiSubtitle">Interactive Workstream Timeline & Real-Time Executive Dashboard</p>
@@ -809,8 +935,8 @@
       </div>
     </div>
 
-    <!-- Data Input Panel -->
-    <div class="panel" id="inputPanel">
+    <!-- Data Input Panel (Collapsed by default) -->
+    <div class="panel" id="inputPanel" style="display: none;">
       <div class="panel-header">
         <span class="panel-title" id="uiPanelTitle">📋 Master Workstream Action Plan & Timeline</span>
         <span style="font-size: 0.8rem; color: var(--text-muted);"><span id="uiTaskCountLabel">Total 9 Master Activities</span></span>
@@ -850,24 +976,8 @@
           <h2 id="uiTimelineTitle">Workstream Timeline & Milestones</h2>
         </div>
 
-        <!-- Upward Shifted Milestones Strip -->
+        <!-- Upward Shifted Milestones Strip with Left-Border Downward Connector Lines -->
         <div class="milestones-strip-v2" id="milestonesStrip">
-          <div class="milestone-item-v2 milestone-level-top" style="left:27.8%;" title="Stephan submits Foxlink India remediation proposal to Kevin Gu">
-            <div class="milestone-icon">★</div>
-            <div class="milestone-label-v2" id="ms1">Aug 07: Proposal</div>
-          </div>
-          <div class="milestone-item-v2 milestone-level-bottom" style="left:37.6%;" title="All non-budget QPA & QSA corrective actions completed">
-            <div class="milestone-icon">◆</div>
-            <div class="milestone-label-v2" id="ms2">Aug 31: Non-budget 100%</div>
-          </div>
-          <div class="milestone-item-v2 milestone-level-top" style="left:62.4%;" title="Equipment installed, training & self-check done; SSSTC Online Audit conducted">
-            <div class="milestone-icon">▲</div>
-            <div class="milestone-label-v2" id="ms3">Oct 31: Equipment & SSSTC Audit</div>
-          </div>
-          <div class="milestone-item-v2 milestone-level-bottom" style="left:76.3%;" title="Final physical line audit by Dell & SSSTC team">
-            <div class="milestone-icon">🏁</div>
-            <div class="milestone-label-v2" id="ms4">Nov-Dec: Dell Audit</div>
-          </div>
         </div>
 
         <!-- Two-Tier Month & Week Header Grid -->
@@ -984,13 +1094,26 @@
     </div>
   </div>
 
+  <!-- Milestone Details Edit Modal (Flat & Independent Overlay) -->
+  <div class="modal-overlay" id="milestoneModal">
+    <div class="modal-content" style="max-width: 520px;">
+      <div class="modal-header">
+        <div class="modal-title" id="msModalTitle">🚩 Edit Milestone Details</div>
+        <button class="modal-close" onclick="closeMsModal()">✕</button>
+      </div>
+      <div id="msModalBody">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
   <script>
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIGSon61ZQYFAGhWmFqUOmyK0YAoe2MsAnqgoldOLaKQnn6YFXLZFsBmm3dJ74aa0UAA/exec";
 
     // STRICT i18n DICTIONARY - ZERO CHINESE IN ENGLISH MODE!
     const i18n = {
       en: {
-        title: "SSSTC & Foxlink Project Management Roadmap v2.4",
+        title: "SSSTC & Foxlink Project Management Roadmap",
         subtitle: "Interactive Workstream Timeline & Real-Time Executive Dashboard",
         toggleTable: "Toggle / Collapse Table",
         switchViewMaster: "Switch to Full Detail List (164)",
@@ -1037,10 +1160,15 @@
         lblStatus: "Status:",
         btnSaveCloud: "💾 Save & Sync to Google Sheet",
         btnDeleteTask: "🗑️ Delete Task",
-        confirmDelete: "Are you sure you want to delete task"
+        confirmDelete: "Are you sure you want to delete task",
+        editMsModalTitle: "🚩 Edit Milestone Details",
+        lblMsName: "Milestone Label:",
+        lblMsDate: "Target Date:",
+        lblMsDesc: "Detailed Description:",
+        btnSaveMs: "💾 Save Milestone Details" 
       },
       zh: {
-        title: "SSSTC & Foxlink 專案管理與稽核改善時程地圖 v2.4",
+        title: "SSSTC & Foxlink 專案管理與稽核改善時程地圖",
         subtitle: "互動式工作流時程看板與即時專案儀表板（彈窗標題凍結版）",
         toggleTable: "切換/折疊數據表格",
         switchViewMaster: "切換至全量稽核明細 (164 項)",
@@ -1087,7 +1215,12 @@
         lblStatus: "執行狀態：",
         btnSaveCloud: "💾 儲存並同步至 Google Sheet",
         btnDeleteTask: "🗑️ 刪除此任務",
-        confirmDelete: "您確定要刪除任務"
+        confirmDelete: "您確定要刪除任務",
+        editMsModalTitle: "🚩 編輯里程碑節點與日期",
+        lblMsName: "里程碑標籤名稱：",
+        lblMsDate: "目標完成日期：",
+        lblMsDesc: "詳細對策說明：",
+        btnSaveMs: "💾 儲存里程碑變更" 
       }
     };
 
@@ -1148,7 +1281,17 @@
         rootCause_en: "Received 112 Observations in QPA and scheduled till Aug to complete these points",
         rootCause_zh: "接收 112 項 QPA 製程缺失，排定至 8 月底前全數閉環完成",
         deliverable_en: "112 CAPA before/after evidence packages",
-        deliverable_zh: "112 筆 CAPA 改善前後對照佐證包"
+        deliverable_zh: "112 筆 CAPA 改善前後對照佐證包",
+        reportLink: "",
+        subSummary: { total: 112, closed: 44, open: 68 },
+        subList_en: [
+          "• Total 112 items: 44 items closed, 68 items open",
+          "• Scheduled till August 31 to complete 100% CAPA evidence closure"
+        ],
+        subList_zh: [
+          "• 總計 112 項 QPA 缺失對策：已閉環 44 項，進行中 68 項",
+          "• 目標於 8 月 31 日前全數完成 100% CAPA 改善與佐證閉環"
+        ]
       },
       {
         id: "ACT-3",
@@ -1165,11 +1308,21 @@
         rootCause_en: "Received 15 Observations in QSA and scheduled till Aug to complete these points",
         rootCause_zh: "接收 15 項 QSA 品質體系缺失，排定至 8 月底前修訂 SOP 並閉環",
         deliverable_en: "15 QSA Closure documents & updated level-2/3 SOPs",
-        deliverable_zh: "15 項 QSA 結案證明與品質體系程序書更新"
+        deliverable_zh: "15 項 QSA 結案證明與品質體系程序書更新",
+        reportLink: "https://html.foxlink.co.in/reports/report-1785820067291.html",
+        subSummary: { total: 15, closed: 12, open: 3 },
+        subList_en: [
+          "• Total 15 items: 12 items closed, 3 items open",
+          "• Level 2/3 Quality SOP revision & operator training in progress"
+        ],
+        subList_zh: [
+          "• 總計 15 項 QSA 品質體系缺失：已閉環 12 項，進行中 3 項",
+          "• 二/三階品質程序書 (SOP) 修訂與作業員培訓推進中"
+        ]
       },
       {
         id: "ACT-4",
-        name_en: "Purchase",
+        name_en: "Equipment & System Purchase",
         name_zh: "4. 專案設備與系統採購",
         workstream: "EQUIPMENT",
         color: "#10B981",
@@ -1177,79 +1330,89 @@
         progressPct: 40,
         startDate: "2026-06-25",
         endDate: "2026-10-31",
-        owner: "Stephan / Procurement",
-        auditPoint: "SFC, QR Scan, Microscope, ESD Gate, X-Ray",
-        rootCause_en: "All items will be purchased and installed by end of October (except Feeder calibrator)",
-        rootCause_zh: "所有專案設備與 SFC 系統於 10 月底前全數採購與安裝到位（Feeder 校正儀除外）",
-        deliverable_en: "POs, Installation & System Integration Logs",
-        deliverable_zh: "採購單 (PO)、硬體裝設點收與系統過站整合報告"
+        owner: "Steering Committee / IT / Purchase",
+        auditPoint: "9 Major Equipment & Software Systems",
+        rootCause_en: "Lead times for automated equipment & software systems procurement",
+        rootCause_zh: "自動化檢測設備與智慧軟體系統採購前置交期籌備",
+        deliverable_en: "PO copies, FAT/SAT reports, Commissioning sign-off",
+        deliverable_zh: "採購單據、出廠與現場驗收報告、上線運轉證明",
+        reportLink: "",
+        subSummary: { total: 9, closed: 3, open: 6 },
+        subList_en: [
+          "• Total 9 Budget Items: 3 closed, 6 open in procurement pipeline",
+          "• Key focus: Automatic Stencil Cleaner, Turnstile ESD Gate, WMS System"
+        ],
+        subList_zh: [
+          "• 總計 9 項資本支出設備：已到位 3 項，6 項發單採購進度推進中",
+          "• 關鍵焦點：自動鋼網清洗機、門禁 ESD 閘門、WMS 庫房管理系統"
+        ]
       },
       {
         id: "ACT-5",
-        name_en: "Training",
+        name_en: "Operator SOP Training",
         name_zh: "5. 全線人員 SOP 資格培訓",
         workstream: "TRAINING",
         color: "#F59E0B",
         status: "In Progress",
         progressPct: 20,
-        startDate: "2026-10-01",
-        endDate: "2026-10-20",
-        owner: "Yanlin Li 理艷林 / Naresh",
-        auditPoint: "Customer Req: Training before Self Check",
-        rootCause_en: "Training will be started and completed within October (Customer order: Training before Self-Check)",
-        rootCause_zh: "設備到位後，於 10 月中前完成作業員與 SOP 人員實操訓練與考核",
-        deliverable_en: "Signed Operator Training Records & Certifications",
-        deliverable_zh: "作業員培訓簽到表與資格認證名冊"
+        startDate: "2026-09-15",
+        endDate: "2026-10-07",
+        owner: "Trainer / HR / QA",
+        auditPoint: "All Operators SOP Qualification",
+        rootCause_en: "Workstation WI/SOP refresh & operator certification for Dell physical line",
+        rootCause_zh: "專屬產線作業指導書 retraining 與全體作業員技能認證",
+        deliverable_en: "Training logs, Exam sheets, Operator Skills Matrix",
+        deliverable_zh: "培訓簽到表、考卷、作業員技能矩陣圖"
       },
       {
         id: "ACT-6",
-        name_en: "Self Check",
+        name_en: "Internal Mock Audit",
         name_zh: "6. 廠內自我稽核模擬全檢",
         workstream: "SELF CHECK",
         color: "#8B5CF6",
         status: "Scheduled",
         progressPct: 0,
-        startDate: "2026-10-20",
-        endDate: "2026-10-30",
-        owner: "Michael / Yanlin Li 理艷林",
-        auditPoint: "Customer Req: Self Check before SSSTC Audit",
-        rootCause_en: "After completion of training, perform internal self check points verification",
-        rootCause_zh: "培訓完成後，由內部稽核小組執行 Check-sheet 模擬全檢與 Gap 閉環",
-        deliverable_en: "Full Internal Audit Check-sheet Verification Report",
-        deliverable_zh: "廠內自我稽核 Check-sheet 驗證報告"
+        startDate: "2026-10-05",
+        endDate: "2026-10-21",
+        owner: "Internal Audit Lead / QA Manager",
+        auditPoint: "Full Mock Audit against Dell QPA/QSA",
+        rootCause_en: "Internal pre-verification to validate 100% CAPA compliance before customer audit",
+        rootCause_zh: "正式稽核前內部 100% 擬真全評，確保缺失無漏網之魚",
+        deliverable_en: "Internal Mock Audit Scoring Report & Action Items",
+        deliverable_zh: "內部模擬稽核評分報告與快速整改清單"
       },
       {
         id: "ACT-7",
-        name_en: "SSSTC Audit",
+        name_en: "SSSTC Pre-audit",
         name_zh: "7. SSSTC 線上預審稽核",
         workstream: "AUDIT",
         color: "#EF4444",
         status: "Scheduled",
         progressPct: 0,
-        startDate: "2026-10-25",
+        startDate: "2026-10-20",
         endDate: "2026-10-31",
-        owner: "Julia Tseng / Kevin Gu / Stephan",
-        auditPoint: "Target: End of October SSSTC Online Audit",
-        rootCause_en: "SSSTC online pre-audit conducted per Aug 3 customer meeting resolution",
-        rootCause_zh: "依 8/3 客戶會議決議，提前於 10 月底前執行 SSSTC 線上預審實地稽核",
-        deliverable_en: "SSSTC Online Audit Observations Report",
-        deliverable_zh: "SSSTC 線上預審發現點追蹤表"
+        owner: "SSSTC Steering Committee",
+        auditPoint: "SSSTC Executive Milestone Audit",
+        rootCause_en: "Pre-audit conducted jointly by SSSTC team before final customer physical audit",
+        rootCause_zh: "SSSTC 專家小組預審評估，關卡核准確認",
+        deliverable_en: "SSSTC Pre-audit Sign-off & Gap Resolution Checklist",
+        deliverable_zh: "SSSTC 預審發現點改善對照證明"
       },
       {
         id: "ACT-8",
-        name_en: "SSSTC Resolution",
-        name_zh: "8. SSSTC 預審對策改善閉環",
+        name_en: "D1 Audit Readiness Check",
+        name_zh: "8. Dell D1 最終準備度確認",
         workstream: "AUDIT",
         color: "#EF4444",
         status: "Scheduled",
         progressPct: 0,
         startDate: "2026-11-01",
         endDate: "2026-11-15",
-        owner: "Sateesh / Stephan",
-        auditPoint: "Post SSSTC Pre-Audit",
-        rootCause_en: "Based on SSSTC observations, take 2 weeks of time to close points",
-        rootCause_zh: "針對 SSSTC 線上預審提報之發現點，於 2 週內快速對策閉環",
-        deliverable_en: "SSSTC Observation Closure Package",
+        owner: "All Workstream Leads",
+        auditPoint: "Pre-event final walkthrough",
+        rootCause_en: "Final dry-run walkthrough of plant environment, documentation, and personnel readiness",
+        rootCause_zh: "廠容廠貌、文件看板、人員應答最終演練",
+        deliverable_en: "Readiness sign-off checklist",
         deliverable_zh: "SSSTC 預審發現點改善對照證明"
       },
       {
@@ -1271,203 +1434,198 @@
       }
     ];
 
-    let fullDetailTasks = [{"id": "QPA-1", "name_en": "[1.1.2] 15.Supplier need to collect COC reports from the customers", "name_zh": "[1.1.2] 進料管制 (IQC) - COC 合規證書與效期追溯, ORT 可靠度抽樣與 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-31", "owner": "Vishnu", "auditPoint": "1. IQC (1.1.2)", "rootCause_en": "Are the critical characteristics and parameters for materials identified and documented?", "rootCause_zh": "稽核發現點：Are the critical characteristics and parameters for materials identified and documented?", "deliverable_en": "15.Supplier need to collect COC reports from the customers", "deliverable_zh": "CAPA 改善對策：[1.1.2] 進料管制 (IQC) - COC 合規證書與效期追溯, ORT 可靠度抽樣與 SOP"}, {"id": "QPA-2", "name_en": "[1.1.17] 8.Customer need to give description on label for every BOM", "name_zh": "[1.1.17] 進料管制 (IQC) - BOM 料號描述與貼標", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "SSSTC", "auditPoint": "1. IQC (1.1.17)", "rootCause_en": "Is the materials at incoming area clearly identified? (e.g., part number, description, quantity, etc.)", "rootCause_zh": "稽核發現點：Is the materials at incoming area clearly identified? (e.g., part number, description, quantity, etc.)", "deliverable_en": "8.Customer need to give description on label for every BOM", "deliverable_zh": "CAPA 改善對策：[1.1.17] 進料管制 (IQC) - BOM 料號描述與貼標"}, {"id": "QPA-3", "name_en": "[1.1.21] Corrective action plan in progress", "name_zh": "[1.1.21] 進料管制 (IQC) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-31", "owner": "Vishnu", "auditPoint": "1. IQC (1.1.21)", "rootCause_en": "Are materials/lot passed incoming inspection properly stored to prevent damage?", "rootCause_zh": "稽核發現點：Are materials/lot passed incoming inspection properly stored to prevent damage?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[1.1.21] 進料管制 (IQC) - 缺失對策與改善對照"}, {"id": "QPA-4", "name_en": "[1.1.22] 15.Supplier need to collect COC reports from the customers", "name_zh": "[1.1.22] 進料管制 (IQC) - COC 合規證書與效期追溯, ORT 可靠度抽樣與 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Vishnu", "auditPoint": "1. IQC (1.1.22)", "rootCause_en": "Are all quality/inspection records identified, indexed, filed, collected, stored, and maintained?", "rootCause_zh": "稽核發現點：Are all quality/inspection records identified, indexed, filed, collected, stored, and maintained?", "deliverable_en": "15.Supplier need to collect COC reports from the customers", "deliverable_zh": "CAPA 改善對策：[1.1.22] 進料管制 (IQC) - COC 合規證書與效期追溯, ORT 可靠度抽樣與 SOP"}, {"id": "QPA-5", "name_en": "[1.2.4] Corrective action plan in progress", "name_zh": "[1.2.4] 進料管制 (IQC) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Vishnu", "auditPoint": "1. IQC (1.2.4)", "rootCause_en": "Is the equipment used for measuring/inspection calibrated? (including test jigs, etc.)", "rootCause_zh": "稽核發現點：Is the equipment used for measuring/inspection calibrated? (including test jigs, etc.)", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[1.2.4] 進料管制 (IQC) - 缺失對策與改善對照"}, {"id": "QPA-6", "name_en": "[1.2.5] Corrective action plan in progress", "name_zh": "[1.2.5] 進料管制 (IQC) - GRR 量測系統分析報告", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "VISHNU", "auditPoint": "1. IQC (1.2.5)", "rootCause_en": "Is MSA (Measurement System Analysis)/ GRR (Gage Repeatability Reproducibility) conducted on the measurement system used at IQC and meeting Dell requirement?", "rootCause_zh": "稽核發現點：Is MSA (Measurement System Analysis)/ GRR (Gage Repeatability Reproducibility) conducted on the measurement system used at IQC and meeting Dell requirement?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[1.2.5] 進料管制 (IQC) - GRR 量測系統分析報告"}, {"id": "QPA-7", "name_en": "[1.3.4] Corrective action plan in progress", "name_zh": "[1.3.4] 進料管制 (IQC) - ORT 可靠度抽樣與 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "VISHNU", "auditPoint": "1. IQC (1.3.4)", "rootCause_en": "Is corrective action request issued when incoming materials not meeting the acceptance criteria, rejected at manufacturing process, or found defective at OBA/ORT?", "rootCause_zh": "稽核發現點：Is corrective action request issued when incoming materials not meeting the acceptance criteria, rejected at manufacturing process, or found defective at OBA/ORT?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[1.3.4] 進料管制 (IQC) - ORT 可靠度抽樣與 SOP"}, {"id": "QPA-8", "name_en": "[1.3.5] Corrective action plan in progress", "name_zh": "[1.3.5] 進料管制 (IQC) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "VISHNU", "auditPoint": "1. IQC (1.3.5)", "rootCause_en": "Is there a system to track status of corrective action request?", "rootCause_zh": "稽核發現點：Is there a system to track status of corrective action request?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[1.3.5] 進料管制 (IQC) - 缺失對策與改善對照"}, {"id": "QPA-9", "name_en": "[1.3.6] Corrective action plan in progress", "name_zh": "[1.3.6] 進料管制 (IQC) - 重工流程與條碼過站防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "VISHNU", "auditPoint": "1. IQC (1.3.6)", "rootCause_en": "Is there a documented control system for non-conformity? (e.g., CAR, rescreen, rework, and RMA)", "rootCause_zh": "稽核發現點：Is there a documented control system for non-conformity? (e.g., CAR, rescreen, rework, and RMA)", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[1.3.6] 進料管制 (IQC) - 重工流程與條碼過站防呆"}, {"id": "QPA-10", "name_en": "[1.3.10] 14.IQC need to check all BOM Expiry and note in IQC checklist and all dimensions , VI.", "name_zh": "[1.3.10] 進料管制 (IQC) - BOM 料號描述與貼標, 物料有效期限管制", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "VISHNU", "auditPoint": "1. IQC (1.3.10)", "rootCause_en": "Is there any system to verify critical parameters quality performance of incoming parts? (e.g., supplier data package review)", "rootCause_zh": "稽核發現點：Is there any system to verify critical parameters quality performance of incoming parts? (e.g., supplier data package review)", "deliverable_en": "14.IQC need to check all BOM Expiry and note in IQC checklist and all dimensions , VI.", "deliverable_zh": "CAPA 改善對策：[1.3.10] 進料管制 (IQC) - BOM 料號描述與貼標, 物料有效期限管制"}, {"id": "QPA-11", "name_en": "[1.3.12] Corrective action plan in progress", "name_zh": "[1.3.12] 進料管制 (IQC) - ORT 可靠度抽樣與 SOP, 產線 DPPM 與品質報告關聯分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-24", "owner": "Vishnu", "auditPoint": "1. IQC (1.3.12)", "rootCause_en": "Is action taken when line DPPM not correlate with quality report from suppliers?", "rootCause_zh": "稽核發現點：Is action taken when line DPPM not correlate with quality report from suppliers?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[1.3.12] 進料管制 (IQC) - ORT 可靠度抽樣與 SOP, 產線 DPPM 與品質報告關聯分析"}, {"id": "QPA-12", "name_en": "[2.1.2] 10.Supplier need to add expiry date of Active & Passive components(Chip/IC/PCB) in WMS\n13.Supplier need to match Physical Vs System stock in WH", "name_zh": "[2.1.2] 資材庫房 (Warehouse) - 物料有效期限管制", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Shabitha", "auditPoint": "2. Warehouse (2.1.2)", "rootCause_en": "Are the physical materials controlled using FIFO?", "rootCause_zh": "稽核發現點：Are the physical materials controlled using FIFO?", "deliverable_en": "10.Supplier need to add expiry date of Active & Passive components(Chip/IC/PCB) in WMS\n13.Supplier need to match Physical Vs System stock in WH", "deliverable_zh": "CAPA 改善對策：[2.1.2] 資材庫房 (Warehouse) - 物料有效期限管制"}, {"id": "QPA-13", "name_en": "[2.1.5] 11.QPA SSSTC need to share the expiry details of all materials", "name_zh": "[2.1.5] 資材庫房 (Warehouse) - 物料有效期限管制", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Shabitha", "auditPoint": "2. Warehouse (2.1.5)", "rootCause_en": "Is there a procedure to govern shelf-life? (eg: materials expiry control)", "rootCause_zh": "稽核發現點：Is there a procedure to govern shelf-life? (eg: materials expiry control)", "deliverable_en": "11.QPA SSSTC need to share the expiry details of all materials", "deliverable_zh": "CAPA 改善對策：[2.1.5] 資材庫房 (Warehouse) - 物料有效期限管制"}, {"id": "QPA-14", "name_en": "[2.1.6] 11.QPA SSSTC need to share the expiry details of all materials", "name_zh": "[2.1.6] 資材庫房 (Warehouse) - 物料有效期限管制", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Shabitha", "auditPoint": "2. Warehouse (2.1.6)", "rootCause_en": "Are shelf-life control implemented according to the procedures? (e.g. materials expiry control)", "rootCause_zh": "稽核發現點：Are shelf-life control implemented according to the procedures? (e.g. materials expiry control)", "deliverable_en": "11.QPA SSSTC need to share the expiry details of all materials", "deliverable_zh": "CAPA 改善對策：[2.1.6] 資材庫房 (Warehouse) - 物料有效期限管制"}, {"id": "QPA-15", "name_en": "[2.1.7] 12.Supplier need to have Auto data recorded Hygrometer along with internal callibration", "name_zh": "[2.1.7] 資材庫房 (Warehouse) - 溫濕度自動紀錄與告警", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Dawei", "auditPoint": "2. Warehouse (2.1.7)", "rootCause_en": "Is there a storage control system for sensitive materials (to temperature/humidity/etc.)?", "rootCause_zh": "稽核發現點：Is there a storage control system for sensitive materials (to temperature/humidity/etc.)?", "deliverable_en": "12.Supplier need to have Auto data recorded Hygrometer along with internal callibration", "deliverable_zh": "CAPA 改善對策：[2.1.7] 資材庫房 (Warehouse) - 溫濕度自動紀錄與告警"}, {"id": "QPA-16", "name_en": "[2.1.8] 12.Supplier need to have Auto data recorded Hygrometer along with internal callibration", "name_zh": "[2.1.8] 資材庫房 (Warehouse) - 溫濕度自動紀錄與告警", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Dawei", "auditPoint": "2. Warehouse (2.1.8)", "rootCause_en": "Are temperature and humidity controlled and monitored on a regular basis?", "rootCause_zh": "稽核發現點：Are temperature and humidity controlled and monitored on a regular basis?", "deliverable_en": "12.Supplier need to have Auto data recorded Hygrometer along with internal callibration", "deliverable_zh": "CAPA 改善對策：[2.1.8] 資材庫房 (Warehouse) - 溫濕度自動紀錄與告警"}, {"id": "QPA-17", "name_en": "[2.1.13] Corrective action plan in progress", "name_zh": "[2.1.13] 資材庫房 (Warehouse) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Dawei", "auditPoint": "2. Warehouse (2.1.13)", "rootCause_en": "Are the changes identified in the document or otherwise?", "rootCause_zh": "稽核發現點：Are the changes identified in the document or otherwise?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[2.1.13] 資材庫房 (Warehouse) - 缺失對策與改善對照"}, {"id": "QPA-18", "name_en": "[2.1.14] Corrective action plan in progress", "name_zh": "[2.1.14] 資材庫房 (Warehouse) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Dawei", "auditPoint": "2. Warehouse (2.1.14)", "rootCause_en": "Is there a master list of these changes?", "rootCause_zh": "稽核發現點：Is there a master list of these changes?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[2.1.14] 資材庫房 (Warehouse) - 缺失對策與改善對照"}, {"id": "QPA-19", "name_en": "[3.1.1] Corrective action plan in progress", "name_zh": "[3.1.1] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.1.1)", "rootCause_en": "Does the supplier have an ESD training program ? (Verify that individuals have completed ESD certification and / or ESD update (refresher) training within the past year. Records of completion / certification are required.)", "rootCause_zh": "稽核發現點：Does the supplier have an ESD training program ? (Verify that individuals have completed ESD certification and / or ESD update (refresher) training within the past year. Records of completion / certification are required.)", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[3.1.1] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-20", "name_en": "[3.1.2] Corrective action plan in progress", "name_zh": "[3.1.2] 靜電防護 (ESD) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.1.2)", "rootCause_en": "Are training records for all personnel correctly maintained?", "rootCause_zh": "稽核發現點：Are training records for all personnel correctly maintained?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[3.1.2] 靜電防護 (ESD) - 缺失對策與改善對照"}, {"id": "QPA-21", "name_en": "[3.1.3] 6.Supplier need to cross check all the ESD & Wrist strap connections at ATE line", "name_zh": "[3.1.3] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.1.3)", "rootCause_en": "Is there ESD audit procedure? This should include but not limited to: Audit check list, non-compliance handling procedure, recording & retention, etc.", "rootCause_zh": "稽核發現點：Is there ESD audit procedure? This should include but not limited to: Audit check list, non-compliance handling procedure, recording & retention, etc.", "deliverable_en": "6.Supplier need to cross check all the ESD & Wrist strap connections at ATE line", "deliverable_zh": "CAPA 改善對策：[3.1.3] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-22", "name_en": "[3.1.7] 2.Supplier need to install ESD Turnstile gate to allow in the shop floor.", "name_zh": "[3.1.7] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.1.7)", "rootCause_en": "Are ESD testers for foot straps and wrist straps calibrated?", "rootCause_zh": "稽核發現點：Are ESD testers for foot straps and wrist straps calibrated?", "deliverable_en": "2.Supplier need to install ESD Turnstile gate to allow in the shop floor.", "deliverable_zh": "CAPA 改善對策：[3.1.7] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-23", "name_en": "[3.1.11] 3. Need to stick EPA (ESD Protected Area) Sign at Shopfloor Entrance", "name_zh": "[3.1.11] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.1.11)", "rootCause_en": "Are ESD warning signs displayed clearly?", "rootCause_zh": "稽核發現點：Are ESD warning signs displayed clearly?", "deliverable_en": "3. Need to stick EPA (ESD Protected Area) Sign at Shopfloor Entrance", "deliverable_zh": "CAPA 改善對策：[3.1.11] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-24", "name_en": "[3.2.3] Corrective action plan in progress", "name_zh": "[3.2.3] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.2.3)", "rootCause_en": "Does the supplier measure ESD walking voltage and does it measured less than 100volts?", "rootCause_zh": "稽核發現點：Does the supplier measure ESD walking voltage and does it measured less than 100volts?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[3.2.3] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-25", "name_en": "[3.2.6] Corrective action plan in progress", "name_zh": "[3.2.6] 靜電防護 (ESD) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.2.6)", "rootCause_en": "If monitored wrist straps are used, is there evidence the workers are paying attention to when they alarm and fix the problem or does the alarm get ignored?", "rootCause_zh": "稽核發現點：If monitored wrist straps are used, is there evidence the workers are paying attention to when they alarm and fix the problem or does the alarm get ignored?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[3.2.6] 靜電防護 (ESD) - 缺失對策與改善對照"}, {"id": "QPA-26", "name_en": "[3.2.8] 6.Supplier need to cross check all the ESD & Wrist strap connections at ATE line", "name_zh": "[3.2.8] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.2.8)", "rootCause_en": "Is daily test logs in place and used?", "rootCause_zh": "稽核發現點：Is daily test logs in place and used?", "deliverable_en": "6.Supplier need to cross check all the ESD & Wrist strap connections at ATE line", "deliverable_zh": "CAPA 改善對策：[3.2.8] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-27", "name_en": "[3.3.2] 4.Supplier need to paste ESD Label on each table", "name_zh": "[3.3.2] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.3.2)", "rootCause_en": "Does the suppliers measure mats/benches and do they measure <1x109 ohms to ground?", "rootCause_zh": "稽核發現點：Does the suppliers measure mats/benches and do they measure <1x109 ohms to ground?", "deliverable_en": "4.Supplier need to paste ESD Label on each table", "deliverable_zh": "CAPA 改善對策：[3.3.2] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-28", "name_en": "[3.5.2] Corrective action plan in progress", "name_zh": "[3.5.2] 靜電防護 (ESD) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Vishnu", "auditPoint": "3. ESD Control (3.5.2)", "rootCause_en": "Are all ESD sensitive parts packaged in ESD totes, trays, or ESD bags when not on ESD surfaces?", "rootCause_zh": "稽核發現點：Are all ESD sensitive parts packaged in ESD totes, trays, or ESD bags when not on ESD surfaces?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[3.5.2] 靜電防護 (ESD) - 靜電防護與測試儀校"}, {"id": "QPA-29", "name_en": "[4.1.6] 27.Stencil Loading direction need to add in SOP", "name_zh": "[4.1.6] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.1.6)", "rootCause_en": "Is the Stencil loading orientation and SSD orientation to Stencil specified on the Work Instructions or line setup instructions?", "rootCause_zh": "稽核發現點：Is the Stencil loading orientation and SSD orientation to Stencil specified on the Work Instructions or line setup instructions?", "deliverable_en": "27.Stencil Loading direction need to add in SOP", "deliverable_zh": "CAPA 改善對策：[4.1.6] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證"}, {"id": "QPA-30", "name_en": "[4.1.7] 29.Stencil & Squeeze number need to add in SOP", "name_zh": "[4.1.7] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.1.7)", "rootCause_en": "Is the Squeegee in use specified in the Paste Print program or Work Instructions?", "rootCause_zh": "稽核發現點：Is the Squeegee in use specified in the Paste Print program or Work Instructions?", "deliverable_en": "29.Stencil & Squeeze number need to add in SOP", "deliverable_zh": "CAPA 改善對策：[4.1.7] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證"}, {"id": "QPA-31", "name_en": "[4.2.1] 31.Need to cross check the stirring time in TDS & customer process", "name_zh": "[4.2.1] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.2.1)", "rootCause_en": "Is there a Standard Operating Procedure for the storage and handling of solder paste?", "rootCause_zh": "稽核發現點：Is there a Standard Operating Procedure for the storage and handling of solder paste?", "deliverable_en": "31.Need to cross check the stirring time in TDS & customer process", "deliverable_zh": "CAPA 改善對策：[4.2.1] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-32", "name_en": "[4.2.5] 5.Supplier need to have Alarmed Hygrometer along with internal callibration", "name_zh": "[4.2.5] 錫膏印刷 (Solder Paste) - 溫濕度自動紀錄與告警", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.2.5)", "rootCause_en": "Is there evidence to demonstrate that action was taken when the temperature was outside the defined storage limits?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that action was taken when the temperature was outside the defined storage limits?", "deliverable_en": "5.Supplier need to have Alarmed Hygrometer along with internal callibration", "deliverable_zh": "CAPA 改善對策：[4.2.5] 錫膏印刷 (Solder Paste) - 溫濕度自動紀錄與告警"}, {"id": "QPA-33", "name_en": "[4.2.6] 9.Supplier need to match solder paste expiry date with supplier expiry date on the label and SPTS as well", "name_zh": "[4.2.6] 錫膏印刷 (Solder Paste) - 物料有效期限管制, 錫膏儲存與回溫紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.2.6)", "rootCause_en": "Is the cold storage expiration date of the Solder Paste specified on the Solder Paste container?", "rootCause_zh": "稽核發現點：Is the cold storage expiration date of the Solder Paste specified on the Solder Paste container?", "deliverable_en": "9.Supplier need to match solder paste expiry date with supplier expiry date on the label and SPTS as well", "deliverable_zh": "CAPA 改善對策：[4.2.6] 錫膏印刷 (Solder Paste) - 物料有效期限管制, 錫膏儲存與回溫紀錄"}, {"id": "QPA-34", "name_en": "[4.2.9] 17.Need to note proper solder paste date & time on jar", "name_zh": "[4.2.9] 錫膏印刷 (Solder Paste) - 錫膏儲存與回溫紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.2.9)", "rootCause_en": "Is the date and time that the Solder Paste expires at ambient temperature with its 'seal broken' documented and known?", "rootCause_zh": "稽核發現點：Is the date and time that the Solder Paste expires at ambient temperature with its 'seal broken' documented and known?", "deliverable_en": "17.Need to note proper solder paste date & time on jar", "deliverable_zh": "CAPA 改善對策：[4.2.9] 錫膏印刷 (Solder Paste) - 錫膏儲存與回溫紀錄"}, {"id": "QPA-35", "name_en": "[4.2.11] Corrective action plan in progress", "name_zh": "[4.2.11] 錫膏印刷 (Solder Paste) - 錫膏儲存與回溫紀錄, 回流焊參數控制 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.2.11)", "rootCause_en": "Is the maximum time that the Solder Paste is allowed to remain on a board prior to reflow documented, known, & followed?", "rootCause_zh": "稽核發現點：Is the maximum time that the Solder Paste is allowed to remain on a board prior to reflow documented, known, & followed?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[4.2.11] 錫膏印刷 (Solder Paste) - 錫膏儲存與回溫紀錄, 回流焊參數控制 SOP"}, {"id": "QPA-36", "name_en": "[4.3.5] 34.Stencil Cleaning machine parameters add in SOP", "name_zh": "[4.3.5] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Ambethkar", "auditPoint": "4. Solder Paste Print (4.3.5)", "rootCause_en": "Is there a documented Stencil Cleaner maintenance procedure which defines frequency for checking filters and solution levels?", "rootCause_zh": "稽核發現點：Is there a documented Stencil Cleaner maintenance procedure which defines frequency for checking filters and solution levels?", "deliverable_en": "34.Stencil Cleaning machine parameters add in SOP", "deliverable_zh": "CAPA 改善對策：[4.3.5] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證"}, {"id": "QPA-37", "name_en": "[4.3.8] 22.Stencil aperture need to cross check based on design", "name_zh": "[4.3.8] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "UDAY-EQ", "auditPoint": "4. Solder Paste Print (4.3.8)", "rootCause_en": "Is there a documented requirement to inspect a Stencil for damage once cleaned?", "rootCause_zh": "稽核發現點：Is there a documented requirement to inspect a Stencil for damage once cleaned?", "deliverable_en": "22.Stencil aperture need to cross check based on design", "deliverable_zh": "CAPA 改善對策：[4.3.8] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證"}, {"id": "QPA-38", "name_en": "[4.3.13] 23.Stencil validation report need to verify all location like (BGA,IC,Chip)", "name_zh": "[4.3.13] 錫膏印刷 (Solder Paste) - ORT 可靠度抽樣與 SOP, 鋼網張力與清洗驗證", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.3.13)", "rootCause_en": "Is there a documented Stencil First Article procedure which checks, tension, thickness, aperture sizes and design, first print, etc.?", "rootCause_zh": "稽核發現點：Is there a documented Stencil First Article procedure which checks, tension, thickness, aperture sizes and design, first print, etc.?", "deliverable_en": "23.Stencil validation report need to verify all location like (BGA,IC,Chip)", "deliverable_zh": "CAPA 改善對策：[4.3.13] 錫膏印刷 (Solder Paste) - ORT 可靠度抽樣與 SOP, 鋼網張力與清洗驗證"}, {"id": "QPA-39", "name_en": "[4.3.14] 22.Stencil aperture need to cross check based on design", "name_zh": "[4.3.14] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Vishnu", "auditPoint": "4. Solder Paste Print (4.3.14)", "rootCause_en": "Is there evidence to demonstrate that the Stencil First Article procedure and records are adequate and up-to-date?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that the Stencil First Article procedure and records are adequate and up-to-date?", "deliverable_en": "22.Stencil aperture need to cross check based on design", "deliverable_zh": "CAPA 改善對策：[4.3.14] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證"}, {"id": "QPA-40", "name_en": "[4.4.1] 16.Squeeze size need to reduce based on PCB size", "name_zh": "[4.4.1] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-07", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.4.1)", "rootCause_en": "Are the Squeegees length, angle, style/durometer, defined to ensure correct Squeegee selection?", "rootCause_zh": "稽核發現點：Are the Squeegees length, angle, style/durometer, defined to ensure correct Squeegee selection?", "deliverable_en": "16.Squeeze size need to reduce based on PCB size", "deliverable_zh": "CAPA 改善對策：[4.4.1] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-41", "name_en": "[4.4.2] 16.Squeeze size need to reduce based on PCB size", "name_zh": "[4.4.2] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-07", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.4.2)", "rootCause_en": "Is there evidence to demonstrate that the Squeegee used is correct and is fully and easily traceable to the product and stencil?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that the Squeegee used is correct and is fully and easily traceable to the product and stencil?", "deliverable_en": "16.Squeeze size need to reduce based on PCB size", "deliverable_zh": "CAPA 改善對策：[4.4.2] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-42", "name_en": "[4.4.3] 35.Squeeze Cleaning SOP need to create", "name_zh": "[4.4.3] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Ambethkar", "auditPoint": "4. Solder Paste Print (4.4.3)", "rootCause_en": "Are all Squeegees adequately stored in a manner to avoid potential damage?", "rootCause_zh": "稽核發現點：Are all Squeegees adequately stored in a manner to avoid potential damage?", "deliverable_en": "35.Squeeze Cleaning SOP need to create", "deliverable_zh": "CAPA 改善對策：[4.4.3] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-43", "name_en": "[4.4.4] 35.Squeeze Cleaning SOP need to create", "name_zh": "[4.4.4] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.4.4)", "rootCause_en": "Is there evidence that Squeegees inspected for cleanliness and damage prior to use and prior to storage?", "rootCause_zh": "稽核發現點：Is there evidence that Squeegees inspected for cleanliness and damage prior to use and prior to storage?", "deliverable_en": "35.Squeeze Cleaning SOP need to create", "deliverable_zh": "CAPA 改善對策：[4.4.4] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-44", "name_en": "[4.6.4] Corrective action plan in progress", "name_zh": "[4.6.4] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.6.4)", "rootCause_en": "When the PCB package is opened, is the maximum allowable exposure time before soldering known, tracked, and documented?", "rootCause_zh": "稽核發現點：When the PCB package is opened, is the maximum allowable exposure time before soldering known, tracked, and documented?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[4.6.4] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-45", "name_en": "[4.6.5] Corrective action plan in progress", "name_zh": "[4.6.5] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.6.5)", "rootCause_en": "Is there evidence that misprinted PCBs cleaned in an automatic board cleaner using appropriate fixturing?", "rootCause_zh": "稽核發現點：Is there evidence that misprinted PCBs cleaned in an automatic board cleaner using appropriate fixturing?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[4.6.5] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-46", "name_en": "[4.7.6] 20.Stencil cleaning frequency need to provide by the customer and add in SOP", "name_zh": "[4.7.6] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.7.6)", "rootCause_en": "Are changes to clean rates approved based only upon performance feedback?", "rootCause_zh": "稽核發現點：Are changes to clean rates approved based only upon performance feedback?", "deliverable_en": "20.Stencil cleaning frequency need to provide by the customer and add in SOP", "deliverable_zh": "CAPA 改善對策：[4.7.6] 錫膏印刷 (Solder Paste) - 鋼網張力與清洗驗證"}, {"id": "QPA-47", "name_en": "[4.7.7] Corrective action plan in progress", "name_zh": "[4.7.7] 錫膏印刷 (Solder Paste) - 錫膏儲存與回溫紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Balaji-PIE", "auditPoint": "4. Solder Paste Print (4.7.7)", "rootCause_en": "Does the Printing machine have the capability of automatically dispense Solder Paste and is used for the product?", "rootCause_zh": "稽核發現點：Does the Printing machine have the capability of automatically dispense Solder Paste and is used for the product?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[4.7.7] 錫膏印刷 (Solder Paste) - 錫膏儲存與回溫紀錄"}, {"id": "QPA-48", "name_en": "[4.7.10] 24.SPP machine need to replace the humidity & temp sensor.", "name_zh": "[4.7.10] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "UDAY-EQ", "auditPoint": "4. Solder Paste Print (4.7.10)", "rootCause_en": "Are localized climate control units installed and in use on all Paste Printers?", "rootCause_zh": "稽核發現點：Are localized climate control units installed and in use on all Paste Printers?", "deliverable_en": "24.SPP machine need to replace the humidity & temp sensor.", "deliverable_zh": "CAPA 改善對策：[4.7.10] 錫膏印刷 (Solder Paste) - 缺失對策與改善對照"}, {"id": "QPA-49", "name_en": "[4.8.7] Corrective action plan in progress", "name_zh": "[4.8.7] 錫膏印刷 (Solder Paste) - 設備儀器校正與標籤", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Ambethkar", "auditPoint": "4. Solder Paste Print (4.8.7)", "rootCause_en": "Is there a regular calibration plan for machine itself?", "rootCause_zh": "稽核發現點：Is there a regular calibration plan for machine itself?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[4.8.7] 錫膏印刷 (Solder Paste) - 設備儀器校正與標籤"}, {"id": "QPA-50", "name_en": "[4.9.6] 44.CP & CPK Machine Wise required", "name_zh": "[4.9.6] 錫膏印刷 (Solder Paste) - Cpk/GRR 製程能力分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Ambethkar", "auditPoint": "4. Solder Paste Print (4.9.6)", "rootCause_en": "Has the Process Capability Analysis been conducted and meeting Dell's process capability requirement?", "rootCause_zh": "稽核發現點：Has the Process Capability Analysis been conducted and meeting Dell's process capability requirement?", "deliverable_en": "44.CP & CPK Machine Wise required", "deliverable_zh": "CAPA 改善對策：[4.9.6] 錫膏印刷 (Solder Paste) - Cpk/GRR 製程能力分析"}, {"id": "QPA-51", "name_en": "[5.1.2] 38.Feeder loading procedure need to create -SOP", "name_zh": "[5.1.2] SMT 貼片 (Placement) - Feeder 飛達校正與防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.1.2)", "rootCause_en": "Are Work Instructions readily available to the operator and are they followed at Component Placement?", "rootCause_zh": "稽核發現點：Are Work Instructions readily available to the operator and are they followed at Component Placement?", "deliverable_en": "38.Feeder loading procedure need to create -SOP", "deliverable_zh": "CAPA 改善對策：[5.1.2] SMT 貼片 (Placement) - Feeder 飛達校正與防呆"}, {"id": "QPA-52", "name_en": "[5.1.4] Corrective action plan in progress", "name_zh": "[5.1.4] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "Shabitha", "auditPoint": "5. SMT Placement (5.1.4)", "rootCause_en": "Are component descriptions sufficiently detailed to check at first-article that the correct components are being used?", "rootCause_zh": "稽核發現點：Are component descriptions sufficiently detailed to check at first-article that the correct components are being used?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.1.4] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-53", "name_en": "[5.2.1] 61.Need to assign/link Feeder with the feeder List", "name_zh": "[5.2.1] SMT 貼片 (Placement) - Feeder 飛達校正與防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.2.1)", "rootCause_en": "Is there an automated bar coded component loading verification aid in order to reduce the probability of incorrect loading?", "rootCause_zh": "稽核發現點：Is there an automated bar coded component loading verification aid in order to reduce the probability of incorrect loading?", "deliverable_en": "61.Need to assign/link Feeder with the feeder List", "deliverable_zh": "CAPA 改善對策：[5.2.1] SMT 貼片 (Placement) - Feeder 飛達校正與防呆"}, {"id": "QPA-54", "name_en": "[5.2.3] Corrective action plan in progress", "name_zh": "[5.2.3] SMT 貼片 (Placement) - 生產條碼與滿載追溯鏈", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "HARISH-IT", "auditPoint": "5. SMT Placement (5.2.3)", "rootCause_en": "Can traceability of component lot codes be demonstrated for critical devices?", "rootCause_zh": "稽核發現點：Can traceability of component lot codes be demonstrated for critical devices?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.2.3] SMT 貼片 (Placement) - 生產條碼與滿載追溯鏈"}, {"id": "QPA-55", "name_en": "[5.2.6] 56.IPQC FAI checksheet need to modify as per requirments", "name_zh": "[5.2.6] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Vishnu", "auditPoint": "5. SMT Placement (5.2.6)", "rootCause_en": "Are first-articles conducted using AOI methods and complemented with description verification and value metering?", "rootCause_zh": "稽核發現點：Are first-articles conducted using AOI methods and complemented with description verification and value metering?", "deliverable_en": "56.IPQC FAI checksheet need to modify as per requirments", "deliverable_zh": "CAPA 改善對策：[5.2.6] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-56", "name_en": "[5.2.10] 42.Need to prepare tray loading SOP", "name_zh": "[5.2.10] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.2.10)", "rootCause_en": "Is the IC tray loading polarity standardized for each type of polarity indicator that can be used for each component?", "rootCause_zh": "稽核發現點：Is the IC tray loading polarity standardized for each type of polarity indicator that can be used for each component?", "deliverable_en": "42.Need to prepare tray loading SOP", "deliverable_zh": "CAPA 改善對策：[5.2.10] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-57", "name_en": "[5.3.1] Corrective action plan in progress", "name_zh": "[5.3.1] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.3.1)", "rootCause_en": "Is there a document which details the standardized nozzle diameter set-up selected for each type of placement equipment?", "rootCause_zh": "稽核發現點：Is there a document which details the standardized nozzle diameter set-up selected for each type of placement equipment?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.3.1] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-58", "name_en": "[5.3.4] 39.Nozzle cleaning temp need to add in SOP(Discuss with vendor)", "name_zh": "[5.3.4] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.3.4)", "rootCause_en": "Is there a documented requirement to conduct daily nozzle centering and is there evidence that this is done?", "rootCause_zh": "稽核發現點：Is there a documented requirement to conduct daily nozzle centering and is there evidence that this is done?", "deliverable_en": "39.Nozzle cleaning temp need to add in SOP(Discuss with vendor)", "deliverable_zh": "CAPA 改善對策：[5.3.4] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-59", "name_en": "[5.3.5] 61.Need to assign/link Feeder with the feeder List", "name_zh": "[5.3.5] SMT 貼片 (Placement) - Feeder 飛達校正與防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.3.5)", "rootCause_en": "Is each feeder identified with its own unique serial number?", "rootCause_zh": "稽核發現點：Is each feeder identified with its own unique serial number?", "deliverable_en": "61.Need to assign/link Feeder with the feeder List", "deliverable_zh": "CAPA 改善對策：[5.3.5] SMT 貼片 (Placement) - Feeder 飛達校正與防呆"}, {"id": "QPA-60", "name_en": "[5.3.6] Corrective action plan in progress", "name_zh": "[5.3.6] SMT 貼片 (Placement) - Feeder 飛達校正與防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.3.6)", "rootCause_en": "Are database records maintained for each feeder serial number for the purpose of tracking its maintenance history and performance?", "rootCause_zh": "稽核發現點：Are database records maintained for each feeder serial number for the purpose of tracking its maintenance history and performance?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.3.6] SMT 貼片 (Placement) - Feeder 飛達校正與防呆"}, {"id": "QPA-61", "name_en": "[5.3.7] Corrective action plan in progress", "name_zh": "[5.3.7] SMT 貼片 (Placement) - Feeder 飛達校正與防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.3.7)", "rootCause_en": "Can it be demonstrated that the number of feeder indexes is counted & monitored for each unique feeder using software or otherwise?", "rootCause_zh": "稽核發現點：Can it be demonstrated that the number of feeder indexes is counted & monitored for each unique feeder using software or otherwise?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.3.7] SMT 貼片 (Placement) - Feeder 飛達校正與防呆"}, {"id": "QPA-62", "name_en": "[5.3.8] Corrective action plan in progress", "name_zh": "[5.3.8] SMT 貼片 (Placement) - Feeder 飛達校正與防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "UDAY-EQ", "auditPoint": "5. SMT Placement (5.3.8)", "rootCause_en": "Is there a documented and effective Feeder Maintenance Program? Records (s/w or otherwise) must be by Feeder Serial Number.", "rootCause_zh": "稽核發現點：Is there a documented and effective Feeder Maintenance Program? Records (s/w or otherwise) must be by Feeder Serial Number.", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.3.8] SMT 貼片 (Placement) - Feeder 飛達校正與防呆"}, {"id": "QPA-63", "name_en": "[5.3.9] 36.Feeder Calibration equipment required for NXT feeder", "name_zh": "[5.3.9] SMT 貼片 (Placement) - Feeder 飛達校正與防呆, 設備儀器校正與標籤", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.3.9)", "rootCause_en": "Is this information used to flag that feeder preventative maintenance is required after x number of indexes?", "rootCause_zh": "稽核發現點：Is this information used to flag that feeder preventative maintenance is required after x number of indexes?", "deliverable_en": "36.Feeder Calibration equipment required for NXT feeder", "deliverable_zh": "CAPA 改善對策：[5.3.9] SMT 貼片 (Placement) - Feeder 飛達校正與防呆, 設備儀器校正與標籤"}, {"id": "QPA-64", "name_en": "[5.3.10] Corrective action plan in progress", "name_zh": "[5.3.10] SMT 貼片 (Placement) - Feeder 飛達校正與防呆", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Ambethkar", "auditPoint": "5. SMT Placement (5.3.10)", "rootCause_en": "Is feeder maintenance history used to monitor feeder life so that problematic feeders can be removed from the process?", "rootCause_zh": "稽核發現點：Is feeder maintenance history used to monitor feeder life so that problematic feeders can be removed from the process?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.3.10] SMT 貼片 (Placement) - Feeder 飛達校正與防呆"}, {"id": "QPA-65", "name_en": "[5.4.3] 43.MSL Procedure need to add in SOP and Update the Date column in Label", "name_zh": "[5.4.3] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.4.3)", "rootCause_en": "Are MSDs time stamped at opening and their exposure time monitored against pre determined limits?", "rootCause_zh": "稽核發現點：Are MSDs time stamped at opening and their exposure time monitored against pre determined limits?", "deliverable_en": "43.MSL Procedure need to add in SOP and Update the Date column in Label", "deliverable_zh": "CAPA 改善對策：[5.4.3] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-66", "name_en": "[5.4.4] 43.MSL Procedure need to add in SOP and Update the Date column in Label", "name_zh": "[5.4.4] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.4.4)", "rootCause_en": "Is there a flag to indicate that the exposure time has been exceed for any given device in a dry box?", "rootCause_zh": "稽核發現點：Is there a flag to indicate that the exposure time has been exceed for any given device in a dry box?", "deliverable_en": "43.MSL Procedure need to add in SOP and Update the Date column in Label", "deliverable_zh": "CAPA 改善對策：[5.4.4] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-67", "name_en": "[5.4.6] Corrective action plan in progress", "name_zh": "[5.4.6] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "Vishnu", "auditPoint": "5. SMT Placement (5.4.6)", "rootCause_en": "Have MSD procedures been updated to reflect the JEDEC standard for MSD control? (J-STD-033A)", "rootCause_zh": "稽核發現點：Have MSD procedures been updated to reflect the JEDEC standard for MSD control? (J-STD-033A)", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.4.6] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄"}, {"id": "QPA-68", "name_en": "[5.4.7] Corrective action plan in progress", "name_zh": "[5.4.7] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "Naresh", "auditPoint": "5. SMT Placement (5.4.7)", "rootCause_en": "Is there evidence of correct implementation of J-STD-033A for all MSD devices?", "rootCause_zh": "稽核發現點：Is there evidence of correct implementation of J-STD-033A for all MSD devices?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.4.7] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄"}, {"id": "QPA-69", "name_en": "[5.4.8] 43.MSL Procedure need to add in SOP and Update the Date column in Label", "name_zh": "[5.4.8] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.4.8)", "rootCause_en": "Are there MSD procedures in place to ensure MSD shelf life is reduced based on measured Relative Humidity conditions?", "rootCause_zh": "稽核發現點：Are there MSD procedures in place to ensure MSD shelf life is reduced based on measured Relative Humidity conditions?", "deliverable_en": "43.MSL Procedure need to add in SOP and Update the Date column in Label", "deliverable_zh": "CAPA 改善對策：[5.4.8] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-70", "name_en": "[5.4.9] Corrective action plan in progress", "name_zh": "[5.4.9] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-24", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.4.9)", "rootCause_en": "Is there a method in place to address the time spent in dry storage and its effect on remaining life based on MS Level and RH Level?", "rootCause_zh": "稽核發現點：Is there a method in place to address the time spent in dry storage and its effect on remaining life based on MS Level and RH Level?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.4.9] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-71", "name_en": "[5.4.11] Corrective action plan in progress", "name_zh": "[5.4.11] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-31", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.4.11)", "rootCause_en": "Have MSD recovery methods been defined and adequate for all component types?", "rootCause_zh": "稽核發現點：Have MSD recovery methods been defined and adequate for all component types?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.4.11] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄"}, {"id": "QPA-72", "name_en": "[5.4.13] Corrective action plan in progress", "name_zh": "[5.4.13] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-31", "owner": "VISHNU", "auditPoint": "5. SMT Placement (5.4.13)", "rootCause_en": "Has this time and temp been determined based on the component supplier's guidelines / J-STD-033A?", "rootCause_zh": "稽核發現點：Has this time and temp been determined based on the component supplier's guidelines / J-STD-033A?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.4.13] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-73", "name_en": "[5.4.14] Corrective action plan in progress", "name_zh": "[5.4.14] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.4.14)", "rootCause_en": "Is there evidence to demonstrate that the control process for MSDs is in use and is effective?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that the control process for MSDs is in use and is effective?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.4.14] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄"}, {"id": "QPA-74", "name_en": "[5.4.15] Corrective action plan in progress", "name_zh": "[5.4.15] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.4.15)", "rootCause_en": "Have MSD recovery methods been defined and adequate for all component types?", "rootCause_zh": "稽核發現點：Have MSD recovery methods been defined and adequate for all component types?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.4.15] SMT 貼片 (Placement) - 濕敏元件 MSD 拆封紀錄"}, {"id": "QPA-75", "name_en": "[5.7.5] Corrective action plan in progress", "name_zh": "[5.7.5] SMT 貼片 (Placement) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-24", "owner": "UDAY-EQ", "auditPoint": "5. SMT Placement (5.7.5)", "rootCause_en": "Is there evidence to demonstrate that attrition rate monitoring is conducted, effective, and used to make process control decisions?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that attrition rate monitoring is conducted, effective, and used to make process control decisions?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[5.7.5] SMT 貼片 (Placement) - 缺失對策與改善對照"}, {"id": "QPA-76", "name_en": "[5.8.1] 44.CP & CPK Machine Wise required", "name_zh": "[5.8.1] SMT 貼片 (Placement) - Cpk/GRR 製程能力分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-24", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.8.1)", "rootCause_en": "Is there a documented procedure to perform Process Capability Analysis and CpK studies for CTQ parameters defined in SMT process?", "rootCause_zh": "稽核發現點：Is there a documented procedure to perform Process Capability Analysis and CpK studies for CTQ parameters defined in SMT process?", "deliverable_en": "44.CP & CPK Machine Wise required", "deliverable_zh": "CAPA 改善對策：[5.8.1] SMT 貼片 (Placement) - Cpk/GRR 製程能力分析"}, {"id": "QPA-77", "name_en": "[5.8.2] 44.CP & CPK Machine Wise required", "name_zh": "[5.8.2] SMT 貼片 (Placement) - Cpk/GRR 製程能力分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-31", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.8.2)", "rootCause_en": "Has the Process Capability Analysis been conducted and meeting Dell's process capability requirement?", "rootCause_zh": "稽核發現點：Has the Process Capability Analysis been conducted and meeting Dell's process capability requirement?", "deliverable_en": "44.CP & CPK Machine Wise required", "deliverable_zh": "CAPA 改善對策：[5.8.2] SMT 貼片 (Placement) - Cpk/GRR 製程能力分析"}, {"id": "QPA-78", "name_en": "[5.8.4] 44.CP & CPK Machine Wise required", "name_zh": "[5.8.4] SMT 貼片 (Placement) - Cpk/GRR 製程能力分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-07", "owner": "Balaji-PIE", "auditPoint": "5. SMT Placement (5.8.4)", "rootCause_en": "Is the machine calibration and preventive maintenance current and up-to-date ?", "rootCause_zh": "稽核發現點：Is the machine calibration and preventive maintenance current and up-to-date ?", "deliverable_en": "44.CP & CPK Machine Wise required", "deliverable_zh": "CAPA 改善對策：[5.8.4] SMT 貼片 (Placement) - Cpk/GRR 製程能力分析"}, {"id": "QPA-79", "name_en": "[6.2.3] 46.Reflow Exhaust need to be in a standard pipe besides flexible, so pressure may vary", "name_zh": "[6.2.3] 回流焊 (Reflow) - 回流焊參數控制 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-06-26", "owner": "Ambethkar", "auditPoint": "6. Reflow (6.2.3)", "rootCause_en": "Are exhaust air flow rate ranges specified and monitored on a regular basis to ensure compliance?", "rootCause_zh": "稽核發現點：Are exhaust air flow rate ranges specified and monitored on a regular basis to ensure compliance?", "deliverable_en": "46.Reflow Exhaust need to be in a standard pipe besides flexible, so pressure may vary", "deliverable_zh": "CAPA 改善對策：[6.2.3] 回流焊 (Reflow) - 回流焊參數控制 SOP"}, {"id": "QPA-80", "name_en": "[6.3.9] 50.Need to procure Reflow calibration device", "name_zh": "[6.3.9] 回流焊 (Reflow) - 設備儀器校正與標籤, 回流焊參數控制 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Ambethkar", "auditPoint": "6. Reflow (6.3.9)", "rootCause_en": "Is the practice of comparing the current Calibration Profile to the Standardized Calibration Profile used to identify changes?", "rootCause_zh": "稽核發現點：Is the practice of comparing the current Calibration Profile to the Standardized Calibration Profile used to identify changes?", "deliverable_en": "50.Need to procure Reflow calibration device", "deliverable_zh": "CAPA 改善對策：[6.3.9] 回流焊 (Reflow) - 設備儀器校正與標籤, 回流焊參數控制 SOP"}, {"id": "QPA-81", "name_en": "[6.3.10] 45.Reflow profile should also follow for Chips Components/ top side of the board-should maintain the profile peak above max range.", "name_zh": "[6.3.10] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Ambethkar", "auditPoint": "6. Reflow (6.3.10)", "rootCause_en": "Is there evidence to demonstrate that action was taken when the Calibration Profile was different to the Standard?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that action was taken when the Calibration Profile was different to the Standard?", "deliverable_en": "45.Reflow profile should also follow for Chips Components/ top side of the board-should maintain the profile peak above max range.", "deliverable_zh": "CAPA 改善對策：[6.3.10] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP"}, {"id": "QPA-82", "name_en": "[6.4.6] Corrective action plan in progress", "name_zh": "[6.4.6] 回流焊 (Reflow) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "Ambethkar", "auditPoint": "6. Reflow (6.4.6)", "rootCause_en": "Was the Engineering based spec. derived from the Paste & Component manufacturer's recommendations but controlled to a narrower window?", "rootCause_zh": "稽核發現點：Was the Engineering based spec. derived from the Paste & Component manufacturer's recommendations but controlled to a narrower window?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[6.4.6] 回流焊 (Reflow) - 缺失對策與改善對照"}, {"id": "QPA-83", "name_en": "[6.4.7] Corrective action plan in progress", "name_zh": "[6.4.7] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "Ambethkar", "auditPoint": "6. Reflow (6.4.7)", "rootCause_en": "Does the product Temperature Profile fall within the Engineering based specification for the process window?", "rootCause_zh": "稽核發現點：Does the product Temperature Profile fall within the Engineering based specification for the process window?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[6.4.7] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP"}, {"id": "QPA-84", "name_en": "[6.4.9] Corrective action plan in progress", "name_zh": "[6.4.9] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "Ambethkar/ssstc", "auditPoint": "6. Reflow (6.4.9)", "rootCause_en": "Does the product Temperature Profile meet the reflow requirements for the SMT components according to the component manufactures?", "rootCause_zh": "稽核發現點：Does the product Temperature Profile meet the reflow requirements for the SMT components according to the component manufactures?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[6.4.9] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP"}, {"id": "QPA-85", "name_en": "[6.4.11] 48.Profile need to take at Starting and running of production", "name_zh": "[6.4.11] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Ambethkar/ssstc", "auditPoint": "6. Reflow (6.4.11)", "rootCause_en": "Is there evidence that a once off comparison study been conducted for a loaded versus an unloaded oven?", "rootCause_zh": "稽核發現點：Is there evidence that a once off comparison study been conducted for a loaded versus an unloaded oven?", "deliverable_en": "48.Profile need to take at Starting and running of production", "deliverable_zh": "CAPA 改善對策：[6.4.11] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP"}, {"id": "QPA-86", "name_en": "[6.4.13] 45.Reflow profile should also follow for Chips Components/ top side of the board-should maintain the profile peak above max range.", "name_zh": "[6.4.13] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Balaji-PIE", "auditPoint": "6. Reflow (6.4.13)", "rootCause_en": "Have at least five thermocouples been used at various points on the board to establish the Thermal Profile?", "rootCause_zh": "稽核發現點：Have at least five thermocouples been used at various points on the board to establish the Thermal Profile?", "deliverable_en": "45.Reflow profile should also follow for Chips Components/ top side of the board-should maintain the profile peak above max range.", "deliverable_zh": "CAPA 改善對策：[6.4.13] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP"}, {"id": "QPA-87", "name_en": "[6.4.14] 47.Reflow profiler making sop need to modify", "name_zh": "[6.4.14] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "Balaji-PIE", "auditPoint": "6. Reflow (6.4.14)", "rootCause_en": "Is there a documented and systematic approach used to identify the most appropriate locations to attach the thermocouples?", "rootCause_zh": "稽核發現點：Is there a documented and systematic approach used to identify the most appropriate locations to attach the thermocouples?", "deliverable_en": "47.Reflow profiler making sop need to modify", "deliverable_zh": "CAPA 改善對策：[6.4.14] 回流焊 (Reflow) - 回流焊爐溫曲線 SOP, 回流焊參數控制 SOP"}, {"id": "QPA-88", "name_en": "[6.4.15] Corrective action plan in progress", "name_zh": "[6.4.15] 回流焊 (Reflow) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Ambethkar", "auditPoint": "6. Reflow (6.4.15)", "rootCause_en": "Is there evidence that each thermocouple ball was bonded to a board joint using Hi Temp. Solder or Conductive Epoxy?", "rootCause_zh": "稽核發現點：Is there evidence that each thermocouple ball was bonded to a board joint using Hi Temp. Solder or Conductive Epoxy?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[6.4.15] 回流焊 (Reflow) - 缺失對策與改善對照"}, {"id": "QPA-89", "name_en": "[7.1.7] 44.CP & CPK Machine Wise required", "name_zh": "[7.1.7] AOI與分板 (AOI/Depanel) - Cpk/GRR 製程能力分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Ambethkar", "auditPoint": "7. AOI Depanel (7.1.7)", "rootCause_en": "Is the AOI equipment on the calibration and PM tracking system?", "rootCause_zh": "稽核發現點：Is the AOI equipment on the calibration and PM tracking system?", "deliverable_en": "44.CP & CPK Machine Wise required", "deliverable_zh": "CAPA 改善對策：[7.1.7] AOI與分板 (AOI/Depanel) - Cpk/GRR 製程能力分析"}, {"id": "QPA-90", "name_en": "[7.1.10] Corrective action plan in progress", "name_zh": "[7.1.10] AOI與分板 (AOI/Depanel) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "Ambethkar", "auditPoint": "7. AOI Depanel (7.1.10)", "rootCause_en": "Is there sufficient Engineering and Programming staff in place to keep false calls down to an acceptable level that can meet the required continuous flow cycle time?", "rootCause_zh": "稽核發現點：Is there sufficient Engineering and Programming staff in place to keep false calls down to an acceptable level that can meet the required continuous flow cycle time?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[7.1.10] AOI與分板 (AOI/Depanel) - 缺失對策與改善對照"}, {"id": "QPA-91", "name_en": "[7.1.11] Corrective action plan in progress", "name_zh": "[7.1.11] AOI與分板 (AOI/Depanel) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "Ambethkar", "auditPoint": "7. AOI Depanel (7.1.11)", "rootCause_en": "Are Known Bad Boards in use used to ensure that the machine still detects critical fault types and what defect types are being covered?", "rootCause_zh": "稽核發現點：Are Known Bad Boards in use used to ensure that the machine still detects critical fault types and what defect types are being covered?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[7.1.11] AOI與分板 (AOI/Depanel) - 缺失對策與改善對照"}, {"id": "QPA-92", "name_en": "[9.2.4] Corrective action plan in progress", "name_zh": "[9.2.4] 功能測試 (Function Test) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-24", "owner": "HARISH-IT", "auditPoint": "9. Function Test (9.2.4)", "rootCause_en": "Is there evidence to demonstrate that Preventative Maintenance records are up-to-date?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that Preventative Maintenance records are up-to-date?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[9.2.4] 功能測試 (Function Test) - 缺失對策與改善對照"}, {"id": "QPA-93", "name_en": "[9.2.8] Corrective action plan in progress", "name_zh": "[9.2.8] 功能測試 (Function Test) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-14", "owner": "HARISH-IT", "auditPoint": "9. Function Test (9.2.8)", "rootCause_en": "Is the inventory of spare test parts adequately controlled?", "rootCause_zh": "稽核發現點：Is the inventory of spare test parts adequately controlled?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[9.2.8] 功能測試 (Function Test) - 缺失對策與改善對照"}, {"id": "QPA-94", "name_en": "[9.2.11] Corrective action plan in progress", "name_zh": "[9.2.11] 功能測試 (Function Test) - 靜電防護與測試儀校", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "HARISH-IT", "auditPoint": "9. Function Test (9.2.11)", "rootCause_en": "Is the test fixture grounded directly to earth ground (not ESD ground)?", "rootCause_zh": "稽核發現點：Is the test fixture grounded directly to earth ground (not ESD ground)?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[9.2.11] 功能測試 (Function Test) - 靜電防護與測試儀校"}, {"id": "QPA-95", "name_en": "[9.5.9] Corrective action plan in progress", "name_zh": "[9.5.9] 功能測試 (Function Test) - Cpk/GRR 製程能力分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-31", "owner": "SSSTC", "auditPoint": "9. Function Test (9.5.9)", "rootCause_en": "Are there Process Capability Analysis and CpK studies performed according to control plan?", "rootCause_zh": "稽核發現點：Are there Process Capability Analysis and CpK studies performed according to control plan?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[9.5.9] 功能測試 (Function Test) - Cpk/GRR 製程能力分析"}, {"id": "QPA-96", "name_en": "[9.5.11] Corrective action plan in progress", "name_zh": "[9.5.11] 功能測試 (Function Test) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "SSSTC", "auditPoint": "9. Function Test (9.5.11)", "rootCause_en": "Has a Gauge R&R study been completed in accordance with Dell GR&R Procedures and criteria? (Doc No. COR.40.WWP.SQ.0207)", "rootCause_zh": "稽核發現點：Has a Gauge R&R study been completed in accordance with Dell GR&R Procedures and criteria? (Doc No. COR.40.WWP.SQ.0207)", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[9.5.11] 功能測試 (Function Test) - 缺失對策與改善對照"}, {"id": "QPA-97", "name_en": "[9.7.9] Corrective action plan in progress", "name_zh": "[9.7.9] 功能測試 (Function Test) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Ambethkar", "auditPoint": "9. Function Test (9.7.9)", "rootCause_en": "Are false failure rates tracked, monitored, and documented?", "rootCause_zh": "稽核發現點：Are false failure rates tracked, monitored, and documented?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[9.7.9] 功能測試 (Function Test) - 缺失對策與改善對照"}, {"id": "QPA-98", "name_en": "[10.1.7] Corrective action plan in progress", "name_zh": "[10.1.7] 標籤包裝 (Label/Packing) - 測試治具應變力學分析", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "SSSTC", "auditPoint": "10. Label Paste & Packing (10.1.7)", "rootCause_en": "Is there evidence that Strain Gauge Analysis was performed on the fixture prior to routine production use?", "rootCause_zh": "稽核發現點：Is there evidence that Strain Gauge Analysis was performed on the fixture prior to routine production use?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[10.1.7] 標籤包裝 (Label/Packing) - 測試治具應變力學分析"}, {"id": "QPA-99", "name_en": "[10.2.12] 62.Carton label need to print automatically based on the   \n SN labels", "name_zh": "[10.2.12] 標籤包裝 (Label/Packing) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-31", "owner": "HARISH-IT-IT", "auditPoint": "10. Label Paste & Packing (10.2.12)", "rootCause_en": "Is the Dell Shipping label (or product ID) attached to the carton box?", "rootCause_zh": "稽核發現點：Is the Dell Shipping label (or product ID) attached to the carton box?", "deliverable_en": "62.Carton label need to print automatically based on the   \n SN labels", "deliverable_zh": "CAPA 改善對策：[10.2.12] 標籤包裝 (Label/Packing) - 缺失對策與改善對照"}, {"id": "QPA-100", "name_en": "[10.2.14] 62.Carton label need to print automatically based on the   \nSN labels", "name_zh": "[10.2.14] 標籤包裝 (Label/Packing) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-07", "owner": "HARISH-IT", "auditPoint": "10. Label Paste & Packing (10.2.14)", "rootCause_en": "Do the work instructions specify and check for label part number, quantity, printed text/barcodes and placement locations?", "rootCause_zh": "稽核發現點：Do the work instructions specify and check for label part number, quantity, printed text/barcodes and placement locations?", "deliverable_en": "62.Carton label need to print automatically based on the   \nSN labels", "deliverable_zh": "CAPA 改善對策：[10.2.14] 標籤包裝 (Label/Packing) - 缺失對策與改善對照"}, {"id": "QPA-101", "name_en": "[10.2.1.4] Corrective action plan in progress", "name_zh": "[10.2.1.4] 標籤包裝 (Label/Packing) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-10", "owner": "Balaji-PIE", "auditPoint": "10. Label Paste & Packing (10.2.1.4)", "rootCause_en": "Do the work instructions specify and check for label part number, quantity, printed text/barcodes and placement locations?", "rootCause_zh": "稽核發現點：Do the work instructions specify and check for label part number, quantity, printed text/barcodes and placement locations?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[10.2.1.4] 標籤包裝 (Label/Packing) - 缺失對策與改善對照"}, {"id": "QPA-102", "name_en": "[11.2.5] 56.IPQC FAI checksheet need to modify as per requirments", "name_zh": "[11.2.5] 出貨品質 (OQA) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-07-03", "owner": "VISHNU", "auditPoint": "11. Outgoing QA (11.2.5)", "rootCause_en": "Does the FAI process validates the correctness of the Identify Controller Data structure of the drives? (Example: Form factor, Device Category, Class Type, Gen, etc.)", "rootCause_zh": "稽核發現點：Does the FAI process validates the correctness of the Identify Controller Data structure of the drives? (Example: Form factor, Device Category, Class Type, Gen, etc.)", "deliverable_en": "56.IPQC FAI checksheet need to modify as per requirments", "deliverable_zh": "CAPA 改善對策：[11.2.5] 出貨品質 (OQA) - 缺失對策與改善對照"}, {"id": "QPA-103", "name_en": "[11.3.4] Corrective action plan in progress", "name_zh": "[11.3.4] 出貨品質 (OQA) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "VISHNU", "auditPoint": "11. Outgoing QA (11.3.4)", "rootCause_en": "Is there evidence to demonstrate that the action plan has been followed?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate that the action plan has been followed?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[11.3.4] 出貨品質 (OQA) - 缺失對策與改善對照"}, {"id": "QPA-104", "name_en": "[11.5.1] Corrective action plan in progress", "name_zh": "[11.5.1] 出貨品質 (OQA) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-24", "owner": "VISHNU", "auditPoint": "11. Outgoing QA (11.5.1)", "rootCause_en": "Is there a reliability test procedure/plan for each model?", "rootCause_zh": "稽核發現點：Is there a reliability test procedure/plan for each model?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[11.5.1] 出貨品質 (OQA) - 缺失對策與改善對照"}, {"id": "QPA-105", "name_en": "[11.5.3] Corrective action plan in progress", "name_zh": "[11.5.3] 出貨品質 (OQA) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "VISHNU", "auditPoint": "11. Outgoing QA (11.5.3)", "rootCause_en": "Is the sampling plan, test scope and acceptance criteria for reliability test clearly defined?", "rootCause_zh": "稽核發現點：Is the sampling plan, test scope and acceptance criteria for reliability test clearly defined?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[11.5.3] 出貨品質 (OQA) - 缺失對策與改善對照"}, {"id": "QPA-106", "name_en": "[12.2.6] Corrective action plan in progress", "name_zh": "[12.2.6] FACA 分析能力 - ORT 可靠度抽樣與 SOP", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-07-17", "owner": "Balaji-PIE", "auditPoint": "12. FACA Capability (12.2.6)", "rootCause_en": "Does the corrective action report clearly explains the root cause of the issue/event?", "rootCause_zh": "稽核發現點：Does the corrective action report clearly explains the root cause of the issue/event?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[12.2.6] FACA 分析能力 - ORT 可靠度抽樣與 SOP"}, {"id": "QPA-107", "name_en": "[12.2.10] Corrective action plan in progress", "name_zh": "[12.2.10] FACA 分析能力 - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-28", "owner": "Balaji-PIE", "auditPoint": "12. FACA Capability (12.2.10)", "rootCause_en": "Are the contents of the responses/corrective actions appropriate?", "rootCause_zh": "稽核發現點：Are the contents of the responses/corrective actions appropriate?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[12.2.10] FACA 分析能力 - 缺失對策與改善對照"}, {"id": "QPA-108", "name_en": "[13.1.5] Corrective action plan in progress", "name_zh": "[13.1.5] 韌體重工 (FW Rework) - 缺失對策與改善對照", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "Balaji-PIE", "auditPoint": "13. FW Change & Rework (13.1.5)", "rootCause_en": "Is there evidence to demonstrate the correlation of Dell ECR process with the internal change management process?", "rootCause_zh": "稽核發現點：Is there evidence to demonstrate the correlation of Dell ECR process with the internal change management process?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[13.1.5] 韌體重工 (FW Rework) - 缺失對策與改善對照"}, {"id": "QPA-109", "name_en": "[14.1.1] Corrective action plan in progress", "name_zh": "[14.1.1] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "HARISH-IT", "auditPoint": "14. Traceability (14.1.1)", "rootCause_en": "For specific PPIDs/SNs, can the traceability of SSD and key components lot codes and/or date codes be demonstrated?", "rootCause_zh": "稽核發現點：For specific PPIDs/SNs, can the traceability of SSD and key components lot codes and/or date codes be demonstrated?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[14.1.1] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈"}, {"id": "QPA-110", "name_en": "[14.1.2] Corrective action plan in progress", "name_zh": "[14.1.2] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "HARISH-IT-IT", "auditPoint": "14. Traceability (14.1.2)", "rootCause_en": "For specific PPIDs/SNs, can supplier demonstrate the SMT line production traceability (eg: line, date/time, equipment ID, etc)?", "rootCause_zh": "稽核發現點：For specific PPIDs/SNs, can supplier demonstrate the SMT line production traceability (eg: line, date/time, equipment ID, etc)?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[14.1.2] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈"}, {"id": "QPA-111", "name_en": "[14.1.5] Corrective action plan in progress", "name_zh": "[14.1.5] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "HARISH-IT", "auditPoint": "14. Traceability (14.1.5)", "rootCause_en": "Is there any verification process to demonstrate the effectiveness of SSD traceability?", "rootCause_zh": "稽核發現點：Is there any verification process to demonstrate the effectiveness of SSD traceability?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[14.1.5] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈"}, {"id": "QPA-112", "name_en": "[14.2.1] Corrective action plan in progress", "name_zh": "[14.2.1] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈", "workstream": "QPA ACTION PLAN", "color": "#3B82F6", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-21", "owner": "HARISH-IT", "auditPoint": "14. Traceability (14.2.1)", "rootCause_en": "Has appropriate computer database traceability been developed from Box# to Component level and vice versa?", "rootCause_zh": "稽核發現點：Has appropriate computer database traceability been developed from Box# to Component level and vice versa?", "deliverable_en": "Corrective action plan in progress", "deliverable_zh": "CAPA 改善對策：[14.2.1] 生產追溯 (Traceability) - 生產條碼與滿載追溯鏈"}, {"id": "QSA-1", "name_en": "[1-3 - 5.1] Does top management know how well the organization is performing on Dell products and understand the problems and risks (e.g. QBR, FIR/IFIR, HSR, COPQ, etc.)? Are there corresponding countermeasures and improvement plans?", "name_zh": "[1-3 - 5.1] 高層參與與品質目標追蹤 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA MP-1. Top management engagement 高層參與", "rootCause_en": "Does top management know how well the organization is performing on Dell products and understand the problems and risks (e.g. QBR, FIR/IFIR, HSR, COPQ, etc.)? Are there corresponding countermeasures and improvement plans?", "rootCause_zh": "品質體系缺失：Does top management know how well the organization is performing on Dell products and understand the problems and risks (e.g. QBR, FIR/IFIR, HSR, COPQ, etc.)? Are there corresponding countermeasures and improvement plans?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-2", "name_en": "[1-4 - 4.2] Does top management plan and apply relevant innovations (new technology, new process, new equipment, new material applications, etc.)?", "name_zh": "[1-4 - 4.2] 高層參與與品質目標追蹤 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "PIE-BALAJI", "auditPoint": "QSA MP-1. Top management engagement 高層參與", "rootCause_en": "Does top management plan and apply relevant innovations (new technology, new process, new equipment, new material applications, etc.)?", "rootCause_zh": "品質體系缺失：Does top management plan and apply relevant innovations (new technology, new process, new equipment, new material applications, etc.)?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-3", "name_en": "[3-1 - 9.2] Are internal audits conducted according to the identified processes and planned time intervals, are any processes omitted, and are the findings of the last audit tracked?", "name_zh": "[3-1 - 9.2] MP-3. Internal Audit & Management review 內部稽核與管理審查 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA MP-3. Internal Audit & Management review 內部稽核與管理審查", "rootCause_en": "Are internal audits conducted according to the identified processes and planned time intervals, are any processes omitted, and are the findings of the last audit tracked?", "rootCause_zh": "品質體系缺失：Are internal audits conducted according to the identified processes and planned time intervals, are any processes omitted, and are the findings of the last audit tracked?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-4", "name_en": "[3-2 - 9.2] Are the internal auditors qualified, competent, and impartial to perform the audit of the process they undertake?", "name_zh": "[3-2 - 9.2] MP-3. Internal Audit & Management review 內部稽核與管理審查 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA MP-3. Internal Audit & Management review 內部稽核與管理審查", "rootCause_en": "Are the internal auditors qualified, competent, and impartial to perform the audit of the process they undertake?", "rootCause_zh": "品質體系缺失：Are the internal auditors qualified, competent, and impartial to perform the audit of the process they undertake?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-5", "name_en": "[3-4 - 9.2] Are audit findings corrected, are corrective actions effective, and are they recurring?", "name_zh": "[3-4 - 9.2] MP-3. Internal Audit & Management review 內部稽核與管理審查 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA MP-3. Internal Audit & Management review 內部稽核與管理審查", "rootCause_en": "Are audit findings corrected, are corrective actions effective, and are they recurring?", "rootCause_zh": "品質體系缺失：Are audit findings corrected, are corrective actions effective, and are they recurring?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-6", "name_en": "[4-3 - 8.5] Does the operation instruction define the control measures in detail according to AQP requirements, including equipment, fixtures, tools, measuring tools, and operator operations in accordance with SOP?", "name_zh": "[4-3 - 8.5] CP-4. Process operation and control 生產過程控制 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "PIE-BALAJI", "auditPoint": "QSA CP-4. Process operation and control 生產過程控制", "rootCause_en": "Does the operation instruction define the control measures in detail according to AQP requirements, including equipment, fixtures, tools, measuring tools, and operator operations in accordance with SOP?", "rootCause_zh": "品質體系缺失：Does the operation instruction define the control measures in detail according to AQP requirements, including equipment, fixtures, tools, measuring tools, and operator operations in accordance with SOP?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-7", "name_en": "[4-4 - 8.5] Are operators trained and certified to perform the job, and are measures taken to prevent human error during the operation?", "name_zh": "[4-4 - 8.5] CP-4. Process operation and control 生產過程控制 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA CP-4. Process operation and control 生產過程控制", "rootCause_en": "Are operators trained and certified to perform the job, and are measures taken to prevent human error during the operation?", "rootCause_zh": "品質體系缺失：Are operators trained and certified to perform the job, and are measures taken to prevent human error during the operation?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-8", "name_en": "[4-8 - 8.5] Are there clear definitions of different change levels? Such as significant change, minor change, emergent change, etc.; Are there corresponding change procedures based on different change levels?", "name_zh": "[4-8 - 8.5] CP-4. Process operation and control 生產過程控制 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA CP-4. Process operation and control 生產過程控制", "rootCause_en": "Are there clear definitions of different change levels? Such as significant change, minor change, emergent change, etc.; Are there corresponding change procedures based on different change levels?", "rootCause_zh": "品質體系缺失：Are there clear definitions of different change levels? Such as significant change, minor change, emergent change, etc.; Are there corresponding change procedures based on different change levels?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-9", "name_en": "[4-9 - 8.5] Whether all staff (management team, engineers, production leaders, front line workers) receive adequate training (such as annual training and simulation exercise),and have sufficient awareness to feedback and manage changes? (random onsite check)", "name_zh": "[4-9 - 8.5] CP-4. Process operation and control 生產過程控制 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA CP-4. Process operation and control 生產過程控制", "rootCause_en": "Whether all staff (management team, engineers, production leaders, front line workers) receive adequate training (such as annual training and simulation exercise),and have sufficient awareness to feedback and manage changes? (random onsite check)", "rootCause_zh": "品質體系缺失：Whether all staff (management team, engineers, production leaders, front line workers) receive adequate training (such as annual training and simulation exercise),and have sufficient awareness to feedback and manage changes? (random onsite check)", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-10", "name_en": "[4-12 - 8.5] Is there a traceability system in place for the production process, and is there a system to prevent off-site production?", "name_zh": "[4-12 - 8.5] CP-4. Process operation and control 生產過程控制 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "In Progress", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "IT-Teja", "auditPoint": "QSA CP-4. Process operation and control 生產過程控制", "rootCause_en": "Is there a traceability system in place for the production process, and is there a system to prevent off-site production?", "rootCause_zh": "品質體系缺失：Is there a traceability system in place for the production process, and is there a system to prevent off-site production?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-11", "name_en": "[5-3 - 8.5] Is there a FIFO process for material/semi-finished products/finished products and it is implemented effectively?", "name_zh": "[5-3 - 8.5] 搬運包裝與庫房儲運管制 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "WH/Shabitha", "auditPoint": "QSA CP-5. Handling, Package, Storage & Delivery", "rootCause_en": "Is there a FIFO process for material/semi-finished products/finished products and it is implemented effectively?", "rootCause_zh": "品質體系缺失：Is there a FIFO process for material/semi-finished products/finished products and it is implemented effectively?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-12", "name_en": "[5-6 - 8.5] Is the material/semi-finished/finished storage environment, storage period defined, evaluated and implemented effectively?", "name_zh": "[5-6 - 8.5] 搬運包裝與庫房儲運管制 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "In Progress", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "Production-Naresh", "auditPoint": "QSA CP-5. Handling, Package, Storage & Delivery", "rootCause_en": "Is the material/semi-finished/finished storage environment, storage period defined, evaluated and implemented effectively?", "rootCause_zh": "品質體系缺失：Is the material/semi-finished/finished storage environment, storage period defined, evaluated and implemented effectively?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-13", "name_en": "[1-1 - 7.1] Does the organization establish inspection, measurement, and test project plans based on material, process, finished product inspection and testing requirements? Are all test items covered?", "name_zh": "[1-1 - 7.1] SP-1 Evaluation of test & measurement system 測試與量測系統的評估 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA SP-1 Evaluation of test & measurement system 測試與量測系統的評估", "rootCause_en": "Does the organization establish inspection, measurement, and test project plans based on material, process, finished product inspection and testing requirements? Are all test items covered?", "rootCause_zh": "品質體系缺失：Does the organization establish inspection, measurement, and test project plans based on material, process, finished product inspection and testing requirements? Are all test items covered?", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-14", "name_en": "[3-4 - 7.2] Are the relevant personnel of the organization able to correctly apply quality tools to solve quality problems (e.g. SPC, MSA, AQP, NUDD, 5C, DOE...)", "name_zh": "[3-4 - 7.2] SP-3 Problem solving & personnel capability 問題解決和人員能力 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "In Progress", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "QUALITY-Sateesh", "auditPoint": "QSA SP-3 Problem solving & personnel capability 問題解決和人員能力", "rootCause_en": "Are the relevant personnel of the organization able to correctly apply quality tools to solve quality problems (e.g. SPC, MSA, AQP, NUDD, 5C, DOE...)", "rootCause_zh": "品質體系缺失：Are the relevant personnel of the organization able to correctly apply quality tools to solve quality problems (e.g. SPC, MSA, AQP, NUDD, 5C, DOE...)", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "QSA-15", "name_en": "[3-7 - 7.1] Whether the organization has carried out effective knowledge management (Lessons learnt, AQP, design guideline update, change management record…)", "name_zh": "[3-7 - 7.1] SP-3 Problem solving & personnel capability 問題解決和人員能力 - 缺失改善與 SOP 修正", "workstream": "QSA ACTION PLAN", "color": "#8B5CF6", "status": "Completed", "startDate": "2026-05-19", "endDate": "2026-08-07", "owner": "PIE-BALAJI", "auditPoint": "QSA SP-3 Problem solving & personnel capability 問題解決和人員能力", "rootCause_en": "Whether the organization has carried out effective knowledge management (Lessons learnt, AQP, design guideline update, change management record…)", "rootCause_zh": "品質體系缺失：Whether the organization has carried out effective knowledge management (Lessons learnt, AQP, design guideline update, change management record…)", "deliverable_en": "QSA Closure Evidence & Quality System Level 2/3 SOP Update", "deliverable_zh": "QSA 結案佐證文件與品質二階/三階程序書修訂"}, {"id": "BUDGET-1", "name_en": "Procurement: Peak stand Microscope(100x)", "name_zh": "[專案採購] 100倍立式高倍率顯微鏡採購", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-06-30", "owner": "Stephan / Procurement", "auditPoint": "Point #38", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR 70800", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR 70800", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-2", "name_en": "Procurement: Purchase temperature & Humility meter with \nauto alarm function & mail trigger（5pcs）", "name_zh": "[專案採購] 專案採購: Purchase temperature & Humility meter with \nauto alarm function & mail trigger（5pcs）", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-06-30", "owner": "Stephan / Procurement", "auditPoint": "Point #15 &16", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR 106200", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR 106200", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-3", "name_en": "Procurement: Purchase ESD turnstile gate", "name_zh": "[專案採購] SMT 車間入口 ESD 靜電門禁閘門裝設", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-06-30", "owner": "Stephan / Procurement", "auditPoint": "Point #22", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR 185000", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR 185000", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-4", "name_en": "Procurement: Eqm DRI's need to be get trained by machine supliers (SPI,AOI)", "name_zh": "[專案採購] SPI/AOI 設備主責人員原廠專業認證培訓", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-10-31", "owner": "Stephan / Procurement", "auditPoint": "Dell Highlight Point", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR INR", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR INR", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-1", "name_en": "Procurement: Import SFC system at all SMT stations", "name_zh": "[專案採購] SFC 車間系統全 SMT 工站導入與過站連鎖", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-06-30", "owner": "Stephan / Procurement", "auditPoint": "Point #110", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR 2153088", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR 2153088", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-2", "name_en": "Procurement: MES Process", "name_zh": "[專案採購] MES 製造執行系統流程整合", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-06-30", "owner": "Stephan / Procurement", "auditPoint": "Point #110", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR 484160", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR 484160", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-3", "name_en": "Procurement: Add  auto scan QR for SFC input station", "name_zh": "[專案採購] 專案採購: Add  auto scan QR for SFC input station", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-06-30", "owner": "Stephan / Procurement", "auditPoint": "Point #109", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR 236541", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR 236541", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-4", "name_en": "Procurement: Purchase Feeder Calibration", "name_zh": "[專案採購] Fuji Feeder 飛達校正儀採購與開發", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-06-30", "owner": "Stephan / Procurement", "auditPoint": "Point #63", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR 1816551", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR 1816551", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "BUDGET-5", "name_en": "Procurement: Purchase 2.5D X-ray", "name_zh": "[專案採購] 2.5D X-Ray 銲點檢驗設備引進/租賃", "workstream": "EQUIPMENT & BUDGET", "color": "#10B981", "status": "In Progress", "startDate": "2026-06-30", "endDate": "2026-10-31", "owner": "Stephan / Procurement", "auditPoint": "Dell Highlight Point", "rootCause_en": "Equipment/system required for line audit readiness. Budget Cost: INR INR", "rootCause_zh": "符合稽核規範必備之設備或軟體系統。採購預算: INR INR", "deliverable_en": "PO, Delivery Receipt, Calibration Certificate & System Log", "deliverable_zh": "採購單 (PO)、到貨點收報告、校正證書與系統整合驗證紀錄"}, {"id": "SUPP-1", "name_en": "SSSTC Support: 1. IQC (1.1.2) - 1.全部COC合规证书及有效期 All COC and Expiry date", "name_zh": "[SSSTC 支援] 1. IQC (1.1.2) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 1.1.2", "rootCause_en": "1.全部COC合规证书及有效期 All COC and Expiry date", "rootCause_zh": "需 SSSTC 提供支援事項：1.全部COC合规证书及有效期 All COC and Expiry date", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-2", "name_en": "SSSTC Support: 1. IQC (1.1.2) - 1.全部COC合规证书及有效期 All COC and Expiry date", "name_zh": "[SSSTC 支援] 1. IQC (1.1.2) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "In Progress", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 1.1.2", "rootCause_en": "1.全部COC合规证书及有效期 All COC and Expiry date", "rootCause_zh": "需 SSSTC 提供支援事項：1.全部COC合规证书及有效期 All COC and Expiry date", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-3", "name_en": "SSSTC Support: 1. IQC (1.1.17) - 2.BOM表包含物料详细描述（随箱附带纸本物料清单） Need to include material descript", "name_zh": "[SSSTC 支援] 1. IQC (1.1.17) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 1.1.17", "rootCause_en": "2.BOM表包含物料详细描述（随箱附带纸本物料清单） Need to include material description in BOM(All description data provide Paperlist while shipment)", "rootCause_zh": "需 SSSTC 提供支援事項：2.BOM表包含物料详细描述（随箱附带纸本物料清单） Need to include material description in BOM(All description data provide Paperlist while shipment)", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-4", "name_en": "SSSTC Support: 1. IQC (1.1.17) - 2.BOM表包含物料详细描述（随箱附带纸本物料清单） Need to include material descript", "name_zh": "[SSSTC 支援] 1. IQC (1.1.17) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 1.1.17", "rootCause_en": "2.BOM表包含物料详细描述（随箱附带纸本物料清单） Need to include material description in BOM(All description data provide Paperlist while shipment)", "rootCause_zh": "需 SSSTC 提供支援事項：2.BOM表包含物料详细描述（随箱附带纸本物料清单） Need to include material description in BOM(All description data provide Paperlist while shipment)", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-5", "name_en": "SSSTC Support: 5. SMT Placement (5.1.4) - 3.物料料盘lable包含详细描述 Reel components also need to include descr", "name_zh": "[SSSTC 支援] 5. SMT Placement (5.1.4) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 5.1.4", "rootCause_en": "3.物料料盘lable包含详细描述 Reel components also need to include description on the label", "rootCause_zh": "需 SSSTC 提供支援事項：3.物料料盘lable包含详细描述 Reel components also need to include description on the label", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-6", "name_en": "SSSTC Support: 5. SMT Placement (5.1.4) - 3.物料料盘lable包含详细描述 Reel components also need to include descr", "name_zh": "[SSSTC 支援] 5. SMT Placement (5.1.4) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 5.1.4", "rootCause_en": "3.物料料盘lable包含详细描述 Reel components also need to include description on the label", "rootCause_zh": "需 SSSTC 提供支援事項：3.物料料盘lable包含详细描述 Reel components also need to include description on the label", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-7", "name_en": "SSSTC Support: 6. Reflow (6.3.9) - 4.Profile标准曲线Range条件定义进SOP In SOP need to include the standa", "name_zh": "[SSSTC 支援] 6. Reflow (6.3.9) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.3.9", "rootCause_en": "4.Profile标准曲线Range条件定义进SOP In SOP need to include the standardized conditions", "rootCause_zh": "需 SSSTC 提供支援事項：4.Profile标准曲线Range条件定义进SOP In SOP need to include the standardized conditions", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-8", "name_en": "SSSTC Support: 6. Reflow (6.3.9) - 4.Profile标准曲线Range条件定义进SOP In SOP need to include the standa", "name_zh": "[SSSTC 支援] 6. Reflow (6.3.9) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.3.9", "rootCause_en": "4.Profile标准曲线Range条件定义进SOP In SOP need to include the standardized conditions", "rootCause_zh": "需 SSSTC 提供支援事項：4.Profile标准曲线Range条件定义进SOP In SOP need to include the standardized conditions", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-9", "name_en": "SSSTC Support: 6. Reflow (6.3.10) - ", "name_zh": "[SSSTC 支援] 6. Reflow (6.3.10) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.3.10", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-10", "name_en": "SSSTC Support: 6. Reflow (6.3.10) - ", "name_zh": "[SSSTC 支援] 6. Reflow (6.3.10) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.3.10", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-11", "name_en": "SSSTC Support: 6. Reflow (6.4.6) - ", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.6) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.6", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-12", "name_en": "SSSTC Support: 6. Reflow (6.4.6) - ", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.6) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.6", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-13", "name_en": "SSSTC Support: 6. Reflow (6.4.7) - ", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.7) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.7", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-14", "name_en": "SSSTC Support: 6. Reflow (6.4.7) - ", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.7) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.7", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-15", "name_en": "SSSTC Support: 6. Reflow (6.4.9) - 5.元器件TDS Component TDS", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.9) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.9", "rootCause_en": "5.元器件TDS Component TDS", "rootCause_zh": "需 SSSTC 提供支援事項：5.元器件TDS Component TDS", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-16", "name_en": "SSSTC Support: 6. Reflow (6.4.9) - 5.元器件TDS Component TDS", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.9) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.9", "rootCause_en": "5.元器件TDS Component TDS", "rootCause_zh": "需 SSSTC 提供支援事項：5.元器件TDS Component TDS", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-17", "name_en": "SSSTC Support: 6. Reflow (6.4.11) - 6.对负载和空载的Reflow进行对比研究的佐证 Evidence from Compare loaded and un", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.11) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.11", "rootCause_en": "6.对负载和空载的Reflow进行对比研究的佐证 Evidence from Compare loaded and unloaded reflow processes.", "rootCause_zh": "需 SSSTC 提供支援事項：6.对负载和空载的Reflow进行对比研究的佐证 Evidence from Compare loaded and unloaded reflow processes.", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-18", "name_en": "SSSTC Support: 6. Reflow (6.4.11) - 6.对负载和空载的Reflow进行对比研究的佐证 Evidence from Compare loaded and un", "name_zh": "[SSSTC 支援] 6. Reflow (6.4.11) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 6.4.11", "rootCause_en": "6.对负载和空载的Reflow进行对比研究的佐证 Evidence from Compare loaded and unloaded reflow processes.", "rootCause_zh": "需 SSSTC 提供支援事項：6.对负载和空载的Reflow进行对比研究的佐证 Evidence from Compare loaded and unloaded reflow processes.", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-19", "name_en": "SSSTC Support: 9. Function Test (9.5.9) - 7.ATE 工站 CP/CPK分析 Process Capability Analysis and CpK studie", "name_zh": "[SSSTC 支援] 9. Function Test (9.5.9) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 9.5.9", "rootCause_en": "7.ATE 工站 CP/CPK分析 Process Capability Analysis and CpK studies  to be performed", "rootCause_zh": "需 SSSTC 提供支援事項：7.ATE 工站 CP/CPK分析 Process Capability Analysis and CpK studies  to be performed", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-20", "name_en": "SSSTC Support: 9. Function Test (9.5.9) - 7.ATE 工站 CP/CPK分析 Process Capability Analysis and CpK studie", "name_zh": "[SSSTC 支援] 9. Function Test (9.5.9) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 9.5.9", "rootCause_en": "7.ATE 工站 CP/CPK分析 Process Capability Analysis and CpK studies  to be performed", "rootCause_zh": "需 SSSTC 提供支援事項：7.ATE 工站 CP/CPK分析 Process Capability Analysis and CpK studies  to be performed", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-21", "name_en": "SSSTC Support: 9. Function Test (9.5.11) - 8.ATE工站GRR分析 Gauge R&R study not been completed in accordanc", "name_zh": "[SSSTC 支援] 9. Function Test (9.5.11) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 9.5.11", "rootCause_en": "8.ATE工站GRR分析 Gauge R&R study not been completed in accordance with Dell GR&R Procedures", "rootCause_zh": "需 SSSTC 提供支援事項：8.ATE工站GRR分析 Gauge R&R study not been completed in accordance with Dell GR&R Procedures", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-22", "name_en": "SSSTC Support: 9. Function Test (9.5.11) - 8.ATE工站GRR分析 Gauge R&R study not been completed in accordanc", "name_zh": "[SSSTC 支援] 9. Function Test (9.5.11) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 9.5.11", "rootCause_en": "8.ATE工站GRR分析 Gauge R&R study not been completed in accordance with Dell GR&R Procedures", "rootCause_zh": "需 SSSTC 提供支援事項：8.ATE工站GRR分析 Gauge R&R study not been completed in accordance with Dell GR&R Procedures", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-23", "name_en": "SSSTC Support: 10. Label Paste & Packing (10.1.7) - 9.ATE工站治具应变分析验证 Strain Gauge Analysis was not performed on t", "name_zh": "[SSSTC 支援] 10. Label Paste & Packing (10.1.7) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 10.1.7", "rootCause_en": "9.ATE工站治具应变分析验证 Strain Gauge Analysis was not performed on the fixture", "rootCause_zh": "需 SSSTC 提供支援事項：9.ATE工站治具应变分析验证 Strain Gauge Analysis was not performed on the fixture", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-24", "name_en": "SSSTC Support: 10. Label Paste & Packing (10.1.7) - 9.ATE工站治具应变分析验证 Strain Gauge Analysis was not performed on t", "name_zh": "[SSSTC 支援] 10. Label Paste & Packing (10.1.7) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 10.1.7", "rootCause_en": "9.ATE工站治具应变分析验证 Strain Gauge Analysis was not performed on the fixture", "rootCause_zh": "需 SSSTC 提供支援事項：9.ATE工站治具应变分析验证 Strain Gauge Analysis was not performed on the fixture", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-25", "name_en": "SSSTC Support: 11. Outgoing QA (11.5.1) - 10.ORT测试程序和抽样计划 Reliability test procedure and plan not ther", "name_zh": "[SSSTC 支援] 11. Outgoing QA (11.5.1) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 11.5.1", "rootCause_en": "10.ORT测试程序和抽样计划 Reliability test procedure and plan not there for each model", "rootCause_zh": "需 SSSTC 提供支援事項：10.ORT测试程序和抽样计划 Reliability test procedure and plan not there for each model", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-26", "name_en": "SSSTC Support: 11. Outgoing QA (11.5.1) - 10.ORT测试程序和抽样计划 Reliability test procedure and plan not ther", "name_zh": "[SSSTC 支援] 11. Outgoing QA (11.5.1) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 11.5.1", "rootCause_en": "10.ORT测试程序和抽样计划 Reliability test procedure and plan not there for each model", "rootCause_zh": "需 SSSTC 提供支援事項：10.ORT测试程序和抽样计划 Reliability test procedure and plan not there for each model", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-27", "name_en": "SSSTC Support: 11. Outgoing QA (11.5.3) - ", "name_zh": "[SSSTC 支援] 11. Outgoing QA (11.5.3) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 11.5.3", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}, {"id": "SUPP-28", "name_en": "SSSTC Support: 11. Outgoing QA (11.5.3) - ", "name_zh": "[SSSTC 支援] 11. Outgoing QA (11.5.3) - 技術規格與數據提供", "workstream": "SSSTC SUPPORT", "color": "#F59E0B", "status": "Completed", "startDate": "2026-06-26", "endDate": "2026-08-31", "owner": "SSSTC Team / Julia Tseng", "auditPoint": "Question 11.5.3", "rootCause_en": "Customer specification & data verification needed", "rootCause_zh": "需 SSSTC 提供支援事項：", "deliverable_en": "SSSTC Technical Specification Document & Confirmation", "deliverable_zh": "SSSTC 技術規格對照文件與雙方確認會議紀錄"}];
+    let fullDetailTasks = []; // Managed by JS fallback
 
-    let statusChartInstance = null;
-    let wsChartInstance = null;
-
-    document.addEventListener('DOMContentLoaded', () => {
-      updateLanguageUI();
-      renderTable();
-      renderTimeline();
-      updateTodayNeedle();
-      initCharts();
-      fetchFromGoogleSheet();
-
-      document.addEventListener('fullscreenchange', () => {
-        const btn = document.getElementById('uiFullscreenBtn');
-        const t = i18n[currentLang];
-        if (document.fullscreenElement) {
-          btn.innerText = t.btnExitFullscreen;
-        } else {
-          btn.innerText = t.btnFullscreen;
-        }
-      });
-    });
-
-    function toggleFullScreen() {
-      const btn = document.getElementById('uiFullscreenBtn');
-      const t = i18n[currentLang];
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().then(() => {
-          btn.innerText = t.btnExitFullscreen;
-        }).catch(err => console.warn(err));
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen().then(() => {
-            btn.innerText = t.btnFullscreen;
-          }).catch(err => console.warn(err));
-        }
+    // Dynamic Decoupled Milestone Model
+    const defaultMilestones = [
+      {
+        id: "MS-1",
+        name_en: "CAPA Alignment Proposal",
+        name_zh: "整改對策提案",
+        date: "2026-08-07",
+        icon: "★",
+        desc_en: "Complete preliminary alignment & submit action plan proposal to SSSTC QA",
+        desc_zh: "完成對策初審並向 SSSTC 品質團隊提交整改對策提案",
+        level: "top"
+      },
+      {
+        id: "MS-2",
+        name_en: "Non-budget Points 100% Closure",
+        name_zh: "非預算缺失 100% 閉環",
+        date: "2026-08-31",
+        icon: "◆",
+        desc_en: "Complete 100% closure for all non-budget QPA/QSA audit observations",
+        desc_zh: "完成所有非預算項之 QPA/QSA 稽核缺失 100% 佐證閉環",
+        level: "bottom"
+      },
+      {
+        id: "MS-3",
+        name_en: "Equipment Arrival & SSSTC Review",
+        name_zh: "設備到位與 SSSTC 預審",
+        date: "2026-10-31",
+        icon: "▲",
+        desc_en: "100% budget equipment onsite commissioning & SSSTC executive pre-audit sign-off",
+        desc_zh: "資本支出設備全數到位調試完成，並通過 SSSTC 高階預審",
+        level: "top"
+      },
+      {
+        id: "MS-4",
+        name_en: "Dell Customer Final Audit",
+        name_zh: "Dell 客戶最終稽核",
+        date: "2026-11-20",
+        icon: "🏁",
+        desc_en: "Host Dell customer physical line audit and obtain mass production qualification approval",
+        desc_zh: "迎接 Dell 客戶現場正式稽核，取得 D1 量產閉環認證",
+        level: "bottom"
       }
+    ];
+
+    function sanitizeMilestoneName(name) {
+      if (!name) return '';
+      return name.replace(/^[A-Za-z]{3}\s*\d{1,2}\s*:\s*/, '').replace(/^\d{1,2}\s*月\s*\d{1,2}\s*日\s*[:：]\s*/, '').replace(/^Nov-Dec:\s*/, '');
     }
 
-    // Fetch data from Google Sheet
-    async function fetchFromGoogleSheet() {
-      const badge = document.getElementById('cloudBadge');
+    let masterMilestones = loadMilestonesFromCache();
+
+    function loadMilestonesFromCache() {
       try {
-        badge.innerText = "⏳ Loading...";
-        badge.classList.add('syncing');
-
-        const res = await fetch(GAS_WEBAPP_URL);
-        const json = await res.json();
-        
-        if (json && json.data && json.data.length > 0) {
-          json.data.forEach(cloudTask => {
-            let local = masterTasks.find(t => t.id === cloudTask.id);
-            if (!local) {
-              // Dynamic task created in cloud
-              local = {
-                id: cloudTask.id,
-                name_en: cloudTask.name_en || cloudTask.id,
-                name_zh: cloudTask.name_zh || cloudTask.name_en || cloudTask.id,
-                workstream: cloudTask.workstream || "ACTION PLAN",
-                color: "#3B82F6",
-                status: cloudTask.status || "In Progress",
-                progressPct: parseInt(cloudTask.progressPct || 0, 10),
-                startDate: cloudTask.startDate ? String(cloudTask.startDate).split('T')[0] : "2026-08-01",
-                endDate: cloudTask.endDate ? String(cloudTask.endDate).split('T')[0] : "2026-09-30",
-                owner: cloudTask.owner || "Sateesh",
-                auditPoint: cloudTask.auditPoint || "Custom Task",
-                rootCause_en: "User added task",
-                rootCause_zh: "使用者自訂新增項目",
-                deliverable_en: "CAPA Evidence Report",
-                deliverable_zh: "CAPA 佐證報告"
-              };
-              masterTasks.push(local);
-            } else {
-              if (cloudTask.progressPct !== undefined && cloudTask.progressPct !== "") {
-                local.progressPct = parseInt(cloudTask.progressPct, 10);
-              }
-              if (cloudTask.status) local.status = cloudTask.status;
-              if (cloudTask.startDate) {
-                const cleanStart = String(cloudTask.startDate).split('T')[0];
-                if (cleanStart.length === 10) local.startDate = cleanStart;
-              }
-              if (cloudTask.endDate) {
-                const cleanEnd = String(cloudTask.endDate).split('T')[0];
-                if (cleanEnd.length === 10) local.endDate = cleanEnd;
-              }
-              if (cloudTask.name_en) local.name_en = cloudTask.name_en;
-              if (cloudTask.name_zh) local.name_zh = cloudTask.name_zh;
-              if (cloudTask.owner) local.owner = cloudTask.owner;
-            }
-          });
-
-          badge.innerText = i18n[currentLang].cloudSynced;
-          badge.classList.remove('syncing');
-
-          renderTable();
-          renderTimeline();
-          updateCharts();
+        const cached = localStorage.getItem('SSSTC_ROADMAP_MILESTONES_V35');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            parsed.forEach(ms => {
+              ms.name_en = sanitizeMilestoneName(ms.name_en);
+              ms.name_zh = sanitizeMilestoneName(ms.name_zh);
+            });
+            return parsed;
+          }
         }
-      } catch (err) {
-        console.warn("GAS fetch notice (using local cache):", err);
-        badge.innerText = "☁️ Local Mode";
-        badge.classList.remove('syncing');
+      } catch(e) { console.warn('Milestone cache notice:', e); }
+      return defaultMilestones;
+    }
+
+    function saveMilestonesToCache() {
+      try {
+        localStorage.setItem('SSSTC_ROADMAP_MILESTONES_V35', JSON.stringify(masterMilestones));
+      } catch(e) { console.warn('Milestone save notice:', e); }
+    }
+
+    function formatMsDatePrefix(dateStr, lang) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return '';
+
+      const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const monthStr = monthsEn[d.getMonth()];
+      const dayNum = String(d.getDate()).padStart(2, '0');
+
+      if (lang === 'en') {
+        return `${monthStr} ${dayNum}: `;
+      } else {
+        return `${d.getMonth() + 1}月${dayNum}日：`;
       }
     }
 
-    function toggleLanguage() {
-      currentLang = (currentLang === 'en') ? 'zh' : 'en';
-      updateLanguageUI();
-      renderTable();
-      renderTimeline();
-      updateTodayNeedle();
-      updateCharts();
+    /* RENDER REFINED MILESTONES WITH SUBTLE DOWNWARD CONNECTOR LINES ANCHORED AT LEFT EDGE */
+    function renderMilestones() {
+      const container = document.getElementById('milestonesStrip');
+      if (!container) return;
+
+      container.innerHTML = masterMilestones.map(ms => {
+        const pct = calcPercent(ms.date);
+        const prefix = formatMsDatePrefix(ms.date, currentLang);
+        const rawName = (currentLang === 'en') ? ms.name_en : ms.name_zh;
+        const cleanName = sanitizeMilestoneName(rawName);
+        const fullName = prefix + cleanName;
+
+        const desc = (currentLang === 'en') ? ms.desc_en : ms.desc_zh;
+        const levelClass = ms.level === 'top' ? 'milestone-level-top' : 'milestone-level-bottom';
+
+        return `
+          <div class="milestone-item-v2 ${levelClass}" style="left:${pct}%;" 
+               title="${desc.replace(/"/g, '&quot;')}"
+               onclick="showMilestoneModal('${ms.id}')">
+            <div class="milestone-card-content" id="${ms.id}_label">
+              <span class="milestone-icon">${ms.icon}</span>
+              <span>${fullName}</span>
+            </div>
+            <div class="milestone-connector-line"></div>
+          </div>
+        `;
+      }).join('');
     }
 
-    function toggleViewMode() {
-      isFullViewMode = !isFullViewMode;
-      const btn = document.getElementById('uiViewToggleBtn');
-      const textObj = i18n[currentLang];
-      btn.innerText = isFullViewMode ? textObj.switchViewFull : textObj.switchViewMaster;
-      
-      const titleSpan = document.getElementById('uiPanelTitle');
-      titleSpan.innerText = isFullViewMode ? textObj.tableTitleFull : textObj.tableTitleMaster;
+    function showMilestoneModal(msId) {
+      const ms = masterMilestones.find(x => x.id === msId);
+      if (!ms) return;
 
-      renderTable();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const t = i18n[currentLang];
+      const nameVal = sanitizeMilestoneName((currentLang === 'en') ? ms.name_en : ms.name_zh);
+      const descVal = (currentLang === 'en') ? ms.desc_en : ms.desc_zh;
+
+      const modalEl = document.getElementById('milestoneModal');
+      if (!modalEl) return;
+
+      document.getElementById('msModalTitle').innerText = `${t.editMsModalTitle} (${ms.id})`;
+
+      document.getElementById('msModalBody').innerHTML = `
+        <div class="edit-box" style="margin-top:0;">
+          <div class="edit-field">
+            <label>${t.lblMsName}</label>
+            <input type="text" id="editMsName" class="edit-input-text" value="${nameVal.replace(/"/g, '&quot;')}">
+          </div>
+
+          <div class="edit-field">
+            <label>${t.lblMsDate}</label>
+            <input type="date" id="editMsDate" class="edit-input-date" value="${ms.date}">
+          </div>
+
+          <div class="edit-field" style="align-items:flex-start;">
+            <label style="padding-top:4px;">${t.lblMsDesc}</label>
+            <textarea id="editMsDesc" class="edit-input-text" style="height:70px; resize:vertical; font-size:0.82rem;">${descVal}</textarea>
+          </div>
+
+          <button class="btn-save-cloud" onclick="saveMilestoneFromModal('${ms.id}')">
+            ${t.btnSaveMs}
+          </button>
+        </div>
+      `;
+
+      modalEl.classList.add('active');
     }
 
-    function toggleInputPanel() {
-      const panel = document.getElementById('inputPanel');
-      const isHidden = (panel.style.display === 'none');
-      panel.style.display = isHidden ? 'block' : 'none';
-      if (isHidden) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    function saveMilestoneFromModal(msId) {
+      const ms = masterMilestones.find(x => x.id === msId);
+      if (!ms) return;
+
+      const nameEl = document.getElementById('editMsName');
+      const dateEl = document.getElementById('editMsDate');
+      const descEl = document.getElementById('editMsDesc');
+
+      const newName = nameEl ? sanitizeMilestoneName(nameEl.value.trim()) : '';
+      const newDate = dateEl ? dateEl.value.trim() : '';
+      const newDesc = descEl ? descEl.value.trim() : '';
+
+      if (currentLang === 'en') {
+        if (newName) ms.name_en = newName;
+        if (newDesc) ms.desc_en = newDesc;
+      } else {
+        if (newName) ms.name_zh = newName;
+        if (newDesc) ms.desc_zh = newDesc;
       }
+
+      if (newDate) {
+        ms.date = newDate;
+      }
+
+      saveMilestonesToCache();
+      renderMilestones();
+      closeMsModal();
     }
 
-    function updateLanguageUI() {
-      const t = i18n[currentLang];
-      document.getElementById('uiTitle').innerHTML = `${t.title} <span class="cloud-badge" id="cloudBadge">${t.cloudSynced}</span>`;
-      document.getElementById('uiSubtitle').innerText = t.subtitle;
-      document.getElementById('uiLangBtn').innerText = t.langBtn;
-      document.getElementById('uiFullscreenBtn').innerText = document.fullscreenElement ? t.btnExitFullscreen : t.btnFullscreen;
-      document.getElementById('uiToggleTableBtn').innerText = t.toggleTable;
-      document.getElementById('uiAddTaskBtn').innerText = t.addTask;
-      
-      const viewBtn = document.getElementById('uiViewToggleBtn');
-      viewBtn.innerText = isFullViewMode ? t.switchViewFull : t.switchViewMaster;
-
-      const titleSpan = document.getElementById('uiPanelTitle');
-      titleSpan.innerText = isFullViewMode ? t.tableTitleFull : t.tableTitleMaster;
-
-      document.getElementById('thRef').innerText = t.colRef;
-      document.getElementById('thName').innerText = t.colName;
-      document.getElementById('thCategory').innerText = t.colCategory;
-      document.getElementById('thStatus').innerText = t.colStatus;
-      document.getElementById('thStart').innerText = t.colStart;
-      document.getElementById('thEnd').innerText = t.colEnd;
-      document.getElementById('thOwner').innerText = t.colOwner;
-      document.getElementById('thAuditPoint').innerText = t.colAuditPoint;
-
-      document.getElementById('uiTimelineTitle').innerText = t.timelineTitle;
-
-      document.getElementById('uiChartStatusTitle').innerText = t.chartStatusTitle;
-      document.getElementById('uiChartWsTitle').innerText = t.chartWsTitle;
-      document.getElementById('uiChartProgressTitle').innerText = t.chartProgressTitle;
-
-      document.getElementById('prog1Label').innerText = t.prog1;
-      document.getElementById('prog2Label').innerText = t.prog2;
-      document.getElementById('prog3Label').innerText = t.prog3;
-    }
-
-    function updateTodayNeedle() {
-      const now = new Date();
-      const yyyy = now.getFullYear();
-      const mm = String(now.getMonth() + 1).padStart(2, '0');
-      const dd = String(now.getDate()).padStart(2, '0');
-      const dateStr = `${yyyy}-${mm}-${dd}`;
-      const curMonthKey = `${yyyy}-${mm}`;
-
-      const t = i18n[currentLang];
-      const todayTag = document.getElementById('todayTag');
-      todayTag.innerText = `${t.todayTagPrefix}${dateStr})`;
-
-      const pct = calcPercent(now);
-      const needleContainer = document.getElementById('todayNeedleContainer');
-
-      // EXACT PADDING COMPENSATION FORMULA
-      needleContainer.style.left = `calc(24px + 270px + (100% - 270px - 48px) * ${pct / 100})`;
-
-      document.querySelectorAll('.month-col-group').forEach(el => {
-        if (el.getAttribute('data-month') === curMonthKey) {
-          el.classList.add('current-month-active');
-        } else {
-          el.classList.remove('current-month-active');
-        }
-      });
+    function closeMsModal() {
+      const modalEl = document.getElementById('milestoneModal');
+      if (modalEl) modalEl.classList.remove('active');
     }
 
     function getActiveDataset() {
@@ -1475,34 +1633,37 @@
     }
 
     function renderTable() {
-      const data = getActiveDataset();
-      const t = i18n[currentLang];
       const tbody = document.getElementById('taskTableBody');
+      if (!tbody) return;
 
-      document.getElementById('uiTaskCountLabel').innerText = t.taskCountLabel.replace('{count}', data.length);
+      const dataset = getActiveDataset();
+      const t = i18n[currentLang];
 
-      tbody.innerHTML = data.map(item => {
+      tbody.innerHTML = dataset.map(item => {
         const name = (currentLang === 'en') ? (item.name_en || item.name) : (item.name_zh || item.name);
-        const statusText = item.status === 'Completed' ? t.statusCompleted : (item.status === 'In Progress' ? t.statusProgress : t.statusNotStarted);
+        const owner = item.owner || 'TBD';
+        const auditPoint = item.auditPoint || 'N/A';
         const statusClass = item.status === 'Completed' ? 'status-completed' : (item.status === 'In Progress' ? 'status-progress' : 'status-notstarted');
-        
-        const isMaster = masterTasks.some(x => x.id === item.id);
-        const dateInputStart = isMaster ? `<input type="date" class="table-date-input" value="${item.startDate}" onchange="updateTaskDateInline('${item.id}', 'startDate', this.value)" onclick="event.stopPropagation()">` : item.startDate;
-        const dateInputEnd = isMaster ? `<input type="date" class="table-date-input" value="${item.endDate}" onchange="updateTaskDateInline('${item.id}', 'endDate', this.value)" onclick="event.stopPropagation()">` : item.endDate;
+        const statusLabel = item.status === 'Completed' ? t.statusCompleted : (item.status === 'In Progress' ? t.statusProgress : t.statusNotStarted);
 
         return `
           <tr onclick="showDetail('${item.id}')">
-            <td><span style="font-weight:700; color:#3B82F6;">${item.id}</span></td>
-            <td class="task-name-cell" title="${name.replace(/"/g, '&quot;')}">${name}</td>
-            <td><span style="background:${item.color}15; color:${item.color}; font-weight:700; padding:2px 6px; border-radius:4px;">${item.workstream}</span></td>
-            <td><span class="badge-status ${statusClass}">${statusText}</span></td>
-            <td>${dateInputStart}</td>
-            <td>${dateInputEnd}</td>
-            <td>${item.owner}</td>
-            <td style="color:var(--text-muted);">${item.auditPoint}</td>
+            <td><strong>${item.id}</strong></td>
+            <td class="task-name-cell">${name}</td>
+            <td><span style="color:${item.color}; font-weight:700;">${item.workstream}</span></td>
+            <td><span class="badge-status ${statusClass}">${statusLabel}</span></td>
+            <td><input type="date" class="table-date-input" value="${item.startDate}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'startDate', this.value)"></td>
+            <td><input type="date" class="table-date-input" value="${item.endDate}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'endDate', this.value)"></td>
+            <td>${owner}</td>
+            <td><code>${auditPoint}</code></td>
           </tr>
         `;
       }).join('');
+
+      const countLabel = document.getElementById('uiTaskCountLabel');
+      if (countLabel) {
+        countLabel.innerText = t.taskCountLabel.replace('{count}', dataset.length);
+      }
     }
 
     function renderTimeline() {
@@ -1521,7 +1682,6 @@
         </div>
       `;
 
-      // PERFECTED 3-COLUMN ALIGNMENT FOR ROW-LABEL
       const rowsHTML = masterTasks.map(t => {
         const startPct = calcPercent(t.startDate);
         const endPct = calcPercent(t.endDate);
@@ -1530,29 +1690,95 @@
         const fillWidth = t.progressPct || 0;
         const durationStr = calcDurationWks(t.startDate, t.endDate);
 
+        const hasSub = !!(t.subList_en || t.subDetails_en || t.subSummary);
+        const expandBtnHTML = hasSub ? `<button class="btn-expand-sub" id="btnSub_${t.id}" onclick="event.stopPropagation(); toggleSubDrawer('${t.id}')" title="Expand/Collapse Details">🔻</button>` : '';
+
+        let subContentHTML = '';
+        if (hasSub) {
+          let linkBtnHTML = '';
+          const linkText = (currentLang === 'en') ? '🔗 Open Detailed Report ↗' : '🔗 查看詳細對策追蹤表 ↗';
+          const pendingText = (currentLang === 'en') ? '🔗 Track Report Pending' : '🔗 對策追蹤表準備中';
+
+          if (t.reportLink) {
+            linkBtnHTML = `<a href="${t.reportLink}" target="_blank" rel="noopener noreferrer" class="btn-report-link" onclick="event.stopPropagation()">${linkText}</a>`;
+          } else {
+            linkBtnHTML = `<span class="btn-report-pending" onclick="event.stopPropagation()">${pendingText}</span>`;
+          }
+
+          let headerBarHTML = '';
+          if (t.subSummary) {
+            headerBarHTML = `
+              <div style="margin-bottom:0.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                <div style="display:flex; align-items:center; flex-wrap:wrap; gap:0.35rem;">
+                  <span class="sub-kpi-badge sub-kpi-closed">✓ Closed: ${t.subSummary.closed}</span>
+                  <span class="sub-kpi-badge sub-kpi-open">⏳ Open: ${t.subSummary.open}</span>
+                  <span style="font-size:0.75rem; font-weight:700; color:#64748B;">(Total: ${t.subSummary.total} Items)</span>
+                </div>
+                <div>${linkBtnHTML}</div>
+              </div>
+            `;
+          } else {
+            headerBarHTML = `
+              <div style="margin-bottom:0.4rem; display:flex; align-items:center; justify-content:flex-end;">
+                ${linkBtnHTML}
+              </div>
+            `;
+          }
+
+          const rawList = (currentLang === 'en') ? (t.subDetails_en || t.subList_en) : (t.subDetails_zh || t.subList_zh);
+          let listHTML = '';
+          if (Array.isArray(rawList)) {
+            listHTML = rawList.map(item => `<div class="sub-list-item">${item}</div>`).join('');
+          } else if (typeof rawList === 'string') {
+            listHTML = `<div class="sub-list-item">${rawList.replace(/\n/g, '<br>')}</div>`;
+          }
+
+          subContentHTML = `
+            <div class="sub-detail-drawer" id="subDrawer_${t.id}">
+              ${headerBarHTML}
+              ${listHTML}
+            </div>
+          `;
+        }
+
         return `
-          <div class="timeline-row">
-            <div class="row-label" title="${name.replace(/"/g, '&quot;')}">
-              <span class="duration-pill">${durationStr}</span>
-              <div class="label-tag-wrapper">
-                <div class="label-tag" style="background:${t.color};"></div>
+          <div class="timeline-row-group">
+            <div class="timeline-row">
+              <div class="row-label" title="${name.replace(/"/g, '&quot;')}">
+                <span class="duration-pill">${durationStr}</span>
+                <div class="label-tag-wrapper">
+                  <div class="label-tag" style="background:${t.color};"></div>
+                </div>
+                <span class="row-title-text">${name}${expandBtnHTML}</span>
               </div>
-              <span class="row-title-text">${name}</span>
-            </div>
-            <div class="row-track">
-              <div class="gantt-progress-bar" 
-                   style="left:${startPct}%; width:${widthPct}%; background:${t.color};"
-                   title="${name.replace(/"/g, '&quot;')} (${t.startDate} ~ ${t.endDate}) - Progress: ${fillWidth}%"
-                   onclick="showDetail('${t.id}')">
-                <div class="progress-fill" style="width:${fillWidth}%;"></div>
-                <span style="position:relative; z-index:2;">${fillWidth}%</span>
+              <div class="row-track">
+                <div class="gantt-progress-bar" 
+                     style="left:${startPct}%; width:${widthPct}%; background:${t.color};"
+                     title="${name.replace(/"/g, '&quot;')} (${t.startDate} ~ ${t.endDate}) - Progress: ${fillWidth}%"
+                     onclick="showDetail('${t.id}')">
+                  <div class="progress-fill" style="width:${fillWidth}%;"></div>
+                  <span style="position:relative; z-index:2;">${fillWidth}%</span>
+                </div>
               </div>
             </div>
+            ${subContentHTML}
           </div>
         `;
       }).join('');
 
       grid.innerHTML = guidelinesHTML + rowsHTML;
+      renderMilestones();
+    }
+
+    function toggleSubDrawer(taskId) {
+      const drawer = document.getElementById('subDrawer_' + taskId);
+      const btn = document.getElementById('btnSub_' + taskId);
+      if (!drawer) return;
+      
+      const isHidden = (drawer.style.display !== 'block');
+      drawer.style.display = isHidden ? 'block' : 'none';
+      drawer.classList.toggle('active', isHidden);
+      if (btn) btn.classList.toggle('active', isHidden);
     }
 
     function updateTaskDateInline(id, field, val) {
@@ -1767,6 +1993,9 @@
       saveTaskToCloud(newId);
     }
 
+    let statusChartInstance = null;
+    let wsChartInstance = null;
+
     function initCharts() {
       const t = i18n[currentLang];
       const ctx1 = document.getElementById('statusChart').getContext('2d');
@@ -1803,6 +2032,105 @@
       statusChartInstance.update();
       wsChartInstance.update();
     }
+
+    function updateTodayNeedle() {
+      const container = document.getElementById('todayNeedleContainer');
+      const tag = document.getElementById('todayTag');
+      if (!container || !tag) return;
+
+      const today = new Date();
+      const pct = calcPercent(today);
+
+      container.style.left = `calc(270px + (100% - 270px) * ${pct / 100})`;
+
+      const dateStr = today.toISOString().split('T')[0];
+      tag.innerText = i18n[currentLang].todayTagPrefix + dateStr + ")";
+    }
+
+    function toggleLanguage() {
+      currentLang = (currentLang === 'en') ? 'zh' : 'en';
+      const t = i18n[currentLang];
+
+      document.getElementById('uiTitle').childNodes[0].nodeValue = t.title + ' ';
+      document.getElementById('uiSubtitle').innerText = t.subtitle;
+      document.getElementById('uiLangBtn').innerText = t.langBtn;
+      document.getElementById('uiFullscreenBtn').innerText = document.fullscreenElement ? t.btnExitFullscreen : t.btnFullscreen;
+      document.getElementById('uiViewToggleBtn').innerText = isFullViewMode ? t.switchViewFull : t.switchViewMaster;
+      document.getElementById('uiToggleTableBtn').innerText = t.toggleTable;
+      document.getElementById('uiAddTaskBtn').innerText = t.addTask;
+      document.getElementById('uiPanelTitle').innerText = isFullViewMode ? t.tableTitleFull : t.tableTitleMaster;
+      document.getElementById('uiTimelineTitle').innerText = t.timelineTitle;
+
+      document.getElementById('thRef').innerText = t.colRef;
+      document.getElementById('thName').innerText = t.colName;
+      document.getElementById('thCategory').innerText = t.colCategory;
+      document.getElementById('thStatus').innerText = t.colStatus;
+      document.getElementById('thStart').innerText = t.colStart;
+      document.getElementById('thEnd').innerText = t.colEnd;
+      document.getElementById('thOwner').innerText = t.colOwner;
+      document.getElementById('thAuditPoint').innerText = t.colAuditPoint;
+
+      document.getElementById('uiChartStatusTitle').innerText = t.chartStatusTitle;
+      document.getElementById('uiChartWsTitle').innerText = t.chartWsTitle;
+      document.getElementById('uiChartProgressTitle').innerText = t.chartProgressTitle;
+
+      document.getElementById('prog1Label').innerText = t.prog1;
+      document.getElementById('prog2Label').innerText = t.prog2;
+      document.getElementById('prog3Label').innerText = t.prog3;
+
+      renderTable();
+      renderTimeline();
+      renderMilestones();
+      updateTodayNeedle();
+      updateCharts();
+    }
+
+    function toggleInputPanel() {
+      const panel = document.getElementById('inputPanel');
+      panel.style.display = (panel.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function toggleViewMode() {
+      isFullViewMode = !isFullViewMode;
+      const t = i18n[currentLang];
+      document.getElementById('uiViewToggleBtn').innerText = isFullViewMode ? t.switchViewFull : t.switchViewMaster;
+      document.getElementById('uiPanelTitle').innerText = isFullViewMode ? t.tableTitleFull : t.tableTitleMaster;
+      renderTable();
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      const btn = document.getElementById('uiFullscreenBtn');
+      const t = i18n[currentLang];
+      if (btn) {
+        btn.innerText = document.fullscreenElement ? t.btnExitFullscreen : t.btnFullscreen;
+      }
+    });
+
+    // Automatic Page Initialization on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTable();
+      renderTimeline();
+      renderMilestones();
+      updateTodayNeedle();
+      initCharts();
+    });
+
+    // Immediate fallback execution
+    try {
+      renderTable();
+      renderTimeline();
+      renderMilestones();
+      updateTodayNeedle();
+      initCharts();
+    } catch(e) { console.log('Initial render notice:', e); }
   </script>
 </body>
 </html>
