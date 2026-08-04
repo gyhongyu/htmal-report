@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D1 Audit Management System - QSA Observations 管理系統 (v3.0 單一滾動軸終極版)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #131b2e;
+            --bg-card: rgba(19, 27, 46, 0.75);
+            --bg-hover: #1e293b;
+            --accent-primary: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-danger: #ef4444;
+            --accent-purple: #a855f7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --formula-bg: rgba(30, 41, 59, 0.6);
+            --dirty-bg: rgba(245, 158, 11, 0.2);
+            --dirty-border: #f59e0b;
+            --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+            --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Group Banners Colors (100% 實體不透明深色背景，徹底防止透光) */
+            --group-cat-bg: #142e2a;
+            --group-sub-bg: #192744;
+            --group-nc-bg: #341b2b;
+            --group-capa-bg: #352a16;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+        }
+
+        /* 👑 頂部固定導覽列區塊 (Fixed Top Nav Wrapper) - 自動精確高度，零重疊 */
+        .sticky-top-wrapper {
+            flex: 0 0 auto;
+            z-index: 1000;
+            background: rgba(11, 15, 25, 0.98);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 頂部 Header */
+        header {
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .brand-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .brand-title h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: linear-gradient(90deg, #ffffff, #94a3b8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-title p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #34d399;
+            box-shadow: 0 0 8px #34d399;
+        }
+
+        /* 外部 Google Sheet 直連按鈕 */
+        .btn-sheet-link {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            text-decoration: none;
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.2s;
+        }
+
+        .btn-sheet-link:hover {
+            background: rgba(16, 185, 129, 0.3);
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* 全螢幕按鈕 */
+        .btn-fullscreen {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-fullscreen:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-fullscreen svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* 語系切換按鈕 */
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.2rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: #2563eb !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .badge-dirty {
+            background: #f59e0b;
+            color: #0f172a;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            margin-left: 0.3rem;
+        }
+
+        /* 頂部視圖與 Tab 頁籤 (已納入置頂凍結範圍) */
+        .tabs-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            background: rgba(19, 27, 46, 0.6);
+        }
+
+        .tabs-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .tab-btn {
+            background: var(--accent-primary);
+            border: none;
+            color: white;
+            padding: 0.55rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: default;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        /* 視圖切換按鈕組 */
+        .view-switcher {
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.2rem;
+        }
+
+        .view-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .view-btn.active {
+            background: rgba(59, 130, 246, 0.25);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        /* 🔵 主區域 - 頁面唯一縱向與橫向滾動容器 (padding-top 為 0 確保表頭黏靠 top:0 時上方零縫隙) */
+        main {
+            flex: 1 1 0px;
+            min-height: 0;
+            overflow: auto;
+            padding: 0 1.5rem 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 1750px;
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        /* 微型 KPI 統計儀表板 (KPI Analytics Bar) - 提供頁面頂部間距 */
+        .kpi-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.85rem;
+            width: 100%;
+            margin-top: 1.25rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .kpi-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .kpi-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .kpi-total .kpi-icon { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+        .kpi-nc .kpi-icon    { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .kpi-hl .kpi-icon    { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+        .kpi-pass .kpi-icon  { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+        .kpi-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            width: 100%;
+        }
+
+        .kpi-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .kpi-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+        }
+
+        .kpi-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* 工具列與狀態篩選晶片 */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.45rem 0.85rem;
+            width: 320px;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--accent-primary);
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            width: 100%;
+            margin-left: 0.5rem;
+            outline: none;
+        }
+
+        /* 淨化後的 Status Filter Chips (僅包含真實數據 All, Fail/NC, Highlight) */
+        .filter-chips {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .chip-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .chip-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+        .chip-btn.active {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+        }
+
+        .chip-nc.active { background: #ef4444; border-color: #ef4444; box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4); }
+        .chip-hl.active { background: #a855f7; border-color: #a855f7; box-shadow: 0 2px 10px rgba(168, 85, 247, 0.4); }
+
+        .info-stats {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-formula { background: var(--formula-bg); border: 1px solid var(--border-color); }
+        .legend-dirty { background: var(--dirty-bg); border: 1px solid var(--dirty-border); }
+
+        /* 資料表格容器 - 不設內嵌縱向滾動，讓父級 main 成為唯一滾動容器 */
+        .table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        table {
+            width: max-content;
+            min-width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.84rem;
+            text-align: left;
+        }
+
+        /* 🟢 表頭精準黏靠：相對於主滾動容器 main 最頂端 (top: 0 即在 102px 固定導航列正下方) */
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: #131b2e;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+        }
+
+        thead tr {
+            background-color: #131b2e;
+        }
+
+        th {
+            padding: 0.55rem 0.75rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            background-color: #131b2e;
+            background-clip: border-box;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+            border-right: 1px solid var(--border-color);
+            white-space: nowrap;
+            line-height: 1.25;
+            user-select: none;
+            font-size: 0.81rem;
+            letter-spacing: 0.01em;
+            vertical-align: middle;
+            position: relative;
+            z-index: 510;
+        }
+
+        th.group-cell {
+            text-align: center;
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+            background-clip: border-box;
+            position: relative;
+            z-index: 510;
+        }
+
+        th.group-cat  { background: var(--group-cat-bg);  color: #6ee7b7; border-right: 2px solid rgba(16, 185, 129, 0.4); }
+        th.group-sub  { background: var(--group-sub-bg);  color: #93c5fd; border-right: 2px solid rgba(59, 130, 246, 0.4); }
+        th.group-nc   { background: var(--group-nc-bg);   color: #f472b6; border-right: 2px solid rgba(236, 72, 153, 0.4); }
+        th.group-capa { background: var(--group-capa-bg); color: #fde047; }
+
+        th.col-first {
+            width: 60px;
+            min-width: 60px;
+            text-align: center;
+            background: #0b0f19;
+            color: var(--text-main);
+            white-space: nowrap;
+            position: relative;
+            z-index: 520;
+        }
+
+        /* 儲存格固定 38px 行高 */
+        td {
+            padding: 0.45rem 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            color: #cbd5e1;
+            transition: background 0.15s, border-color 0.15s;
+            position: static;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 280px;
+            height: 38px;
+            cursor: pointer;
+        }
+
+        td:hover {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+            color: #60a5fa !important;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.04);
+        }
+
+        /* 背景表格選中高亮列 */
+        tr.active-row td {
+            background-color: rgba(37, 99, 235, 0.35) !important;
+            color: #ffffff !important;
+            font-weight: 600;
+            border-bottom-color: rgba(59, 130, 246, 0.6) !important;
+            border-top-color: rgba(59, 130, 246, 0.6) !important;
+        }
+
+        tr.active-row td:first-child {
+            border-left: 4px solid #3b82f6 !important;
+            box-shadow: inset 4px 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.18rem 0.55rem;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .pill-fail { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .pill-pass { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .pill-pending { background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .pill-highlight { background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.5); }
+
+        td.cell-formula {
+            background: var(--formula-bg);
+            cursor: not-allowed;
+            color: #94a3b8;
+            font-family: var(--font-mono);
+            position: relative;
+        }
+
+        td.cell-formula::after {
+            content: "🔒";
+            font-size: 0.68rem;
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            opacity: 0.6;
+        }
+
+        td.cell-dirty {
+            background: var(--dirty-bg) !important;
+            border: 1px solid var(--dirty-border) !important;
+            color: #fef08a !important;
+            font-weight: 600;
+        }
+
+        /* CAPA 彈窗觸發按鈕 */
+        .btn-capa-view {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.3));
+            color: #fef08a;
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            padding: 0.22rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .btn-capa-view:hover {
+            background: rgba(245, 158, 11, 0.4);
+            border-color: #f59e0b;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+            transform: scale(1.03);
+        }
+
+        /* ==================== CAPA 側邊抽屜 (Side Drawer / Modal) ==================== */
+        .capa-drawer-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1200;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .capa-drawer-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .capa-drawer {
+            position: fixed;
+            top: 0; right: -580px; bottom: 0;
+            width: 100%;
+            max-width: 580px;
+            background: #0f172a;
+            border-left: 1px solid rgba(59, 130, 246, 0.4);
+            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1250;
+        }
+
+        .capa-drawer-overlay.open .capa-drawer {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 1.25rem 1.5rem;
+            background: rgba(19, 27, 46, 0.98);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .drawer-header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .drawer-header-title h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fde047;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .drawer-header-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .drawer-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-copy-report {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-report:hover {
+            background: rgba(59, 130, 246, 0.4);
+            color: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-drawer-close {
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .btn-drawer-close:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .drawer-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .drawer-section-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .capa-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.85rem;
+        }
+
+        .capa-field-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .capa-field-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .capa-field-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            word-break: break-word;
+        }
+
+        .capa-text-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.9rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .capa-edit-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .capa-edit-area label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fde047;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .capa-edit-area textarea {
+            width: 100%;
+            height: 120px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-main);
+            padding: 0.85rem;
+            font-family: inherit;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            outline: none;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .capa-edit-area textarea:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+
+        .drawer-footer {
+            padding: 1rem 1.5rem;
+            background: rgba(19, 27, 46, 0.95);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .drawer-nav-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* 一般儲存格編輯 Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+        }
+
+        .modal-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 720px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-card textarea {
+            width: 100%;
+            height: 240px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            padding: 0.85rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            outline: none;
+            resize: vertical;
+        }
+
+        .modal-card textarea:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 50;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3.5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.8s infinite linear;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 2000;
+        }
+
+        .toast {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        .toast-success { border-left: 4px solid var(--accent-success); }
+        .toast-error { border-left: 4px solid var(--accent-danger); }
+        .toast-info { border-left: 4px solid var(--accent-primary); }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 👑 置頂凍結導覽列區塊 (Sticky Top Nav Wrapper) -->
+    <div class="sticky-top-wrapper">
+        <!-- 頂部 Header -->
+        <header>
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 7h10v2H7zm0 4h10v2H7zm0 4h7v2H7z"/>
+                    </svg>
+                </div>
+                <div class="brand-title">
+                    <h1 id="appTitle">D1 Audit QSA Observations 管理系統 (v3.1 單一滾動軸版)</h1>
+                    <p>
+                        <span class="connection-status">
+                            <span class="status-dot"></span> <span id="statusText">在線資料庫連線中 (Live API Connected)</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <!-- 直連外部 Google Sheet 原生試算表 -->
+                <a id="btnSheetLink" href="https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1459374771" target="_blank" rel="noopener noreferrer" class="btn-sheet-link" title="開啟 Google Sheet 對應語系原生試算表">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span id="btnSheetLinkText">🟢 Google Sheet 試算表</span>
+                </a>
+
+                <!-- 全螢幕 / 還原 切換鈕 -->
+                <button class="btn-fullscreen" id="btnFullscreen" onclick="toggleFullscreen()" title="切換全螢幕 (Toggle Fullscreen)">
+                    <svg id="iconExpand" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                    <svg id="iconCompress" viewBox="0 0 24 24" style="display: none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+                </button>
+
+                <!-- 中英文語系切換鈕 -->
+                <div class="lang-switch">
+                    <button class="lang-btn" id="btnLangZH" onclick="switchLanguage('ZH')">繁中</button>
+                    <button class="lang-btn" id="btnLangEN" onclick="switchLanguage('EN')">EN</button>
+                </div>
+
+                <button class="btn btn-secondary" onclick="loadAllData()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    <span id="btnRefreshText">重新整理</span>
+                </button>
+
+                <button class="btn btn-success" id="btnSave" onclick="saveChanges()" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <span id="btnSaveText">儲存所有變更</span> <span class="badge-dirty" id="dirtyCounter" style="display: none;">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 專焦單一 Tab 與雙模式切換 -->
+        <div class="tabs-header">
+            <div class="tabs-nav" id="tabsNav">
+                <button class="tab-btn active">📊 QSA Observations</button>
+            </div>
+
+            <!-- 視圖切換器 -->
+            <div class="view-switcher">
+                <button class="view-btn active" id="btnViewCompact" onclick="switchViewMode('COMPACT')">
+                    ⚡ <span id="btnViewCompactText">精簡視圖 (無冗餘)</span>
+                </button>
+                <button class="view-btn" id="btnViewClassic" onclick="switchViewMode('CLASSIC')">
+                    📊 <span id="btnViewClassicText">傳統全視圖 (14欄)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主內容區 -->
+    <main>
+        <!-- 稽核 KPI 統計儀表板 -->
+        <div class="kpi-bar" id="kpiBar">
+            <div class="kpi-card kpi-total">
+                <div class="kpi-icon">📋</div>
+                <div class="kpi-info">
+                    <span class="kpi-label" id="lblKpiTotal">稽核觀察總項數</span>
+                    <div class="kpi-value"><span id="valKpiTotal">--</span> <span class="kpi-sub" id="lblKpiTotalSub">Obs</span></div>
+                </div>
+            </div>
+            <div class="kpi-card kpi-nc">
+                <div class="kpi-icon">❌</div>
+                <div class="kpi-info">
+                    <span class="kpi-label" id="lblKpiNc">缺失整改數 (NC)</span>
+                    <div class="kpi-value"><span id="valKpiNc">--</span> <span class="kpi-sub" id="lblKpiNcSub">Items</span></div>
+                </div>
+            </div>
+            <div class="kpi-card kpi-hl">
+                <div class="kpi-icon">🟣</div>
+                <div class="kpi-info">
+                    <span class="kpi-label" id="lblKpiHl">重點關注數 (Highlight)</span>
+                    <div class="kpi-value"><span id="valKpiHl">--</span> <span class="kpi-sub" id="lblKpiHlSub">Items</span></div>
+                </div>
+            </div>
+            <div class="kpi-card kpi-pass">
+                <div class="kpi-icon">📈</div>
+                <div class="kpi-info">
+                    <span class="kpi-label" id="lblKpiPassRate">合規達成率 (Compliance)</span>
+                    <div class="kpi-value"><span id="valKpiPassRate">--%</span></div>
+                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="kpiProgressFill" style="width: 0%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 工具列與淨化後的狀態過濾晶片 -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <div class="search-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" placeholder="搜尋 QSA Observations 所有欄位..." oninput="onSearchInput()" />
+                </div>
+
+                <!-- 淨化後的 Status Filter Chips (依目前已有數據保留 All, Fail/NC, Highlight) -->
+                <div class="filter-chips">
+                    <button class="chip-btn active" id="chipAll" onclick="setStatusFilter('ALL')">全部</button>
+                    <button class="chip-btn chip-nc" id="chipNc" onclick="setStatusFilter('FAIL')">❌ 缺失未通過</button>
+                    <button class="chip-btn chip-hl" id="chipHl" onclick="setStatusFilter('HIGHLIGHT')">🟣 重點關注</button>
+                </div>
+            </div>
+
+            <div class="info-stats">
+                <span id="rowCountInfo">載入中...</span>
+                <span class="legend-item"><span class="legend-box legend-formula"></span> <span id="legendFormulaText">🔒 公式計算 (唯讀)</span></span>
+                <span class="legend-item"><span class="legend-box legend-dirty"></span> <span id="legendDirtyText">✏️ 已修改 (待儲存)</span></span>
+            </div>
+        </div>
+
+        <!-- 表格容器 -->
+        <div class="table-container" id="tableContainer">
+            <div class="loading-overlay">
+                <div class="spinner"></div>
+                <div style="font-weight: 600;" id="overlayLoadingText">正在從 Google Sheet 載入 QSA Observations 資料...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- CAPA 側邊抽屜 (Side Drawer Modal) -->
+    <div class="capa-drawer-overlay" id="capaDrawerOverlay" onclick="handleOverlayClick(event)">
+        <div class="capa-drawer" id="capaDrawer">
+            <div class="drawer-header">
+                <div class="drawer-header-title">
+                    <h2 id="drawerRefTitle">⚡ CAPA 缺失整改對策詳情</h2>
+                    <div class="drawer-header-subtitle" id="drawerMetaSub">
+                        <span>主類別: --</span>
+                        <span>•</span>
+                        <span>次類別: --</span>
+                    </div>
+                </div>
+                <div class="drawer-header-actions">
+                    <button class="btn-copy-report" onclick="copyCapaReport()" title="複製完整 CAPA 報告文字">
+                        📋 <span id="btnCopyReportText">複製報告</span>
+                    </button>
+                    <button class="btn-drawer-close" onclick="closeCapaDrawer()" title="關閉 (Esc)">✕</button>
+                </div>
+            </div>
+
+            <div class="drawer-body">
+                <!-- 區塊 1: 稽核缺失說明 (NC) -->
+                <div>
+                    <div class="drawer-section-title" id="lblDrawerNcSection">📌 稽核缺失內容</div>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;" id="lblDrawerReq">要求 (Requirement)</div>
+                            <div class="capa-text-box" id="drawerReqContent">--</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;" id="lblDrawerFinding">稽核意見 (Audit Finding)</div>
+                            <div class="capa-text-box" id="drawerFindingContent">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 區塊 2: CAPA 執行狀態與指標 -->
+                <div>
+                    <div class="drawer-section-title" id="lblDrawerTrackerSection">🛠️ CAPA 執行狀態與指標</div>
+                    <div class="capa-info-grid">
+                        <div class="capa-field-card">
+                            <span class="capa-field-label" id="lblDrawerDri">負責人 (DRI)</span>
+                            <span class="capa-field-value" id="drawerDriVal">--</span>
+                        </div>
+                        <div class="capa-field-card">
+                            <span class="capa-field-label" id="lblDrawerPq2">PQ2 種類</span>
+                            <span class="capa-field-value" id="drawerPq2Val">--</span>
+                        </div>
+                        <div class="capa-field-card">
+                            <span class="capa-field-label" id="lblDrawerDueDate">截止日 (Due Date)</span>
+                            <span class="capa-field-value" id="drawerDueDateVal">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 區塊 3: 根本原因與行動計劃編輯區 -->
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="drawer-section-title" id="lblDrawerCapaSection">🔍 根本原因與行動計劃</div>
+                    
+                    <div class="capa-edit-area">
+                        <label for="drawerRootCause">
+                            <span id="lblDrawerRootCause">根本原因 (Root Cause)</span>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: normal;" id="lblDrawerEditHint1">(點擊編輯，編輯後點擊其他處即儲存)</span>
+                        </label>
+                        <textarea id="drawerRootCause" placeholder="請輸入根本原因分析..." onchange="onDrawerFieldChange('rootCause')"></textarea>
+                    </div>
+
+                    <div class="capa-edit-area">
+                        <label for="drawerActionPlan">
+                            <span id="lblDrawerActionPlan">行動計劃 (Action Plan)</span>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: normal;" id="lblDrawerEditHint2">(點擊編輯，編輯後點擊其他處即儲存)</span>
+                        </label>
+                        <textarea id="drawerActionPlan" placeholder="請輸入對策與預防行動計劃..." onchange="onDrawerFieldChange('actionPlan')"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-footer">
+                <div class="drawer-nav-group">
+                    <button class="btn btn-secondary" onclick="navigateDrawer(-1)" id="btnDrawerPrev">⬅️ 上一筆</button>
+                    <button class="btn btn-secondary" onclick="navigateDrawer(1)" id="btnDrawerNext">下一筆 ➡️</button>
+                </div>
+                <button class="btn btn-primary" onclick="closeCapaDrawer()" id="btnDrawerDone">關閉抽屜</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 一般儲存格編輯 Modal -->
+    <div class="modal-overlay" id="editModal" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-title" id="modalTitle">編輯內容</div>
+            <textarea id="modalTextarea" placeholder="在此輸入或修改內文..."></textarea>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()" id="modalCancelBtn">取消</button>
+                <button class="btn btn-primary" onclick="applyModalEdit()" id="modalConfirmBtn">確定修改</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // 硬編碼 GAS Web App URL
+        const HARDCODED_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby45EQ7ECz0tFqw6M10sOB1VwP01kvBsGL-976jmxSlC0OPNvkqn5DT1BTYtIjbmpzj/exec';
+
+        // 雙語精準 Google Sheet GID 直連網址對照
+        const GOOGLE_SHEET_URLS = {
+            ZH: 'https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1459374771',
+            EN: 'https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1395973215'
+        };
+
+        // 當前語系 ('ZH' 或 'EN')
+        let currentLang = localStorage.getItem('app_lang') || 'ZH';
+
+        // 當前檢視模式 ('COMPACT' 或 'CLASSIC')
+        let currentViewMode = localStorage.getItem('qsa_view_mode') || 'COMPACT';
+
+        // 當前狀態過濾晶片 ('ALL', 'FAIL', 'HIGHLIGHT')
+        let currentStatusFilter = 'ALL';
+
+        // 100% 硬編碼多語系 UI 字典 (純潔雙語)
+        const I18N = {
+            ZH: {
+                appTitle: 'D1 Audit QSA Observations 管理系統 (v3.1 單一滾動軸版)',
+                statusText: '在線資料庫連線中 (Live API Connected)',
+                btnSheetLinkText: '🟢 Google Sheet 繁中表',
+                btnRefreshText: '重新整理',
+                btnSaveText: '儲存所有變更',
+                btnViewCompactText: '⚡ 精簡視圖 (無冗餘)',
+                btnViewClassicText: '📊 傳統全視圖 (14欄)',
+                searchPlaceholder: '搜尋 QSA Observations 所有欄位...',
+                legendFormulaText: '🔒 公式計算 (唯讀)',
+                legendDirtyText: '✏️ 已修改 (待儲存)',
+                overlayLoadingText: '正在從 Google Sheet 載入 QSA Observations 資料...',
+                modalTitlePrefix: '編輯/檢視',
+                modalCancelBtn: '取消',
+                modalConfirmBtn: '確定修改',
+                fullscreenTooltip: '全螢幕 (F11)',
+                exitFullscreenTooltip: '退出全螢幕 (Esc / F11)',
+                rowCountInfoText: (filtered, total) => `顯示 ${filtered} / ${total} 筆列資料`,
+                btnCapaView: '🔍 CAPA 詳情',
+                btnCopyReportText: '複製報告',
+                drawerTitlePrefix: '⚡ CAPA 缺失整改對策詳情',
+                lblDrawerNcSection: '📌 稽核缺失內容',
+                lblDrawerTrackerSection: '🛠️ CAPA 執行狀態與指標',
+                lblDrawerCapaSection: '🔍 根本原因與行動計劃',
+                lblDrawerReq: '要求',
+                lblDrawerFinding: '稽核意見',
+                lblDrawerDri: '負責人 (DRI)',
+                lblDrawerPq2: 'PQ2 種類',
+                lblDrawerDueDate: '截止日',
+                lblDrawerRootCause: '根本原因',
+                lblDrawerActionPlan: '行動計劃',
+                lblDrawerEditHint: '(點擊編輯，編輯後點擊其他處即儲存)',
+                placeholderRootCause: '請輸入根本原因分析...',
+                placeholderActionPlan: '請輸入對策與預防行動計劃...',
+                btnDrawerPrev: '⬅️ 上一筆',
+                btnDrawerNext: '下一筆 ➡️',
+                btnDrawerDone: '關閉抽屜',
+                
+                // KPI Labels
+                lblKpiTotal: '稽核觀察總項數',
+                lblKpiNc: '缺失整改項 (NC)',
+                lblKpiHl: '重點關注項 (Highlight)',
+                lblKpiPassRate: '合規達成率 (Compliance)',
+                
+                // Filter Chips (按現有數據淨化)
+                chipAll: '全部',
+                chipNc: '❌ 缺失未通過',
+                chipHl: '🟣 重點關注'
+            },
+            EN: {
+                appTitle: 'D1 Audit QSA Observations Management System (v3.1 Single Scroll)',
+                statusText: 'Live API Connected',
+                btnSheetLinkText: '🟢 Live Sheet (EN)',
+                btnRefreshText: 'Refresh',
+                btnSaveText: 'Save Changes',
+                btnViewCompactText: '⚡ Compact View',
+                btnViewClassicText: '📊 Classic Full Sheet (14 cols)',
+                searchPlaceholder: 'Search all QSA columns...',
+                legendFormulaText: '🔒 Formula Cell (Read-Only)',
+                legendDirtyText: '✏️ Modified (Pending Save)',
+                overlayLoadingText: 'Loading QSA Observations data...',
+                modalTitlePrefix: 'View / Edit',
+                modalCancelBtn: 'Cancel',
+                modalConfirmBtn: 'Apply Edit',
+                fullscreenTooltip: 'Fullscreen (F11)',
+                exitFullscreenTooltip: 'Exit Fullscreen (Esc / F11)',
+                rowCountInfoText: (filtered, total) => `Showing ${filtered} / ${total} rows`,
+                btnCapaView: '🔍 View CAPA',
+                btnCopyReportText: 'Copy Report',
+                drawerTitlePrefix: '⚡ CAPA & Action Tracker Detail',
+                lblDrawerNcSection: '📌 NON-CONFORMANCE',
+                lblDrawerTrackerSection: '🛠️ CAPA TRACKER',
+                lblDrawerCapaSection: '🔍 CAPA DETAILS',
+                lblDrawerReq: 'Requirement',
+                lblDrawerFinding: 'Audit Finding',
+                lblDrawerDri: 'DRI',
+                lblDrawerPq2: 'PQ2-Category',
+                lblDrawerDueDate: 'Due Date',
+                lblDrawerRootCause: 'Root Cause',
+                lblDrawerActionPlan: 'Action Plan',
+                lblDrawerEditHint: '(Click to edit, auto-saves on blur)',
+                placeholderRootCause: 'Enter root cause analysis...',
+                placeholderActionPlan: 'Enter corrective and preventive action plan...',
+                btnDrawerPrev: '⬅️ Previous',
+                btnDrawerNext: 'Next ➡️',
+                btnDrawerDone: 'Close',
+
+                // KPI Labels
+                lblKpiTotal: 'Total Observations',
+                lblKpiNc: 'Non-Conformances (NC)',
+                lblKpiHl: 'Highlights',
+                lblKpiPassRate: 'Compliance Rate',
+
+                // Filter Chips (Cleaned for actual data)
+                chipAll: 'All',
+                chipNc: '❌ Fail / NC',
+                chipHl: '🟣 Highlight'
+            }
+        };
+
+        const HARDCODED_OBS_HEADERS_CLASSIC = {
+            ZH: {
+                group: [
+                    { name: '主類', span: 3, class: 'group-cat' },
+                    { name: '次類', span: 4, class: 'group-sub' },
+                    { name: '缺失 (NC)', span: 4, class: 'group-nc' },
+                    { name: 'CAPA 整改對策', span: 2, class: 'group-capa' }
+                ],
+                sub: ['序號', '主類別', '分數', '狀況', '次類別', '目標分', '實得分', '狀況', '缺失號', '要求', '嚴重度', '稽核意見', '負責人 / 截止日', 'CAPA 詳情']
+            },
+            EN: {
+                group: [
+                    { name: 'Category', span: 3, class: 'group-cat' },
+                    { name: 'Sub-Category', span: 4, class: 'group-sub' },
+                    { name: 'NC(Non-Conformance)', span: 4, class: 'group-nc' },
+                    { name: 'CAPA Tracker', span: 2, class: 'group-capa' }
+                ],
+                sub: ['No', 'Topic', 'Score', 'Status', 'Sub-Process', 'Target Score', 'Actual Score', 'Status', 'Ref No.', 'Requirement', 'Severity', 'Audit Finding', 'DRI / Due Date', 'CAPA Detail']
+            }
+        };
+
+        const HARDCODED_OBS_HEADERS_COMPACT = {
+            ZH: {
+                group: [
+                    { name: '次類指標與得分', span: 4, class: 'group-sub' },
+                    { name: '缺失與要求 (NC)', span: 4, class: 'group-nc' },
+                    { name: 'CAPA 對策追蹤', span: 2, class: 'group-capa' }
+                ],
+                sub: ['序號', '次類別', '目標分', '實得分', '狀況', '缺失號', '要求', '嚴重度', '稽核意見', '負責人 / 截止日', 'CAPA 詳情']
+            },
+            EN: {
+                group: [
+                    { name: 'Sub-Process & Metrics', span: 4, class: 'group-sub' },
+                    { name: 'NC Details', span: 4, class: 'group-nc' },
+                    { name: 'CAPA Tracker', span: 2, class: 'group-capa' }
+                ],
+                sub: ['No', 'Sub-Process', 'Target Score', 'Actual Score', 'Status', 'Ref No.', 'Requirement', 'Severity', 'Audit Finding', 'DRI / Due Date', 'CAPA Detail']
+            }
+        };
+
+        let qsaDataCache = { ZH: null, EN: null };
+        let currentSheetData = null;
+        let pendingChanges = {};
+        let currentSearchQuery = '';
+        let currentEditingCell = null;
+        
+        let activeDrawerDisplayIndex = -1;
+        let currentDisplayRowsList = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            syncLangButtons();
+            syncViewButtons();
+            applyI18nUI();
+            setupFullscreenListeners();
+            setupKeyboardListeners();
+            loadAllData();
+        });
+
+        function switchViewMode(mode) {
+            currentViewMode = mode;
+            localStorage.setItem('qsa_view_mode', mode);
+            syncViewButtons();
+            renderTable();
+        }
+
+        function syncViewButtons() {
+            const btnC = document.getElementById('btnViewCompact');
+            const btnL = document.getElementById('btnViewClassic');
+            if (!btnC || !btnL) return;
+            if (currentViewMode === 'COMPACT') {
+                btnC.classList.add('active');
+                btnL.classList.remove('active');
+            } else {
+                btnL.classList.add('active');
+                btnC.classList.remove('active');
+            }
+        }
+
+        function setStatusFilter(filterKey) {
+            currentStatusFilter = filterKey;
+            const chips = ['chipAll', 'chipNc', 'chipHl'];
+            const targetId = filterKey === 'ALL' ? 'chipAll' :
+                             filterKey === 'FAIL' ? 'chipNc' : 'chipHl';
+
+            chips.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === targetId) el.classList.add('active');
+                    else el.classList.remove('active');
+                }
+            });
+
+            renderTable();
+        }
+
+        function toggleFullscreen() {
+            try {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                        document.documentElement.webkitRequestFullscreen();
+                    } else if (document.documentElement.mozRequestFullScreen) {
+                        document.documentElement.mozRequestFullScreen();
+                    } else if (document.documentElement.msRequestFullscreen) {
+                        document.documentElement.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
+            } catch (err) {
+                console.error("Fullscreen toggle error:", err);
+            }
+        }
+
+        function setupFullscreenListeners() {
+            const updateIcons = () => {
+                const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+                const iconExpand = document.getElementById('iconExpand');
+                const iconCompress = document.getElementById('iconCompress');
+                const btnFS = document.getElementById('btnFullscreen');
+
+                if (iconExpand && iconCompress && btnFS) {
+                    if (isFS) {
+                        iconExpand.style.display = 'none';
+                        iconCompress.style.display = 'block';
+                        btnFS.title = I18N[currentLang].exitFullscreenTooltip;
+                    } else {
+                        iconExpand.style.display = 'block';
+                        iconCompress.style.display = 'none';
+                        btnFS.title = I18N[currentLang].fullscreenTooltip;
+                    }
+                }
+            };
+
+            document.addEventListener('fullscreenchange', updateIcons);
+            document.addEventListener('webkitfullscreenchange', updateIcons);
+            document.addEventListener('mozfullscreenchange', updateIcons);
+            document.addEventListener('MSFullscreenChange', updateIcons);
+        }
+
+        function setupKeyboardListeners() {
+            document.addEventListener('keydown', (e) => {
+                const overlay = document.getElementById('capaDrawerOverlay');
+                if (overlay && overlay.classList.contains('open')) {
+                    if (e.key === 'Escape') {
+                        closeCapaDrawer();
+                    } else if (e.key === 'ArrowLeft') {
+                        if (document.activeElement.tagName !== 'TEXTAREA') {
+                            navigateDrawer(-1);
+                        }
+                    } else if (e.key === 'ArrowRight') {
+                        if (document.activeElement.tagName !== 'TEXTAREA') {
+                            navigateDrawer(1);
+                        }
+                    }
+                }
+            });
+        }
+
+        function safeSetText(id, text, attr = 'innerText') {
+            const el = document.getElementById(id);
+            if (el) el[attr] = text;
+        }
+
+        function sanitizeTextForLang(str, lang) {
+            if (!str) return '';
+            const s = String(str).trim();
+            if (lang === 'EN') {
+                return s.replace(/[\u4e00-\u9fa5].*$/, '').trim() || s;
+            }
+            return s;
+        }
+
+        function syncLangButtons() {
+            const btnZH = document.getElementById('btnLangZH');
+            const btnEN = document.getElementById('btnLangEN');
+            if (!btnZH || !btnEN) return;
+            if (currentLang === 'ZH') {
+                btnZH.classList.add('active');
+                btnEN.classList.remove('active');
+            } else {
+                btnEN.classList.add('active');
+                btnZH.classList.remove('active');
+            }
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('app_lang', lang);
+
+            syncLangButtons();
+            applyI18nUI();
+
+            if (qsaDataCache[currentLang]) {
+                currentSheetData = qsaDataCache[currentLang];
+                renderTable();
+                if (activeDrawerDisplayIndex >= 0) {
+                    renderCapaDrawerContent(activeDrawerDisplayIndex);
+                }
+            } else {
+                loadQsaDataForLanguage(lang);
+            }
+        }
+
+        function applyI18nUI() {
+            const dict = I18N[currentLang] || I18N['ZH'];
+            safeSetText('appTitle', dict.appTitle);
+            safeSetText('statusText', dict.statusText);
+            safeSetText('btnSheetLinkText', dict.btnSheetLinkText);
+            safeSetText('btnRefreshText', dict.btnRefreshText);
+            safeSetText('btnSaveText', dict.btnSaveText);
+            safeSetText('btnViewCompactText', dict.btnViewCompactText);
+            safeSetText('btnViewClassicText', dict.btnViewClassicText);
+            safeSetText('searchInput', dict.searchPlaceholder, 'placeholder');
+            safeSetText('legendFormulaText', dict.legendFormulaText);
+            safeSetText('legendDirtyText', dict.legendDirtyText);
+            safeSetText('overlayLoadingText', dict.overlayLoadingText);
+            safeSetText('modalCancelBtn', dict.modalCancelBtn);
+            safeSetText('modalConfirmBtn', dict.modalConfirmBtn);
+            safeSetText('btnCopyReportText', dict.btnCopyReportText);
+
+            const sheetLinkBtn = document.getElementById('btnSheetLink');
+            if (sheetLinkBtn && GOOGLE_SHEET_URLS[currentLang]) {
+                sheetLinkBtn.href = GOOGLE_SHEET_URLS[currentLang];
+            }
+
+            // KPI Labels
+            safeSetText('lblKpiTotal', dict.lblKpiTotal);
+            safeSetText('lblKpiNc', dict.lblKpiNc);
+            safeSetText('lblKpiHl', dict.lblKpiHl);
+            safeSetText('lblKpiPassRate', dict.lblKpiPassRate);
+
+            // Chips
+            safeSetText('chipAll', dict.chipAll);
+            safeSetText('chipNc', dict.chipNc);
+            safeSetText('chipHl', dict.chipHl);
+
+            // Drawer UI
+            safeSetText('lblDrawerNcSection', dict.lblDrawerNcSection);
+            safeSetText('lblDrawerTrackerSection', dict.lblDrawerTrackerSection);
+            safeSetText('lblDrawerCapaSection', dict.lblDrawerCapaSection);
+            safeSetText('lblDrawerReq', dict.lblDrawerReq);
+            safeSetText('lblDrawerFinding', dict.lblDrawerFinding);
+            safeSetText('lblDrawerDri', dict.lblDrawerDri);
+            safeSetText('lblDrawerPq2', dict.lblDrawerPq2);
+            safeSetText('lblDrawerDueDate', dict.lblDrawerDueDate);
+            safeSetText('lblDrawerRootCause', dict.lblDrawerRootCause);
+            safeSetText('lblDrawerActionPlan', dict.lblDrawerActionPlan);
+            safeSetText('lblDrawerEditHint1', dict.lblDrawerEditHint);
+            safeSetText('lblDrawerEditHint2', dict.lblDrawerEditHint);
+            safeSetText('drawerRootCause', dict.placeholderRootCause, 'placeholder');
+            safeSetText('drawerActionPlan', dict.placeholderActionPlan, 'placeholder');
+            safeSetText('btnDrawerPrev', dict.btnDrawerPrev);
+            safeSetText('btnDrawerNext', dict.btnDrawerNext);
+            safeSetText('btnDrawerDone', dict.btnDrawerDone);
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(currentLang === 'ZH' ? '🎉 已成功複製 CAPA 整改報告至剪貼簿！' : '🎉 CAPA Report copied to clipboard!', 'success');
+                }).catch(err => {
+                    fallbackCopyText(text);
+                });
+            } else {
+                fallbackCopyText(text);
+            }
+        }
+
+        function fallbackCopyText(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                showToast(currentLang === 'ZH' ? '🎉 已成功複製 CAPA 整改報告至剪貼簿！' : '🎉 CAPA Report copied to clipboard!', 'success');
+            } catch (err) {
+                showToast(currentLang === 'ZH' ? '複製失敗，請手動選取複製' : 'Copy failed, please select manually', 'error');
+            }
+            document.body.removeChild(ta);
+        }
+
+        function setLoading(isLoading, message = '') {
+            const container = document.getElementById('tableContainer');
+            if (!container) return;
+            let overlay = container.querySelector('.loading-overlay');
+            if (isLoading) {
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'loading-overlay';
+                    overlay.innerHTML = `<div class="spinner"></div><div style="font-weight: 600;" id="overlayLoadingText">${message || I18N[currentLang].overlayLoadingText}</div>`;
+                    container.appendChild(overlay);
+                }
+            } else if (overlay) {
+                overlay.remove();
+            }
+        }
+
+        async function loadAllData() {
+            setLoading(true, currentLang === 'ZH' ? '讀取 QSA Observations 繁中資料...' : 'Loading QSA Observations EN data...');
+            qsaDataCache = { ZH: null, EN: null };
+            await loadQsaDataForLanguage(currentLang);
+        }
+
+        async function loadQsaDataForLanguage(lang) {
+            setLoading(true, lang === 'ZH' ? '讀取 QSA Observations 繁中資料...' : 'Loading QSA Observations EN data...');
+            
+            const targetSheetName = lang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
+
+            try {
+                const url = `${HARDCODED_WEB_APP_URL}?action=getSheetData&sheetName=${encodeURIComponent(targetSheetName)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+
+                setLoading(false);
+
+                if (data.status === 'success') {
+                    qsaDataCache[lang] = data;
+                    currentSheetData = data;
+                    renderTable();
+                    if (activeDrawerDisplayIndex >= 0) {
+                        renderCapaDrawerContent(activeDrawerDisplayIndex);
+                    }
+                } else if (lang === 'ZH') {
+                    showToast('線上無 QSA Observations (ZH) 表格，顯示預設英文表', 'info');
+                    loadQsaDataForLanguage('EN');
+                } else {
+                    showToast(`載入 [${targetSheetName}] 失敗: ${data.message}`, 'error');
+                }
+            } catch (err) {
+                console.error(err);
+                setLoading(false);
+                showToast(`載入數據連線異常`, 'error');
+            }
+        }
+
+        function getColWidthStyle(colIdx, isCompact = false) {
+            if (isCompact) {
+                switch (colIdx) {
+                    case 0: return 'width:50px; min-width:50px; text-align:center;';
+                    case 4: return 'width:150px; min-width:150px;';
+                    case 5: return 'width:80px; min-width:80px; text-align:center;';
+                    case 6: return 'width:80px; min-width:80px; text-align:center;';
+                    case 7: return 'width:75px; min-width:75px; text-align:center;';
+                    case 8: return 'width:80px; min-width:80px; text-align:center;';
+                    case 9: return 'width:240px; min-width:240px;';
+                    case 10: return 'width:105px; min-width:105px; text-align:center;';
+                    case 11: return 'width:240px; min-width:240px;';
+                    case 12: return 'width:145px; min-width:145px; text-align:center;';
+                    case 13: return 'width:115px; min-width:115px; text-align:center;';
+                    default: return 'min-width:110px;';
+                }
+            }
+
+            switch (colIdx) {
+                case 0: return 'width:60px; min-width:60px; text-align:center;';
+                case 1: return 'width:130px; min-width:130px;';
+                case 2: return 'width:80px; min-width:80px; text-align:center;';
+                case 3: return 'width:75px; min-width:75px; text-align:center;';
+                case 4: return 'width:160px; min-width:160px;';
+                case 5: return 'width:85px; min-width:85px; text-align:center;';
+                case 6: return 'width:85px; min-width:85px; text-align:center;';
+                case 7: return 'width:75px; min-width:75px; text-align:center;';
+                case 8: return 'width:85px; min-width:85px; text-align:center;';
+                case 9: return 'width:240px; min-width:240px;';
+                case 10: return 'width:110px; min-width:110px; text-align:center;';
+                case 11: return 'width:240px; min-width:240px;';
+                case 12: return 'width:150px; min-width:150px; text-align:center;';
+                case 13: return 'width:125px; min-width:125px; text-align:center;';
+                default: return 'min-width:120px;';
+            }
+        }
+
+        
+        function getBadgeClass(val) {
+            if (!val) return '';
+            const cleanStr = String(val).trim();
+            const s = cleanStr.toLowerCase();
+            if (cleanStr === 'Pass' || cleanStr === '已核准' || cleanStr === 'Done' || cleanStr === '通過' || cleanStr === '符合' || s === 'pass' || s === 'approved') {
+                return 'pill-pass';
+            }
+            if (cleanStr === '未通過' || s.includes('fail') || s.includes('nonconformance') || s.includes('non-conformance') || cleanStr === 'Rejected' || s.includes('缺失') || s.includes('不符合') || s === 'nc') {
+                return 'pill-fail';
+            }
+            if (cleanStr === '重點關注' || s === 'highlight') {
+                return 'pill-highlight';
+            }
+            if (cleanStr === '進行中' || cleanStr === '審核中' || cleanStr === '待處理' || s === 'in progress' || s.includes('佐證') || s === 'evidence' || s === 'pending') {
+                return 'pill-pending';
+            }
+            return '';
+        }
+
+        function renderTable() {
+            setLoading(false);
+
+            try {
+                const container = document.getElementById('tableContainer');
+                if (!container) return;
+
+                if (!currentSheetData || !currentSheetData.rows) {
+                    container.innerHTML = `
+                        <div style="padding: 4rem; text-align: center; color: var(--text-muted);">
+                            <h3>QSA Observations 尚無資料內容</h3>
+                        </div>
+                    `;
+                    safeSetText('rowCountInfo', '列數: 0');
+                    return;
+                }
+
+                const rows = currentSheetData.rows;
+                const formulaMask = currentSheetData.formulaMask || [];
+
+                let dataStartRowIdx = 0;
+                while (dataStartRowIdx < rows.length) {
+                    const r = rows[dataStartRowIdx];
+                    const c1 = String(r[1] || '');
+                    if (c1.includes('Topic') || c1.includes('主類別') || c1.includes('Category') || c1 === '') {
+                        dataStartRowIdx++;
+                    } else {
+                        break;
+                    }
+                }
+
+                currentDisplayRowsList = [];
+                let totalObsCount = 0;
+                let totalNcCount = 0;
+                let totalHlCount = 0;
+                let totalPassCount = 0;
+
+                for (let rIdx = dataStartRowIdx; rIdx < rows.length; rIdx++) {
+                    const r = rows[rIdx];
+                    if (!r || r.every(cell => String(cell).trim() === '')) continue;
+
+                    totalObsCount++;
+
+                    const subStatus = getCellDisplayVal(rIdx, 7, r[7]);
+                    const sevStatus = getCellDisplayVal(rIdx, 10, r[10]);
+                    const cleanSub = String(subStatus).trim();
+                    const cleanSev = String(sevStatus).trim();
+
+                    const subBadge = getBadgeClass(subStatus);
+                    const sevBadge = getBadgeClass(sevStatus);
+                    const isNc = (subBadge === 'pill-fail' || sevBadge === 'pill-fail');
+                    const isHl = (sevBadge === 'pill-highlight');
+                    const isPass = (subBadge === 'pill-pass' && sevBadge !== 'pill-fail');
+
+                    if (isNc) totalNcCount++;
+                    if (isHl) totalHlCount++;
+                    if (isPass) totalPassCount++;
+
+                    let matchesSearch = true;
+                    if (currentSearchQuery) {
+                        matchesSearch = r.some(c => String(c).toLowerCase().includes(currentSearchQuery.toLowerCase()));
+                    }
+
+                    let matchesChip = true;
+                    if (currentStatusFilter === 'FAIL') matchesChip = isNc;
+                    else if (currentStatusFilter === 'HIGHLIGHT') matchesChip = isHl;
+
+                    if (matchesSearch && matchesChip) {
+                        currentDisplayRowsList.push({ rIdx, r });
+                    }
+                }
+
+                safeSetText('valKpiTotal', `${totalObsCount}`);
+                safeSetText('valKpiNc', `${totalNcCount}`);
+                safeSetText('valKpiHl', `${totalHlCount}`);
+                const compliancePct = totalObsCount > 0 ? Math.round((totalPassCount / totalObsCount) * 100) : 0;
+                safeSetText('valKpiPassRate', `${compliancePct}%`);
+                const fillEl = document.getElementById('kpiProgressFill');
+                if (fillEl) fillEl.style.width = `${compliancePct}%`;
+
+                safeSetText('rowCountInfo', I18N[currentLang].rowCountInfoText(currentDisplayRowsList.length, Math.max(0, rows.length - dataStartRowIdx)));
+
+                if (currentViewMode === 'COMPACT') {
+                    renderCompactView(container, formulaMask);
+                } else {
+                    renderClassicView(container, formulaMask);
+                }
+
+            } catch (err) {
+                console.error("renderTable error:", err);
+            }
+        }
+
+        // ⚡ 精簡平鋪視圖渲染 (Clean Compact View - 無中斷 Banner，乾淨暢快)
+        function renderCompactView(container, formulaMask) {
+            const obsDef = HARDCODED_OBS_HEADERS_COMPACT[currentLang] || HARDCODED_OBS_HEADERS_COMPACT['ZH'];
+            const groupHeaders = obsDef.group;
+            const subHeaders = obsDef.sub;
+
+            let headerHtml = `
+                <thead>
+                    <tr>
+                        <th class="col-first" rowspan="2">${subHeaders[0]}</th>
+                        ${groupHeaders.map(g => `<th class="group-cell ${g.class}" colspan="${g.span}">${g.name}</th>`).join('')}
+                    </tr>
+                    <tr>
+            `;
+
+            const mappedCols = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+            for (let i = 0; i < mappedCols.length; i++) {
+                const c = mappedCols[i];
+                const hName = subHeaders[i + 1];
+                const widthStyle = getColWidthStyle(c, true);
+                headerHtml += `<th style="${widthStyle}">${hName}</th>`;
+            }
+            headerHtml += `</tr></thead>`;
+
+            let html = `<table>${headerHtml}<tbody>`;
+
+            currentDisplayRowsList.forEach(({ rIdx, r }, dispIdx) => {
+                const realRow = rIdx + 2;
+                const isActive = (activeDrawerDisplayIndex === dispIdx);
+                const rowClass = isActive ? 'class="active-row"' : '';
+
+                html += `<tr ${rowClass}>`;
+
+                // Col 0: 序號 (No)
+                const noVal = getCellDisplayVal(rIdx, 0, r[0]);
+                html += `<td style="${getColWidthStyle(0, true)}" style="text-align:center; font-weight:700;">${escapeHtml(noVal)}</td>`;
+
+                // 繪製 Col 4 ~ 11 (次類別 到 稽核意見)
+                for (let cIdx = 4; cIdx <= 11; cIdx++) {
+                    const realCol = cIdx + 1;
+                    const subHeaderIdx = mappedCols.indexOf(cIdx) + 1;
+                    const hName = subHeaders[subHeaderIdx];
+                    const rawVal = (r && r[cIdx] !== undefined) ? r[cIdx] : '';
+
+                    const isFormula = (formulaMask && formulaMask[rIdx] && formulaMask[rIdx][cIdx]) ? true : false;
+                    const widthStyle = getColWidthStyle(cIdx, true);
+
+                    const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
+                    const changeKey = `${realRow}_${realCol}`;
+                    const hasDirty = pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined;
+                    const displayVal = hasDirty ? pendingChanges[activeTargetSheet][changeKey] : rawVal;
+
+                    let cellClass = 'cell-clickable ';
+                    if (isFormula) cellClass += 'cell-formula';
+                    else if (hasDirty) cellClass += 'cell-dirty';
+                    else cellClass += 'cell-editable';
+
+                    let formattedContent = escapeHtml(displayVal);
+                    const cleanStr = String(displayVal).trim();
+                    const isBadgeColumn = (cIdx === 7 || cIdx === 10);
+
+                    if (isBadgeColumn) {
+                        const badgeCls = getBadgeClass(cleanStr);
+                        if (badgeCls) {
+                            formattedContent = `<span class="status-pill ${badgeCls}">${escapeHtml(cleanStr)}</span>`;
+                        }
+                    } else if (cleanStr.endsWith('%') && !isNaN(parseFloat(cleanStr))) {
+                        const pct = parseFloat(cleanStr);
+                        formattedContent = `
+                            <div style="font-weight:600;">${escapeHtml(cleanStr)}</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${Math.min(100, Math.max(0, pct))}%;"></div></div>
+                        `;
+                    }
+
+                    html += `
+                        <td class="${cellClass}" 
+                            style="${widthStyle}"
+                            data-row="${realRow}" 
+                            data-col="${realCol}" 
+                            data-rindex="${rIdx}" 
+                            data-cindex="${cIdx}" 
+                            data-formula="${isFormula}"
+                            data-header="${escapeHtml(hName)}"
+                            title="💡 點擊儲存格查看完整內文與修改"
+                            onclick="handleCellClick(this, event)">
+                            ${formattedContent}
+                        </td>
+                    `;
+                }
+
+                // Col 12: DRI 與 Due Date
+                const driVal = getCellDisplayVal(rIdx, 12, r[12]);
+                const dueVal = getCellDisplayVal(rIdx, 14, r[14]);
+                const width12 = getColWidthStyle(12, true);
+                html += `
+                    <td style="${width12} text-align:center; font-size:0.78rem;" onclick="openCapaDrawer(${dispIdx})">
+                        <div style="font-weight:700; color:var(--text-main);">${escapeHtml(driVal || '--')}</div>
+                        <div style="font-size:0.72rem; color:var(--text-muted);">${escapeHtml(dueVal || '--')}</div>
+                    </td>
+                `;
+
+                // Col 13: CAPA 詳情按鈕
+                const width13 = getColWidthStyle(13, true);
+                const btnLabel = I18N[currentLang].btnCapaView;
+                html += `
+                    <td style="${width13} text-align:center;" onclick="openCapaDrawer(${dispIdx})">
+                        <button class="btn-capa-view" onclick="event.stopPropagation(); openCapaDrawer(${dispIdx});">
+                            ${btnLabel}
+                        </button>
+                    </td>
+                `;
+
+                html += `</tr>`;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+        }
+
+        function renderClassicView(container, formulaMask) {
+            const obsDef = HARDCODED_OBS_HEADERS_CLASSIC[currentLang] || HARDCODED_OBS_HEADERS_CLASSIC['ZH'];
+            const groupHeaders = obsDef.group;
+            const subHeaders = obsDef.sub;
+
+            let headerHtml = `
+                <thead>
+                    <tr>
+                        <th class="col-first" rowspan="2">${subHeaders[0]}</th>
+                        ${groupHeaders.map(g => `<th class="group-cell ${g.class}" colspan="${g.span}">${g.name}</th>`).join('')}
+                    </tr>
+                    <tr>
+            `;
+
+            for (let c = 1; c < subHeaders.length; c++) {
+                const hName = subHeaders[c];
+                const widthStyle = getColWidthStyle(c, false);
+                headerHtml += `<th style="${widthStyle}">${hName}</th>`;
+            }
+            headerHtml += `</tr></thead>`;
+
+            let html = `<table>${headerHtml}<tbody>`;
+
+            currentDisplayRowsList.forEach(({ rIdx, r }, dispIdx) => {
+                const realRow = rIdx + 2;
+                const isActive = (activeDrawerDisplayIndex === dispIdx);
+                const rowClass = isActive ? 'class="active-row"' : '';
+
+                html += `<tr ${rowClass}>`;
+
+                for (let cIdx = 0; cIdx <= 11; cIdx++) {
+                    const hName = subHeaders[cIdx];
+                    const realCol = cIdx + 1;
+                    const rawVal = (r && r[cIdx] !== undefined) ? r[cIdx] : '';
+                    
+                    const isFormula = (formulaMask && formulaMask[rIdx] && formulaMask[rIdx][cIdx]) ? true : false;
+                    const widthStyle = getColWidthStyle(cIdx, false);
+
+                    const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
+                    const changeKey = `${realRow}_${realCol}`;
+                    const hasDirty = pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined;
+                    const displayVal = hasDirty ? pendingChanges[activeTargetSheet][changeKey] : rawVal;
+
+                    let cellClass = 'cell-clickable ';
+                    if (isFormula) cellClass += 'cell-formula';
+                    else if (hasDirty) cellClass += 'cell-dirty';
+                    else cellClass += 'cell-editable';
+
+                    let formattedContent = escapeHtml(displayVal);
+                    const cleanStr = String(displayVal).trim();
+                    const isBadgeColumn = (cIdx === 3 || cIdx === 7 || cIdx === 10);
+
+                    if (isBadgeColumn) {
+                        const badgeCls = getBadgeClass(cleanStr);
+                        if (badgeCls) {
+                            formattedContent = `<span class="status-pill ${badgeCls}">${escapeHtml(cleanStr)}</span>`;
+                        }
+                    } else if (cleanStr.endsWith('%') && !isNaN(parseFloat(cleanStr))) {
+                        const pct = parseFloat(cleanStr);
+                        formattedContent = `
+                            <div style="font-weight:600;">${escapeHtml(cleanStr)}</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${Math.min(100, Math.max(0, pct))}%;"></div></div>
+                        `;
+                    }
+
+                    html += `
+                        <td class="${cellClass}" 
+                            style="${widthStyle}"
+                            data-row="${realRow}" 
+                            data-col="${realCol}" 
+                            data-rindex="${rIdx}" 
+                            data-cindex="${cIdx}" 
+                            data-formula="${isFormula}"
+                            data-header="${escapeHtml(hName)}"
+                            title="💡 點擊儲存格查看完整內文與修改"
+                            onclick="handleCellClick(this, event)">
+                            ${formattedContent}
+                        </td>
+                    `;
+                }
+
+                const driVal = getCellDisplayVal(rIdx, 12, r[12]);
+                const dueVal = getCellDisplayVal(rIdx, 14, r[14]);
+                const width12 = getColWidthStyle(12, false);
+                html += `
+                    <td style="${width12} text-align:center; font-size:0.78rem;" onclick="openCapaDrawer(${dispIdx})">
+                        <div style="font-weight:700; color:var(--text-main);">${escapeHtml(driVal || '--')}</div>
+                        <div style="font-size:0.72rem; color:var(--text-muted);">${escapeHtml(dueVal || '--')}</div>
+                    </td>
+                `;
+
+                const width13 = getColWidthStyle(13, false);
+                const btnLabel = I18N[currentLang].btnCapaView;
+                html += `
+                    <td style="${width13} text-align:center;" onclick="openCapaDrawer(${dispIdx})">
+                        <button class="btn-capa-view" onclick="event.stopPropagation(); openCapaDrawer(${dispIdx});">
+                            ${btnLabel}
+                        </button>
+                    </td>
+                `;
+
+                html += `</tr>`;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+        }
+
+        function getCellDisplayVal(rIdx, cIdx, rawFallback = '') {
+            if (!currentSheetData || !currentSheetData.rows) return rawFallback;
+            const realRow = rIdx + 2;
+            const realCol = cIdx + 1;
+            const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
+            const changeKey = `${realRow}_${realCol}`;
+            if (pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined) {
+                return pendingChanges[activeTargetSheet][changeKey];
+            }
+            return (currentSheetData.rows[rIdx] && currentSheetData.rows[rIdx][cIdx] !== undefined)
+                ? currentSheetData.rows[rIdx][cIdx]
+                : rawFallback;
+        }
+
+        function onSearchInput() {
+            currentSearchQuery = document.getElementById('searchInput').value.trim();
+            renderTable();
+        }
+
+        function openCapaDrawer(dispIdx) {
+            if (dispIdx < 0 || dispIdx >= currentDisplayRowsList.length) return;
+            activeDrawerDisplayIndex = dispIdx;
+
+            const overlay = document.getElementById('capaDrawerOverlay');
+            if (overlay) overlay.classList.add('open');
+
+            renderCapaDrawerContent(dispIdx);
+            renderTable();
+        }
+
+        function closeCapaDrawer() {
+            activeDrawerDisplayIndex = -1;
+            const overlay = document.getElementById('capaDrawerOverlay');
+            if (overlay) overlay.classList.remove('open');
+            renderTable();
+        }
+
+        function handleOverlayClick(event) {
+            if (event.target.id === 'capaDrawerOverlay') {
+                closeCapaDrawer();
+            }
+        }
+
+        function navigateDrawer(direction) {
+            if (activeDrawerDisplayIndex < 0) return;
+            const nextIdx = activeDrawerDisplayIndex + direction;
+            if (nextIdx >= 0 && nextIdx < currentDisplayRowsList.length) {
+                openCapaDrawer(nextIdx);
+            } else {
+                showToast(direction > 0 ? (currentLang === 'ZH' ? '已達最後一筆資料' : 'Reached last row') : (currentLang === 'ZH' ? '已達第一筆資料' : 'Reached first row'), 'info');
+            }
+        }
+
+        function renderCapaDrawerContent(dispIdx) {
+            const item = currentDisplayRowsList[dispIdx];
+            if (!item) return;
+            const { rIdx, r } = item;
+            const realRow = rIdx + 2;
+
+            const refNo = getCellDisplayVal(rIdx, 8, r[8]);
+            let topic = getCellDisplayVal(rIdx, 1, r[1]);
+            let subProcess = getCellDisplayVal(rIdx, 4, r[4]);
+            const severity = getCellDisplayVal(rIdx, 10, r[10]);
+
+            topic = sanitizeTextForLang(topic, currentLang);
+            subProcess = sanitizeTextForLang(subProcess, currentLang);
+
+            const requirement = getCellDisplayVal(rIdx, 9, r[9]);
+            const auditFinding = getCellDisplayVal(rIdx, 11, r[11]);
+
+            const dri = getCellDisplayVal(rIdx, 12, r[12]);
+            const pq2Cat = getCellDisplayVal(rIdx, 13, r[13]);
+            const dueDate = getCellDisplayVal(rIdx, 14, r[14]);
+            const rootCause = getCellDisplayVal(rIdx, 15, r[15]);
+            const actionPlan = getCellDisplayVal(rIdx, 16, r[16]);
+
+            const dict = I18N[currentLang] || I18N['ZH'];
+
+            safeSetText('drawerRefTitle', `${dict.drawerTitlePrefix} [${refNo || 'Ref #' + realRow}]`);
+            const sevBadgeClass = getBadgeClass(severity) || 'pill-fail';
+            safeSetText('drawerMetaSub', `<span>${escapeHtml(topic)}</span> • <span>${escapeHtml(subProcess)}</span> • <span class="status-pill ${sevBadgeClass}">${escapeHtml(severity)}</span>`, 'innerHTML');
+
+            safeSetText('drawerReqContent', requirement || '--');
+            safeSetText('drawerFindingContent', auditFinding || '--');
+
+            safeSetText('drawerDriVal', dri || '--');
+            safeSetText('drawerPq2Val', pq2Cat || '--');
+            safeSetText('drawerDueDateVal', dueDate || '--');
+
+            const taRoot = document.getElementById('drawerRootCause');
+            const taAction = document.getElementById('drawerActionPlan');
+            if (taRoot) taRoot.value = rootCause || '';
+            if (taAction) taAction.value = actionPlan || '';
+
+            const btnPrev = document.getElementById('btnDrawerPrev');
+            const btnNext = document.getElementById('btnDrawerNext');
+            if (btnPrev) btnPrev.disabled = (dispIdx === 0);
+            if (btnNext) btnNext.disabled = (dispIdx === currentDisplayRowsList.length - 1);
+        }
+
+        function copyCapaReport() {
+            if (activeDrawerDisplayIndex < 0) return;
+            const item = currentDisplayRowsList[activeDrawerDisplayIndex];
+            if (!item) return;
+            const { rIdx, r } = item;
+            const realRow = rIdx + 2;
+
+            const refNo = getCellDisplayVal(rIdx, 8, r[8]);
+            const topic = sanitizeTextForLang(getCellDisplayVal(rIdx, 1, r[1]), currentLang);
+            const subProcess = sanitizeTextForLang(getCellDisplayVal(rIdx, 4, r[4]), currentLang);
+            const severity = getCellDisplayVal(rIdx, 10, r[10]);
+            const req = getCellDisplayVal(rIdx, 9, r[9]);
+            const finding = getCellDisplayVal(rIdx, 11, r[11]);
+            const dri = getCellDisplayVal(rIdx, 12, r[12]);
+            const due = getCellDisplayVal(rIdx, 14, r[14]);
+            const rootCause = getCellDisplayVal(rIdx, 15, r[15]);
+            const actionPlan = getCellDisplayVal(rIdx, 16, r[16]);
+
+            const reportText = `【QSA Observation CAPA Report - ${refNo || ('Row ' + realRow)}】
+📌 Category: ${topic} / Sub-Process: ${subProcess} (${severity})
+📌 Requirement: ${req}
+📌 Audit Finding: ${finding}
+🛠️ DRI: ${dri} | Due Date: ${due}
+🔍 Root Cause:
+${rootCause || '(Pending)'}
+
+🛠️ Action Plan:
+${actionPlan || '(Pending)'}`;
+
+            copyToClipboard(reportText);
+        }
+
+        function onDrawerFieldChange(fieldType) {
+            if (activeDrawerDisplayIndex < 0) return;
+            const item = currentDisplayRowsList[activeDrawerDisplayIndex];
+            if (!item) return;
+            const { rIdx, r } = item;
+            const realRow = rIdx + 2;
+
+            let cIdx = (fieldType === 'rootCause') ? 15 : 16;
+            let realCol = cIdx + 1;
+
+            const ta = document.getElementById(fieldType === 'rootCause' ? 'drawerRootCause' : 'drawerActionPlan');
+            if (!ta) return;
+
+            const newVal = ta.value.trim();
+            const origRawVal = (r && r[cIdx] !== undefined) ? r[cIdx] : '';
+            const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
+
+            applyCellChange(activeTargetSheet, realRow, realCol, rIdx, cIdx, origRawVal, newVal);
+            showToast(currentLang === 'ZH' ? `已套用 [${fieldType === 'rootCause' ? '根本原因' : '行動計劃'}] 修改，待儲存` : `Applied [${fieldType === 'rootCause' ? 'Root Cause' : 'Action Plan'}] change (Pending Save)`, 'info');
+        }
+
+        function handleCellClick(td, event) {
+            const isFormula = td.getAttribute('data-formula') === 'true';
+            if (isFormula) {
+                showToast(currentLang === 'ZH' ? '🔒 此欄位為公式動態計算，已自動唯讀防護！' : '🔒 Formula cell (Read-only)', 'info');
+                return;
+            }
+
+            const rIdx = parseInt(td.getAttribute('data-rindex'), 10);
+            const cIdx = parseInt(td.getAttribute('data-cindex'), 10);
+            const realRow = td.getAttribute('data-row');
+            const realCol = td.getAttribute('data-col');
+            const headerName = td.getAttribute('data-header');
+
+            const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
+            const origRawVal = (currentSheetData.rows[rIdx] && currentSheetData.rows[rIdx][cIdx] !== undefined) ? currentSheetData.rows[rIdx][cIdx] : '';
+            const changeKey = `${realRow}_${realCol}`;
+            const currentVal = (pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined)
+                                ? pendingChanges[activeTargetSheet][changeKey]
+                                : origRawVal;
+
+            currentEditingCell = { td, realRow, realCol, rIdx, cIdx, origRawVal, activeTargetSheet };
+            const modalTitleEl = document.getElementById('modalTitle');
+            if (modalTitleEl) {
+                modalTitleEl.innerHTML = `
+                    <span>📝 ${I18N[currentLang].modalTitlePrefix} [${headerName}] - Row ${realRow}</span>
+                    <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(${currentLang === 'ZH' ? '按下 ESC 或點擊取消關閉' : 'Press ESC or cancel to close'})</span>
+                `;
+            }
+            
+            const textarea = document.getElementById('modalTextarea');
+            if (textarea) textarea.value = currentVal;
+            
+            const modal = document.getElementById('editModal');
+            if (modal) modal.style.display = 'flex';
+            if (textarea) textarea.focus();
+        }
+
+        function applyModalEdit() {
+            if (!currentEditingCell) return;
+            const textarea = document.getElementById('modalTextarea');
+            const newVal = textarea ? textarea.value.trim() : '';
+            const { realRow, realCol, rIdx, cIdx, origRawVal, activeTargetSheet } = currentEditingCell;
+            applyCellChange(activeTargetSheet, realRow, realCol, rIdx, cIdx, origRawVal, newVal);
+            closeModal();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('editModal');
+            if (modal) modal.style.display = 'none';
+            currentEditingCell = null;
+        }
+
+        function applyCellChange(targetSheet, realRow, realCol, rIdx, cIdx, origRawVal, newVal) {
+            const changeKey = `${realRow}_${realCol}`;
+            if (!pendingChanges[targetSheet]) {
+                pendingChanges[targetSheet] = {};
+            }
+
+            if (newVal !== origRawVal) {
+                pendingChanges[targetSheet][changeKey] = newVal;
+            } else {
+                delete pendingChanges[targetSheet][changeKey];
+            }
+
+            updateDirtyCounter();
+            renderTable();
+        }
+
+        function updateDirtyCounter() {
+            let total = 0;
+            Object.keys(pendingChanges).forEach(s => {
+                total += Object.keys(pendingChanges[s]).length;
+            });
+
+            const btnSave = document.getElementById('btnSave');
+            const counter = document.getElementById('dirtyCounter');
+
+            if (btnSave && counter) {
+                if (total > 0) {
+                    btnSave.disabled = false;
+                    counter.style.display = 'inline-block';
+                    counter.innerText = `${total}`;
+                } else {
+                    btnSave.disabled = true;
+                    counter.style.display = 'none';
+                }
+            }
+        }
+
+        async function saveChanges() {
+            let changesList = [];
+            Object.keys(pendingChanges).forEach(sName => {
+                Object.keys(pendingChanges[sName]).forEach(key => {
+                    const parts = key.split('_');
+                    changesList.push({
+                        sheetName: sName,
+                        row: parseInt(parts[0], 10),
+                        col: parseInt(parts[1], 10),
+                        value: pendingChanges[sName][key]
+                    });
+                });
+            });
+
+            if (changesList.length === 0) return;
+
+            setLoading(true, currentLang === 'ZH' ? `同步更新 ${changesList.length} 個儲存格至 Google Sheet...` : `Syncing ${changesList.length} cells to Google Sheet...`);
+
+            try {
+                const groups = {};
+                changesList.forEach(item => {
+                    if (!groups[item.sheetName]) groups[item.sheetName] = [];
+                    groups[item.sheetName].push({ row: item.row, col: item.col, value: item.value });
+                });
+
+                let updatedTotal = 0;
+                for (const sName of Object.keys(groups)) {
+                    const res = await fetch(HARDCODED_WEB_APP_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'updateBatch',
+                            sheetName: sName,
+                            changes: groups[sName]
+                        })
+                    });
+
+                    const data = await res.json();
+                    if (data.status === 'success') {
+                        updatedTotal += (data.updatedCount || 0);
+                    }
+                }
+
+                showToast(currentLang === 'ZH' ? `🎉 成功更新 ${updatedTotal} 個儲存格！` : `🎉 Successfully updated ${updatedTotal} cells!`, 'success');
+                pendingChanges = {};
+                updateDirtyCounter();
+                loadAllData();
+
+            } catch (err) {
+                console.error(err);
+                setLoading(false);
+                showToast(currentLang === 'ZH' ? '儲存失敗，請確認 GAS 權限設定' : 'Save failed, please check GAS permissions', 'error');
+            }
+        }
+
+        function escapeHtml(text) {
+            if (text === null || text === undefined) return '';
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
