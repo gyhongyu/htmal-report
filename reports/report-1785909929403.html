@@ -19,7 +19,7 @@
         .mermaid {
             background: #ffffff;
             border-radius: 0.75rem;
-            padding: 1.5rem;
+            padding: 2rem;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
         .tab-active {
@@ -36,7 +36,7 @@
         <div class="max-w-[96%] mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex items-center gap-4">
-                    <!-- Foxlink Logo (Pure White Effect) -->
+                    <!-- Foxlink White Logo -->
                     <img src="https://i.postimg.cc/rsb3xvLj/foxlink.png" alt="Foxlink Logo" class="h-8 w-auto flex-shrink-0" style="filter: grayscale(100%) invert(100%) contrast(200%); mix-blend-mode: screen;">
                     <div>
                         <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-1">
@@ -50,7 +50,7 @@
                         </h1>
                     </div>
                 </div>
-                <!-- Supply Chain Chain Flow -->
+                <!-- Supply Chain Flow -->
                 <div class="bg-slate-800/90 border border-slate-700/80 rounded-lg px-3 py-2 text-xs flex items-center gap-2 self-start md:self-auto">
                     <span class="text-slate-400">供應鏈鏈條：</span>
                     <span class="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-medium">Dell (最終客戶)</span>
@@ -68,7 +68,7 @@
         <div class="max-w-[96%] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex space-x-8 overflow-x-auto" id="tab-container">
                 <button onclick="switchTab('flowchart')" id="tab-flowchart" class="tab-btn py-4 px-1 text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2 whitespace-nowrap tab-active">
-                    <i data-lucide="git-fork" class="w-4 h-4"></i> 整改流程圖 (Flowchart)
+                    <i data-lucide="git-fork" class="w-4 h-4"></i> 標準整改流程圖 (Standard Flowchart)
                 </button>
                 <button onclick="switchTab('roles')" id="tab-roles" class="tab-btn py-4 px-1 text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2 whitespace-nowrap">
                     <i data-lucide="users" class="w-4 h-4"></i> 成員崗位與 KRA 職責分工
@@ -91,64 +91,92 @@
 
         <!-- TAB 1: FLOWCHART -->
         <section id="content-flowchart" class="tab-content block space-y-6">
-            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-blue-900 flex items-start gap-3">
-                <i data-lucide="info" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></i>
-                <div class="text-sm">
-                    <h4 class="font-bold mb-1">流程架構說明</h4>
-                    本流程遵循 <strong>ISO 19011 管理體系稽核指南</strong>，針對印度廠區實施「先審計畫、後驗證據、遠端視訊複核」的三階閉環機制。由 <strong>Sateesh (QA)</strong> 聯合 <strong>Shahabaz (Production)</strong> 與 <strong>SF IT / PE</strong> 實施現場與系統改進。
+
+            <!-- Standard Norms Reference Header Box -->
+            <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i data-lucide="shapes" class="text-blue-600"></i>
+                    流程圖圖形形狀繪製規範 (Flowchart Standard Norms)
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                    <div class="flex items-center gap-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                        <span class="w-7 h-5 bg-blue-100 border-2 border-blue-600 rounded-full flex items-center justify-center font-bold text-[10px] text-blue-800">Start</span>
+                        <span><strong>圓角矩形：</strong> 起始 / 結束 (Start / End)</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                        <span class="w-7 h-5 bg-white border-2 border-slate-700 flex items-center justify-center font-bold text-[10px]">Step</span>
+                        <span><strong>標準矩形：</strong> 動作步驟 (Process)</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                        <span class="w-5 h-5 bg-amber-50 border-2 border-amber-600 rotate-45 flex items-center justify-center font-bold text-[8px] text-amber-800">◇</span>
+                        <span><strong>菱形判定框：</strong> 審查/決策 (Decision)</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                        <span class="text-blue-600 font-bold">↓ Yes / → No</span>
+                        <span><strong>分支規則：</strong> Yes向下 / No向右退回</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Mermaid Chart Render Area -->
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <i data-lucide="workflow" class="text-blue-600"></i>
-                    缺失整改完成度簽核動態流程圖
-                </h3>
-                <div class="mermaid overflow-x-auto flex justify-center">
+            <!-- Mermaid Standard Flowchart -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i data-lucide="workflow" class="text-blue-600"></i>
+                        SSSTC 專案稽核缺失整改完成度簽核流程圖 (Standard ISO Flowchart)
+                    </h3>
+                    <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-full border border-emerald-200">
+                        垂直主幹線 • Yes垂直向下 • No右側迴圈
+                    </span>
+                </div>
+
+                <div class="mermaid overflow-x-auto flex justify-center py-4">
 flowchart TD
-    classDef india fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#01579b
-    classDef twn fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
-    classDef client fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+    classDef startEnd fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#01579b;
+    classDef process fill:#ffffff,stroke:#334155,stroke-width:2px,color:#0f172a;
+    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
 
-    subgraph Phase1 ["第一階段：原因分析與 CAP Plan 擬定"]
-        A1["⑤ Sateesh QA / ⑦ SF IT<br/>分析根本原因 RCA 與擬定對策"]:::india --> A2["① Yanlin QM<br/>審核 RCA 與對策可行性"]:::twn
-        A2 -->|"退回修正"| A1
-        A2 -->|"初審通過"| A3["③ HQQ<br/>總部品保複審認可"]:::twn
-        A3 -->|"認可"| A4["② Yancy PM / ④ Mike Sales<br/>回覆 SSSTC 對策計畫"]:::client
-    end
+    %% Node Definitions
+    START(["【開始】SSSTC/Dell 稽核缺失開立 (Audit NC Issue)"]):::startEnd
+    
+    P1["【步驟 1】缺失原因分析與對策擬定<br/>⑤ Sateesh QA & ⑦ SF IT / PE 工程團隊<br/>進行 RCA 根本原因分析 (5-Why/魚骨圖) 並撰寫 CAP 計畫"]:::process
 
-    subgraph Phase2 ["第二階段：現場整改與佐證收集"]
-        B1["⑤ Sateesh QA & ⑥ Shahabaz Prod<br/>執行產線整改、SOP訓練、SF卡關、收集證據"]:::india
-    end
+    D1{"【判定 1】初審認可?<br/>① Yanlin QM<br/>審查 RCA 與 CAP 對策可行性"}:::decision
 
-    subgraph Phase3 ["第三階段：遠端視訊實地驗證 Remote Audit"]
-        C1["① Yanlin QM<br/>開立實地驗證明細 Checksheet"]:::twn --> C2["開啟 Teams/Zoom 視訊連線"]
-        
-        subgraph IndiaField ["印度現場連線分工"]
-            C3_1["④ Mike Sales<br/>掌鏡拍攝第三人稱視角 + 翻譯協調"]:::india
-            C3_2["⑤ Sateesh QA & ⑥ Shahabaz Prod<br/>現場演示防呆、SF系統卡關、操作 SOP"]:::india
-        end
-        
-        C2 --> C3_1
-        C2 --> C3_2
-        C3_1 --> C4{"① Yanlin QM<br/>即時視訊覆核是否過關?"}:::twn
-        C3_2 --> C4
-        C4 -->|"不通過/補充證據"| B1
-    end
+    D2{"【判定 2】總部認可?<br/>③ HQQ<br/>總部品質最終複審與把關"}:::decision
 
-    subgraph Phase4 ["第四階段：系統進度登錄與簽核"]
-        D1["① Yanlin QM<br/>更新 NC 追蹤表完成度並簽核"]:::twn --> D2["③ HQQ<br/>總部最終認可閉環"]:::twn
-    end
+    P2["【步驟 2】回覆客戶 CAP Plan<br/>② Yancy PM & ④ Mike Sales<br/>將審核通過之 CAP Plan 提交給 SSSTC / Dell"]:::process
 
-    subgraph Phase5 ["第五階段：客戶端對外結案"]
-        E1["② Yancy PM / ④ Mike Sales<br/>提交完整整改報告至 SSSTC / Dell 結案"]:::client
-    end
+    P3["【步驟 3】現場實體整改與佐證收集<br/>⑤ Sateesh QA & ⑥ Shahabaz Production<br/>實施產線治具防呆、MES卡關、作業員 SOP 重新訓練、收集 Evidence"]:::process
 
-    A4 --> B1
-    B1 --> C1
-    C4 -->|"通過"| D1
-    D2 --> E1
+    P4["【步驟 4】開啟遠端視訊實地驗證 (Remote Gemba Audit)<br/>① Yanlin QM 開立 Checksheet 表單<br/>④ Mike Sales 掌鏡第三人稱視角與翻譯 | ⑤ Sateesh & ⑥ Shahabaz 現場操作演示"]:::process
+
+    D3{"【判定 3】視訊驗證過關?<br/>① Yanlin QM<br/>對照 Checksheet 即時判定整改完成度"}:::decision
+
+    P5["【步驟 5】系統完成度登錄與內部閉環<br/>① Yanlin QM 更新 NC 追蹤表進度至 100%<br/>③ HQQ 總部簽核 Closure 認可"]:::process
+
+    P6["【步驟 6】對外提交正式 CAPA 結案報告<br/>② Yancy PM & ④ Mike Sales<br/>提交最終整改報告至 SSSTC / Dell 專案結案"]:::process
+
+    END_NODE(["【結束】SSSTC 專案稽核缺失正式閉環結案"]):::startEnd
+
+    %% Flow Connections (Standard Main Flow Downwards, No Branches to the Right)
+    START --> P1
+    P1 --> D1
+    D1 -- "Yes / 初審通過" --> D2
+    D1 -- "No / 未通過 (退回修正)" --> P1
+
+    D2 -- "Yes / 認可閉環" --> P2
+    D2 -- "No / 未通過 (退回修正)" --> P1
+
+    P2 --> P3
+    P3 --> P4
+    P4 --> D3
+
+    D3 -- "Yes / 驗證過關" --> P5
+    D3 -- "No / 驗證不通過 (補充證據)" --> P3
+
+    P5 --> P6
+    P6 --> END_NODE
                 </div>
             </div>
 
@@ -157,12 +185,12 @@ flowchart TD
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-blue-600 uppercase tracking-wider bg-blue-50 px-2 py-1 rounded">Phase 1 - 2</span>
                     <h4 class="font-bold text-base mt-2 mb-1">RCA 分析與軟硬體防呆落地</h4>
-                    <p class="text-sm text-slate-600">Sateesh 拉通 SF IT 與 PE 設計 MES 系統卡關 (Interlock) 及治具防呆。Yanlin 與 HQQ 審核通過後，交由生產主管 Shahabaz 落地執行。</p>
+                    <p class="text-sm text-slate-600">Sateesh 拉通 SF IT 與 PE 設計 MES 系統卡關 (Interlock) 及治具防呆。Yanlin 與 HQQ 審核通過 (Yes) 後，交由生產主管 Shahabaz 落地執行。</p>
                 </div>
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-purple-600 uppercase tracking-wider bg-purple-50 px-2 py-1 rounded">Phase 3</span>
                     <h4 class="font-bold text-base mt-2 mb-1">遠端 Gemba 三方視訊驗證</h4>
-                    <p class="text-sm text-slate-600">Yanlin 主導視訊，Mike 擔任「鏡頭與翻譯」，Sateesh 與 Shahabaz 現場演示物理防呆與 MES 硬卡關，證明改善有效。</p>
+                    <p class="text-sm text-slate-600">Yanlin 主導視訊判定，Mike 擔任「鏡頭與翻譯」，Sateesh 與 Shahabaz 現場演示物理防呆與 MES 硬卡關，驗證通過 (Yes) 進入簽核。</p>
                 </div>
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2 py-1 rounded">Phase 4 - 5</span>
@@ -276,7 +304,7 @@ flowchart TD
                     </div>
                 </div>
 
-                <!-- 4. Mike (Sales) - STRICT BOUNDARIES -->
+                <!-- 4. Mike (Sales) -->
                 <div class="bg-white rounded-xl border-2 border-amber-400 shadow-md overflow-hidden flex flex-col">
                     <div class="bg-amber-500 text-white p-4 flex items-center justify-between">
                         <div>
@@ -312,7 +340,7 @@ flowchart TD
                     </div>
                 </div>
 
-                <!-- 5. Sateesh (QA) - TASKFORCE CONVENER -->
+                <!-- 5. Sateesh (QA) -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
                     <div class="bg-sky-600 text-white p-4 flex items-center justify-between">
                         <div>
@@ -342,7 +370,7 @@ flowchart TD
                     </div>
                 </div>
 
-                <!-- 6. Shahabaz (Production Leader) - LOCAL EXECUTION -->
+                <!-- 6. Shahabaz (Production Leader) -->
                 <div class="bg-white rounded-xl border border-emerald-300 shadow-sm overflow-hidden flex flex-col">
                     <div class="bg-emerald-600 text-white p-4 flex items-center justify-between">
                         <div>
@@ -520,7 +548,7 @@ flowchart TD
             </div>
         </section>
 
-        <!-- TAB 4: REMOTE AUDIT PROTOCOL (MIKE & SHAHABAZ ROLE) -->
+        <!-- TAB 4: REMOTE AUDIT PROTOCOL -->
         <section id="content-remote-audit" class="tab-content hidden space-y-6">
             <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-6">
                 <div>
@@ -577,7 +605,7 @@ flowchart TD
                         <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 relative">
                             <span class="absolute -top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Step 4</span>
                             <h4 class="font-bold text-sm mt-1 mb-1">即時判定與紀錄</h4>
-                            <p class="text-xs text-slate-600">Yanlin 於螢幕前即時核對並打勾，過關則線上簽核，若未通過則列出補件清單交 Sateesh/Shahabaz 重新改善。</p>
+                            <p class="text-xs text-slate-600">Yanlin 於螢幕前即時核對並打勾 (Yes/No)，過關則線上簽核，若未通過則列出補件清單交 Sateesh/Shahabaz 重新改善。</p>
                         </div>
                     </div>
                 </div>
@@ -685,7 +713,7 @@ flowchart TD
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Initialize Mermaid
+        // Initialize Mermaid with strict top-down layout
         mermaid.initialize({
             startOnLoad: true,
             theme: 'default',
@@ -698,18 +726,15 @@ flowchart TD
 
         // Tab Switching Logic
         function switchTab(tabId) {
-            // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.add('hidden');
                 el.classList.remove('block');
             });
 
-            // Remove active style from all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('tab-active');
             });
 
-            // Show selected content & set active button
             const targetContent = document.getElementById(`content-${tabId}`);
             const targetBtn = document.getElementById(`tab-${tabId}`);
 
@@ -719,7 +744,6 @@ flowchart TD
                 targetBtn.classList.add('tab-active');
             }
 
-            // Re-render icons inside visible tabs if needed
             lucide.createIcons();
         }
 
@@ -758,7 +782,6 @@ flowchart TD
         function deleteRow(btn) {
             const row = btn.closest('tr');
             row.remove();
-            // Re-index row numbers
             const tbody = document.getElementById('checklist-tbody');
             Array.from(tbody.children).forEach((tr, idx) => {
                 tr.children[0].textContent = idx + 1;
