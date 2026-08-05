@@ -34,7 +34,54 @@
       margin: 0 auto;
     }
 
-    /* STICKY GLASSMORPHISM TOP HEADER - STRICT SINGLE ROW ON DESKTOP */
+    /* FULLSCREEN APP LOADER OVERLAY */
+    .app-loader-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: opacity 0.3s ease-out;
+    }
+
+    .loader-content {
+      text-align: center;
+      padding: 2rem;
+      max-width: 460px;
+    }
+
+    .spinner {
+      width: 52px;
+      height: 52px;
+      border: 4px solid #E2E8F0;
+      border-top-color: #2563EB;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1.25rem auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 0.4rem;
+    }
+
+    .loader-content p {
+      font-size: 0.82rem;
+      color: #64748B;
+    }
+
+    /* STICKY GLASSMORPHISM TOP HEADER */
     .top-header {
       position: sticky;
       top: 0;
@@ -169,7 +216,6 @@
       color: #334155;
     }
 
-    /* DATA TABLE WRAPPER WITH MIN-WIDTH HORIZONTAL TOUCH SCROLL */
     .data-table-wrapper {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -204,7 +250,6 @@
       cursor: pointer;
     }
 
-    /* TASK NAME CELL WITH PROTECTED MIN/MAX WIDTH */
     .task-name-cell {
       min-width: 280px;
       max-width: 420px;
@@ -241,7 +286,6 @@
       border-color: var(--primary);
     }
 
-    /* Roadmap Timeline Container with Touch Scroll Protection */
     .roadmap-chart-wrapper {
       background: var(--bg-card);
       border: 1.5px solid #94A3B8;
@@ -271,7 +315,6 @@
       font-weight: 700;
     }
 
-    /* Dynamic Today Needle */
     .today-needle-container {
       position: absolute;
       top: 25px;
@@ -312,7 +355,6 @@
       box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
     }
 
-    /* REFINED MILESTONE STRIP WITH LEFT-EDGE DOWNWARD DASHED CONNECTOR LINES */
     .milestones-strip-v2 {
       display: flex;
       margin-left: 270px;
@@ -323,7 +365,6 @@
 
     .milestone-item-v2 {
       position: absolute;
-      /* Anchors exactly at milestone target date % from left edge */
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -332,7 +373,6 @@
       user-select: none;
     }
 
-    /* Staggered levels to prevent horizontal capsule collision */
     .milestone-level-top { top: 0px; }
     .milestone-level-bottom { top: 32px; }
 
@@ -366,7 +406,6 @@
       color: #D97706;
     }
 
-    /* Subtle left-edge vertical drop line connecting left border to W1, W2 header ticks */
     .milestone-item-v2.milestone-align-right {
       transform: translateX(-100%);
     }
@@ -394,7 +433,6 @@
       height: 20px;
     }
 
-    /* Two-Tier Month & Week Header Grid */
     .timeline-month-ticks {
       display: flex;
       margin-left: 270px;
@@ -457,7 +495,6 @@
       border-right: none;
     }
 
-    /* Timeline Grid Row Layout */
     .timeline-grid {
       display: flex;
       flex-direction: column;
@@ -472,7 +509,6 @@
       position: relative;
     }
 
-    /* 3-COLUMN FIXED ALIGNMENT FOR ROW-LABEL */
     .row-label {
       width: 270px;
       min-width: 270px;
@@ -559,7 +595,6 @@
       border-right: none;
     }
 
-    /* Gantt Progress Bar */
     .gantt-progress-bar {
       position: absolute;
       top: 8px;
@@ -645,7 +680,6 @@
       position: relative;
     }
 
-    /* STICKY FROZEN MODAL HEADER */
     .modal-header {
       position: sticky;
       top: 0;
@@ -691,7 +725,6 @@
       color: #1E293B;
     }
 
-    /* Edit Section Styles inside Modal */
     .edit-box {
       background: #F8FAFC;
       border: 1px solid #CBD5E1;
@@ -766,6 +799,29 @@
       font-weight: 600;
     }
 
+    .quant-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    .quant-locked {
+      background: #DCFCE7;
+      color: #15803D;
+      border: 1px solid #86EFAC;
+    }
+
+    .quant-manual {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+    }
+
     .btn-save-cloud {
       width: 100%;
       padding: 0.65rem;
@@ -783,9 +839,7 @@
       margin-bottom: 0.5rem;
     }
 
-    .btn-save-cloud:hover {
-      background: #059669;
-    }
+    .btn-save-cloud:hover { background: #059669; }
 
     .btn-delete-task {
       width: 100%;
@@ -803,12 +857,8 @@
       gap: 0.4rem;
     }
 
-    .btn-delete-task:hover {
-      background: #FCA5A5;
-      color: #991B1B;
-    }
+    .btn-delete-task:hover { background: #FCA5A5; color: #991B1B; }
 
-    /* Mobile Responsive RWD Media Queries */
     @media (max-width: 991px) {
       .top-header { flex-wrap: wrap; }
     }
@@ -821,7 +871,6 @@
       .btn { padding: 0.35rem 0.6rem; font-size: 0.75rem; }
     }
   
-    /* Sub-detail expandable card styles */
     .timeline-row-group {
       display: flex;
       flex-direction: column;
@@ -919,14 +968,23 @@
       line-height: 1.45;
       font-weight: 500;
     }
-
 </style>
 </head>
 <body>
 
+  <!-- FULLSCREEN APP LOADER OVERLAY - ZERO HARDCODING PROTECTION -->
+  <div id="appLoader" class="app-loader-overlay">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <h3 id="loaderText">⏳ 正在連線 Google Sheet 雲端資料庫...</h3>
+      <p id="loaderSubtext">SSSTC & Foxlink Audit Roadmap DB (Single Source of Truth)</p>
+      <button id="loaderRetryBtn" class="btn btn-primary" style="display:none; margin-top:1.2rem;" onclick="loadTasksFromCloud()">🔄 重新連線</button>
+    </div>
+  </div>
+
   <div class="container">
     
-    <!-- STICKY TOP HEADER WITH STRICT SINGLE ROW ON DESKTOP -->
+    <!-- STICKY TOP HEADER -->
     <div class="top-header">
       <div class="project-info">
         <h1 id="uiTitle">
@@ -938,7 +996,6 @@
       <div class="header-actions">
         <button class="btn btn-fullscreen" onclick="toggleFullScreen()" id="uiFullscreenBtn">⛶ Fullscreen</button>
         <button class="btn btn-lang" onclick="toggleLanguage()" id="uiLangBtn">🌐 繁體中文</button>
-        <button class="btn" onclick="toggleViewMode()" id="uiViewToggleBtn">Switch to Full Detail List (164)</button>
         <button class="btn" onclick="toggleInputPanel()" id="uiToggleTableBtn">Toggle / Collapse Table</button>
         <button class="btn btn-primary" onclick="addNewTask()" id="uiAddTaskBtn">+ Add Task Item</button>
       </div>
@@ -948,7 +1005,7 @@
     <div class="panel" id="inputPanel" style="display: none;">
       <div class="panel-header">
         <span class="panel-title" id="uiPanelTitle">📋 Master Workstream Action Plan & Timeline</span>
-        <span style="font-size: 0.8rem; color: var(--text-muted);"><span id="uiTaskCountLabel">Total 9 Master Activities</span></span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);"><span id="uiTaskCountLabel">Total 0 Master Activities</span></span>
       </div>
       <div class="data-table-wrapper">
         <table class="data-table">
@@ -965,7 +1022,7 @@
             </tr>
           </thead>
           <tbody id="taskTableBody">
-            <!-- Dynamic rows generated by JS -->
+            <!-- Dynamic rows rendered from Google Sheet Cloud API -->
           </tbody>
         </table>
       </div>
@@ -985,7 +1042,7 @@
           <h2 id="uiTimelineTitle">Workstream Timeline & Milestones</h2>
         </div>
 
-        <!-- Upward Shifted Milestones Strip with Left-Border Downward Connector Lines -->
+        <!-- Milestones Strip -->
         <div class="milestones-strip-v2" id="milestonesStrip">
         </div>
 
@@ -1037,13 +1094,11 @@
             <div class="month-guide-group" data-month="2026-12"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
             <div class="month-guide-group" data-month="2027-01"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
           </div>
-
-          <!-- Dynamic Timeline Rows Rendered by JS -->
         </div>
       </div>
     </div>
 
-    <!-- Dashboard Charts -->
+    <!-- 100% PURE DATA-DRIVEN DASHBOARD ENGINE -->
     <div class="dashboard-grid">
       <div class="chart-card">
         <h3 id="uiChartStatusTitle">TASK STATUS DISTRIBUTION (%)</h3>
@@ -1062,26 +1117,26 @@
         <div class="chart-container-inner" style="display:flex; flex-direction:column; justify-content:center; gap:1.1rem;">
           <div>
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:600; margin-bottom:0.25rem;">
-              <span id="prog1Label">Non-budget Items Closure Rate</span><span>80%</span>
+              <span id="prog1Label">Non-budget Items Closure Rate</span><span id="prog1Val">0%</span>
             </div>
             <div style="background:#E2E8F0; height:9px; border-radius:4px; overflow:hidden;">
-              <div style="background:#10B981; width:80%; height:100%;"></div>
+              <div id="prog1Bar" style="background:#10B981; width:0%; height:100%; transition: width 0.4s ease;"></div>
             </div>
           </div>
           <div>
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:600; margin-bottom:0.25rem;">
-              <span id="prog2Label">Equipment Lead-time Progress</span><span>40%</span>
+              <span id="prog2Label">Equipment Lead-time Progress</span><span id="prog2Val">0%</span>
             </div>
             <div style="background:#E2E8F0; height:9px; border-radius:4px; overflow:hidden;">
-              <div style="background:#3B82F6; width:40%; height:100%;"></div>
+              <div id="prog2Bar" style="background:#3B82F6; width:0%; height:100%; transition: width 0.4s ease;"></div>
             </div>
           </div>
           <div>
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:600; margin-bottom:0.25rem;">
-              <span id="prog3Label">SSSTC Support Items Resolution Rate</span><span>70%</span>
+              <span id="prog3Label">CAPA & Equipment Training Progress</span><span id="prog3Val">0%</span>
             </div>
             <div style="background:#E2E8F0; height:9px; border-radius:4px; overflow:hidden;">
-              <div style="background:#F59E0B; width:70%; height:100%;"></div>
+              <div id="prog3Bar" style="background:#F59E0B; width:0%; height:100%; transition: width 0.4s ease;"></div>
             </div>
           </div>
         </div>
@@ -1090,7 +1145,7 @@
 
   </div>
 
-  <!-- Task Detail Popup Modal with Sticky Frozen Header -->
+  <!-- Task Detail Popup Modal -->
   <div class="modal-overlay" id="detailModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -1098,12 +1153,12 @@
         <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
       <div id="modalBody">
-        <!-- Content injected by JS -->
+        <!-- Content injected dynamically by JS -->
       </div>
     </div>
   </div>
 
-  <!-- Milestone Details Edit Modal (Flat & Independent Overlay) -->
+  <!-- Milestone Details Edit Modal -->
   <div class="modal-overlay" id="milestoneModal">
     <div class="modal-content" style="max-width: 520px;">
       <div class="modal-header">
@@ -1119,20 +1174,17 @@
   <script>
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIGSon61ZQYFAGhWmFqUOmyK0YAoe2MsAnqgoldOLaKQnn6YFXLZFsBmm3dJ74aa0UAA/exec";
 
-    // STRICT i18n DICTIONARY - ZERO CHINESE IN ENGLISH MODE!
+    // STRICT i18n DICTIONARY - PURE DYNAMIC ENGINE
     const i18n = {
       en: {
         title: "SSSTC & Foxlink Project Management Roadmap",
         subtitle: "Interactive Workstream Timeline & Real-Time Executive Dashboard",
         toggleTable: "Toggle / Collapse Table",
-        switchViewMaster: "Switch to Full Detail List (164)",
-        switchViewFull: "Switch to Master Workstreams (9)",
         addTask: "+ Add Task Item",
         langBtn: "🌐 繁體中文",
         btnFullscreen: "⛶ Fullscreen",
         btnExitFullscreen: "ʞʞ Exit Fullscreen",
         tableTitleMaster: "📋 Master Workstream Action Plan & Timeline",
-        tableTitleFull: "📋 Detailed Audit Points & Budget Line Items (164 Items)",
         taskCountLabel: "Total {count} Tasks",
         colRef: "Ref #",
         colName: "Activity / Task Name",
@@ -1148,7 +1200,7 @@
         chartProgressTitle: "AUDIT READINESS & TIMELINE PROGRESS",
         prog1: "Non-budget Items Closure Rate",
         prog2: "Equipment Lead-time Progress",
-        prog3: "SSSTC Support Items Resolution Rate",
+        prog3: "CAPA & Equipment Training Progress",
         modalTitle: "Task Details",
         lblCategory: "WORKSTREAM CATEGORY",
         lblAuditPoint: "SSSTC AUDIT POINT REFERENCE",
@@ -1167,6 +1219,11 @@
         lblEndDate: "End Date:",
         lblProgress: "Progress (%):",
         lblStatus: "Status:",
+        lblQuantHeader: "📊 Quantitative Metrics (Sub-items Counter):",
+        lblTotalItems: "Total Items:",
+        lblClosedItems: "Closed Items:",
+        quantLockedMsg: "🔒 Auto-calculated from Quantitative Metrics (Closed / Total)",
+        quantManualMsg: "🔓 Manual Progress Slider (No Quantitative Metrics)",
         btnSaveCloud: "💾 Save & Sync to Google Sheet",
         btnDeleteTask: "🗑️ Delete Task",
         confirmDelete: "Are you sure you want to delete task",
@@ -1178,16 +1235,13 @@
       },
       zh: {
         title: "SSSTC & Foxlink 專案管理與稽核改善時程地圖",
-        subtitle: "互動式工作流時程看板與即時專案儀表板（彈窗標題凍結版）",
+        subtitle: "互動式工作流時程看板與即時專案儀表板（通用量化算分引擎版）",
         toggleTable: "切換/折疊數據表格",
-        switchViewMaster: "切換至全量稽核明細 (164 項)",
-        switchViewFull: "切換至主工作流 (9 項)",
         addTask: "+ 新增任務項目",
         langBtn: "🌐 English",
         btnFullscreen: "⛶ 全螢幕",
         btnExitFullscreen: "ʞʞ 退出全螢幕",
         tableTitleMaster: "📋 主工作流改善計畫與甘特圖時程",
-        tableTitleFull: "📋 全量稽核缺失與預算明細清單 (164 項)",
         taskCountLabel: "共 {count} 項任務",
         colRef: "參考編號",
         colName: "活動 / 任務名稱",
@@ -1201,9 +1255,9 @@
         chartStatusTitle: "任務執行狀態分佈 (%)",
         chartWsTitle: "工作流類別比例分佈",
         chartProgressTitle: "稽核準備度與時程推進指標",
-        prog1: "非預算缺失閉環率 (Aug 31 標)",
-        prog2: "設備系統採購到位率",
-        prog3: "SSSTC 技術支援事項完成率",
+        prog1: "非預算缺失閉環率",
+        prog2: "專案設備與系統採購進度",
+        prog3: "專案對策與設備培訓完成率",
         modalTitle: "任務詳細資訊",
         lblCategory: "工作流類別 (WORKSTREAM)",
         lblAuditPoint: "SSSTC 稽核條款對照",
@@ -1216,12 +1270,17 @@
         todayTagPrefix: "📍 今天 (",
         cloudSynced: "☁️ 已連線至雲端",
         cloudSyncing: "⏳ 同步中...",
-        editSectionTitle: "✏️ 編輯任務內容並同步至雲端",
+        editSectionTitle: "✏️ 編輯任務內容與量化指標",
         lblTaskName: "任務名稱：",
         lblStartDate: "開始日期：",
         lblEndDate: "結束日期：",
         lblProgress: "完成進度 (%)：",
         lblStatus: "執行狀態：",
+        lblQuantHeader: "📊 量化條目統計 (計數器)：",
+        lblTotalItems: "總量化項數 (Total)：",
+        lblClosedItems: "已完成項數 (Closed)：",
+        quantLockedMsg: "🔒 已根據量化指標自動精準計算進度 (Closed / Total)",
+        quantManualMsg: "🔓 未填寫量化指標，手動拉動進度條",
         btnSaveCloud: "💾 儲存並同步至 Google Sheet",
         btnDeleteTask: "🗑️ 刪除此任務",
         confirmDelete: "您確定要刪除任務",
@@ -1233,13 +1292,45 @@
       }
     };
 
+    // Workstream Category Translation Map
+    const wsDict = {
+      en: {
+        'ACTION PLAN': 'ACTION PLAN',
+        'EQUIPMENT': 'EQUIPMENT',
+        'TRAINING': 'TRAINING',
+        'SELF CHECK': 'SELF CHECK',
+        'AUDIT': 'AUDIT'
+      },
+      zh: {
+        'ACTION PLAN': '行動對策',
+        'EQUIPMENT': '專案設備',
+        'TRAINING': '對策培訓',
+        'SELF CHECK': '廠內自稽',
+        'AUDIT': '客戶稽核'
+      }
+    };
+
     let currentLang = 'en';
-    let isFullViewMode = false;
+
+    // ZERO HARDCODING: Master arrays initialized 100% empty []
+    let masterTasks = [];
+    let masterMilestones = [];
 
     // Total Range for Date Math: 2026-06-01 to 2027-01-31 (245 Days)
     const axisStart = new Date("2026-06-01").getTime();
     const axisEnd = new Date("2027-01-31").getTime();
     const totalSpanMs = axisEnd - axisStart;
+
+    // UNIVERSAL QUANTITATIVE PROGRESS LAW
+    function getEffectiveProgressPct(t) {
+      if (!t) return 0;
+      if (t.subSummary && Number(t.subSummary.total) > 0) {
+        const total = Number(t.subSummary.total);
+        const closed = Number(t.subSummary.closed || 0);
+        return Math.min(100, Math.max(0, Math.round((closed / total) * 100)));
+      }
+      return Number(t.progressPct || 0);
+    }
 
     function calcPercent(dateObj) {
       const t = (dateObj instanceof Date) ? dateObj.getTime() : new Date(dateObj).getTime();
@@ -1256,256 +1347,9 @@
       return wks > 1 ? `${wks} Wks` : `${wks} Wk`;
     }
 
-    // Master Workstream Activities (Exact 11 Tasks Aligned with Latest Excel Roadmap)
-    let masterTasks = [
-      {
-        id: "ACT-1",
-        name_en: "Audit Observations",
-        name_zh: "1. 稽核發現點紀錄分析",
-        workstream: "ACTION PLAN",
-        color: "#3B82F6",
-        status: "Completed",
-        progressPct: 100,
-        startDate: "2026-05-25",
-        endDate: "2026-06-15",
-        owner: "Team / Sateesh",
-        auditPoint: "Team started work on Audit observations",
-        rootCause_en: "Team started work on Audit observations & initial alignment",
-        rootCause_zh: "對策小組成立與全廠稽核發現點初審分析",
-        deliverable_en: "Audit observation master breakdown list",
-        deliverable_zh: "稽核缺失條款總體歸納清單"
-      },
-      {
-        id: "ACT-2",
-        name_en: "D1 QPA Points",
-        name_zh: "2. D1 QPA 對策閉環",
-        workstream: "ACTION PLAN",
-        color: "#3B82F6",
-        status: "In Progress",
-        progressPct: 65,
-        startDate: "2026-06-01",
-        endDate: "2026-08-31",
-        owner: "Sateesh / Vishnu / Yanlin Li",
-        auditPoint: "Received 112 Observations in QPA",
-        rootCause_en: "Received 112 Observations in QPA and scheduled till Aug to complete these points",
-        rootCause_zh: "接收 112 項 QPA 製程缺失，排定至 8 月底前全數閉環完成",
-        deliverable_en: "112 CAPA before/after evidence packages",
-        deliverable_zh: "112 筆 CAPA 改善前後對照佐證包",
-        reportLink: "",
-        subSummary: { total: 112, closed: 44, open: 68 },
-        subList_en: [
-          "• Total 112 items: 44 items closed, 68 items open",
-          "• Scheduled till August 31 to complete 100% CAPA evidence closure"
-        ],
-        subList_zh: [
-          "• 總計 112 項 QPA 缺失對策：已閉環 44 項，進行中 68 項",
-          "• 目標於 8 月 31 日前全數完成 100% CAPA 改善與佐證閉環"
-        ]
-      },
-      {
-        id: "ACT-3",
-        name_en: "D1 QSA Points",
-        name_zh: "3. D1 QSA 體系閉環",
-        workstream: "ACTION PLAN",
-        color: "#8B5CF6",
-        status: "In Progress",
-        progressPct: 80,
-        startDate: "2026-07-01",
-        endDate: "2026-08-31",
-        owner: "Sateesh - QC / Roger",
-        auditPoint: "Received 15 Observations in QSA",
-        rootCause_en: "Received 15 Observations in QSA and scheduled till Aug to complete these points",
-        rootCause_zh: "接收 15 項 QSA 品質體系缺失，排定至 8 月底前修訂 SOP 並閉環",
-        deliverable_en: "15 QSA Closure documents & updated level-2/3 SOPs",
-        deliverable_zh: "15 項 QSA 結案證明與品質體系程序書更新",
-        reportLink: "https://html.foxlink.co.in/reports/report-1785820067291.html",
-        subSummary: { total: 15, closed: 12, open: 3 },
-        subList_en: [
-          "• Total 15 items: 12 items closed, 3 items open",
-          "• Level 2/3 Quality SOP revision & operator training in progress"
-        ],
-        subList_zh: [
-          "• 總計 15 項 QSA 品質體系缺失：已閉環 12 項，進行中 3 項",
-          "• 二/三階品質程序書 (SOP) 修訂與作業員培訓推進中"
-        ]
-      },
-      {
-        id: "ACT-4",
-        name_en: "Purchase (except Feeder calibrator)",
-        name_zh: "4. 專案設備與系統採購 (Feeder校正儀除外)",
-        workstream: "EQUIPMENT",
-        color: "#10B981",
-        status: "In Progress",
-        progressPct: 40,
-        startDate: "2026-06-01",
-        endDate: "2026-10-31",
-        owner: "Steering Committee / IT / Purchase",
-        auditPoint: "All items purchased by end of October (except Feeder calibrator)",
-        rootCause_en: "All items will be purchased and installed by end of October <span style='color:#EF4444; font-weight:700;'>(except Feeder calibrator)</span>",
-        rootCause_zh: "所有專案設備與 SFC 系統於 10 月底前全數採購與安裝到位 <span style='color:#EF4444; font-weight:700;'>(Feeder 校正儀除外)</span>",
-        deliverable_en: "PO copies, FAT/SAT reports, Commissioning sign-off",
-        deliverable_zh: "採購單據、出廠與現場驗收報告、上線運轉證明",
-        reportLink: "",
-        subSummary: { total: 9, closed: 3, open: 6 },
-        subList_en: [
-          "• Total 9 Budget Items: 3 closed, 6 open in procurement pipeline",
-          "1) Peak stand Microscope(100x): pending for arrangement from supplier (est. 8/15)",
-          "2) SPI training: completed.",
-          "3) AOI training: plan to raise PR before target date; supplier arrangement pending.",
-          "4) Temperature & Humidity meter: plan to raise PR on est. 8/9 (3 quotations received).",
-          "5) ESD turnstile gate: plan to raise PR on est. 8/10 (1 supplier quotation received)."
-        ],
-        subList_zh: [
-          "• 總計 9 項資本支出設備：已到位 3 項，6 項發單採購進度推進中",
-          "1) Peak 100x 顯微鏡：待供應商發貨安排 (預計 8/15)",
-          "2) SPI 專案培訓：已完成",
-          "3) AOI 培訓計畫：預計於目標日前提出請購 (PR)，後續由供應商派員",
-          "4) 溫濕度監測計：預計 8/9 前提出請購 (已取得 3 家最終報價與比價定案)",
-          "5) 靜電門禁閘門 (ESD Turnstile Gate)：預計 8/10 前提出請購 (現已拿到 1 家報價)"
-        ]
-      },
-      {
-        id: "ACT-5",
-        name_en: "Training (QSA & QPA)",
-        name_zh: "5. QSA & QPA 項目對策培訓",
-        workstream: "TRAINING",
-        color: "#F59E0B",
-        status: "In Progress",
-        progressPct: 20,
-        startDate: "2026-08-20",
-        endDate: "2026-09-10",
-        owner: "Trainer / HR / QA",
-        auditPoint: "QSA & QPA 3-Week Training",
-        rootCause_en: "Training will be started and completed within 3 weeks for QSA and QPA",
-        rootCause_zh: "針對 QSA 與 QPA 體系發現點，於 3 週內完成全員對策與 SOP 培訓",
-        deliverable_en: "QSA & QPA Training attendance logs & sign-offs",
-        deliverable_zh: "QSA/QPA 專案培訓簽到表與紀錄"
-      },
-      {
-        id: "ACT-6",
-        name_en: "Training (Purchase Items)",
-        name_zh: "6. 採購新設備與系統專案培訓",
-        workstream: "TRAINING",
-        color: "#F59E0B",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-11-01",
-        endDate: "2026-11-14",
-        owner: "Equipment Suppliers / HR",
-        auditPoint: "Purchase Items 2-Week Training",
-        rootCause_en: "Training will be started and completed within 2 weeks for purchase items",
-        rootCause_zh: "新進採購設備與過站軟體到位後，於 2 週內完成操作員實操培訓",
-        deliverable_en: "Equipment Supplier Training Certifications",
-        deliverable_zh: "原廠設備操作培訓合格證書"
-      },
-      {
-        id: "ACT-7",
-        name_en: "Foxlink Self Check",
-        name_zh: "7. 廠內自我稽核模擬全檢",
-        workstream: "SELF CHECK",
-        color: "#8B5CF6",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-11-15",
-        endDate: "2026-11-21",
-        owner: "Internal Audit Lead / Yanlin Li",
-        auditPoint: "1-Week Internal Self Check",
-        rootCause_en: "After completion of training within 1 week will complete all self check points",
-        rootCause_zh: "培訓完成後，於 1 週內執行 Check-sheet 擬真自我全檢",
-        deliverable_en: "Full Internal Self Check Verification Report",
-        deliverable_zh: "廠內自我稽核 Check-sheet 驗證報告"
-      },
-      {
-        id: "ACT-8",
-        name_en: "Foxlink Observations",
-        name_zh: "8. 廠內缺失對策快速改善閉環",
-        workstream: "ACTION PLAN",
-        color: "#3B82F6",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-11-22",
-        endDate: "2026-12-05",
-        owner: "Foxlink QA / Operation Team",
-        auditPoint: "2-Week Corrective Actions",
-        rootCause_en: "After completion self check will complete Corrective within 2 weeks",
-        rootCause_zh: "自我全檢完成後，於 2 週內快速整改與閉環內部缺失",
-        deliverable_en: "Internal Corrective Action Closure Log",
-        deliverable_zh: "內部自我稽核發現點快速改善對照表"
-      },
-      {
-        id: "ACT-9",
-        name_en: "SSSTC Online Audit",
-        name_zh: "9. SSSTC 線上預審稽核",
-        workstream: "AUDIT",
-        color: "#EF4444",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-12-06",
-        endDate: "2026-12-12",
-        owner: "SSSTC Steering Committee / Kevin Gu",
-        auditPoint: "In 2nd week of December SSSTC Audit",
-        rootCause_en: "In 2nd week of December planning to schedule a SSSTC Online Audit",
-        rootCause_zh: "排定於 12 月第 2 週正式執行 SSSTC 線上預審稽核",
-        deliverable_en: "SSSTC Online Pre-audit Official Report",
-        deliverable_zh: "SSSTC 線上預審發現點追蹤表"
-      },
-      {
-        id: "ACT-10",
-        name_en: "SSSTC Observation Closure",
-        name_zh: "10. SSSTC 預審發現點對策閉環",
-        workstream: "AUDIT",
-        color: "#EF4444",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-12-13",
-        endDate: "2027-01-05",
-        owner: "Sateesh / Stephan",
-        auditPoint: "3-Week SSSTC Points Closure",
-        rootCause_en: "Based on the observations we will take 3 weeks of time to close those",
-        rootCause_zh: "針對 SSSTC 預審提報之發現點，於 3 週內完成對策與佐證閉環",
-        deliverable_en: "SSSTC Observation Final Closure Package",
-        deliverable_zh: "SSSTC 預審發現點改善對照證明"
-      },
-      {
-        id: "ACT-11",
-        name_en: "D1 Re-audit",
-        name_zh: "11. Dell D1 最終現場正式稽核",
-        workstream: "AUDIT",
-        color: "#EF4444",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2027-01-06",
-        endDate: "2027-01-14",
-        owner: "Dell Customer Audit Team / SSSTC",
-        auditPoint: "In 2nd week of January D1 Re-Audit",
-        rootCause_en: "In 2nd week of January planning to schedule a D1 Re-Audit for mass production qualification",
-        rootCause_zh: "排定於 2027 年 1 月第 2 週迎接 Dell 客戶聯合現場稽核，取得量產認證",
-        deliverable_en: "Official D1 Audit Approval Letter & Certification",
-        deliverable_zh: "Dell D1 稽核閉環官方核准函與量產認證證書"
-      }
-    ];
-
-    let fullDetailTasks = []; // Managed by JS fallback
-
-    // Dynamic Cloud Milestone Model (Source of Truth: Google Sheet Database)
-    const defaultMilestones = [
-      { id: "MS-1", name_en: "CAPA Alignment Proposal", name_zh: "整改對策提案", date: "2026-08-07", icon: "★", desc_en: "Complete preliminary alignment & submit action plan proposal to SSSTC QA", desc_zh: "完成對策初審並向 SSSTC 品質團隊提交整改對策提案", level: "top" },
-      { id: "MS-2", name_en: "Non-budget Points 100% Closure", name_zh: "非預算缺失 100% 閉環", date: "2026-08-31", icon: "◆", desc_en: "Complete 100% closure for all non-budget QPA/QSA audit observations", desc_zh: "完成所有非預算項之 QPA/QSA 稽核缺失 100% 佐證閉環", level: "bottom" },
-      { id: "MS-3", name_en: "Equipment Arrival & SSSTC Review", name_zh: "設備到位與 SSSTC 預審", date: "2026-10-31", icon: "▲", desc_en: "100% budget equipment onsite commissioning & SSSTC executive pre-audit sign-off", desc_zh: "資本支出設備全數到位調試完成，並通過 SSSTC 高階預審", level: "top" },
-      { id: "MS-4", name_en: "Dell Customer Final Audit", name_zh: "Dell 客戶最終稽核", date: "2027-01-06", icon: "🏁", desc_en: "Host Dell customer physical line audit and obtain mass production qualification approval", desc_zh: "迎接 Dell 客戶現場正式稽核，取得 D1 量產閉環認證", level: "bottom" }
-    ];
-
     function sanitizeMilestoneName(name) {
       if (!name) return '';
       return name.replace(/^[A-Za-z]{3}\s*\d{1,2}\s*:\s*/, '').replace(/^\d{1,2}\s*月\s*\d{1,2}\s*日\s*[:：]\s*/, '').replace(/^Nov-Dec:\s*/, '');
-    }
-
-    let masterMilestones = defaultMilestones;
-
-    function saveMilestonesToCache() {
-      try {
-        localStorage.setItem('SSSTC_ROADMAP_MILESTONES_V35', JSON.stringify(masterMilestones));
-      } catch(e) { console.warn('Milestone save notice:', e); }
     }
 
     function formatMsDatePrefix(dateStr, lang) {
@@ -1524,7 +1368,6 @@
       }
     }
 
-    /* RENDER REFINED MILESTONES WITH SUBTLE DOWNWARD CONNECTOR LINES ANCHORED AT LEFT EDGE */
     function renderMilestones() {
       const container = document.getElementById('milestonesStrip');
       if (!container) return;
@@ -1542,10 +1385,10 @@
 
         return `
           <div class="milestone-item-v2 ${levelClass} ${alignRightClass}" style="left:${pct}%;" 
-               title="${desc.replace(/"/g, '&quot;')}"
+               title="${(desc || '').replace(/"/g, '&quot;')}"
                onclick="showMilestoneModal('${ms.id}')">
             <div class="milestone-card-content" id="${ms.id}_label">
-              <span class="milestone-icon">${ms.icon}</span>
+              <span class="milestone-icon">${ms.icon || '★'}</span>
               <span>${fullName}</span>
             </div>
             <div class="milestone-connector-line"></div>
@@ -1571,17 +1414,17 @@
         <div class="edit-box" style="margin-top:0;">
           <div class="edit-field">
             <label>${t.lblMsName}</label>
-            <input type="text" id="editMsName" class="edit-input-text" value="${nameVal.replace(/"/g, '&quot;')}">
+            <input type="text" id="editMsName" class="edit-input-text" value="${(nameVal || '').replace(/"/g, '&quot;')}">
           </div>
 
           <div class="edit-field">
             <label>${t.lblMsDate}</label>
-            <input type="date" id="editMsDate" class="edit-input-date" value="${ms.date}">
+            <input type="date" id="editMsDate" class="edit-input-date" value="${ms.date || ''}">
           </div>
 
           <div class="edit-field" style="align-items:flex-start;">
             <label style="padding-top:4px;">${t.lblMsDesc}</label>
-            <textarea id="editMsDesc" class="edit-input-text" style="height:70px; resize:vertical; font-size:0.82rem;">${descVal}</textarea>
+            <textarea id="editMsDesc" class="edit-input-text" style="height:70px; resize:vertical; font-size:0.82rem;">${descVal || ''}</textarea>
           </div>
 
           <button class="btn-save-cloud" onclick="saveMilestoneFromModal('${ms.id}')">
@@ -1613,13 +1456,11 @@
         if (newDesc) ms.desc_zh = newDesc;
       }
 
-      if (newDate) {
-        ms.date = newDate;
-      }
+      if (newDate) ms.date = newDate;
 
-      saveMilestonesToCache();
       renderMilestones();
       closeMsModal();
+      saveMilestoneToCloud(msId);
     }
 
     function closeMsModal() {
@@ -1627,41 +1468,37 @@
       if (modalEl) modalEl.classList.remove('active');
     }
 
-    function getActiveDataset() {
-      return isFullViewMode ? fullDetailTasks : masterTasks;
-    }
-
     function renderTable() {
       const tbody = document.getElementById('taskTableBody');
       if (!tbody) return;
 
-      const dataset = getActiveDataset();
       const t = i18n[currentLang];
 
-      tbody.innerHTML = dataset.map(item => {
-        const name = (currentLang === 'en') ? (item.name_en || item.name) : (item.name_zh || item.name);
-        const owner = item.owner || 'TBD';
-        const auditPoint = item.auditPoint || 'N/A';
+      tbody.innerHTML = masterTasks.map(item => {
+        const name = (currentLang === 'en') ? (item.name_en || item.name_zh) : (item.name_zh || item.name_en);
+        const owner = (currentLang === 'en') ? (item.owner_en || item.owner_zh) : (item.owner_zh || item.owner_en);
+        const auditPoint = (currentLang === 'en') ? (item.auditPoint_en || item.auditPoint_zh) : (item.auditPoint_zh || item.auditPoint_en);
         const statusClass = item.status === 'Completed' ? 'status-completed' : (item.status === 'In Progress' ? 'status-progress' : 'status-notstarted');
         const statusLabel = item.status === 'Completed' ? t.statusCompleted : (item.status === 'In Progress' ? t.statusProgress : t.statusNotStarted);
+        const wsLabel = (wsDict[currentLang] && wsDict[currentLang][item.workstream]) ? wsDict[currentLang][item.workstream] : item.workstream;
 
         return `
           <tr onclick="showDetail('${item.id}')">
             <td><strong>${item.id}</strong></td>
             <td class="task-name-cell">${name}</td>
-            <td><span style="color:${item.color}; font-weight:700;">${item.workstream}</span></td>
+            <td><span style="color:${item.color}; font-weight:700;">${wsLabel}</span></td>
             <td><span class="badge-status ${statusClass}">${statusLabel}</span></td>
             <td><input type="date" class="table-date-input" value="${item.startDate}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'startDate', this.value)"></td>
             <td><input type="date" class="table-date-input" value="${item.endDate}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'endDate', this.value)"></td>
-            <td>${owner}</td>
-            <td><code>${auditPoint}</code></td>
+            <td>${owner || 'TBD'}</td>
+            <td><code>${auditPoint || 'N/A'}</code></td>
           </tr>
         `;
       }).join('');
 
       const countLabel = document.getElementById('uiTaskCountLabel');
       if (countLabel) {
-        countLabel.innerText = t.taskCountLabel.replace('{count}', dataset.length);
+        countLabel.innerText = t.taskCountLabel.replace('{count}', masterTasks.length);
       }
     }
 
@@ -1685,11 +1522,11 @@
         const startPct = calcPercent(t.startDate);
         const endPct = calcPercent(t.endDate);
         const widthPct = Math.max(2.5, endPct - startPct);
-        const name = (currentLang === 'en') ? t.name_en : t.name_zh;
-        const fillWidth = t.progressPct || 0;
+        const name = (currentLang === 'en') ? (t.name_en || t.name_zh) : (t.name_zh || t.name_en);
+        const fillWidth = getEffectiveProgressPct(t);
         const durationStr = calcDurationWks(t.startDate, t.endDate);
 
-        const hasSub = !!(t.subList_en || t.subDetails_en || t.subSummary);
+        const hasSub = !!(t.subList_en || t.subList_zh || t.subSummary);
         const expandBtnHTML = hasSub ? `<button class="btn-expand-sub" id="btnSub_${t.id}" onclick="event.stopPropagation(); toggleSubDrawer('${t.id}')" title="Expand/Collapse Details">🔻</button>` : '';
 
         let subContentHTML = '';
@@ -1724,7 +1561,7 @@
             `;
           }
 
-          const rawList = (currentLang === 'en') ? (t.subDetails_en || t.subList_en) : (t.subDetails_zh || t.subList_zh);
+          const rawList = (currentLang === 'en') ? (t.subList_en || t.subList_zh) : (t.subList_zh || t.subList_en);
           let listHTML = '';
           if (Array.isArray(rawList)) {
             listHTML = rawList.map(item => `<div class="sub-list-item">${item}</div>`).join('');
@@ -1743,7 +1580,7 @@
         return `
           <div class="timeline-row-group">
             <div class="timeline-row">
-              <div class="row-label" title="${name.replace(/"/g, '&quot;')}">
+              <div class="row-label" title="${(name || '').replace(/"/g, '&quot;')}">
                 <span class="duration-pill">${durationStr}</span>
                 <div class="label-tag-wrapper">
                   <div class="label-tag" style="background:${t.color};"></div>
@@ -1753,7 +1590,7 @@
               <div class="row-track">
                 <div class="gantt-progress-bar" 
                      style="left:${startPct}%; width:${widthPct}%; background:${t.color};"
-                     title="${name.replace(/"/g, '&quot;')} (${t.startDate} ~ ${t.endDate}) - Progress: ${fillWidth}%"
+                     title="${(name || '').replace(/"/g, '&quot;')} (${t.startDate} ~ ${t.endDate}) - Progress: ${fillWidth}%"
                      onclick="showDetail('${t.id}')">
                   <div class="progress-fill" style="width:${fillWidth}%;"></div>
                   <span style="position:relative; z-index:2;">${fillWidth}%</span>
@@ -1791,29 +1628,53 @@
       }
     }
 
-    // Full Interactive Task Modal Editor
     function showDetail(id) {
-      const data = getActiveDataset();
-      const item = data.find(x => x.id === id) || masterTasks.find(x => x.id === id);
+      const item = masterTasks.find(x => x.id === id);
       if (!item) return;
 
       const t = i18n[currentLang];
-      const name = (currentLang === 'en') ? (item.name_en || item.name) : (item.name_zh || item.name);
-      const rootCause = (currentLang === 'en') ? (item.rootCause_en || item.rootCause) : (item.rootCause_zh || item.rootCause);
-      const deliverable = (currentLang === 'en') ? (item.deliverable_en || item.deliverable) : (item.deliverable_zh || item.deliverable);
+      const name = (currentLang === 'en') ? (item.name_en || item.name_zh) : (item.name_zh || item.name_en);
+      const owner = (currentLang === 'en') ? (item.owner_en || item.owner_zh) : (item.owner_zh || item.owner_en);
+      const auditPoint = (currentLang === 'en') ? (item.auditPoint_en || item.auditPoint_zh) : (item.auditPoint_zh || item.auditPoint_en);
+      const rootCause = (currentLang === 'en') ? (item.rootCause_en || item.rootCause_zh) : (item.rootCause_zh || item.rootCause_en);
+      const deliverable = (currentLang === 'en') ? (item.deliverable_en || item.deliverable_zh) : (item.deliverable_zh || item.deliverable_en);
 
       document.getElementById('modalTaskTitle').innerText = `[${item.id}] ${name}`;
       
-      const isMaster = masterTasks.some(x => x.id === item.id);
       const isCustomNew = item.id.startsWith("NEW-");
 
-      const editSectionHTML = isMaster ? `
+      const quantTotal = item.subSummary ? item.subSummary.total : 0;
+      const quantClosed = item.subSummary ? item.subSummary.closed : 0;
+      const isQuantActive = (quantTotal > 0);
+
+      const effectivePct = getEffectiveProgressPct(item);
+
+      const editSectionHTML = `
         <div class="edit-box">
           <div class="edit-title">${t.editSectionTitle}</div>
           
           <div class="edit-field">
             <label>${t.lblTaskName}</label>
-            <input type="text" id="editTaskName" class="edit-input-text" value="${name.replace(/"/g, '&quot;')}">
+            <input type="text" id="editTaskName" class="edit-input-text" value="${(name || '').replace(/"/g, '&quot;')}">
+          </div>
+
+          <div style="background:#FFF; border:1px solid #CBD5E1; border-radius:6px; padding:0.75rem; margin-bottom:0.75rem;">
+            <div style="font-size:0.8rem; font-weight:700; color:#1E293B; margin-bottom:0.4rem;">${t.lblQuantHeader}</div>
+            
+            <div id="quantBadge" class="quant-badge ${isQuantActive ? 'quant-locked' : 'quant-manual'}">
+              ${isQuantActive ? t.quantLockedMsg : t.quantManualMsg}
+            </div>
+
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+              <div class="edit-field" style="margin-bottom:0; flex:1;">
+                <label style="width:auto;">${t.lblTotalItems}</label>
+                <input type="number" id="editQuantTotal" min="0" class="edit-input-text" style="width:70px;" value="${quantTotal}" oninput="onQuantInputsChanged()">
+              </div>
+              <div class="edit-field" style="margin-bottom:0; flex:1;">
+                <label style="width:auto;">${t.lblClosedItems}</label>
+                <input type="number" id="editQuantClosed" min="0" class="edit-input-text" style="width:70px;" value="${quantClosed}" oninput="onQuantInputsChanged()">
+              </div>
+            </div>
           </div>
 
           <div class="edit-field">
@@ -1829,8 +1690,8 @@
           <div class="edit-field">
             <label>${t.lblProgress}</label>
             <div class="edit-input-slider">
-              <input type="range" id="editSlider" min="0" max="100" value="${item.progressPct || 0}" oninput="document.getElementById('editNum').value = this.value">
-              <input type="number" id="editNum" min="0" max="100" value="${item.progressPct || 0}" oninput="document.getElementById('editSlider').value = this.value">%
+              <input type="range" id="editSlider" min="0" max="100" value="${effectivePct}" ${isQuantActive ? 'disabled="disabled" style="opacity:0.5; cursor:not-allowed;"' : ''} oninput="document.getElementById('editNum').value = this.value">
+              <input type="number" id="editNum" min="0" max="100" value="${effectivePct}" ${isQuantActive ? 'disabled="disabled" style="opacity:0.5; cursor:not-allowed;"' : ''} oninput="document.getElementById('editSlider').value = this.value">%
             </div>
           </div>
 
@@ -1848,7 +1709,7 @@
           </button>
           ${isCustomNew ? `<button class="btn-delete-task" onclick="deleteTaskFromModal('${item.id}')">${t.btnDeleteTask}</button>` : ''}
         </div>
-      ` : '';
+      `;
 
       document.getElementById('modalBody').innerHTML = `
         <div class="detail-group">
@@ -1857,19 +1718,19 @@
         </div>
         <div class="detail-group">
           <div class="detail-label">${t.lblAuditPoint}</div>
-          <div class="detail-val" style="background:#F1F5F9; padding:6px; border-radius:4px; font-weight:600;">${item.auditPoint}</div>
+          <div class="detail-val" style="background:#F1F5F9; padding:6px; border-radius:4px; font-weight:600;">${auditPoint || 'N/A'}</div>
         </div>
         <div class="detail-group">
           <div class="detail-label">${t.lblRootCause}</div>
-          <div class="detail-val">${rootCause}</div>
+          <div class="detail-val">${rootCause || 'N/A'}</div>
         </div>
         <div class="detail-group">
           <div class="detail-label">${t.lblOwner}</div>
-          <div class="detail-val">${item.owner}</div>
+          <div class="detail-val">${owner || 'TBD'}</div>
         </div>
         <div class="detail-group">
           <div class="detail-label">${t.lblDeliverable}</div>
-          <div class="detail-val" style="color:#059669; font-weight:600;">${deliverable}</div>
+          <div class="detail-val" style="color:#059669; font-weight:600;">${deliverable || 'N/A'}</div>
         </div>
         ${editSectionHTML}
       `;
@@ -1877,44 +1738,64 @@
       document.getElementById('detailModal').classList.add('active');
     }
 
+    function onQuantInputsChanged() {
+      const totalEl = document.getElementById('editQuantTotal');
+      const closedEl = document.getElementById('editQuantClosed');
+      const sliderEl = document.getElementById('editSlider');
+      const numEl = document.getElementById('editNum');
+      const badgeEl = document.getElementById('quantBadge');
+
+      if (!totalEl || !closedEl || !sliderEl || !numEl) return;
+
+      const total = parseInt(totalEl.value, 10) || 0;
+      const closed = parseInt(closedEl.value, 10) || 0;
+      const t = i18n[currentLang];
+
+      if (total > 0) {
+        const computedPct = Math.min(100, Math.max(0, Math.round((closed / total) * 100)));
+        sliderEl.value = computedPct;
+        numEl.value = computedPct;
+        sliderEl.disabled = true;
+        numEl.disabled = true;
+        sliderEl.style.opacity = '0.5';
+        sliderEl.style.cursor = 'not-allowed';
+        numEl.style.opacity = '0.5';
+
+        if (badgeEl) {
+          badgeEl.className = 'quant-badge quant-locked';
+          badgeEl.innerText = t.quantLockedMsg;
+        }
+      } else {
+        sliderEl.disabled = false;
+        numEl.disabled = false;
+        sliderEl.style.opacity = '1';
+        sliderEl.style.cursor = 'pointer';
+        numEl.style.opacity = '1';
+
+        if (badgeEl) {
+          badgeEl.className = 'quant-badge quant-manual';
+          badgeEl.innerText = t.quantManualMsg;
+        }
+      }
+    }
+
     function saveTaskFromModal(taskId) {
       const nameVal = document.getElementById('editTaskName') ? document.getElementById('editTaskName').value : null;
       const startVal = document.getElementById('editStartDate').value;
       const endVal = document.getElementById('editEndDate').value;
-      const sliderVal = parseInt(document.getElementById('editSlider').value, 10);
       const statusVal = document.getElementById('editStatusSelect').value;
 
-      const local = masterTasks.find(t => t.id === taskId);
-      if (local) {
-        if (nameVal) {
-          if (currentLang === 'en') local.name_en = nameVal;
-          else local.name_zh = nameVal;
-        }
-        if (startVal) local.startDate = startVal;
-        if (endVal) local.endDate = endVal;
-        local.progressPct = sliderVal;
-        local.status = statusVal;
+      const totalVal = parseInt(document.getElementById('editQuantTotal').value, 10) || 0;
+      const closedVal = parseInt(document.getElementById('editQuantClosed').value, 10) || 0;
+      const openVal = Math.max(0, totalVal - closedVal);
+
+      let finalPct = 0;
+      if (totalVal > 0) {
+        finalPct = Math.min(100, Math.max(0, Math.round((closedVal / totalVal) * 100)));
+      } else {
+        finalPct = parseInt(document.getElementById('editSlider').value, 10) || 0;
       }
 
-      try {
-        // Pure Cloud Persistence Mode
-      } catch(e) {}
-
-      renderTable();
-      renderTimeline();
-      updateCharts();
-      closeModal();
-
-      saveTaskToCloud(taskId);
-    }
-
-    function _old_saveTaskFromModal(taskId) {
-      const nameVal = document.getElementById('editTaskName') ? document.getElementById('editTaskName').value : null;
-      const startVal = document.getElementById('editStartDate').value;
-      const endVal = document.getElementById('editEndDate').value;
-      const sliderVal = parseInt(document.getElementById('editSlider').value, 10);
-      const statusVal = document.getElementById('editStatusSelect').value;
-
       const local = masterTasks.find(t => t.id === taskId);
       if (local) {
         if (nameVal) {
@@ -1923,8 +1804,18 @@
         }
         if (startVal) local.startDate = startVal;
         if (endVal) local.endDate = endVal;
-        local.progressPct = sliderVal;
+        local.progressPct = finalPct;
         local.status = statusVal;
+
+        if (totalVal > 0) {
+          local.subSummary = {
+            total: totalVal,
+            closed: closedVal,
+            open: openVal
+          };
+        } else {
+          local.subSummary = null;
+        }
       }
 
       renderTable();
@@ -1953,14 +1844,19 @@
       }
     }
 
-    
-    // Pure GAS Cloud Fetch Engine (Source of Truth: Google Sheet Database)
+    // PURE DATA GLUE ENGINE: 100% SINGLE SOURCE OF TRUTH FROM GOOGLE SHEET
     async function loadTasksFromCloud() {
       const badge = document.getElementById('cloudBadge');
+      const loader = document.getElementById('appLoader');
+      const loaderText = document.getElementById('loaderText');
+      const loaderRetryBtn = document.getElementById('loaderRetryBtn');
+
       if (badge) {
-        badge.innerText = "⏳ 讀取 Google Sheet 雲端資料庫中...";
+        badge.innerText = currentLang === 'en' ? "⏳ Syncing Cloud DB..." : "⏳ 讀取 Google Sheet 雲端資料庫中...";
         badge.classList.add('syncing');
       }
+      if (loaderText) loaderText.innerText = currentLang === 'en' ? "⏳ Connecting to Google Sheet Cloud DB..." : "⏳ 正在連線 Google Sheet 雲端資料庫...";
+      if (loaderRetryBtn) loaderRetryBtn.style.display = 'none';
 
       try {
         const res = await fetch(GAS_WEBAPP_URL + '?action=getTasks');
@@ -1968,93 +1864,124 @@
         const list = (jsonRes && (jsonRes.data || jsonRes.tasks)) ? (jsonRes.data || jsonRes.tasks) : (Array.isArray(jsonRes) ? jsonRes : null);
 
         if (Array.isArray(list) && list.length > 0) {
-          // Smart Merge Engine: Update local masterTasks attributes with cloud data while preserving local styling/colors
-          list.forEach(cloudItem => {
-            let local = masterTasks.find(t => t.id === cloudItem.id);
-            const sDate = (cloudItem.startDate && cloudItem.startDate.includes('T')) ? cloudItem.startDate.split('T')[0] : cloudItem.startDate;
-            const eDate = (cloudItem.endDate && cloudItem.endDate.includes('T')) ? cloudItem.endDate.split('T')[0] : cloudItem.endDate;
-
-            if (local) {
-              if (cloudItem.name_zh) local.name_zh = cloudItem.name_zh;
-              if (cloudItem.name_en) local.name_en = cloudItem.name_en;
-              if (cloudItem.progressPct !== undefined && cloudItem.progressPct !== null) local.progressPct = Number(cloudItem.progressPct);
-              if (cloudItem.status) local.status = cloudItem.status;
-              if (sDate) local.startDate = sDate;
-              if (eDate) local.endDate = eDate;
-              if (cloudItem.owner) local.owner = cloudItem.owner;
-              if (cloudItem.workstream) local.workstream = cloudItem.workstream;
-            } else {
-              cloudItem.color = cloudItem.color || "#3B82F6";
-              cloudItem.startDate = sDate;
-              cloudItem.endDate = eDate;
-              masterTasks.push(cloudItem);
-            }
+          // 100% Pure Data-Driven Assignment
+          masterTasks = list.map(item => {
+            const sDate = (item.startDate && item.startDate.includes('T')) ? item.startDate.split('T')[0] : item.startDate;
+            const eDate = (item.endDate && item.endDate.includes('T')) ? item.endDate.split('T')[0] : item.endDate;
+            return {
+              id: item.id,
+              name_en: item.name_en || item.name || '',
+              name_zh: item.name_zh || item.name || '',
+              workstream: item.workstream || 'ACTION PLAN',
+              color: item.color || '#3B82F6',
+              status: item.status || 'Scheduled',
+              progressPct: Number(item.progressPct || 0),
+              startDate: sDate,
+              endDate: eDate,
+              owner_en: item.owner_en || item.owner || 'TBD',
+              owner_zh: item.owner_zh || item.owner || 'TBD',
+              auditPoint_en: item.auditPoint_en || item.auditPoint || 'N/A',
+              auditPoint_zh: item.auditPoint_zh || item.auditPoint || 'N/A',
+              rootCause_en: item.rootCause_en || '',
+              rootCause_zh: item.rootCause_zh || '',
+              deliverable_en: item.deliverable_en || '',
+              deliverable_zh: item.deliverable_zh || '',
+              subSummary: (item.subSummary_total !== undefined && item.subSummary_total !== null && item.subSummary_total !== '' && Number(item.subSummary_total) > 0) ? {
+                total: Number(item.subSummary_total || 0),
+                closed: Number(item.subSummary_closed || 0),
+                open: Number(item.subSummary_open || 0)
+              } : null,
+              subList_en: item.subList_en || '',
+              subList_zh: item.subList_zh || '',
+              reportLink: item.reportLink || ''
+            };
           });
 
           // Sync Cloud Milestones if returned
           if (jsonRes && Array.isArray(jsonRes.milestones) && jsonRes.milestones.length > 0) {
-            jsonRes.milestones.forEach(cloudMs => {
-              let localMs = masterMilestones.find(m => m.id === cloudMs.id);
-              const mDate = (cloudMs.date && cloudMs.date.includes('T')) ? cloudMs.date.split('T')[0] : cloudMs.date;
-              if (localMs) {
-                if (cloudMs.name_zh) localMs.name_zh = cloudMs.name_zh;
-                if (cloudMs.name_en) localMs.name_en = cloudMs.name_en;
-                if (mDate) localMs.date = mDate;
-                if (cloudMs.desc_zh) localMs.desc_zh = cloudMs.desc_zh;
-                if (cloudMs.desc_en) localMs.desc_en = cloudMs.desc_en;
-              } else {
-                cloudMs.date = mDate;
-                masterMilestones.push(cloudMs);
-              }
+            masterMilestones = jsonRes.milestones.map(ms => {
+              const mDate = (ms.date && ms.date.includes('T')) ? ms.date.split('T')[0] : ms.date;
+              return {
+                id: ms.id,
+                name_en: ms.name_en || ms.name || '',
+                name_zh: ms.name_zh || ms.name || '',
+                date: mDate,
+                icon: ms.icon || '★',
+                level: ms.level || 'top',
+                desc_en: ms.desc_en || ms.desc || '',
+                desc_zh: ms.desc_zh || ms.desc || ''
+              };
             });
           } else {
-            // Dynamic Auto-Binding: Bind MS-4 date to ACT-11 startDate from Google Sheet
-            const act11 = masterTasks.find(t => t.id === "ACT-11");
-            const ms4 = masterMilestones.find(m => m.id === "MS-4");
-            if (act11 && act11.startDate && ms4) {
-              ms4.date = act11.startDate;
+            const act11 = masterTasks.find(t => t.id === 'ACT-11');
+            if (act11 && act11.startDate) {
+              const ms4 = masterMilestones.find(m => m.id === 'MS-4');
+              if (ms4) ms4.date = act11.startDate;
             }
           }
 
           renderTable();
           renderTimeline();
           renderMilestones();
-          updateCharts();
+          updateTodayNeedle();
+          initCharts();
 
           if (badge) {
-            badge.innerText = "☁️ 已成功同步 Google Sheet 雲端數據 (" + list.length + "項)";
+            badge.innerText = currentLang === 'en' 
+              ? `☁️ Cloud DB Synced (${masterTasks.length} Tasks)`
+              : `☁️ 已成功同步 Google Sheet 雲端數據 (${masterTasks.length}項)`;
             badge.classList.remove('syncing');
+          }
+
+          if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.display = 'none'; loader.style.opacity = '1'; }, 300);
           }
           return;
         }
       } catch (err) {
-        console.warn("GAS fetch notice:", err);
-        if (badge) {
-          badge.innerText = "☁️ 已連線至雲端 (等待回應)";
-          badge.classList.remove('syncing');
-        }
+        console.warn("GAS fetch error:", err);
       }
+
+      if (badge) {
+        badge.innerText = currentLang === 'en' ? "⚠️ Cloud Connection Error" : "⚠️ 雲端連線失敗 (零硬編碼保護)";
+        badge.classList.remove('syncing');
+      }
+      if (loaderText) {
+        loaderText.innerText = currentLang === 'en' 
+          ? "⚠️ Failed to fetch data from Google Sheet Cloud DB." 
+          : "⚠️ 無法連線至 Google Sheet 雲端資料庫（已啟用零硬編碼防護）";
+      }
+      if (loaderRetryBtn) loaderRetryBtn.style.display = 'inline-block';
     }
 
-async function saveTaskToCloud(taskId) {
+    async function saveTaskToCloud(taskId) {
       const local = masterTasks.find(t => t.id === taskId);
       if (!local) return;
 
       const badge = document.getElementById('cloudBadge');
-      badge.innerText = i18n[currentLang].cloudSyncing;
-      badge.classList.add('syncing');
+      if (badge) {
+        badge.innerText = i18n[currentLang].cloudSyncing;
+        badge.classList.add('syncing');
+      }
 
       try {
+        const effectivePct = getEffectiveProgressPct(local);
+
         const payload = {
           action: "updateTask",
           taskId: taskId,
           name_en: local.name_en,
           name_zh: local.name_zh,
-          progressPct: local.progressPct,
+          progressPct: effectivePct,
           status: local.status,
           startDate: local.startDate,
           endDate: local.endDate,
-          owner: local.owner
+          owner_en: local.owner_en,
+          owner_zh: local.owner_zh,
+          subSummary_total: local.subSummary ? local.subSummary.total : 0,
+          subSummary_closed: local.subSummary ? local.subSummary.closed : 0,
+          subSummary_open: local.subSummary ? local.subSummary.open : 0
         };
 
         await fetch(GAS_WEBAPP_URL, {
@@ -2062,14 +1989,39 @@ async function saveTaskToCloud(taskId) {
           body: JSON.stringify(payload)
         });
 
-        badge.innerText = i18n[currentLang].cloudSynced;
-        badge.classList.remove('syncing');
+        if (badge) {
+          badge.innerText = i18n[currentLang].cloudSynced;
+          badge.classList.remove('syncing');
+        }
         loadTasksFromCloud();
       } catch (err) {
         console.warn("GAS save notice:", err);
-        badge.innerText = "☁️ Local Mode";
-        badge.classList.remove('syncing');
+        if (badge) {
+          badge.innerText = "☁️ Local Mode";
+          badge.classList.remove('syncing');
+        }
       }
+    }
+
+    async function saveMilestoneToCloud(msId) {
+      const local = masterMilestones.find(m => m.id === msId);
+      if (!local) return;
+
+      try {
+        await fetch(GAS_WEBAPP_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: "updateMilestone",
+            msId: msId,
+            name_en: local.name_en,
+            name_zh: local.name_zh,
+            date: local.date,
+            desc_en: local.desc_en,
+            desc_zh: local.desc_zh
+          })
+        });
+        loadTasksFromCloud();
+      } catch(e) { console.warn(e); }
     }
 
     function closeModal() {
@@ -2091,12 +2043,18 @@ async function saveTaskToCloud(taskId) {
         progressPct: 50,
         startDate: "2026-08-01",
         endDate: "2026-09-30",
-        owner: "Sateesh",
-        auditPoint: "New Point",
+        owner_en: "Sateesh",
+        owner_zh: "Sateesh",
+        auditPoint_en: "New Point",
+        auditPoint_zh: "新增發現點",
         rootCause_en: "New corrective action added by user",
         rootCause_zh: "使用者新增之改善對策項目",
         deliverable_en: "CAPA Evidence Report",
-        deliverable_zh: "CAPA 佐證報告"
+        deliverable_zh: "CAPA 佐證報告",
+        subSummary: null,
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       };
 
       masterTasks.push(newTask);
@@ -2107,46 +2065,124 @@ async function saveTaskToCloud(taskId) {
       saveTaskToCloud(newId);
     }
 
+    // 100% PURE DYNAMIC CHART.JS ENGINE
     let statusChartInstance = null;
     let wsChartInstance = null;
 
     function initCharts() {
       if (statusChartInstance) { statusChartInstance.destroy(); statusChartInstance = null; }
       if (wsChartInstance) { wsChartInstance.destroy(); wsChartInstance = null; }
+
       const t = i18n[currentLang];
+      
+      // 1. Dynamic Task Status Pie Chart
+      const inProgress = masterTasks.filter(t => t.status === 'In Progress').length;
+      const scheduled = masterTasks.filter(t => t.status === 'Scheduled').length;
+      const completed = masterTasks.filter(t => t.status === 'Completed').length;
+
       const ctx1 = document.getElementById('statusChart').getContext('2d');
       statusChartInstance = new Chart(ctx1, {
         type: 'pie',
         data: {
           labels: [t.statusProgress, t.statusNotStarted, t.statusCompleted],
           datasets: [{
-            data: [65, 4, 56],
+            data: [inProgress, scheduled, completed],
             backgroundColor: ['#F59E0B', '#64748B', '#10B981']
           }]
         },
         options: { responsive: true, maintainAspectRatio: false }
       });
 
+      // 2. Dynamic Workstream Doughnut Chart with Language Legend Translation
+      const wsCategories = ['ACTION PLAN', 'EQUIPMENT', 'TRAINING', 'SELF CHECK', 'AUDIT'];
+      const wsMap = { 'ACTION PLAN': 0, 'EQUIPMENT': 0, 'TRAINING': 0, 'SELF CHECK': 0, 'AUDIT': 0 };
+      
+      masterTasks.forEach(t => {
+        const ws = (t.workstream || '').toUpperCase();
+        if (wsMap[ws] !== undefined) wsMap[ws]++;
+      });
+
+      const translatedWsLabels = wsCategories.map(cat => wsDict[currentLang][cat] || cat);
+
       const ctx2 = document.getElementById('workstreamChart').getContext('2d');
       wsChartInstance = new Chart(ctx2, {
         type: 'doughnut',
         data: {
-          labels: ['ACTION PLAN', 'EQUIPMENT', 'TRAINING', 'SELF CHECK', 'AUDIT'],
+          labels: translatedWsLabels,
           datasets: [{
-            data: [127, 9, 1, 1, 3],
+            data: Object.values(wsMap),
             backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EF4444']
           }]
         },
         options: { responsive: true, maintainAspectRatio: false }
       });
+
+      updateReadinessCards();
     }
 
     function updateCharts() {
       if (!statusChartInstance || !wsChartInstance) return;
       const t = i18n[currentLang];
+
+      // Update Chart 1
+      const inProgress = masterTasks.filter(t => t.status === 'In Progress').length;
+      const scheduled = masterTasks.filter(t => t.status === 'Scheduled').length;
+      const completed = masterTasks.filter(t => t.status === 'Completed').length;
+
       statusChartInstance.data.labels = [t.statusProgress, t.statusNotStarted, t.statusCompleted];
+      statusChartInstance.data.datasets[0].data = [inProgress, scheduled, completed];
       statusChartInstance.update();
+
+      // Update Chart 2
+      const wsCategories = ['ACTION PLAN', 'EQUIPMENT', 'TRAINING', 'SELF CHECK', 'AUDIT'];
+      const wsMap = { 'ACTION PLAN': 0, 'EQUIPMENT': 0, 'TRAINING': 0, 'SELF CHECK': 0, 'AUDIT': 0 };
+      
+      masterTasks.forEach(t => {
+        const ws = (t.workstream || '').toUpperCase();
+        if (wsMap[ws] !== undefined) wsMap[ws]++;
+      });
+
+      wsChartInstance.data.labels = wsCategories.map(cat => wsDict[currentLang][cat] || cat);
+      wsChartInstance.data.datasets[0].data = Object.values(wsMap);
       wsChartInstance.update();
+
+      updateReadinessCards();
+    }
+
+    // Dynamic Audit Readiness Cards Update Engine
+    function updateReadinessCards() {
+      const act2 = masterTasks.find(t => t.id === 'ACT-2');
+      const act3 = masterTasks.find(t => t.id === 'ACT-3');
+      const act4 = masterTasks.find(t => t.id === 'ACT-4');
+      const act5 = masterTasks.find(t => t.id === 'ACT-5');
+      const act6 = masterTasks.find(t => t.id === 'ACT-6');
+
+      // Prog 1: Non-budget Items Closure Rate (ACT-2 & ACT-3 average progress)
+      const p2 = getEffectiveProgressPct(act2);
+      const p3 = getEffectiveProgressPct(act3);
+      const prog1Val = (act2 && act3) ? Math.round((p2 + p3) / 2) : 0;
+      
+      // Prog 2: Equipment Lead-time Progress (ACT-4 progress)
+      const prog2Val = getEffectiveProgressPct(act4);
+
+      // Prog 3: Training Resolution Rate (ACT-5 & ACT-6 average progress)
+      const p5 = getEffectiveProgressPct(act5);
+      const p6 = getEffectiveProgressPct(act6);
+      const prog3Val = (act5 && act6) ? Math.round((p5 + p6) / 2) : 0;
+
+      const el1Val = document.getElementById('prog1Val');
+      const el1Bar = document.getElementById('prog1Bar');
+      const el2Val = document.getElementById('prog2Val');
+      const el2Bar = document.getElementById('prog2Bar');
+      const el3Val = document.getElementById('prog3Val');
+      const el3Bar = document.getElementById('prog3Bar');
+
+      if (el1Val) el1Val.innerText = `${prog1Val}%`;
+      if (el1Bar) el1Bar.style.width = `${prog1Val}%`;
+      if (el2Val) el2Val.innerText = `${prog2Val}%`;
+      if (el2Bar) el2Bar.style.width = `${prog2Val}%`;
+      if (el3Val) el3Val.innerText = `${prog3Val}%`;
+      if (el3Bar) el3Bar.style.width = `${prog3Val}%`;
     }
 
     function updateTodayNeedle() {
@@ -2171,10 +2207,9 @@ async function saveTaskToCloud(taskId) {
       document.getElementById('uiSubtitle').innerText = t.subtitle;
       document.getElementById('uiLangBtn').innerText = t.langBtn;
       document.getElementById('uiFullscreenBtn').innerText = document.fullscreenElement ? t.btnExitFullscreen : t.btnFullscreen;
-      document.getElementById('uiViewToggleBtn').innerText = isFullViewMode ? t.switchViewFull : t.switchViewMaster;
       document.getElementById('uiToggleTableBtn').innerText = t.toggleTable;
       document.getElementById('uiAddTaskBtn').innerText = t.addTask;
-      document.getElementById('uiPanelTitle').innerText = isFullViewMode ? t.tableTitleFull : t.tableTitleMaster;
+      document.getElementById('uiPanelTitle').innerText = t.tableTitleMaster;
       document.getElementById('uiTimelineTitle').innerText = t.timelineTitle;
 
       document.getElementById('thRef').innerText = t.colRef;
@@ -2206,14 +2241,6 @@ async function saveTaskToCloud(taskId) {
       panel.style.display = (panel.style.display === 'none') ? 'block' : 'none';
     }
 
-    function toggleViewMode() {
-      isFullViewMode = !isFullViewMode;
-      const t = i18n[currentLang];
-      document.getElementById('uiViewToggleBtn').innerText = isFullViewMode ? t.switchViewFull : t.switchViewMaster;
-      document.getElementById('uiPanelTitle').innerText = isFullViewMode ? t.tableTitleFull : t.tableTitleMaster;
-      renderTable();
-    }
-
     function toggleFullScreen() {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(err => console.log(err));
@@ -2230,26 +2257,10 @@ async function saveTaskToCloud(taskId) {
       }
     });
 
-    // Automatic Page Initialization on Load (100% Pure GAS Cloud Fetch)
+    // Automatic Pure Cloud Initialization
     window.addEventListener('DOMContentLoaded', () => {
-      renderTable();
-      renderTimeline();
-      renderMilestones();
-      updateTodayNeedle();
-      initCharts();
-
-      // Always load the single source of truth from Google Sheet Database on page load!
       loadTasksFromCloud();
     });
-
-    // Immediate fallback execution
-    try {
-      renderTable();
-      renderTimeline();
-      renderMilestones();
-      updateTodayNeedle();
-      initCharts();
-    } catch(e) { console.log('Initial render notice:', e); }
   </script>
 </body>
 </html>
