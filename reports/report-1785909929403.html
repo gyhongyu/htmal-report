@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSSTC 專案稽核 (Audit) 缺失整改應對小組 SOP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Mermaid JS for Flowchart Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .mermaid {
+            background: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+        .tab-active {
+            border-bottom: 3px solid #2563eb;
+            color: #2563eb;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header / Banner -->
+    <header class="bg-slate-900 text-white shadow-lg border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-[96%] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <!-- Foxlink Logo (Pure White Effect) -->
+                    <img src="https://i.postimg.cc/rsb3xvLj/foxlink.png" alt="Foxlink Logo" class="h-8 w-auto flex-shrink-0" style="filter: grayscale(100%) invert(100%) contrast(200%); mix-blend-mode: screen;">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-1">
+                            <span>ISO 9001 / ISO 19011 合規體系</span>
+                            <span>•</span>
+                            <span>跨國專案管理 (TW/CN - India)</span>
+                        </div>
+                        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                            <i data-lucide="shield-check" class="text-blue-500"></i>
+                            SSSTC 專案稽核缺失整改應對小組 SOP
+                        </h1>
+                    </div>
+                </div>
+                <!-- Supply Chain Chain Flow -->
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-lg px-3 py-2 text-xs flex items-center gap-2 self-start md:self-auto">
+                    <span class="text-slate-400">供應鏈鏈條：</span>
+                    <span class="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-medium">Dell (最終客戶)</span>
+                    <i data-lucide="arrow-left" class="w-3 h-3 text-slate-500"></i>
+                    <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded font-medium">SSSTC (建興)</span>
+                    <i data-lucide="arrow-left" class="w-3 h-3 text-slate-500"></i>
+                    <span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-medium">Foxlink 正崴 (代工廠)</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation Tabs -->
+    <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-[73px] z-40">
+        <div class="max-w-[96%] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 overflow-x-auto" id="tab-container">
+                <button onclick="switchTab('flowchart')" id="tab-flowchart" class="tab-btn py-4 px-1 text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2 whitespace-nowrap tab-active">
+                    <i data-lucide="git-fork" class="w-4 h-4"></i> 整改流程圖 (Flowchart)
+                </button>
+                <button onclick="switchTab('roles')" id="tab-roles" class="tab-btn py-4 px-1 text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2 whitespace-nowrap">
+                    <i data-lucide="users" class="w-4 h-4"></i> 成員崗位與 KRA 職責分工
+                </button>
+                <button onclick="switchTab('raci')" id="tab-raci" class="tab-btn py-4 px-1 text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2 whitespace-nowrap">
+                    <i data-lucide="grid" class="w-4 h-4"></i> RACI 權責矩陣
+                </button>
+                <button onclick="switchTab('remote-audit')" id="tab-remote-audit" class="tab-btn py-4 px-1 text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2 whitespace-nowrap">
+                    <i data-lucide="video" class="w-4 h-4"></i> 遠端視訊稽核規範 (Mike/Shahabaz定位)
+                </button>
+                <button onclick="switchTab('checklist')" id="tab-checklist" class="tab-btn py-4 px-1 text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-2 whitespace-nowrap">
+                    <i data-lucide="check-square" class="w-4 h-4"></i> 現場驗證 Checksheet 工具
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Body -->
+    <main class="max-w-[96%] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+
+        <!-- TAB 1: FLOWCHART -->
+        <section id="content-flowchart" class="tab-content block space-y-6">
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-blue-900 flex items-start gap-3">
+                <i data-lucide="info" class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"></i>
+                <div class="text-sm">
+                    <h4 class="font-bold mb-1">流程架構說明</h4>
+                    本流程遵循 <strong>ISO 19011 管理體系稽核指南</strong>，針對印度廠區實施「先審計畫、後驗證據、遠端視訊複核」的三階閉環機制。由 <strong>Sateesh (QA)</strong> 聯合 <strong>Shahabaz (Production)</strong> 與 <strong>SF IT / PE</strong> 實施現場與系統改進。
+                </div>
+            </div>
+
+            <!-- Mermaid Chart Render Area -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="workflow" class="text-blue-600"></i>
+                    缺失整改完成度簽核動態流程圖
+                </h3>
+                <div class="mermaid overflow-x-auto flex justify-center">
+flowchart TD
+    classDef india fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#01579b
+    classDef twn fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    classDef client fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+
+    subgraph Phase1 ["第一階段：原因分析與 CAP Plan 擬定"]
+        A1["⑤ Sateesh QA / ⑦ SF IT<br/>分析根本原因 RCA 與擬定對策"]:::india --> A2["① Yanlin QM<br/>審核 RCA 與對策可行性"]:::twn
+        A2 -->|"退回修正"| A1
+        A2 -->|"初審通過"| A3["③ HQQ<br/>總部品保複審認可"]:::twn
+        A3 -->|"認可"| A4["② Yancy PM / ④ Mike Sales<br/>回覆 SSSTC 對策計畫"]:::client
+    end
+
+    subgraph Phase2 ["第二階段：現場整改與佐證收集"]
+        B1["⑤ Sateesh QA & ⑥ Shahabaz Prod<br/>執行產線整改、SOP訓練、SF卡關、收集證據"]:::india
+    end
+
+    subgraph Phase3 ["第三階段：遠端視訊實地驗證 Remote Audit"]
+        C1["① Yanlin QM<br/>開立實地驗證明細 Checksheet"]:::twn --> C2["開啟 Teams/Zoom 視訊連線"]
+        
+        subgraph IndiaField ["印度現場連線分工"]
+            C3_1["④ Mike Sales<br/>掌鏡拍攝第三人稱視角 + 翻譯協調"]:::india
+            C3_2["⑤ Sateesh QA & ⑥ Shahabaz Prod<br/>現場演示防呆、SF系統卡關、操作 SOP"]:::india
+        end
+        
+        C2 --> C3_1
+        C2 --> C3_2
+        C3_1 --> C4{"① Yanlin QM<br/>即時視訊覆核是否過關?"}:::twn
+        C3_2 --> C4
+        C4 -->|"不通過/補充證據"| B1
+    end
+
+    subgraph Phase4 ["第四階段：系統進度登錄與簽核"]
+        D1["① Yanlin QM<br/>更新 NC 追蹤表完成度並簽核"]:::twn --> D2["③ HQQ<br/>總部最終認可閉環"]:::twn
+    end
+
+    subgraph Phase5 ["第五階段：客戶端對外結案"]
+        E1["② Yancy PM / ④ Mike Sales<br/>提交完整整改報告至 SSSTC / Dell 結案"]:::client
+    end
+
+    A4 --> B1
+    B1 --> C1
+    C4 -->|"通過"| D1
+    D2 --> E1
+                </div>
+            </div>
+
+            <!-- Phase Step Breakdown Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider bg-blue-50 px-2 py-1 rounded">Phase 1 - 2</span>
+                    <h4 class="font-bold text-base mt-2 mb-1">RCA 分析與軟硬體防呆落地</h4>
+                    <p class="text-sm text-slate-600">Sateesh 拉通 SF IT 與 PE 設計 MES 系統卡關 (Interlock) 及治具防呆。Yanlin 與 HQQ 審核通過後，交由生產主管 Shahabaz 落地執行。</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider bg-purple-50 px-2 py-1 rounded">Phase 3</span>
+                    <h4 class="font-bold text-base mt-2 mb-1">遠端 Gemba 三方視訊驗證</h4>
+                    <p class="text-sm text-slate-600">Yanlin 主導視訊，Mike 擔任「鏡頭與翻譯」，Sateesh 與 Shahabaz 現場演示物理防呆與 MES 硬卡關，證明改善有效。</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2 py-1 rounded">Phase 4 - 5</span>
+                    <h4 class="font-bold text-base mt-2 mb-1">閉環與對外報告提交</h4>
+                    <p class="text-sm text-slate-600">Yanlin 認可後更新 NC 完成度，經 HQQ 總部簽核結案，最後由 PM Yancy 及 Sales Mike 提交 SSSTC/Dell 正式閉環。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: ROLES & RESPONSIBILITIES -->
+        <section id="content-roles" class="tab-content hidden space-y-6">
+            <div class="border-b border-slate-200 pb-4">
+                <h2 class="text-xl font-bold text-slate-900">小組成員崗位與 KRA 職責分工明細</h2>
+                <p class="text-sm text-slate-500 mt-1">涵蓋 China/TW 總部管理層、India 現場品保與生產主管，以及工廠 IT/工程技術支援團隊。</p>
+            </div>
+
+            <!-- Role Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 1. Yanlin (QM) -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-purple-600 text-white p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-purple-200 uppercase">China / TW 團隊</div>
+                            <h3 class="text-lg font-bold">① Yanlin (QM)</h3>
+                        </div>
+                        <span class="bg-purple-700 text-purple-100 text-xs px-2.5 py-1 rounded-full font-semibold">品質管理主管</span>
+                    </div>
+                    <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>CAP Plan 審查：</strong> 負責初審 Sateesh 提交的 RCA 根本原因與整改措施。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>開立 Checksheet：</strong> 依據稽核缺失開立現場驗證明細表。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>主導遠端視訊驗證：</strong> 擔任視訊稽核的主稽核員，即時判定現場改善是否符合 ISO 要求。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>NC 完成度維護：</strong> 認可後正式更新 NC (Non-Conformity) 追蹤表進度。</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+                            ISO 角色：主導稽核員 (Lead Auditor)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Yancy (PM) -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-indigo-600 text-white p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-indigo-200 uppercase">China / TW 團隊</div>
+                            <h3 class="text-lg font-bold">② Yancy (PM)</h3>
+                        </div>
+                        <span class="bg-indigo-700 text-indigo-100 text-xs px-2.5 py-1 rounded-full font-semibold">專案經理</span>
+                    </div>
+                    <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>專案整體時程控管：</strong> 追蹤整改各階段 Milestone，防止逾期。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>資源協調：</strong> 協調跨國/跨部門資源（治具採購、SOP發行等）。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>SSSTC 專案對口：</strong> 負責將通過審核的 CAP Plan 與閉環報告對外提交至 SSSTC PM。</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+                            ISO 角色：專案時程與對外溝通者
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. HQQ -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-slate-700 text-white p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-slate-300 uppercase">China / TW 團隊</div>
+                            <h3 class="text-lg font-bold">③ HQQ</h3>
+                        </div>
+                        <span class="bg-slate-800 text-slate-200 text-xs px-2.5 py-1 rounded-full font-semibold">總部品保 (HQ Quality)</span>
+                    </div>
+                    <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-slate-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>高階品質把關：</strong> 代表總部品質委員會審核高風險缺失整改方案。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-slate-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>最終核准 (Final Approval)：</strong> 經 Yanlin 驗證通過後，進行總部最終簽核與系統 Closure 認可。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-slate-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>體系標準化：</strong> 評估整改措施是否需橫向展開 (Horizontal Roll-out) 至其他產線。</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+                            ISO 角色：品質門檻與最終簽核者 (Accountable)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Mike (Sales) - STRICT BOUNDARIES -->
+                <div class="bg-white rounded-xl border-2 border-amber-400 shadow-md overflow-hidden flex flex-col">
+                    <div class="bg-amber-500 text-white p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-amber-100 uppercase">India 廠區團隊</div>
+                            <h3 class="text-lg font-bold">④ Mike (Sales)</h3>
+                        </div>
+                        <span class="bg-amber-600 text-amber-50 text-xs px-2.5 py-1 rounded-full font-semibold">業務代表 / 現場協調員</span>
+                    </div>
+                    <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                        <div class="bg-amber-50 p-2.5 rounded-lg border border-amber-200 text-xs text-amber-800 font-semibold">
+                            🛑 嚴格防守邊界 (三不原則)：<br/>
+                            1. 不替代品質打勾驗證<br/>
+                            2. 不主導產線整改與生產<br/>
+                            3. 不代表品保簽核報告
+                        </div>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="camera" class="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>第三人稱掌鏡 (Eyes)：</strong> 視訊連線時拿著設備拍攝 Sateesh 與 Shahabaz 的操作，避免自導自演死角。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="languages" class="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>語言溝通橋樑 (Mouth)：</strong> 協助 TW/CN QM (Yanlin) 與印度在地產線作業員/組長間的即時翻譯。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="clock" class="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>現場進度催繳：</strong> 協助 PM (Yancy) 於印度現場催促 Sateesh 與 Shahabaz 依限提交 Evidence。</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+                            ISO 角色：遠端稽核協調員 (Facilitator)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Sateesh (QA) - TASKFORCE CONVENER -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-sky-600 text-white p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-sky-200 uppercase">India 廠區團隊</div>
+                            <h3 class="text-lg font-bold">⑤ Sateesh (QA)</h3>
+                        </div>
+                        <span class="bg-sky-700 text-sky-100 text-xs px-2.5 py-1 rounded-full font-semibold">印度品質整改召集人</span>
+                    </div>
+                    <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-sky-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>拉通跨部門 (RCA/CAP)：</strong> 召集印度生產 (Shahabaz) 與 SF IT/PE 共同分析根本原因並擬定對策。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-sky-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>品質監督與佐證收集：</strong> 監督產線改進執行，收集修改後 SOP、首件紀錄表與改善前後對照照片。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-sky-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>視訊品質驗證演示：</strong> 於遠端視訊中向 Yanlin 說明 QA 抽檢邏輯與展示防呆數據。</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+                            ISO 角色：現場整改負責人 (Action Owner)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Shahabaz (Production Leader) - LOCAL EXECUTION -->
+                <div class="bg-white rounded-xl border border-emerald-300 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-emerald-600 text-white p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-emerald-200 uppercase">India 廠區團隊</div>
+                            <h3 class="text-lg font-bold">⑥ Shahabaz (Production)</h3>
+                        </div>
+                        <span class="bg-emerald-700 text-emerald-100 text-xs px-2.5 py-1 rounded-full font-semibold">印度生產主管 (Local Owner)</span>
+                    </div>
+                    <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                        <div class="bg-emerald-50 p-2 rounded text-xs text-emerald-800 font-medium">
+                            ℹ️ 組織過渡：由 Shahabaz 擔綱第一線生產執行，Hellen 進行過渡輔導與資深顧問支持。
+                        </div>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>產線實體整改落地：</strong> 負責將 PE 設計之防呆治具上架至工位，並確保作業員不繞過防呆。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>在地語言作業員培訓：</strong> 用印地語/當地語言針對新版 SOP 徹底重新培訓第一線作業員。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0"></i>
+                                <span><strong>開線首件與檢驗產出：</strong> 負責開線執行首件確認 (First Article Inspection) 並產出生產紀錄交 Sateesh。</span>
+                            </li>
+                        </ul>
+                        <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+                            ISO 角色：現場製造執行者 (Production Owner)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. SF IT & PE (Technical Support) -->
+                <div class="bg-white rounded-xl border border-teal-300 shadow-sm overflow-hidden flex flex-col md:col-span-2 lg:col-span-3">
+                    <div class="bg-teal-700 text-white p-4 flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-teal-200 uppercase">India 廠區技術支援團隊</div>
+                            <h3 class="text-lg font-bold">⑦ SF IT (MES) & PE/ME (工程技術團隊)</h3>
+                        </div>
+                        <span class="bg-teal-800 text-teal-100 text-xs px-2.5 py-1 rounded-full font-semibold">系統與物理防呆技術支援</span>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-sm text-teal-900 mb-2 flex items-center gap-1.5">
+                                <i data-lucide="cpu" class="w-4 h-4 text-teal-600"></i> SF IT / MES 團隊 (系統級防呆)
+                            </h4>
+                            <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+                                <li><strong>Shop Floor 邏輯硬卡關 (Interlock)：</strong> 在 MES 系統寫入防呆邏輯（如：未刷過首檢不允許開工、漏刷步驟不許列印標籤）。</li>
+                                <li><strong>權限限制：</strong> 限制產線作業員擅自跳過測試工位之系統權限。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-teal-900 mb-2 flex items-center gap-1.5">
+                                <i data-lucide="wrench" class="w-4 h-4 text-teal-600"></i> PE / ME 工程團隊 (物理級防呆)
+                            </h4>
+                            <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+                                <li><strong>治具防呆 (Poka-yoke) 改進：</strong> 設計物理限制裝置（如防反插機構、定位銷），消除人為操作失誤。</li>
+                                <li><strong>SOP 變更發行：</strong> 負責撰寫工程變更通知 (ECN) 並更新作業指導書圖示。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 3: RACI MATRIX -->
+        <section id="content-raci" class="tab-content hidden space-y-6">
+            <div class="border-b border-slate-200 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900">RACI 職責授權矩陣</h2>
+                    <p class="text-sm text-slate-500 mt-1">明確定義每一階段誰主導 (A)、誰執行 (R)、誰協助/諮詢 (C)、誰知悉 (I)。</p>
+                </div>
+                <!-- RACI Legend -->
+                <div class="flex items-center gap-3 text-xs bg-white p-2.5 rounded-lg border border-slate-200">
+                    <span class="flex items-center gap-1"><strong class="bg-red-100 text-red-700 px-1.5 py-0.5 rounded">R</strong> 負責執行 (Responsible)</span>
+                    <span class="flex items-center gap-1"><strong class="bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded">A</strong> 最終核准 (Accountable)</span>
+                    <span class="flex items-center gap-1"><strong class="bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">C</strong> 諮詢/協查 (Consulted)</span>
+                    <span class="flex items-center gap-1"><strong class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded">I</strong> 告知 (Informed)</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 text-slate-700 uppercase font-semibold border-b border-slate-200 text-xs">
+                            <tr>
+                                <th class="py-3.5 px-4 w-1/4">缺失整改流程階段 / 任務項目</th>
+                                <th class="py-3.5 px-2 text-center">⑤ Sateesh<br/><span class="text-slate-400 font-normal">India QA</span></th>
+                                <th class="py-3.5 px-2 text-center">⑥ Shahabaz<br/><span class="text-slate-400 font-normal">India Prod</span></th>
+                                <th class="py-3.5 px-2 text-center">⑦ SF IT/PE<br/><span class="text-slate-400 font-normal">Technical</span></th>
+                                <th class="py-3.5 px-2 text-center bg-amber-50/50">④ Mike<br/><span class="text-slate-400 font-normal">India Sales</span></th>
+                                <th class="py-3.5 px-2 text-center">① Yanlin<br/><span class="text-slate-400 font-normal">TW/CN QM</span></th>
+                                <th class="py-3.5 px-2 text-center">③ HQQ<br/><span class="text-slate-400 font-normal">HQ Quality</span></th>
+                                <th class="py-3.5 px-2 text-center">② Yancy<br/><span class="text-slate-400 font-normal">TW/CN PM</span></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="py-3 px-4 font-medium">1. 暫時圍堵對策與產品隔離 (Containment)</td>
+                                <td class="text-center font-bold text-red-600 bg-red-50/30">R</td>
+                                <td class="text-center font-bold text-red-600 bg-red-50/30">R (產線隔離)</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500 bg-amber-50/20">I</td>
+                                <td class="text-center font-bold text-purple-600">A</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-medium">2. 根本原因分析 (RCA) 與 CAP 計畫撰寫</td>
+                                <td class="text-center font-bold text-red-600 bg-red-50/30">R (召集)</td>
+                                <td class="text-center font-bold text-blue-600">C (生產檢討)</td>
+                                <td class="text-center font-bold text-blue-600">C (技術可行性)</td>
+                                <td class="text-center font-bold text-slate-500 bg-amber-50/20">I</td>
+                                <td class="text-center font-bold text-purple-600">A</td>
+                                <td class="text-center font-bold text-blue-600">C</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-medium">3. 向 SSSTC/Dell 提交初版 CAP Plan</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-red-600 bg-amber-50/40">R (客戶窗口)</td>
+                                <td class="text-center font-bold text-blue-600">C</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-purple-600">A (專案管控)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-medium">4. 印度現場產線整改、SF系統硬卡關與人員訓練</td>
+                                <td class="text-center font-bold text-blue-600">C (稽查監督)</td>
+                                <td class="text-center font-bold text-red-600 bg-red-50/30">R (落地/訓練)</td>
+                                <td class="text-center font-bold text-red-600">R (SF卡關/防呆)</td>
+                                <td class="text-center font-bold text-slate-500 bg-amber-50/20">I (三不原則)</td>
+                                <td class="text-center font-bold text-purple-600">A</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                            </tr>
+                            <tr class="bg-slate-50/80">
+                                <td class="py-3 px-4 font-medium text-blue-900 flex items-center gap-1.5">
+                                    <i data-lucide="video" class="w-4 h-4 text-blue-600"></i>
+                                    5. 遠端 Gemba 視訊實地驗證 (Remote Audit)
+                                </td>
+                                <td class="text-center font-bold text-blue-600">C (QA邏輯說明)</td>
+                                <td class="text-center font-bold text-blue-600">C (現場操作演示)</td>
+                                <td class="text-center font-bold text-blue-600">C (SF卡關演示)</td>
+                                <td class="text-center font-bold text-blue-600 bg-amber-100/50">C (掌鏡/翻譯)</td>
+                                <td class="text-center font-bold text-red-600 bg-red-50">R / A (主稽核)</td>
+                                <td class="text-center font-bold text-blue-600">C (抽查)</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-medium">6. NC 完成度登錄與內部閉環簽核</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500 bg-amber-50/20">I</td>
+                                <td class="text-center font-bold text-red-600">R (更新系統)</td>
+                                <td class="text-center font-bold text-purple-600">A (最終核准)</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-medium">7. 對外提交正式 CAPA 結案報告至 SSSTC</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-red-600 bg-amber-50/40">R (對外提交)</td>
+                                <td class="text-center font-bold text-blue-600">C</td>
+                                <td class="text-center font-bold text-slate-500">I</td>
+                                <td class="text-center font-bold text-purple-600">A (結案管制)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: REMOTE AUDIT PROTOCOL (MIKE & SHAHABAZ ROLE) -->
+        <section id="content-remote-audit" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-6">
+                <div>
+                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded">ISO 19011 合規專章</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-2">遠端 Gemba 視訊稽核規範與現場角色分工</h2>
+                    <p class="text-sm text-slate-500 mt-1">為解決「印度廠無 China/TW 品質主管駐點」且需滿足「ISO 客觀獨立性」的最佳解決方案。</p>
+                </div>
+
+                <!-- Boundaries & Roles Box -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-red-50 rounded-xl border border-red-200">
+                        <h4 class="font-bold text-red-900 text-sm flex items-center gap-2 mb-2">
+                            <i data-lucide="x-circle" class="text-red-600"></i>
+                            嚴禁由 Sales (Mike) 單獨打勾簽核或主導生產
+                        </h4>
+                        <ul class="text-xs text-red-800 space-y-1.5 list-disc list-inside">
+                            <li><strong>利益衝突 (Conflict of Interest)：</strong> 業務主要 KPI 為出貨與業績，讓業務獨自驗證品質容易導致放水，客戶稽核時會判定為無效閉環。</li>
+                            <li><strong>職責切割明確：</strong> Sales 不干涉生產整改（由 Shahabaz 負責）也不簽核品質報告（由 Yanlin 負責）。</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2 mb-2">
+                            <i data-lucide="check-circle" class="text-emerald-600"></i>
+                            ISO 認可之「印度現場黃金三角」分工
+                        </h4>
+                        <ul class="text-xs text-emerald-800 space-y-1.5 list-disc list-inside">
+                            <li><strong>④ Mike (Sales)：</strong> 第三人稱攝影掌鏡 (Eyes) + 即時翻譯 (Mouth)。</li>
+                            <li><strong>⑤ Sateesh (QA)：</strong> 說明品質控制點、檢驗數據與 Evidence。</li>
+                            <li><strong>⑥ Shahabaz (Production)：</strong> 產線實機操作防呆治具與 MES 系統卡關。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Execution Steps -->
+                <div class="border-t border-slate-200 pt-6">
+                    <h3 class="font-bold text-slate-900 text-base mb-4">遠端視訊稽核 4 步標準作業程序 (SOP)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 relative">
+                            <span class="absolute -top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Step 1</span>
+                            <h4 class="font-bold text-sm mt-1 mb-1">課前開立 Checksheet</h4>
+                            <p class="text-xs text-slate-600">Yanlin (QM) 依據缺失項目，開立「現場驗證明細表」，載明要看的工位、治具編號、MES 系統卡關邏輯與 SOP 條款。</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 relative">
+                            <span class="absolute -top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Step 2</span>
+                            <h4 class="font-bold text-sm mt-1 mb-1">連線與掌鏡分工</h4>
+                            <p class="text-xs text-slate-600">開啟 Teams/Zoom。Mike 拿著手機掌鏡，視訊畫面需同時涵蓋「Shahabaz 操作防呆」、「MES 畫面」與「作業員動作」。</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 relative">
+                            <span class="absolute -top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Step 3</span>
+                            <h4 class="font-bold text-sm mt-1 mb-1">現場演示與隨機抽問</h4>
+                            <p class="text-xs text-slate-600">Shahabaz 演示物理防呆阻擋效果。Yanlin 透過 Mike 翻譯，隨機抽問現場印籍作業員新版 SOP 變更重點。</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 relative">
+                            <span class="absolute -top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Step 4</span>
+                            <h4 class="font-bold text-sm mt-1 mb-1">即時判定與紀錄</h4>
+                            <p class="text-xs text-slate-600">Yanlin 於螢幕前即時核對並打勾，過關則線上簽核，若未通過則列出補件清單交 Sateesh/Shahabaz 重新改善。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 5: CHECKSHEET TOOL -->
+        <section id="content-checklist" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">實地驗證 Checksheet 管理工具</h2>
+                        <p class="text-sm text-slate-500 mt-1">Yanlin 可在此開立驗證清單，遠端連線時逐項審核並產生整改進度報告。</p>
+                    </div>
+                    <button onclick="addChecklistItem()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-lg flex items-center gap-1.5 self-start md:self-auto">
+                        <i data-lucide="plus" class="w-4 h-4"></i> 新增缺失驗證項
+                    </button>
+                </div>
+
+                <!-- Interactive Checklist Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 text-slate-700 uppercase font-semibold border-b border-slate-200 text-xs">
+                            <tr>
+                                <th class="py-3 px-3 w-12 text-center">項次</th>
+                                <th class="py-3 px-4 w-1/4">稽核缺失描述 (NC Item)</th>
+                                <th class="py-3 px-4 w-1/4">應驗證佐證 (Evidence Required)</th>
+                                <th class="py-3 px-3 w-32 text-center">現場執行人</th>
+                                <th class="py-3 px-3 w-36 text-center">視訊驗證結果</th>
+                                <th class="py-3 px-3 w-20 text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="checklist-tbody" class="divide-y divide-slate-200">
+                            <!-- Default Row 1 -->
+                            <tr>
+                                <td class="py-3 px-3 text-center font-bold text-slate-500">1</td>
+                                <td class="py-3 px-4">
+                                    <input type="text" value="產線工位 #3 未貼附最新 SSSTC 專案治具操作 SOP (印地語/英文版)" class="w-full border-slate-200 rounded text-sm p-1 border focus:ring-blue-500">
+                                </td>
+                                <td class="py-3 px-4">
+                                    <input type="text" value="視訊查看工位現場 SOP 貼附，並由 Shahabaz 抽問印籍作業員" class="w-full border-slate-200 rounded text-sm p-1 border focus:ring-blue-500">
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded font-medium">Shahabaz (Prod)</span>
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    <select class="border-slate-300 rounded text-xs p-1 border focus:ring-blue-500 font-semibold text-emerald-600 bg-emerald-50">
+                                        <option value="pass">PASS (已驗證)</option>
+                                        <option value="fail">FAIL (未通過)</option>
+                                        <option value="pending" selected>PENDING (待驗證)</option>
+                                    </select>
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    <button onclick="deleteRow(this)" class="text-red-500 hover:text-red-700 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                </td>
+                            </tr>
+                            <!-- Default Row 2 -->
+                            <tr>
+                                <td class="py-3 px-3 text-center font-bold text-slate-500">2</td>
+                                <td class="py-3 px-4">
+                                    <input type="text" value="測試治具缺少物理防呆（Poka-yoke）且 MES 未設定未過卡關 (Interlock)" class="w-full border-slate-200 rounded text-sm p-1 border focus:ring-blue-500">
+                                </td>
+                                <td class="py-3 px-4">
+                                    <input type="text" value="視訊直播 Shahabaz 反向插治具被阻擋，及 SF IT 演示 MES 報錯攔截" class="w-full border-slate-200 rounded text-sm p-1 border focus:ring-blue-500">
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    <span class="bg-teal-100 text-teal-800 text-xs px-2 py-0.5 rounded font-medium">SF IT / PE</span>
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    <select class="border-slate-300 rounded text-xs p-1 border focus:ring-blue-500 font-semibold text-amber-600 bg-amber-50">
+                                        <option value="pass">PASS (已驗證)</option>
+                                        <option value="fail">FAIL (未通過)</option>
+                                        <option value="pending" selected>PENDING (待驗證)</option>
+                                    </select>
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    <button onclick="deleteRow(this)" class="text-red-500 hover:text-red-700 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-200">
+                    <div class="text-xs text-slate-500">
+                        審核簽核：<strong>① Yanlin (QM)</strong> | 複審簽核：<strong>③ HQQ</strong>
+                    </div>
+                    <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-1.5">
+                        <i data-lucide="printer" class="w-4 h-4"></i> 列印 / 導出 PDF 報告
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+        SSSTC Project Audit CAPA Taskforce Standard Operating Procedure • Foxlink Quality Management System
+    </footer>
+
+    <!-- App Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+
+            // Remove active style from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+            });
+
+            // Show selected content & set active button
+            const targetContent = document.getElementById(`content-${tabId}`);
+            const targetBtn = document.getElementById(`tab-${tabId}`);
+
+            if (targetContent && targetBtn) {
+                targetContent.classList.remove('hidden');
+                targetContent.classList.add('block');
+                targetBtn.classList.add('tab-active');
+            }
+
+            // Re-render icons inside visible tabs if needed
+            lucide.createIcons();
+        }
+
+        // Add Checklist Row Logic
+        function addChecklistItem() {
+            const tbody = document.getElementById('checklist-tbody');
+            const rowCount = tbody.children.length + 1;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="py-3 px-3 text-center font-bold text-slate-500">${rowCount}</td>
+                <td class="py-3 px-4">
+                    <input type="text" placeholder="請輸入缺失描述..." class="w-full border-slate-200 rounded text-sm p-1 border focus:ring-blue-500">
+                </td>
+                <td class="py-3 px-4">
+                    <input type="text" placeholder="請輸入驗證佐證要求..." class="w-full border-slate-200 rounded text-sm p-1 border focus:ring-blue-500">
+                </td>
+                <td class="py-3 px-3 text-center">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded font-medium">Shahabaz / Sateesh</span>
+                </td>
+                <td class="py-3 px-3 text-center">
+                    <select class="border-slate-300 rounded text-xs p-1 border focus:ring-blue-500 font-semibold text-amber-600 bg-amber-50">
+                        <option value="pass">PASS (已驗證)</option>
+                        <option value="fail">FAIL (未通過)</option>
+                        <option value="pending" selected>PENDING (待驗證)</option>
+                    </select>
+                </td>
+                <td class="py-3 px-3 text-center">
+                    <button onclick="deleteRow(this)" class="text-red-500 hover:text-red-700 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            lucide.createIcons();
+        }
+
+        // Delete Checklist Row Logic
+        function deleteRow(btn) {
+            const row = btn.closest('tr');
+            row.remove();
+            // Re-index row numbers
+            const tbody = document.getElementById('checklist-tbody');
+            Array.from(tbody.children).forEach((tr, idx) => {
+                tr.children[0].textContent = idx + 1;
+            });
+        }
+    </script>
+</body>
+</html>
