@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D1 Audit Team Chart & Governance Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-full flex flex-col">
+
+    <header class="bg-slate-900 text-white shadow-md">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center gap-4">
+            <div class="flex items-center gap-3 sm:gap-4">
+                <!-- FOXLINK Logo -->
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="FOXLINK Logo" class="h-7 sm:h-9 object-contain bg-white/10 p-1 rounded" onerror="this.style.display='none'">
+                <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
+                <div>
+                    <h1 data-i18n="main_title" class="text-lg sm:text-xl font-bold tracking-tight">
+                        FOXLINK - SSSTC Audit Governance Dashboard
+                    </h1>
+                    <p data-i18n="auditee_info" class="text-xs text-slate-400">Auditee: FOXLINK | Auditor: SSSTC</p>
+                </div>
+            </div>
+            <div>
+                <button id="lang-toggle-btn" onclick="toggleLanguage()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1 4h6m-1 0l-4 12m4-12l4 12M5 19c2-3 3-6 3-9M4 11c1 2 3 5 5 7"></path>
+                    </svg>
+                    <span id="lang-btn-text">中文</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8 space-y-8">
+
+        <!-- Visual Hybrid Flowchart Card -->
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8 overflow-hidden">
+            <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
+                <h2 data-i18n="chart_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                    </svg>
+                    Team Structure & Audit Flow
+                </h2>
+            </div>
+
+            <div class="w-full overflow-x-auto">
+                <div class="w-full min-w-[850px] py-2">
+                    <svg viewBox="0 0 1280 460" class="w-full h-auto max-w-full">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+                            </marker>
+                            <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+                            </marker>
+                        </defs>
+
+                        <!-- Connector Lines -->
+                        <line x1="630" y1="45" x2="650" y2="45" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5"/>
+                        <line x1="750" y1="45" x2="770" y2="45" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5"/>
+
+                        <line x1="550" y1="75" x2="550" y2="160" stroke="#64748b" stroke-width="2"/>
+                        <line x1="112" y1="160" x2="1168" y2="160" stroke="#64748b" stroke-width="2"/>
+
+                        <!-- Vertical Connectors to 7 Bottom Modules -->
+                        <line x1="112" y1="160" x2="112" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+                        <line x1="288" y1="160" x2="288" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <line x1="464" y1="160" x2="464" y2="190" stroke="#64748b" stroke-width="2"/>
+                        <line x1="464" y1="250" x2="464" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <line x1="640" y1="160" x2="640" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <line x1="816" y1="160" x2="816" y2="190" stroke="#64748b" stroke-width="2"/>
+                        <line x1="816" y1="250" x2="816" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <line x1="984" y1="160" x2="984" y2="190" stroke="#64748b" stroke-width="2"/>
+
+                        <!-- Split Arrows for QS and PM -->
+                        <path d="M 984 250 L 984 275 L 992 275 L 992 308" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+                        <path d="M 984 250 L 984 275 L 1168 275 L 1168 308" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+                        <!-- Top Leadership -->
+                        <foreignObject x="470" y="15" width="160" height="60">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-slate-700 rounded-lg p-2 text-center shadow-sm">
+                                <div class="font-bold text-xs text-slate-900">Michael Chen</div>
+                                <div data-i18n="role_project_leader" class="text-[11px] text-slate-500 font-medium">Project Leader</div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="650" y="25" width="100" height="40">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-slate-400 bg-slate-50 rounded p-1.5 text-center">
+                                <div data-i18n="role_poc" class="text-[11px] text-slate-600 font-semibold leading-tight">Point of contact</div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="770" y="15" width="110" height="60">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-400 rounded-lg p-2 text-center shadow-sm">
+                                <div class="font-bold text-xs text-slate-900">SSSTC</div>
+                                <div data-i18n="role_client" class="text-[10px] text-slate-500 font-medium">Auditor / Client</div>
+                            </div>
+                        </foreignObject>
+
+                        <!-- Process Flow Tag Overlay Labels -->
+                        <foreignObject x="390" y="122" width="70" height="32">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-amber-500 bg-amber-50 text-amber-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
+                                <span data-i18n="tag_collection">Collection</span>
+                            </div>
+                        </foreignObject>
+                        <foreignObject x="465" y="122" width="70" height="32">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-amber-500 bg-amber-50 text-amber-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
+                                <span data-i18n="tag_correction">Correction</span>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="740" y="122" width="75" height="32">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-emerald-500 bg-emerald-50 text-emerald-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
+                                <span data-i18n="tag_initial_review">Initial Review</span>
+                            </div>
+                        </foreignObject>
+                        <foreignObject x="820" y="122" width="75" height="32">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-emerald-500 bg-emerald-50 text-emerald-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
+                                <span data-i18n="tag_upload_ftp">Upload FTP</span>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="944" y="122" width="80" height="32">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-purple-500 bg-purple-50 text-purple-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
+                                <span data-i18n="tag_final_review">Final Review</span>
+                            </div>
+                        </foreignObject>
+
+                        <!-- Audit Leaders -->
+                        <foreignObject x="394" y="190" width="140" height="60">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-blue-500 rounded-lg p-2 text-center shadow-md">
+                                <div class="font-bold text-xs text-slate-900">Sateesh</div>
+                                <div data-i18n="role_audit_leader" class="text-[11px] text-blue-600 font-semibold">Audit Leader</div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="746" y="190" width="140" height="60">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-emerald-500 rounded-lg p-2 text-center shadow-md">
+                                <div class="font-bold text-xs text-slate-900">Hellen Zhang</div>
+                                <div data-i18n="role_audit_support" class="text-[11px] text-emerald-600 font-semibold">Audit Support</div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="914" y="190" width="140" height="60">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-purple-500 rounded-lg p-2 text-center shadow-md">
+                                <div class="font-bold text-xs text-slate-900">Yanlin Li</div>
+                                <div data-i18n="role_dg_leader" class="text-[11px] text-purple-600 font-semibold">DG Leader</div>
+                            </div>
+                        </foreignObject>
+
+                        <!-- 7 Functional Modules -->
+                        <foreignObject x="32" y="310" width="160" height="135">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
+                                <div data-i18n="mod_warehouse" class="p-3 text-center flex-grow flex items-center justify-center font-semibold text-xs text-slate-800">
+                                    Warehouse
+                                </div>
+                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                    DRI: Dawei
+                                </div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="208" y="310" width="160" height="135">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
+                                <div data-i18n="mod_smt" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
+                                    Solder Paste Print / SMT Placement / Reflow / AOI depanel
+                                </div>
+                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                    DRI: Ambethkar
+                                </div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="384" y="310" width="160" height="135">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
+                                <div data-i18n="mod_iqc" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
+                                    IQC / ESD Control / Outgoing QA
+                                </div>
+                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                    DRI: Sateesh
+                                </div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="560" y="310" width="160" height="135">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
+                                <div data-i18n="mod_test" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
+                                    Function Test / Label Paste &amp; Packing / Traceability
+                                </div>
+                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                    DRI: Harish
+                                </div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="736" y="310" width="160" height="135">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
+                                <div data-i18n="mod_faca" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
+                                    FACA Capability / FW Change &amp; Rework
+                                </div>
+                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                    DRI: Balaji
+                                </div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="912" y="310" width="160" height="135">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
+                                <div data-i18n="mod_qs" class="p-3 text-center flex-grow flex items-center justify-center font-semibold text-xs text-slate-800">
+                                    QS
+                                </div>
+                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                    DRI: Qiaoling Wang
+                                </div>
+                            </div>
+                        </foreignObject>
+
+                        <foreignObject x="1088" y="310" width="160" height="135">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
+                                <div data-i18n="mod_pm" class="p-3 text-center flex-grow flex items-center justify-center font-semibold text-xs text-slate-800">
+                                    PM
+                                </div>
+                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                    DRI: Yancy Ye
+                                </div>
+                            </div>
+                        </foreignObject>
+
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roles & Responsibilities Matrix Section -->
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8">
+            <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
+                <h2 data-i18n="matrix_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    Roles & Responsibilities Matrix
+                </h2>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                    <thead class="bg-slate-100 text-slate-700 font-semibold">
+                        <tr>
+                            <th data-i18n="th_module" class="px-4 py-3.5 rounded-l-lg">Functional Module / Audit Scope</th>
+                            <th data-i18n="th_dri" class="px-4 py-3.5">Direct Responsible Individual (DRI)</th>
+                            <th data-i18n="th_leader" class="px-4 py-3.5">Reporting Leader / Support</th>
+                            <th data-i18n="th_process" class="px-4 py-3.5 rounded-r-lg">Associated Process Node</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td data-i18n="mod_warehouse" class="px-4 py-3.5 font-medium text-slate-900">Warehouse</td>
+                            <td class="px-4 py-3.5 text-amber-700 font-bold">Dawei</td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td data-i18n="mod_smt" class="px-4 py-3.5 font-medium text-slate-900">Solder Paste Print / SMT Placement / Reflow / AOI Depanel</td>
+                            <td class="px-4 py-3.5 text-amber-700 font-bold">Ambethkar</td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td data-i18n="mod_iqc" class="px-4 py-3.5 font-medium text-slate-900">IQC / ESD Control / Outgoing QA</td>
+                            <td class="px-4 py-3.5 text-amber-700 font-bold">Sateesh</td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td data-i18n="mod_test" class="px-4 py-3.5 font-medium text-slate-900">Function Test / Label Paste & Packing / Traceability</td>
+                            <td class="px-4 py-3.5 text-amber-700 font-bold">Harish</td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td data-i18n="mod_faca" class="px-4 py-3.5 font-medium text-slate-900">FACA Capability / FW Change & Rework</td>
+                            <td class="px-4 py-3.5 text-amber-700 font-bold">Balaji</td>
+                            <td class="px-4 py-3.5">Hellen Zhang <span data-i18n="role_audit_support_tag" class="text-xs text-slate-400 font-normal">(Audit Support)</span></td>
+                            <td class="px-4 py-3.5"><span data-i18n="proc_init_ftp" class="bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded text-xs font-medium">Initial Review / Upload FTP</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td data-i18n="mod_qs" class="px-4 py-3.5 font-medium text-slate-900">Quality System</td>
+                            <td class="px-4 py-3.5 text-amber-700 font-bold">Qiaoling Wang</td>
+                            <td class="px-4 py-3.5">Yanlin Li <span data-i18n="role_dg_leader_tag" class="text-xs text-slate-400 font-normal">(DG Leader)</span></td>
+                            <td class="px-4 py-3.5"><span data-i18n="proc_final" class="bg-purple-50 text-purple-800 border border-purple-200 px-2.5 py-1 rounded text-xs font-medium">Final Review</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td data-i18n="mod_pm" class="px-4 py-3.5 font-medium text-slate-900">Project Management</td>
+                            <td class="px-4 py-3.5 text-amber-700 font-bold">Yancy Ye</td>
+                            <td class="px-4 py-3.5">Yanlin Li <span data-i18n="role_dg_leader_tag" class="text-xs text-slate-400 font-normal">(DG Leader)</span></td>
+                            <td class="px-4 py-3.5"><span data-i18n="proc_final" class="bg-purple-50 text-purple-800 border border-purple-200 px-2.5 py-1 rounded text-xs font-medium">Final Review</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Professional Glossary Table Section -->
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8">
+            <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
+                <h2 data-i18n="glossary_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    Glossary of Terms & Abbreviations
+                </h2>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                    <thead class="bg-slate-100 text-slate-700 font-semibold">
+                        <tr>
+                            <th data-i18n="th_term" class="px-4 py-3.5 rounded-l-lg w-32">Term</th>
+                            <th data-i18n="th_full_name" class="px-4 py-3.5 w-64">Full Name</th>
+                            <th data-i18n="th_description" class="px-4 py-3.5 rounded-r-lg">Description & Scope</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">DRI</td>
+                            <td data-i18n="g_dri_fn" class="px-4 py-3 font-medium text-slate-900">Direct Responsible Individual</td>
+                            <td data-i18n="g_dri_desc" class="px-4 py-3 text-slate-600">The single person accountable for a specific module's execution and audit deliverables.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">FACA</td>
+                            <td data-i18n="g_faca_fn" class="px-4 py-3 font-medium text-slate-900">Failure Analysis & Corrective Action</td>
+                            <td data-i18n="g_faca_desc" class="px-4 py-3 text-slate-600">Process of analyzing root causes of defects and implementing systemic corrective actions.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">SMT</td>
+                            <td data-i18n="g_smt_fn" class="px-4 py-3 font-medium text-slate-900">Surface Mount Technology</td>
+                            <td data-i18n="g_smt_desc" class="px-4 py-3 text-slate-600">Automated electronics manufacturing process including solder printing, placement, reflow, and depaneling.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">AOI</td>
+                            <td data-i18n="g_aoi_fn" class="px-4 py-3 font-medium text-slate-900">Automated Optical Inspection</td>
+                            <td data-i18n="g_aoi_desc" class="px-4 py-3 text-slate-600">Visual inspection equipment scanning printed circuit board assemblies for soldering and component defects.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">IQC / OQA</td>
+                            <td data-i18n="g_qc_fn" class="px-4 py-3 font-medium text-slate-900">Incoming Quality Control / Outgoing QA</td>
+                            <td data-i18n="g_qc_desc" class="px-4 py-3 text-slate-600">Quality verification controls applied to incoming raw materials and finished goods before shipment.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">ESD</td>
+                            <td data-i18n="g_esd_fn" class="px-4 py-3 font-medium text-slate-900">Electrostatic Discharge Control</td>
+                            <td data-i18n="g_esd_desc" class="px-4 py-3 text-slate-600">Static electricity prevention protocols across manufacturing lines to protect delicate electronic components.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">FW</td>
+                            <td data-i18n="g_fw_fn" class="px-4 py-3 font-medium text-slate-900">Firmware</td>
+                            <td data-i18n="g_fw_desc" class="px-4 py-3 text-slate-600">Embedded software installed on hardware components subject to strict revision control and rework auditing.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">QS</td>
+                            <td data-i18n="g_qs_fn" class="px-4 py-3 font-medium text-slate-900">Quality System</td>
+                            <td data-i18n="g_qs_desc" class="px-4 py-3 text-slate-600">Comprehensive organizational framework and compliance documentation governing audit procedures.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">PM</td>
+                            <td data-i18n="g_pm_fn" class="px-4 py-3 font-medium text-slate-900">Project Management</td>
+                            <td data-i18n="g_pm_desc" class="px-4 py-3 text-slate-600">Overall project coordination, milestone tracking, and cross-departmental scheduling.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">POC</td>
+                            <td data-i18n="g_poc_fn" class="px-4 py-3 font-medium text-slate-900">Point of Contact</td>
+                            <td data-i18n="g_poc_desc" class="px-4 py-3 text-slate-600">Primary designated liaison handling communication between auditee FOXLINK and client auditor SSSTC.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-4 py-3 font-bold text-indigo-700">FTP</td>
+                            <td data-i18n="g_ftp_fn" class="px-4 py-3 font-medium text-slate-900">File Transfer Protocol</td>
+                            <td data-i18n="g_ftp_desc" class="px-4 py-3 text-slate-600">Secure digital repository server used for uploading official audit documentation and evidence files.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400 mt-auto">
+        <p>FOXLINK - SSSTC Audit Dashboard &copy; 2026</p>
+    </footer>
+
+    <script>
+        const translations = {
+            main_title: {
+                en: "FOXLINK - SSSTC Audit Governance Dashboard",
+                zh: "正崴 (FOXLINK) - SSSTC 審計團隊架構與權責矩陣表"
+            },
+            auditee_info: {
+                en: "Auditee: FOXLINK | Auditor: SSSTC",
+                zh: "受審單位：正崴精密 (FOXLINK) | 審計單位：SSSTC"
+            },
+            chart_title: {
+                en: "Team Structure & Audit Flow",
+                zh: "團隊架構與審計流程圖"
+            },
+            matrix_title: {
+                en: "Roles & Responsibilities Matrix",
+                zh: "結構化權責與流程說明表"
+            },
+            glossary_title: {
+                en: "Glossary of Terms & Abbreviations",
+                zh: "專業術語與英文縮寫說明表"
+            },
+            th_module: {
+                en: "Functional Module / Audit Scope",
+                zh: "功能模組 / 稽核範疇"
+            },
+            th_dri: {
+                en: "Direct Responsible Individual (DRI)",
+                zh: "直接負責人 (DRI)"
+            },
+            th_leader: {
+                en: "Reporting Leader / Support",
+                zh: "主管 / 支援人員"
+            },
+            th_process: {
+                en: "Associated Process Node",
+                zh: "相關作業流程節點"
+            },
+            th_term: {
+                en: "Term",
+                zh: "術語 / 縮寫"
+            },
+            th_full_name: {
+                en: "Full Name",
+                zh: "英文全稱"
+            },
+            th_description: {
+                en: "Description & Scope",
+                zh: "說明與範疇"
+            },
+            role_project_leader: {
+                en: "Project Leader",
+                zh: "專案領導"
+            },
+            role_poc: {
+                en: "Point of contact",
+                zh: "對接窗口"
+            },
+            role_client: {
+                en: "Auditor / Client",
+                zh: "客戶 / 審計方"
+            },
+            role_audit_leader: {
+                en: "Audit Leader",
+                zh: "審計組長"
+            },
+            role_audit_support: {
+                en: "Audit Support",
+                zh: "審計支援"
+            },
+            role_dg_leader: {
+                en: "DG Leader",
+                zh: "DG 組長"
+            },
+            role_audit_leader_tag: {
+                en: "(Audit Leader)",
+                zh: "(審計組長)"
+            },
+            role_audit_support_tag: {
+                en: "(Audit Support)",
+                zh: "(審計支援)"
+            },
+            role_dg_leader_tag: {
+                en: "(DG Leader)",
+                zh: "(DG 組長)"
+            },
+            tag_collection: {
+                en: "Collection",
+                zh: "數據收集"
+            },
+            tag_correction: {
+                en: "Correction",
+                zh: "更正改善"
+            },
+            tag_initial_review: {
+                en: "Initial Review",
+                zh: "初審"
+            },
+            tag_upload_ftp: {
+                en: "Upload FTP",
+                zh: "上傳 FTP"
+            },
+            tag_final_review: {
+                en: "Final Review",
+                zh: "終審"
+            },
+            mod_warehouse: {
+                en: "Warehouse",
+                zh: "倉儲管理"
+            },
+            mod_smt: {
+                en: "Solder Paste Print / SMT Placement / Reflow / AOI Depanel",
+                zh: "錫膏印刷 / SMT 貼片 / 回流焊 / AOI 分板"
+            },
+            mod_iqc: {
+                en: "IQC / ESD Control / Outgoing QA",
+                zh: "進料檢驗 / 靜電防護 / 出貨品質檢驗"
+            },
+            mod_test: {
+                en: "Function Test / Label Paste & Packing / Traceability",
+                zh: "功能測試 / 標籤貼附與包裝 / 履歷追溯"
+            },
+            mod_faca: {
+                en: "FACA Capability / FW Change & Rework",
+                zh: "故障分析與糾正能力 / 韌體變更與重工"
+            },
+            mod_qs: {
+                en: "Quality System",
+                zh: "品質系統"
+            },
+            mod_pm: {
+                en: "Project Management",
+                zh: "專案管理"
+            },
+            proc_col_corr: {
+                en: "Collection / Correction",
+                zh: "數據收集與更正"
+            },
+            proc_init_ftp: {
+                en: "Initial Review / Upload FTP",
+                zh: "初審與 FTP 上傳"
+            },
+            proc_final: {
+                en: "Final Review",
+                zh: "終審"
+            },
+            /* Glossary Translations */
+            g_dri_fn: { en: "Direct Responsible Individual", zh: "直接負責人" },
+            g_dri_desc: { en: "The single person accountable for a specific module's execution and audit deliverables.", zh: "特定模組執行與稽核交付項目的唯一直接負責人。" },
+            g_faca_fn: { en: "Failure Analysis & Corrective Action", zh: "故障分析與糾正措施" },
+            g_faca_desc: { en: "Process of analyzing root causes of defects and implementing systemic corrective actions.", zh: "分析不良品根本原因並推動系統性糾正預防措施之流程能力。" },
+            g_smt_fn: { en: "Surface Mount Technology", zh: "表面貼裝技術" },
+            g_smt_desc: { en: "Automated electronics manufacturing process including solder printing, placement, reflow, and depaneling.", zh: "包含錫膏印刷、零件貼片、回流焊接與分板之自動化電子製造工藝。" },
+            g_aoi_fn: { en: "Automated Optical Inspection", zh: "自動光學檢測" },
+            g_aoi_desc: { en: "Visual inspection equipment scanning printed circuit board assemblies for soldering and component defects.", zh: "利用光學鏡頭自動掃描電路板以檢測外觀與焊接缺陷之設備。" },
+            g_qc_fn: { en: "Incoming Quality Control / Outgoing QA", zh: "進料檢驗 / 出貨品質保證" },
+            g_qc_desc: { en: "Quality verification controls applied to incoming raw materials and finished goods before shipment.", zh: "原材料進廠檢驗與成品出貨前的品質抽驗管制。" },
+            g_esd_fn: { en: "Electrostatic Discharge Control", zh: "靜電放電防護" },
+            g_esd_desc: { en: "Static electricity prevention protocols across manufacturing lines to protect delicate electronic components.", zh: "生產線防靜電措施，用以保護敏感電子元件不被靜電擊穿。" },
+            g_fw_fn: { en: "Firmware", zh: "韌體" },
+            g_fw_desc: { en: "Embedded software installed on hardware components subject to strict revision control and rework auditing.", zh: "嵌入於硬體設備中的底層程式碼，需進行嚴格的變更與重工管制。" },
+            g_qs_fn: { en: "Quality System", zh: "品質系統" },
+            g_qs_desc: { en: "Comprehensive organizational framework and compliance documentation governing audit procedures.", zh: "涵蓋稽核程序之整體品質管理架構與合規文件體系。" },
+            g_pm_fn: { en: "Project Management", zh: "專案管理" },
+            g_pm_desc: { en: "Overall project coordination, milestone tracking, and cross-departmental scheduling.", zh: "專案全週期進度協調、關鍵里程碑追蹤與跨部門排程。" },
+            g_poc_fn: { en: "Point of Contact", zh: "專案對接窗口" },
+            g_poc_desc: { en: "Primary designated liaison handling communication between auditee FOXLINK and client auditor SSSTC.", zh: "受審方正崴 (FOXLINK) 與客戶審計方 SSSTC 之間的指定對接窗口。" },
+            g_ftp_fn: { en: "File Transfer Protocol", zh: "檔案傳輸協定" },
+            g_ftp_desc: { en: "Secure digital repository server used for uploading official audit documentation and evidence files.", zh: "用於上傳與存放正式審計文件、報告與佐證資料之伺服器平台。" }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateDOM();
+        }
+
+        function updateDOM() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[key] && translations[key][currentLang]) {
+                    el.textContent = translations[key][currentLang];
+                }
+            });
+
+            const btnText = document.getElementById('lang-btn-text');
+            if (btnText) {
+                btnText.textContent = currentLang === 'en' ? '中文' : 'English';
+            }
+            document.documentElement.lang = currentLang;
+        }
+    </script>
+</body>
+</html>
