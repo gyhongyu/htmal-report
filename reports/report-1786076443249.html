@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D1 Audit Team Chart & Governance Matrix</title>
+    <title>FOXLINK - SSSTC Audit Governance Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -22,7 +22,7 @@
         @media print {
             @page {
                 size: A4 landscape;
-                margin: 10mm;
+                margin: 6mm;
             }
             body {
                 background: white !important;
@@ -32,11 +32,35 @@
             .no-print {
                 display: none !important;
             }
+            main {
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
             section {
                 break-inside: avoid;
                 page-break-inside: avoid;
                 box-shadow: none !important;
                 border: 1px solid #e2e8f0 !important;
+                margin-bottom: 0.75rem !important;
+                padding: 0.75rem !important;
+            }
+            .overflow-x-auto, .min-w-\[1100px\] {
+                overflow: visible !important;
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+            /* 僅讓流程圖本體 SVG 於列印時滿版縮放，防止標題小圖示被放大 */
+            .flowchart-svg {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 100% !important;
+            }
+            .title-icon {
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+                display: inline-block !important;
             }
         }
     </style>
@@ -46,8 +70,8 @@
     <header class="bg-slate-900 text-white shadow-md">
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center gap-4">
             <div class="flex items-center gap-3 sm:gap-4">
-                <!-- FOXLINK Logo -->
-                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="FOXLINK Logo" class="h-7 sm:h-9 object-contain bg-white/10 p-1 rounded" onerror="this.style.display='none'">
+                <!-- FOXLINK Logo - 純白Logo底色不加額外卡片色塊 -->
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="FOXLINK Logo" class="h-7 sm:h-9 object-contain" onerror="this.style.display='none'">
                 <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
                 <div>
                     <h1 data-i18n="main_title" class="text-lg sm:text-xl font-bold tracking-tight">
@@ -73,201 +97,258 @@
         </div>
     </header>
 
-    <main class="flex-grow max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8 space-y-8">
+    <main class="flex-grow max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-6 space-y-8">
 
-        <!-- Visual Hybrid Flowchart Card -->
-        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8 overflow-hidden">
-            <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
+        <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 overflow-hidden">
+            <div class="border-b border-slate-200 pb-3 mb-5 flex justify-between items-center">
                 <h2 data-i18n="chart_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="title-icon w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
                     </svg>
                     Team Structure & Audit Flow
                 </h2>
             </div>
 
-            <div class="w-full overflow-x-auto">
-                <div class="w-full min-w-[850px] py-2">
-                    <svg viewBox="0 0 1280 460" class="w-full h-auto max-w-full">
+            <div class="w-full overflow-x-auto print:overflow-visible">
+                <div class="w-full min-w-[1100px] print:min-w-0 py-1">
+                    <svg viewBox="0 0 1280 560" class="flowchart-svg w-full h-auto max-w-full">
                         <defs>
-                            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+                            <!-- Markers for Connectors -->
+                            <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
                             </marker>
                             <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                 <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
                             </marker>
                         </defs>
 
-                        <!-- Connector Lines -->
-                        <line x1="630" y1="45" x2="650" y2="45" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5"/>
-                        <line x1="750" y1="45" x2="770" y2="45" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5"/>
+                        <!-- Top Level Connections -->
+                        <!-- Michael Chen to SSSTC Point of Contact -->
+                        <line x1="680" y1="45" x2="730" y2="45" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5"/>
+                        <line x1="810" y1="45" x2="850" y2="45" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5"/>
 
-                        <line x1="550" y1="75" x2="550" y2="160" stroke="#64748b" stroke-width="2"/>
-                        <line x1="112" y1="160" x2="984" y2="160" stroke="#64748b" stroke-width="2"/>
+                        <!-- Downward Split from Michael Chen -->
+                        <line x1="610" y1="80" x2="610" y2="100" stroke="#475569" stroke-width="2"/>
+                        <line x1="290" y1="100" x2="1010" y2="100" stroke="#475569" stroke-width="2"/>
+                        
+                        <line x1="290" y1="100" x2="290" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                        <line x1="1010" y1="100" x2="1010" y2="120" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
 
-                        <!-- Vertical Connectors to 7 Bottom Modules -->
-                        <line x1="112" y1="160" x2="112" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-                        <line x1="288" y1="160" x2="288" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-
-                        <line x1="464" y1="160" x2="464" y2="190" stroke="#64748b" stroke-width="2"/>
-                        <line x1="464" y1="250" x2="464" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-
-                        <line x1="640" y1="160" x2="640" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-
-                        <line x1="816" y1="160" x2="816" y2="190" stroke="#64748b" stroke-width="2"/>
-                        <line x1="816" y1="250" x2="816" y2="308" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-
-                        <line x1="984" y1="160" x2="984" y2="190" stroke="#64748b" stroke-width="2"/>
-
-                        <!-- Split Arrows for QS and PM -->
-                        <path d="M 984 250 L 984 275 L 992 275 L 992 308" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
-                        <path d="M 984 250 L 984 275 L 1168 275 L 1168 308" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
-
-                        <!-- Top Leadership -->
-                        <foreignObject x="470" y="15" width="160" height="60">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-slate-700 rounded-lg p-2 text-center shadow-sm">
-                                <div class="font-bold text-xs text-slate-900">Michael Chen</div>
-                                <div data-i18n="role_project_leader" class="text-[11px] text-slate-500 font-medium">Project Leader</div>
+                        <!-- Top Level Nodes -->
+                        <!-- Michael Chen Box -->
+                        <foreignObject x="510" y="15" width="200" height="65">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-slate-700 rounded-lg p-2 text-center shadow-sm h-full flex flex-col justify-center">
+                                <div class="font-bold text-sm text-slate-900">Michael Chen</div>
+                                <div data-i18n="role_project_leader" class="text-xs text-slate-500 font-medium">Project Leader</div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="650" y="25" width="100" height="40">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-slate-400 bg-slate-50 rounded p-1.5 text-center">
+                        <!-- Point of Contact Box -->
+                        <foreignObject x="725" y="27" width="90" height="38">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-slate-400 bg-slate-50 rounded p-1 text-center h-full flex items-center justify-center">
                                 <div data-i18n="role_poc" class="text-[11px] text-slate-600 font-semibold leading-tight">Point of contact</div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="770" y="15" width="110" height="60">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-400 rounded-lg p-2 text-center shadow-sm">
-                                <div class="font-bold text-xs text-slate-900">SSSTC</div>
-                                <div data-i18n="role_client" class="text-[10px] text-slate-500 font-medium">Auditor / Client</div>
+                        <!-- SSSTC Client Box -->
+                        <foreignObject x="850" y="15" width="160" height="65">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-slate-400 bg-slate-50 rounded-lg p-2 text-center shadow-sm h-full flex flex-col justify-center">
+                                <div class="font-bold text-sm text-slate-900">SSSTC</div>
+                                <div data-i18n="role_client" class="text-xs text-slate-500 font-medium">Auditor / Client</div>
                             </div>
                         </foreignObject>
 
-                        <!-- Process Flow Tag Overlay Labels -->
-                        <foreignObject x="390" y="122" width="70" height="32">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-amber-500 bg-amber-50 text-amber-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
-                                <span data-i18n="tag_collection">Collection</span>
-                            </div>
-                        </foreignObject>
-                        <foreignObject x="465" y="122" width="70" height="32">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-amber-500 bg-amber-50 text-amber-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
-                                <span data-i18n="tag_correction">Correction</span>
+                        <!-- Left Container: Audit & Engineering Co-Management -->
+                        <foreignObject x="25" y="120" width="550" height="225">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border-2 border-blue-300 bg-blue-50/40 rounded-xl p-3 h-full flex flex-col">
+                                <div data-i18n="grp_co_mgmt" class="text-center font-bold text-blue-900 text-xs sm:text-sm mb-2">
+                                    Audit &amp; Engineering Co-Management
+                                </div>
+                                <div class="flex gap-2 flex-1 relative items-stretch">
+                                    <!-- Sateesh Card -->
+                                    <div class="flex-1 bg-white border-2 border-blue-500 rounded-lg p-2 flex flex-col justify-between shadow-sm">
+                                        <div>
+                                            <div data-i18n="pill_audit_lead" class="bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded text-center mb-1">
+                                                Audit Lead
+                                            </div>
+                                            <div class="font-bold text-sm text-slate-900 text-center">Sateesh</div>
+                                            <div data-i18n="role_audit_leader" class="text-[11px] text-blue-600 font-semibold text-center">Audit Leader</div>
+                                            <div data-i18n="desc_sateesh" class="text-[10px] text-slate-500 text-center mt-1 border-t border-slate-100 pt-1">
+                                                Quality Qualified / Final Audit Sign-off
+                                            </div>
+                                        </div>
+                                        <div class="mt-1 pt-1 border-t border-slate-100">
+                                            <div data-i18n="lbl_phase" class="text-[9px] text-slate-400 text-center font-medium">Audit Phase:</div>
+                                            <div class="flex justify-center gap-1 mt-0.5">
+                                                <span data-i18n="tag_collection" class="border border-amber-400 bg-amber-50 text-amber-800 rounded px-1 text-[9px] font-semibold">Collection</span>
+                                                <span data-i18n="tag_correction" class="border border-amber-400 bg-amber-50 text-amber-800 rounded px-1 text-[9px] font-semibold">Correction</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cooperation Connector Pill -->
+                                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                                        <span data-i18n="tag_cooperate" class="bg-blue-100 border border-blue-400 text-blue-800 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                                            Cooperate
+                                        </span>
+                                    </div>
+
+                                    <!-- Hellen Zhang Card -->
+                                    <div class="flex-1 bg-white border-2 border-emerald-500 rounded-lg p-2 flex flex-col justify-between shadow-sm">
+                                        <div>
+                                            <div data-i18n="pill_eng_support" class="bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded text-center mb-1">
+                                                Engineering Support
+                                            </div>
+                                            <div class="font-bold text-sm text-slate-900 text-center">Hellen Zhang</div>
+                                            <div data-i18n="role_audit_support" class="text-[11px] text-emerald-600 font-semibold text-center">Audit Support</div>
+                                            <div data-i18n="desc_hellen" class="text-[10px] text-slate-500 text-center mt-1 border-t border-slate-100 pt-1">
+                                                Assist Sateesh in Reporting &amp; On-site Management
+                                            </div>
+                                        </div>
+                                        <div class="mt-1 pt-1 border-t border-slate-100">
+                                            <div data-i18n="lbl_phase" class="text-[9px] text-slate-400 text-center font-medium">Audit Phase:</div>
+                                            <div class="flex justify-center gap-1 mt-0.5">
+                                                <span data-i18n="tag_initial_review" class="border border-emerald-400 bg-emerald-50 text-emerald-800 rounded px-1 text-[9px] font-semibold">Initial Review</span>
+                                                <span data-i18n="tag_upload_ftp" class="border border-emerald-400 bg-emerald-50 text-emerald-800 rounded px-1 text-[9px] font-semibold">Upload FTP</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="740" y="122" width="75" height="32">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-emerald-500 bg-emerald-50 text-emerald-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
-                                <span data-i18n="tag_initial_review">Initial Review</span>
-                            </div>
-                        </foreignObject>
-                        <foreignObject x="820" y="122" width="75" height="32">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-emerald-500 bg-emerald-50 text-emerald-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
-                                <span data-i18n="tag_upload_ftp">Upload FTP</span>
-                            </div>
-                        </foreignObject>
-
-                        <foreignObject x="944" y="122" width="80" height="32">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="border border-dashed border-purple-500 bg-purple-50 text-purple-800 rounded px-1 py-0.5 text-center text-[10px] font-medium">
-                                <span data-i18n="tag_final_review">Final Review</span>
-                            </div>
-                        </foreignObject>
-
-                        <!-- Audit Leaders -->
-                        <foreignObject x="394" y="190" width="140" height="60">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-blue-500 rounded-lg p-2 text-center shadow-md">
-                                <div class="font-bold text-xs text-slate-900">Sateesh</div>
-                                <div data-i18n="role_audit_leader" class="text-[11px] text-blue-600 font-semibold">Audit Leader</div>
-                            </div>
-                        </foreignObject>
-
-                        <foreignObject x="746" y="190" width="140" height="60">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-emerald-500 rounded-lg p-2 text-center shadow-md">
-                                <div class="font-bold text-xs text-slate-900">Hellen Zhang</div>
-                                <div data-i18n="role_audit_support" class="text-[11px] text-emerald-600 font-semibold">Audit Support</div>
+                        <!-- Right Container: DG Management -->
+                        <foreignObject x="760" y="120" width="500" height="225">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="border-2 border-purple-300 bg-purple-50/40 rounded-xl p-3 h-full flex flex-col">
+                                <div data-i18n="grp_dg_mgmt" class="text-center font-bold text-purple-900 text-xs sm:text-sm mb-2">
+                                    DG Management
+                                </div>
+                                <div class="flex-1 bg-white border-2 border-purple-500 rounded-lg p-2.5 flex flex-col justify-between shadow-sm">
+                                    <div>
+                                        <div data-i18n="pill_dg_lead" class="bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded text-center w-fit mx-auto mb-1">
+                                            DG Lead
+                                        </div>
+                                        <div class="font-bold text-base text-slate-900 text-center">Yanlin Li</div>
+                                        <div data-i18n="role_dg_leader" class="text-xs text-purple-600 font-semibold text-center">DG Leader</div>
+                                        <div data-i18n="desc_yanlin" class="text-[11px] text-slate-500 text-center mt-1 border-t border-slate-100 pt-1 max-w-xs mx-auto">
+                                            Responsible for Quality System &amp; Project Management
+                                        </div>
+                                    </div>
+                                    <div class="mt-1 pt-1 border-t border-slate-100 text-center">
+                                        <div data-i18n="lbl_phase" class="text-[9px] text-slate-400 font-medium">Audit Phase:</div>
+                                        <div class="flex justify-center mt-0.5">
+                                            <span data-i18n="tag_final_review" class="border border-purple-400 bg-purple-50 text-purple-800 rounded px-2 py-0.5 text-[10px] font-semibold">Final Review</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="914" y="190" width="140" height="60">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-purple-500 rounded-lg p-2 text-center shadow-md">
-                                <div class="font-bold text-xs text-slate-900">Yanlin Li</div>
-                                <div data-i18n="role_dg_leader" class="text-[11px] text-purple-600 font-semibold">DG Leader</div>
-                            </div>
-                        </foreignObject>
+                        <!-- Connectors from Containers to Bottom 7 Modules -->
+                        <!-- Left Group Bus Line -->
+                        <line x1="300" y1="345" x2="300" y2="365" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="112" y1="365" x2="816" y2="365" stroke="#2563eb" stroke-width="2"/>
+
+                        <line x1="112" y1="365" x2="112" y2="395" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                        <line x1="288" y1="365" x2="288" y2="395" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                        <line x1="464" y1="365" x2="464" y2="395" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                        <line x1="640" y1="365" x2="640" y2="395" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                        <line x1="816" y1="365" x2="816" y2="395" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+                        <!-- Right Group Bus Line -->
+                        <line x1="1010" y1="345" x2="1010" y2="365" stroke="#7c3aed" stroke-width="2"/>
+                        <line x1="984" y1="365" x2="1168" y2="365" stroke="#7c3aed" stroke-width="2"/>
+
+                        <line x1="984" y1="365" x2="984" y2="395" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+                        <line x1="1168" y1="365" x2="1168" y2="395" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
 
                         <!-- 7 Functional Modules -->
-                        <foreignObject x="32" y="310" width="160" height="135">
+                        <!-- Module 1: Warehouse -->
+                        <foreignObject x="32" y="398" width="160" height="150">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
-                                <div data-i18n="mod_warehouse" class="p-3 text-center flex-grow flex items-center justify-center font-semibold text-xs text-slate-800">
-                                    Warehouse
+                                <div class="p-2.5 text-center flex-grow flex flex-col items-center justify-center">
+                                    <div data-i18n="mod_warehouse" class="font-bold text-xs text-slate-800">Warehouse</div>
+                                    <div data-i18n="sub_warehouse" class="text-[10px] text-slate-400 mt-1 leading-tight">Material Control / Inventory &amp; Environment</div>
                                 </div>
-                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                <div class="bg-amber-600 text-white text-center py-1.5 text-xs font-bold tracking-wide">
                                     DRI: Dawei
                                 </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="208" y="310" width="160" height="135">
+                        <!-- Module 2: SMT -->
+                        <foreignObject x="208" y="398" width="160" height="150">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
-                                <div data-i18n="mod_smt" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
-                                    Solder Paste Print / SMT Placement / Reflow / AOI depanel
+                                <div class="p-2 text-center flex-grow flex flex-col items-center justify-center">
+                                    <div data-i18n="mod_smt" class="font-bold text-[11px] leading-tight text-slate-800">Solder Paste Print / SMT Placement / Reflow / AOI depanel</div>
+                                    <div data-i18n="sub_smt" class="text-[10px] text-slate-400 mt-1 leading-tight">Process Quality &amp; Parameters</div>
                                 </div>
-                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                <div class="bg-amber-600 text-white text-center py-1.5 text-xs font-bold tracking-wide">
                                     DRI: Ambethkar
                                 </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="384" y="310" width="160" height="135">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
-                                <div data-i18n="mod_iqc" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
-                                    IQC / ESD Control / Outgoing QA
+                        <!-- Module 3: IQC (Dual Role Highlighting with Blue Border) -->
+                        <foreignObject x="384" y="398" width="160" height="150">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border-2 border-blue-600 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between ring-2 ring-blue-100">
+                                <div class="p-2 text-center flex-grow flex flex-col items-center justify-center">
+                                    <div data-i18n="mod_iqc" class="font-bold text-[11px] leading-tight text-slate-900">IQC / ESD Control / Outgoing QA</div>
+                                    <div data-i18n="sub_iqc" class="text-[10px] text-blue-600 font-medium mt-1 leading-tight">IQC / OQC / ESD</div>
                                 </div>
-                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                <div class="bg-amber-600 text-white text-center py-1.5 text-xs font-bold tracking-wide">
                                     DRI: Sateesh
                                 </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="560" y="310" width="160" height="135">
+                        <!-- Module 4: Function Test -->
+                        <foreignObject x="560" y="398" width="160" height="150">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
-                                <div data-i18n="mod_test" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
-                                    Function Test / Label Paste &amp; Packing / Traceability
+                                <div class="p-2 text-center flex-grow flex flex-col items-center justify-center">
+                                    <div data-i18n="mod_test" class="font-bold text-[11px] leading-tight text-slate-800">Function Test / Label Paste &amp; Packing / Traceability</div>
+                                    <div data-i18n="sub_test" class="text-[10px] text-slate-400 mt-1 leading-tight">FCT / Packing Traceability</div>
                                 </div>
-                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                <div class="bg-amber-600 text-white text-center py-1.5 text-xs font-bold tracking-wide">
                                     DRI: Harish
                                 </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="736" y="310" width="160" height="135">
+                        <!-- Module 5: FACA -->
+                        <foreignObject x="736" y="398" width="160" height="150">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
-                                <div data-i18n="mod_faca" class="p-2 text-center flex-grow flex items-center justify-center font-semibold text-[11px] leading-tight text-slate-800">
-                                    FACA Capability / FW Change &amp; Rework
+                                <div class="p-2 text-center flex-grow flex flex-col items-center justify-center">
+                                    <div data-i18n="mod_faca" class="font-bold text-[11px] leading-tight text-slate-800">FACA Capability / FW Change &amp; Rework</div>
+                                    <div data-i18n="sub_faca" class="text-[10px] text-slate-400 mt-1 leading-tight">FA / Rework Improvement</div>
                                 </div>
-                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                <div class="bg-amber-600 text-white text-center py-1.5 text-xs font-bold tracking-wide">
                                     DRI: Balaji
                                 </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="912" y="310" width="160" height="135">
+                        <!-- Module 6: QS -->
+                        <foreignObject x="912" y="398" width="160" height="150">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
-                                <div data-i18n="mod_qs" class="p-3 text-center flex-grow flex items-center justify-center font-semibold text-xs text-slate-800">
-                                    QS
+                                <div class="p-2.5 text-center flex-grow flex flex-col items-center justify-center">
+                                    <div data-i18n="mod_qs" class="font-bold text-xs text-slate-800">Quality System</div>
+                                    <div data-i18n="sub_qs" class="text-[10px] text-slate-400 mt-1 leading-tight">System Maintenance &amp; Documentation</div>
                                 </div>
-                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                <div class="bg-amber-600 text-white text-center py-1.5 text-xs font-bold tracking-wide">
                                     DRI: Qiaoling Wang
                                 </div>
                             </div>
                         </foreignObject>
 
-                        <foreignObject x="1088" y="310" width="160" height="135">
+                        <!-- Module 7: PM -->
+                        <foreignObject x="1088" y="398" width="160" height="150">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white border border-slate-300 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-between">
-                                <div data-i18n="mod_pm" class="p-3 text-center flex-grow flex items-center justify-center font-semibold text-xs text-slate-800">
-                                    PM
+                                <div class="p-2.5 text-center flex-grow flex flex-col items-center justify-center">
+                                    <div data-i18n="mod_pm" class="font-bold text-xs text-slate-800">Project Management</div>
+                                    <div data-i18n="sub_pm" class="text-[10px] text-slate-400 mt-1 leading-tight">Progress &amp; Resource Coordination</div>
                                 </div>
-                                <div class="bg-amber-600 text-white text-center py-2 text-xs font-bold tracking-wide">
+                                <div class="bg-amber-600 text-white text-center py-1.5 text-xs font-bold tracking-wide">
                                     DRI: Yancy Ye
                                 </div>
                             </div>
@@ -278,14 +359,13 @@
             </div>
         </section>
 
-        <!-- Roles & Responsibilities Matrix Section -->
         <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8">
             <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
                 <h2 data-i18n="matrix_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="title-icon w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
-                    Roles & Responsibilities Matrix
+                    Roles &amp; Responsibilities Matrix
                 </h2>
             </div>
 
@@ -303,43 +383,43 @@
                         <tr class="hover:bg-slate-50/80 transition-colors">
                             <td data-i18n="mod_warehouse" class="px-4 py-3.5 font-medium text-slate-900">Warehouse</td>
                             <td class="px-4 py-3.5 text-amber-700 font-bold">Dawei</td>
-                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Lead)</span></td>
                             <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
                             <td data-i18n="mod_smt" class="px-4 py-3.5 font-medium text-slate-900">Solder Paste Print / SMT Placement / Reflow / AOI Depanel</td>
                             <td class="px-4 py-3.5 text-amber-700 font-bold">Ambethkar</td>
-                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Lead)</span></td>
                             <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
                             <td data-i18n="mod_iqc" class="px-4 py-3.5 font-medium text-slate-900">IQC / ESD Control / Outgoing QA</td>
                             <td class="px-4 py-3.5 text-amber-700 font-bold">Sateesh</td>
-                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Lead)</span></td>
                             <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
-                            <td data-i18n="mod_test" class="px-4 py-3.5 font-medium text-slate-900">Function Test / Label Paste & Packing / Traceability</td>
+                            <td data-i18n="mod_test" class="px-4 py-3.5 font-medium text-slate-900">Function Test / Label Paste &amp; Packing / Traceability</td>
                             <td class="px-4 py-3.5 text-amber-700 font-bold">Harish</td>
-                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Leader)</span></td>
+                            <td class="px-4 py-3.5">Sateesh <span data-i18n="role_audit_leader_tag" class="text-xs text-slate-400 font-normal">(Audit Lead)</span></td>
                             <td class="px-4 py-3.5"><span data-i18n="proc_col_corr" class="bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded text-xs font-medium">Collection / Correction</span></td>
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
-                            <td data-i18n="mod_faca" class="px-4 py-3.5 font-medium text-slate-900">FACA Capability / FW Change & Rework</td>
+                            <td data-i18n="mod_faca" class="px-4 py-3.5 font-medium text-slate-900">FACA Capability / FW Change &amp; Rework</td>
                             <td class="px-4 py-3.5 text-amber-700 font-bold">Balaji</td>
-                            <td class="px-4 py-3.5">Hellen Zhang <span data-i18n="role_audit_support_tag" class="text-xs text-slate-400 font-normal">(Audit Support)</span></td>
+                            <td class="px-4 py-3.5">Hellen Zhang <span data-i18n="role_audit_support_tag" class="text-xs text-slate-400 font-normal">(Engineering Support)</span></td>
                             <td class="px-4 py-3.5"><span data-i18n="proc_init_ftp" class="bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded text-xs font-medium">Initial Review / Upload FTP</span></td>
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
                             <td data-i18n="mod_qs" class="px-4 py-3.5 font-medium text-slate-900">Quality System</td>
                             <td class="px-4 py-3.5 text-amber-700 font-bold">Qiaoling Wang</td>
-                            <td class="px-4 py-3.5">Yanlin Li <span data-i18n="role_dg_leader_tag" class="text-xs text-slate-400 font-normal">(DG Leader)</span></td>
+                            <td class="px-4 py-3.5">Yanlin Li <span data-i18n="role_dg_leader_tag" class="text-xs text-slate-400 font-normal">(DG Lead)</span></td>
                             <td class="px-4 py-3.5"><span data-i18n="proc_final" class="bg-purple-50 text-purple-800 border border-purple-200 px-2.5 py-1 rounded text-xs font-medium">Final Review</span></td>
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
                             <td data-i18n="mod_pm" class="px-4 py-3.5 font-medium text-slate-900">Project Management</td>
                             <td class="px-4 py-3.5 text-amber-700 font-bold">Yancy Ye</td>
-                            <td class="px-4 py-3.5">Yanlin Li <span data-i18n="role_dg_leader_tag" class="text-xs text-slate-400 font-normal">(DG Leader)</span></td>
+                            <td class="px-4 py-3.5">Yanlin Li <span data-i18n="role_dg_leader_tag" class="text-xs text-slate-400 font-normal">(DG Lead)</span></td>
                             <td class="px-4 py-3.5"><span data-i18n="proc_final" class="bg-purple-50 text-purple-800 border border-purple-200 px-2.5 py-1 rounded text-xs font-medium">Final Review</span></td>
                         </tr>
                     </tbody>
@@ -347,14 +427,13 @@
             </div>
         </section>
 
-        <!-- Professional Glossary Table Section -->
         <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8">
             <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
                 <h2 data-i18n="glossary_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="title-icon w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
-                    Glossary of Terms & Abbreviations
+                    Glossary of Terms &amp; Abbreviations
                 </h2>
             </div>
 
@@ -364,7 +443,7 @@
                         <tr>
                             <th data-i18n="th_term" class="px-4 py-3.5 rounded-l-lg w-32">Term</th>
                             <th data-i18n="th_full_name" class="px-4 py-3.5 w-64">Full Name</th>
-                            <th data-i18n="th_description" class="px-4 py-3.5 rounded-r-lg">Description & Scope</th>
+                            <th data-i18n="th_description" class="px-4 py-3.5 rounded-r-lg">Description &amp; Scope</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 text-slate-700">
@@ -375,7 +454,7 @@
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
                             <td class="px-4 py-3 font-bold text-indigo-700">FACA</td>
-                            <td data-i18n="g_faca_fn" class="px-4 py-3 font-medium text-slate-900">Failure Analysis & Corrective Action</td>
+                            <td data-i18n="g_faca_fn" class="px-4 py-3 font-medium text-slate-900">Failure Analysis &amp; Corrective Action</td>
                             <td data-i18n="g_faca_desc" class="px-4 py-3 text-slate-600">Process of analyzing root causes of defects and implementing systemic corrective actions.</td>
                         </tr>
                         <tr class="hover:bg-slate-50/80 transition-colors">
@@ -500,29 +579,69 @@
                 en: "Auditor / Client",
                 zh: "客戶 / 審計方"
             },
+            grp_co_mgmt: {
+                en: "Audit & Engineering Co-Management",
+                zh: "審計與工程聯合管理小組"
+            },
+            grp_dg_mgmt: {
+                en: "DG Management",
+                zh: "DG 管理組"
+            },
+            pill_audit_lead: {
+                en: "Audit Lead",
+                zh: "品質審計主控"
+            },
+            pill_eng_support: {
+                en: "Engineering Support",
+                zh: "工程技術對接"
+            },
+            pill_dg_lead: {
+                en: "DG Lead",
+                zh: "DG 主控"
+            },
             role_audit_leader: {
                 en: "Audit Leader",
                 zh: "審計組長"
             },
             role_audit_support: {
                 en: "Audit Support",
-                zh: "審計支援"
+                zh: "工程組長 / 審計支援"
             },
             role_dg_leader: {
                 en: "DG Leader",
                 zh: "DG 組長"
             },
             role_audit_leader_tag: {
-                en: "(Audit Leader)",
-                zh: "(審計組長)"
+                en: "(Audit Lead)",
+                zh: "(品質審計主控)"
             },
             role_audit_support_tag: {
-                en: "(Audit Support)",
-                zh: "(審計支援)"
+                en: "(Engineering Support)",
+                zh: "(工程技術對接)"
             },
             role_dg_leader_tag: {
-                en: "(DG Leader)",
-                zh: "(DG 組長)"
+                en: "(DG Lead)",
+                zh: "(DG 主控)"
+            },
+            desc_sateesh: {
+                en: "Quality Qualified / Final Audit Sign-off",
+                zh: "具品質資質 / 審計結果終簽"
+            },
+            desc_hellen: {
+                en: "Assist Sateesh in Reporting & On-site Management",
+                zh: "協助 Sateesh 彙報 & 現場管理"
+            },
+            desc_yanlin: {
+                en: "Responsible for Quality System & Project Management",
+                zh: "負責品質系統與專案管理"
+            },
+            lbl_phase: {
+                en: "Audit Phase:",
+                zh: "負責審計階段："
+            },
+            tag_cooperate: {
+                en: "Cooperate",
+                zh: "協同"
             },
             tag_collection: {
                 en: "Collection",
@@ -548,29 +667,57 @@
                 en: "Warehouse",
                 zh: "倉儲管理"
             },
+            sub_warehouse: {
+                en: "Material Control / Inventory & Environment",
+                zh: "物料進出庫管控 / 庫存盤點與環境"
+            },
             mod_smt: {
-                en: "Solder Paste Print / SMT Placement / Reflow / AOI Depanel",
+                en: "Solder Paste Print / SMT Placement / Reflow / AOI depanel",
                 zh: "錫膏印刷 / SMT 貼片 / 回流焊 / AOI 分板"
+            },
+            sub_smt: {
+                en: "Process Quality & Parameters",
+                zh: "製程品質與參數"
             },
             mod_iqc: {
                 en: "IQC / ESD Control / Outgoing QA",
                 zh: "進料檢驗 / 靜電防護 / 出貨品質檢驗"
             },
+            sub_iqc: {
+                en: "IQC / OQC / ESD",
+                zh: "IQC / OQC / ESD"
+            },
             mod_test: {
                 en: "Function Test / Label Paste & Packing / Traceability",
                 zh: "功能測試 / 標籤貼附與包裝 / 履歷追溯"
+            },
+            sub_test: {
+                en: "FCT / Packing Traceability",
+                zh: "FCT / 包裝追溯"
             },
             mod_faca: {
                 en: "FACA Capability / FW Change & Rework",
                 zh: "故障分析與糾正能力 / 韌體變更與重工"
             },
+            sub_faca: {
+                en: "FA / Rework Improvement",
+                zh: "FA / 重工改善"
+            },
             mod_qs: {
                 en: "Quality System",
                 zh: "品質系統"
             },
+            sub_qs: {
+                en: "System Maintenance & Documentation",
+                zh: "體系維護與文件"
+            },
             mod_pm: {
                 en: "Project Management",
                 zh: "專案管理"
+            },
+            sub_pm: {
+                en: "Progress & Resource Coordination",
+                zh: "進度與資源協調"
             },
             proc_col_corr: {
                 en: "Collection / Correction",
