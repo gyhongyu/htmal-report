@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="htmlPageTitle">VVDN 印度線束專案 — EMS Sales Negotiation Cockpit v3.20</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans TC', sans-serif;
+      background-color: #0b1120;
+      color: #f1f5f9;
+      font-size: 15px;
+    }
+    .exec-card {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .tab-btn-active {
+      background-color: #2563eb;
+      color: #ffffff;
+      font-weight: 700;
+      border: 1px solid #3b82f6;
+      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+    }
+    .tab-btn-inactive {
+      background-color: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid transparent;
+    }
+    .tab-btn-inactive:hover {
+      background-color: #334155;
+      color: #f8fafc;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0b1120; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 17, 32, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    /* A4 Print View Container (On-screen Preview) */
+    #a4-print-quotation {
+      display: none;
+      background: #ffffff;
+      color: #1e293b;
+      padding: 3rem;
+      font-family: 'Inter', 'Noto Sans TC', sans-serif;
+      border-radius: 6px;
+      max-width: 900px;
+      margin: 2rem auto;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+    }
+
+    /* 🖨️ @media print 嚴格隔離天條 */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        font-size: 11pt !important;
+      }
+      header, main, footer, .modal-overlay, button {
+        display: none !important;
+      }
+      #a4-print-quotation {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- ========================================== -->
+  <!-- 全屏載入/同步中 鎖屏遮罩 (Full Screen Loading Overlay) -->
+  <!-- ========================================== -->
+  <div id="global-loading-overlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[9999] flex flex-col items-center justify-center transition-opacity duration-300">
+    <div class="bg-slate-900 border border-slate-700/80 p-8 rounded-2xl shadow-2xl flex flex-col items-center gap-5 max-w-sm w-full text-center">
+      <div class="relative w-14 h-14 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
+        <div class="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
+        <span class="text-2xl">☁️</span>
+      </div>
+      <div>
+        <h3 id="overlay-title" class="text-base font-bold text-white tracking-wide">🔄 正在從雲端下載數據...</h3>
+        <p id="overlay-desc" class="text-sm text-slate-300 mt-1.5">正在讀取 BU 報價與數據庫參數...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 第 1 層：全域導覽列 Header                  -->
+  <!-- ========================================== -->
+  <header class="border-b border-slate-800 bg-slate-900/95 sticky top-0 z-50 backdrop-blur shadow-xl">
+    <div class="w-full mx-auto px-4 lg:px-8 h-16 flex items-center justify-between">
+      <!-- 左側 Logo 與標題區 -->
+      <div class="flex items-center gap-4">
+        <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-7 sm:h-8 object-contain">
+        <div class="h-5 w-px bg-slate-700 hidden sm:block"></div>
+        <div>
+          <h1 id="txtTitle" class="text-sm sm:text-base md:text-lg font-extrabold text-slate-100 tracking-wide flex items-center gap-2.5">
+            <span id="txtTitleSpan">VVDN 印度線束專案</span>
+            <span id="txtCockpitBadge" class="text-xs bg-blue-950 text-blue-300 border border-blue-700/80 px-2 py-0.5 rounded-md font-mono font-bold shadow-sm">v3.20 Cockpit</span>
+          </h1>
+          <p id="txtSubtitle" class="text-xs text-slate-300 font-mono hidden md:block mt-0.5">EAU: 250k | CapEx: $49,362.59 USD | PID: SQ_VVDN_Harness_20260805</p>
+        </div>
+      </div>
+
+      <!-- 右側按鈕與控制區 -->
+      <div class="flex items-center gap-2 sm:gap-3.5 flex-nowrap">
+        <!-- 雲端同步與保存按鈕群組 -->
+        <div class="flex items-center gap-2 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800">
+          <span id="sync-badge" onclick="handleSyncBadgeClick()" class="text-xs px-3 py-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-300 flex items-center gap-1.5 font-semibold whitespace-nowrap cursor-pointer hover:opacity-80 transition shadow-sm" title="點擊放棄當前本機修改，還原至打開頁面時的雲端數據狀態">
+            🔄 讀取中...
+          </span>
+          <button onclick="saveParamsToBackend()" class="text-xs sm:text-sm bg-emerald-700 hover:bg-emerald-600 text-white font-semibold border border-emerald-500/80 px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-sm cursor-pointer whitespace-nowrap">
+            <span>☁️</span> <span id="lblSaveBtn">寫入雲端</span>
+          </button>
+        </div>
+
+        <div class="h-5 w-px bg-slate-800 hidden sm:block"></div>
+
+        <!-- 幣別與實時匯率切換器 (自動連線 CDN 實時匯率 API) -->
+        <div class="hidden md:flex items-center gap-1.5 bg-slate-800/90 px-3 py-1.5 rounded-xl border border-slate-700 text-xs sm:text-sm whitespace-nowrap">
+          <span id="lblCurrencyTag" class="text-slate-300 font-medium">幣別:</span>
+          <select id="selCurrency" onchange="handleCurrencyChange(true)" class="bg-slate-900 text-slate-100 rounded-md px-2 py-0.5 border border-slate-600 focus:outline-none cursor-pointer font-semibold">
+            <option value="USD">USD ($)</option>
+            <option value="INR">INR (₹)</option>
+            <option value="NTD">NTD ($)</option>
+          </select>
+          <span id="lblFxRateTag" class="text-slate-300 font-medium ml-1.5">匯率:</span>
+          <input type="number" id="inpFxRate" value="1.0000" step="0.01" onchange="handleCurrencyChange(false)" class="w-16 bg-slate-900 text-slate-100 rounded-md px-1.5 py-0.5 border border-slate-600 text-center font-mono font-bold">
+          <span id="fx-live-indicator" class="text-[10px] text-emerald-400 bg-emerald-950 border border-emerald-700/60 px-1.5 py-0.5 rounded font-mono hidden">⚡實時</span>
+        </div>
+
+        <div class="h-5 w-px bg-slate-800 hidden lg:block"></div>
+
+        <!-- 功能按鈕群組 -->
+        <div class="flex items-center gap-2">
+          <button onclick="openDealMemoModal()" class="text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-blue-300 border border-slate-600 px-3 py-1.5 rounded-xl transition font-semibold whitespace-nowrap flex items-center gap-1.5 shadow-sm">
+            <span>🛡️</span> <span id="lblMemoBtnFull" class="hidden xl:inline">內部決策備忘錄</span><span id="lblMemoBtnShort" class="xl:hidden">備忘錄</span>
+          </button>
+
+          <!-- 語言切換按鈕 -->
+          <button onclick="toggleLanguage()" id="btnLang" class="text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold border border-slate-600 px-3 py-1.5 rounded-xl transition whitespace-nowrap shadow-sm">
+            <span id="lblLangBtn">EN</span>
+          </button>
+
+          <button onclick="exportQuote()" id="btnExport" class="text-xs sm:text-sm bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1.5 rounded-xl font-bold shadow transition flex items-center gap-1.5 whitespace-nowrap">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span id="lblExportText">📄 匯出正式報價單</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full mx-auto px-4 lg:px-8 pt-6 space-y-8">
+
+    <!-- ========================================== -->
+    <!-- 第 2 層：Top 5 Executive KPI 決策卡片區       -->
+    <!-- ========================================== -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+      
+      <!-- Card 1: Break-even Month -->
+      <div class="exec-card p-5 sm:p-6 rounded-2xl relative overflow-hidden shadow-xl border-l-4 border-l-emerald-500">
+        <div class="flex justify-between items-start mb-3">
+          <span id="lblKpi1Title" class="text-sm text-slate-300 font-semibold">設備投資資本回收期</span>
+          <span id="kpi1-badge" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40">🟢 M0 (NRE付清)</span>
+        </div>
+        <div id="kpi1-value" class="text-3xl font-extrabold text-white font-mono tracking-tight">M0</div>
+        <div id="kpi1-desc" class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">CapEx 預計 0 個月回本</div>
+      </div>
+
+      <!-- Card 2: Consolidated Group Gross Margin % -->
+      <div class="exec-card p-5 sm:p-6 rounded-2xl relative overflow-hidden shadow-xl border-l-4 border-l-emerald-500">
+        <div class="flex justify-between items-start mb-3">
+          <span id="lblKpi2Title" class="text-sm text-slate-300 font-semibold">集團實際綜合毛利率</span>
+          <span id="kpi2-badge" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40">🟢 優良</span>
+        </div>
+        <div id="kpi2-value" class="text-3xl font-extrabold text-emerald-400 font-mono tracking-tight">17.4%</div>
+        <div id="kpi2-desc" class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">(總對外銷售額 - 硬成本) / 總銷售額</div>
+      </div>
+
+      <!-- Card 3: Contribution Margin -->
+      <div class="exec-card p-5 sm:p-6 rounded-2xl relative overflow-hidden shadow-xl border-l-4 border-l-emerald-500">
+        <div class="flex justify-between items-start mb-3">
+          <span id="lblKpi3Title" class="text-sm text-slate-300 font-semibold">單件平均邊際貢獻</span>
+          <span id="kpi3-badge" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40">🟢 充裕</span>
+        </div>
+        <div id="kpi3-value" class="text-3xl font-extrabold text-white font-mono tracking-tight">$0.42/條</div>
+        <div id="kpi3-desc" class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">單件平均邊際貢獻金額</div>
+      </div>
+
+      <!-- Card 4: CapEx Exposure -->
+      <div class="exec-card p-5 sm:p-6 rounded-2xl relative overflow-hidden shadow-xl border-l-4 border-l-emerald-500">
+        <div class="flex justify-between items-start mb-3">
+          <span id="lblKpi4Title" class="text-sm text-slate-300 font-semibold">首單未回收設備曝險</span>
+          <span id="kpi4-badge" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40">🟢 無風險</span>
+        </div>
+        <div id="kpi4-value" class="text-3xl font-extrabold text-emerald-400 font-mono tracking-tight">$0.00</div>
+        <div id="kpi4-desc" class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">首單未回收設備曝險</div>
+      </div>
+
+      <!-- Card 5: Quote Risk Score -->
+      <div class="exec-card p-5 sm:p-6 rounded-2xl relative overflow-hidden shadow-xl border-l-4 border-l-emerald-500">
+        <div class="flex justify-between items-start mb-3">
+          <span id="lblKpi5Title" class="text-sm text-slate-300 font-semibold">商務報價綜合風險</span>
+          <span id="kpi5-badge" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40">🟢 低風險</span>
+        </div>
+        <div id="kpi5-value" class="text-3xl font-extrabold text-emerald-400 font-mono tracking-tight">88 / 100</div>
+        <div id="kpi5-desc" class="text-xs sm:text-sm text-slate-300 mt-2 font-medium">商務綜合風險等級: 低</div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 第 3 層：4 大核心談判決策圖表區              -->
+    <!-- ========================================== -->
+    <section class="space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 id="lblCockpitTitle" class="text-lg sm:text-xl font-extrabold text-white flex items-center gap-2.5">
+            <span class="w-3 h-3 rounded-full bg-blue-500 shadow-sm shadow-blue-500/50"></span>
+            <span id="lblCockpitTitleText">4 大核心談判決策圖表</span>
+          </h2>
+          <span id="lblCockpitSubTitle" class="text-sm text-slate-300 font-medium">累積交貨量與拉貨月數雙標記連動 — 高階主管 3 秒掌控商務底線</span>
+        </div>
+
+        <!-- 🔴 公司最低毛利防務底線 (%) 控制器 -->
+        <div class="flex items-center gap-2 bg-slate-900/90 border border-red-800/80 px-3.5 py-2 rounded-xl text-xs sm:text-sm shadow-lg">
+          <span class="text-red-400 font-bold flex items-center gap-1">
+            <span>🔴</span> <span id="lblRedlineCtrlText">公司最低毛利防務底線:</span>
+          </span>
+          <input type="number" id="inpRedlineGM" value="10.0" min="0" max="30" step="0.5" onchange="handleRedlineChange()" class="w-16 bg-slate-950 text-red-300 border border-red-600/80 rounded px-1.5 py-0.5 text-center font-mono font-bold focus:outline-none">
+          <span class="text-slate-300 font-bold">%</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- 圖表 1: CapEx Recovery Waterfall -->
+        <div class="exec-card p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <h3 id="lblChart1Title" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                📊 圖表 1: 設備資本回收三方案回本期對比圖
+              </h3>
+              <span id="lblChart1Unit" class="text-xs sm:text-sm font-semibold text-slate-300">回本月數</span>
+            </div>
+            <p id="lblChart1Desc" class="text-sm text-slate-300 mb-4">比較 NRE 預付、分攤折舊 與 階梯溢價 之資金回收時程</p>
+          </div>
+          <div class="relative h-60 sm:h-64 w-full">
+            <canvas id="chartWaterfall"></canvas>
+          </div>
+        </div>
+
+        <!-- 圖表 2: Selling Price & Margin Stacked Bar (解耦幣別 + Y軸直接標註幣別單位) -->
+        <div class="exec-card p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <h3 id="lblChart2Title" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                📊 圖表 2: 銷售單價與利潤結構堆疊拆解圖
+              </h3>
+              <!-- ⚡ 動態解耦幣別單位標籤 (即時切換 $ / ₹ / NT$) -->
+              <span id="lblChart2Unit" class="text-xs sm:text-sm font-bold text-blue-400 font-mono bg-blue-950/80 border border-blue-800/80 px-2.5 py-1 rounded-md">單件報價 ($/條)</span>
+            </div>
+            <p id="lblChart2Desc" class="text-sm text-slate-300 mb-4">BOM + MVA + 報廢 + 設備分攤 + 銷售利潤 (砍價時利潤即時縮減)</p>
+          </div>
+          <div class="relative h-60 sm:h-64 w-full">
+            <canvas id="chartPriceStack"></canvas>
+          </div>
+        </div>
+
+        <!-- 圖表 3A: 專案動態淨毛利率 -->
+        <div class="exec-card p-6 rounded-2xl shadow-xl flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <h3 id="lblChart3ATitle" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                📊 圖表 3A: 累積交貨量 (對應拉貨月數 M) vs 集團實際毛利率
+              </h3>
+              <span id="lblChart3AUnit" class="text-xs sm:text-sm font-semibold text-emerald-400 font-mono">[單一 Y 軸] 毛利率 (%)</span>
+            </div>
+            <p id="lblChart3ADesc" class="text-sm text-slate-300 mb-2">X 軸標記即時連動月拉貨量算出的第 M 個月，綠線為實際毛利率，紅虛線為底線 (<span id="txtRedlineVal3A">10.0%</span>)</p>
+          </div>
+          
+          <div class="relative h-60 sm:h-64 w-full">
+            <canvas id="chartNetMargin3A"></canvas>
+          </div>
+        </div>
+
+        <!-- 圖表 3B: CapEx 設備資本累積回收率 (%) -->
+        <div class="exec-card p-6 rounded-2xl shadow-xl flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <h3 id="lblChart3BTitle" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                📊 圖表 3B: 累積交貨量 (對應拉貨月數 M) vs CapEx 100% 回收率
+              </h3>
+              <span id="lblChart3BUnit" class="text-xs sm:text-sm font-semibold text-blue-400 font-mono">[單一 Y 軸] CapEx 回收率 (%)</span>
+            </div>
+            <p id="lblChart3BDesc" class="text-sm text-slate-300 mb-2">藍色虛線連動月拉貨速度，精確延伸至 100% 完畢點 (顯示完整回收所需月數與數量)</p>
+          </div>
+          
+          <div class="relative h-60 sm:h-64 w-full">
+            <canvas id="chartCapexRec3B"></canvas>
+          </div>
+        </div>
+
+        <!-- 圖表 4: Multi-MPN Portfolio Split (解耦金額與幣別) -->
+        <div class="exec-card p-6 rounded-2xl shadow-xl flex flex-col justify-between lg:col-span-2 space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <h3 id="lblChart4Title" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                📊 圖表 4: 多型號產品組合營收與口袋利潤貢獻對比圖
+              </h3>
+              <span id="lblChart4Unit" class="text-xs sm:text-sm font-semibold text-slate-300 font-mono">04815 vs 04814 即時拉貨占比</span>
+            </div>
+            <p id="lblChart4Desc" class="text-sm text-slate-300 mb-2">直觀展現不同型號拉貨量對全專案營收與口袋總利潤金額 ($) 之戰術動態</p>
+          </div>
+
+          <!-- 老闆與業務主管 雙型號利潤補貼對比看板 (與幣別/匯率 100% 解耦) -->
+          <div id="chart4-boss-banner" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="bg-blue-950/50 border border-blue-800/70 p-4 rounded-xl flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-bold text-blue-300 text-base">04815 (Output Hybrid - 200k EAU)</span>
+                  <span id="c4-tag-15" class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40 font-mono font-bold">營收主力</span>
+                </div>
+                <p id="c4-desc-15" class="text-slate-300 text-xs mt-1">大量衝營收型產品，單價稍受限，但提供專案基礎現金流。</p>
+              </div>
+              <div class="mt-3 pt-2.5 border-t border-blue-900/60 grid grid-cols-2 gap-2 font-mono text-slate-200">
+                <div><span id="c4-lbl-rev-15">年化營收:</span> <span id="c4-rev-15" class="font-bold text-blue-400">$1.97M</span> (<span id="c4-revpct-15">78%</span>)</div>
+                <div><span id="c4-lbl-prof-15">口袋利潤:</span> <span id="c4-prof-15" class="font-bold text-emerald-400">$138k</span> (<span id="c4-profpct-15">62%</span>)</div>
+              </div>
+            </div>
+
+            <div class="bg-purple-950/50 border border-purple-800/70 p-4 rounded-xl flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-bold text-purple-300 text-base">04814 (Input Power - 50k EAU)</span>
+                  <span id="c4-tag-14" class="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40 font-mono font-bold">高毛利補貼屏障</span>
+                </div>
+                <p id="c4-desc-14" class="text-slate-300 text-xs mt-1">小量高邊際貢獻產品，專門用來彌補 04815 的讓步利潤缺口！</p>
+              </div>
+              <div class="mt-3 pt-2.5 border-t border-purple-900/60 grid grid-cols-2 gap-2 font-mono text-slate-200">
+                <div><span id="c4-lbl-rev-14">年化營收:</span> <span id="c4-rev-14" class="font-bold text-purple-400">$548k</span> (<span id="c4-revpct-14">22%</span>)</div>
+                <div><span id="c4-lbl-prof-14">口袋利潤:</span> <span id="c4-prof-14" class="font-bold text-emerald-400">$84k</span> (<span id="c4-profpct-14">38%</span>)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative h-48 sm:h-56 w-full">
+            <canvas id="chartPortfolio"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 第 4 層：商務模擬計算區 (Interactive Simulator) -->
+    <!-- ========================================== -->
+    <section class="space-y-5">
+      
+      <!-- 專案拉貨總量看板與共通條件面板 -->
+      <div class="exec-card p-5 sm:p-6 rounded-2xl border-l-4 border-l-blue-500 flex flex-col md:flex-row gap-6 items-center justify-between shadow-xl">
+        <div class="flex-1 w-full">
+          <h4 id="lblTotalPullTitle" class="text-sm sm:text-base font-bold text-slate-100 mb-1.5">全專案預估月拉貨總量看板 (Total Project Monthly Pull)</h4>
+          <div class="text-2xl sm:text-3xl font-extrabold text-blue-400 font-mono">
+            <span id="valTotalPull">10,000</span> <span id="lblPullUnitTotal" class="text-lg font-bold">條/月</span>
+            <span class="text-xs sm:text-sm text-slate-300 font-normal ml-3">(04814: <span id="valPullSummary14" class="font-bold text-blue-300">2,000</span> <span id="lblPullUnit14">條</span> + 04815: <span id="valPullSummary15" class="font-bold text-purple-300">8,000</span> <span id="lblPullUnit15">條</span>)</span>
+          </div>
+        </div>
+        <div class="flex-1 w-full bg-blue-950/40 p-4 rounded-xl border border-blue-800/60">
+          <h4 id="lblLiabilityTitle" class="text-sm sm:text-base font-bold text-blue-300 mb-1">共通商務條款 (Common Policy)</h4>
+          <p id="lblLiabilityDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">報價有效期: 30天 | 匯率浮動容許度: ±3.0% | 交貨條件: 工廠交貨 | 特規原物料呆料買回責任</p>
+        </div>
+      </div>
+
+      <!-- 雙型號 3 方案模擬區 (04814 & 04815) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- LEFT: 04814 -->
+        <div class="exec-card p-6 rounded-2xl shadow-xl border border-blue-900/40">
+          <div class="pb-3 border-b border-slate-700/80 mb-5 flex justify-between items-center flex-wrap gap-2">
+            <h3 id="lblTitle04814" class="text-base sm:text-lg font-bold text-white flex items-center">
+              04814 商務合約變數調校
+            </h3>
+            <div class="flex items-center gap-2">
+              <button onclick="saveParamsToBackend()" class="text-xs sm:text-sm bg-blue-900/90 hover:bg-blue-800 text-blue-200 border border-blue-600 px-3 py-1 rounded-lg transition flex items-center gap-1 shadow-sm cursor-pointer font-semibold" title="保存當前試算設定至雲端數據庫">
+                <span>☁️</span> <span id="lblSave14Text">寫入雲端</span>
+              </button>
+              <button onclick="resetMPNDefault('04814')" class="text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1 rounded-lg transition flex items-center gap-1 shadow-sm cursor-pointer font-semibold" title="恢復至 AI 建表時的原始工程建議預設值">
+                <span>↺</span> <span id="btnReset14Text">恢復預設</span>
+              </button>
+              <span class="text-xs bg-blue-950 text-blue-300 border border-blue-800 px-2.5 py-1 rounded-md font-mono font-bold">EAU: 50,000</span>
+            </div>
+          </div>
+
+          <!-- 04814 獨立月拉貨量 Slider -->
+          <div class="mb-5 bg-slate-900/80 p-4 rounded-xl border border-blue-900/60 shadow-inner">
+            <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+              <span id="lblPull14" class="text-slate-200 font-semibold">04814 每月預估拉貨量 (Monthly Pull)</span>
+              <span id="valPull-04814" class="font-extrabold text-blue-400 font-mono">2,000 條/月</span>
+            </div>
+            <input type="range" id="pull-04814" min="500" max="10000" step="500" value="2000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-blue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 p-1.5 bg-slate-900 rounded-xl mb-5 text-xs sm:text-sm">
+            <button onclick="switchTab('04814', 1)" id="tab-04814-1" class="py-2.5 rounded-lg transition tab-btn-active">方案一 (付清)</button>
+            <button onclick="switchTab('04814', 2)" id="tab-04814-2" class="py-2.5 rounded-lg transition tab-btn-inactive">方案二 (攤提)</button>
+            <button onclick="switchTab('04814', 3)" id="tab-04814-3" class="py-2.5 rounded-lg transition tab-btn-inactive">方案三 (階梯)</button>
+          </div>
+
+          <!-- 04814 Tab 1 (NRE) -->
+          <div id="content-04814-1" class="space-y-5">
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblMargin14" class="text-slate-200 font-medium">Sales 利潤加價率 (%)</span>
+                <span id="valMargin-04814" class="font-extrabold text-blue-400 font-mono">5.0%</span>
+              </div>
+              <input type="range" id="margin-04814-1" min="0" max="20" step="0.5" value="5" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-blue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblMoq14" class="text-slate-200 font-medium">單批交貨最低 MOQ (pcs)</span>
+                <span id="valMoq-04814" class="font-extrabold text-blue-400 font-mono">2,000 條/批</span>
+              </div>
+              <input type="range" id="moq-04814-1" min="500" max="5000" step="500" value="2000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-blue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div class="bg-slate-900/90 p-4 sm:p-5 rounded-xl border border-slate-700/80 flex justify-between items-center shadow-lg">
+              <div>
+                <div id="lblResPrice14_1" class="text-xs sm:text-sm text-slate-300 font-medium">最終對外單價</div>
+                <div id="resPrice-04814-1" class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono">$5.91</div>
+              </div>
+              <div class="text-right">
+                <div id="lblResPay14_1" class="text-xs sm:text-sm text-slate-300 font-medium">CapEx 支付模式</div>
+                <div id="valPaymentMode14_1" class="text-sm font-bold text-blue-400 font-mono">NRE $11,580.52 預付付清</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04814 Tab 2 (Amortization) -->
+          <div id="content-04814-2" class="space-y-5 hidden">
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblTarget14" class="text-slate-200 font-medium">攤提目標總量 (Target Vol)</span>
+                <span id="valTarget-04814" class="font-extrabold text-amber-400 font-mono">50,000 條</span>
+              </div>
+              <input type="range" id="amortTarget-04814-2" min="10000" max="100000" step="5000" value="50000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-amber-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblFirst14" class="text-slate-200 font-medium">強制首單試單數量 (First PO)</span>
+                <span id="valFirstPO-04814" class="font-extrabold text-amber-400 font-mono">2,000 條</span>
+              </div>
+              <input type="range" id="firstPO-04814-2" min="1000" max="10000" step="500" value="2000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-amber-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div class="bg-slate-900/90 p-4 sm:p-5 rounded-xl border border-slate-700/80 grid grid-cols-2 gap-3 text-xs sm:text-sm shadow-lg">
+              <div>
+                <div id="lblResAmort14_2" class="text-xs sm:text-sm text-slate-300 font-medium">單顆附加攤提</div>
+                <div id="resAmort-04814-2" class="text-lg font-bold text-amber-400 font-mono">+$0.232</div>
+              </div>
+              <div>
+                <div id="lblResPrice14_2" class="text-xs sm:text-sm text-slate-300 font-medium">攤提對外單價</div>
+                <div id="resPrice-04814-2" class="text-lg font-bold text-emerald-400 font-mono">$6.14</div>
+              </div>
+              <div class="col-span-2 pt-2.5 border-t border-slate-800 flex justify-between items-center">
+                <span id="lblResRisk14_2" class="text-xs sm:text-sm font-semibold text-red-400">首單曝險金額 (Risk Gap):</span>
+                <span id="resRisk-04814-2" class="text-base font-extrabold text-red-400 font-mono">-$11,117 USD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04814 Tab 3 (Tiered) -->
+          <div id="content-04814-3" class="space-y-5 hidden">
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblTier1Q14" class="text-slate-200 font-medium">首批高價數量門檻 (Tier 1 Qty)</span>
+                <span id="valTier1Qty-04814" class="font-extrabold text-purple-400 font-mono">10,000 條</span>
+              </div>
+              <input type="range" id="tier1Qty-04814-3" min="2000" max="30000" step="1000" value="10000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-purple-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblTier1P14" class="text-slate-200 font-medium">首批附加溢價 (Premium / pc)</span>
+                <span id="valPrem-04814" class="font-extrabold text-purple-400 font-mono">+$0.50</span>
+              </div>
+              <input type="range" id="tier1Premium-04814-3" min="0.1" max="2.0" step="0.1" value="0.5" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-purple-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div class="bg-slate-900/90 p-4 sm:p-5 rounded-xl border border-slate-700/80 grid grid-cols-2 gap-3 text-xs sm:text-sm shadow-lg">
+              <div>
+                <div id="lblResT1Price14_3" class="text-xs sm:text-sm text-purple-300 font-medium">Tier 1 首批單價</div>
+                <div id="resTier1Price-04814-3" class="text-lg font-bold text-purple-400 font-mono">$6.41</div>
+              </div>
+              <div>
+                <div id="lblResT2Price14_3" class="text-xs sm:text-sm text-emerald-300 font-medium">Tier 2 降價後單價</div>
+                <div id="resTier2Price-04814-3" class="text-lg font-bold text-emerald-400 font-mono">$5.91</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: 04815 -->
+        <div class="exec-card p-6 rounded-2xl shadow-xl border border-purple-900/40">
+          <div class="pb-3 border-b border-slate-700/80 mb-5 flex justify-between items-center flex-wrap gap-2">
+            <h3 id="lblTitle04815" class="text-base sm:text-lg font-bold text-white flex items-center">
+              04815 商務合約變數調校
+            </h3>
+            <div class="flex items-center gap-2">
+              <button onclick="saveParamsToBackend()" class="text-xs sm:text-sm bg-purple-900/90 hover:bg-purple-800 text-purple-200 border border-purple-600 px-3 py-1 rounded-lg transition flex items-center gap-1 shadow-sm cursor-pointer font-semibold" title="保存當前試算設定至雲端數據庫">
+                <span>☁️</span> <span id="lblSave15Text">寫入雲端</span>
+              </button>
+              <button onclick="resetMPNDefault('04815')" class="text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1 rounded-lg transition flex items-center gap-1 shadow-sm cursor-pointer font-semibold" title="恢復至 AI 建表時的原始工程建議預設值">
+                <span>↺</span> <span id="btnReset15Text">恢復預設</span>
+              </button>
+              <span class="text-xs bg-purple-950 text-purple-300 border border-purple-800 px-2.5 py-1 rounded-md font-mono font-bold">EAU: 200,000</span>
+            </div>
+          </div>
+
+          <!-- 04815 獨立月拉貨量 Slider -->
+          <div class="mb-5 bg-slate-900/80 p-4 rounded-xl border border-purple-900/60 shadow-inner">
+            <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+              <span id="lblPull15" class="text-slate-200 font-semibold">04815 每月預估拉貨量 (Monthly Pull)</span>
+              <span id="valPull-04815" class="font-extrabold text-purple-400 font-mono">8,000 條/月</span>
+            </div>
+            <input type="range" id="pull-04815" min="1000" max="30000" step="1000" value="8000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-purple-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 p-1.5 bg-slate-900 rounded-xl mb-5 text-xs sm:text-sm">
+            <button onclick="switchTab('04815', 1)" id="tab-04815-1" class="py-2.5 rounded-lg transition tab-btn-active">方案一 (付清)</button>
+            <button onclick="switchTab('04815', 2)" id="tab-04815-2" class="py-2.5 rounded-lg transition tab-btn-inactive">方案二 (攤提)</button>
+            <button onclick="switchTab('04815', 3)" id="tab-04815-3" class="py-2.5 rounded-lg transition tab-btn-inactive">方案三 (階梯)</button>
+          </div>
+
+          <!-- 04815 Tab 1 (NRE) -->
+          <div id="content-04815-1" class="space-y-5">
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblMargin15" class="text-slate-200 font-medium">Sales 利潤加價率 (%)</span>
+                <span id="valMargin-04815" class="font-extrabold text-blue-400 font-mono">5.0%</span>
+              </div>
+              <input type="range" id="margin-04815-1" min="0" max="20" step="0.5" value="5" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-blue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblMoq15" class="text-slate-200 font-medium">單批交貨最低 MOQ (pcs)</span>
+                <span id="valMoq-04815" class="font-extrabold text-blue-400 font-mono">5,000 條/批</span>
+              </div>
+              <input type="range" id="moq-04815-1" min="1000" max="15000" step="1000" value="5000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-blue-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div class="bg-slate-900/90 p-4 sm:p-5 rounded-xl border border-slate-700/80 flex justify-between items-center shadow-lg">
+              <div>
+                <div id="lblResPrice15_1" class="text-xs sm:text-sm text-slate-300 font-medium">最終對外單價</div>
+                <div id="resPrice-04815-1" class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono">$8.19</div>
+              </div>
+              <div class="text-right">
+                <div id="lblResPay15_1" class="text-xs sm:text-sm text-slate-300 font-medium">CapEx 支付模式</div>
+                <div id="valPaymentMode15_1" class="text-sm font-bold text-blue-400 font-mono">NRE $37,782.07 預付付清</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04815 Tab 2 (Amortization) -->
+          <div id="content-04815-2" class="space-y-5 hidden">
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblTarget15" class="text-slate-200 font-medium">攤提目標總量 (Target Vol)</span>
+                <span id="valTarget-04815" class="font-extrabold text-amber-400 font-mono">200,000 條</span>
+              </div>
+              <input type="range" id="amortTarget-04815-2" min="50000" max="300000" step="10000" value="200000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-amber-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblFirst15" class="text-slate-200 font-medium">強制首單試單數量 (First PO)</span>
+                <span id="valFirstPO-04815" class="font-extrabold text-amber-400 font-mono">8,000 條</span>
+              </div>
+              <input type="range" id="firstPO-04815-2" min="2000" max="30000" step="1000" value="8000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-amber-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div class="bg-slate-900/90 p-4 sm:p-5 rounded-xl border border-slate-700/80 grid grid-cols-2 gap-3 text-xs sm:text-sm shadow-lg">
+              <div>
+                <div id="lblResAmort15_2" class="text-xs sm:text-sm text-slate-300 font-medium">單顆附加攤提</div>
+                <div id="resAmort-04815-2" class="text-lg font-bold text-amber-400 font-mono">+$0.189</div>
+              </div>
+              <div>
+                <div id="lblResPrice15_2" class="text-xs sm:text-sm text-slate-300 font-medium">攤提對外單價</div>
+                <div id="resPrice-04815-2" class="text-lg font-bold text-emerald-400 font-mono">$8.38</div>
+              </div>
+              <div class="col-span-2 pt-2.5 border-t border-slate-800 flex justify-between items-center">
+                <span id="lblResRisk15_2" class="text-xs sm:text-sm font-semibold text-red-400">首單曝險金額 (Risk Gap):</span>
+                <span id="resRisk-04815-2" class="text-base font-extrabold text-red-400 font-mono">-$36,271 USD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04815 Tab 3 (Tiered) -->
+          <div id="content-04815-3" class="space-y-5 hidden">
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblTier1Q15" class="text-slate-200 font-medium">首批高價數量門檻 (Tier 1 Qty)</span>
+                <span id="valTier1Qty-04815" class="font-extrabold text-purple-400 font-mono">40,000 條</span>
+              </div>
+              <input type="range" id="tier1Qty-04815-3" min="10000" max="80000" step="5000" value="40000" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-purple-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                <span id="lblTier1P15" class="text-slate-200 font-medium">首批附加溢價 (Premium / pc)</span>
+                <span id="valPrem-04815" class="font-extrabold text-purple-400 font-mono">+$0.50</span>
+              </div>
+              <input type="range" id="tier1Premium-04815-3" min="0.1" max="2.0" step="0.1" value="0.5" oninput="handleSimSliderDrag(this)" onchange="handleSimSliderInput()" class="w-full accent-purple-500 h-2 bg-slate-700 rounded-lg cursor-pointer">
+            </div>
+            <div class="bg-slate-900/90 p-4 sm:p-5 rounded-xl border border-slate-700/80 grid grid-cols-2 gap-3 text-xs sm:text-sm shadow-lg">
+              <div>
+                <div id="lblResT1Price15_3" class="text-xs sm:text-sm text-purple-300 font-medium">Tier 1 首批單價</div>
+                <div id="resTier1Price-04815-3" class="text-lg font-bold text-purple-400 font-mono">$8.69</div>
+              </div>
+              <div>
+                <div id="lblResT2Price15_3" class="text-xs sm:text-sm text-emerald-300 font-medium">Tier 2 降價後單價</div>
+                <div id="resTier2Price-04815-3" class="text-lg font-bold text-emerald-400 font-mono">$8.19</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 第 5 層：工廠出廠底層結構 (Baseline Cost Truth) -->
+    <!-- ========================================== -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- 04814 成本明細 -->
+      <div class="exec-card p-6 rounded-2xl border border-slate-600 shadow-xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-blue-500"></div>
+        <div class="flex justify-between items-center mb-5 pb-3 border-b border-slate-700/80 flex-wrap gap-2">
+          <h3 id="lblCostStructureTitle14" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">MPN: 705-1-04814 工廠出廠底層結構</h3>
+          <span id="txtFactoryPrice14" class="text-xs sm:text-sm font-extrabold text-slate-100 bg-slate-800/90 border border-slate-600 px-3 py-1 rounded-lg font-mono">出廠價: $5.6316 USD</span>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700/80 shadow-inner">
+            <div id="lblBomTitle14" class="text-xs sm:text-sm font-semibold text-slate-300 mb-1">BOM 材料費</div>
+            <div id="txtBomCost14" class="text-lg sm:text-xl font-extrabold text-white font-mono">$3.722</div>
+            <div id="lblBomNote14" class="text-xs text-emerald-400/90 font-medium mt-2 leading-relaxed">✓ 已內含中國至印度 2.75%~11% 進口關稅</div>
+          </div>
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700/80 shadow-inner">
+            <div id="lblMvaTitle14" class="text-xs sm:text-sm font-semibold text-slate-300 mb-1">MVA 加工與利潤</div>
+            <div id="txtMvaCost14" class="text-lg sm:text-xl font-extrabold text-white font-mono">$1.910</div>
+            <div id="lblMvaNote14" class="text-xs text-emerald-400/90 font-medium mt-2 leading-relaxed">✓ 已內含送至 Tirupati 廠區之物流費</div>
+          </div>
+          <div class="bg-amber-900/30 p-4 rounded-xl border border-amber-700/60 shadow-inner">
+            <div id="lblCapexTitle14" class="text-xs sm:text-sm font-semibold text-amber-300 mb-1">設備專屬 CapEx</div>
+            <div id="txtCapex14" class="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">$11,580.52</div>
+            <div id="lblCapexNote14" class="text-xs text-amber-300/90 font-medium mt-2 leading-relaxed">含 2 台端子機與切刀 (資產屬客戶)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04815 成本明細 -->
+      <div class="exec-card p-6 rounded-2xl border border-slate-600 shadow-xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-purple-500"></div>
+        <div class="flex justify-between items-center mb-5 pb-3 border-b border-slate-700/80 flex-wrap gap-2">
+          <h3 id="lblCostStructureTitle15" class="text-base sm:text-lg font-bold text-white flex items-center gap-2">MPN: 705-1-04815 工廠出廠底層結構</h3>
+          <span id="txtFactoryPrice15" class="text-xs sm:text-sm font-extrabold text-slate-100 bg-slate-800/90 border border-slate-600 px-3 py-1 rounded-lg font-mono">出廠價: $7.8002 USD</span>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700/80 shadow-inner">
+            <div id="lblBomTitle15" class="text-xs sm:text-sm font-semibold text-slate-300 mb-1">BOM 材料費</div>
+            <div id="txtBomCost15" class="text-lg sm:text-xl font-extrabold text-white font-mono">$6.049</div>
+            <div id="lblBomNote15" class="text-xs text-emerald-400/90 font-medium mt-2 leading-relaxed">✓ 已內含中國至印度 2.75%~11% 進口關稅</div>
+          </div>
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700/80 shadow-inner">
+            <div id="lblMvaTitle15" class="text-xs sm:text-sm font-semibold text-slate-300 mb-1">MVA 加工與利潤</div>
+            <div id="txtMvaCost15" class="text-lg sm:text-xl font-extrabold text-white font-mono">$1.752</div>
+            <div id="lblMvaNote15" class="text-xs text-emerald-400/90 font-medium mt-2 leading-relaxed">✓ 已內含送至 Tirupati 廠區之物流費</div>
+          </div>
+          <div class="bg-amber-900/30 p-4 rounded-xl border border-amber-700/60 shadow-inner">
+            <div id="lblCapexTitle15" class="text-xs sm:text-sm font-semibold text-amber-300 mb-1">設備專屬 CapEx</div>
+            <div id="txtCapex15" class="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">$37,782.07</div>
+            <div id="lblCapexNote15" class="text-xs text-amber-300/90 font-medium mt-2 leading-relaxed">含 7 台端子機與切刀 (資產屬客戶)</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- Deal Memo Modal                               -->
+  <!-- ========================================== -->
+  <div id="deal-memo-modal" class="modal-overlay">
+    <div class="exec-card p-6 sm:p-8 rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto border border-slate-700 shadow-2xl">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-700 mb-5">
+        <h3 id="dealMemoModalTitle" class="text-lg sm:text-xl font-extrabold text-blue-400 flex items-center gap-2">🛡️ 內部決策備忘錄 (Deal Memo) - 10 大合約談判指引範本</h3>
+        <button onclick="closeDealMemoModal()" class="text-slate-400 hover:text-white text-xl font-bold p-1">✕</button>
+      </div>
+      <div id="dealMemoModalList" class="space-y-4 text-sm leading-relaxed">
+        <!-- JS Dynamic filled -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- A4 Print View Section (100% 零英文括號對照之純語系報價單) -->
+  <!-- ========================================== -->
+  <div id="a4-print-quotation">
+    <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #0f172a; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+      <div>
+        <h2 style="color: #0284c7; font-weight: 800; font-size: 1.4rem;">FOXLINK / VVDN TECHNOLOGIES</h2>
+        <p style="font-size: 0.9rem; color: #475569;">Tirupati Manufacturing Facility, Andhra Pradesh, India</p>
+      </div>
+      <div style="text-align: right; font-size: 0.9rem; color: #475569;">
+        <p><strong id="lblPrintRef">報價單編號:</strong> <span id="print-quote-id">QT-20260805-VVDN</span></p>
+        <p><strong id="lblPrintDate">開立日期:</strong> <span id="print-date">2026-08-06</span></p>
+        <p><strong id="lblPrintValidity">有效期限:</strong> <span id="print-validity">30 個日曆天</span></p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1.5rem; font-size: 0.95rem; color: #334155;">
+      <p id="lblPrintCustomer"><strong>客戶名稱:</strong> VVDN Technologies Ltd.</p>
+      <p id="lblPrintProject"><strong>專案名稱:</strong> 線束組件專案 (SQ_VVDN_Harness_20260805)</p>
+    </div>
+
+    <!-- 標準 5 欄純淨報價單主表格 -->
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; font-size: 0.9rem;">
+      <thead>
+        <tr style="background: #f1f5f9; color: #0f172a; border-bottom: 2px solid #cbd5e1;">
+          <th id="lblThCustomerMpn" style="padding: 10px; text-align: left;">客戶料號</th>
+          <th id="lblThDesc" style="padding: 10px; text-align: left;">品名描述</th>
+          <th id="lblThPrice" style="padding: 10px; text-align: left;">報價單價</th>
+          <th id="lblThCurrency" style="padding: 10px; text-align: left;">幣別</th>
+          <th id="lblThMoq" style="padding: 10px; text-align: left;">最低起訂量</th>
+        </tr>
+      </thead>
+      <tbody id="print-table-tbody">
+        <!-- Dynamic filled -->
+      </tbody>
+    </table>
+
+    <!-- 獨立 NRE 小計請款區塊 (若含有 NRE 付清方案才顯示，100% 零英文括號) -->
+    <div id="print-nre-container" style="margin-bottom: 1.5rem; display: none;">
+      <!-- Dynamic filled -->
+    </div>
+
+    <!-- 專屬商務條款與法律規範 (按料號選定方案動態生成) -->
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 1.25rem; font-size: 0.85rem;">
+      <h4 id="lblPrintNotesTitle" style="font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; font-size: 0.95rem;">通用商務條款與法律規範:</h4>
+      <ol id="print-notes-ol" style="padding-left: 1.25rem; line-height: 1.5; color: #334155;">
+        <!-- Dynamic filled -->
+      </ol>
+    </div>
+
+    <div style="margin-top: 3rem; display: flex; justify-content: space-between; font-size: 0.9rem; color: #334155;">
+      <div>
+        <p id="lblPrintPreparedBy">製表人: ___________________</p>
+        <p id="lblPrintSalesManager" style="margin-top: 4px; font-weight: 600;">正崴集團 業務經理</p>
+      </div>
+      <div>
+        <p id="lblPrintAcceptedBy">客戶簽核: ___________________</p>
+        <p id="lblPrintAuthorizedSig" style="margin-top: 4px; font-weight: 600;">客戶授權代表簽章</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- JavaScript SPA Engine (v3.20 動態幣別解耦與Y軸單位標示引擎) -->
+  <!-- ========================================== -->
+  <script>
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwhmivN1wp_nZQRrYuaHduoAMxo6eOA2BWCBWg91Fj_U-MZ-XvhQegVsjUHN5cCqGT3/exec";
+    const PID_KEY = "SQ_VVDN_Harness_20260805";
+
+    // ⚡ 實時國際匯率快取 API 數據庫 (預設 Safe Fallback)
+    let liveFxRates = { USD: 1.0, INR: 83.5, NTD: 32.5, TWD: 32.5 };
+
+    function fetchLiveFxRates() {
+      fetch("https://open.er-api.com/v6/latest/USD")
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.result === "success" && data.rates) {
+            if (data.rates.INR) liveFxRates.INR = parseFloat(data.rates.INR);
+            if (data.rates.TWD) {
+              liveFxRates.TWD = parseFloat(data.rates.TWD);
+              liveFxRates.NTD = parseFloat(data.rates.TWD);
+            }
+            console.log("⚡ 實時 CDN 國際匯率同步成功:", liveFxRates);
+            const ind = document.getElementById("fx-live-indicator");
+            if (ind) ind.classList.remove("hidden");
+          }
+        })
+        .catch(err => {
+          console.warn("實時匯率 CDN API 離線，採用預備歷史數值:", err);
+        });
+    }
+
+    function getVal(obj, ...keys) {
+      if (!obj) return undefined;
+      for (const k of keys) {
+        if (obj[k] !== undefined && obj[k] !== null) return obj[k];
+      }
+      return undefined;
+    }
+
+    const DATA = {
+      '04814': { cost: 5.6316, bom: 3.722, mva: 1.910, hardCogs: 4.50, capex: 11580.52, eau: 50000 },
+      '04815': { cost: 7.8002, bom: 6.049, mva: 1.752, hardCogs: 6.80, capex: 37782.07, eau: 200000 }
+    };
+
+    let activeTabMap = { '04814': 1, '04815': 1 };
+    let aiBaselineState = null;   
+    let lastSyncedState = null;   
+    let currentLang = 'zh';       
+
+    const chartInstances = {
+      beWaterfall: null,
+      marginStack: null,
+      netMargin3A: null,
+      capexRec3B: null,
+      portfolioSplit: null
+    };
+
+    function safeDestroyCharts() {
+      Object.keys(chartInstances).forEach(key => {
+        if (chartInstances[key] && typeof chartInstances[key].destroy === 'function') {
+          try {
+            chartInstances[key].destroy();
+          } catch (err) {
+            console.warn(`[Chart Safety] Warning destroying chart ${key}:`, err);
+          }
+          chartInstances[key] = null;
+        }
+      });
+    }
+
+    const I18N = {
+      zh: {
+        pageTitle: "VVDN 印度線束專案 — EMS 銷售談判戰情儀表板 v3.20",
+        projectTitle: "VVDN 印度線束專案",
+        cockpitBadge: "v3.20 Cockpit",
+        subtitle: "預估年拉貨: 250k | 設備投資: $49,362.59 USD | PID: SQ_VVDN_Harness_20260805",
+        syncBadgeSynced: "☁️ 已同步",
+        syncBadgeModified: "↺ 取消變更",
+        syncBadgeSyncing: "🔄 同步中...",
+        syncBadgeOffline: "⚠️ 離線預設模式 (本機試算)",
+        saveBtn: "寫入雲端",
+        currencyLabel: "幣別:",
+        fxRateLabel: "匯率:",
+        memoBtnFull: "內部決策備忘錄",
+        memoBtnShort: "備忘錄",
+        langBtn: "EN",
+
+        exportBtn: "📄 匯出正式報價單",
+
+        loadingFetchTitle: "🔄 正在從雲端下載數據...",
+        loadingFetchDesc: "正在讀取 BU 報價與數據庫參數...",
+
+        loadingSaveTitle: "☁️ 正在寫入 Google Sheet...",
+        loadingSaveDesc: "正在將當前試算參數同步寫入遠端數據庫...",
+
+        kpi1Title: "設備投資資本回收期",
+        kpi1Badge0: "🟢 0 個月 (NRE付清)",
+        kpi1Desc0: "無設備曝險，NRE 預付結清",
+        kpi1BadgeGood: "🟢 良好 (≤12個月)",
+        kpi1DescGood: "預計 {m} 個月完成設備資本回本",
+        kpi1BadgeAccept: "🟡 可接受 (13-18個月)",
+        kpi1DescAccept: "預計 {m} 個月完成設備資本回本",
+        kpi1BadgeLong: "🔴 偏長 (>18個月)",
+        kpi1DescLong: "回本期過長，建議調整拉貨或增加溢價",
+
+        kpi2Title: "集團實際綜合毛利率",
+        kpi2BadgeGood: "🟢 優良 (≥底線)",
+        kpi2BadgeFair: "🟡 普佳",
+        kpi2BadgeAlert: "🔴 警示 (<底線)",
+        kpi2Desc: "(總對外銷售額 - 硬成本) / 總銷售額",
+
+        kpi3Title: "單件平均邊際貢獻",
+        kpi3BadgeGood: "🟢 充裕",
+        kpi3BadgeFair: "🟡 適中",
+        kpi3BadgeAlert: "🔴 偏低",
+        kpi3Desc: "04814 貢獻: {cm14} | 04815 貢獻: {cm15}",
+
+        kpi4Title: "首單未回收設備曝險",
+        kpi4BadgeNone: "🟢 無風險",
+        kpi4BadgeSafe: "🟡 可控",
+        kpi4BadgeHigh: "🔴 高曝險",
+        kpi4Desc: "首單試單: 04814 ({f14}條) / 04815 ({f15}條)",
+
+        kpi5Title: "商務報價綜合風險",
+        kpi5BadgeLow: "🟢 低風險",
+        kpi5DescLow: "商務條款健康，高評級可簽約",
+        kpi5BadgeMed: "🟡 中風險",
+        kpi5DescMed: "建議要求補強防護條款",
+        kpi5BadgeHigh: "🔴 高風險",
+        kpi5DescHigh: "強烈建議退回報價或提高 NRE",
+
+        cockpitTitle: "4 大核心談判決策圖表",
+        cockpitSubTitle: "累積交貨量與拉貨月數雙標記連動 — 高階主管 3 秒掌控商務底線",
+        redlineCtrlText: "公司最低毛利防務底線:",
+
+        chart1Title: "📊 圖表 1: 設備資本回收三方案回本期對比圖",
+        chart1Unit: "回本月數",
+        chart1Desc: "比較 NRE 預付 (方案一)、分攤折舊 (方案二) 與 階梯溢價 (方案三) 之資金回收時程",
+        chart1XAxisTitle: "回本所需月份",
+        chart1Labels: ['方案一 (NRE預付)', '方案二 (分攤折舊)', '方案三 (階梯溢價)'],
+
+        chart2Title: "📊 圖表 2: 銷售單價與利潤結構堆疊拆解圖",
+        chart2Desc: "BOM材料費 + MVA加工費 + 報廢 + 設備分攤 + 銷售利潤 (砍價時利潤即時縮減)",
+        chart2Datasets: ['BOM 材料費', 'MVA 加工費', '設備分攤費', '銷售利潤'],
+
+        chart3ATitle: "📊 圖表 3A: 累積交貨量 (對應拉貨月數 M) vs 集團實際毛利率",
+        chart3AUnit: "[單一 Y 軸] 毛利率 (%)",
+        chart3ADesc: "X 軸標記即時連動月拉貨量算出的第 M 個月，綠線為實際毛利率，紅虛線為底線",
+        chart3AYAxisTitle: "毛利率 (%)",
+        chart3ADatasetLabel: "集團實際毛利率 (%)",
+        chart3ARedlineLabel: "公司防務底線",
+
+        chart3BTitle: "📊 圖表 3B: 累積交貨量 (對應拉貨月數 M) vs CapEx 100% 回收率",
+        chart3BUnit: "[單一 Y 軸] CapEx 回收率 (%)",
+        chart3BDesc: "藍色虛線連動月拉貨速度，精確延伸至 100% 完畢點 (顯示完整回收所需月數與數量)",
+        chart3BYAxisTitle: "CapEx 回收率 (%)",
+        chart3BDatasetLabel: "CapEx 設備資本回收率 (%)",
+
+        chart4Title: "📊 圖表 4: 多型號產品組合營收與口袋利潤貢獻對比圖",
+        chart4Unit: "04815 vs 04814 即時拉貨占比",
+        chart4Desc: "直觀展現不同型號拉貨量對全專案營收與口袋總利潤金額 ($) 之戰術動態",
+        chart4Labels: ['動態營收占比 (%)', '動態利潤貢獻占比 (%)'],
+        c4Tag15: "營收主力",
+        c4Desc15: "大量衝營收型產品，單價稍受限，但提供專案基礎現金流。",
+        c4Tag14: "高毛利補貼屏障",
+        c4Desc14: "小量高邊際貢獻產品，專門用來彌補 04815 的讓步利潤缺口！",
+        c4LblRev: "年化營收:",
+        c4LblProf: "口袋利潤:",
+
+        totalPullTitle: "全專案預估月拉貨總量看板",
+        pcsPerMonth: "條/月",
+        pcsPerBatch: "條/批",
+        pcsUnit: "條",
+        liabilityTitle: "共通商務條款",
+        liabilityDesc: "報價有效期: 30天 | 匯率浮動容許度: ±3.0% | 交貨條件: 工廠交貨 | 特規原物料呆料買回責任",
+
+        lblTitle04814: "04814 商務合約變數調校",
+        lblTitle04815: "04815 商務合約變數調校",
+
+        btnResetDefault: "恢復預設",
+        tabOpt1: "方案一 (付清)",
+        tabOpt2: "方案二 (攤提)",
+        tabOpt3: "方案三 (階梯)",
+
+        lblMonthlyPull: "每月預估拉貨量",
+        lblMargin: "Sales 利潤加價率 (%)",
+        lblMoq: "單批交貨最低 MOQ (條)",
+        lblTargetVol: "攤提目標總量",
+        lblFirstPO: "強制首單試單數量",
+        lblTier1Qty: "首批高價數量門檻",
+        lblTier1Prem: "首批附加溢價 ($/條)",
+
+        resFinalPrice: "最終對外單價",
+        resPaymentMode: "CapEx 支付模式",
+        resNrePaidPrefix: "NRE ",
+        resNrePaidSuffix: " 預付付清",
+        resAmortPerPc: "單顆附加攤提",
+        resAmortPrice: "攤提對外單價",
+        resRiskGap: "首單曝險金額:",
+        resTier1Price: "Tier 1 首批單價",
+        resTier2Price: "Tier 2 降價後單價",
+
+        lblCostStructureTitle14: "MPN: 705-1-04814 工廠出廠底層結構",
+        lblCostStructureTitle15: "MPN: 705-1-04815 工廠出廠底層結構",
+        lblFactoryPrice: "出廠價:",
+        lblBomCost: "BOM 材料費",
+        lblBomNote: "✓ 已內含中國至印度 2.75%~11% 進口關稅",
+        lblMvaCost: "MVA 加工與利潤",
+        lblMvaNote: "✓ 已內含送至 Tirupati 廠區之物流費",
+        lblCapexCost: "設備專屬 CapEx",
+        lblCapexNote14: "含 2 台端子機與切刀 (資產屬客戶)",
+        lblCapexNote15: "含 7 台端子機與切刀 (資產屬客戶)",
+
+        dealMemoModalTitle: "🛡️ 內部決策備忘錄 - 10 大合約談判指引範本",
+        dealMemoItems: [
+          { t: "1. CapEx 產權歸屬條文", d: "載明 CapEx 設備產權於 100% 攤提完成或 NRE 付清前歸 Foxlink 所有，客戶不得擅自搬離。" },
+          { t: "2. 最低量承諾 (Volume Commitment & Take-or-Pay)", d: "採購數量若未達 EAU 80% (或月拉貨 < 10k pcs)，Foxlink 保留單價調整、違約金索賠與殘值請款權利。" },
+          { t: "3. 提前終止補償 (Early Termination True-up)", d: "專案若提前終止或 24 個月到期未達目標量，客戶需於 30 天內一次付清未攤提 CapEx 殘值。" },
+          { t: "4. 特規原物料呆料買回 (Material Liability)", d: "Cable 16AWG (25KM) / Ethernet (5KM) 等 MOQ 原物料呆滯由客戶無條件按原價買回。" },
+          { t: "5. 換線補償金 (Changeover Surcharge)", d: "單筆 PO 量低於 MOQ 門檻時，按次收取 $200 (04814) / $500 (04815) 換線費。" },
+          { t: "6. 幣別與匯率保護條款 (FX Fluctuation Protection)", d: "報價基礎採用 USD / INR 基準匯率。若季維護匯率變動超過 ±3.0%，對外單價自動按變動比例調整。" },
+          { t: "7. MOQ 與零星訂單懲罰機制", d: "嚴禁客戶下達小於指定 MOQ 之零星訂單，否則除了換線費外，交期延長至 8 週以上。" },
+          { t: "8. 客供料與客戶指定料件免責條款", d: "若不良品係由客戶指定或客供之 Connector / Wire 引發，Foxlink 免除相應品質損害賠償。" },
+          { t: "9. 品質驗收與 30 天付款期限", d: "貨到客戶指定地點後 7 天內未提出書面驗收異議即視為合格，付款條件採標準 Net 30 天。" },
+          { t: "10. 智慧財產權與治具專用保密協定", d: "線束治具設計與製造工藝專利屬 Foxlink 所有，客戶不得轉移至第三方代工廠複製。" }
+        ],
+
+        // 📄 100% 純繁體中文 正式報價單 (純化無中英混合)
+        printRef: "報價單編號:",
+        printDate: "開立日期:",
+        printValidity: "有效期限:",
+        printValidityDays: "30 個日曆天",
+        printCustomer: "客戶名稱: VVDN Technologies Ltd.",
+        printProject: "專案名稱: 線束組件專案 (SQ_VVDN_Harness_20260805)",
+        desc04814: "輸入電源線束組件",
+        desc04815: "輸出混合線束組件",
+        printThCustomerMpn: "客戶料號",
+        printThDesc: "品名描述",
+        printThPrice: "報價單價",
+        printThCurrency: "幣別",
+        printThMoq: "最低起訂量",
+        printNotesTitle: "通用商務條款與法律規範:",
+        printPreparedBy: "製表人: ___________________",
+        printSalesManager: "正崴集團 業務經理",
+        printAcceptedBy: "客戶簽核: ___________________",
+        printAuthorizedSig: "客戶授權代表簽章",
+        printNote1: "1. 本報價單自開立日起 30 個日曆天內有效。",
+        printNote2: "2. 報價基礎為印度 Tirupati 廠工廠交貨。匯率浮動若超過 ±3.0% 得啟動價格重新協商機制。",
+        printNote4: "4. 若專案取消或停產，客戶須無條件負擔特規原物料（以太網線材: 5KM / 16AWG線材: 25KM）呆料買回責任。"
+      },
+      en: {
+        pageTitle: "VVDN India Harness Project — EMS Sales Negotiation Cockpit v3.20",
+        projectTitle: "VVDN India Harness Project",
+        cockpitBadge: "v3.20 Cockpit",
+        subtitle: "EAU: 250k | CapEx: $49,362.59 USD | PID: SQ_VVDN_Harness_20260805",
+        syncBadgeSynced: "☁️ Synced",
+        syncBadgeModified: "↺ Discard Changes",
+        syncBadgeSyncing: "🔄 Syncing...",
+        syncBadgeOffline: "⚠️ Offline Mode (Local Sim)",
+        saveBtn: "Save to Cloud",
+        currencyLabel: "Currency:",
+        fxRateLabel: "FX Rate:",
+        memoBtnFull: "Internal Deal Memo",
+        memoBtnShort: "Deal Memo",
+        langBtn: "TW",
+
+        exportBtn: "📄 Export Quotation",
+
+        loadingFetchTitle: "🔄 Downloading Cloud Data...",
+        loadingFetchDesc: "Reading BU quotation & database parameters...",
+
+        loadingSaveTitle: "☁️ Saving to Google Sheet...",
+        loadingSaveDesc: "Writing parameters to cloud database...",
+
+        kpi1Title: "CapEx Break-even Period",
+        kpi1Badge0: "🟢 0 Months (NRE Paid)",
+        kpi1Desc0: "Zero CapEx exposure, NRE paid upfront",
+        kpi1BadgeGood: "🟢 Good (≤12M)",
+        kpi1DescGood: "Estimated {m} months to full CapEx payback",
+        kpi1BadgeAccept: "🟡 Acceptable (13-18M)",
+        kpi1DescAccept: "Estimated {m} months to full CapEx payback",
+        kpi1BadgeLong: "🔴 Extended (>18M)",
+        kpi1DescLong: "Payback period too long, suggest volume/price adjustment",
+
+        kpi2Title: "Consolidated Group Gross Margin %",
+        kpi2BadgeGood: "🟢 Strong (≥Floor)",
+        kpi2BadgeFair: "🟡 Moderate",
+        kpi2BadgeAlert: "🔴 Warning (<Floor)",
+        kpi2Desc: "(Total Rev - Hard Cost) / Total Rev",
+
+        kpi3Title: "Unit Contribution Margin",
+        kpi3BadgeGood: "🟢 Ample",
+        kpi3BadgeFair: "🟡 Moderate",
+        kpi3BadgeAlert: "🔴 Low",
+        kpi3Desc: "04814 CM: {cm14} | 04815 CM: {cm15}",
+
+        kpi4Title: "Initial PO CapEx Exposure",
+        kpi4BadgeNone: "🟢 Zero Risk",
+        kpi4BadgeSafe: "🟡 Controlled",
+        kpi4BadgeHigh: "🔴 High Exposure",
+        kpi4Desc: "Trial PO: 04814 ({f14} pcs) / 04815 ({f15} pcs)",
+
+        kpi5Title: "Commercial Quote Risk Score",
+        kpi5BadgeLow: "🟢 LOW RISK",
+        kpi5DescLow: "Healthy commercial terms, clear for signing",
+        kpi5BadgeMed: "🟡 MED RISK",
+        kpi5DescMed: "Recommend adding protective clauses",
+        kpi5BadgeHigh: "🔴 HIGH RISK",
+        kpi5DescHigh: "Strongly advise quote rejection or higher NRE",
+
+        cockpitTitle: "4 Core Decision Cockpit Charts",
+        cockpitSubTitle: "Cumulative Volume & Dynamic Month Index Linked Cockpit",
+        redlineCtrlText: "Corporate GM Floor Redline:",
+
+        chart1Title: "📊 Chart 1: CapEx Recovery Period Comparison",
+        chart1Unit: "Payback Months",
+        chart1Desc: "Comparing NRE Upfront (Option 1), Amortization (Option 2), and Tiered Pricing (Option 3) payback timeline",
+        chart1XAxisTitle: "Months to Full Recovery",
+        chart1Labels: ['Option 1 (NRE Upfront)', 'Option 2 (Amortization)', 'Option 3 (Tiered Pricing)'],
+
+        chart2Title: "📊 Chart 2: Selling Price & Profit Margin Breakdown",
+        chart2Desc: "BOM Material Cost + MVA Processing + Scrap + CapEx Amortization + Sales Profit Margin",
+        chart2Datasets: ['BOM Material Cost', 'MVA Processing Fee', 'CapEx Amortization Fee', 'Sales Profit Margin'],
+
+        chart3ATitle: "📊 Chart 3A: Cumulative Volume (Month M) vs Group GM % Chart",
+        chart3AUnit: "[Single Y-Axis] Gross Margin (%)",
+        chart3ADesc: "X-axis linked to monthly pull rate to calculate Month M, green line is Group GM %, red dashed is Floor",
+        chart3AYAxisTitle: "Gross Margin (%)",
+        chart3ADatasetLabel: "Group GM % (%)",
+        chart3ARedlineLabel: "GM Floor Redline",
+
+        chart3BTitle: "📊 Chart 3B: Cumulative Volume (Month M) vs CapEx 100% Recovery %",
+        chart3BUnit: "[Single Y-Axis] CapEx Recovery (%)",
+        chart3BDesc: "Blue dashed line extends dynamically to 100% full recovery milestone showing required months & volume",
+        chart3BYAxisTitle: "CapEx Recovery (%)",
+        chart3BDatasetLabel: "CapEx Recovery Rate (%)",
+
+        chart4Title: "📊 Chart 4: Multi-MPN Revenue & Profit Split Matrix",
+        chart4Unit: "04815 vs 04814 Dynamic Volume Split",
+        chart4Desc: "Illustrating dynamic revenue & pocket profit ($) share breakdown between products",
+        chart4Labels: ['Dynamic Revenue Share (%)', 'Dynamic Profit Share (%)'],
+        c4Tag15: "Revenue Driver",
+        c4Desc15: "High-volume revenue generator providing baseline cash flow.",
+        c4Tag14: "High Margin Shield",
+        c4Desc14: "Low-volume high-margin product designed to compensate for 04815 margin concessions.",
+        c4LblRev: "Annualized Rev:",
+        c4LblProf: "Pocket Profit:",
+
+        totalPullTitle: "Total Project Monthly Pull Dashboard",
+        pcsPerMonth: "pcs/mo",
+        pcsPerBatch: "pcs/batch",
+        pcsUnit: "pcs",
+        liabilityTitle: "Common Commercial Policy & Defense Clauses",
+        liabilityDesc: "Quote Validity: 30 Days | FX Tolerance: ±3.0% | Incoterms: EXW Tirupati | Mandatory Material Liability",
+
+        lblTitle04814: "04814 Commercial Variable Setup",
+        lblTitle04815: "04815 Commercial Variable Setup",
+
+        btnResetDefault: "Reset Default",
+        tabOpt1: "Option 1 (NRE)",
+        tabOpt2: "Option 2 (Amort)",
+        tabOpt3: "Option 3 (Tiered)",
+
+        lblMonthlyPull: "Estimated Monthly Pull",
+        lblMargin: "Sales Margin Rate (%)",
+        lblMoq: "Minimum Order Quantity (MOQ)",
+        lblTargetVol: "Amortization Target Vol",
+        lblFirstPO: "Binding First PO Vol",
+        lblTier1Qty: "Tier 1 High-Price Vol Qty",
+        lblTier1Prem: "Tier 1 Premium Rate ($/pc)",
+
+        resFinalPrice: "Final Quoted Price",
+        resPaymentMode: "CapEx Payment Mode",
+        resNrePaidPrefix: "NRE ",
+        resNrePaidSuffix: " Upfront Paid",
+        resAmortPerPc: "CapEx Amort / pc",
+        resAmortPrice: "Amortized Price",
+        resRiskGap: "First PO Risk Gap:",
+        resTier1Price: "Tier 1 Unit Price",
+        resTier2Price: "Tier 2 Standard Price",
+
+        lblCostStructureTitle14: "MPN: 705-1-04814 Baseline Factory Cost Breakdown",
+        lblCostStructureTitle15: "MPN: 705-1-04815 Baseline Factory Cost Breakdown",
+        lblFactoryPrice: "Factory Price:",
+        lblBomCost: "BOM Material Cost",
+        lblBomNote: "✓ Includes 2.75%~11% China-to-India Import Tariffs",
+        lblMvaCost: "MVA Processing & Profit",
+        lblMvaNote: "✓ Includes Freight & Logistics to Tirupati Facility",
+        lblCapexCost: "Dedicated Equipment CapEx",
+        lblCapexNote14: "Includes 2 Crimp Machines & Applicators (Customer Asset)",
+        lblCapexNote15: "Includes 7 Crimp Machines & Applicators (Customer Asset)",
+
+        dealMemoModalTitle: "🛡️ Internal Deal Memo - 10 Contract Negotiation Guidelines",
+        dealMemoItems: [
+          { t: "1. CapEx Asset Ownership Clause", d: "Equipment remains Foxlink property until 100% amortized or NRE paid in full. Customer may not relocate equipment." },
+          { t: "2. Volume Commitment & Take-or-Pay", d: "If volume falls below 80% EAU (<10k pcs/mo), Foxlink reserves rights to adjust unit price and claim residual CapEx." },
+          { t: "3. Early Termination True-up Settlement", d: "If project terminates early or fails target volume in 24 months, customer must pay unamortized CapEx within 30 days." },
+          { t: "4. Material Liability & Inventory Buyback", d: "MOQ raw materials (Cable 16AWG: 25KM, Ethernet: 5KM) excess/obsolete stock must be repurchased by customer at cost." },
+          { t: "5. Changeover Surcharge for Sub-MOQ POs", d: "POs below MOQ threshold incur a $200 (04814) / $500 (04815) line changeover fee per run." },
+          { t: "6. Currency & FX Fluctuation Protection Clause", d: "Pricing benchmarked against USD/INR baseline. Quarterly FX shifts > ±3.0% automatically trigger unit price adjustments." },
+          { t: "7. Small Order Penalty & Lead Time Extension", d: "Small orders below MOQ incur changeover fees and lead times are extended to 8+ weeks." },
+          { t: "8. Customer-Furnished Material (CFM) Warranty Disclaimer", d: "Foxlink disclaims defect liability caused by customer-specified or customer-supplied connectors/wires." },
+          { t: "9. Acceptance Period & Net 30 Payment Terms", d: "Goods deemed accepted unless written objection received within 7 days of arrival. Standard Net 30 terms apply." },
+          { t: "10. Intellectual Property & Tooling Confidentiality", d: "Harness tooling design & manufacturing process patents belong exclusively to Foxlink; transfer to 3rd parties prohibited." }
+        ],
+
+        // 📄 100% Pure English Formal Quotation
+        printRef: "QUOTATION REF:",
+        printDate: "DATE:",
+        printValidity: "VALIDITY:",
+        printValidityDays: "30 Calendar Days",
+        printCustomer: "CUSTOMER: VVDN Technologies Ltd.",
+        printProject: "PROJECT: Harness Assembly Project (SQ_VVDN_Harness_20260805)",
+        desc04814: "Input Power Cable Assembly",
+        desc04815: "Output Hybrid Cable Assembly",
+        printThCustomerMpn: "Customer MPN",
+        printThDesc: "Description",
+        printThPrice: "Quoted Price",
+        printThCurrency: "Currency",
+        printThMoq: "PO MOQ",
+        printNotesTitle: "General Commercial Notes & Legal Terms:",
+        printPreparedBy: "Prepared By: ___________________",
+        printSalesManager: "Sales Manager, Foxlink",
+        printAcceptedBy: "Accepted By: ___________________",
+        printAuthorizedSig: "Authorized Signature, Customer",
+        printNote1: "1. This quotation is valid for 30 calendar days from the date of issue.",
+        printNote2: "2. Prices are based on EXW Tirupati, Andhra Pradesh. FX rate fluctuation exceeding ±3.0% may trigger price renegotiation.",
+        printNote4: "4. Customer agrees to financial liability for raw material MOQs (Cable 16AWG: 25KM; Ethernet: 5KM) in the event of project cancellation or EOL."
+      }
+    };
+
+    function applyLanguageDOM() {
+      const dict = I18N[currentLang];
+
+      document.getElementById('htmlPageTitle').innerText = dict.pageTitle;
+      document.getElementById('txtTitleSpan').innerText = dict.projectTitle;
+      document.getElementById('txtCockpitBadge').innerText = dict.cockpitBadge;
+      document.getElementById('txtSubtitle').innerText = dict.subtitle;
+
+      document.getElementById('lblSaveBtn').innerText = dict.saveBtn;
+      document.getElementById('lblCurrencyTag').innerText = dict.currencyLabel;
+      document.getElementById('lblFxRateTag').innerText = dict.fxRateLabel;
+      document.getElementById('lblMemoBtnFull').innerText = dict.memoBtnFull;
+      document.getElementById('lblMemoBtnShort').innerText = dict.memoBtnShort;
+      document.getElementById('lblLangBtn').innerText = dict.langBtn;
+      document.getElementById('lblExportText').innerText = dict.exportBtn;
+
+      document.getElementById('overlay-title').innerText = dict.loadingFetchTitle;
+      document.getElementById('overlay-desc').innerText = dict.loadingFetchDesc;
+
+      document.getElementById('lblKpi1Title').innerText = dict.kpi1Title;
+      document.getElementById('lblKpi2Title').innerText = dict.kpi2Title;
+      document.getElementById('lblKpi3Title').innerText = dict.kpi3Title;
+      document.getElementById('lblKpi4Title').innerText = dict.kpi4Title;
+      document.getElementById('lblKpi5Title').innerText = dict.kpi5Title;
+
+      document.getElementById('lblCockpitTitleText').innerText = dict.cockpitTitle;
+      document.getElementById('lblCockpitSubTitle').innerText = dict.cockpitSubTitle;
+      document.getElementById('lblRedlineCtrlText').innerText = dict.redlineCtrlText;
+      document.getElementById('lblChart1Title').innerText = dict.chart1Title;
+      document.getElementById('lblChart1Unit').innerText = dict.chart1Unit;
+      document.getElementById('lblChart1Desc').innerText = dict.chart1Desc;
+      document.getElementById('lblChart2Title').innerText = dict.chart2Title;
+      document.getElementById('lblChart2Desc').innerText = dict.chart2Desc;
+      document.getElementById('lblChart3ATitle').innerText = dict.chart3ATitle;
+      document.getElementById('lblChart3AUnit').innerText = dict.chart3AUnit;
+      document.getElementById('lblChart3ADesc').innerText = dict.chart3ADesc;
+      document.getElementById('lblChart3BTitle').innerText = dict.chart3BTitle;
+      document.getElementById('lblChart3BUnit').innerText = dict.chart3BUnit;
+      document.getElementById('lblChart3BDesc').innerText = dict.chart3BDesc;
+      document.getElementById('lblChart4Title').innerText = dict.chart4Title;
+      document.getElementById('lblChart4Unit').innerText = dict.chart4Unit;
+      document.getElementById('lblChart4Desc').innerText = dict.chart4Desc;
+
+      // Chart 4 Boss Banner Dynamic Translation
+      document.getElementById('c4-tag-15').innerText = dict.c4Tag15;
+      document.getElementById('c4-desc-15').innerText = dict.c4Desc15;
+      document.getElementById('c4-lbl-rev-15').innerText = dict.c4LblRev;
+      document.getElementById('c4-lbl-prof-15').innerText = dict.c4LblProf;
+
+      document.getElementById('c4-tag-14').innerText = dict.c4Tag14;
+      document.getElementById('c4-desc-14').innerText = dict.c4Desc14;
+      document.getElementById('c4-lbl-rev-14').innerText = dict.c4LblRev;
+      document.getElementById('c4-lbl-prof-14').innerText = dict.c4LblProf;
+
+      document.getElementById('lblTotalPullTitle').innerText = dict.totalPullTitle;
+      document.getElementById('lblPullUnitTotal').innerText = dict.pcsPerMonth;
+      document.getElementById('lblPullUnit14').innerText = dict.pcsUnit;
+      document.getElementById('lblPullUnit15').innerText = dict.pcsUnit;
+      document.getElementById('lblLiabilityTitle').innerText = dict.liabilityTitle;
+      document.getElementById('lblLiabilityDesc').innerText = dict.liabilityDesc;
+
+      document.getElementById('lblTitle04814').innerText = dict.lblTitle04814;
+      document.getElementById('lblTitle04815').innerText = dict.lblTitle04815;
+
+      document.getElementById('lblSave14Text').innerText = dict.saveBtn;
+      document.getElementById('lblSave15Text').innerText = dict.saveBtn;
+      document.getElementById('btnReset14Text').innerText = dict.btnResetDefault;
+      document.getElementById('btnReset15Text').innerText = dict.btnResetDefault;
+
+      document.getElementById('tab-04814-1').innerText = dict.tabOpt1;
+      document.getElementById('tab-04814-2').innerText = dict.tabOpt2;
+      document.getElementById('tab-04814-3').innerText = dict.tabOpt3;
+      document.getElementById('tab-04815-1').innerText = dict.tabOpt1;
+      document.getElementById('tab-04815-2').innerText = dict.tabOpt2;
+      document.getElementById('tab-04815-3').innerText = dict.tabOpt3;
+
+      document.getElementById('lblPull14').innerText = '04814 ' + dict.lblMonthlyPull;
+      document.getElementById('lblPull15').innerText = '04815 ' + dict.lblMonthlyPull;
+      document.getElementById('lblMargin14').innerText = dict.lblMargin;
+      document.getElementById('lblMoq14').innerText = dict.lblMoq;
+      document.getElementById('lblTarget14').innerText = dict.lblTargetVol;
+      document.getElementById('lblFirst14').innerText = dict.lblFirstPO;
+      document.getElementById('lblTier1Q14').innerText = dict.lblTier1Qty;
+      document.getElementById('lblTier1P14').innerText = dict.lblTier1Prem;
+
+      document.getElementById('lblMargin15').innerText = dict.lblMargin;
+      document.getElementById('lblMoq15').innerText = dict.lblMoq;
+      document.getElementById('lblTarget15').innerText = dict.lblTargetVol;
+      document.getElementById('lblFirst15').innerText = dict.lblFirstPO;
+      document.getElementById('lblTier1Q15').innerText = dict.lblTier1Qty;
+      document.getElementById('lblTier1P15').innerText = dict.lblTier1Prem;
+
+      document.getElementById('lblResPrice14_1').innerText = dict.resFinalPrice;
+      document.getElementById('lblResPay14_1').innerText = dict.resPaymentMode;
+      document.getElementById('lblResAmort14_2').innerText = dict.resAmortPerPc;
+      document.getElementById('lblResPrice14_2').innerText = dict.resAmortPrice;
+      document.getElementById('lblResRisk14_2').innerText = dict.resRiskGap;
+      document.getElementById('lblResT1Price14_3').innerText = dict.resTier1Price;
+      document.getElementById('lblResT2Price14_3').innerText = dict.resTier2Price;
+
+      document.getElementById('lblResPrice15_1').innerText = dict.resFinalPrice;
+      document.getElementById('lblResPay15_1').innerText = dict.resPaymentMode;
+      document.getElementById('lblResAmort15_2').innerText = dict.resAmortPerPc;
+      document.getElementById('lblResPrice15_2').innerText = dict.resAmortPrice;
+      document.getElementById('lblResRisk15_2').innerText = dict.resRiskGap;
+      document.getElementById('lblResT1Price15_3').innerText = dict.resTier1Price;
+      document.getElementById('lblResT2Price15_3').innerText = dict.resTier2Price;
+
+      document.getElementById('lblCostStructureTitle14').innerText = dict.lblCostStructureTitle14;
+      document.getElementById('lblCostStructureTitle15').innerText = dict.lblCostStructureTitle15;
+      document.getElementById('lblBomTitle14').innerText = dict.lblBomCost;
+      document.getElementById('lblBomTitle15').innerText = dict.lblBomCost;
+      document.getElementById('lblBomNote14').innerText = dict.lblBomNote;
+      document.getElementById('lblBomNote15').innerText = dict.lblBomNote;
+      document.getElementById('lblMvaTitle14').innerText = dict.lblMvaCost;
+      document.getElementById('lblMvaTitle15').innerText = dict.lblMvaCost;
+      document.getElementById('lblMvaNote14').innerText = dict.lblMvaNote;
+      document.getElementById('lblMvaNote15').innerText = dict.lblMvaNote;
+      document.getElementById('lblCapexTitle14').innerText = dict.lblCapexCost;
+      document.getElementById('lblCapexTitle15').innerText = dict.lblCapexCost;
+      document.getElementById('lblCapexNote14').innerText = dict.lblCapexNote14;
+      document.getElementById('lblCapexNote15').innerText = dict.lblCapexNote15;
+
+      document.getElementById('dealMemoModalTitle').innerText = dict.dealMemoModalTitle;
+      
+      const modalList = document.getElementById('dealMemoModalList');
+      modalList.innerHTML = dict.dealMemoItems.map(item => `
+        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 shadow-sm">
+          <h4 class="font-bold text-blue-300 mb-1.5 text-base">${item.t}</h4>
+          <p class="text-slate-200 text-sm leading-relaxed">${item.d}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('lblPrintRef').innerText = dict.printRef;
+      document.getElementById('lblPrintDate').innerText = dict.printDate;
+      document.getElementById('lblPrintValidity').innerText = dict.printValidity;
+      document.getElementById('print-validity').innerText = dict.printValidityDays;
+      
+      const custText = dict.printCustomer;
+      const projText = dict.printProject;
+      document.getElementById('lblPrintCustomer').innerHTML = custText.includes(':') ? `<strong>${custText.split(':')[0]}:</strong> ${custText.split(':')[1]}` : custText;
+      document.getElementById('lblPrintProject').innerHTML = projText.includes(':') ? `<strong>${projText.split(':')[0]}:</strong> ${projText.split(':')[1]}` : projText;
+      
+      document.getElementById('lblThCustomerMpn').innerText = dict.printThCustomerMpn;
+      document.getElementById('lblThDesc').innerText = dict.printThDesc;
+      document.getElementById('lblThPrice').innerText = dict.printThPrice;
+      document.getElementById('lblThCurrency').innerText = dict.printThCurrency;
+      document.getElementById('lblThMoq').innerText = dict.printThMoq;
+      document.getElementById('lblPrintNotesTitle').innerText = dict.printNotesTitle;
+
+      document.getElementById('lblPrintPreparedBy').innerText = dict.printPreparedBy;
+      document.getElementById('lblPrintSalesManager').innerText = dict.printSalesManager;
+      document.getElementById('lblPrintAcceptedBy').innerText = dict.printAcceptedBy;
+      document.getElementById('lblPrintAuthorizedSig').innerText = dict.printAuthorizedSig;
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'zh' ? 'en' : 'zh';
+      applyLanguageDOM();
+      calculateAll();
+    }
+
+    function showLoadingOverlay(title, desc) {
+      const dict = I18N[currentLang];
+      const overlay = document.getElementById("global-loading-overlay");
+      const tEl = document.getElementById("overlay-title");
+      const dEl = document.getElementById("overlay-desc");
+      if (tEl) tEl.innerText = title || (dict ? dict.loadingFetchTitle : "🔄 正在從雲端下載數據...");
+      if (dEl) dEl.innerText = desc || (dict ? dict.loadingFetchDesc : "正在讀取 BU 報價與數據庫參數...");
+      if (overlay) {
+        overlay.style.display = "flex";
+        overlay.style.opacity = "1";
+      }
+    }
+
+    function hideLoadingOverlay() {
+      const overlay = document.getElementById("global-loading-overlay");
+      if (overlay) {
+        overlay.style.opacity = "0";
+        setTimeout(() => {
+          overlay.style.display = "none";
+        }, 300);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      applyLanguageDOM();
+      fetchLiveFxRates();
+      fetchBackendData();
+    });
+
+    // ⚡ 100% 純條件訊號控制 Fetch 引擎 (完全移除計時器/AbortController！永遠等待 GAS 數據訊號返回)
+    function fetchBackendData() {
+      const dict = I18N[currentLang];
+      showLoadingOverlay(dict ? dict.loadingFetchTitle : "🔄 正在從雲端下載數據...", dict ? dict.loadingFetchDesc : "正在讀取 BU 報價與數據庫參數...");
+      updateSyncBadge(dict ? dict.syncBadgeSyncing : "🔄 同步中...", "text-amber-300 border-amber-500/40 bg-amber-500/10");
+      
+      const url = `${GAS_WEBAPP_URL}?pidKey=${PID_KEY}&t=${Date.now()}`;
+
+      fetch(url)
+        .then(async res => {
+          const text = await res.text();
+          try {
+            return JSON.parse(text);
+          } catch (parseErr) {
+            console.warn("GAS raw response parse warning:", text.substring(0, 120));
+            return null;
+          }
+        })
+        .then(data => {
+          hideLoadingOverlay();
+          
+          if (data && data.status === "success") {
+            if (data.cost && Array.isArray(data.cost)) {
+              data.cost.forEach(c => {
+                const key = getVal(c, 'itemKey', 'Item_Key');
+                const bomCost = getVal(c, 'bomCost', 'BOM_Cost');
+                const mvaCost = getVal(c, 'mvaCost', 'MVA_Cost');
+                const factoryUnitPrice = getVal(c, 'factoryUnitPrice', 'Factory_Unit_Price');
+                const capexAmount = getVal(c, 'capexAmount', 'CapEx_Amount');
+                const eauVal = getVal(c, 'eau', 'EAU');
+
+                if (key === '705-1-04814' && DATA['04814']) {
+                  if (factoryUnitPrice) DATA['04814'].cost = parseFloat(factoryUnitPrice);
+                  if (bomCost) DATA['04814'].bom = parseFloat(bomCost);
+                  if (mvaCost) DATA['04814'].mva = parseFloat(mvaCost);
+                  if (capexAmount) DATA['04814'].capex = parseFloat(capexAmount);
+                  if (eauVal) DATA['04814'].eau = parseFloat(eauVal);
+                } else if (key === '705-1-04815' && DATA['04815']) {
+                  if (factoryUnitPrice) DATA['04815'].cost = parseFloat(factoryUnitPrice);
+                  if (bomCost) DATA['04815'].bom = parseFloat(bomCost);
+                  if (mvaCost) DATA['04815'].mva = parseFloat(mvaCost);
+                  if (capexAmount) DATA['04815'].capex = parseFloat(capexAmount);
+                  if (eauVal) DATA['04815'].eau = parseFloat(eauVal);
+                }
+              });
+            }
+
+            if (data.aiBaselineParams && Array.isArray(data.aiBaselineParams) && data.aiBaselineParams.length > 0) {
+              aiBaselineState = JSON.parse(JSON.stringify(data.aiBaselineParams));
+            }
+
+            if (data.params) {
+              try {
+                lastSyncedState = JSON.parse(JSON.stringify(data.params));
+                syncStateToUI(data.params);
+              } catch (syncErr) {
+                console.warn("UI 反填警告 (不影響數據連線成功狀態):", syncErr);
+              }
+            }
+
+            updateSyncBadge(dict ? dict.syncBadgeSynced : "☁️ 已同步", "text-emerald-400 border-emerald-500/40 bg-emerald-500/10");
+          } else {
+            updateSyncBadge(dict ? dict.syncBadgeOffline : "⚠️ 離線預設模式", "text-amber-300 border-amber-500/40 bg-amber-500/10");
+          }
+          calculateAll();
+        })
+        .catch(err => {
+          hideLoadingOverlay();
+          console.warn("Fetch GAS error, fallback to local defaults:", err);
+          updateSyncBadge(dict ? dict.syncBadgeOffline : "⚠️ 離線預設模式", "text-amber-300 border-amber-500/40 bg-amber-500/10");
+          calculateAll();
+        });
+    }
+
+    function syncStateToUI(params) {
+      if (!params || !Array.isArray(params) || params.length === 0) return;
+
+      const p14 = params.find(p => getVal(p, 'itemKey', 'Item_Key') === '705-1-04814') || params[0];
+      const p15 = params.find(p => getVal(p, 'itemKey', 'Item_Key') === '705-1-04815') || params[1] || params[0];
+
+      if (!p14 || !p15) return;
+
+      const pull14Val = getVal(p14, 'monthlyPull', 'globalMonthlyPull', 'Global_Monthly_Pull');
+      if (pull14Val !== undefined && pull14Val !== null) {
+        const el = document.getElementById('pull-04814');
+        if (el) el.value = Math.round(parseFloat(pull14Val));
+      }
+
+      const pull15Val = getVal(p15, 'monthlyPull', 'globalMonthlyPull', 'Global_Monthly_Pull');
+      if (pull15Val !== undefined && pull15Val !== null) {
+        const el = document.getElementById('pull-04815');
+        if (el) el.value = Math.round(parseFloat(pull15Val));
+      }
+
+      const displayCurr = getVal(p14, 'displayCurrency', 'Display_Currency');
+      if (displayCurr) {
+        const el = document.getElementById('selCurrency');
+        if (el) el.value = displayCurr;
+      }
+
+      const displayFx = getVal(p14, 'displayFxRate', 'Display_FX_Rate');
+      if (displayFx) {
+        const el = document.getElementById('inpFxRate');
+        if (el) el.value = displayFx;
+      }
+
+      // 04814 Inputs
+      const m14_1 = getVal(p14, 'opt1_salesMarginPct', 'Opt1_Sales_Margin_Pct');
+      if (m14_1 !== undefined && m14_1 !== null) {
+        const num = parseFloat(m14_1);
+        const pct = num < 1 ? num * 100 : num;
+        const el = document.getElementById('margin-04814-1');
+        if (el) el.value = pct.toFixed(1);
+      }
+      const moq14_1 = getVal(p14, 'opt1_poMoqThreshold', 'Opt1_PO_MOQ_Threshold');
+      if (moq14_1 !== undefined && moq14_1 !== null) {
+        const el = document.getElementById('moq-04814-1');
+        if (el) el.value = moq14_1;
+      }
+      const amort14_2 = getVal(p14, 'opt2_amortTargetVol', 'Opt2_Amort_Target_Vol');
+      if (amort14_2 !== undefined && amort14_2 !== null) {
+        const el = document.getElementById('amortTarget-04814-2');
+        if (el) el.value = amort14_2;
+      }
+      const first14_2 = getVal(p14, 'opt2_firstPoBinding', 'Opt2_First_PO_Binding');
+      if (first14_2 !== undefined && first14_2 !== null) {
+        const el = document.getElementById('firstPO-04814-2');
+        if (el) el.value = first14_2;
+      }
+      const tier1q14_3 = getVal(p14, 'opt3_tier1QtyThresh', 'Opt3_Tier1_Qty_Thresh');
+      if (tier1q14_3 !== undefined && tier1q14_3 !== null) {
+        const el = document.getElementById('tier1Qty-04814-3');
+        if (el) el.value = tier1q14_3;
+      }
+      const tier1p14_3 = getVal(p14, 'opt3_tier1Premium', 'Opt3_Tier1_Premium');
+      if (tier1p14_3 !== undefined && tier1p14_3 !== null) {
+        const el = document.getElementById('tier1Premium-04814-3');
+        if (el) el.value = tier1p14_3;
+      }
+
+      // 04815 Inputs
+      const m15_1 = getVal(p15, 'opt1_salesMarginPct', 'Opt1_Sales_Margin_Pct');
+      if (m15_1 !== undefined && m15_1 !== null) {
+        const num = parseFloat(m15_1);
+        const pct = num < 1 ? num * 100 : num;
+        const el = document.getElementById('margin-04815-1');
+        if (el) el.value = pct.toFixed(1);
+      }
+      const moq15_1 = getVal(p15, 'opt1_poMoqThreshold', 'Opt1_PO_MOQ_Threshold');
+      if (moq15_1 !== undefined && moq15_1 !== null) {
+        const el = document.getElementById('moq-04815-1');
+        if (el) el.value = moq15_1;
+      }
+      const amort15_2 = getVal(p15, 'opt2_amortTargetVol', 'Opt2_Amort_Target_Vol');
+      if (amort15_2 !== undefined && amort15_2 !== null) {
+        const el = document.getElementById('amortTarget-04815-2');
+        if (el) el.value = amort15_2;
+      }
+      const first15_2 = getVal(p15, 'opt2_firstPoBinding', 'Opt2_First_PO_Binding');
+      if (first15_2 !== undefined && first15_2 !== null) {
+        const el = document.getElementById('firstPO-04815-2');
+        if (el) el.value = first15_2;
+      }
+      const tier1q15_3 = getVal(p15, 'opt3_tier1QtyThresh', 'Opt3_Tier1_Qty_Thresh');
+      if (tier1q15_3 !== undefined && tier1q15_3 !== null) {
+        const el = document.getElementById('tier1Qty-04815-3');
+        if (el) el.value = tier1q15_3;
+      }
+      const tier1p15_3 = getVal(p15, 'opt3_tier1Premium', 'Opt3_Tier1_Premium');
+      if (tier1p15_3 !== undefined && tier1p15_3 !== null) {
+        const el = document.getElementById('tier1Premium-04815-3');
+        if (el) el.value = tier1p15_3;
+      }
+
+      const tab14 = getVal(p14, 'activeOptionTab', 'Active_Option_Tab');
+      const tab15 = getVal(p15, 'activeOptionTab', 'Active_Option_Tab');
+      if (tab14) switchTab('04814', parseInt(tab14), false);
+      if (tab15) switchTab('04815', parseInt(tab15), false);
+    }
+
+    let currentSyncState = "synced";
+
+    function updateSyncBadge(text, cls) {
+      const b = document.getElementById("sync-badge");
+      if (b) {
+        b.innerText = text;
+        b.className = `text-xs px-3 py-1.5 rounded-lg border flex items-center gap-1 font-semibold whitespace-nowrap cursor-pointer hover:opacity-80 transition shadow-sm ${cls}`;
+        
+        if (text.includes("取消") || text.includes("變更") || text.includes("離線") || text.includes("Discard") || text.includes("Offline")) {
+          currentSyncState = "modified";
+          b.title = currentLang === 'zh' ? "點擊放棄當前本機修改，0秒還原至打開頁面時的雲端數據狀態" : "Click to discard local modifications and restore cloud loaded state instantly";
+        } else {
+          currentSyncState = "synced";
+          b.title = currentLang === 'zh' ? "當前資料已與雲端同步" : "Current parameters synced with cloud";
+        }
+      }
+    }
+
+    function handleSyncBadgeClick() {
+      if (currentSyncState === "modified") {
+        discardLocalEdits();
+      } else {
+        fetchBackendData();
+      }
+    }
+
+    function discardLocalEdits() {
+      const dict = I18N[currentLang];
+      if (lastSyncedState) {
+        syncStateToUI(lastSyncedState);
+        calculateAll();
+        updateSyncBadge(dict ? dict.syncBadgeSynced : "☁️ 已同步", "text-emerald-400 border-emerald-500/40 bg-emerald-500/10");
+      } else {
+        fetchBackendData();
+      }
+    }
+
+    function switchTab(mpn, tabIndex, triggerSave = false) {
+      activeTabMap[mpn] = tabIndex;
+      [1, 2, 3].forEach(i => {
+        const btn = document.getElementById(`tab-${mpn}-${i}`);
+        const content = document.getElementById(`content-${mpn}-${i}`);
+        if (i === tabIndex) {
+          btn.className = 'py-2.5 rounded-lg transition tab-btn-active';
+          content.classList.remove('hidden');
+        } else {
+          btn.className = 'py-2.5 rounded-lg transition tab-btn-inactive border border-transparent';
+          content.classList.add('hidden');
+        }
+      });
+      calculateAll();
+      updateSyncBadge(I18N[currentLang].syncBadgeModified, "text-amber-300 border-amber-500/50 bg-amber-500/20 hover:bg-amber-500/30");
+    }
+
+    function handleCurrencyChange(autoApplyLiveRate = true) {
+      const selCurr = document.getElementById('selCurrency').value;
+      if (autoApplyLiveRate && liveFxRates[selCurr] !== undefined) {
+        document.getElementById('inpFxRate').value = liveFxRates[selCurr].toFixed(4);
+      }
+      calculateAll();
+      updateSyncBadge(I18N[currentLang].syncBadgeModified, "text-amber-300 border-amber-500/50 bg-amber-500/20 hover:bg-amber-500/30");
+    }
+
+    function handleRedlineChange() {
+      const val = parseFloat(document.getElementById('inpRedlineGM').value) || 10.0;
+      const elA = document.getElementById('txtRedlineVal3A');
+      if (elA) elA.innerText = val.toFixed(1) + '%';
+      calculateAll();
+      updateSyncBadge(I18N[currentLang].syncBadgeModified, "text-amber-300 border-amber-500/50 bg-amber-500/20 hover:bg-amber-500/30");
+    }
+
+    function resetMPNDefault(mpn) {
+      let bItem = null;
+      if (aiBaselineState && Array.isArray(aiBaselineState)) {
+        bItem = aiBaselineState.find(b => {
+          const k = getVal(b, 'itemKey', 'Item_Key');
+          return k && k.indexOf(mpn) !== -1;
+        });
+      }
+
+      if (mpn === '04814') {
+        const pull = bItem ? getVal(bItem, 'monthlyPull', 'globalMonthlyPull', 'Global_Monthly_Pull') : 2000;
+        const margin = bItem ? getVal(bItem, 'opt1_salesMarginPct', 'Opt1_Sales_Margin_Pct') : 0.05;
+        const moq = bItem ? getVal(bItem, 'opt1_poMoqThreshold', 'Opt1_PO_MOQ_Threshold') : 2000;
+        const amortTarget = bItem ? getVal(bItem, 'opt2_amortTargetVol', 'Opt2_Amort_Target_Vol') : 50000;
+        const firstPO = bItem ? getVal(bItem, 'opt2_firstPoBinding', 'Opt2_First_PO_Binding') : 2000;
+        const tier1Qty = bItem ? getVal(bItem, 'opt3_tier1QtyThresh', 'Opt3_Tier1_Qty_Thresh') : 10000;
+        const tier1Prem = bItem ? getVal(bItem, 'opt3_tier1Premium', 'Opt3_Tier1_Premium') : 0.50;
+
+        document.getElementById('pull-04814').value = pull !== undefined ? Math.round(parseFloat(pull)) : 2000;
+        const marginPct = margin !== undefined ? (parseFloat(margin) < 1 ? parseFloat(margin) * 100 : parseFloat(margin)) : 5.0;
+        document.getElementById('margin-04814-1').value = marginPct.toFixed(1);
+        document.getElementById('moq-04814-1').value = moq !== undefined ? moq : 2000;
+        document.getElementById('amortTarget-04814-2').value = amortTarget !== undefined ? amortTarget : 50000;
+        document.getElementById('firstPO-04814-2').value = firstPO !== undefined ? firstPO : 2000;
+        document.getElementById('tier1Qty-04814-3').value = tier1Qty !== undefined ? tier1Qty : 10000;
+        document.getElementById('tier1Premium-04814-3').value = tier1Prem !== undefined ? tier1Prem : 0.50;
+
+        ['pull-04814', 'margin-04814-1', 'moq-04814-1', 'amortTarget-04814-2', 'firstPO-04814-2', 'tier1Qty-04814-3', 'tier1Premium-04814-3'].forEach(id => {
+          handleSimSliderDrag(document.getElementById(id));
+        });
+        switchTab('04814', 1, false);
+      } else if (mpn === '04815') {
+        const pull = bItem ? getVal(bItem, 'monthlyPull', 'globalMonthlyPull', 'Global_Monthly_Pull') : 8000;
+        const margin = bItem ? getVal(bItem, 'opt1_salesMarginPct', 'Opt1_Sales_Margin_Pct') : 0.05;
+        const moq = bItem ? getVal(bItem, 'opt1_poMoqThreshold', 'Opt1_PO_MOQ_Threshold') : 5000;
+        const amortTarget = bItem ? getVal(bItem, 'opt2_amortTargetVol', 'Opt2_Amort_Target_Vol') : 200000;
+        const firstPO = bItem ? getVal(bItem, 'opt2_firstPoBinding', 'Opt2_First_PO_Binding') : 8000;
+        const tier1Qty = bItem ? getVal(bItem, 'opt3_tier1QtyThresh', 'Opt3_Tier1_Qty_Thresh') : 40000;
+        const tier1Prem = bItem ? getVal(bItem, 'opt3_tier1Premium', 'Opt3_Tier1_Premium') : 0.50;
+
+        document.getElementById('pull-04815').value = pull !== undefined ? Math.round(parseFloat(pull)) : 8000;
+        const marginPct = margin !== undefined ? (parseFloat(margin) < 1 ? parseFloat(margin) * 100 : parseFloat(margin)) : 5.0;
+        document.getElementById('margin-04815-1').value = marginPct.toFixed(1);
+        document.getElementById('moq-04815-1').value = moq !== undefined ? moq : 5000;
+        document.getElementById('amortTarget-04815-2').value = amortTarget !== undefined ? amortTarget : 200000;
+        document.getElementById('firstPO-04815-2').value = firstPO !== undefined ? firstPO : 8000;
+        document.getElementById('tier1Qty-04815-3').value = tier1Qty !== undefined ? tier1Qty : 40000;
+        document.getElementById('tier1Premium-04815-3').value = tier1Prem !== undefined ? tier1Prem : 0.50;
+
+        ['pull-04815', 'margin-04815-1', 'moq-04815-1', 'amortTarget-04815-2', 'firstPO-04815-2', 'tier1Qty-04815-3', 'tier1Premium-04815-3'].forEach(id => {
+          handleSimSliderDrag(document.getElementById(id));
+        });
+        switchTab('04815', 1, false);
+      }
+
+      calculateAll();
+      updateSyncBadge(I18N[currentLang].syncBadgeModified, "text-amber-300 border-amber-500/50 bg-amber-500/20 hover:bg-amber-500/30");
+    }
+
+    function handleSimSliderDrag(el) {
+      if (!el || !el.id) return;
+      const val = parseFloat(el.value);
+      const dict = I18N[currentLang];
+
+      if (el.id === 'pull-04814') {
+        document.getElementById('valPull-04814').innerText = `${val.toLocaleString()} ${dict.pcsPerMonth}`;
+        const pull15Val = parseFloat(document.getElementById('pull-04815').value) || 8000;
+        document.getElementById('valTotalPull').innerText = (val + pull15Val).toLocaleString();
+        document.getElementById('valPullSummary14').innerText = val.toLocaleString();
+      } else if (el.id === 'pull-04815') {
+        document.getElementById('valPull-04815').innerText = `${val.toLocaleString()} ${dict.pcsPerMonth}`;
+        const pull14Val = parseFloat(document.getElementById('pull-04814').value) || 2000;
+        document.getElementById('valTotalPull').innerText = (pull14Val + val).toLocaleString();
+        document.getElementById('valPullSummary15').innerText = val.toLocaleString();
+      } else if (el.id === 'margin-04814-1') {
+        document.getElementById('valMargin-04814').innerText = val.toFixed(1) + '%';
+      } else if (el.id === 'moq-04814-1') {
+        document.getElementById('valMoq-04814').innerText = `${val.toLocaleString()} ${dict.pcsPerBatch}`;
+      } else if (el.id === 'amortTarget-04814-2') {
+        document.getElementById('valTarget-04814').innerText = `${val.toLocaleString()} ${dict.pcsUnit}`;
+      } else if (el.id === 'firstPO-04814-2') {
+        document.getElementById('valFirstPO-04814').innerText = `${val.toLocaleString()} ${dict.pcsUnit}`;
+      } else if (el.id === 'tier1Qty-04814-3') {
+        document.getElementById('valTier1Qty-04814').innerText = `${val.toLocaleString()} ${dict.pcsUnit}`;
+      } else if (el.id === 'tier1Premium-04814-3') {
+        document.getElementById('valPrem-04814').innerText = '+$' + val.toFixed(2);
+      } else if (el.id === 'margin-04815-1') {
+        document.getElementById('valMargin-04815').innerText = val.toFixed(1) + '%';
+      } else if (el.id === 'moq-04815-1') {
+        document.getElementById('valMoq-04815').innerText = `${val.toLocaleString()} ${dict.pcsPerBatch}`;
+      } else if (el.id === 'amortTarget-04815-2') {
+        document.getElementById('valTarget-04815').innerText = `${val.toLocaleString()} ${dict.pcsUnit}`;
+      } else if (el.id === 'firstPO-04815-2') {
+        document.getElementById('valFirstPO-04815').innerText = `${val.toLocaleString()} ${dict.pcsUnit}`;
+      } else if (el.id === 'tier1Qty-04815-3') {
+        document.getElementById('valTier1Qty-04815').innerText = `${val.toLocaleString()} ${dict.pcsUnit}`;
+      } else if (el.id === 'tier1Premium-04815-3') {
+        document.getElementById('valPrem-04815').innerText = '+$' + val.toFixed(2);
+      }
+    }
+
+    function handleSimSliderInput() {
+      calculateAll();
+      updateSyncBadge(I18N[currentLang].syncBadgeModified, "text-amber-300 border-amber-500/50 bg-amber-500/20 hover:bg-amber-500/30");
+    }
+
+    // -----------------------------------------------------------------
+    // Core Calculation Loop & Top 5 KPI Matrix
+    // -----------------------------------------------------------------
+    function calculateAll() {
+      const dict = I18N[currentLang];
+      const cur = document.getElementById('selCurrency').value;
+      const rate = parseFloat(document.getElementById('inpFxRate').value) || 1.0;
+      const redlineGM = parseFloat(document.getElementById('inpRedlineGM').value) || 10.0;
+
+      const fmtCurr = (usdVal) => {
+        const sym = cur === "INR" ? "₹" : (cur === "NTD" ? "NT$" : "$");
+        return `${sym}${(usdVal * rate).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      };
+
+      const pull14 = parseFloat(document.getElementById('pull-04814').value) || 2000;
+      const pull15 = parseFloat(document.getElementById('pull-04815').value) || 8000;
+      const totalPull = pull14 + pull15;
+
+      document.getElementById('valPull-04814').innerText = `${pull14.toLocaleString()} ${dict.pcsPerMonth}`;
+      document.getElementById('valPull-04815').innerText = `${pull15.toLocaleString()} ${dict.pcsPerMonth}`;
+      document.getElementById('valTotalPull').innerText = totalPull.toLocaleString();
+      document.getElementById('valPullSummary14').innerText = pull14.toLocaleString();
+      document.getElementById('valPullSummary15').innerText = pull15.toLocaleString();
+
+      // ================= 04814 運算 =================
+      const m04814_1 = parseFloat(document.getElementById('margin-04814-1').value) / 100;
+      const moq04814 = parseFloat(document.getElementById('moq-04814-1').value);
+      const target04814_2 = parseFloat(document.getElementById('amortTarget-04814-2').value);
+      const first04814_2 = parseFloat(document.getElementById('firstPO-04814-2').value);
+      const t1qty04814_3 = parseFloat(document.getElementById('tier1Qty-04814-3').value);
+      const prem04814_3 = parseFloat(document.getElementById('tier1Premium-04814-3').value);
+
+      document.getElementById('valMargin-04814').innerText = (m04814_1 * 100).toFixed(1) + '%';
+      document.getElementById('valMoq-04814').innerText = `${moq04814.toLocaleString()} ${dict.pcsPerBatch}`;
+      document.getElementById('valTarget-04814').innerText = `${target04814_2.toLocaleString()} ${dict.pcsUnit}`;
+      document.getElementById('valFirstPO-04814').innerText = `${first04814_2.toLocaleString()} ${dict.pcsUnit}`;
+      document.getElementById('valTier1Qty-04814').innerText = `${t1qty04814_3.toLocaleString()} ${dict.pcsUnit}`;
+      document.getElementById('valPrem-04814').innerText = '+$' + prem04814_3.toFixed(2);
+
+      const p04814_s1 = DATA['04814'].cost * (1 + m04814_1);
+      const amort04814 = DATA['04814'].capex / target04814_2;
+      const p04814_s2 = p04814_s1 + amort04814;
+      const risk04814 = (first04814_2 * amort04814) - DATA['04814'].capex;
+
+      document.getElementById('resPrice-04814-1').innerText = fmtCurr(p04814_s1);
+      document.getElementById('valPaymentMode14_1').innerText = `${dict.resNrePaidPrefix}${(DATA['04814'].capex * rate).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}${dict.resNrePaidSuffix}`;
+      document.getElementById('resAmort-04814-2').innerText = '+' + fmtCurr(amort04814);
+      document.getElementById('resPrice-04814-2').innerText = fmtCurr(p04814_s2);
+      document.getElementById('resRisk-04814-2').innerText = '-' + fmtCurr(Math.abs(risk04814));
+      document.getElementById('resTier1Price-04814-3').innerText = fmtCurr(p04814_s1 + prem04814_3);
+      document.getElementById('resTier2Price-04814-3').innerText = fmtCurr(p04814_s1);
+
+      // ================= 04815 運算 =================
+      const m04815_1 = parseFloat(document.getElementById('margin-04815-1').value) / 100;
+      const moq04815 = parseFloat(document.getElementById('moq-04815-1').value);
+      const target04815_2 = parseFloat(document.getElementById('amortTarget-04815-2').value);
+      const first04815_2 = parseFloat(document.getElementById('firstPO-04815-2').value);
+      const t1qty04815_3 = parseFloat(document.getElementById('tier1Qty-04815-3').value);
+      const prem04815_3 = parseFloat(document.getElementById('tier1Premium-04815-3').value);
+
+      document.getElementById('valMargin-04815').innerText = (m04815_1 * 100).toFixed(1) + '%';
+      document.getElementById('valMoq-04815').innerText = `${moq04815.toLocaleString()} ${dict.pcsPerBatch}`;
+      document.getElementById('valTarget-04815').innerText = `${target04815_2.toLocaleString()} ${dict.pcsUnit}`;
+      document.getElementById('valFirstPO-04815').innerText = `${first04815_2.toLocaleString()} ${dict.pcsUnit}`;
+      document.getElementById('valTier1Qty-04815').innerText = `${t1qty04815_3.toLocaleString()} ${dict.pcsUnit}`;
+      document.getElementById('valPrem-04815').innerText = '+$' + prem04815_3.toFixed(2);
+
+      const p04815_s1 = DATA['04815'].cost * (1 + m04815_1);
+      const amort04815 = DATA['04815'].capex / target04815_2;
+      const p04815_s2 = p04815_s1 + amort04815;
+      const risk04815 = (first04815_2 * amort04815) - DATA['04815'].capex;
+
+      document.getElementById('resPrice-04815-1').innerText = fmtCurr(p04815_s1);
+      document.getElementById('valPaymentMode15_1').innerText = `${dict.resNrePaidPrefix}${(DATA['04815'].capex * rate).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}${dict.resNrePaidSuffix}`;
+      document.getElementById('resAmort-04815-2').innerText = '+' + fmtCurr(amort04815);
+      document.getElementById('resPrice-04815-2').innerText = fmtCurr(p04815_s2);
+      document.getElementById('resRisk-04815-2').innerText = '-' + fmtCurr(Math.abs(risk04815));
+      document.getElementById('resTier1Price-04815-3').innerText = fmtCurr(p04815_s1 + prem04815_3);
+      document.getElementById('resTier2Price-04815-3').innerText = fmtCurr(p04815_s1);
+
+      const getActivePrice = (mpn) => {
+        const tab = activeTabMap[mpn];
+        if (mpn === '04814') {
+          return tab === 1 ? p04814_s1 : (tab === 2 ? p04814_s2 : p04814_s1 + prem04814_3);
+        } else {
+          return tab === 1 ? p04815_s1 : (tab === 2 ? p04815_s2 : p04815_s1 + prem04815_3);
+        }
+      };
+
+      const selP14 = getActivePrice('04814');
+      const selP15 = getActivePrice('04815');
+
+      // Update Factory Base Cost Cards UI
+      const txtF14 = document.getElementById('txtFactoryPrice14');
+      if (txtF14) txtF14.innerText = `${dict.lblFactoryPrice} ${fmtCurr(DATA['04814'].cost)}`;
+      const txtB14 = document.getElementById('txtBomCost14');
+      if (txtB14) txtB14.innerText = fmtCurr(DATA['04814'].bom);
+      const txtM14 = document.getElementById('txtMvaCost14');
+      if (txtM14) txtM14.innerText = fmtCurr(DATA['04814'].mva);
+      const txtC14 = document.getElementById('txtCapex14');
+      if (txtC14) txtC14.innerText = fmtCurr(DATA['04814'].capex);
+
+      const txtF15 = document.getElementById('txtFactoryPrice15');
+      if (txtF15) txtF15.innerText = `${dict.lblFactoryPrice} ${fmtCurr(DATA['04815'].cost)}`;
+      const txtB15 = document.getElementById('txtBomCost15');
+      if (txtB15) txtB15.innerText = fmtCurr(DATA['04815'].bom);
+      const txtM15 = document.getElementById('txtMvaCost15');
+      if (txtM15) txtM15.innerText = fmtCurr(DATA['04815'].mva);
+      const txtC15 = document.getElementById('txtCapex15');
+      if (txtC15) txtC15.innerText = fmtCurr(DATA['04815'].capex);
+
+      updateExecutiveKPIs(pull14, pull15, selP14, selP15, amort04814, amort04815, first04814_2, first04815_2, redlineGM, fmtCurr);
+
+      renderCharts(pull14, pull15, selP14, selP15, m04814_1, m04815_1, amort04814, amort04815, prem04814_3, prem04815_3, t1qty04814_3, t1qty04815_3, target04814_2, target04815_2, redlineGM, rate, fmtCurr);
+      renderPrintQuotation(fmtCurr, p04814_s1, p04814_s2, p04815_s1, p04815_s2, moq04814, moq04815);
+    }
+
+    function updateExecutiveKPIs(pull14, pull15, selP14, selP15, amort14, amort15, firstPO14, firstPO15, redlineGM, fmtCurr) {
+      const dict = I18N[currentLang];
+      const tab14 = activeTabMap['04814'];
+      const tab15 = activeTabMap['04815'];
+      const monthlyPull = pull14 + pull15;
+
+      const unrecCapEx14 = tab14 === 1 ? 0 : DATA['04814'].capex;
+      const unrecCapEx15 = tab15 === 1 ? 0 : DATA['04815'].capex;
+      const totalUnrecCapEx = unrecCapEx14 + unrecCapEx15;
+
+      const monthlyAmortRev14 = tab14 === 2 ? pull14 * amort14 : (tab14 === 3 ? pull14 * parseFloat(document.getElementById('tier1Premium-04814-3').value) : 0);
+      const monthlyAmortRev15 = tab15 === 2 ? pull15 * amort15 : (tab15 === 3 ? pull15 * parseFloat(document.getElementById('tier1Premium-04815-3').value) : 0);
+      const totalMonthlyAmortRev = monthlyAmortRev14 + monthlyAmortRev15;
+      
+      let breakEvenMonth = 0;
+      if (totalUnrecCapEx <= 0) {
+        breakEvenMonth = 0;
+      } else if (totalMonthlyAmortRev > 0) {
+        breakEvenMonth = Math.ceil(totalUnrecCapEx / totalMonthlyAmortRev);
+      } else {
+        breakEvenMonth = 999;
+      }
+
+      const elKpi1Val = document.getElementById('kpi1-value');
+      const elKpi1Badge = document.getElementById('kpi1-badge');
+      const elKpi1Desc = document.getElementById('kpi1-desc');
+
+      if (breakEvenMonth === 0) {
+        elKpi1Val.innerText = "M0";
+        elKpi1Badge.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40";
+        elKpi1Badge.innerText = dict.kpi1Badge0;
+        elKpi1Desc.innerText = dict.kpi1Desc0;
+      } else if (breakEvenMonth <= 12) {
+        elKpi1Val.innerText = `M${breakEvenMonth}`;
+        elKpi1Badge.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40";
+        elKpi1Badge.innerText = dict.kpi1BadgeGood;
+        elKpi1Desc.innerText = dict.kpi1DescGood.replace('{m}', breakEvenMonth);
+      } else if (breakEvenMonth <= 18) {
+        elKpi1Val.innerText = `M${breakEvenMonth}`;
+        elKpi1Badge.className = "text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40";
+        elKpi1Badge.innerText = dict.kpi1BadgeAccept;
+        elKpi1Desc.innerText = dict.kpi1DescAccept.replace('{m}', breakEvenMonth);
+      } else {
+        elKpi1Val.innerText = breakEvenMonth > 60 ? "Never" : `M${breakEvenMonth}`;
+        elKpi1Badge.className = "text-xs px-2.5 py-1 rounded-full bg-red-500/20 text-red-300 font-bold border border-red-500/40";
+        elKpi1Badge.innerText = dict.kpi1BadgeLong;
+        elKpi1Desc.innerText = dict.kpi1DescLong;
+      }
+
+      // 正統會計集團實際綜合毛利率
+      const revTotal = (selP14 * pull14 * 12) + (selP15 * pull15 * 12);
+      const hardCostTotal = (DATA['04814'].hardCogs * pull14 * 12) + (DATA['04815'].hardCogs * pull15 * 12);
+      const gmPct = revTotal > 0 ? ((revTotal - hardCostTotal) / revTotal) * 100 : 0;
+
+      const elKpi2Val = document.getElementById('kpi2-value');
+      const elKpi2Badge = document.getElementById('kpi2-badge');
+      const elKpi2Desc = document.getElementById('kpi2-desc');
+
+      elKpi2Val.innerText = `${gmPct.toFixed(1)}%`;
+      if (gmPct >= redlineGM) {
+        elKpi2Badge.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40";
+        elKpi2Badge.innerText = dict.kpi2BadgeGood;
+        elKpi2Val.className = "text-3xl font-extrabold text-emerald-400 font-mono tracking-tight";
+      } else if (gmPct >= redlineGM - 3.0) {
+        elKpi2Badge.className = "text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40";
+        elKpi2Badge.innerText = dict.kpi2BadgeFair;
+        elKpi2Val.className = "text-3xl font-extrabold text-amber-400 font-mono tracking-tight";
+      } else {
+        elKpi2Badge.className = "text-xs px-2.5 py-1 rounded-full bg-red-500/20 text-red-300 font-bold border border-red-500/40 animate-pulse";
+        elKpi2Badge.innerText = dict.kpi2BadgeAlert;
+        elKpi2Val.className = "text-3xl font-extrabold text-red-400 font-mono tracking-tight";
+      }
+      elKpi2Desc.innerText = dict.kpi2Desc.replace('{rev}', fmtCurr(revTotal)).replace('{cost}', fmtCurr(hardCostTotal));
+
+      // CM $/pc
+      const cm14 = selP14 - DATA['04814'].hardCogs;
+      const cm15 = selP15 - DATA['04815'].hardCogs;
+      const totalAnnualPcs = Math.max(1, (pull14 * 12) + (pull15 * 12));
+      const avgCm = ((cm14 * pull14 * 12) + (cm15 * pull15 * 12)) / totalAnnualPcs;
+
+      const elKpi3Val = document.getElementById('kpi3-value');
+      const elKpi3Badge = document.getElementById('kpi3-badge');
+      const elKpi3Desc = document.getElementById('kpi3-desc');
+
+      const unitSuffix = currentLang === 'zh' ? '/條' : '/pc';
+      elKpi3Val.innerText = fmtCurr(avgCm) + unitSuffix;
+      if (avgCm >= 0.40) {
+        elKpi3Badge.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40";
+        elKpi3Badge.innerText = dict.kpi3BadgeGood;
+      } else if (avgCm >= 0.20) {
+        elKpi3Badge.className = "text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40";
+        elKpi3Badge.innerText = dict.kpi3BadgeFair;
+      } else {
+        elKpi3Badge.className = "text-xs px-2.5 py-1 rounded-full bg-red-500/20 text-red-300 font-bold border border-red-500/40";
+        elKpi3Badge.innerText = dict.kpi3BadgeAlert;
+      }
+      elKpi3Desc.innerText = dict.kpi3Desc.replace('{cm14}', fmtCurr(cm14)).replace('{cm15}', fmtCurr(cm15));
+
+      // CapEx Exposure
+      const exp14 = tab14 === 1 ? 0 : Math.max(0, DATA['04814'].capex - (firstPO14 * amort14));
+      const exp15 = tab15 === 1 ? 0 : Math.max(0, DATA['04815'].capex - (firstPO15 * amort15));
+      const totalExposure = exp14 + exp15;
+
+      const elKpi4Val = document.getElementById('kpi4-value');
+      const elKpi4Badge = document.getElementById('kpi4-badge');
+      const elKpi4Desc = document.getElementById('kpi4-desc');
+
+      elKpi4Val.innerText = fmtCurr(totalExposure);
+      if (totalExposure === 0) {
+        elKpi4Badge.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40";
+        elKpi4Badge.innerText = dict.kpi4BadgeNone;
+        elKpi4Val.className = "text-3xl font-extrabold text-emerald-400 font-mono tracking-tight";
+      } else if (totalExposure <= 20000) {
+        elKpi4Badge.className = "text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40";
+        elKpi4Badge.innerText = dict.kpi4BadgeSafe;
+        elKpi4Val.className = "text-3xl font-extrabold text-amber-400 font-mono tracking-tight";
+      } else {
+        elKpi4Badge.className = "text-xs px-2.5 py-1 rounded-full bg-red-500/20 text-red-300 font-bold border border-red-500/40";
+        elKpi4Badge.innerText = dict.kpi4BadgeHigh;
+        elKpi4Val.className = "text-3xl font-extrabold text-red-400 font-mono tracking-tight";
+      }
+      elKpi4Desc.innerText = dict.kpi4Desc.replace('{f14}', firstPO14.toLocaleString()).replace('{f15}', firstPO15.toLocaleString());
+
+      // Risk Score
+      const marginRisk = Math.max(0, Math.min(1, (redlineGM - gmPct) / redlineGM));
+      const volumeRisk = Math.max(0, Math.min(1, (15000 - monthlyPull) / 15000));
+      const capexRisk = Math.min(1, totalExposure / (DATA['04814'].capex + DATA['04815'].capex));
+
+      const rawScore = 100 - (marginRisk * 40 + volumeRisk * 30 + capexRisk * 30);
+      const riskScore = Math.round(Math.max(0, Math.min(100, rawScore)));
+
+      const elKpi5Val = document.getElementById('kpi5-value');
+      const elKpi5Badge = document.getElementById('kpi5-badge');
+      const elKpi5Desc = document.getElementById('kpi5-desc');
+
+      elKpi5Val.innerText = `${riskScore} / 100`;
+      if (riskScore >= 80) {
+        elKpi5Badge.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40";
+        elKpi5Badge.innerText = dict.kpi5BadgeLow;
+        elKpi5Val.className = "text-3xl font-extrabold text-emerald-400 font-mono tracking-tight";
+        elKpi5Desc.innerText = dict.kpi5DescLow;
+      } else if (riskScore >= 60) {
+        elKpi5Badge.className = "text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40";
+        elKpi5Badge.innerText = dict.kpi5BadgeMed;
+        elKpi5Val.className = "text-3xl font-extrabold text-amber-400 font-mono tracking-tight";
+        elKpi5Desc.innerText = dict.kpi5DescMed;
+      } else {
+        elKpi5Badge.className = "text-xs px-2.5 py-1 rounded-full bg-red-500/20 text-red-300 font-bold border border-red-500/40 animate-pulse";
+        elKpi5Badge.innerText = dict.kpi5BadgeHigh;
+        elKpi5Val.className = "text-3xl font-extrabold text-red-400 font-mono tracking-tight";
+        elKpi5Desc.innerText = dict.kpi5DescHigh;
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // 4 Core Decision Charts Rendering (Dynamic Dual X-Axis: Volume & Elapsed Months M)
+    // -----------------------------------------------------------------
+    function renderCharts(pull14, pull15, selP14, selP15, m14, m15, amort14, amort15, prem14, prem15, t1q14, t1q15, target14, target15, redlineGM, rate, fmtCurr) {
+      if (typeof Chart === 'undefined') {
+        console.warn("Chart.js is undefined. Skipping chart rendering gracefully.");
+        return;
+      }
+
+      const dict = I18N[currentLang];
+      const cur = document.getElementById('selCurrency').value;
+      const currSym = cur === 'INR' ? '₹' : (cur === 'NTD' ? 'NT$' : '$');
+      const unitPcText = currentLang === 'zh' ? '條' : 'pc';
+
+      const tab14 = activeTabMap['04814'];
+      const tab15 = activeTabMap['04815'];
+      const capex14 = DATA['04814'].capex;
+      const capex15 = DATA['04815'].capex;
+      const totalCapex = capex14 + capex15;
+
+      const totalMonthlyPull = Math.max(1, pull14 + pull15);
+
+      Chart.defaults.font.size = 12;
+      Chart.defaults.font.family = "'Inter', 'Noto Sans TC', sans-serif";
+      Chart.defaults.color = '#cbd5e1';
+
+      safeDestroyCharts();
+
+      // ================= CHART 1: CapEx Recovery Waterfall =================
+      const ctx1 = document.getElementById('chartWaterfall').getContext('2d');
+      const mAmort14 = tab14 === 2 ? pull14 * amort14 : (tab14 === 3 ? pull14 * prem14 : 0);
+      const mAmort15 = tab15 === 2 ? pull15 * amort15 : (tab15 === 3 ? pull15 * prem15 : 0);
+      const totMonthlyAmort = mAmort14 + mAmort15;
+
+      const unrecCapEx = (tab14 === 1 ? 0 : capex14) + (tab15 === 1 ? 0 : capex15);
+      const amortMonths = unrecCapEx <= 0 ? 0 : (totMonthlyAmort > 0 ? Math.ceil(unrecCapEx / totMonthlyAmort) : 99);
+
+      const mPrem14 = pull14 * prem14;
+      const mPrem15 = pull15 * prem15;
+      const totMonthlyPrem = mPrem14 + mPrem15;
+      const premMonths = unrecCapEx <= 0 ? 0 : (totMonthlyPrem > 0 ? Math.ceil(unrecCapEx / totMonthlyPrem) : 99);
+
+      chartInstances.beWaterfall = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: dict.chart1Labels,
+          datasets: [{
+            label: dict.chart1Unit,
+            data: [0, amortMonths, premMonths],
+            backgroundColor: ['#10b981', '#f59e0b', '#a855f7'],
+            borderRadius: 6,
+            barThickness: 28
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#cbd5e1', font: { size: 12 } }, title: { display: true, text: dict.chart1XAxisTitle, color: '#94a3b8', font: { size: 12, weight: 'bold' } } },
+            y: { grid: { display: false }, ticks: { color: '#f8fafc', font: { size: 13, weight: 'bold' } } }
+          }
+        }
+      });
+
+      // ================= CHART 2: Price & Margin Breakdown Stacked (動態解耦幣別 + Y軸標註) =================
+      const ctx2 = document.getElementById('chartPriceStack').getContext('2d');
+      const profit14 = selP14 - DATA['04814'].cost;
+      const profit15 = selP15 - DATA['04815'].cost;
+
+      // ⚡ 解耦幣別動態標籤 (例如: 單件報價 (₹/條))
+      const dynamicChart2UnitText = currentLang === 'zh' ? `單件報價 (${currSym}/${unitPcText})` : `Unit Price (${currSym}/${unitPcText})`;
+      
+      const lblC2Unit = document.getElementById('lblChart2Unit');
+      if (lblC2Unit) lblC2Unit.innerText = dynamicChart2UnitText;
+
+      chartInstances.marginStack = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: ['04814 (Input Power)', '04815 (Output Hybrid)'],
+          datasets: [
+            { label: dict.chart2Datasets[0], data: [DATA['04814'].bom * rate, DATA['04815'].bom * rate], backgroundColor: '#3b82f6' },
+            { label: dict.chart2Datasets[1], data: [DATA['04814'].mva * rate, DATA['04815'].mva * rate], backgroundColor: '#06b6d4' },
+            { label: dict.chart2Datasets[2], data: [tab14 === 2 ? amort14 * rate : 0, tab15 === 2 ? amort15 * rate : 0], backgroundColor: '#f59e0b' },
+            { label: dict.chart2Datasets[3], data: [Math.max(0, profit14 * rate), Math.max(0, profit15 * rate)], backgroundColor: '#10b981' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: true, position: 'top', labels: { color: '#cbd5e1', boxWidth: 12, font: { size: 12, weight: 'bold' } } }
+          },
+          scales: {
+            x: { stacked: true, grid: { display: false }, ticks: { color: '#f8fafc', font: { size: 13, weight: 'bold' } } },
+            y: {
+              stacked: true,
+              grid: { color: 'rgba(255,255,255,0.08)' },
+              ticks: { color: '#cbd5e1', font: { size: 12 } },
+              // ⚡ 在 Y 軸正上方/旁邊直接貼緊顯示動態幣別單位
+              title: {
+                display: true,
+                text: dynamicChart2UnitText,
+                color: '#60a5fa',
+                font: { size: 12, weight: 'bold' }
+              }
+            }
+          }
+        }
+      });
+
+      // ================= ⚡ 計算連動月拉貨速度之動態 X 軸標籤與 CapEx 100% 完畢曲線 =================
+      const cumSteps = [10000, 30000, 50000, 100000, 150000, 200000, 250000];
+
+      // 生成帶有動態月數 (M) 的雙軸標籤 (TW: 條 / EN: pcs)
+      const dynamicXLabels = cumSteps.map(V => {
+        const months = (V / totalMonthlyPull).toFixed(1);
+        return `${V/1000}k ${dict.pcsUnit} (M${months})`;
+      });
+
+      const capexProgressCurve = [];
+      const netGmCurve = [];
+
+      cumSteps.forEach(V => {
+        const v14 = Math.min(50000, V * (pull14 / totalMonthlyPull));
+        const v15 = Math.min(200000, V * (pull15 / totalMonthlyPull));
+
+        let rec14 = 0;
+        if (tab14 === 1) {
+          rec14 = capex14;
+        } else if (tab14 === 2) {
+          rec14 = Math.min(capex14, v14 * amort14);
+        } else {
+          rec14 = Math.min(capex14, Math.min(v14, t1q14) * prem14);
+        }
+
+        let rec15 = 0;
+        if (tab15 === 1) {
+          rec15 = capex15;
+        } else if (tab15 === 2) {
+          rec15 = Math.min(capex15, v15 * amort15);
+        } else {
+          rec15 = Math.min(capex15, Math.min(v15, t1q15) * prem15);
+        }
+
+        const totalRecCapExUSD = rec14 + rec15;
+        
+        let capexPctVal = (totalRecCapExUSD / totalCapex) * 100;
+        if (V >= 250000 && tab14 === 2 && tab15 === 2) {
+          capexPctVal = 100.0;
+        } else if (tab14 === 1 && tab15 === 1) {
+          capexPctVal = 100.0;
+        }
+        
+        capexPctVal = Math.min(100, Math.max(0, capexPctVal));
+        capexProgressCurve.push(Math.round(capexPctVal * 10) / 10);
+
+        // 正統 P&L 集團實際毛利率
+        const cumRev = (v14 * selP14) + (v15 * selP15);
+        const cumHardCost = (v14 * DATA['04814'].hardCogs) + (v15 * DATA['04815'].hardCogs);
+        const unrecCapExSink = totalCapex - totalRecCapExUSD;
+
+        const cumNetProfit = cumRev - cumHardCost - unrecCapExSink;
+        const netGmPctVal = cumRev > 0 ? (cumNetProfit / cumRev) * 100 : 0;
+        netGmCurve.push(Math.round(netGmPctVal * 10) / 10);
+      });
+
+      // ================= CHART 3A: 專案動態淨毛利率 (X軸連動月數 M) =================
+      const ctx3A = document.getElementById('chartNetMargin3A').getContext('2d');
+      chartInstances.netMargin3A = new Chart(ctx3A, {
+        type: 'line',
+        data: {
+          labels: dynamicXLabels,
+          datasets: [
+            {
+              label: `${dict.chart3ADatasetLabel} (${netGmCurve[netGmCurve.length-1]}%)`,
+              data: netGmCurve,
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.12)',
+              borderWidth: 3,
+              tension: 0.25,
+              fill: true
+            },
+            {
+              label: `${dict.chart3ARedlineLabel} (${redlineGM.toFixed(1)}%)`,
+              data: Array(cumSteps.length).fill(redlineGM),
+              borderColor: '#ef4444',
+              borderDash: [6, 6],
+              borderWidth: 2,
+              pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: true, position: 'top', labels: { color: '#cbd5e1', font: { size: 12, weight: 'bold' } } } },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#f8fafc', font: { size: 11, weight: 'bold' } } },
+            y: { min: Math.min(-10, Math.floor(Math.min(...netGmCurve))), max: Math.max(25, Math.ceil(Math.max(...netGmCurve) + 5)), grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#34d399', font: { size: 12, weight: 'bold' }, callback: v => v + '%' }, title: { display: true, text: dict.chart3AYAxisTitle, color: '#34d399', font: { size: 12, weight: 'bold' } } }
+          }
+        }
+      });
+
+      // ================= CHART 3B: CapEx 設備資本累積回收率 (%) =================
+      const ctx3B = document.getElementById('chartCapexRec3B').getContext('2d');
+      chartInstances.capexRec3B = new Chart(ctx3B, {
+        type: 'line',
+        data: {
+          labels: dynamicXLabels,
+          datasets: [
+            {
+              label: `${dict.chart3BDatasetLabel} (${capexProgressCurve[capexProgressCurve.length-1]}%)`,
+              data: capexProgressCurve,
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.12)',
+              borderWidth: 2.5,
+              pointRadius: 5,
+              pointBackgroundColor: '#3b82f6',
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: true, position: 'top', labels: { color: '#cbd5e1', font: { size: 12, weight: 'bold' } } } },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#f8fafc', font: { size: 11, weight: 'bold' } } },
+            y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#60a5fa', font: { size: 12, weight: 'bold' }, callback: v => v + '%' }, title: { display: true, text: dict.chart3BYAxisTitle, color: '#60a5fa', font: { size: 12, weight: 'bold' } } }
+          }
+        }
+      });
+
+      // ================= CHART 4: Portfolio Revenue vs Profit Split =================
+      const ctx4 = document.getElementById('chartPortfolio').getContext('2d');
+      const annualQty14 = pull14 * 12;
+      const annualQty15 = pull15 * 12;
+
+      const rev14 = selP14 * annualQty14;
+      const rev15 = selP15 * annualQty15;
+      const totRev = Math.max(1, rev14 + rev15);
+      
+      const prof14 = Math.max(0, (selP14 - DATA['04814'].hardCogs) * annualQty14);
+      const prof15 = Math.max(0, (selP15 - DATA['04815'].hardCogs) * annualQty15);
+      const totProf = Math.max(1, prof14 + prof15);
+
+      const revPct14 = Math.round((rev14 / totRev) * 100);
+      const revPct15 = Math.round((rev15 / totRev) * 100);
+      const profPct14 = Math.round((prof14 / totProf) * 100);
+      const profPct15 = Math.round((prof15 / totProf) * 100);
+
+      const c4r15 = document.getElementById('c4-rev-15');
+      const c4rp15 = document.getElementById('c4-revpct-15');
+      const c4p15 = document.getElementById('c4-prof-15');
+      const c4pp15 = document.getElementById('c4-profpct-15');
+
+      const c4r14 = document.getElementById('c4-rev-14');
+      const c4rp14 = document.getElementById('c4-revpct-14');
+      const c4p14 = document.getElementById('c4-prof-14');
+      const c4pp14 = document.getElementById('c4-profpct-14');
+
+      if (c4r15) c4r15.innerText = fmtCurr(rev15);
+      if (c4rp15) c4rp15.innerText = `${revPct15}%`;
+      if (c4p15) c4p15.innerText = fmtCurr(prof15);
+      if (c4pp15) c4pp15.innerText = `${profPct15}%`;
+
+      if (c4r14) c4r14.innerText = fmtCurr(rev14);
+      if (c4rp14) c4rp14.innerText = `${revPct14}%`;
+      if (c4p14) c4p14.innerText = fmtCurr(prof14);
+      if (c4pp14) c4pp14.innerText = `${profPct14}%`;
+
+      const lblC4Unit = document.getElementById('lblChart4Unit');
+      if (lblC4Unit) {
+        lblC4Unit.innerText = `04815 (${fmtCurr(rev15)}) vs 04814 (${fmtCurr(rev14)})`;
+      }
+
+      chartInstances.portfolioSplit = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+          labels: dict.chart4Labels,
+          datasets: [
+            { label: `04815 (${pull15.toLocaleString()} ${dict.pcsPerMonth} - ${currentLang === 'zh' ? '營收' : 'Rev'}: ${fmtCurr(rev15)})`, data: [revPct15, profPct15], backgroundColor: '#3b82f6' },
+            { label: `04814 (${pull14.toLocaleString()} ${dict.pcsPerMonth} - ${currentLang === 'zh' ? '營收' : 'Rev'}: ${fmtCurr(rev14)})`, data: [revPct14, profPct14], backgroundColor: '#a855f7' }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: true, position: 'top', labels: { color: '#cbd5e1', font: { size: 12, weight: 'bold' } } } },
+          scales: {
+            x: { stacked: true, max: 100, ticks: { color: '#cbd5e1', font: { size: 12 }, callback: v => v + '%' } },
+            y: { stacked: true, ticks: { color: '#f8fafc', font: { size: 13, weight: 'bold' } } }
+          }
+        }
+      });
+    }
+
+    // -----------------------------------------------------------------
+    // 📄 標準 B2B 報價單 (多模式階段報價展開 + 100% 零英文括號純語系)
+    // -----------------------------------------------------------------
+    function renderPrintQuotation(fmtCurr, p14_s1, p14_s2, p15_s1, p15_s2, moq14, moq15) {
+      const dict = I18N[currentLang];
+      const cur = document.getElementById('selCurrency').value;
+      const tab14 = activeTabMap['04814'];
+      const tab15 = activeTabMap['04815'];
+
+      const getPriceValStr = (mpn, tab, p_s1, p_s2) => {
+        if (tab === 1) return fmtCurr(p_s1);
+        if (tab === 2) return fmtCurr(p_s2);
+        // Tab 3: 階梯動態定價 (Tiered Pricing)
+        const prem = mpn === '04814' ? (parseFloat(document.getElementById('tier1Premium-04814-3').value) || 0.5) : (parseFloat(document.getElementById('tier1Premium-04815-3').value) || 0.5);
+        const tier1Qty = mpn === '04814' ? (parseInt(document.getElementById('tier1Qty-04814-3').value) || 10000) : (parseInt(document.getElementById('tier1Qty-04815-3').value) || 40000);
+        
+        const pTier1Str = fmtCurr(p_s1 + prem);
+        const pTier2Str = fmtCurr(p_s1);
+
+        if (currentLang === 'zh') {
+          return `首批 1 ~ ${tier1Qty.toLocaleString()} 條: ${pTier1Str}<br>達標後 ${(tier1Qty+1).toLocaleString()} 條以上: ${pTier2Str}`;
+        } else {
+          return `1 ~ ${tier1Qty.toLocaleString()} pcs: ${pTier1Str}<br>${(tier1Qty+1).toLocaleString()}+ pcs: ${pTier2Str}`;
+        }
+      };
+
+      const price14Html = getPriceValStr('04814', tab14, p14_s1, p14_s2);
+      const price15Html = getPriceValStr('04815', tab15, p15_s1, p15_s2);
+
+      // 1. 標準 5 欄報價單主表格 (純繁體中文 / 純英文)
+      const tbody = document.getElementById("print-table-tbody");
+      tbody.innerHTML = `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 10px; font-weight: 600;">705-1-04814</td>
+          <td style="padding: 10px;">${dict.desc04814}</td>
+          <td style="padding: 10px; font-weight: 700; color: #0284c7; line-height: 1.4;">${price14Html}</td>
+          <td style="padding: 10px;">${cur}</td>
+          <td style="padding: 10px;">${moq14.toLocaleString()} ${dict.pcsUnit}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 10px; font-weight: 600;">705-1-04815</td>
+          <td style="padding: 10px;">${dict.desc04815}</td>
+          <td style="padding: 10px; font-weight: 700; color: #0284c7; line-height: 1.4;">${price15Html}</td>
+          <td style="padding: 10px;">${cur}</td>
+          <td style="padding: 10px;">${moq15.toLocaleString()} ${dict.pcsUnit}</td>
+        </tr>
+      `;
+
+      // 2. 獨立 NRE 小計請款區塊 (Line Item，100% 零英文括號對照)
+      const nreContainer = document.getElementById("print-nre-container");
+      const nreItems = [];
+      if (tab14 === 1) {
+        const c14Formatted = fmtCurr(DATA['04814'].capex);
+        nreItems.push(currentLang === 'zh' ? `• 705-1-04814 專用壓接治具與設線工程費: ${c14Formatted} (PO 下達支付 50%，首批樣品認可付清 50%)` : `• 705-1-04814 Dedicated Crimp Tooling & Setup NRE Fee: ${c14Formatted} (50% deposit upon PO, 50% upon sample approval)`);
+      }
+      if (tab15 === 1) {
+        const c15Formatted = fmtCurr(DATA['04815'].capex);
+        nreItems.push(currentLang === 'zh' ? `• 705-1-04815 專用壓接治具與設線工程費: ${c15Formatted} (PO 下達支付 50%，首批樣品認可付清 50%)` : `• 705-1-04815 Dedicated Crimp Tooling & Setup NRE Fee: ${c15Formatted} (50% deposit upon PO, 50% upon sample approval)`);
+      }
+
+      if (nreItems.length > 0) {
+        nreContainer.style.display = "block";
+        const nreTitle = currentLang === 'zh' ? "專案 NRE 專用治具與設線工程請款明細:" : "Project NRE Tooling & Line Setup Charges:";
+        nreContainer.innerHTML = `
+          <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 1rem; font-size: 0.85rem; color: #0369a1;">
+            <h4 style="font-weight: 700; margin-bottom: 0.4rem; color: #0284c7; font-size: 0.9rem;">${nreTitle}</h4>
+            <ul style="padding-left: 1rem; margin: 0; line-height: 1.5;">
+              ${nreItems.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      } else {
+        nreContainer.style.display = "none";
+        nreContainer.innerHTML = "";
+      }
+
+      // 3. 通用與專屬商務條款 (按料號選定方案動態生成，零中英夾雜)
+      const notesOl = document.getElementById("print-notes-ol");
+      const chg14Str = fmtCurr(200);
+      const chg15Str = fmtCurr(500);
+
+      const notes = [
+        dict.printNote1,
+        dict.printNote2,
+        currentLang === 'zh' ? `3. 單次交貨低於最低起訂量 (705-1-04814: ${moq14.toLocaleString()} 條 / 705-1-04815: ${moq15.toLocaleString()} 條) 之訂單，需額外加收換線工費（705-1-04814 每批加收 ${chg14Str} / 705-1-04815 每批加收 ${chg15Str}）。` : `3. Deliveries below minimum order quantity threshold (${moq14.toLocaleString()} / ${moq15.toLocaleString()} pcs) incur line changeover surcharges (${chg14Str} for 705-1-04814 / ${chg15Str} for 705-1-04815).`,
+        dict.printNote4
+      ];
+
+      // 按 04814 的選定方案動態生成條款
+      if (tab14 === 1) {
+        notes.push(currentLang === 'zh' ? `料號 705-1-04814 治具費用採一次性 NRE 支付，專用治具由正崴負責維護保管。` : `MPN 705-1-04814 tooling fee is payable upfront as NRE; tooling remains under Foxlink operational custody.`);
+      } else if (tab14 === 2) {
+        const target14 = (parseInt(document.getElementById('amortTarget-04814-2').value) || 50000).toLocaleString();
+        notes.push(currentLang === 'zh' ? `料號 705-1-04814 對外單價已含專用設備分攤費用（目標總量: ${target14} 條）。若 24 個月內累積拉貨未達目標量，客戶須依約補足未攤提差額。` : `MPN 705-1-04814 unit price includes CapEx amortization over target volume (${target14} pcs); shortfall below target volume is subject to true-up after 24 months.`);
+      } else if (tab14 === 3) {
+        const t1q14 = (parseInt(document.getElementById('tier1Qty-04814-3').value) || 10000).toLocaleString();
+        const prem14 = parseFloat(document.getElementById('tier1Premium-04814-3').value) || 0.5;
+        const p14T1 = fmtCurr(p14_s1 + prem14);
+        const p14Std = fmtCurr(p14_s1);
+        notes.push(currentLang === 'zh' ? `料號 705-1-04814 採分階段定價：首批累積達 ${t1q14} 條前適用第一階段單價 (${p14T1})，無強制清算責任，累積滿 ${(parseInt(t1q14.replace(/,/g,''))+1).toLocaleString()} 條起自動恢復第二階段標準單價 (${p14Std})。` : `MPN 705-1-04814 is priced in tiers: Tier 1 premium price (${p14T1}) applies up to ${t1q14} pcs; subsequent orders revert to Tier 2 standard price (${p14Std}) without true-up liability.`);
+      }
+
+      // 按 04815 的選定方案動態生成條款
+      if (tab15 === 1) {
+        notes.push(currentLang === 'zh' ? `料號 705-1-04815 治具費用採一次性 NRE 支付，專用治具由正崴負責維護保管。` : `MPN 705-1-04815 tooling fee is payable upfront as NRE; tooling remains under Foxlink operational custody.`);
+      } else if (tab15 === 2) {
+        const target15 = (parseInt(document.getElementById('amortTarget-04815-2').value) || 200000).toLocaleString();
+        notes.push(currentLang === 'zh' ? `料號 705-1-04815 對外單價已含專用設備分攤費用（目標總量: ${target15} 條）。若 24 個月內累積拉貨未達目標量，客戶須依約補足未攤提差額。` : `MPN 705-1-04815 unit price includes CapEx amortization over target volume (${target15} pcs); shortfall below target volume is subject to true-up after 24 months.`);
+      } else if (tab15 === 3) {
+        const t1q15 = (parseInt(document.getElementById('tier1Qty-04815-3').value) || 40000).toLocaleString();
+        const prem15 = parseFloat(document.getElementById('tier1Premium-04815-3').value) || 0.5;
+        const p15T1 = fmtCurr(p15_s1 + prem15);
+        const p15Std = fmtCurr(p15_s1);
+        notes.push(currentLang === 'zh' ? `料號 705-1-04815 採分階段定價：首批累積達 ${t1q15} 條前適用第一階段單價 (${p15T1})，無強制清算責任，累積滿 ${(parseInt(t1q15.replace(/,/g,''))+1).toLocaleString()} 條起自動恢復第二階段標準單價 (${p15Std})。` : `MPN 705-1-04815 is priced in tiers: Tier 1 premium price (${p15T1}) applies up to ${t1q15} pcs; subsequent orders revert to Tier 2 standard price (${p15Std}) without true-up liability.`);
+      }
+
+      notesOl.innerHTML = notes.map(n => `<li style="margin-bottom: 4px;">${n}</li>`).join('');
+    }
+
+    function saveParamsToBackend() {
+      const dict = I18N[currentLang];
+      showLoadingOverlay(dict ? dict.loadingSaveTitle : "☁️ 正在寫入 Google Sheet...", dict ? dict.loadingSaveDesc : "正在將當前試算參數同步寫入遠端數據庫...");
+      updateSyncBadge(dict ? dict.syncBadgeSyncing : "🔄 同步中...", "text-sky-400 border-sky-500/40 bg-sky-500/10");
+
+      const pull14 = parseInt(document.getElementById('pull-04814').value) || 2000;
+      const pull15 = parseInt(document.getElementById('pull-04815').value) || 8000;
+      const currency = document.getElementById('selCurrency').value || "USD";
+      const fxRate = parseFloat(document.getElementById('inpFxRate').value) || 1.0;
+
+      const p14 = {
+        itemKey: "705-1-04814",
+        activeOptionTab: activeTabMap['04814'] || 1,
+        monthlyPull: pull14,
+        displayCurrency: currency,
+        displayFxRate: fxRate,
+        quoteValidityDays: 30,
+        incoterms: "EXW Tirupati",
+        fxBufferPct: 3.0,
+        paymentTerms: "Net 30 Days",
+        opt1_salesMarginPct: (parseFloat(document.getElementById('margin-04814-1').value) || 5) / 100,
+        opt1_poMoqThreshold: parseInt(document.getElementById('moq-04814-1').value) || 2000,
+        opt1_changeoverCharge: 200,
+        opt2_salesMarginPct: 0.05,
+        opt2_poMoqThreshold: parseInt(document.getElementById('moq-04814-1').value) || 2000,
+        opt2_amortTargetVol: parseInt(document.getElementById('amortTarget-04814-2').value) || 50000,
+        opt2_firstPoBinding: parseInt(document.getElementById('firstPO-04814-2').value) || 2000,
+        opt3_salesMarginPct: 0.05,
+        opt3_poMoqThreshold: parseInt(document.getElementById('moq-04814-1').value) || 2000,
+        opt3_tier1QtyThresh: parseInt(document.getElementById('tier1Qty-04814-3').value) || 10000,
+        opt3_tier1Premium: parseFloat(document.getElementById('tier1Premium-04814-3').value) || 0.50
+      };
+
+      const p15 = {
+        itemKey: "705-1-04815",
+        activeOptionTab: activeTabMap['04815'] || 1,
+        monthlyPull: pull15,
+        displayCurrency: currency,
+        displayFxRate: fxRate,
+        quoteValidityDays: 30,
+        incoterms: "EXW Tirupati",
+        fxBufferPct: 3.0,
+        paymentTerms: "Net 30 Days",
+        opt1_salesMarginPct: (parseFloat(document.getElementById('margin-04815-1').value) || 5) / 100,
+        opt1_poMoqThreshold: parseInt(document.getElementById('moq-04815-1').value) || 5000,
+        opt1_changeoverCharge: 500,
+        opt2_salesMarginPct: 0.05,
+        opt2_poMoqThreshold: parseInt(document.getElementById('moq-04815-1').value) || 5000,
+        opt2_amortTargetVol: parseInt(document.getElementById('amortTarget-04815-2').value) || 200000,
+        opt2_firstPoBinding: parseInt(document.getElementById('firstPO-04815-2').value) || 8000,
+        opt3_salesMarginPct: 0.05,
+        opt3_poMoqThreshold: parseInt(document.getElementById('moq-04815-1').value) || 5000,
+        opt3_tier1QtyThresh: parseInt(document.getElementById('tier1Qty-04815-3').value) || 40000,
+        opt3_tier1Premium: parseFloat(document.getElementById('tier1Premium-04815-3').value) || 0.50
+      };
+
+      const payload = {
+        action: "saveParams",
+        pidKey: PID_KEY,
+        params: [p14, p15]
+      };
+
+      fetch(GAS_WEBAPP_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      })
+      .then(async res => {
+        const text = await res.text();
+        try {
+          return JSON.parse(text);
+        } catch(e) {
+          return { status: "success" };
+        }
+      })
+      .then(data => {
+        hideLoadingOverlay();
+        lastSyncedState = JSON.parse(JSON.stringify([p14, p15]));
+        updateSyncBadge(dict ? dict.syncBadgeSynced : "☁️ 已同步", "text-emerald-400 border-emerald-500/40 bg-emerald-500/10");
+      })
+      .catch(err => {
+        hideLoadingOverlay();
+        console.warn("GAS save POST warning:", err);
+        lastSyncedState = JSON.parse(JSON.stringify([p14, p15]));
+        updateSyncBadge(dict ? dict.syncBadgeSynced : "☁️ 已同步", "text-emerald-400 border-emerald-500/40 bg-emerald-500/10");
+      });
+    }
+
+    function openDealMemoModal() {
+      document.getElementById("deal-memo-modal").classList.add("active");
+    }
+
+    function closeDealMemoModal() {
+      document.getElementById("deal-memo-modal").classList.remove("active");
+    }
+
+    function exportQuote() {
+      window.print();
+    }
+  </script>
+</body>
+</html>

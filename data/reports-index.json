@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-08-07T06:04:13.782Z",
+  "lastUpdated": "2026-08-07T06:13:20.129Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1913,6 +1913,19 @@
       "fileName": "report-1786076443249.html",
       "createdAt": "2026-08-07T04:20:45.046Z",
       "updatedAt": "2026-08-07T06:04:13.782Z"
+    },
+    {
+      "id": "report-1786083198293",
+      "title": "VVDN 印度線束報價策略",
+      "description": "VVDN 印度線束報價策略",
+      "categories": [
+        "財務分析",
+        "客戶KYC",
+        "內部簡報"
+      ],
+      "fileName": "report-1786083198293.html",
+      "createdAt": "2026-08-07T06:13:20.129Z",
+      "updatedAt": "2026-08-07T06:13:20.129Z"
     }
   ]
 }
