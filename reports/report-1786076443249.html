@@ -19,6 +19,26 @@
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+            body {
+                background: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-full flex flex-col">
@@ -36,12 +56,18 @@
                     <p data-i18n="auditee_info" class="text-xs text-slate-400">Auditee: FOXLINK | Auditor: SSSTC</p>
                 </div>
             </div>
-            <div>
+            <div class="flex items-center gap-2.5 no-print">
                 <button id="lang-toggle-btn" onclick="toggleLanguage()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
                     <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1 4h6m-1 0l-4 12m4-12l4 12M5 19c2-3 3-6 3-9M4 11c1 2 3 5 5 7"></path>
                     </svg>
                     <span id="lang-btn-text">中文</span>
+                </button>
+                <button id="pdf-export-btn" onclick="exportPDF()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-500 transition-colors cursor-pointer shadow-sm">
+                    <svg class="w-4 h-4 text-emerald-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span data-i18n="btn_export_pdf">Export PDF</span>
                 </button>
             </div>
         </div>
@@ -414,6 +440,10 @@
                 en: "FOXLINK - SSSTC Audit Governance Dashboard",
                 zh: "正崴 (FOXLINK) - SSSTC 審計團隊架構與權責矩陣表"
             },
+            btn_export_pdf: {
+                en: "Export PDF",
+                zh: "導出 PDF 報告"
+            },
             auditee_info: {
                 en: "Auditee: FOXLINK | Auditor: SSSTC",
                 zh: "受審單位：正崴精密 (FOXLINK) | 審計單位：SSSTC"
@@ -580,6 +610,10 @@
         };
 
         let currentLang = 'en';
+
+        function exportPDF() {
+            window.print();
+        }
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'zh' : 'en';
