@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-08-07T09:10:57.698Z",
+  "lastUpdated": "2026-08-08T03:14:19.726Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1926,6 +1926,19 @@
       "fileName": "report-1786083198293.html",
       "createdAt": "2026-08-07T06:13:20.129Z",
       "updatedAt": "2026-08-07T06:13:20.129Z"
+    },
+    {
+      "id": "report-1786158858789",
+      "title": "Target: IL JIN Electronics (India) Private Limited",
+      "description": "目標企業：IL JIN Electronics (India) Private Limited",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "項目計劃"
+      ],
+      "fileName": "report-1786158858789.html",
+      "createdAt": "2026-08-08T03:14:19.726Z",
+      "updatedAt": "2026-08-08T03:14:19.726Z"
     }
   ]
 }
