@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-08-08T03:14:19.726Z",
+  "lastUpdated": "2026-08-08T03:20:04.921Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1939,6 +1939,19 @@
       "fileName": "report-1786158858789.html",
       "createdAt": "2026-08-08T03:14:19.726Z",
       "updatedAt": "2026-08-08T03:14:19.726Z"
+    },
+    {
+      "id": "report-1786159203990",
+      "title": "Target: AT&S India Private Limited",
+      "description": "目標企業：AT&S India Private Limited (奧地利商奧特斯)",
+      "categories": [
+        "客戶KYC",
+        "客戶攻略",
+        "項目計劃"
+      ],
+      "fileName": "report-1786159203990.html",
+      "createdAt": "2026-08-08T03:20:04.921Z",
+      "updatedAt": "2026-08-08T03:20:04.921Z"
     }
   ]
 }
