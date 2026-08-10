@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-08-08T03:20:04.921Z",
+  "lastUpdated": "2026-08-10T04:54:50.303Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1952,6 +1952,19 @@
       "fileName": "report-1786159203990.html",
       "createdAt": "2026-08-08T03:20:04.921Z",
       "updatedAt": "2026-08-08T03:20:04.921Z"
+    },
+    {
+      "id": "report-1786337689781",
+      "title": "Target: Wowtop Technology Private Limited",
+      "description": "目標企業：Wowtop Technology Private Limited",
+      "categories": [
+        "客戶攻略",
+        "市場分析",
+        "項目計劃"
+      ],
+      "fileName": "report-1786337689781.html",
+      "createdAt": "2026-08-10T04:54:50.303Z",
+      "updatedAt": "2026-08-10T04:54:50.303Z"
     }
   ]
 }
