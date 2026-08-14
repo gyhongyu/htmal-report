@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="zh">Aisin AVM 專案 PCBA 雙軌製造與靈活代工提案書 | 正崴集團 FOXLINK</title>
+    <title data-lang="en">Aisin AVM Project PCBA Manufacturing Proposal | Foxlink Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Core Styles --- */
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            background-color: #0b0f17; 
+            color: #f3f4f6; 
+            margin: 0; 
+            padding: 0; 
+            overflow-y: auto; 
+        }
+        [data-lang] { display: none; }
+        
+        .content-area { 
+            animation: fadeIn 0.4s ease-out; 
+            min-height: calc(100vh - 80px); 
+            padding: 1rem; 
+            box-sizing: border-box; 
+            max-width: 1320px; 
+            margin: 0 auto; 
+        }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* --- Custom Cards & Glassmorphism --- */
+        .glass-card { 
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8)); 
+            border: 1px solid rgba(51, 65, 85, 0.8); 
+            backdrop-filter: blur(8px);
+            border-radius: 0.75rem; 
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .glass-card:hover { 
+            border-color: #38bdf8; 
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.15); 
+        }
+
+        .highlight-box { 
+            background-color: #1e293b; 
+            border: 1px solid #334155; 
+            border-radius: 0.5rem; 
+            padding: 1.25rem; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .highlight-box.cyan { border-left: 4px solid #38bdf8; }
+        .highlight-box.emerald { border-left: 4px solid #10b981; }
+        .highlight-box.amber { border-left: 4px solid #f59e0b; }
+        .highlight-box.indigo { border-left: 4px solid #6366f1; }
+        .highlight-box.rose { border-left: 4px solid #f43f5e; }
+
+        /* --- Section Divider --- */
+        .section-divider { 
+            display: flex; 
+            align-items: center; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.5rem; 
+        }
+        .section-divider::before, .section-divider::after { 
+            content: ""; 
+            flex: 1; 
+            border-bottom: 1px solid #334155; 
+        }
+        .section-divider span { 
+            padding: 0 1rem; 
+            color: #38bdf8; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.08em; 
+            font-size: 0.875rem; 
+        }
+
+        /* --- Table Design --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; font-size: 0.875rem; }
+        th, td { border: 1px solid #334155; padding: 0.75rem; text-align: left; vertical-align: middle; }
+        th { background-color: #1e293b; font-weight: 600; color: #38bdf8; }
+        tbody tr:nth-child(odd) { background-color: rgba(15, 23, 42, 0.6); }
+        tbody tr:nth-child(even) { background-color: rgba(30, 41, 59, 0.4); }
+        tbody tr:hover { background-color: rgba(51, 65, 85, 0.5); }
+
+        /* --- Print Optimization --- */
+        @media print { 
+            @page { margin: 15mm 10mm; }
+            .no-print { display: none !important; } 
+            body { background: #fff !important; color: #000 !important; font-size: 9pt; } 
+            .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; } 
+            .glass-card, .highlight-box { background: #fff !important; border: 1px solid #ccc !important; color: #000 !important; box-shadow: none !important; } 
+            th { background-color: #f1f5f9 !important; color: #000 !important; } 
+            .text-white, .text-gray-300, .text-gray-400, .text-cyan-400, .text-emerald-400 { color: #000 !important; } 
+            .section-divider span { color: #000 !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-gray-100 flex flex-col min-h-screen">
+
+    <div class="w-full mx-auto bg-slate-900 border-b border-slate-800 flex flex-col">
+        
+        <!-- Golden Template Navigation Bar -->
+        <header class="sticky top-0 left-0 right-0 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center z-30 bg-slate-900/95 backdrop-blur border-b border-slate-800 no-print">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.foxlink.com/web/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="Foxlink Logo" class="h-8 w-auto">
+                <div>
+                    <span class="block text-lg font-bold leading-tight text-white" data-lang="zh">正崴集團 (FOXLINK) 專案提案</span>
+                    <span class="block text-lg font-bold leading-tight text-white" data-lang="en">FOXLINK Group Project Proposal</span>
+                    <span class="block text-xs text-cyan-400" data-lang="zh">Aisin AVM Camera PCBA 靈活製造與代工服務</span>
+                    <span class="block text-xs text-cyan-400" data-lang="en">Aisin AVM Camera PCBA Flexible Manufacturing</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 flex-shrink-0 mt-4 md:mt-0">
+                <a href="https://drive.google.com/file/d/1vd2KvyXZ_gbndyS2Ef0xMcmYfKZ42dt-/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-600 px-3.5 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-download mr-2 text-cyan-400"></i>
+                    <span data-lang="zh">下載越南廠 Profile</span>
+                    <span data-lang="en">Download Profile</span>
+                </a>
+                <button id="export-pdf-btn" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-3.5 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-file-pdf mr-2 text-rose-400"></i>
+                    <span data-lang="zh">列印 / 導出 PDF</span>
+                    <span data-lang="en">Export PDF</span>
+                </button>
+                <button id="lang-toggle" class="bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-400 border border-cyan-500/50 px-3.5 py-1.5 rounded text-xs font-medium transition-colors flex items-center">
+                    <i class="fas fa-globe mr-2"></i>
+                    <span data-lang="zh">Switch to English</span>
+                    <span data-lang="en">切換中文</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <div class="content-area">
+                
+                <!-- Proposal Header & Hero Card -->
+                <div class="border-b border-slate-800 pb-6 mb-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-2">
+                                <span class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 text-xs px-2.5 py-0.5 rounded font-bold tracking-wider uppercase">
+                                    AUTOMOTIVE PROPOSAL
+                                </span>
+                                <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs px-2.5 py-0.5 rounded font-bold tracking-wider">
+                                    Tier-1 Supply Chain Synergy
+                                </span>
+                            </div>
+                            <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight" data-lang="zh">
+                                Aisin AVM 專案 PCBA 靈活製造與代工服務提案書
+                            </h1>
+                            <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight" data-lang="en">
+                                Aisin AVM Project PCBA Flexible Manufacturing Proposal
+                            </h1>
+                            <p class="text-xs md:text-sm text-slate-400 mt-1" data-lang="zh">
+                                提案目標：<strong>Senvision / Sensetek</strong> | 提供正崴雙軌產地與多元代工合作方案
+                            </p>
+                            <p class="text-xs md:text-sm text-slate-400 mt-1" data-lang="en">
+                                Target Client: <strong>Senvision / Sensetek</strong> | Dual-Track Footprint & Flexible Business Models
+                            </p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 bg-slate-900 p-3 rounded-lg border border-slate-800 self-stretch md:self-auto justify-around">
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-emerald-400">0 PPM</div>
+                                <div class="text-[10px] text-slate-400 uppercase" data-lang="zh">車規品質實績</div>
+                                <div class="text-[10px] text-slate-400 uppercase" data-lang="en">Quality Record</div>
+                            </div>
+                            <div class="h-8 w-px bg-slate-800"></div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-cyan-400">±0.015mm</div>
+                                <div class="text-[10px] text-slate-400 uppercase" data-lang="zh">SMT 貼裝精度</div>
+                                <div class="text-[10px] text-slate-400 uppercase" data-lang="en">SMT Precision</div>
+                            </div>
+                            <div class="h-8 w-px bg-slate-800"></div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-amber-400">100%</div>
+                                <div class="text-[10px] text-slate-400 uppercase" data-lang="zh">SFCS 單板追溯</div>
+                                <div class="text-[10px] text-slate-400 uppercase" data-lang="en">MES Traceability</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 1: Executive Summary -->
+                <div class="section-divider mt-0">
+                    <span data-lang="zh">壹、 執行摘要與合作願景 (Executive Summary)</span>
+                    <span data-lang="en">1. Executive Summary & Core Value</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                    <!-- Value 1 -->
+                    <div class="glass-card p-5 relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3 text-lg">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1" data-lang="zh">1. 產地彈性 (Dual Footprint)</h3>
+                        <h3 class="text-base font-bold text-white mb-1" data-lang="en">1. Dual-Track Footprint</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-lang="zh">
+                            主推「越南峴港廠」作為零風險快速 SOP 首選基地（非中原產地 COD/COO）；中期可搭配「印度 Tirupati 廠」開啟 MII 技術轉移。
+                        </p>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-lang="en">
+                            Pioneering Da Nang (Vietnam) for zero-risk fast SOP (Non-China COD/COO), backed by Tirupati (India) as a long-term MII roadmap option.
+                        </p>
+                    </div>
+
+                    <!-- Value 2 -->
+                    <div class="glass-card p-5 relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-3 text-lg">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1" data-lang="zh">2. 商務靈活 (Flexible Models)</h3>
+                        <h3 class="text-base font-bold text-white mb-1" data-lang="en">2. Commercial Flexibility</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-lang="zh">
+                            提供「全交匙 (Turnkey)」與「純代工 (Consignment)」雙選項。完全尊重客戶指定之供應商、合約價與採購配額主導權。
+                        </p>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-lang="en">
+                            Offering Full Turnkey or Pure Consignment models with open-book pricing, 100% adopting customer-designated suppliers and contract rates.
+                        </p>
+                    </div>
+
+                    <!-- Value 3 -->
+                    <div class="glass-card p-5 relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-3 text-lg">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1" data-lang="zh">3. 車規實績與在地對接</h3>
+                        <h3 class="text-base font-bold text-white mb-1" data-lang="en">3. Automotive Excellence</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-lang="zh">
+                            以連續 5 年 0 PPM 車載極致品質為基礎，搭配正崴印度在地 SMT 專業團隊，提供 Sensetek 廠區第一時間之技術對接與 8D/RMA 支援。
+                        </p>
+                        <p class="text-xs text-slate-300 leading-relaxed" data-lang="en">
+                            Backed by 5-consecutive years 0 PPM record and local Foxlink India SMT engineers providing immediate on-site RMA/8D support at Sensetek.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Dual-Track Strategy -->
+                <div class="section-divider">
+                    <span data-lang="zh">貳、 雙軌產地部署戰略 (Dual-Track Footprint Strategy)</span>
+                    <span data-lang="en">2. Dual-Track Manufacturing Footprint</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Phase 1: Vietnam -->
+                    <div class="highlight-box cyan">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs px-2.5 py-1 rounded font-bold" data-lang="zh">
+                                第一階段：主推首選方案
+                            </span>
+                            <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs px-2.5 py-1 rounded font-bold" data-lang="en">
+                                Phase 1: Primary Recommendation
+                            </span>
+                            <span class="text-xs text-slate-400 font-mono">USD CIF</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">越南峴港廠 (Da Nang Hi-Tech Park)</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Da Nang Plant (Vietnam Hi-Tech Park)</h3>
+                        <p class="text-xs text-slate-300 mb-4" data-lang="zh">
+                            定位：<strong>「零風險快速 SOP 之最佳製造基地」</strong>。成熟車用 SMT 體系，完全避免新廠模索期導致之 SOP 延後風險。
+                        </p>
+                        <p class="text-xs text-slate-300 mb-4" data-lang="en">
+                            Positioning: <strong>"Zero-Risk Fast SOP Production Base"</strong>. Mature automotive SMT lines ensuring flawless Aisin audit passage.
+                        </p>
+                        
+                        <ul class="space-y-2 text-xs text-slate-300 border-t border-slate-700/60 pt-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-cyan-400 mt-0.5 mr-2"></i>
+                                <span data-lang="zh">合規出具越南原產地證明 (Non-China COD/COO)，規避貿易關稅障礙。</span>
+                                <span data-lang="en">Compliant Non-China COO/COD certificate to eliminate trade barrier risks.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-cyan-400 mt-0.5 mr-2"></i>
+                                <span data-lang="zh">擁有 ADAS 3.0、EV 電池等國際車廠實績，保證 Aisin 稽核一次性通過。</span>
+                                <span data-lang="en">ADAS 3.0 & EV manufacturing track record guarantees audit success.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-cyan-400 mt-0.5 mr-2"></i>
+                                <span data-lang="zh">備有 3D SPI、3D AOI、ERSA 選擇性波峰焊與 100% SFCS 條碼追溯。</span>
+                                <span data-lang="en">Equipped with 3D SPI, 3D AOI, ERSA selective wave soldering, & 100% SFCS.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 2: India -->
+                    <div class="highlight-box emerald">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs px-2.5 py-1 rounded font-bold" data-lang="zh">
+                                第二階段：長期 MII 藍圖
+                            </span>
+                            <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs px-2.5 py-1 rounded font-bold" data-lang="en">
+                                Phase 2: MII Long-term Roadmap
+                            </span>
+                            <span class="text-xs text-slate-400 font-mono">INR Local</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="zh">印度 Tirupati 廠</h3>
+                        <h3 class="text-lg font-bold text-white mb-2" data-lang="en">Tirupati Plant (India)</h3>
+                        <p class="text-xs text-slate-300 mb-4" data-lang="zh">
+                            定位：<strong>「Make in India (MII) 在地化戰略備選」</strong>。由越南團隊進行技術轉移，滿足 Maruti/Aisin 之在地化製造政策。
+                        </p>
+                        <p class="text-xs text-slate-300 mb-4" data-lang="en">
+                            Positioning: <strong>"Make in India (MII) Local Strategic Transfer"</strong>. Smooth Tech Transfer guided by Vietnam automotive team.
+                        </p>
+                        
+                        <ul class="space-y-2 text-xs text-slate-300 border-t border-slate-700/60 pt-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-emerald-400 mt-0.5 mr-2"></i>
+                                <span data-lang="zh">印度盧比 (INR) 在地結算，正崴負擔關稅與匯率波動風險。</span>
+                                <span data-lang="en">INR local billing; Foxlink absorbs import duty & FX volatility risks.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-emerald-400 mt-0.5 mr-2"></i>
+                                <span data-lang="zh">完全符合印度政府與車廠之 Make in India 在地化政策與獎勵要求。</span>
+                                <span data-lang="en">Fully aligns with Maruti Suzuki & Indian Govt Make in India policies.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-emerald-400 mt-0.5 mr-2"></i>
+                                <span data-lang="zh">待越南量產穩定後平滑轉移，降低初期技術摸索風險。</span>
+                                <span data-lang="en">Smooth tech transfer after Vietnam SOP stabilizes initial technical risks.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 3: Da Nang Plant Capabilities -->
+                <div class="section-divider">
+                    <span data-lang="zh">參、 越南峴港廠：車載級製造硬實力 (Plant Capabilities)</span>
+                    <span data-lang="en">3. Da Nang Plant Manufacturing Capabilities</span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                    <div class="text-xs text-slate-300">
+                        <span data-lang="zh">越南峴港廠座落於峴港高新科技園區，具備世界級車載電子製造環境與品質管控標準。</span>
+                        <span data-lang="en">Located in Da Nang Hi-Tech Park, featuring world-class automotive electronics manufacturing standards and zero-defect QA systems.</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1vd2KvyXZ_gbndyS2Ef0xMcmYfKZ42dt-/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="bg-cyan-950/80 hover:bg-cyan-900 text-cyan-300 border border-cyan-500/50 px-3 py-1.5 rounded text-xs font-medium transition-colors flex items-center shrink-0">
+                        <i class="fas fa-file-pdf mr-2 text-rose-400"></i>
+                        <span data-lang="zh">下載越南廠完整 Profile</span>
+                        <span data-lang="en">Download Full Vietnam Profile</span>
+                    </a>
+                </div>
+
+                <!-- Capabilities Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
+                        <i class="fas fa-award text-2xl text-amber-400 mb-2"></i>
+                        <div class="text-sm font-bold text-white" data-lang="zh">5 年 0 PPM 實績</div>
+                        <div class="text-sm font-bold text-white" data-lang="en">5 Years 0 PPM Award</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="zh">榮獲 AE Partner Reward</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="en">AE Partner Award Winner</div>
+                    </div>
+
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
+                        <i class="fas fa-certificate text-2xl text-cyan-400 mb-2"></i>
+                        <div class="text-sm font-bold text-white" data-lang="zh">IATF 16949 認證</div>
+                        <div class="text-sm font-bold text-white" data-lang="en">IATF 16949 Certified</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="zh">ISO 17025 / ESD 20.20</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="en">Lab ISO 17025 / ESD 20.20</div>
+                    </div>
+
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
+                        <i class="fas fa-microchip text-2xl text-emerald-400 mb-2"></i>
+                        <div class="text-sm font-bold text-white" data-lang="zh">0201 微型件貼裝</div>
+                        <div class="text-sm font-bold text-white" data-lang="en">0201 Chip Precision</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="zh">貼裝精度 ±0.015mm</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="en">Placement Accuracy ±0.015mm</div>
+                    </div>
+
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
+                        <i class="fas fa-barcode text-2xl text-indigo-400 mb-2"></i>
+                        <div class="text-sm font-bold text-white" data-lang="zh">100% SFCS 追溯</div>
+                        <div class="text-sm font-bold text-white" data-lang="en">100% SFCS MES</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="zh">單板全流程條碼履歷</div>
+                        <div class="text-[11px] text-slate-400 mt-1" data-lang="en">Full PCBA Barcode Trace</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Specs Table -->
+                <div class="glass-card p-5 mb-8 overflow-x-auto">
+                    <h3 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-3" data-lang="zh">
+                        <i class="fas fa-cogs mr-2"></i>越南廠關鍵 SMT 設備與車用製程規格對照
+                    </h3>
+                    <h3 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-3" data-lang="en">
+                        <i class="fas fa-cogs mr-2"></i>Da Nang Plant SMT Equipment & Process Specifications
+                    </h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-lang="zh">工藝站別 / 設備項目</th>
+                                <th data-lang="en">Process Station</th>
+                                <th data-lang="zh">廠牌與型號 (Brand & Model)</th>
+                                <th data-lang="en">Brand & Model</th>
+                                <th data-lang="zh">技術規格與品質保證效益</th>
+                                <th data-lang="en">Technical Capability & Quality Value</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-xs">
+                            <tr>
+                                <td class="font-bold text-white">錫膏印刷 (Solder Printing)</td>
+                                <td>DEK Horizon 8 / MPM Momentum</td>
+                                <td data-lang="zh">高精度車規鋼網印刷，確保錫膏厚度均勻度 (70%~150%)。</td>
+                                <td data-lang="en">High-precision stencil printing with uniform solder volume control.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-cyan-300">3D SPI (錫膏檢測)</td>
+                                <td>TRI TR7007DF / TR7007</td>
+                                <td data-lang="zh">100% 3D 立體錫膏體積與少錫/橋接立體檢測，源頭杜絕焊接不良。</td>
+                                <td data-lang="en">100% 3D inspection for solder volume & bridging prevention.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-white">高速貼片 (Pick & Place)</td>
+                                <td>Fuji NXT M3I/M6I, JUKI KE-3010AL</td>
+                                <td data-lang="zh">支援 0201 零件、最小 Pitch 0.35mm，貼裝精度達 ±0.015mm。</td>
+                                <td data-lang="en">0201 micro-part ready, pitch 0.35mm, precision ±0.015mm.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-cyan-300">3D AOI (自動光學檢測)</td>
+                                <td>TRI TR7700Q SII / TR7710F 3D AOI</td>
+                                <td data-lang="zh">爐後 100% 3D 立體元件浮起、極性與焊腳檢測，零漏檢。</td>
+                                <td data-lang="en">100% post-reflow 3D inspection for component height & soldering.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-white">選擇性波峰焊 (Selective Solder)</td>
+                                <td>ERSA MS-VF345 (德國進口)</td>
+                                <td data-lang="zh">車用級選擇性波峰焊，噴塗高精度，專為車載插針與連接器設計。</td>
+                                <td data-lang="en">High-end German selective soldering for automotive connectors.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-white">CCD 點膠機 (Dispensing)</td>
+                                <td>RSHTEK-RS77 (視覺對位)</td>
+                                <td data-lang="zh">重複精度 ±10µm，支援 UV 膠/三防膠固化，滿載防震防潮需求。</td>
+                                <td data-lang="en">Precision ±10µm CCD alignment for conformal coating & glue.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Section 4: Commercial Business Models -->
+                <div class="section-divider">
+                    <span data-lang="zh">肆、 多元商務合作模式 (Flexible Business Models)</span>
+                    <span data-lang="en">4. Flexible Commercial Models</span>
+                </div>
+
+                <p class="text-xs text-slate-300 mb-4" data-lang="zh">
+                    正崴集團不預設單一合作框架，提供「選單式」多元商務模式，完全配合 Senvision / Sensetek 之採購與資金管理偏好：
+                </p>
+                <p class="text-xs text-slate-300 mb-4" data-lang="en">
+                    Foxlink offers menu-style flexible engagement options to best fit Senvision / Sensetek's cash flow and procurement strategies:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Model A -->
+                    <div class="glass-card p-5 border-l-4 border-cyan-400">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-base font-bold text-white" data-lang="zh">模式 A：全交匙服務 (Full Turnkey)</h3>
+                            <h3 class="text-base font-bold text-white" data-lang="en">Model A: Full Turnkey</h3>
+                            <span class="text-xs bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-bold">Recommended</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-3" data-lang="zh">
+                            由 FOXLINK 負擔 PCB 與全部電子元器件 (Sensor, PMIC, EEPROM, Serializer 等) 之採購、資金墊付與 SMT 貼片測試。
+                        </p>
+                        <p class="text-xs text-slate-300 mb-3" data-lang="en">
+                            Foxlink manages 100% BOM procurement (PCB, Sensor, ICs, RLCs), inventory financing, SMT, & final testing.
+                        </p>
+                        
+                        <div class="bg-slate-900/80 p-3 rounded text-xs space-y-2 text-slate-300">
+                            <div><strong class="text-cyan-400" data-lang="zh">完全授權：</strong><span data-lang="zh">完全採納客戶指定之元器件供應商、合約報價與採購配額。</span></div>
+                            <div><strong class="text-cyan-400" data-lang="en">Direct Sourcing:</strong> <span data-lang="en">100% adopts customer designated suppliers, contract pricing, & quotas.</span></div>
+                            <div><strong class="text-cyan-400" data-lang="zh">核心效益：</strong><span data-lang="zh">簡化客戶採購管理，由正崴吸收大筆物料資金佔用與外匯風險。</span></div>
+                            <div><strong class="text-cyan-400" data-lang="en">Key Benefit:</strong> <span data-lang="en">Reduces client procurement overhead & absorbs raw material financing.</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Model B -->
+                    <div class="glass-card p-5 border-l-4 border-amber-400">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-base font-bold text-white" data-lang="zh">模式 B：純代工服務 (Consignment)</h3>
+                            <h3 class="text-base font-bold text-white" data-lang="en">Model B: Pure Consignment</h3>
+                            <span class="text-xs bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">Flexible</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-3" data-lang="zh">
+                            由客戶 (Senvision / Sensetek) 自行採購 BOM 物料並客供至 FOXLINK 工廠，FOXLINK 僅收取純 SMT 貼片與測試加工費。
+                        </p>
+                        <p class="text-xs text-slate-300 mb-3" data-lang="en">
+                            Customer supplies all BOM materials to Foxlink plant; Foxlink charges purely for SMT processing & QA.
+                        </p>
+
+                        <div class="bg-slate-900/80 p-3 rounded text-xs space-y-2 text-slate-300">
+                            <div><strong class="text-amber-400" data-lang="zh">主導供應鏈：</strong><span data-lang="zh">客戶 100% 控制元器件採購價格與供貨配額。</span></div>
+                            <div><strong class="text-amber-400" data-lang="en">Direct Control:</strong> <span data-lang="en">Client retains 100% ownership of component pricing & allocations.</span></div>
+                            <div><strong class="text-amber-400" data-lang="zh">核心效益：</strong><span data-lang="zh">降低中間轉手費用，結構簡單透明。</span></div>
+                            <div><strong class="text-amber-400" data-lang="en">Key Benefit:</strong> <span data-lang="en">Minimizes intermediate transaction fees with simple tolling structure.</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Win-Aisin Core Pitch Guide for Senvision -->
+                <div class="section-divider">
+                    <span data-lang="zh">伍、 說服 Aisin / Maruti 之核心戰略說帖 (Win-Aisin Pitch Guide)</span>
+                    <span data-lang="en">5. Win-Aisin Pitch Guide for Senvision</span>
+                </div>
+
+                <div class="glass-card p-6 mb-8 border-l-4 border-cyan-400">
+                    <div class="mb-4">
+                        <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs px-2.5 py-1 rounded font-bold uppercase" data-lang="zh">
+                            <i class="fas fa-bullseye mr-1.5"></i>Senvision 專用策略對接說帖
+                        </span>
+                        <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs px-2.5 py-1 rounded font-bold uppercase" data-lang="en">
+                            <i class="fas fa-bullseye mr-1.5"></i>Strategic Pitch Deck for Aisin Alignment
+                        </span>
+                        <h3 class="text-lg font-bold text-white mt-2" data-lang="zh">協助 Senvision 向 Tier-1 Aisin 與車廠 Maruti Suzuki 簡報之三大必勝邏輯</h3>
+                        <h3 class="text-lg font-bold text-white mt-2" data-lang="en">3 Pillar Pitch Arguments for Senvision to Win Aisin & Maruti Approval</h3>
+                        <p class="text-xs text-slate-400 mt-1" data-lang="zh">
+                            針對 Aisin 極度關注之「專案如期 SOP (Zero Delay)」與「印度在地製造 (Make in India)」，提供以下可直接向 Aisin 匯報之完美商業說帖：
+                        </p>
+                        <p class="text-xs text-slate-400 mt-1" data-lang="en">
+                            Direct pitch logic addressing Aisin's top priorities: Zero Launch Delay & Make in India Compliance.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
+                        <!-- Argument 1 -->
+                        <div class="bg-slate-900/90 p-4 rounded-lg border border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <div class="text-rose-400 font-bold mb-2 flex items-center">
+                                    <i class="fas fa-shield-cat mr-2 text-base"></i>
+                                    <span data-lang="zh">1. 避開新廠摸索的致命風險</span>
+                                    <span data-lang="en">1. Eliminating New Plant SOP Risks</span>
+                                </div>
+                                <p class="text-slate-300 leading-relaxed" data-lang="zh">
+                                    車載 AVM 屬於高精密影像系統，若直接在全新 SMT 產線試產與驗證，一旦稽核未通過或良率拉升緩慢，將<strong>直接導致 Maruti 關鍵車型 SOP 延後</strong>。正崴越南廠現成 0 PPM 與 ADAS 3.0 經驗是保證如期量產的唯一保險。
+                                </p>
+                                <p class="text-slate-300 leading-relaxed" data-lang="en">
+                                    AVM camera PCBA requires zero-defect accuracy. Trial production on an unproven line risks audit failures and <strong>disruptive SOP delays for Maruti Suzuki</strong>. Foxlink Da Nang's 0 PPM record guarantees flawless launch timeline.
+                                </p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-800 text-[11px] text-cyan-400 font-bold">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                <span data-lang="zh">核心目標：確保專案零延誤如期 SOP</span>
+                                <span data-lang="en">Goal: Guarantee 100% On-Time SOP</span>
+                            </div>
+                        </div>
+
+                        <!-- Argument 2 -->
+                        <div class="bg-slate-900/90 p-4 rounded-lg border border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <div class="text-emerald-400 font-bold mb-2 flex items-center">
+                                    <i class="fas fa-layer-group mr-2 text-base"></i>
+                                    <span data-lang="zh">2. 「先求穩，再求在地」雙軌策略</span>
+                                    <span data-lang="en">2. "Stability First, Localized Next"</span>
+                                </div>
+                                <p class="text-slate-300 leading-relaxed" data-lang="zh">
+                                    請 Aisin 先承認正崴越南廠（具有成熟 IATF 16949 與 0 PPM 實績）作為 Phase 1 的<strong>「保底量產基地」</strong>；同時承諾 Phase 2 由正崴成熟團隊將技術與品質體系<strong>平滑轉移 (Tech Transfer) 至印度 Tirupati 廠</strong>，完美合規 MII 政策。
+                                </p>
+                                <p class="text-slate-300 leading-relaxed" data-lang="en">
+                                    Approve Foxlink Vietnam as Phase 1 <strong>"Zero-Risk SOP Base"</strong>. Simultaneously commit to Phase 2 Tech Transfer to Foxlink India Tirupati plant by Vietnam team—delivering a seamless roadmap for Make in India (MII) compliance.
+                                </p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-800 text-[11px] text-emerald-400 font-bold">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                <span data-lang="zh">核心目標：零風險合規 Make in India</span>
+                                <span data-lang="en">Goal: Risk-Free Make in India Path</span>
+                            </div>
+                        </div>
+
+                        <!-- Argument 3 -->
+                        <div class="bg-slate-900/90 p-4 rounded-lg border border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <div class="text-amber-400 font-bold mb-2 flex items-center">
+                                    <i class="fas fa-sliders-h mr-2 text-base"></i>
+                                    <span data-lang="zh">3. 極致降低 Senvision 專案管理成本</span>
+                                    <span data-lang="en">3. Lower Project Management Burden</span>
+                                </div>
+                                <p class="text-slate-300 leading-relaxed" data-lang="zh">
+                                    由正崴全權包辦車規級品質體系、稽核接待與單板 SFCS 履歷，搭配印度在地 SMT 團隊提供 Sensetek 廠區現場技術對接，<strong>Senvision 與 Aisin 無需額外投入大量專人進行技術輔導或售後排查</strong>。
+                                </p>
+                                <p class="text-slate-300 leading-relaxed" data-lang="en">
+                                    Foxlink manages total automotive QA, audit logistics, and full SFCS traceability. Local Foxlink India engineers handle Sensetek site alignment, <strong>saving Senvision & Aisin from heavy engineering resource drain</strong>.
+                                </p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-800 text-[11px] text-amber-400 font-bold">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                <span data-lang="zh">核心目標：大幅節省雙方管理資源</span>
+                                <span data-lang="en">Goal: Minimize Client Engineering Overhead</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Step-by-Step Audit & Validation Roadmap -->
+                <div class="section-divider">
+                    <span data-lang="zh">陸、 具體稽核與驗證執行計畫 (Aisin Audit & Validation Roadmap)</span>
+                    <span data-lang="en">6. Step-by-Step Audit & Validation Roadmap</span>
+                </div>
+
+                <p class="text-xs text-slate-300 mb-4" data-lang="zh">
+                    為消除 Aisin 與車廠對跨國製造稽核之疑慮，正崴主動提議以下循序漸進之三階段驗證計畫，利於 Senvision 攜帶至 Aisin 進行正式簡報：
+                </p>
+                <p class="text-xs text-slate-300 mb-4" data-lang="en">
+                    Structured 3-step audit roadmap designed for Senvision to present to Aisin for smooth compliance approval:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Step 1 -->
+                    <div class="glass-card p-5 relative border-t-4 border-cyan-400 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-extrabold text-cyan-400 tracking-wider">STEP 01</span>
+                                <span class="bg-cyan-500/20 text-cyan-300 text-[10px] px-2 py-0.5 rounded font-bold">Phase 1: Alignment</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-2" data-lang="zh">先期文件審查與線上廠勘</h4>
+                            <h4 class="text-sm font-bold text-white mb-2" data-lang="en">Document Review & Virtual Tour</h4>
+                            <p class="text-xs text-slate-300 mb-3" data-lang="zh">
+                                提供越南峴港廠完整車規資質文件，並安排線上視訊實景導覽：
+                            </p>
+                            <p class="text-xs text-slate-300 mb-3" data-lang="en">
+                                Submit complete automotive qualifications & host a live virtual tour:
+                            </p>
+                            <ul class="space-y-1.5 text-xs text-slate-400">
+                                <li class="flex items-start"><i class="fas fa-file-check text-cyan-400 mt-0.5 mr-2"></i><span data-lang="zh">IATF 16949 / ISO 17025 權威證書</span><span data-lang="en">IATF 16949 / ISO 17025 Certificates</span></li>
+                                <li class="flex items-start"><i class="fas fa-file-check text-cyan-400 mt-0.5 mr-2"></i><span data-lang="zh">3D AOI / 3D SPI / ERSA 設備清單</span><span data-lang="en">3D AOI/SPI & ERSA Solder Line Specs</span></li>
+                                <li class="flex items-start"><i class="fas fa-file-check text-cyan-400 mt-0.5 mr-2"></i><span data-lang="zh">SFCS 條碼追溯系統架構圖說明</span><span data-lang="en">SFCS MES Barcode Traceability System</span></li>
+                                <li class="flex items-start"><i class="fas fa-file-check text-cyan-400 mt-0.5 mr-2"></i><span data-lang="zh">線上 Live 廠勘（展示無塵與車用專線）</span><span data-lang="en">Live Virtual Plant Tour for Aisin Team</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400" data-lang="zh">
+                            里程碑：完成 Aisin 書面品質審核
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400" data-lang="en">
+                            Milestone: Document Approval
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="glass-card p-5 relative border-t-4 border-emerald-400 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-extrabold text-emerald-400 tracking-wider">STEP 02</span>
+                                <span class="bg-emerald-500/20 text-emerald-300 text-[10px] px-2 py-0.5 rounded font-bold">Phase 2: Validation</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-2" data-lang="zh">工程打樣與實體品質驗證</h4>
+                            <h4 class="text-sm font-bold text-white mb-2" data-lang="en">Engineering Build & Quality Proof</h4>
+                            <p class="text-xs text-slate-300 mb-3" data-lang="zh">
+                                於越南廠進行 EVT / DVT 樣板試打，以數據與實物驗證工藝：
+                            </p>
+                            <p class="text-xs text-slate-300 mb-3" data-lang="en">
+                                Conduct EVT/DVT sample builds in Vietnam to prove process quality:
+                            </p>
+                            <ul class="space-y-1.5 text-xs text-slate-400">
+                                <li class="flex items-start"><i class="fas fa-microchip text-emerald-400 mt-0.5 mr-2"></i><span data-lang="zh">0201 微型件與 Pitch 0.35mm 貼裝驗證</span><span data-lang="en">0201 & 0.35mm Pitch Component Verification</span></li>
+                                <li class="flex items-start"><i class="fas fa-microchip text-emerald-400 mt-0.5 mr-2"></i><span data-lang="zh">出具 100% 3D SPI 與 3D AOI 立體檢測報告</span><span data-lang="en">100% 3D SPI & 3D AOI Inspection Data</span></li>
+                                <li class="flex items-start"><i class="fas fa-microchip text-emerald-400 mt-0.5 mr-2"></i><span data-lang="zh">提交切片分析 (X-Ray & Cross-Section)</span><span data-lang="en">X-Ray & Cross-Section Analysis Reports</span></li>
+                                <li class="flex items-start"><i class="fas fa-microchip text-emerald-400 mt-0.5 mr-2"></i><span data-lang="zh">樣板交付 Sensetek 進行 AA 對焦組裝驗證</span><span data-lang="en">Delivery to Sensetek for AA Alignment Test</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400" data-lang="zh">
+                            里程碑：通過實體 PCBA 切片與功能驗證
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400" data-lang="en">
+                            Milestone: Physical PCBA Approval
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="glass-card p-5 relative border-t-4 border-amber-400 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-extrabold text-amber-400 tracking-wider">STEP 03</span>
+                                <span class="bg-amber-500/20 text-amber-300 text-[10px] px-2 py-0.5 rounded font-bold">Phase 3: SOP Approval</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-2" data-lang="zh">VDA 6.3 實地稽核與 PPAP 簽核</h4>
+                            <h4 class="text-sm font-bold text-white mb-2" data-lang="en">On-Site VDA 6.3 Audit & PPAP</h4>
+                            <p class="text-xs text-slate-300 mb-3" data-lang="zh">
+                                邀請 Aisin 稽核員赴越南峴港廠完成正式 VDA 6.3 審核：
+                            </p>
+                            <p class="text-xs text-slate-300 mb-3" data-lang="en">
+                                Welcome Aisin auditors to Vietnam Da Nang plant for final approval:
+                            </p>
+                            <ul class="space-y-1.5 text-xs text-slate-400">
+                                <li class="flex items-start"><i class="fas fa-passport text-amber-400 mt-0.5 mr-2"></i><span data-lang="zh">正崴全權負責 Aisin 團隊之落地接待與動線安排</span><span data-lang="en">Foxlink manages total on-site audit hospitality</span></li>
+                                <li class="flex items-start"><i class="fas fa-passport text-amber-400 mt-0.5 mr-2"></i><span data-lang="zh">執行正式 VDA 6.3 過程稽核與 Run@Rate 產能測試</span><span data-lang="en">Formal VDA 6.3 process audit & Run@Rate test</span></li>
+                                <li class="flex items-start"><i class="fas fa-passport text-amber-400 mt-0.5 mr-2"></i><span data-lang="zh">提交全套車規 PPAP (生產件核准程序) 文件</span><span data-lang="en">Submit complete Level 3 PPAP documentation</span></li>
+                                <li class="flex items-start"><i class="fas fa-passport text-amber-400 mt-0.5 mr-2"></i><span data-lang="zh">取得 Aisin 正式 SOP 量產與出貨許可</span><span data-lang="en">Obtain formal Aisin SOP sign-off & greenlight</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400" data-lang="zh">
+                            里程碑：順利取得 Aisin 量產簽核
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400" data-lang="en">
+                            Milestone: Official SOP Sign-off
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 7: Group Synergy & India Support -->
+                <div class="section-divider">
+                    <span data-lang="zh">柒、 正崴集團在地支援與技術後盾 (Group Synergy)</span>
+                    <span data-lang="en">7. Group Synergy & India Local Support</span>
+                </div>
+
+                <div class="highlight-box indigo mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="col-span-2">
+                            <h3 class="text-base font-bold text-white mb-2" data-lang="zh">跨國集團化管理：在地即時服務，零溝通時差</h3>
+                            <h3 class="text-base font-bold text-white mb-2" data-lang="en">Global Footprint, Local Support: Zero Communication Lag</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-3" data-lang="zh">
+                                即便初期的 PCBA 訂單由「正崴越南峴港廠」直接出口交付予 Sensetek，客戶依然享有正崴於印度在地（Tirupati & 專業 SMT 團隊）的即時工程與品質對接：
+                            </p>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-3" data-lang="en">
+                                Even with PCBA exported directly from Foxlink Da Nang to Sensetek, clients benefit from Foxlink India's local technical & quality support:
+                            </p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                                <div class="bg-slate-900/90 p-3 rounded border border-slate-800">
+                                    <strong class="text-indigo-400 block mb-1" data-lang="zh"><i class="fas fa-wrench mr-1"></i>印度在地工程對接</strong>
+                                    <strong class="text-indigo-400 block mb-1" data-lang="en"><i class="fas fa-wrench mr-1"></i>Local SMT Engineering</strong>
+                                    <span class="text-slate-300" data-lang="zh">正崴印度 SMT 團隊可協助 Sensetek Manesar 廠進行試產對接與工藝交流。</span>
+                                    <span class="text-slate-300" data-lang="en">Foxlink India team assists Sensetek Manesar plant during NPI & process sync.</span>
+                                </div>
+
+                                <div class="bg-slate-900/90 p-3 rounded border border-slate-800">
+                                    <strong class="text-indigo-400 block mb-1" data-lang="zh"><i class="fas fa-microscope mr-1"></i>即時品質響應 (8D/RMA)</strong>
+                                    <strong class="text-indigo-400 block mb-1" data-lang="en"><i class="fas fa-microscope mr-1"></i>On-Site 8D & RMA Response</strong>
+                                    <span class="text-slate-300" data-lang="zh">後續 FATP 組裝如有疑慮，印度團隊第一時間赴現場排查與 8D 分析，消除跨國時差。</span>
+                                    <span class="text-slate-300" data-lang="en">Immediate on-site troubleshooting & 8D reporting at Sensetek without overseas delay.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Synergy Graphic/Badge -->
+                        <div class="flex flex-col justify-center items-center bg-slate-900/60 p-4 rounded-lg border border-slate-800 text-center">
+                            <div class="w-12 h-12 rounded-full bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-xl mb-2">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="text-sm font-bold text-white" data-lang="zh">正崴跨國綜效 (Synergy)</div>
+                            <div class="text-sm font-bold text-white" data-lang="en">Foxlink Global Synergy</div>
+                            <p class="text-[11px] text-slate-400 mt-1" data-lang="zh">
+                                越南製造高品質 + 印度在地即時服務 = 專案成功保障
+                            </p>
+                            <p class="text-[11px] text-slate-400 mt-1" data-lang="en">
+                                Vietnam Quality + India Local Support = Ultimate Success
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 8: Next Steps Action Plan -->
+                <div class="section-divider">
+                    <span data-lang="zh">捌、 下一步行動建議 (Next Steps)</span>
+                    <span data-lang="en">8. Next Steps & Engagement Plan</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="glass-card p-4 relative">
+                        <div class="text-xs font-bold text-cyan-400 mb-1">ACTION 01</div>
+                        <h4 class="text-sm font-bold text-white mb-2" data-lang="zh">商務與產地模式確認</h4>
+                        <h4 class="text-sm font-bold text-white mb-2" data-lang="en">Commercial Alignment</h4>
+                        <p class="text-xs text-slate-300" data-lang="zh">
+                            邀請 Senvision / Sensetek 就偏好之產地路徑（越南/印度）與合作模式（Turnkey/Consignment）進行方向性確認。
+                        </p>
+                        <p class="text-xs text-slate-300" data-lang="en">
+                            Align with Senvision/Sensetek on preferred footprint path (Vietnam/India) & business model (Turnkey/Consignment).
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-4 relative">
+                        <div class="text-xs font-bold text-emerald-400 mb-1">ACTION 02</div>
+                        <h4 class="text-sm font-bold text-white mb-2" data-lang="zh">工程 Gerber 審核與 DFM 對接</h4>
+                        <h4 class="text-sm font-bold text-white mb-2" data-lang="en">Engineering Gerber Review</h4>
+                        <p class="text-xs text-slate-300" data-lang="zh">
+                            由正崴工程團隊進行 Gerber File 審核與 DFM 可製造性評估，鎖定打樣與量產品質工藝參數。
+                        </p>
+                        <p class="text-xs text-slate-300" data-lang="en">
+                            Foxlink engineering team performs Gerber file review & DFM evaluation to finalize process parameters.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-4 relative">
+                        <div class="text-xs font-bold text-amber-400 mb-1">ACTION 03</div>
+                        <h4 class="text-sm font-bold text-white mb-2" data-lang="zh">啟動三階段 Aisin 稽核計畫</h4>
+                        <h4 class="text-sm font-bold text-white mb-2" data-lang="en">Initiate Audit Roadmap</h4>
+                        <p class="text-xs text-slate-300" data-lang="zh">
+                            提供 Step 1 資質文件與安排視訊廠勘，助 Senvision 順利向 Aisin / Maruti Suzuki 完成專案簡報與過關。
+                        </p>
+                        <p class="text-xs text-slate-300" data-lang="en">
+                            Provide Step 1 documentation & host virtual tour to assist Senvision in winning Aisin/Maruti Suzuki approval.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        /* --- Golden Template Language Toggle Logic --- */
+        let currentLang = 'en'; 
+
+        function updateLanguageUI() {
+            try {
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    if (el.tagName.toLowerCase() !== 'title') el.style.display = 'none';
+                });
+                document.querySelectorAll(`[data-lang="${currentLang}"]`).forEach(el => {
+                    const tagName = el.tagName.toLowerCase();
+                    if (['span', 'strong', 'a', 'i', 'button', 'li', 'h1', 'h2', 'h3', 'h4', 'p', 'th', 'td', 'div'].includes(tagName)) {
+                        if (['td', 'th'].includes(tagName)) el.style.display = 'table-cell';
+                        else if (['span', 'strong', 'a', 'i', 'button', 'li'].includes(tagName)) el.style.display = 'inline-block';
+                        else el.style.display = 'block';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                });
+                document.querySelectorAll('title').forEach(title => {
+                    if (title.getAttribute('data-lang') === currentLang) document.title = title.textContent;
+                });
+            } catch (e) { 
+                console.error("Language UI Update Error:", e); 
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Event Listeners
+            const langBtn = document.getElementById('lang-toggle');
+            if (langBtn) {
+                langBtn.addEventListener('click', () => {
+                    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+                    updateLanguageUI();
+                });
+            }
+
+            const pdfBtn = document.getElementById('export-pdf-btn');
+            if (pdfBtn) {
+                pdfBtn.addEventListener('click', () => window.print());
+            }
+
+            // Initial UI Setup
+            updateLanguageUI();
+        });
+    </script>
+</body>
+</html>

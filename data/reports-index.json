@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-08-10T04:54:50.303Z",
+  "lastUpdated": "2026-08-14T05:32:10.760Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1965,6 +1965,19 @@
       "fileName": "report-1786337689781.html",
       "createdAt": "2026-08-10T04:54:50.303Z",
       "updatedAt": "2026-08-10T04:54:50.303Z"
+    },
+    {
+      "id": "report-1786685529888",
+      "title": "Aisin AVM Camera PCBA Flexible Manufacturing-FOXLINK Group Project Proposal",
+      "description": "Aisin AVM Camera PCBA 靈活製造與代工服務-正崴集團 (FOXLINK) 專案提案",
+      "categories": [
+        "對外簡報",
+        "客戶攻略",
+        "項目計劃"
+      ],
+      "fileName": "report-1786685529888.html",
+      "createdAt": "2026-08-14T05:32:10.760Z",
+      "updatedAt": "2026-08-14T05:32:10.760Z"
     }
   ]
 }
