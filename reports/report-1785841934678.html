@@ -15,13 +15,12 @@
      * =========================================================================
      * 1. 🎨 [ANCHOR: CSS-THEME]          - 主題色彩變數與全域重設 (Tokens & Reset)
      * 2. 🧱 [ANCHOR: CSS-NAVBAR]         - 頂部毛玻璃 Header、官方 LOGO 與操作按鈕
-     * 3. 🌐 [ANCHOR: CSS-PORTAL]         - 100vw x 100vh 全螢幕多模組無縫視口容器
-     * 4. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速切換島 (避開 LOGO) 與 Toast
-     * 5. 📋 [ANCHOR: CSS-TABLE]          - 折疊數據表格與欄位樣式
-     * 6. 📊 [ANCHOR: CSS-GANTT]          - 自研雙欄甘特圖、時間軸網格、進度條與金黃里程碑
-     * 7. 📈 [ANCHOR: CSS-DASHBOARD]      - 儀表台雙 Chart.js 畫布與推進卡片
-     * 8. ✏️ [ANCHOR: CSS-MODAL]          - 任務與里程碑編輯彈窗 (Flat & Independent)
-     * 9. 🗂️ [ANCHOR: CSS-DRAWER]         - 甘特圖子任務展開抽屜與報告連結按鈕
+     * 3. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速導航島 (避開 LOGO) 與 Toast
+     * 4. 📋 [ANCHOR: CSS-TABLE]          - 折疊數據表格與欄位樣式
+     * 5. 📊 [ANCHOR: CSS-GANTT]          - 自研雙欄甘特圖、時間軸網格、進度條與金黃里程碑
+     * 6. 📈 [ANCHOR: CSS-DASHBOARD]      - 儀表台雙 Chart.js 畫布與推進卡片
+     * 7. ✏️ [ANCHOR: CSS-MODAL]          - 任務與里程碑編輯彈窗 (Flat & Independent)
+     * 8. 🗂️ [ANCHOR: CSS-DRAWER]         - 甘特圖子任務展開抽屜與報告連結按鈕
      * =========================================================================
      */
 
@@ -191,72 +190,7 @@
     .btn-fullscreen:hover { background: #E2E8F0; }
 
     /* =========================================================================
-     * 🌐 [ANCHOR: CSS-PORTAL] 100vw x 100vh 全螢幕多模組無縫視口容器
-     * ========================================================================= */
-    .portal-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 99990;
-      border: none;
-      margin: 0;
-      padding: 0;
-      background: #FFFFFF;
-      display: none;
-    }
-
-    .portal-container.active {
-      display: block;
-    }
-
-    .portal-iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
-    }
-
-    .portal-iframe.active {
-      display: block;
-    }
-
-    .portal-loading {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255,255,255,0.92);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      z-index: 10;
-      display: none;
-    }
-
-    .portal-loading.active {
-      display: flex;
-    }
-
-    .portal-spinner {
-      width: 36px;
-      height: 36px;
-      border: 3px solid #E2E8F0;
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* =========================================================================
-     * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速切換島 (避開 LOGO)
+     * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
      * ========================================================================= */
     .floating-quick-dock {
       position: fixed;
@@ -1162,17 +1096,17 @@
 <body>
 
   <!-- =========================================================================
-   * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速切換島 (避開 LOGO)
+   * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
    * ========================================================================= -->
   <div class="floating-quick-dock" id="floatingQuickDock">
     <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
       🧭
     </div>
     <div class="floating-dock-menu" id="floatingDockMenu">
-      <button type="button" class="floating-dock-item active" onclick="switchPortalModule('01_dashboard')">
+      <button type="button" class="floating-dock-item active" onclick="navigateToModule('01_dashboard')">
         <span>📊</span> 01 儀表台總覽
       </button>
-      <button type="button" class="floating-dock-item" onclick="switchPortalModule('02_qsa')">
+      <button type="button" class="floating-dock-item" onclick="navigateToModule('02_qsa')">
         <span>🛡️</span> 02 QSA 體系稽核
       </button>
       <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
@@ -1181,11 +1115,11 @@
       <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('04_procurement')">
         <span>📦</span> 04 設備採購 (建置中)
       </button>
-      <button type="button" class="floating-dock-item" onclick="switchPortalModule('sop_guide')">
+      <button type="button" class="floating-dock-item" onclick="navigateToModule('sop_guide')">
         <span>📘</span> SOP 應對指南
       </button>
       <div style="height:1px; background:#E2E8F0; margin:2px 0;"></div>
-      <button type="button" class="floating-dock-item" onclick="reloadCurrentModule()">
+      <button type="button" class="floating-dock-item" onclick="reloadCurrentPage()">
         <span>🔄</span> 重新載入當前頁
       </button>
     </div>
@@ -1195,18 +1129,6 @@
   <div class="toast-popup" id="toastPopup">
     <span id="toastIcon">ℹ️</span>
     <span id="toastMsg">提示訊息</span>
-  </div>
-
-  <!-- =========================================================================
-   * 🌐 [ANCHOR: DOM-PORTAL-CONTAINER] 100vw x 100vh 全螢幕多模組無縫視口容器
-   * ========================================================================= -->
-  <div class="portal-container" id="portalContainer">
-    <div class="portal-loading" id="portalLoading">
-      <div class="portal-spinner"></div>
-      <div id="portalLoadingText">載入模組內容中...</div>
-    </div>
-    <iframe class="portal-iframe" id="iframe_02_qsa" src="" title="02 QSA Module"></iframe>
-    <iframe class="portal-iframe" id="iframe_sop_guide" src="" title="SOP Guide Module"></iframe>
   </div>
 
   <!-- =========================================================================
@@ -1342,7 +1264,7 @@
 
     <!-- =========================================================================
      * 📈 [ANCHOR: DOM-DASHBOARD-CHARTS] 雙 Chart.js 畫布與推進卡片
-     * ========================================================================= */
+     * ========================================================================= -->
     <div class="dashboard-grid">
       <div class="chart-card">
         <h3 id="uiChartStatusTitle">TASK STATUS DISTRIBUTION (%)</h3>
@@ -1420,103 +1342,27 @@
   <script>
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIGSon61ZQYFAGhWmFqUOmyK0YAoe2MsAnqgoldOLaKQnn6YFXLZFsBmm3dJ74aa0UAA/exec";
 
-    // Multi-Module Fullscreen Viewport Configuration
-    const PORTAL_MODULES = {
-      '01_dashboard': {
-        name_en: '01 Dashboard',
-        name_zh: '01 儀表台總覽',
-        icon: '📊',
-        type: 'native'
-      },
-      '02_qsa': {
-        name_en: '02 QSA Audit',
-        name_zh: '02 QSA 體系稽核',
-        icon: '🛡️',
-        type: 'iframe',
-        url: 'https://html.foxlink.co.in/reports/report-1785820067291.html',
-        iframeId: 'iframe_02_qsa'
-      },
-      '03_qpa': {
-        name_en: '03 QPA Audit',
-        name_zh: '03 QPA 製程 (建置中)',
-        icon: '⚙️',
-        type: 'pending',
-        url: ''
-      },
-      '04_procurement': {
-        name_en: '04 Procurement',
-        name_zh: '04 設備採購 (建置中)',
-        icon: '📦',
-        type: 'pending',
-        url: ''
-      },
-      'sop_guide': {
-        name_en: 'SOP Guide',
-        name_zh: 'SOP 應對指南',
-        icon: '📘',
-        type: 'iframe',
-        url: 'https://html.foxlink.co.in/reports/report-1785909929403.html',
-        iframeId: 'iframe_sop_guide'
-      }
+    // Standard Universal Module URLs Dictionary
+    const PORTAL_URLS = {
+      '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
+      '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
+      '03_qpa': '',
+      '04_procurement': '',
+      'sop_guide': 'https://html.foxlink.co.in/reports/report-1785909929403.html'
     };
 
-    let activeModuleId = '01_dashboard';
-
-    // Fullscreen Viewport Portal Switcher
-    function switchPortalModule(modId) {
-      const mod = PORTAL_MODULES[modId];
-      if (!mod) return;
-
-      if (mod.type === 'pending') {
+    // Native Top-Level Window Navigation
+    function navigateToModule(modId) {
+      if (modId === '01_dashboard') {
+        toggleFloatingDock();
+        return;
+      }
+      const url = PORTAL_URLS[modId];
+      if (!url) {
         showModulePendingToast(modId);
         return;
       }
-
-      activeModuleId = modId;
-
-      // Update Floating Dock Active State
-      document.querySelectorAll('.floating-dock-item').forEach(item => {
-        item.classList.toggle('active', item.getAttribute('onclick')?.includes(modId));
-      });
-
-      const mainContainer = document.getElementById('mainDashboardContainer');
-      const portalContainer = document.getElementById('portalContainer');
-      const loadingEl = document.getElementById('portalLoading');
-
-      if (mod.type === 'native') {
-        // Show Native 01 Dashboard
-        portalContainer.classList.remove('active');
-        mainContainer.style.display = 'block';
-
-        // Trigger Chart Resize
-        setTimeout(() => {
-          if (statusChartInstance) statusChartInstance.resize();
-          if (wsChartInstance) wsChartInstance.resize();
-        }, 50);
-      } else if (mod.type === 'iframe') {
-        // Show Fullscreen 100vw x 100vh Viewport
-        mainContainer.style.display = 'none';
-        portalContainer.classList.add('active');
-
-        // Hide all iframes first
-        document.querySelectorAll('.portal-iframe').forEach(ifr => ifr.classList.remove('active'));
-
-        const targetIframe = document.getElementById(mod.iframeId);
-        if (targetIframe) {
-          if (!targetIframe.src || targetIframe.src === 'about:blank' || targetIframe.src === window.location.href) {
-            loadingEl.classList.add('active');
-            targetIframe.src = mod.url;
-            targetIframe.onload = () => {
-              loadingEl.classList.remove('active');
-            };
-          }
-          targetIframe.classList.add('active');
-        }
-      }
-
-      // Auto close dock menu
-      const dockMenu = document.getElementById('floatingDockMenu');
-      if (dockMenu) dockMenu.classList.remove('active');
+      window.location.href = url;
     }
 
     function toggleFloatingDock() {
@@ -1524,22 +1370,8 @@
       if (menu) menu.classList.toggle('active');
     }
 
-    function reloadCurrentModule() {
-      if (activeModuleId === '01_dashboard') {
-        loadTasksFromCloud();
-        showToast('🔄', currentLang === 'en' ? 'Reloaded 01 Dashboard data' : '已重新同步 01 儀表台雲端數據');
-      } else {
-        const mod = PORTAL_MODULES[activeModuleId];
-        if (mod && mod.iframeId) {
-          const ifr = document.getElementById(mod.iframeId);
-          if (ifr) {
-            ifr.src = mod.url;
-            showToast('🔄', currentLang === 'en' ? `Reloading ${mod.name_en}...` : `正在重新載入 ${mod.name_zh}...`);
-          }
-        }
-      }
-      const dockMenu = document.getElementById('floatingDockMenu');
-      if (dockMenu) dockMenu.classList.remove('active');
+    function reloadCurrentPage() {
+      window.location.reload();
     }
 
     let toastTimer = null;
@@ -1560,8 +1392,11 @@
     }
 
     function showModulePendingToast(modId) {
-      const mod = PORTAL_MODULES[modId];
-      const name = mod ? (currentLang === 'en' ? mod.name_en : mod.name_zh) : '此模組';
+      const modNames = {
+        '03_qpa': (currentLang === 'en') ? '03 QPA Audit' : '03 QPA 製程',
+        '04_procurement': (currentLang === 'en') ? '04 Procurement' : '04 設備採購'
+      };
+      const name = modNames[modId] || '此模組';
       const msg = (currentLang === 'en') ? `${name} is currently under construction!` : `${name} 模組建置中，敬請期待！`;
       showToast('⚙️', msg);
       const dockMenu = document.getElementById('floatingDockMenu');
