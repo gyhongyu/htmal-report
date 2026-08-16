@@ -8,6 +8,22 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
+        /* =========================================================================
+         * 🗺️ [CODE MAP] SSSTC SOP WebUI 架構導引目錄 (AI 代理人快速定位專用)
+         * =========================================================================
+         * 1. 🎨 [ANCHOR: CSS-THEME]          - 主題色彩變數與全域樣式
+         * 2. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速導航島 (避開 LOGO) 與 Toast
+         * 3. 🖨️ [ANCHOR: CSS-PRINT]          - A4 Portrait 列印與 PDF 匯出最佳化樣式
+         * 4. 🧱 [ANCHOR: DOM-NAVBAR]         - 頂部 LOGO、供應鏈鏈條、多語切換與分頁骨架
+         * 5. 📊 [ANCHOR: DOM-FLOWCHART]      - Tab 1 Mermaid 標準整改流程圖
+         * 6. 👥 [ANCHOR: DOM-ROLES]          - Tab 2 成員崗位與 KRA 職責卡片
+         * 7. 📋 [ANCHOR: DOM-RACI]           - Tab 3 RACI 權責矩陣
+         * 8. 📹 [ANCHOR: DOM-REMOTE-AUDIT]   - Tab 4 遠端 Gemba 視訊稽核規範
+         * 9. ✅ [ANCHOR: DOM-CHECKLIST]      - Tab 5 現場驗證 Checksheet 管理工具
+         * 10.🧠 [ANCHOR: JS-STATE]           - 全域狀態、語系切換與 Mermaid 渲染引擎
+         * =========================================================================
+         */
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         
         body {
@@ -26,11 +42,137 @@
             font-weight: 700;
         }
 
-        /* OPTIMIZED A4 PORTRAIT PRINT & PDF EXPORT STYLES */
+        /* =========================================================================
+         * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+         * ========================================================================= */
+        .floating-quick-dock {
+            position: fixed;
+            top: 6px;
+            left: 6px;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.35rem;
+        }
+
+        .floating-dock-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #FFFFFF;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-out;
+            opacity: 0.75;
+        }
+
+        .floating-dock-toggle:hover {
+            transform: scale(1.12);
+            opacity: 1;
+            background: #2563eb;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.55);
+        }
+
+        .floating-dock-menu {
+            display: none;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 175px;
+            animation: slideDownFade 0.2s ease-out;
+        }
+
+        .floating-dock-menu.active {
+            display: flex;
+        }
+
+        @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-dock-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #1e293b;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .floating-dock-item:hover {
+            background: #f1f5f9;
+            color: #2563eb;
+        }
+
+        .floating-dock-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .floating-dock-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Toast Notification Popup */
+        .toast-popup {
+            position: fixed;
+            top: 45px;
+            left: 6px;
+            background: #1e293b;
+            color: #fff;
+            padding: 0.55rem 0.95rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+            z-index: 1000000;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .toast-popup.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =========================================================================
+         * 🖨️ [ANCHOR: CSS-PRINT] A4 Portrait 列印與 PDF 匯出最佳化樣式
+         * ========================================================================= */
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 8mm 8mm; /* Compact margins to maximize printable area */
+                margin: 8mm 8mm;
             }
             body {
                 background-color: #ffffff !important;
@@ -38,7 +180,7 @@
                 font-size: 8.5pt;
                 line-height: 1.25;
             }
-            .no-print, nav, #tab-container, .no-print-btn {
+            .no-print, nav, #tab-container, .no-print-btn, .floating-quick-dock {
                 display: none !important;
             }
             header {
@@ -52,22 +194,19 @@
                 padding: 0.5rem 0.75rem !important;
             }
             
-            /* Unhide all tab contents during export */
             .tab-content {
                 display: block !important;
                 visibility: visible !important;
                 margin-bottom: 1rem;
             }
             
-            /* Clean section breaks without creating orphan pages */
             .tab-content-section {
                 page-break-before: always;
             }
             .tab-content-section:first-child, #content-flowchart {
-                page-break-before: auto !important; /* First tab flows right after header */
+                page-break-before: auto !important;
             }
             
-            /* Mermaid Flowchart Scaling - Fits perfectly on Page 1 with Header & Legend */
             .mermaid {
                 border: 1px solid #cbd5e1 !important;
                 box-shadow: none !important;
@@ -77,13 +216,12 @@
                 text-align: center;
             }
             .mermaid svg {
-                max-height: 15.5cm !important; /* Constrain height so Page 1 contains Header + Legend + Diagram */
+                max-height: 15.5cm !important;
                 width: auto !important;
                 max-width: 100% !important;
                 margin: 0 auto !important;
             }
 
-            /* Prevent page breaks inside cards, tables, and sections */
             .grid > div, tr, .bg-white {
                 page-break-inside: avoid !important;
             }
@@ -107,14 +245,52 @@
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col">
 
-    <!-- Header / Banner -->
+    <!-- =========================================================================
+     * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+     * ========================================================================= -->
+    <div class="floating-quick-dock no-print" id="floatingQuickDock">
+        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+            🧭
+        </div>
+        <div class="floating-dock-menu" id="floatingDockMenu">
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('01_dashboard')">
+                <span>📊</span> 01 儀表台總覽
+            </button>
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('02_qsa')">
+                <span>🛡️</span> 02 QSA 體系稽核
+            </button>
+            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+                <span>⚙️</span> 03 QPA 製程 (建置中)
+            </button>
+            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('04_procurement')">
+                <span>📦</span> 04 設備採購 (建置中)
+            </button>
+            <button type="button" class="floating-dock-item active" onclick="navigateToModule('sop_guide')">
+                <span>📘</span> SOP 應對指南
+            </button>
+            <div style="height:1px; background:#e2e8f0; margin:2px 0;"></div>
+            <button type="button" class="floating-dock-item" onclick="window.location.reload()">
+                <span>🔄</span> 重新載入當前頁
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Popup -->
+    <div class="toast-popup no-print" id="toastPopup">
+        <span id="toastIcon">ℹ️</span>
+        <span id="toastMsg">提示訊息</span>
+    </div>
+
+    <!-- =========================================================================
+     * 🧱 [ANCHOR: DOM-NAVBAR] 頂部固定 Header、官方 LOGO 與操作按鈕
+     * ========================================================================= -->
     <header class="bg-slate-900 text-white shadow-lg border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-[96%] mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
                 
-                <div class="flex items-center gap-4">
-                    <!-- Foxlink White Logo -->
-                    <img src="https://i.postimg.cc/rsb3xvLj/foxlink.png" alt="Foxlink Logo" class="h-7 w-auto flex-shrink-0" style="filter: grayscale(100%) invert(100%) contrast(200%); mix-blend-mode: screen;">
+                <div class="flex items-center gap-4 ml-5">
+                    <!-- Foxlink Official Standard White Logo -->
+                    <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink Logo" class="h-7 w-auto flex-shrink-0">
                     <div>
                         <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-0.5">
                             <span data-en="ISO 9001 / ISO 19011 Compliance System" data-zh="ISO 9001 / ISO 19011 合規體系">ISO 9001 / ISO 19011 Compliance System</span>
@@ -141,13 +317,11 @@
 
                     <!-- Action Controls (Language Toggle & PDF Export) -->
                     <div class="flex items-center gap-2 no-print">
-                        <!-- Language Toggle -->
                         <div class="bg-slate-800 border border-slate-700 rounded-lg p-0.5 flex items-center text-xs">
                             <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2.5 py-1 rounded font-semibold text-white bg-blue-600 transition">EN</button>
                             <button id="lang-btn-zh" onclick="setLanguage('zh')" class="px-2.5 py-1 rounded font-semibold text-slate-400 hover:text-white transition">中文</button>
                         </div>
 
-                        <!-- Export PDF Button -->
                         <button onclick="exportToPDF()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition">
                             <i data-lucide="file-down" class="w-4 h-4"></i>
                             <span data-en="Export PDF" data-zh="導出 PDF 報告">Export PDF</span>
@@ -190,10 +364,10 @@
     <!-- Main Content Body -->
     <main class="max-w-[96%] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
 
-        <!-- TAB 1: FLOWCHART -->
+        <!-- =========================================================================
+         * 📊 [ANCHOR: DOM-FLOWCHART] Tab 1 Mermaid 標準整改流程圖
+         * ========================================================================= -->
         <section id="content-flowchart" class="tab-content tab-content-section block space-y-4">
-
-            <!-- Flowchart Norm Legend Box -->
             <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm space-y-2">
                 <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
                     <i data-lucide="shapes" class="text-blue-600"></i>
@@ -219,7 +393,6 @@
                 </div>
             </div>
 
-            <!-- Mermaid Standard Flowchart Container -->
             <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                     <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
@@ -231,13 +404,9 @@
                     </span>
                 </div>
 
-                <!-- Mermaid Render Div -->
-                <div id="mermaid-container" class="mermaid overflow-x-auto flex justify-center py-2">
-                    <!-- Rendered dynamically by JS -->
-                </div>
+                <div id="mermaid-container" class="mermaid overflow-x-auto flex justify-center py-2"></div>
             </div>
 
-            <!-- Phase Step Breakdown Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                     <span class="text-xs font-bold text-blue-600 uppercase tracking-wider bg-blue-50 px-2 py-0.5 rounded">Phase 1 - 2</span>
@@ -257,16 +426,16 @@
             </div>
         </section>
 
-        <!-- TAB 2: ROLES & RESPONSIBILITIES -->
+        <!-- =========================================================================
+         * 👥 [ANCHOR: DOM-ROLES] Tab 2 成員崗位與 KRA 職責卡片
+         * ========================================================================= -->
         <section id="content-roles" class="tab-content tab-content-section hidden space-y-6">
             <div class="border-b border-slate-200 pb-3">
                 <h2 class="text-lg font-bold text-slate-900" data-en="Team Member Roles & KRA Duties Breakdown" data-zh="小組成員崗位與 KRA 職責分工明細">Team Member Roles & KRA Duties Breakdown</h2>
                 <p class="text-xs text-slate-500 mt-0.5" data-en="Covers China/TW HQ management, India site Quality & Production leaders, and factory IT/PE engineering teams." data-zh="涵蓋 China/TW 總部管理層、India 現場品保與生產主管，以及工廠 IT/工程技術支援團隊。">Covers China/TW HQ management, India site Quality & Production leaders, and factory IT/PE engineering teams.</p>
             </div>
 
-            <!-- Role Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-
                 <!-- 1. Yanlin (QM) -->
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
                     <div class="bg-purple-600 text-white p-3.5 flex items-center justify-between">
@@ -295,9 +464,7 @@
                                 <span data-en="NC Tracker Update: Formally updates NC completion progress to 100% after verification." data-zh="NC 完成度維護：認可後正式更新 NC (Non-Conformity) 追蹤表進度。"><strong>NC Tracker Update:</strong> Formally updates NC completion progress to 100% after verification.</span>
                             </li>
                         </ul>
-                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
-                            ISO Role: Lead Auditor
-                        </div>
+                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">ISO Role: Lead Auditor</div>
                     </div>
                 </div>
 
@@ -325,9 +492,7 @@
                                 <span data-en="SSSTC Interface: Submits approved CAP Plan & closure report to SSSTC PM." data-zh="SSSTC 專案對口：負責將通過審核的 CAP Plan 與閉環報告對外提交至 SSSTC PM。"><strong>SSSTC Interface:</strong> Submits approved CAP Plan & closure report to SSSTC PM.</span>
                             </li>
                         </ul>
-                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
-                            ISO Role: Project Schedule & Client Communicator
-                        </div>
+                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">ISO Role: Project Schedule & Client Communicator</div>
                     </div>
                 </div>
 
@@ -355,9 +520,7 @@
                                 <span data-en="Horizontal Deployment: Evaluates horizontal expansion to other production lines." data-zh="體系標準化：評估整改措施是否需橫向展開 (Horizontal Roll-out) 至其他產線。"><strong>Horizontal Deployment:</strong> Evaluates horizontal expansion to other production lines.</span>
                             </li>
                         </ul>
-                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
-                            ISO Role: Quality Gatekeeper & Final Approver (Accountable)
-                        </div>
+                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">ISO Role: Quality Gatekeeper & Final Approver (Accountable)</div>
                     </div>
                 </div>
 
@@ -388,9 +551,7 @@
                                 <span data-en="On-site Urging: Helps PM (Yancy) urge Sateesh & Shahabaz to submit evidence on time." data-zh="現場進度催繳：協助 PM (Yancy) 於印度現場催促 Sateesh 與 Shahabaz 依限提交 Evidence。"><strong>On-site Urging:</strong> Helps PM (Yancy) urge Sateesh & Shahabaz to submit evidence on time.</span>
                             </li>
                         </ul>
-                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
-                            ISO Role: Remote Audit Facilitator
-                        </div>
+                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">ISO Role: Remote Audit Facilitator</div>
                     </div>
                 </div>
 
@@ -418,9 +579,7 @@
                                 <span data-en="Live Audit Demo: Explains QA sampling logic and demonstrates Poka-yoke data to Yanlin." data-zh="視訊品質驗證演示：於遠端視訊中向 Yanlin 說明 QA 抽檢邏輯與展示防呆數據。"><strong>Live Audit Demo:</strong> Explains QA sampling logic and demonstrates Poka-yoke data to Yanlin.</span>
                             </li>
                         </ul>
-                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
-                            ISO Role: Site Action Owner
-                        </div>
+                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">ISO Role: Site Action Owner</div>
                     </div>
                 </div>
 
@@ -451,9 +610,7 @@
                                 <span data-en="First Article Output: Executes First Article Inspection (FAI) and delivers production logs to Sateesh." data-zh="開線首件與檢驗產出：負責開線執行首件確認 (First Article Inspection) 並產出生產紀錄交 Sateesh。"><strong>First Article Output:</strong> Executes FAI and delivers production logs to Sateesh.</span>
                             </li>
                         </ul>
-                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
-                            ISO Role: Production Owner
-                        </div>
+                        <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-500 font-medium">ISO Role: Production Owner</div>
                     </div>
                 </div>
 
@@ -489,18 +646,18 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- TAB 3: RACI MATRIX -->
+        <!-- =========================================================================
+         * 📋 [ANCHOR: DOM-RACI] Tab 3 RACI 權責矩陣
+         * ========================================================================= -->
         <section id="content-raci" class="tab-content tab-content-section hidden space-y-6">
             <div class="border-b border-slate-200 pb-3 flex flex-col md:flex-row md:items-center justify-between gap-3">
                 <div>
                     <h2 class="text-lg font-bold text-slate-900" data-en="RACI Governance Matrix" data-zh="RACI 職責授權矩陣">RACI Governance Matrix</h2>
                     <p class="text-xs text-slate-500 mt-0.5" data-en="Defines who is Responsible (R), Accountable (A), Consulted (C), and Informed (I) for each stage." data-zh="明確定義每一階段誰主導 (A)、誰執行 (R)、誰協助/諮詢 (C)、誰知悉 (I)。">Defines who is Responsible (R), Accountable (A), Consulted (C), and Informed (I) for each stage.</p>
                 </div>
-                <!-- RACI Legend -->
                 <div class="flex items-center gap-3 text-xs bg-white p-2 rounded-lg border border-slate-200">
                     <span class="flex items-center gap-1"><strong class="bg-red-100 text-red-700 px-1.5 py-0.5 rounded">R</strong> <span data-en="Responsible" data-zh="負責執行">Responsible</span></span>
                     <span class="flex items-center gap-1"><strong class="bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded">A</strong> <span data-en="Accountable" data-zh="最終核准">Accountable</span></span>
@@ -604,7 +761,9 @@
             </div>
         </section>
 
-        <!-- TAB 4: REMOTE AUDIT PROTOCOL -->
+        <!-- =========================================================================
+         * 📹 [ANCHOR: DOM-REMOTE-AUDIT] Tab 4 遠端 Gemba 視訊稽核規範
+         * ========================================================================= -->
         <section id="content-remote-audit" class="tab-content tab-content-section hidden space-y-6">
             <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-5">
                 <div>
@@ -613,7 +772,6 @@
                     <p class="text-xs text-slate-500 mt-0.5" data-en="Solves the absence of TW/CN QA managers in India while fulfilling ISO objectivity requirements." data-zh="為解決「印度廠無 China/TW 品質主管駐點」且需滿足「ISO 客觀獨立性」的最佳解決方案。">Solves the absence of TW/CN QA managers in India while fulfilling ISO objectivity requirements.</p>
                 </div>
 
-                <!-- Boundaries & Roles Box -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="p-3.5 bg-red-50 rounded-xl border border-red-200">
                         <h4 class="font-bold text-red-900 text-xs flex items-center gap-2 mb-1.5">
@@ -639,7 +797,6 @@
                     </div>
                 </div>
 
-                <!-- Execution Steps -->
                 <div class="border-t border-slate-200 pt-4">
                     <h3 class="font-bold text-slate-900 text-sm mb-3" data-en="Remote Video Audit 4-Step Standard Operating Procedure" data-zh="遠端視訊稽核 4 步標準作業程序 (SOP)">Remote Video Audit 4-Step Standard Operating Procedure</h3>
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
@@ -665,11 +822,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- TAB 5: CHECKSHEET TOOL -->
+        <!-- =========================================================================
+         * ✅ [ANCHOR: DOM-CHECKLIST] Tab 5 現場驗證 Checksheet 管理工具
+         * ========================================================================= -->
         <section id="content-checklist" class="tab-content tab-content-section hidden space-y-6">
             <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-5">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 pb-3">
@@ -683,7 +841,6 @@
                     </button>
                 </div>
 
-                <!-- Interactive Checklist Table -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs text-left">
                         <thead class="bg-slate-50 text-slate-700 uppercase font-semibold border-b border-slate-200 text-[11px]">
@@ -697,7 +854,6 @@
                             </tr>
                         </thead>
                         <tbody id="checklist-tbody" class="divide-y divide-slate-200">
-                            <!-- Default Row 1 -->
                             <tr>
                                 <td class="py-2.5 px-3 text-center font-bold text-slate-500">1</td>
                                 <td class="py-2.5 px-3">
@@ -720,7 +876,6 @@
                                     <button onclick="deleteRow(this)" class="text-red-500 hover:text-red-700 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                                 </td>
                             </tr>
-                            <!-- Default Row 2 -->
                             <tr>
                                 <td class="py-2.5 px-3 text-center font-bold text-slate-500">2</td>
                                 <td class="py-2.5 px-3">
@@ -762,16 +917,72 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500">
+    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500 no-print">
         SSSTC Project Audit CAPA Taskforce Standard Operating Procedure • Foxlink Quality Management System
     </footer>
 
-    <!-- App Scripts -->
+    <!-- =========================================================================
+     * 🧠 [ANCHOR: JS-STATE] 全域狀態、語系切換與 Mermaid 渲染引擎
+     * ========================================================================= -->
     <script>
-        // State Management
-        let currentLang = 'en'; // Default language is English
+        // Standard Universal Module URLs Dictionary
+        const PORTAL_URLS = {
+            '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
+            '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
+            '03_qpa': '',
+            '04_procurement': '',
+            'sop_guide': 'https://html.foxlink.co.in/reports/report-1785909929403.html'
+        };
 
-        // Mermaid Code Definitions for Both Languages
+        function navigateToModule(modId) {
+            if (modId === 'sop_guide') {
+                toggleFloatingDock();
+                return;
+            }
+            const url = PORTAL_URLS[modId];
+            if (!url) {
+                showModulePendingToast(modId);
+                return;
+            }
+            window.location.href = url;
+        }
+
+        function toggleFloatingDock() {
+            const menu = document.getElementById('floatingDockMenu');
+            if (menu) menu.classList.toggle('active');
+        }
+
+        let toastTimer = null;
+        function showToast(icon, msg) {
+            const toast = document.getElementById('toastPopup');
+            const iconEl = document.getElementById('toastIcon');
+            const msgEl = document.getElementById('toastMsg');
+            if (!toast) return;
+
+            iconEl.innerText = icon;
+            msgEl.innerText = msg;
+            toast.classList.add('active');
+
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('active');
+            }, 2600);
+        }
+
+        function showModulePendingToast(modId) {
+            const modNames = {
+                '03_qpa': (currentLang === 'en') ? '03 QPA Audit' : '03 QPA 製程',
+                '04_procurement': (currentLang === 'en') ? '04 Procurement' : '04 設備採購'
+            };
+            const name = modNames[modId] || '此模組';
+            const msg = (currentLang === 'en') ? `${name} is currently under construction!` : `${name} 模組建置中，敬請期待！`;
+            showToast('⚙️', msg);
+            const dockMenu = document.getElementById('floatingDockMenu');
+            if (dockMenu) dockMenu.classList.remove('active');
+        }
+
+        let currentLang = 'en';
+
         const mermaidCodeEn = `
 flowchart TD
     classDef startEnd fill:#e0f2fe,stroke:#0288d1,stroke-width:2px,color:#01579b;
@@ -866,7 +1077,6 @@ flowchart TD
     P6 --> END_NODE
         `;
 
-        // Initialize App on Window Load
         window.onload = function() {
             lucide.createIcons();
             mermaid.initialize({
@@ -881,7 +1091,6 @@ flowchart TD
             renderMermaid();
         };
 
-        // Render Mermaid Diagram Dynamically
         async function renderMermaid() {
             const container = document.getElementById('mermaid-container');
             if (!container) return;
@@ -898,11 +1107,9 @@ flowchart TD
             }
         }
 
-        // Language Switcher Function
         function setLanguage(lang) {
             currentLang = lang;
 
-            // Toggle Button active classes
             const btnEn = document.getElementById('lang-btn-en');
             const btnZh = document.getElementById('lang-btn-zh');
 
@@ -916,7 +1123,6 @@ flowchart TD
                 document.documentElement.lang = 'zh-TW';
             }
 
-            // Update DOM Elements with data-en & data-zh attributes
             const translatableElements = document.querySelectorAll('[data-en][data-zh]');
             translatableElements.forEach(el => {
                 const text = el.getAttribute(`data-${lang}`);
@@ -929,12 +1135,10 @@ flowchart TD
                 }
             });
 
-            // Re-render Mermaid Chart with the corresponding language syntax
             renderMermaid();
             lucide.createIcons();
         }
 
-        // Tab Switching Logic
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.add('hidden');
@@ -957,7 +1161,6 @@ flowchart TD
             lucide.createIcons();
         }
 
-        // Add Checklist Item Row
         function addChecklistItem() {
             const tbody = document.getElementById('checklist-tbody');
             const rowCount = tbody.children.length + 1;
@@ -992,7 +1195,6 @@ flowchart TD
             lucide.createIcons();
         }
 
-        // Delete Checklist Row
         function deleteRow(btn) {
             const row = btn.closest('tr');
             row.remove();
@@ -1002,19 +1204,15 @@ flowchart TD
             });
         }
 
-        // Optimized PDF Export Handler
         function exportToPDF() {
-            // Unhide all tabs temporarily for full document printing
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
                 content.classList.remove('hidden');
                 content.classList.add('block');
             });
 
-            // Trigger standard browser print configured for A4 Portrait via CSS
             window.print();
 
-            // Re-apply active tab state after print dialogue closes
             const activeTabBtn = document.querySelector('.tab-btn.tab-active');
             if (activeTabBtn) {
                 const activeTabId = activeTabBtn.id.replace('tab-', '');
