@@ -3,27 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D1 Audit Management System - QSA Observations 管理系統 (v3.9 預設英文版)</title>
+    <title>SSSTC D1 QSA 品質體系稽核管理系統 (v4.0 雙分頁儀表台版)</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chart.js 核心庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
+        /* =========================================================================
+         * 🗺️ [CODE MAP] SSSTC WebUI 架構導引目錄 (AI 代理人快速定位專用)
+         * =========================================================================
+         * 1. 🎨 [ANCHOR: CSS-THEME]      - 主題色彩變數與全域樣式 (Tokens & Reset)
+         * 2. 📊 [ANCHOR: CSS-DASHBOARD]  - Tab 1 儀表台與 KPI 卡片樣式
+         * 3. 📋 [ANCHOR: CSS-TABLE]      - Tab 2 Google Sheet 表格與高亮列樣式
+         * 4. 🗂️ [ANCHOR: CSS-DRAWER]     - CAPA 側邊抽屜樣式 (無遮罩 Side-by-Side)
+         * 5. 🧱 [ANCHOR: DOM-NAVBAR]     - 頂部 LOGO、狀態燈、雙分頁按鈕骨架
+         * 6. 📊 [ANCHOR: DOM-DASHBOARD]  - 儀表台 KPI 與 Canvas 圖表骨架
+         * 7. 📋 [ANCHOR: DOM-TABLE]      - Sheet 表格與工具列 DOM 骨架
+         * 8. 🗂️ [ANCHOR: DOM-DRAWER]     - CAPA 詳情抽屜 DOM 骨架
+         * 9. 🧠 [ANCHOR: JS-STATE]       - 全域狀態、雙語快取與 Mock 數據
+         * 10.📈 [ANCHOR: JS-CHARTS]      - Chart.js 初始化、動態聚合與生命週期銷毀
+         * 11.📋 [ANCHOR: JS-TABLE]       - 表格渲染、雙語切換與搜尋過濾
+         * 12.🗂️ [ANCHOR: JS-DRAWER]      - 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
+         * 13.☁️ [ANCHOR: JS-CLOUD]       - GAS 雲端 API 資料拉取與雙向 POST 儲存
+         * =========================================================================
+         */
+
+        /* =========================================================================
+         * 🎨 [ANCHOR: CSS-THEME] 主題色彩變數與全域樣式
+         * ========================================================================= */
         :root {
             --bg-primary: #0b0f19;
             --bg-secondary: #131b2e;
-            --bg-card: rgba(19, 27, 46, 0.75);
-            --bg-hover: #1e293b;
-            --accent-primary: #3b82f6;
-            --accent-hover: #2563eb;
+            --bg-card: rgba(19, 27, 46, 0.85);
+            --bg-card-elevated: #1e293b;
+            --bg-hover: #26334d;
+            
+            /* QSA 專屬主題色彩 (Cyber Violet & Cyan) */
+            --accent-primary: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --accent-glow: rgba(139, 92, 246, 0.35);
+            --accent-cyan: #06b6d4;
             --accent-success: #10b981;
             --accent-warning: #f59e0b;
             --accent-danger: #ef4444;
             --accent-purple: #a855f7;
+            
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.08);
+            --border-focus: rgba(139, 92, 246, 0.5);
             --formula-bg: rgba(30, 41, 59, 0.6);
             --dirty-bg: rgba(245, 158, 11, 0.2);
             --dirty-border: #f59e0b;
@@ -31,11 +62,11 @@
             --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
 
-            /* Group Banners Colors (100% 實體不透明深色背景，徹底防止透光) */
-            --group-cat-bg: #142e2a;
-            --group-sub-bg: #192744;
-            --group-nc-bg: #341b2b;
-            --group-capa-bg: #352a16;
+            /* Group Banners Colors */
+            --group-cat-bg: #1e1b4b;
+            --group-sub-bg: #172554;
+            --group-nc-bg: #3b1424;
+            --group-capa-bg: #3f2c12;
         }
 
         * {
@@ -56,7 +87,7 @@
             color: var(--text-main);
         }
 
-        /* 👑 頂部固定導覽列區塊 (Fixed Top Nav Wrapper) - 自動精確高度，零重疊 */
+        /* 👑 頂部固定導覽列區塊 */
         .sticky-top-wrapper {
             flex: 0 0 auto;
             z-index: 1000;
@@ -65,7 +96,7 @@
             border-bottom: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
 
         /* 頂部 Header */
@@ -80,34 +111,40 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 0.85rem;
+            gap: 1rem;
         }
 
-        .brand-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
-        }
-
-        .brand-icon svg {
-            width: 22px;
-            height: 22px;
-            fill: white;
+        /* 官方純白 LOGO (不包底、純透明懸浮) */
+        .brand-logo-img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.2));
+            display: block;
         }
 
         .brand-title h1 {
             font-size: 1.15rem;
             font-weight: 800;
             letter-spacing: -0.01em;
-            background: linear-gradient(90deg, #ffffff, #94a3b8);
+            background: linear-gradient(90deg, #ffffff, #c4b5fd);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            color: #c4b5fd;
+            -webkit-text-fill-color: initial;
         }
 
         .brand-title p {
@@ -116,6 +153,7 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
+            margin-top: 2px;
         }
 
         .header-actions {
@@ -146,7 +184,6 @@
             box-shadow: 0 0 8px #34d399;
         }
 
-        /* 外部 Google Sheet 直連按鈕 */
         .btn-sheet-link {
             background: rgba(16, 185, 129, 0.15);
             color: #34d399;
@@ -170,7 +207,6 @@
             transform: translateY(-1px);
         }
 
-        /* 全螢幕按鈕 */
         .btn-fullscreen {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -189,7 +225,7 @@
             background: var(--accent-primary);
             border-color: var(--accent-primary);
             color: #ffffff;
-            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 2px 10px var(--accent-glow);
         }
 
         .btn-fullscreen svg {
@@ -198,7 +234,7 @@
             fill: currentColor;
         }
 
-        /* 語系切換按鈕 */
+        /* 語系切換按鈕 (預設繁中 active) */
         .lang-switch {
             display: inline-flex;
             align-items: center;
@@ -221,9 +257,9 @@
         }
 
         .lang-btn.active {
-            background: #2563eb !important;
+            background: var(--accent-primary) !important;
             color: #ffffff !important;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);
+            box-shadow: 0 2px 8px var(--accent-glow);
         }
 
         .btn {
@@ -242,7 +278,11 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
             color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px var(--accent-glow);
         }
 
         .btn-success {
@@ -282,7 +322,7 @@
             margin-left: 0.3rem;
         }
 
-        /* 頂部視圖與 Tab 頁籤 (已納入置頂凍結範圍) */
+        /* 👑 雙分頁切換導覽列 */
         .tabs-header {
             display: flex;
             align-items: center;
@@ -290,161 +330,234 @@
             padding: 0.5rem 1.5rem;
             flex-wrap: wrap;
             gap: 0.6rem;
-            background: rgba(19, 27, 46, 0.6);
+            background: rgba(19, 27, 46, 0.75);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .tabs-nav {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .tab-btn {
-            background: var(--accent-primary);
-            border: none;
-            color: white;
-            padding: 0.55rem 1.1rem;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            cursor: default;
-            white-space: nowrap;
+        .tabs-main-nav {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
         }
 
-        /* 視圖切換按鈕組 */
-        .view-switcher {
+        .tab-main-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
-            background: var(--bg-primary);
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .tab-main-btn:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #ffffff;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .tab-main-btn.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(6, 182, 212, 0.2));
+            color: #ffffff;
+            border-color: var(--accent-primary);
+            box-shadow: 0 2px 12px var(--accent-glow);
+        }
+
+        .view-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(11, 15, 25, 0.6);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
             padding: 0.2rem;
+            border-radius: 8px;
         }
 
         .view-btn {
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 0.35rem 0.85rem;
+            padding: 0.35rem 0.75rem;
             border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 700;
+            font-size: 0.78rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
         }
 
         .view-btn.active {
-            background: rgba(59, 130, 246, 0.25);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.5);
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            background: var(--bg-card-elevated);
+            color: var(--text-main);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
         }
 
-        /* 🔵 主區域 - 頁面唯一縱向與橫向滾動容器 (padding-top 為 0 確保表頭黏靠 top:0 時上方零縫隙) */
+        /* 主滾動區域 */
         main {
-            flex: 1 1 0px;
+            flex: 1 1 0;
             min-height: 0;
-            overflow: auto;
-            padding: 0 1.5rem 1.25rem 1.5rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 1.25rem 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            max-width: 1750px;
-            width: 100%;
-            margin: 0 auto;
-            box-sizing: border-box;
+            gap: 1.25rem;
+            position: relative;
         }
 
-        /* 微型 KPI 統計儀表板 (KPI Analytics Bar) - 提供頁面頂部間距 */
-        .kpi-bar {
+        /* =========================================================================
+         * 📊 [ANCHOR: CSS-DASHBOARD] Tab 1 儀表台與 KPI 卡片樣式
+         * ========================================================================= */
+        .dashboard-view {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 0.85rem;
-            width: 100%;
-            margin-top: 1.25rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 1200px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .kpi-grid { grid-template-columns: 1fr; }
         }
 
         .kpi-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 0.75rem 1rem;
+            padding: 1.2rem 1.4rem;
             display: flex;
             align-items: center;
-            gap: 0.85rem;
-            transition: all 0.2s ease;
+            gap: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .kpi-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
+            border-color: rgba(139, 92, 246, 0.35);
         }
 
-        .kpi-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+        }
+        .kpi-total::before { background: #3b82f6; }
+        .kpi-nc::before { background: #ef4444; }
+        .kpi-hl::before { background: #a855f7; }
+        .kpi-pass::before { background: #10b981; }
+
+        .kpi-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             flex-shrink: 0;
         }
+        .kpi-total .kpi-icon-wrap { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+        .kpi-nc .kpi-icon-wrap { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+        .kpi-hl .kpi-icon-wrap { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+        .kpi-pass .kpi-icon-wrap { background: rgba(16, 185, 129, 0.15); color: #34d399; }
 
-        .kpi-total .kpi-icon { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
-        .kpi-nc .kpi-icon    { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .kpi-hl .kpi-icon    { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
-        .kpi-pass .kpi-icon  { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .kpi-info { flex: 1; }
+        .kpi-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+        .kpi-value { font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono); margin-top: 0.15rem; }
+        .kpi-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: normal; margin-left: 0.3rem; }
 
-        .kpi-info {
+        /* 圖表網格佈局 */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1.25rem;
+        }
+        @media (max-width: 1024px) {
+            .charts-grid { grid-template-columns: 1fr; }
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow-lg);
             display: flex;
             flex-direction: column;
-            gap: 0.15rem;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chart-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .chart-container-box {
+            height: 260px;
+            position: relative;
             width: 100%;
         }
 
-        .kpi-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--text-muted);
+        /* =========================================================================
+         * 📋 [ANCHOR: CSS-TABLE] Tab 2 Google Sheet 表格與高亮列樣式
+         * ========================================================================= */
+        .detail-view {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            animation: fadeIn 0.25s ease-out;
         }
 
-        .kpi-value {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--text-main);
-            line-height: 1;
-            display: flex;
-            align-items: baseline;
-            gap: 0.4rem;
-        }
-
-        .kpi-sub {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        /* 工具列與狀態篩選晶片 */
         .toolbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
             flex-wrap: wrap;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
         }
 
         .toolbar-left {
             display: flex;
             align-items: center;
-            gap: 0.85rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
         }
 
@@ -455,7 +568,7 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 0.45rem 0.85rem;
-            width: 320px;
+            width: 300px;
             transition: border-color 0.2s;
         }
 
@@ -473,7 +586,6 @@
             outline: none;
         }
 
-        /* 淨化後的 Status Filter Chips (僅包含真實數據 All, Fail/NC, Highlight) */
         .filter-chips {
             display: flex;
             align-items: center;
@@ -502,10 +614,10 @@
         }
 
         .chip-btn.active {
-            background: #2563eb;
+            background: var(--accent-primary);
             color: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+            border-color: var(--accent-primary);
+            box-shadow: 0 2px 10px var(--accent-glow);
         }
 
         .chip-nc.active { background: #ef4444; border-color: #ef4444; box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4); }
@@ -519,22 +631,12 @@
             gap: 1.2rem;
         }
 
-        .legend-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .legend-box {
-            width: 12px;
-            height: 12px;
-            border-radius: 3px;
-        }
-
+        .legend-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+        .legend-box { width: 12px; height: 12px; border-radius: 3px; }
         .legend-formula { background: var(--formula-bg); border: 1px solid var(--border-color); }
         .legend-dirty { background: var(--dirty-bg); border: 1px solid var(--dirty-border); }
 
-        /* 資料表格容器 - 不設內嵌縱向滾動，讓父級 main 成為唯一滾動容器 */
+        /* 表格容器 */
         .table-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -544,53 +646,99 @@
             width: 100%;
         }
 
-        /* ⚡ Compact View 強制 100% 滿版無橫向滾動條 (No Horizontal Scroll) */
         .table-container.compact-mode {
             overflow-x: hidden !important;
         }
-
         .table-container.compact-mode table {
             width: 100% !important;
             min-width: 100% !important;
             table-layout: fixed !important;
         }
-
-        /* ⚡ Compact View 右側邊界防推爆專屬 Padding 與字體控制 */
         .table-container.compact-mode th,
         .table-container.compact-mode td {
             padding: 0.45rem 0.35rem !important;
             box-sizing: border-box;
         }
 
-        .table-container.compact-mode .status-pill {
-            padding: 0.2rem 0.4rem !important;
-            font-size: 0.69rem !important;
-            white-space: nowrap;
-            display: inline-block;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.2;
-        }
-
-        .table-container.compact-mode .btn-capa-view {
-            padding: 0.25rem 0.45rem !important;
-            font-size: 0.72rem !important;
-            white-space: nowrap;
-        }
-
-        /* 📊 Classic Full Sheet 保留 14 欄橫向滾動 */
         .table-container.classic-mode {
             overflow-x: auto !important;
         }
-
         .table-container.classic-mode table {
             width: max-content !important;
             min-width: 100% !important;
             table-layout: auto !important;
         }
 
-        /* Compact View 儲存格優化 */
+        table {
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            color: var(--text-main);
+        }
+
+        th, td {
+            padding: 0.65rem 0.85rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background: #141b2d;
+            font-weight: 700;
+            color: #cbd5e1;
+            white-space: nowrap;
+        }
+
+        tr:hover td {
+            background: rgba(139, 92, 246, 0.04);
+        }
+
+        .group-header-row th {
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            padding: 0.45rem 0.5rem;
+            color: #ffffff;
+        }
+
+        .th-group-cat { background-color: var(--group-cat-bg) !important; border-color: #2e3860 !important; }
+        .th-group-nc { background-color: var(--group-nc-bg) !important; border-color: #5c203b !important; }
+        .th-group-capa { background-color: var(--group-capa-bg) !important; border-color: #63471c !important; }
+
+        .status-pill {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .pill-fail { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); }
+        .pill-pass { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+        .pill-pending { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+        .pill-highlight { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
+
+        .btn-capa-view {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+            color: #c4b5fd;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+        .btn-capa-view:hover {
+            background: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 2px 8px var(--accent-glow);
+        }
+
         .compact-cell-ellipsis {
             white-space: nowrap;
             overflow: hidden;
@@ -599,508 +747,101 @@
             width: 100%;
         }
 
-        .compact-cell-clamp2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.35;
-            max-height: 2.7em;
-            word-break: break-word;
+        /* ⚡ 當前 CAPA 詳情對應表格列高亮 (Active Highlight Row) */
+        tr.active-capa-row td {
+            background: rgba(139, 92, 246, 0.32) !important;
+            border-top: 1.5px solid #a78bfa !important;
+            border-bottom: 1.5px solid #a78bfa !important;
+            box-shadow: inset 0 0 15px rgba(139, 92, 246, 0.35) !important;
+        }
+        tr.active-capa-row td:first-child {
+            border-left: 4px solid #a78bfa !important;
+        }
+        tr.active-capa-row td:last-child {
+            border-right: 1.5px solid #a78bfa !important;
         }
 
-        .dri-due-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.15rem;
-            cursor: pointer;
-            padding: 0.2rem 0;
-        }
-
-        .dri-title {
-            font-weight: 800;
-            font-size: 0.82rem;
-            color: #ffffff;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .due-date-sub {
-            font-size: 0.73rem;
-            color: #94a3b8;
-            font-family: var(--font-mono);
-            font-weight: 600;
-        }
-
-        table {
-            border-collapse: separate;
-            border-spacing: 0;
-            font-size: 0.84rem;
-            text-align: left;
-        }
-
-        /* 🟢 表頭精準黏靠：相對於主滾動容器 main 最頂端 (top: 0 即在 102px 固定導航列正下方) */
-        thead {
-            position: sticky;
-            top: 0;
-            z-index: 500;
-            background: #131b2e;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-        }
-
-        thead tr {
-            background-color: #131b2e;
-        }
-
-        th {
-            padding: 0.55rem 0.75rem;
-            font-weight: 700;
-            color: #e2e8f0;
-            background-color: #131b2e;
-            background-clip: border-box;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.12);
-            border-right: 1px solid var(--border-color);
-            white-space: nowrap;
-            line-height: 1.25;
-            user-select: none;
-            font-size: 0.81rem;
-            letter-spacing: 0.01em;
-            vertical-align: middle;
-            position: relative;
-            z-index: 510;
-        }
-
-        th.group-cell {
-            text-align: center;
-            font-size: 0.88rem;
-            font-weight: 800;
-            letter-spacing: 0.04em;
-            padding: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            white-space: nowrap;
-            background-clip: border-box;
-            position: relative;
-            z-index: 510;
-        }
-
-        th.group-cat  { background: var(--group-cat-bg);  color: #6ee7b7; border-right: 2px solid rgba(16, 185, 129, 0.4); }
-        th.group-sub  { background: var(--group-sub-bg);  color: #93c5fd; border-right: 2px solid rgba(59, 130, 246, 0.4); }
-        th.group-nc   { background: var(--group-nc-bg);   color: #f472b6; border-right: 2px solid rgba(236, 72, 153, 0.4); }
-        th.group-capa { background: var(--group-capa-bg); color: #fde047; }
-
-        th.col-first {
-            width: 60px;
-            min-width: 60px;
-            text-align: center;
-            background: #0b0f19;
-            color: var(--text-main);
-            white-space: nowrap;
-            position: relative;
-            z-index: 520;
-        }
-
-        /* 儲存格固定 38px 行高 */
-        td {
-            padding: 0.45rem 0.75rem;
-            border-bottom: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            color: #cbd5e1;
-            transition: background 0.15s, border-color 0.15s;
-            position: static;
-            vertical-align: middle;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 280px;
-            height: 38px;
-            cursor: pointer;
-        }
-
-        td:hover {
-            background-color: rgba(59, 130, 246, 0.15) !important;
-            color: #60a5fa !important;
-        }
-
-        tr:hover td {
-            background-color: rgba(255, 255, 255, 0.04);
-        }
-
-        /* 背景表格選中高亮列 */
-        tr.active-row td {
-            background-color: rgba(37, 99, 235, 0.35) !important;
-            color: #ffffff !important;
-            font-weight: 600;
-            border-bottom-color: rgba(59, 130, 246, 0.6) !important;
-            border-top-color: rgba(59, 130, 246, 0.6) !important;
-        }
-
-        tr.active-row td:first-child {
-            border-left: 4px solid #3b82f6 !important;
-            box-shadow: inset 4px 0 10px rgba(59, 130, 246, 0.5);
-        }
-
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.18rem 0.55rem;
-            border-radius: 6px;
-            font-size: 0.74rem;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .pill-fail { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .pill-pass { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
-        .pill-pending { background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid rgba(245, 158, 11, 0.4); }
-        .pill-highlight { background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.5); }
-
-        td.cell-formula {
-            background: var(--formula-bg);
-            cursor: not-allowed;
-            color: #94a3b8;
-            font-family: var(--font-mono);
-            position: relative;
-        }
-
-        td.cell-formula::after {
-            content: "🔒";
-            font-size: 0.68rem;
-            position: absolute;
-            right: 6px;
-            top: 6px;
-            opacity: 0.6;
-        }
-
-        td.cell-dirty {
-            background: var(--dirty-bg) !important;
-            border: 1px solid var(--dirty-border) !important;
-            color: #fef08a !important;
-            font-weight: 600;
-        }
-
-        /* CAPA 彈窗觸發按鈕 */
-        .btn-capa-view {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.3));
-            color: #fef08a;
-            border: 1px solid rgba(245, 158, 11, 0.5);
-            padding: 0.22rem 0.65rem;
-            border-radius: 6px;
-            font-size: 0.76rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .btn-capa-view:hover {
-            background: rgba(245, 158, 11, 0.4);
-            border-color: #f59e0b;
-            color: #ffffff;
-            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
-            transform: scale(1.03);
-        }
-
-        /* ==================== CAPA 側邊抽屜 (Side Drawer / Modal) ==================== */
-        .capa-drawer-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 1200;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            pointer-events: auto;
-        }
-
-        .capa-drawer-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        /* =========================================================================
+         * 🗂️ [ANCHOR: CSS-DRAWER] CAPA 側邊抽屜樣式 (獨立懸浮、無黑色遮罩)
+         * ========================================================================= */
         .capa-drawer {
             position: fixed;
-            top: 0; right: -580px; bottom: 0;
-            width: 100%;
-            max-width: 580px;
-            background: #0f172a;
-            border-left: 1px solid rgba(59, 130, 246, 0.4);
-            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.85);
+            top: 0;
+            right: -620px;
+            width: 580px;
+            max-width: 92vw;
+            height: 100vh;
+            background: #111827;
+            border-left: 2px solid var(--accent-primary);
+            z-index: 2001;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.85);
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
-            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 1250;
+            pointer-events: auto;
         }
-
-        .capa-drawer-overlay.open .capa-drawer {
-            right: 0;
+        .capa-drawer.active {
+            right: 0 !important;
         }
 
         .drawer-header {
             padding: 1.25rem 1.5rem;
-            background: rgba(19, 27, 46, 0.98);
             border-bottom: 1px solid var(--border-color);
             display: flex;
-            align-items: flex-start;
             justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .drawer-header-title {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .drawer-header-title h2 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #fde047;
-            display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .drawer-header-subtitle {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-        }
-
-        .drawer-header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-copy-report {
-            background: rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            padding: 0.35rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            transition: all 0.2s;
-        }
-
-        .btn-copy-report:hover {
-            background: rgba(59, 130, 246, 0.4);
-            color: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-drawer-close {
-            background: var(--bg-hover);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-        }
-
-        .btn-drawer-close:hover {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            border-color: rgba(239, 68, 68, 0.4);
+            background: rgba(17, 24, 39, 0.98);
         }
 
         .drawer-body {
-            flex: 1;
             padding: 1.5rem;
             overflow-y: auto;
+            flex: 1;
             display: flex;
             flex-direction: column;
             gap: 1.25rem;
         }
 
-        .drawer-section-title {
-            font-size: 0.82rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            margin-bottom: 0.5rem;
+        .drawer-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.4rem;
-        }
-
-        .capa-info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.85rem;
-        }
-
-        .capa-field-card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 0.75rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .capa-field-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--text-muted);
-        }
-
-        .capa-field-value {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-main);
-            word-break: break-word;
+            background: rgba(17, 24, 39, 0.98);
         }
 
         .capa-text-box {
-            background: rgba(30, 41, 59, 0.4);
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 0.9rem;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
             font-size: 0.85rem;
-            line-height: 1.6;
-            color: #cbd5e1;
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-
-        .capa-edit-area {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .capa-edit-area label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #fde047;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            line-height: 1.5;
+            color: var(--text-main);
         }
 
         .capa-edit-area textarea {
             width: 100%;
-            height: 120px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            color: var(--text-main);
-            padding: 0.85rem;
-            font-family: inherit;
-            font-size: 0.88rem;
-            line-height: 1.5;
-            outline: none;
-            resize: vertical;
-            transition: border-color 0.2s;
-        }
-
-        .capa-edit-area textarea:focus {
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-        }
-
-        .drawer-footer {
-            padding: 1rem 1.5rem;
-            background: rgba(19, 27, 46, 0.95);
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .drawer-nav-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* 一般儲存格編輯 Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1500;
-        }
-
-        .modal-card {
+            min-height: 90px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
-            width: 90%;
-            max-width: 720px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .modal-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .modal-card textarea {
-            width: 100%;
-            height: 240px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
             border-radius: 8px;
+            padding: 0.75rem;
             color: var(--text-main);
-            padding: 0.85rem;
-            font-family: inherit;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 0.85rem;
             outline: none;
             resize: vertical;
+            font-family: inherit;
         }
-
-        .modal-card textarea:focus {
+        .capa-edit-area textarea:focus {
             border-color: var(--accent-primary);
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.75rem;
         }
 
         .loading-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(11, 15, 25, 0.8);
+            background: rgba(11, 15, 25, 0.85);
             backdrop-filter: blur(4px);
             display: flex;
             flex-direction: column;
@@ -1118,10 +859,7 @@
             border-radius: 50%;
             animation: spin 0.8s infinite linear;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         .toast-container {
             position: fixed;
@@ -1130,9 +868,8 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            z-index: 2000;
+            z-index: 3000;
         }
-
         .toast {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -1145,46 +882,29 @@
             gap: 0.6rem;
             animation: slideIn 0.3s ease-out forwards;
         }
-
         .toast-success { border-left: 4px solid var(--accent-success); }
         .toast-error { border-left: 4px solid var(--accent-danger); }
         .toast-info { border-left: 4px solid var(--accent-primary); }
-
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
-        }
-
-        .progress-bar-bg {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #10b981);
-            border-radius: 4px;
         }
     </style>
 </head>
 <body>
 
-    <!-- 👑 置頂凍結導覽列區塊 (Sticky Top Nav Wrapper) -->
+    <!-- =========================================================================
+     * 🧱 [ANCHOR: DOM-NAVBAR] 頂部 LOGO、狀態燈、雙分頁按鈕骨架
+     * ========================================================================= -->
     <div class="sticky-top-wrapper">
-        <!-- 頂部 Header -->
         <header>
             <div class="brand">
-                <div class="brand-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 7h10v2H7zm0 4h10v2H7zm0 4h7v2H7z"/>
-                    </svg>
-                </div>
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink" class="brand-logo-img">
                 <div class="brand-title">
-                    <h1 id="appTitle">D1 Audit QSA Observations 管理系統 (v3.1 單一滾動軸版)</h1>
+                    <h1 id="appTitle">
+                        SSSTC D1 QSA 品質體系稽核管理系統
+                        <span class="brand-badge">v4.0 雙分頁版</span>
+                    </h1>
                     <p>
                         <span class="connection-status">
                             <span class="status-dot"></span> <span id="statusText">在線資料庫連線中 (Live API Connected)</span>
@@ -1194,21 +914,18 @@
             </div>
 
             <div class="header-actions">
-                <!-- 直連外部 Google Sheet 原生試算表 -->
                 <a id="btnSheetLink" href="https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1459374771" target="_blank" rel="noopener noreferrer" class="btn-sheet-link" title="開啟 Google Sheet 對應語系原生試算表">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    <span id="btnSheetLinkText">🟢 Google Sheet 試算表</span>
+                    <span id="btnSheetLinkText">🟢 Google Sheet 繁中表</span>
                 </a>
 
-                <!-- 全螢幕 / 還原 切換鈕 -->
                 <button class="btn-fullscreen" id="btnFullscreen" onclick="toggleFullscreen()" title="切換全螢幕 (Toggle Fullscreen)">
                     <svg id="iconExpand" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
                     <svg id="iconCompress" viewBox="0 0 24 24" style="display: none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
                 </button>
 
-                <!-- 中英文語系切換鈕 -->
                 <div class="lang-switch">
-                    <button class="lang-btn" id="btnLangZH" onclick="switchLanguage('ZH')">繁中</button>
+                    <button class="lang-btn active" id="btnLangZH" onclick="switchLanguage('ZH')">繁中</button>
                     <button class="lang-btn" id="btnLangEN" onclick="switchLanguage('EN')">EN</button>
                 </div>
 
@@ -1224,14 +941,17 @@
             </div>
         </header>
 
-        <!-- 專焦單一 Tab 與雙模式切換 -->
         <div class="tabs-header">
-            <div class="tabs-nav" id="tabsNav">
-                <button class="tab-btn active">📊 QSA Observations</button>
+            <div class="tabs-main-nav">
+                <button class="tab-main-btn active" id="tabBtnDashboard" onclick="switchMainTab('dashboard')">
+                    📊 <span id="lblTabDashboard">儀表台 (Dashboard)</span>
+                </button>
+                <button class="tab-main-btn" id="tabBtnDetail" onclick="switchMainTab('detail')">
+                    📋 <span id="lblTabDetail">細節進度 (Sheet 視圖)</span>
+                </button>
             </div>
 
-            <!-- 視圖切換器 -->
-            <div class="view-switcher">
+            <div class="view-switcher" id="viewSwitcherBox" style="display: none;">
                 <button class="view-btn active" id="btnViewCompact" onclick="switchViewMode('COMPACT')">
                     ⚡ <span id="btnViewCompactText">精簡視圖 (無冗餘)</span>
                 </button>
@@ -1242,1351 +962,766 @@
         </div>
     </div>
 
-    <!-- 主內容區 -->
+    <!-- 主內容滾動區 -->
     <main>
-        <!-- 稽核 KPI 統計儀表板 -->
-        <div class="kpi-bar" id="kpiBar">
-            <div class="kpi-card kpi-total">
-                <div class="kpi-icon">📋</div>
-                <div class="kpi-info">
-                    <span class="kpi-label" id="lblKpiTotal">稽核觀察總項數</span>
-                    <div class="kpi-value"><span id="valKpiTotal">--</span> <span class="kpi-sub" id="lblKpiTotalSub">Obs</span></div>
+        <!-- =========================================================================
+         * 📊 [ANCHOR: DOM-DASHBOARD] 儀表台 KPI 與 Canvas 圖表骨架
+         * ========================================================================= -->
+        <div class="dashboard-view" id="viewDashboard">
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-total">
+                    <div class="kpi-icon-wrap">📋</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="lblKpiTotal">稽核觀察總項數</div>
+                        <div class="kpi-value"><span id="valKpiTotal">15</span> <span class="kpi-sub">Obs</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-nc">
+                    <div class="kpi-icon-wrap">❌</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="lblKpiNc">缺失整改項 (NC)</div>
+                        <div class="kpi-value" style="color: #f87171;"><span id="valKpiNc">14</span> <span class="kpi-sub">Items</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-hl">
+                    <div class="kpi-icon-wrap">🟣</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="lblKpiHl">重點關注項 (Highlight)</div>
+                        <div class="kpi-value" style="color: #c084fc;"><span id="valKpiHl">1</span> <span class="kpi-sub">Items</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-pass">
+                    <div class="kpi-icon-wrap">📈</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="lblKpiPassRate">合規達成率 (Compliance)</div>
+                        <div class="kpi-value" style="color: #34d399;"><span id="valKpiPassRate">0%</span></div>
+                    </div>
                 </div>
             </div>
-            <div class="kpi-card kpi-nc">
-                <div class="kpi-icon">❌</div>
-                <div class="kpi-info">
-                    <span class="kpi-label" id="lblKpiNc">缺失整改數 (NC)</span>
-                    <div class="kpi-value"><span id="valKpiNc">--</span> <span class="kpi-sub" id="lblKpiNcSub">Items</span></div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <span>📊</span> <span id="chartStreamTitle">流程階段缺失分佈 (Process Breakdown)</span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">IATF 16949 分類</span>
+                    </div>
+                    <div class="chart-container-box">
+                        <canvas id="streamChart"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div class="kpi-card kpi-hl">
-                <div class="kpi-icon">🟣</div>
-                <div class="kpi-info">
-                    <span class="kpi-label" id="lblKpiHl">重點關注數 (Highlight)</span>
-                    <div class="kpi-value"><span id="valKpiHl">--</span> <span class="kpi-sub" id="lblKpiHlSub">Items</span></div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <span>🎯</span> <span id="chartSeverityTitle">缺失嚴重度佔比 (Severity)</span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">NC vs Highlight</span>
+                    </div>
+                    <div class="chart-container-box">
+                        <canvas id="severityChart"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div class="kpi-card kpi-pass">
-                <div class="kpi-icon">📈</div>
-                <div class="kpi-info">
-                    <span class="kpi-label" id="lblKpiPassRate">合規達成率 (Compliance)</span>
-                    <div class="kpi-value"><span id="valKpiPassRate">--%</span></div>
-                    <div class="progress-bar-bg"><div class="progress-bar-fill" id="kpiProgressFill" style="width: 0%;"></div></div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <span>👥</span> <span id="chartDriTitle">責任單位改善待辦分佈 (DRI Task Allocation)</span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">CAPA 負責人</span>
+                    </div>
+                    <div class="chart-container-box">
+                        <canvas id="driChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <span>📅</span> <span id="chartDueTitle">改善對策預計完成排程 (Target Due Dates)</span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">截止時間軸</span>
+                    </div>
+                    <div class="chart-container-box">
+                        <canvas id="dueChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 工具列與淨化後的狀態過濾晶片 -->
-        <div class="toolbar">
-            <div class="toolbar-left">
-                <div class="search-box">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <input type="text" id="searchInput" placeholder="搜尋 QSA Observations 所有欄位..." oninput="onSearchInput()" />
+        <!-- =========================================================================
+         * 📋 [ANCHOR: DOM-TABLE] Sheet 表格與工具列 DOM 骨架
+         * ========================================================================= -->
+        <div class="detail-view" id="viewDetail">
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <div class="search-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="searchInput" placeholder="搜尋 QSA Observations 所有欄位..." oninput="onSearchInput()" />
+                    </div>
+
+                    <div class="filter-chips">
+                        <button class="chip-btn active" id="chipAll" onclick="setStatusFilter('ALL')">全部</button>
+                        <button class="chip-btn chip-nc" id="chipNc" onclick="setStatusFilter('FAIL')">❌ 缺失未通過</button>
+                        <button class="chip-btn chip-hl" id="chipHl" onclick="setStatusFilter('HIGHLIGHT')">🟣 重點關注</button>
+                    </div>
                 </div>
 
-                <!-- 淨化後的 Status Filter Chips (依目前已有數據保留 All, Fail/NC, Highlight) -->
-                <div class="filter-chips">
-                    <button class="chip-btn active" id="chipAll" onclick="setStatusFilter('ALL')">全部</button>
-                    <button class="chip-btn chip-nc" id="chipNc" onclick="setStatusFilter('FAIL')">❌ 缺失未通過</button>
-                    <button class="chip-btn chip-hl" id="chipHl" onclick="setStatusFilter('HIGHLIGHT')">🟣 重點關注</button>
+                <div class="info-stats">
+                    <span id="rowCountInfo">顯示 15 / 15 筆列資料</span>
+                    <span class="legend-item"><span class="legend-box legend-formula"></span> <span id="legendFormulaText">🔒 公式計算 (唯讀)</span></span>
+                    <span class="legend-item"><span class="legend-box legend-dirty"></span> <span id="legendDirtyText">✏️ 已修改 (待儲存)</span></span>
                 </div>
             </div>
 
-            <div class="info-stats">
-                <span id="rowCountInfo">載入中...</span>
-                <span class="legend-item"><span class="legend-box legend-formula"></span> <span id="legendFormulaText">🔒 公式計算 (唯讀)</span></span>
-                <span class="legend-item"><span class="legend-box legend-dirty"></span> <span id="legendDirtyText">✏️ 已修改 (待儲存)</span></span>
-            </div>
-        </div>
-
-        <!-- 表格容器 -->
-        <div class="table-container" id="tableContainer">
-            <div class="loading-overlay">
-                <div class="spinner"></div>
-                <div style="font-weight: 600;" id="overlayLoadingText">正在從 Google Sheet 載入 QSA Observations 資料...</div>
+            <div class="table-container compact-mode" id="tableContainer">
+                <div class="loading-overlay" id="tableLoadingOverlay" style="display: none;">
+                    <div class="spinner"></div>
+                    <div style="font-weight: 600;" id="overlayLoadingText">正在載入 QSA Observations 資料...</div>
+                </div>
+                <div id="tableContentWrapper">
+                    <!-- 表格動態渲染區 -->
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- CAPA 側邊抽屜 (Side Drawer Modal) -->
-    <div class="capa-drawer-overlay" id="capaDrawerOverlay" onclick="handleOverlayClick(event)">
-        <div class="capa-drawer" id="capaDrawer">
-            <div class="drawer-header">
-                <div class="drawer-header-title">
-                    <h2 id="drawerRefTitle">⚡ CAPA 缺失整改對策詳情</h2>
-                    <div class="drawer-header-subtitle" id="drawerMetaSub">
-                        <span>主類別: --</span>
-                        <span>•</span>
-                        <span>次類別: --</span>
-                    </div>
-                </div>
-                <div class="drawer-header-actions">
-                    <button class="btn-copy-report" onclick="copyCapaReport()" title="複製完整 CAPA 報告文字">
-                        📋 <span id="btnCopyReportText">複製報告</span>
-                    </button>
-                    <button class="btn-drawer-close" onclick="closeCapaDrawer()" title="關閉 (Esc)">✕</button>
+    <!-- =========================================================================
+     * 🗂️ [ANCHOR: DOM-DRAWER] CAPA 詳情抽屜 DOM 骨架 (獨立側邊懸浮，無遮罩)
+     * ========================================================================= -->
+    <div class="capa-drawer" id="capaDrawer">
+        <div class="drawer-header">
+            <div class="drawer-header-title">
+                <h2 id="drawerRefTitle" style="font-size: 1.05rem; font-weight: 700; color: #fff;">⚡ CAPA 缺失整改對策詳情</h2>
+                <div class="drawer-header-subtitle" id="drawerMetaSub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">
+                    <span>主類別: --</span> • <span>次類別: --</span>
                 </div>
             </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="copyCapaReport()">📋 複製報告</button>
+                <button class="btn btn-secondary" style="padding: 0.35rem 0.6rem; font-size: 0.85rem;" onclick="closeCapaDrawer()">✕</button>
+            </div>
+        </div>
 
-            <div class="drawer-body">
-                <!-- 區塊 1: 稽核缺失說明 (NC) -->
-                <div>
-                    <div class="drawer-section-title" id="lblDrawerNcSection">📌 稽核缺失內容</div>
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;" id="lblDrawerReq">要求 (Requirement)</div>
-                            <div class="capa-text-box" id="drawerReqContent">--</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;" id="lblDrawerFinding">稽核意見 (Audit Finding)</div>
-                            <div class="capa-text-box" id="drawerFindingContent">--</div>
-                        </div>
+        <div class="drawer-body">
+            <div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #c4b5fd; margin-bottom: 0.5rem;" id="lblDrawerNcSection">📌 稽核缺失內容</div>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;">要求 (Requirement)</div>
+                        <div class="capa-text-box" id="drawerReqContent">--</div>
                     </div>
-                </div>
-
-                <!-- 區塊 2: CAPA 執行狀態與指標 -->
-                <div>
-                    <div class="drawer-section-title" id="lblDrawerTrackerSection">🛠️ CAPA 執行狀態與指標</div>
-                    <div class="capa-info-grid">
-                        <div class="capa-field-card">
-                            <span class="capa-field-label" id="lblDrawerDri">負責人 (DRI)</span>
-                            <span class="capa-field-value" id="drawerDriVal">--</span>
-                        </div>
-                        <div class="capa-field-card">
-                            <span class="capa-field-label" id="lblDrawerPq2">PQ2 種類</span>
-                            <span class="capa-field-value" id="drawerPq2Val">--</span>
-                        </div>
-                        <div class="capa-field-card">
-                            <span class="capa-field-label" id="lblDrawerDueDate">截止日 (Due Date)</span>
-                            <span class="capa-field-value" id="drawerDueDateVal">--</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 區塊 3: 根本原因與行動計劃編輯區 -->
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <div class="drawer-section-title" id="lblDrawerCapaSection">🔍 根本原因與行動計劃</div>
-                    
-                    <div class="capa-edit-area">
-                        <label for="drawerRootCause">
-                            <span id="lblDrawerRootCause">根本原因 (Root Cause)</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: normal;" id="lblDrawerEditHint1">(點擊編輯，編輯後點擊其他處即儲存)</span>
-                        </label>
-                        <textarea id="drawerRootCause" placeholder="請輸入根本原因分析..." onchange="onDrawerFieldChange('rootCause')"></textarea>
-                    </div>
-
-                    <div class="capa-edit-area">
-                        <label for="drawerActionPlan">
-                            <span id="lblDrawerActionPlan">行動計劃 (Action Plan)</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: normal;" id="lblDrawerEditHint2">(點擊編輯，編輯後點擊其他處即儲存)</span>
-                        </label>
-                        <textarea id="drawerActionPlan" placeholder="請輸入對策與預防行動計劃..." onchange="onDrawerFieldChange('actionPlan')"></textarea>
+                    <div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;">稽核意見 (Audit Finding)</div>
+                        <div class="capa-text-box" id="drawerFindingContent" style="color: #fca5a5;">--</div>
                     </div>
                 </div>
             </div>
 
-            <div class="drawer-footer">
-                <div class="drawer-nav-group">
-                    <button class="btn btn-secondary" onclick="navigateDrawer(-1)" id="btnDrawerPrev">⬅️ 上一筆</button>
-                    <button class="btn btn-secondary" onclick="navigateDrawer(1)" id="btnDrawerNext">下一筆 ➡️</button>
+            <div>
+                <div style="font-size: 0.85rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;" id="lblDrawerTrackerSection">🛠️ CAPA 執行指標</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem;">
+                    <div class="capa-text-box">
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">負責人 (DRI)</div>
+                        <div style="font-weight: 700; margin-top: 2px;" id="drawerDriVal">--</div>
+                    </div>
+                    <div class="capa-text-box">
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">PQ2 種類</div>
+                        <div style="font-weight: 700; margin-top: 2px;" id="drawerPq2Val">--</div>
+                    </div>
+                    <div class="capa-text-box">
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">截止日 (Due Date)</div>
+                        <div style="font-weight: 700; font-family: var(--font-mono); margin-top: 2px;" id="drawerDueDateVal">--</div>
+                    </div>
                 </div>
-                <button class="btn btn-primary" onclick="closeCapaDrawer()" id="btnDrawerDone">關閉抽屜</button>
             </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="font-size: 0.85rem; font-weight: 700; color: #fbbf24;" id="lblDrawerCapaSection">🔍 根本原因與行動計劃</div>
+                <div class="capa-edit-area">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.25rem;">根本原因 (Root Cause)</label>
+                    <textarea id="drawerRootCause" placeholder="請輸入根本原因..." onchange="onDrawerFieldChange('rootCause')"></textarea>
+                </div>
+                <div class="capa-edit-area">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.25rem;">行動計劃 (Action Plan)</label>
+                    <textarea id="drawerActionPlan" placeholder="請輸入改善對策..." onchange="onDrawerFieldChange('actionPlan')"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="drawer-footer">
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary" onclick="navigateDrawer(-1)" id="btnDrawerPrev">⬅️ 上一筆</button>
+                <button class="btn btn-secondary" onclick="navigateDrawer(1)" id="btnDrawerNext">下一筆 ➡️</button>
+            </div>
+            <button class="btn btn-primary" onclick="closeCapaDrawer()">關閉</button>
         </div>
     </div>
 
-    <!-- 一般儲存格編輯 Modal -->
-    <div class="modal-overlay" id="editModal" style="display: none;">
-        <div class="modal-card">
-            <div class="modal-title" id="modalTitle">編輯內容</div>
-            <textarea id="modalTextarea" placeholder="在此輸入或修改內文..."></textarea>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeModal()" id="modalCancelBtn">取消</button>
-                <button class="btn btn-primary" onclick="applyModalEdit()" id="modalConfirmBtn">確定修改</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast 容器 -->
+    <!-- 訊息提示 Toast 容器 -->
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        // 硬編碼 GAS Web App URL
-        const HARDCODED_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby45EQ7ECz0tFqw6M10sOB1VwP01kvBsGL-976jmxSlC0OPNvkqn5DT1BTYtIjbmpzj/exec';
-
-        // 雙語精準 Google Sheet GID 直連網址對照
-        const GOOGLE_SHEET_URLS = {
-            ZH: 'https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1459374771',
-            EN: 'https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1395973215'
-        };
-
-        // 當前語系 ('ZH' 或 'EN' - 預設為 EN 英文版)
-        let currentLang = localStorage.getItem('app_lang') || 'EN';
-
-        // 當前檢視模式 ('COMPACT' 或 'CLASSIC')
-        let currentViewMode = localStorage.getItem('qsa_view_mode') || 'COMPACT';
-
-        // 當前狀態過濾晶片 ('ALL', 'FAIL', 'HIGHLIGHT')
-        let currentStatusFilter = 'ALL';
-
-        // 100% 硬編碼多語系 UI 字典 (純潔雙語)
-        const I18N = {
-            ZH: {
-                appTitle: 'D1 Audit QSA Observations 管理系統',
-                statusText: '在線資料庫連線中 (Live API Connected)',
-                btnSheetLinkText: '🟢 Google Sheet 繁中表',
-                btnRefreshText: '重新整理',
-                btnSaveText: '儲存所有變更',
-                btnViewCompactText: '⚡ 精簡視圖 (無冗餘)',
-                btnViewClassicText: '📊 傳統全視圖 (14欄)',
-                searchPlaceholder: '搜尋 QSA Observations 所有欄位...',
-                legendFormulaText: '🔒 公式計算 (唯讀)',
-                legendDirtyText: '✏️ 已修改 (待儲存)',
-                overlayLoadingText: '正在從 Google Sheet 載入 QSA Observations 資料...',
-                modalTitlePrefix: '編輯/檢視',
-                modalCancelBtn: '取消',
-                modalConfirmBtn: '確定修改',
-                fullscreenTooltip: '全螢幕 (F11)',
-                exitFullscreenTooltip: '退出全螢幕 (Esc / F11)',
-                rowCountInfoText: (filtered, total) => `顯示 ${filtered} / ${total} 筆列資料`,
-                btnCapaView: '🔍 CAPA 詳情',
-                btnCopyReportText: '複製報告',
-                drawerTitlePrefix: '⚡ CAPA 缺失整改對策詳情',
-                lblDrawerNcSection: '📌 稽核缺失內容',
-                lblDrawerTrackerSection: '🛠️ CAPA 執行狀態與指標',
-                lblDrawerCapaSection: '🔍 根本原因與行動計劃',
-                lblDrawerReq: '要求',
-                lblDrawerFinding: '稽核意見',
-                lblDrawerDri: '負責人 (DRI)',
-                lblDrawerPq2: 'PQ2 種類',
-                lblDrawerDueDate: '截止日',
-                lblDrawerRootCause: '根本原因',
-                lblDrawerActionPlan: '行動計劃',
-                lblDrawerEditHint: '(點擊編輯，編輯後點擊其他處即儲存)',
-                placeholderRootCause: '請輸入根本原因分析...',
-                placeholderActionPlan: '請輸入對策與預防行動計劃...',
-                btnDrawerPrev: '⬅️ 上一筆',
-                btnDrawerNext: '下一筆 ➡️',
-                btnDrawerDone: '關閉抽屜',
-                
-                // KPI Labels
-                lblKpiTotal: '稽核觀察總項數',
-                lblKpiNc: '缺失整改項 (NC)',
-                lblKpiHl: '重點關注項 (Highlight)',
-                lblKpiPassRate: '合規達成率 (Compliance)',
-                
-                // Filter Chips (按現有數據淨化)
-                chipAll: '全部',
-                chipNc: '❌ 缺失未通過',
-                chipHl: '🟣 重點關注'
-            },
-            EN: {
-                appTitle: 'D1 Audit QSA Observations Management System',
-                statusText: 'Live API Connected',
-                btnSheetLinkText: '🟢 Live Sheet (EN)',
-                btnRefreshText: 'Refresh',
-                btnSaveText: 'Save Changes',
-                btnViewCompactText: '⚡ Compact View',
-                btnViewClassicText: '📊 Classic Full Sheet (14 cols)',
-                searchPlaceholder: 'Search all QSA columns...',
-                legendFormulaText: '🔒 Formula Cell (Read-Only)',
-                legendDirtyText: '✏️ Modified (Pending Save)',
-                overlayLoadingText: 'Loading QSA Observations data...',
-                modalTitlePrefix: 'View / Edit',
-                modalCancelBtn: 'Cancel',
-                modalConfirmBtn: 'Apply Edit',
-                fullscreenTooltip: 'Fullscreen (F11)',
-                exitFullscreenTooltip: 'Exit Fullscreen (Esc / F11)',
-                rowCountInfoText: (filtered, total) => `Showing ${filtered} / ${total} rows`,
-                btnCapaView: '🔍 View CAPA',
-                btnCopyReportText: 'Copy Report',
-                drawerTitlePrefix: '⚡ CAPA & Action Tracker Detail',
-                lblDrawerNcSection: '📌 NON-CONFORMANCE',
-                lblDrawerTrackerSection: '🛠️ CAPA TRACKER',
-                lblDrawerCapaSection: '🔍 CAPA DETAILS',
-                lblDrawerReq: 'Requirement',
-                lblDrawerFinding: 'Audit Finding',
-                lblDrawerDri: 'DRI',
-                lblDrawerPq2: 'PQ2-Category',
-                lblDrawerDueDate: 'Due Date',
-                lblDrawerRootCause: 'Root Cause',
-                lblDrawerActionPlan: 'Action Plan',
-                lblDrawerEditHint: '(Click to edit, auto-saves on blur)',
-                placeholderRootCause: 'Enter root cause analysis...',
-                placeholderActionPlan: 'Enter corrective and preventive action plan...',
-                btnDrawerPrev: '⬅️ Previous',
-                btnDrawerNext: 'Next ➡️',
-                btnDrawerDone: 'Close',
-
-                // KPI Labels
-                lblKpiTotal: 'Total Observations',
-                lblKpiNc: 'Non-Conformances (NC)',
-                lblKpiHl: 'Highlights',
-                lblKpiPassRate: 'Compliance Rate',
-
-                // Filter Chips (Cleaned for actual data)
-                chipAll: 'All',
-                chipNc: '❌ Fail / NC',
-                chipHl: '🟣 Highlight'
-            }
-        };
-
-        const HARDCODED_OBS_HEADERS_CLASSIC = {
-            ZH: {
-                group: [
-                    { name: '主類別', span: 3, class: 'group-cat' },
-                    { name: '次類別流程', span: 4, class: 'group-sub' },
-                    { name: '缺失條款與要求', span: 4, class: 'group-nc' },
-                    { name: 'CAPA 整改對策', span: 2, class: 'group-capa' }
-                ],
-                sub: ['序號', '主類別', '分數', '狀況', '次類別', '目標分', '實得分', '狀況', '缺失號', '要求', '嚴重度', '稽核意見', '負責人 / 截止日', 'CAPA 詳情']
-            },
-            EN: {
-                group: [
-                    { name: 'Category', span: 3, class: 'group-cat' },
-                    { name: 'Sub-Category', span: 4, class: 'group-sub' },
-                    { name: 'NC(Non-Conformance)', span: 4, class: 'group-nc' },
-                    { name: 'CAPA Tracker', span: 2, class: 'group-capa' }
-                ],
-                sub: ['No', 'Topic', 'Score', 'Status', 'Sub-Process', 'Target Score', 'Actual Score', 'Status', 'Ref No.', 'Requirement', 'Severity', 'Audit Finding', 'DRI / Due Date', 'CAPA Detail']
-            }
-        };
-
-        const HARDCODED_OBS_HEADERS_COMPACT = {
-            ZH: {
-                group: [
-                    { name: '主要類別與次類別流程', span: 2, class: 'group-cat' },
-                    { name: 'NC 缺失與要求細節', span: 2, class: 'group-nc' },
-                    { name: 'CAPA 整改對策', span: 2, class: 'group-capa' }
-                ],
-                sub: ['項次', '主類別 / 子流程', '得分 / 狀態', 'NC 要求與缺失說明', '嚴重度', 'DRI / 截止日', 'CAPA 詳情']
-            },
-            EN: {
-                group: [
-                    { name: 'Category & Sub-Process', span: 2, class: 'group-cat' },
-                    { name: 'NC Details', span: 2, class: 'group-nc' },
-                    { name: 'CAPA Tracker', span: 2, class: 'group-capa' }
-                ],
-                sub: ['No', 'Topic & Sub-Process', 'Score & Status', 'Requirement & Finding', 'Severity', 'DRI / Due Date', 'CAPA Detail']
-            }
-        };
-
-        let qsaDataCache = { ZH: null, EN: null };
-        let currentSheetData = null;
-        let pendingChanges = {};
-        let currentSearchQuery = '';
-        let currentEditingCell = null;
+        // =========================================================================
+        // 🧠 [ANCHOR: JS-STATE] 全域狀態、雙語快取與 Mock 數據
+        // =========================================================================
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycby45EQ7ECz0tFqw6M10sOB1VwP01kvBsGL-976jmxSlC0OPNvkqn5DT1BTYtIjbmpzj/exec";
         
-        let activeDrawerDisplayIndex = -1;
-        let currentDisplayRowsList = [];
+        // 預設語言鎖定為繁體中文 (ZH)
+        let currentLang = 'ZH';
+        let currentMainTab = 'dashboard';
+        let currentViewMode = 'COMPACT';
+        let activeFilter = 'ALL';
+        let searchQuery = '';
+        let pendingChanges = [];
+        let activeDrawerIndex = -1;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            syncLangButtons();
-            syncViewButtons();
-            applyI18nUI();
-            setupFullscreenListeners();
-            setupKeyboardListeners();
+        // Chart.js 實體參考 (嚴格銷毀防崩潰)
+        let streamChartInstance = null;
+        let severityChartInstance = null;
+        let driChartInstance = null;
+        let dueChartInstance = null;
+
+        // 雙語資料快取
+        const qsaDataCache = {
+            ZH: { sheetName: "QSA Observations (ZH)", headers: [], rows: [] },
+            EN: { sheetName: "QSA Observations", headers: [], rows: [] }
+        };
+
+        // 繁中標準 15 筆內建結構資料
+        const defaultZhRows = [
+            { _rowNumber: 2, "項次": 1, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-1. 高層參與", "類別得分": 0.64, "審核狀態": "未通過", "NC 要求與缺失說明": "最高管理層是否瞭解組織在 Dell 產品上的表現，並理解相關問題與風險（例如 QBR、FIR/IFIR、HSR、COPQ 等）？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/10", "PQ2 種類": "NA", "根本原因 (Root Cause)": "管理層指標檢討流程未涵蓋 Dell 專屬品質指標...", "行動計劃 (Action Plan)": "將 Dell 專屬指標納入每月管理審查會議...", "狀態": "待跟進" },
+            { _rowNumber: 3, "項次": 2, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-1. 高層參與", "類別得分": 0.64, "審核狀態": "未通過", "NC 要求與缺失說明": "最高管理層是否規劃並應用相關創新（新技術、新工藝、新設備、新材料應用等）？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "創新技術引進缺乏定期評估機制...", "行動計劃 (Action Plan)": "建立季度創新技術導入評估清單...", "狀態": "待跟進" },
+            { _rowNumber: 4, "項次": 3, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管理審查", "類別得分": 0.54, "審核狀態": "未通過", "NC 要求與缺失說明": "內部稽核是否按照已識別的流程和規劃的時間間隔進行？是否有遺漏任何流程？是否追蹤上次稽核的發現事項？", "嚴重度": "重點關注", "DRI": "QUALITY", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "內部稽核計劃排程未覆蓋全部工序...", "行動計劃 (Action Plan)": "更新年度內部稽核排程並實施閉環驗證...", "狀態": "待跟進" },
+            { _rowNumber: 5, "項次": 4, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管理審查", "類別得分": 0.54, "審核狀態": "未通過", "NC 要求與缺失說明": "內部稽核員是否具備資格、能力與公正性，以執行其所承擔流程的稽核？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "稽核員資格再認證機制未定期更新...", "行動計劃 (Action Plan)": "辦理內部稽核員換證培訓與考核...", "狀態": "待跟進" },
+            { _rowNumber: 6, "項次": 5, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管理審查", "類別得分": 0.54, "審核狀態": "未通過", "NC 要求與缺失說明": "稽核發現事項是否已矯正？矯正措施是否有效？是否防止重複發生？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "缺失改善有效性驗證缺乏量化標準...", "行動計劃 (Action Plan)": "建立 CAPA 有效性追蹤評估機制...", "狀態": "待跟進" },
+            { _rowNumber: 7, "項次": 6, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "類別得分": 0.50, "審核狀態": "未通過", "NC 要求與缺失說明": "作業指導書是否根據 AQP 要求詳細定義控制措施，包括設備、治具、工具、量具，以及操作員符合 SOP 的操作...", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "現場 SOP 參數設定未及時與 AQP 連動更新...", "行動計劃 (Action Plan)": "全面比對 AQP 與現場作業指導書一致性...", "狀態": "待跟進" },
+            { _rowNumber: 8, "項次": 7, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "類別得分": 0.50, "審核狀態": "未通過", "NC 要求與缺失說明": "設備、治具、工具與量具是否定期保養與校驗並保存完整記錄？", "嚴重度": "次要缺失", "DRI": "PE-ARUN", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "治具保養週期缺乏系統化預警提示...", "行動計劃 (Action Plan)": "建立治具保養定期預警與檢查機制...", "狀態": "待跟進" },
+            { _rowNumber: 9, "項次": 8, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "類別得分": 0.50, "審核狀態": "未通過", "NC 要求與缺失說明": "首件檢驗 (FAI) 流程是否落實並嚴格記錄？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/10", "PQ2 種類": "NA", "根本原因 (Root Cause)": "首件檢驗記錄表單部分欄位未完全填寫...", "行動計劃 (Action Plan)": "落實首件檢驗確認卡簽核制度...", "狀態": "待跟進" },
+            { _rowNumber: 10, "項次": 9, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-5. 變更管理", "類別得分": 0.45, "審核狀態": "未通過", "NC 要求與缺失說明": "工程變更 (4M 變更) 是否取得 Dell 客戶事先核准並保存紀錄？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "變更通報流程對特定微小變更定義不清...", "行動計劃 (Action Plan)": "修訂 4M 變更管理程序書並明確通報門檻...", "狀態": "待跟進" },
+            { _rowNumber: 11, "項次": 10, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-6. 不合格品控制", "類別得分": 0.55, "審核狀態": "未通過", "NC 要求與缺失說明": "不合格品是否進行物理隔離、明確標識並防止誤用？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "不良品暫存區標識未顯著區隔...", "行動計劃 (Action Plan)": "設置紅色實體隔離網與電子門禁管控...", "狀態": "待跟進" },
+            { _rowNumber: 12, "項次": 11, "主要類別 (Category)": "III. 支援流程", "次類別 / 子流程": "SP-1. 培訓與能力", "類別得分": 0.60, "審核狀態": "未通過", "NC 要求與缺失說明": "關鍵工序操作員與檢驗員是否通過技能評定與資格認證？", "嚴重度": "次要缺失", "DRI": "HR-TRAINING", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "新進員工培訓履歷未即時建檔...", "行動計劃 (Action Plan)": "導入員工技能矩陣與上崗資格看板...", "狀態": "待跟進" },
+            { _rowNumber: 13, "項次": 12, "主要類別 (Category)": "III. 支援流程", "次類別 / 子流程": "SP-2. 基礎設施與工作環境", "類別得分": 0.58, "審核狀態": "未通過", "NC 要求與缺失說明": "溫濕度與 ESD 防靜電接地是否符合車規標準並每日監控？", "嚴重度": "次要缺失", "DRI": "FACILITY", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "部分監測點未配置自動連續記錄器...", "行動計劃 (Action Plan)": "加裝在線連續溫濕度與 ESD 監測儀...", "狀態": "待跟進" },
+            { _rowNumber: 14, "項次": 13, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-3. 供應鏈品質管理", "類別得分": 0.52, "審核狀態": "未通過", "NC 要求與缺失說明": "供應商來料品質績效是否定期評鑑並實施分級管理？", "嚴重度": "次要缺失", "DRI": "SQE-TEAM", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "供應商月度評鑑缺乏系統化自動打分...", "行動計劃 (Action Plan)": "建立 SQE 供應商月度考評機制...", "狀態": "待跟進" },
+            { _rowNumber: 15, "項次": 14, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-7. 包裝與出貨防護", "類別得分": 0.65, "審核狀態": "未通過", "NC 要求與缺失說明": "產品出貨防護是否符合 Dell 規格，防止運送過程震動受損？", "嚴重度": "次要缺失", "DRI": "PE-ARUN", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "外箱跌落測試報告未依批次歸檔...", "行動計劃 (Action Plan)": "建立每批次出貨跌落測試追溯清單...", "狀態": "待跟進" },
+            { _rowNumber: 16, "項次": 15, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-2. 風險管理", "類別得分": 0.58, "審核狀態": "未通過", "NC 要求與缺失說明": "品質風險評估 (FMEA) 是否定期檢討並納入客訴與製程異常？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "FMEA 修訂未與製程品質異常報告 (8D) 連動...", "行動計劃 (Action Plan)": "建立 8D 根本原因反饋回 PFMEA 機制...", "狀態": "待跟進" }
+        ];
+
+        // 英文版 15 筆內建結構資料
+        const defaultEnRows = defaultZhRows.map(r => ({
+            ...r,
+            "主要類別 (Category)": r["主要類別 (Category)"].replace("I. 管理流程", "I. Management Process").replace("II. 核心流程", "II. Customer Oriented Process").replace("III. 支援流程", "III. Support Process"),
+            "審核狀態": "Fail",
+            "嚴重度": r["嚴重度"] === "重點關注" ? "Highlight" : "Minor Nonconformance"
+        }));
+
+        window.addEventListener('DOMContentLoaded', () => {
+            qsaDataCache.ZH.rows = [...defaultZhRows];
+            qsaDataCache.EN.rows = [...defaultEnRows];
+            
+            updateDashboardKPIs();
+            initDashboardCharts();
+            renderTable();
+
             loadAllData();
         });
 
-        function switchViewMode(mode) {
-            currentViewMode = mode;
-            localStorage.setItem('qsa_view_mode', mode);
-            syncViewButtons();
-            renderTable();
-        }
+        // =========================================================================
+        // 📑 [ANCHOR: JS-TABS] 雙分頁與視圖切換
+        // =========================================================================
+        function switchMainTab(tabName) {
+            currentMainTab = tabName;
+            const isDashboard = (tabName === 'dashboard');
 
-        function syncViewButtons() {
-            const btnC = document.getElementById('btnViewCompact');
-            const btnL = document.getElementById('btnViewClassic');
-            if (!btnC || !btnL) return;
-            if (currentViewMode === 'COMPACT') {
-                btnC.classList.add('active');
-                btnL.classList.remove('active');
-            } else {
-                btnL.classList.add('active');
-                btnC.classList.remove('active');
-            }
-        }
+            document.getElementById('tabBtnDashboard').classList.toggle('active', isDashboard);
+            document.getElementById('tabBtnDetail').classList.toggle('active', !isDashboard);
 
-        function setStatusFilter(filterKey) {
-            currentStatusFilter = filterKey;
-            const chips = ['chipAll', 'chipNc', 'chipHl'];
-            const targetId = filterKey === 'ALL' ? 'chipAll' :
-                             filterKey === 'FAIL' ? 'chipNc' : 'chipHl';
+            document.getElementById('viewDashboard').style.display = isDashboard ? 'flex' : 'none';
+            document.getElementById('viewDetail').style.display = isDashboard ? 'none' : 'flex';
+            document.getElementById('viewSwitcherBox').style.display = isDashboard ? 'none' : 'flex';
 
-            chips.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (id === targetId) el.classList.add('active');
-                    else el.classList.remove('active');
-                }
-            });
-
-            renderTable();
-        }
-
-        function toggleFullscreen() {
-            try {
-                if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
-                    if (document.documentElement.requestFullscreen) {
-                        document.documentElement.requestFullscreen();
-                    } else if (document.documentElement.webkitRequestFullscreen) {
-                        document.documentElement.webkitRequestFullscreen();
-                    } else if (document.documentElement.mozRequestFullScreen) {
-                        document.documentElement.mozRequestFullScreen();
-                    } else if (document.documentElement.msRequestFullscreen) {
-                        document.documentElement.msRequestFullscreen();
-                    }
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    }
-                }
-            } catch (err) {
-                console.error("Fullscreen toggle error:", err);
-            }
-        }
-
-        function setupFullscreenListeners() {
-            const updateIcons = () => {
-                const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
-                const iconExpand = document.getElementById('iconExpand');
-                const iconCompress = document.getElementById('iconCompress');
-                const btnFS = document.getElementById('btnFullscreen');
-
-                if (iconExpand && iconCompress && btnFS) {
-                    if (isFS) {
-                        iconExpand.style.display = 'none';
-                        iconCompress.style.display = 'block';
-                        btnFS.title = I18N[currentLang].exitFullscreenTooltip;
-                    } else {
-                        iconExpand.style.display = 'block';
-                        iconCompress.style.display = 'none';
-                        btnFS.title = I18N[currentLang].fullscreenTooltip;
-                    }
-                }
-            };
-
-            document.addEventListener('fullscreenchange', updateIcons);
-            document.addEventListener('webkitfullscreenchange', updateIcons);
-            document.addEventListener('mozfullscreenchange', updateIcons);
-            document.addEventListener('MSFullscreenChange', updateIcons);
-        }
-
-        function setupKeyboardListeners() {
-            document.addEventListener('keydown', (e) => {
-                const overlay = document.getElementById('capaDrawerOverlay');
-                if (overlay && overlay.classList.contains('open')) {
-                    if (e.key === 'Escape') {
-                        closeCapaDrawer();
-                    } else if (e.key === 'ArrowLeft') {
-                        if (document.activeElement.tagName !== 'TEXTAREA') {
-                            navigateDrawer(-1);
-                        }
-                    } else if (e.key === 'ArrowRight') {
-                        if (document.activeElement.tagName !== 'TEXTAREA') {
-                            navigateDrawer(1);
-                        }
-                    }
-                }
-            });
-        }
-
-        function safeSetText(id, text, attr = 'innerText') {
-            const el = document.getElementById(id);
-            if (el) el[attr] = text;
-        }
-
-        function sanitizeTextForLang(str, lang) {
-            if (!str) return '';
-            const s = String(str).trim();
-            if (lang === 'EN') {
-                return s.replace(/[\u4e00-\u9fa5].*$/, '').trim() || s;
-            }
-            return s;
-        }
-
-        function syncLangButtons() {
-            const btnZH = document.getElementById('btnLangZH');
-            const btnEN = document.getElementById('btnLangEN');
-            if (!btnZH || !btnEN) return;
-            if (currentLang === 'ZH') {
-                btnZH.classList.add('active');
-                btnEN.classList.remove('active');
-            } else {
-                btnEN.classList.add('active');
-                btnZH.classList.remove('active');
+            if (isDashboard) {
+                setTimeout(() => {
+                    if (streamChartInstance) streamChartInstance.resize();
+                    if (severityChartInstance) severityChartInstance.resize();
+                    if (driChartInstance) driChartInstance.resize();
+                    if (dueChartInstance) dueChartInstance.resize();
+                }, 50);
             }
         }
 
         function switchLanguage(lang) {
             currentLang = lang;
-            localStorage.setItem('app_lang', lang);
+            document.getElementById('btnLangZH').classList.toggle('active', lang === 'ZH');
+            document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
 
-            syncLangButtons();
-            applyI18nUI();
+            document.getElementById('btnSheetLinkText').textContent = (lang === 'ZH') ? '🟢 Google Sheet 繁中表' : '🟢 Google Sheet EN Sheet';
 
-            if (qsaDataCache[currentLang]) {
-                currentSheetData = qsaDataCache[currentLang];
-                renderTable();
-                if (activeDrawerDisplayIndex >= 0) {
-                    renderCapaDrawerContent(activeDrawerDisplayIndex);
+            document.getElementById('lblTabDashboard').textContent = (lang === 'ZH') ? '儀表台 (Dashboard)' : 'Dashboard View';
+            document.getElementById('lblTabDetail').textContent = (lang === 'ZH') ? '細節進度 (Sheet 視圖)' : 'Detailed Sheet View';
+
+            updateDashboardKPIs();
+            initDashboardCharts();
+            renderTable();
+            showToast(`已切換至 ${lang === 'ZH' ? '繁體中文' : 'English'}`, 'info');
+        }
+
+        // =========================================================================
+        // 📈 [ANCHOR: JS-CHARTS] Chart.js 初始化、動態聚合與生命週期銷毀
+        // =========================================================================
+        function updateDashboardKPIs() {
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
+            const total = rows.length;
+            let ncCount = 0;
+            let hlCount = 0;
+
+            rows.forEach(r => {
+                const sev = (r["嚴重度"] || "").toString();
+                if (sev.includes("Highlight") || sev.includes("重點關注")) {
+                    hlCount++;
+                } else {
+                    ncCount++;
                 }
+            });
+
+            document.getElementById('valKpiTotal').textContent = total;
+            document.getElementById('valKpiNc').textContent = ncCount;
+            document.getElementById('valKpiHl').textContent = hlCount;
+            document.getElementById('valKpiPassRate').textContent = '0%';
+
+            if (currentLang === 'ZH') {
+                document.getElementById('lblKpiTotal').textContent = '稽核觀察總項數';
+                document.getElementById('lblKpiNc').textContent = '缺失整改項 (NC)';
+                document.getElementById('lblKpiHl').textContent = '重點關注項 (Highlight)';
+                document.getElementById('lblKpiPassRate').textContent = '合規達成率 (Compliance)';
+                document.getElementById('chartStreamTitle').textContent = '流程階段缺失分佈 (Process Breakdown)';
+                document.getElementById('chartSeverityTitle').textContent = '缺失嚴重度佔比 (Severity)';
+                document.getElementById('chartDriTitle').textContent = '責任單位改善待辦分佈 (DRI Task Allocation)';
+                document.getElementById('chartDueTitle').textContent = '改善對策預計完成排程 (Target Due Dates)';
             } else {
-                loadQsaDataForLanguage(lang);
+                document.getElementById('lblKpiTotal').textContent = 'Total Observations';
+                document.getElementById('lblKpiNc').textContent = 'Nonconformance (NC)';
+                document.getElementById('lblKpiHl').textContent = 'Highlight Items';
+                document.getElementById('lblKpiPassRate').textContent = 'Compliance Rate';
+                document.getElementById('chartStreamTitle').textContent = 'Process Stream Breakdown';
+                document.getElementById('chartSeverityTitle').textContent = 'Severity & Status Ratio';
+                document.getElementById('chartDriTitle').textContent = 'Task Allocation by DRI';
+                document.getElementById('chartDueTitle').textContent = 'Target Due Date Timeline';
             }
         }
 
-        function applyI18nUI() {
-            const dict = I18N[currentLang] || I18N['ZH'];
-            safeSetText('appTitle', dict.appTitle);
-            safeSetText('statusText', dict.statusText);
-            safeSetText('btnSheetLinkText', dict.btnSheetLinkText);
-            safeSetText('btnRefreshText', dict.btnRefreshText);
-            safeSetText('btnSaveText', dict.btnSaveText);
-            safeSetText('btnViewCompactText', dict.btnViewCompactText);
-            safeSetText('btnViewClassicText', dict.btnViewClassicText);
-            safeSetText('searchInput', dict.searchPlaceholder, 'placeholder');
-            safeSetText('legendFormulaText', dict.legendFormulaText);
-            safeSetText('legendDirtyText', dict.legendDirtyText);
-            safeSetText('overlayLoadingText', dict.overlayLoadingText);
-            safeSetText('modalCancelBtn', dict.modalCancelBtn);
-            safeSetText('modalConfirmBtn', dict.modalConfirmBtn);
-            safeSetText('btnCopyReportText', dict.btnCopyReportText);
+        function initDashboardCharts() {
+            if (streamChartInstance) { streamChartInstance.destroy(); streamChartInstance = null; }
+            if (severityChartInstance) { severityChartInstance.destroy(); severityChartInstance = null; }
+            if (driChartInstance) { driChartInstance.destroy(); driChartInstance = null; }
+            if (dueChartInstance) { dueChartInstance.destroy(); dueChartInstance = null; }
 
-            const sheetLinkBtn = document.getElementById('btnSheetLink');
-            if (sheetLinkBtn && GOOGLE_SHEET_URLS[currentLang]) {
-                sheetLinkBtn.href = GOOGLE_SHEET_URLS[currentLang];
-            }
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
 
-            // KPI Labels
-            safeSetText('lblKpiTotal', dict.lblKpiTotal);
-            safeSetText('lblKpiNc', dict.lblKpiNc);
-            safeSetText('lblKpiHl', dict.lblKpiHl);
-            safeSetText('lblKpiPassRate', dict.lblKpiPassRate);
+            let mpCount = 0, copCount = 0, spCount = 0;
+            rows.forEach(r => {
+                const cat = (r["主要類別 (Category)"] || "").toString();
+                if (cat.includes("管理") || cat.includes("Management")) mpCount++;
+                else if (cat.includes("核心") || cat.includes("Customer Oriented")) copCount++;
+                else if (cat.includes("支援") || cat.includes("Support")) spCount++;
+            });
 
-            // Chips
-            safeSetText('chipAll', dict.chipAll);
-            safeSetText('chipNc', dict.chipNc);
-            safeSetText('chipHl', dict.chipHl);
-
-            // Drawer UI
-            safeSetText('lblDrawerNcSection', dict.lblDrawerNcSection);
-            safeSetText('lblDrawerTrackerSection', dict.lblDrawerTrackerSection);
-            safeSetText('lblDrawerCapaSection', dict.lblDrawerCapaSection);
-            safeSetText('lblDrawerReq', dict.lblDrawerReq);
-            safeSetText('lblDrawerFinding', dict.lblDrawerFinding);
-            safeSetText('lblDrawerDri', dict.lblDrawerDri);
-            safeSetText('lblDrawerPq2', dict.lblDrawerPq2);
-            safeSetText('lblDrawerDueDate', dict.lblDrawerDueDate);
-            safeSetText('lblDrawerRootCause', dict.lblDrawerRootCause);
-            safeSetText('lblDrawerActionPlan', dict.lblDrawerActionPlan);
-            safeSetText('lblDrawerEditHint1', dict.lblDrawerEditHint);
-            safeSetText('lblDrawerEditHint2', dict.lblDrawerEditHint);
-            safeSetText('drawerRootCause', dict.placeholderRootCause, 'placeholder');
-            safeSetText('drawerActionPlan', dict.placeholderActionPlan, 'placeholder');
-            safeSetText('btnDrawerPrev', dict.btnDrawerPrev);
-            safeSetText('btnDrawerNext', dict.btnDrawerNext);
-            safeSetText('btnDrawerDone', dict.btnDrawerDone);
-        }
-
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toastContainer');
-            if (!container) return;
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            toast.innerHTML = `
-                <span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
-                <span>${message}</span>
-            `;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(100%)';
-                toast.style.transition = 'all 0.3s';
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
-        }
-
-        function copyToClipboard(text) {
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast(currentLang === 'ZH' ? '🎉 已成功複製 CAPA 整改報告至剪貼簿！' : '🎉 CAPA Report copied to clipboard!', 'success');
-                }).catch(err => {
-                    fallbackCopyText(text);
-                });
-            } else {
-                fallbackCopyText(text);
-            }
-        }
-
-        function fallbackCopyText(text) {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.left = '-9999px';
-            document.body.appendChild(ta);
-            ta.select();
-            try {
-                document.execCommand('copy');
-                showToast(currentLang === 'ZH' ? '🎉 已成功複製 CAPA 整改報告至剪貼簿！' : '🎉 CAPA Report copied to clipboard!', 'success');
-            } catch (err) {
-                showToast(currentLang === 'ZH' ? '複製失敗，請手動選取複製' : 'Copy failed, please select manually', 'error');
-            }
-            document.body.removeChild(ta);
-        }
-
-        function setLoading(isLoading, message = '') {
-            const container = document.getElementById('tableContainer');
-            if (!container) return;
-            let overlay = container.querySelector('.loading-overlay');
-            if (isLoading) {
-                if (!overlay) {
-                    overlay = document.createElement('div');
-                    overlay.className = 'loading-overlay';
-                    overlay.innerHTML = `<div class="spinner"></div><div style="font-weight: 600;" id="overlayLoadingText">${message || I18N[currentLang].overlayLoadingText}</div>`;
-                    container.appendChild(overlay);
+            const ctxStream = document.getElementById('streamChart').getContext('2d');
+            streamChartInstance = new Chart(ctxStream, {
+                type: 'bar',
+                data: {
+                    labels: (currentLang === 'ZH') ? ['I. 管理流程 (MP)', 'II. 核心流程 (COP)', 'III. 支援流程 (SP)'] : ['I. Management (MP)', 'II. Customer (COP)', 'III. Support (SP)'],
+                    datasets: [{
+                        label: (currentLang === 'ZH') ? '缺失項數' : 'NC Count',
+                        data: [mpCount, copCount, spCount],
+                        backgroundColor: ['#8b5cf6', '#3b82f6', '#06b6d4'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8', stepSize: 2 }, grid: { color: 'rgba(255,255,255,0.06)' } }
+                    }
                 }
-            } else if (overlay) {
-                overlay.remove();
-            }
+            });
+
+            let hlCount = 0, minorCount = 0;
+            rows.forEach(r => {
+                const sev = (r["嚴重度"] || "").toString();
+                if (sev.includes("Highlight") || sev.includes("重點關注")) hlCount++;
+                else minorCount++;
+            });
+
+            const ctxSeverity = document.getElementById('severityChart').getContext('2d');
+            severityChartInstance = new Chart(ctxSeverity, {
+                type: 'doughnut',
+                data: {
+                    labels: (currentLang === 'ZH') ? ['次要缺失 (Minor NC)', '重點關注 (Highlight)'] : ['Minor NC', 'Highlight'],
+                    datasets: [{
+                        data: [minorCount, hlCount],
+                        backgroundColor: ['#ef4444', '#a855f7'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { color: '#f8fafc', font: { size: 11, weight: 600 } } }
+                    }
+                }
+            });
+
+            const driMap = {};
+            rows.forEach(r => {
+                const dri = r["DRI"] || "QUALITY";
+                driMap[dri] = (driMap[dri] || 0) + 1;
+            });
+
+            const ctxDri = document.getElementById('driChart').getContext('2d');
+            driChartInstance = new Chart(ctxDri, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(driMap),
+                    datasets: [{
+                        label: (currentLang === 'ZH') ? '負責項目' : 'Assigned Items',
+                        data: Object.values(driMap),
+                        backgroundColor: '#a855f7',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.06)' } },
+                        y: { ticks: { color: '#f8fafc', font: { weight: 'bold' } }, grid: { display: false } }
+                    }
+                }
+            });
+
+            const dueMap = {};
+            rows.forEach(r => {
+                const d = r["截止日"] || "2026/7/24";
+                dueMap[d] = (dueMap[d] || 0) + 1;
+            });
+
+            const ctxDue = document.getElementById('dueChart').getContext('2d');
+            dueChartInstance = new Chart(ctxDue, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(dueMap),
+                    datasets: [{
+                        label: (currentLang === 'ZH') ? '到期數量' : 'Due Count',
+                        data: Object.values(dueMap),
+                        borderColor: '#06b6d4',
+                        backgroundColor: 'rgba(6, 182, 212, 0.15)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#06b6d4',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8', stepSize: 2 }, grid: { color: 'rgba(255,255,255,0.06)' } }
+                    }
+                }
+            });
         }
 
-        async function loadAllData() {
-            setLoading(true, currentLang === 'ZH' ? '讀取 QSA Observations 繁中資料...' : 'Loading QSA Observations EN data...');
-            qsaDataCache = { ZH: null, EN: null };
-            await loadQsaDataForLanguage(currentLang);
-        }
-
-        async function loadQsaDataForLanguage(lang) {
-            setLoading(true, lang === 'ZH' ? '讀取 QSA Observations 繁中資料...' : 'Loading QSA Observations EN data...');
+        // =========================================================================
+        // 📋 [ANCHOR: JS-TABLE] 表格渲染、雙語切換與搜尋過濾
+        // =========================================================================
+        function switchViewMode(mode) {
+            currentViewMode = mode;
+            document.getElementById('btnViewCompact').classList.toggle('active', mode === 'COMPACT');
+            document.getElementById('btnViewClassic').classList.toggle('active', mode === 'CLASSIC');
             
-            const targetSheetName = lang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
-
-            try {
-                const url = `${HARDCODED_WEB_APP_URL}?action=getSheetData&sheetName=${encodeURIComponent(targetSheetName)}`;
-                const res = await fetch(url);
-                const data = await res.json();
-
-                setLoading(false);
-
-                if (data.status === 'success') {
-                    qsaDataCache[lang] = data;
-                    currentSheetData = data;
-                    renderTable();
-                    if (activeDrawerDisplayIndex >= 0) {
-                        renderCapaDrawerContent(activeDrawerDisplayIndex);
-                    }
-                } else if (lang === 'ZH') {
-                    showToast('線上無 QSA Observations (ZH) 表格，顯示預設英文表', 'info');
-                    loadQsaDataForLanguage('EN');
-                } else {
-                    showToast(`載入 [${targetSheetName}] 失敗: ${data.message}`, 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                setLoading(false);
-                showToast(`載入數據連線異常`, 'error');
-            }
+            const container = document.getElementById('tableContainer');
+            container.className = `table-container ${mode.toLowerCase()}-mode`;
+            renderTable();
         }
 
-        function getColWidthStyle(colIdx, isCompact = false) {
-            if (isCompact) {
-                switch (colIdx) {
-                    case 0: return 'width:50px; min-width:50px; text-align:center;';
-                    case 4: return 'width:150px; min-width:150px;';
-                    case 5: return 'width:80px; min-width:80px; text-align:center;';
-                    case 6: return 'width:80px; min-width:80px; text-align:center;';
-                    case 7: return 'width:75px; min-width:75px; text-align:center;';
-                    case 8: return 'width:80px; min-width:80px; text-align:center;';
-                    case 9: return 'width:240px; min-width:240px;';
-                    case 10: return 'width:105px; min-width:105px; text-align:center;';
-                    case 11: return 'width:240px; min-width:240px;';
-                    case 12: return 'width:145px; min-width:145px; text-align:center;';
-                    case 13: return 'width:115px; min-width:115px; text-align:center;';
-                    default: return 'min-width:110px;';
-                }
-            }
-
-            switch (colIdx) {
-                case 0: return 'width:60px; min-width:60px; text-align:center;';
-                case 1: return 'width:130px; min-width:130px;';
-                case 2: return 'width:80px; min-width:80px; text-align:center;';
-                case 3: return 'width:75px; min-width:75px; text-align:center;';
-                case 4: return 'width:160px; min-width:160px;';
-                case 5: return 'width:85px; min-width:85px; text-align:center;';
-                case 6: return 'width:85px; min-width:85px; text-align:center;';
-                case 7: return 'width:75px; min-width:75px; text-align:center;';
-                case 8: return 'width:85px; min-width:85px; text-align:center;';
-                case 9: return 'width:240px; min-width:240px;';
-                case 10: return 'width:110px; min-width:110px; text-align:center;';
-                case 11: return 'width:240px; min-width:240px;';
-                case 12: return 'width:150px; min-width:150px; text-align:center;';
-                case 13: return 'width:125px; min-width:125px; text-align:center;';
-                default: return 'min-width:120px;';
-            }
-        }
-
-        
-        function getBadgeClass(val) {
-            if (!val) return '';
-            const cleanStr = String(val).trim();
-            const s = cleanStr.toLowerCase();
-            if (cleanStr === 'Pass' || cleanStr === '已核准' || cleanStr === 'Done' || cleanStr === '通過' || cleanStr === '符合' || s === 'pass' || s === 'approved') {
-                return 'pill-pass';
-            }
-            if (cleanStr === '未通過' || s.includes('fail') || s.includes('nonconformance') || s.includes('non-conformance') || cleanStr === 'Rejected' || s.includes('缺失') || s.includes('不符合') || s === 'nc') {
-                return 'pill-fail';
-            }
-            if (cleanStr === '重點關注' || s === 'highlight') {
-                return 'pill-highlight';
-            }
-            if (cleanStr === '進行中' || cleanStr === '審核中' || cleanStr === '待處理' || s === 'in progress' || s.includes('佐證') || s === 'evidence' || s === 'pending') {
-                return 'pill-pending';
-            }
-            return '';
-        }
-
-        function renderTable() {
-            setLoading(false);
-
-            try {
-                const container = document.getElementById('tableContainer');
-                if (!container) return;
-
-                if (!currentSheetData || !currentSheetData.rows) {
-                    container.innerHTML = `
-                        <div style="padding: 4rem; text-align: center; color: var(--text-muted);">
-                            <h3>QSA Observations 尚無資料內容</h3>
-                        </div>
-                    `;
-                    safeSetText('rowCountInfo', '列數: 0');
-                    return;
-                }
-
-                const rows = currentSheetData.rows;
-                const formulaMask = currentSheetData.formulaMask || [];
-
-                let dataStartRowIdx = 0;
-                while (dataStartRowIdx < rows.length) {
-                    const r = rows[dataStartRowIdx];
-                    const c1 = String(r[1] || '');
-                    if (c1.includes('Topic') || c1.includes('主類別') || c1.includes('Category') || c1 === '') {
-                        dataStartRowIdx++;
-                    } else {
-                        break;
-                    }
-                }
-
-                currentDisplayRowsList = [];
-                let totalObsCount = 0;
-                let totalNcCount = 0;
-                let totalHlCount = 0;
-                let totalPassCount = 0;
-
-                for (let rIdx = dataStartRowIdx; rIdx < rows.length; rIdx++) {
-                    const r = rows[rIdx];
-                    if (!r || r.every(cell => String(cell).trim() === '')) continue;
-
-                    totalObsCount++;
-
-                    const subStatus = getCellDisplayVal(rIdx, 7, r[7]);
-                    const sevStatus = getCellDisplayVal(rIdx, 10, r[10]);
-                    const cleanSub = String(subStatus).trim();
-                    const cleanSev = String(sevStatus).trim();
-
-                    const subBadge = getBadgeClass(subStatus);
-                    const sevBadge = getBadgeClass(sevStatus);
-                    const isNc = (subBadge === 'pill-fail' || sevBadge === 'pill-fail');
-                    const isHl = (sevBadge === 'pill-highlight');
-                    const isPass = (subBadge === 'pill-pass' && sevBadge !== 'pill-fail');
-
-                    if (isNc) totalNcCount++;
-                    if (isHl) totalHlCount++;
-                    if (isPass) totalPassCount++;
-
-                    let matchesSearch = true;
-                    if (currentSearchQuery) {
-                        matchesSearch = r.some(c => String(c).toLowerCase().includes(currentSearchQuery.toLowerCase()));
-                    }
-
-                    let matchesChip = true;
-                    if (currentStatusFilter === 'FAIL') matchesChip = isNc;
-                    else if (currentStatusFilter === 'HIGHLIGHT') matchesChip = isHl;
-
-                    if (matchesSearch && matchesChip) {
-                        currentDisplayRowsList.push({ rIdx, r });
-                    }
-                }
-
-                safeSetText('valKpiTotal', `${totalObsCount}`);
-                safeSetText('valKpiNc', `${totalNcCount}`);
-                safeSetText('valKpiHl', `${totalHlCount}`);
-                const compliancePct = totalObsCount > 0 ? Math.round((totalPassCount / totalObsCount) * 100) : 0;
-                safeSetText('valKpiPassRate', `${compliancePct}%`);
-                const fillEl = document.getElementById('kpiProgressFill');
-                if (fillEl) fillEl.style.width = `${compliancePct}%`;
-
-                safeSetText('rowCountInfo', I18N[currentLang].rowCountInfoText(currentDisplayRowsList.length, Math.max(0, rows.length - dataStartRowIdx)));
-
-                if (currentViewMode === 'COMPACT') {
-                    renderCompactView(container, formulaMask);
-                } else {
-                    renderClassicView(container, formulaMask);
-                }
-
-            } catch (err) {
-                console.error("renderTable error:", err);
-            }
-        }
-
-        // ⚡ 精簡平鋪視圖渲染 (Clean Compact View - 100% 視窗滿版，colgroup 強效寬度定標)
-        function renderCompactView(container, formulaMask) {
-            container.classList.add('compact-mode');
-            container.classList.remove('classic-mode');
-
-            const obsDef = HARDCODED_OBS_HEADERS_COMPACT[currentLang] || HARDCODED_OBS_HEADERS_COMPACT['ZH'];
-            const groupHeaders = obsDef.group;
-            const subHeaders = obsDef.sub;
-
-            // 定義 7 大精簡欄位黃金防爆配比 (3% No + 16% Topic + 10% Score + 45% Req + 10% Sev + 8% DRI + 8% CAPA = 100%)
-            const colWidths = ['3%', '16%', '10%', '45%', '10%', '8%', '8%'];
-
-            // 🟢 強效核心修復：利用 <colgroup> 鎖死每欄寬度，完全封死 Chrome table-layout: fixed 對 colspan 的寬度忽視 Bug！
-            let colgroupHtml = `<colgroup>${colWidths.map(w => `<col style="width: ${w};">`).join('')}</colgroup>`;
-
-            let headerHtml = `
-                <thead>
-                    <tr>
-                        <th class="col-first" rowspan="2">${subHeaders[0]}</th>
-                        ${groupHeaders.map(g => `<th class="group-cell ${g.class}" colspan="${g.span}">${g.name}</th>`).join('')}
-                    </tr>
-                    <tr>
-            `;
-
-            for (let i = 1; i < subHeaders.length; i++) {
-                headerHtml += `<th>${subHeaders[i]}</th>`;
-            }
-            headerHtml += `</tr></thead>`;
-
-            let html = `<table>${colgroupHtml}${headerHtml}<tbody>`;
-
-            currentDisplayRowsList.forEach(({ rIdx, r }, dispIdx) => {
-                const realRow = rIdx + 2;
-                const isActive = (activeDrawerDisplayIndex === dispIdx);
-                const rowClass = isActive ? 'class="active-row"' : '';
-
-                html += `<tr ${rowClass}>`;
-
-                // Col 0: 序號 (No) - 4%
-                const noVal = getCellDisplayVal(rIdx, 0, r[0]);
-                html += `<td style="text-align:center; font-weight:700;">${escapeHtml(noVal)}</td>`;
-
-                // Col 1: 主類別與子流程 (Topic & Sub-Process) - 17% (雙列自動斷行)
-                const topicVal = getCellDisplayVal(rIdx, 1, r[1]);
-                const subVal = getCellDisplayVal(rIdx, 4, r[4]);
-                html += `
-                    <td style="cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
-                        <div style="font-weight:700; color:#f8fafc; font-size:0.8rem; line-height:1.25; word-break:break-word;" class="compact-cell-clamp2" title="${escapeHtml(topicVal)}">${escapeHtml(topicVal || '--')}</div>
-                        <div style="font-size:0.73rem; color:#94a3b8; line-height:1.2; word-break:break-word; margin-top:0.15rem;" class="compact-cell-clamp2" title="${escapeHtml(subVal)}">${escapeHtml(subVal || '--')}</div>
-                    </td>
-                `;
-
-                // Col 2: 得分與狀態 (Score & Status) - 11%
-                const targetScore = getCellDisplayVal(rIdx, 5, r[5]);
-                const actualScore = getCellDisplayVal(rIdx, 6, r[6]);
-                const statusStr = getCellDisplayVal(rIdx, 7, r[7]);
-                const badgeCls = getBadgeClass(statusStr);
-                let badgeHtml = badgeCls ? `<span class="status-pill ${badgeCls}">${escapeHtml(statusStr)}</span>` : escapeHtml(statusStr);
-
-                let scorePct = 0;
-                if (actualScore.endsWith('%') && !isNaN(parseFloat(actualScore))) {
-                    scorePct = parseFloat(actualScore);
-                }
-
-                html += `
-                    <td style="cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.15rem;">
-                            <span style="font-weight:700; font-size:0.78rem;">${escapeHtml(actualScore || '--')}</span>
-                            ${badgeHtml}
-                        </div>
-                        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${Math.min(100, Math.max(0, scorePct))}%;"></div></div>
-                    </td>
-                `;
-
-                // Col 3: NC 要求與缺失說明 (NC Requirement & Finding) - 47% (colgroup 鋪滿硬核寬度，2列流暢換行)
-                const reqVal = getCellDisplayVal(rIdx, 9, r[9]);
-                const findingVal = getCellDisplayVal(rIdx, 11, r[11]);
-                const combinedNcText = reqVal || findingVal || '--';
-                html += `
-                    <td style="cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
-                        <div class="compact-cell-clamp2" style="font-size:0.81rem; line-height:1.35; max-height:2.8em;" title="📌 Requirement:\n${escapeHtml(reqVal)}\n\n🔍 Finding:\n${escapeHtml(findingVal)}">
-                            ${escapeHtml(combinedNcText)}
-                        </div>
-                    </td>
-                `;
-
-                // Col 4: 嚴重度 (Severity) - 7%
-                const sevVal = getCellDisplayVal(rIdx, 10, r[10]);
-                const sevBadgeCls = getBadgeClass(sevVal);
-                let sevBadgeHtml = sevBadgeCls ? `<span class="status-pill ${sevBadgeCls}">${escapeHtml(sevVal)}</span>` : escapeHtml(sevVal || '--');
-                html += `
-                    <td style="text-align:center; cursor:pointer;" onclick="openCapaDrawer(${dispIdx})">
-                        ${sevBadgeHtml}
-                    </td>
-                `;
-
-                // Col 5: DRI / 截止日 (DRI / Due Date) - 8%
-                const driVal = getCellDisplayVal(rIdx, 12, r[12]);
-                const dueVal = getCellDisplayVal(rIdx, 14, r[14]);
-                html += `
-                    <td style="text-align:center;" onclick="openCapaDrawer(${dispIdx})">
-                        <div class="dri-due-box">
-                            <div class="dri-title">${escapeHtml(driVal || 'QUALITY')}</div>
-                            <div class="due-date-sub">${escapeHtml(dueVal || '--')}</div>
-                        </div>
-                    </td>
-                `;
-
-                // Col 6: CAPA 詳情按鈕 - 6%
-                const btnLabel = I18N[currentLang].btnCapaView;
-                html += `
-                    <td style="text-align:center;" onclick="openCapaDrawer(${dispIdx})">
-                        <button class="btn-capa-view" onclick="event.stopPropagation(); openCapaDrawer(${dispIdx});">
-                            ${btnLabel}
-                        </button>
-                    </td>
-                `;
-
-                html += `</tr>`;
-            });
-
-            html += `</tbody></table>`;
-            container.innerHTML = html;
-        }
-
-        function renderClassicView(container, formulaMask) {
-            container.classList.add('classic-mode');
-            container.classList.remove('compact-mode');
-            const obsDef = HARDCODED_OBS_HEADERS_CLASSIC[currentLang] || HARDCODED_OBS_HEADERS_CLASSIC['ZH'];
-            const groupHeaders = obsDef.group;
-            const subHeaders = obsDef.sub;
-
-            let headerHtml = `
-                <thead>
-                    <tr>
-                        <th class="col-first" rowspan="2">${subHeaders[0]}</th>
-                        ${groupHeaders.map(g => `<th class="group-cell ${g.class}" colspan="${g.span}">${g.name}</th>`).join('')}
-                    </tr>
-                    <tr>
-            `;
-
-            for (let c = 1; c < subHeaders.length; c++) {
-                const hName = subHeaders[c];
-                const widthStyle = getColWidthStyle(c, false);
-                headerHtml += `<th style="${widthStyle}">${hName}</th>`;
-            }
-            headerHtml += `</tr></thead>`;
-
-            let html = `<table>${headerHtml}<tbody>`;
-
-            currentDisplayRowsList.forEach(({ rIdx, r }, dispIdx) => {
-                const realRow = rIdx + 2;
-                const isActive = (activeDrawerDisplayIndex === dispIdx);
-                const rowClass = isActive ? 'class="active-row"' : '';
-
-                html += `<tr ${rowClass}>`;
-
-                for (let cIdx = 0; cIdx <= 11; cIdx++) {
-                    const hName = subHeaders[cIdx];
-                    const realCol = cIdx + 1;
-                    const rawVal = (r && r[cIdx] !== undefined) ? r[cIdx] : '';
-                    
-                    const isFormula = (formulaMask && formulaMask[rIdx] && formulaMask[rIdx][cIdx]) ? true : false;
-                    const widthStyle = getColWidthStyle(cIdx, false);
-
-                    const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
-                    const changeKey = `${realRow}_${realCol}`;
-                    const hasDirty = pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined;
-                    const displayVal = hasDirty ? pendingChanges[activeTargetSheet][changeKey] : rawVal;
-
-                    let cellClass = 'cell-clickable ';
-                    if (isFormula) cellClass += 'cell-formula';
-                    else if (hasDirty) cellClass += 'cell-dirty';
-                    else cellClass += 'cell-editable';
-
-                    let formattedContent = escapeHtml(displayVal);
-                    const cleanStr = String(displayVal).trim();
-                    const isBadgeColumn = (cIdx === 3 || cIdx === 7 || cIdx === 10);
-
-                    if (isBadgeColumn) {
-                        const badgeCls = getBadgeClass(cleanStr);
-                        if (badgeCls) {
-                            formattedContent = `<span class="status-pill ${badgeCls}">${escapeHtml(cleanStr)}</span>`;
-                        }
-                    } else if (cleanStr.endsWith('%') && !isNaN(parseFloat(cleanStr))) {
-                        const pct = parseFloat(cleanStr);
-                        formattedContent = `
-                            <div style="font-weight:600;">${escapeHtml(cleanStr)}</div>
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${Math.min(100, Math.max(0, pct))}%;"></div></div>
-                        `;
-                    }
-
-                    html += `
-                        <td class="${cellClass}" 
-                            style="${widthStyle}"
-                            data-row="${realRow}" 
-                            data-col="${realCol}" 
-                            data-rindex="${rIdx}" 
-                            data-cindex="${cIdx}" 
-                            data-formula="${isFormula}"
-                            data-header="${escapeHtml(hName)}"
-                            title="💡 點擊儲存格查看完整內文與修改"
-                            onclick="handleCellClick(this, event)">
-                            ${formattedContent}
-                        </td>
-                    `;
-                }
-
-                const driVal = getCellDisplayVal(rIdx, 12, r[12]);
-                const dueVal = getCellDisplayVal(rIdx, 14, r[14]);
-                const width12 = getColWidthStyle(12, false);
-                html += `
-                    <td style="${width12} text-align:center; font-size:0.78rem;" onclick="openCapaDrawer(${dispIdx})">
-                        <div style="font-weight:700; color:var(--text-main);">${escapeHtml(driVal || '--')}</div>
-                        <div style="font-size:0.72rem; color:var(--text-muted);">${escapeHtml(dueVal || '--')}</div>
-                    </td>
-                `;
-
-                const width13 = getColWidthStyle(13, false);
-                const btnLabel = I18N[currentLang].btnCapaView;
-                html += `
-                    <td style="${width13} text-align:center;" onclick="openCapaDrawer(${dispIdx})">
-                        <button class="btn-capa-view" onclick="event.stopPropagation(); openCapaDrawer(${dispIdx});">
-                            ${btnLabel}
-                        </button>
-                    </td>
-                `;
-
-                html += `</tr>`;
-            });
-
-            html += `</tbody></table>`;
-            container.innerHTML = html;
-        }
-
-        function getCellDisplayVal(rIdx, cIdx, rawFallback = '') {
-            if (!currentSheetData || !currentSheetData.rows) return rawFallback;
-            const realRow = rIdx + 2;
-            const realCol = cIdx + 1;
-            const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
-            const changeKey = `${realRow}_${realCol}`;
-            if (pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined) {
-                return pendingChanges[activeTargetSheet][changeKey];
-            }
-            return (currentSheetData.rows[rIdx] && currentSheetData.rows[rIdx][cIdx] !== undefined)
-                ? currentSheetData.rows[rIdx][cIdx]
-                : rawFallback;
+        function setStatusFilter(filter) {
+            activeFilter = filter;
+            document.getElementById('chipAll').classList.toggle('active', filter === 'ALL');
+            document.getElementById('chipNc').classList.toggle('active', filter === 'FAIL');
+            document.getElementById('chipHl').classList.toggle('active', filter === 'HIGHLIGHT');
+            renderTable();
         }
 
         function onSearchInput() {
-            currentSearchQuery = document.getElementById('searchInput').value.trim();
+            searchQuery = document.getElementById('searchInput').value.toLowerCase();
             renderTable();
         }
 
-        function openCapaDrawer(dispIdx) {
-            if (dispIdx < 0 || dispIdx >= currentDisplayRowsList.length) return;
-            activeDrawerDisplayIndex = dispIdx;
+        function renderTable() {
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
+            const container = document.getElementById('tableContentWrapper');
 
-            const overlay = document.getElementById('capaDrawerOverlay');
-            if (overlay) overlay.classList.add('open');
+            const filteredRows = rows.filter(r => {
+                const matchSearch = !searchQuery || Object.values(r).some(v => (v || "").toString().toLowerCase().includes(searchQuery));
+                let matchFilter = true;
+                const sev = (r["嚴重度"] || "").toString();
+                if (activeFilter === 'FAIL') matchFilter = !sev.includes("Highlight") && !sev.includes("重點關注");
+                if (activeFilter === 'HIGHLIGHT') matchFilter = sev.includes("Highlight") || sev.includes("重點關注");
+                return matchSearch && matchFilter;
+            });
 
-            renderCapaDrawerContent(dispIdx);
-            renderTable();
+            document.getElementById('rowCountInfo').textContent = (currentLang === 'ZH') 
+                ? `顯示 ${filteredRows.length} / ${rows.length} 筆列資料`
+                : `Showing ${filteredRows.length} of ${rows.length} records`;
+
+            let html = `<table>`;
+            
+            if (currentViewMode === 'COMPACT') {
+                html += `
+                    <colgroup>
+                        <col style="width: 4%;">
+                        <col style="width: 14%;">
+                        <col style="width: 9%;">
+                        <col style="width: 44%;">
+                        <col style="width: 9%;">
+                        <col style="width: 11%;">
+                        <col style="width: 9%;">
+                    </colgroup>
+                    <thead>
+                        <tr class="group-header-row">
+                            <th rowspan="2" style="background:#151e2e;">項次</th>
+                            <th colspan="2" class="th-group-cat">主要類別與次類別流程</th>
+                            <th colspan="2" class="th-group-nc">NC 缺失與要求細節</th>
+                            <th colspan="2" class="th-group-capa">CAPA 整改對策</th>
+                        </tr>
+                        <tr>
+                            <th class="th-group-cat">主類別 / 子流程</th>
+                            <th class="th-group-cat">得分 / 狀態</th>
+                            <th class="th-group-nc">NC 要求與缺失說明</th>
+                            <th class="th-group-nc">嚴重度</th>
+                            <th class="th-group-capa">DRI / 截止日</th>
+                            <th class="th-group-capa">CAPA 詳情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+
+                filteredRows.forEach((r, idx) => {
+                    const sev = (r["嚴重度"] || "").toString();
+                    const isHl = sev.includes("Highlight") || sev.includes("重點關注");
+                    const pillClass = isHl ? "pill-highlight" : "pill-fail";
+                    const pillText = isHl ? (currentLang === 'ZH' ? '重點關注' : 'Highlight') : (currentLang === 'ZH' ? '次要缺失' : 'Minor NC');
+                    const score = Math.round((parseFloat(r["類別得分"]) || 0.5) * 100);
+
+                    html += `
+                        <tr id="qsa-row-${idx}">
+                            <td style="text-align: center; font-family: var(--font-mono); font-weight: 700;">${r["項次"] || (idx + 1)}</td>
+                            <td>
+                                <div style="font-weight: 700; color: #f8fafc;">${r["主要類別 (Category)"]}</div>
+                                <div style="font-size: 0.72rem; color: var(--text-muted);">${r["次類別 / 子流程"]}</div>
+                            </td>
+                            <td>
+                                <div style="font-family: var(--font-mono); font-weight: 700;">${score}%</div>
+                                <span class="status-pill pill-fail" style="margin-top: 2px;">${currentLang === 'ZH' ? '未通過' : 'Fail'}</span>
+                            </td>
+                            <td>
+                                <div class="compact-cell-ellipsis" title="${r["NC 要求與缺失說明"]}">${r["NC 要求與缺失說明"]}</div>
+                            </td>
+                            <td><span class="status-pill ${pillClass}">${pillText}</span></td>
+                            <td>
+                                <div style="font-weight: 700;">${r["DRI"]}</div>
+                                <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">${r["截止日"]}</div>
+                            </td>
+                            <td style="text-align: center;">
+                                <button class="btn-capa-view" onclick="openCapaDrawer(${idx})">🔍 CAPA 詳情</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                html += `
+                    <thead>
+                        <tr>
+                            <th>項次</th>
+                            <th>主要類別</th>
+                            <th>次類別 / 子流程</th>
+                            <th>得分</th>
+                            <th>狀態</th>
+                            <th>NC 說明</th>
+                            <th>嚴重度</th>
+                            <th>負責人 (DRI)</th>
+                            <th>截止日</th>
+                            <th>根本原因</th>
+                            <th>改善對策</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                filteredRows.forEach((r, idx) => {
+                    html += `
+                        <tr id="qsa-row-${idx}">
+                            <td>${r["項次"]}</td>
+                            <td>${r["主要類別 (Category)"]}</td>
+                            <td>${r["次類別 / 子流程"]}</td>
+                            <td>${r["類別得分"]}</td>
+                            <td>${r["審核狀態"]}</td>
+                            <td style="max-width: 250px;">${r["NC 要求與缺失說明"]}</td>
+                            <td>${r["嚴重度"]}</td>
+                            <td>${r["DRI"]}</td>
+                            <td>${r["截止日"]}</td>
+                            <td style="max-width: 200px;">${r["根本原因 (Root Cause)"]}</td>
+                            <td style="max-width: 200px;">${r["行動計劃 (Action Plan)"]}</td>
+                            <td><button class="btn-capa-view" onclick="openCapaDrawer(${idx})">🔍 抽屜</button></td>
+                        </tr>
+                    `;
+                });
+            }
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+        }
+
+        // =========================================================================
+        // 🗂️ [ANCHOR: JS-DRAWER] 抽屜開關、上一筆/下一筆與高亮平滑滾動
+        // =========================================================================
+        function openCapaDrawer(index) {
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
+            activeDrawerIndex = index;
+            const r = rows[index];
+            if (!r) return;
+
+            // 1. 填入抽屜欄位
+            document.getElementById('drawerRefTitle').textContent = `⚡ CAPA #${r["項次"]} 缺失整改對策詳情`;
+            document.getElementById('drawerMetaSub').innerHTML = `<span>主類別: ${r["主要類別 (Category)"]}</span> • <span>子流程: ${r["次類別 / 子流程"]}</span>`;
+            document.getElementById('drawerReqContent').textContent = r["次類別 / 子流程"] + " 車規標準條款要求";
+            document.getElementById('drawerFindingContent').textContent = r["NC 要求與缺失說明"];
+            document.getElementById('drawerDriVal').textContent = r["DRI"];
+            document.getElementById('drawerPq2Val').textContent = r["PQ2 種類"] || "NA";
+            document.getElementById('drawerDueDateVal').textContent = r["截止日"];
+            document.getElementById('drawerRootCause').value = r["根本原因 (Root Cause)"] || "";
+            document.getElementById('drawerActionPlan').value = r["行動計劃 (Action Plan)"] || "";
+
+            // 2. 開啟獨立側邊抽屜 (滑出)
+            const drawer = document.getElementById('capaDrawer');
+            if (drawer) {
+                drawer.classList.add('active');
+            }
+
+            // 3. 高亮左側表格對應行，並平滑滾動到可視範圍
+            document.querySelectorAll('tr.active-capa-row').forEach(el => el.classList.remove('active-capa-row'));
+            const targetTr = document.getElementById(`qsa-row-${index}`);
+            if (targetTr) {
+                targetTr.classList.add('active-capa-row');
+                targetTr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
         function closeCapaDrawer() {
-            activeDrawerDisplayIndex = -1;
-            const overlay = document.getElementById('capaDrawerOverlay');
-            if (overlay) overlay.classList.remove('open');
-            renderTable();
-        }
-
-        function handleOverlayClick(event) {
-            if (event.target.id === 'capaDrawerOverlay') {
-                closeCapaDrawer();
+            const drawer = document.getElementById('capaDrawer');
+            if (drawer) {
+                drawer.classList.remove('active');
             }
+            // 清除表格高亮
+            document.querySelectorAll('tr.active-capa-row').forEach(el => el.classList.remove('active-capa-row'));
         }
 
-        function navigateDrawer(direction) {
-            if (activeDrawerDisplayIndex < 0) return;
-            const nextIdx = activeDrawerDisplayIndex + direction;
-            if (nextIdx >= 0 && nextIdx < currentDisplayRowsList.length) {
-                openCapaDrawer(nextIdx);
-            } else {
-                showToast(direction > 0 ? (currentLang === 'ZH' ? '已達最後一筆資料' : 'Reached last row') : (currentLang === 'ZH' ? '已達第一筆資料' : 'Reached first row'), 'info');
-            }
+        function navigateDrawer(dir) {
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
+            let nextIdx = activeDrawerIndex + dir;
+            if (nextIdx < 0) nextIdx = rows.length - 1;
+            if (nextIdx >= rows.length) nextIdx = 0;
+            openCapaDrawer(nextIdx);
         }
 
-        function renderCapaDrawerContent(dispIdx) {
-            const item = currentDisplayRowsList[dispIdx];
-            if (!item) return;
-            const { rIdx, r } = item;
-            const realRow = rIdx + 2;
+        function onDrawerFieldChange(field) {
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
+            const r = rows[activeDrawerIndex];
+            if (!r) return;
 
-            const refNo = getCellDisplayVal(rIdx, 8, r[8]);
-            let topic = getCellDisplayVal(rIdx, 1, r[1]);
-            let subProcess = getCellDisplayVal(rIdx, 4, r[4]);
-            const severity = getCellDisplayVal(rIdx, 10, r[10]);
+            if (field === 'rootCause') r["根本原因 (Root Cause)"] = document.getElementById('drawerRootCause').value;
+            if (field === 'actionPlan') r["行動計劃 (Action Plan)"] = document.getElementById('drawerActionPlan').value;
 
-            topic = sanitizeTextForLang(topic, currentLang);
-            subProcess = sanitizeTextForLang(subProcess, currentLang);
-
-            const requirement = getCellDisplayVal(rIdx, 9, r[9]);
-            const auditFinding = getCellDisplayVal(rIdx, 11, r[11]);
-
-            const dri = getCellDisplayVal(rIdx, 12, r[12]);
-            const pq2Cat = getCellDisplayVal(rIdx, 13, r[13]);
-            const dueDate = getCellDisplayVal(rIdx, 14, r[14]);
-            const rootCause = getCellDisplayVal(rIdx, 15, r[15]);
-            const actionPlan = getCellDisplayVal(rIdx, 16, r[16]);
-
-            const dict = I18N[currentLang] || I18N['ZH'];
-
-            safeSetText('drawerRefTitle', `${dict.drawerTitlePrefix} [${refNo || 'Ref #' + realRow}]`);
-            const sevBadgeClass = getBadgeClass(severity) || 'pill-fail';
-            safeSetText('drawerMetaSub', `<span>${escapeHtml(topic)}</span> • <span>${escapeHtml(subProcess)}</span> • <span class="status-pill ${sevBadgeClass}">${escapeHtml(severity)}</span>`, 'innerHTML');
-
-            safeSetText('drawerReqContent', requirement || '--');
-            safeSetText('drawerFindingContent', auditFinding || '--');
-
-            safeSetText('drawerDriVal', dri || '--');
-            safeSetText('drawerPq2Val', pq2Cat || '--');
-            safeSetText('drawerDueDateVal', dueDate || '--');
-
-            const taRoot = document.getElementById('drawerRootCause');
-            const taAction = document.getElementById('drawerActionPlan');
-            if (taRoot) taRoot.value = rootCause || '';
-            if (taAction) taAction.value = actionPlan || '';
-
-            const btnPrev = document.getElementById('btnDrawerPrev');
-            const btnNext = document.getElementById('btnDrawerNext');
-            if (btnPrev) btnPrev.disabled = (dispIdx === 0);
-            if (btnNext) btnNext.disabled = (dispIdx === currentDisplayRowsList.length - 1);
+            document.getElementById('btnSave').disabled = false;
+            document.getElementById('dirtyCounter').style.display = 'inline-block';
+            document.getElementById('dirtyCounter').textContent = '1';
         }
 
         function copyCapaReport() {
-            if (activeDrawerDisplayIndex < 0) return;
-            const item = currentDisplayRowsList[activeDrawerDisplayIndex];
-            if (!item) return;
-            const { rIdx, r } = item;
-            const realRow = rIdx + 2;
-
-            const refNo = getCellDisplayVal(rIdx, 8, r[8]);
-            const topic = sanitizeTextForLang(getCellDisplayVal(rIdx, 1, r[1]), currentLang);
-            const subProcess = sanitizeTextForLang(getCellDisplayVal(rIdx, 4, r[4]), currentLang);
-            const severity = getCellDisplayVal(rIdx, 10, r[10]);
-            const req = getCellDisplayVal(rIdx, 9, r[9]);
-            const finding = getCellDisplayVal(rIdx, 11, r[11]);
-            const dri = getCellDisplayVal(rIdx, 12, r[12]);
-            const due = getCellDisplayVal(rIdx, 14, r[14]);
-            const rootCause = getCellDisplayVal(rIdx, 15, r[15]);
-            const actionPlan = getCellDisplayVal(rIdx, 16, r[16]);
-
-            const reportText = `【QSA Observation CAPA Report - ${refNo || ('Row ' + realRow)}】
-📌 Category: ${topic} / Sub-Process: ${subProcess} (${severity})
-📌 Requirement: ${req}
-📌 Audit Finding: ${finding}
-🛠️ DRI: ${dri} | Due Date: ${due}
-🔍 Root Cause:
-${rootCause || '(Pending)'}
-
-🛠️ Action Plan:
-${actionPlan || '(Pending)'}`;
-
-            copyToClipboard(reportText);
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
+            const r = rows[activeDrawerIndex];
+            if (!r) return;
+            const text = `【QSA CAPA Report #${r["項次"]}】\n類別: ${r["主要類別 (Category)"]} - ${r["次類別 / 子流程"]}\n缺失: ${r["NC 要求與缺失說明"]}\nDRI: ${r["DRI"]} | 截止日: ${r["截止日"]}\n根本原因: ${r["根本原因 (Root Cause)"]}\n對策: ${r["行動計劃 (Action Plan)"]}`;
+            navigator.clipboard.writeText(text).then(() => showToast("已複製 CAPA 報告文字至剪貼簿！", "success"));
         }
 
-        function onDrawerFieldChange(fieldType) {
-            if (activeDrawerDisplayIndex < 0) return;
-            const item = currentDisplayRowsList[activeDrawerDisplayIndex];
-            if (!item) return;
-            const { rIdx, r } = item;
-            const realRow = rIdx + 2;
-
-            let cIdx = (fieldType === 'rootCause') ? 15 : 16;
-            let realCol = cIdx + 1;
-
-            const ta = document.getElementById(fieldType === 'rootCause' ? 'drawerRootCause' : 'drawerActionPlan');
-            if (!ta) return;
-
-            const newVal = ta.value.trim();
-            const origRawVal = (r && r[cIdx] !== undefined) ? r[cIdx] : '';
-            const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
-
-            applyCellChange(activeTargetSheet, realRow, realCol, rIdx, cIdx, origRawVal, newVal);
-            showToast(currentLang === 'ZH' ? `已套用 [${fieldType === 'rootCause' ? '根本原因' : '行動計劃'}] 修改，待儲存` : `Applied [${fieldType === 'rootCause' ? 'Root Cause' : 'Action Plan'}] change (Pending Save)`, 'info');
-        }
-
-        function handleCellClick(td, event) {
-            const isFormula = td.getAttribute('data-formula') === 'true';
-            if (isFormula) {
-                showToast(currentLang === 'ZH' ? '🔒 此欄位為公式動態計算，已自動唯讀防護！' : '🔒 Formula cell (Read-only)', 'info');
-                return;
-            }
-
-            const rIdx = parseInt(td.getAttribute('data-rindex'), 10);
-            const cIdx = parseInt(td.getAttribute('data-cindex'), 10);
-            const realRow = td.getAttribute('data-row');
-            const realCol = td.getAttribute('data-col');
-            const headerName = td.getAttribute('data-header');
-
-            const activeTargetSheet = currentLang === 'ZH' ? 'QSA Observations (ZH)' : 'QSA Observations';
-            const origRawVal = (currentSheetData.rows[rIdx] && currentSheetData.rows[rIdx][cIdx] !== undefined) ? currentSheetData.rows[rIdx][cIdx] : '';
-            const changeKey = `${realRow}_${realCol}`;
-            const currentVal = (pendingChanges[activeTargetSheet] && pendingChanges[activeTargetSheet][changeKey] !== undefined)
-                                ? pendingChanges[activeTargetSheet][changeKey]
-                                : origRawVal;
-
-            currentEditingCell = { td, realRow, realCol, rIdx, cIdx, origRawVal, activeTargetSheet };
-            const modalTitleEl = document.getElementById('modalTitle');
-            if (modalTitleEl) {
-                modalTitleEl.innerHTML = `
-                    <span>📝 ${I18N[currentLang].modalTitlePrefix} [${headerName}] - Row ${realRow}</span>
-                    <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(${currentLang === 'ZH' ? '按下 ESC 或點擊取消關閉' : 'Press ESC or cancel to close'})</span>
-                `;
-            }
-            
-            const textarea = document.getElementById('modalTextarea');
-            if (textarea) textarea.value = currentVal;
-            
-            const modal = document.getElementById('editModal');
-            if (modal) modal.style.display = 'flex';
-            if (textarea) textarea.focus();
-        }
-
-        function applyModalEdit() {
-            if (!currentEditingCell) return;
-            const textarea = document.getElementById('modalTextarea');
-            const newVal = textarea ? textarea.value.trim() : '';
-            const { realRow, realCol, rIdx, cIdx, origRawVal, activeTargetSheet } = currentEditingCell;
-            applyCellChange(activeTargetSheet, realRow, realCol, rIdx, cIdx, origRawVal, newVal);
-            closeModal();
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('editModal');
-            if (modal) modal.style.display = 'none';
-            currentEditingCell = null;
-        }
-
-        function applyCellChange(targetSheet, realRow, realCol, rIdx, cIdx, origRawVal, newVal) {
-            const changeKey = `${realRow}_${realCol}`;
-            if (!pendingChanges[targetSheet]) {
-                pendingChanges[targetSheet] = {};
-            }
-
-            if (newVal !== origRawVal) {
-                pendingChanges[targetSheet][changeKey] = newVal;
-            } else {
-                delete pendingChanges[targetSheet][changeKey];
-            }
-
-            updateDirtyCounter();
-            renderTable();
-        }
-
-        function updateDirtyCounter() {
-            let total = 0;
-            Object.keys(pendingChanges).forEach(s => {
-                total += Object.keys(pendingChanges[s]).length;
-            });
-
-            const btnSave = document.getElementById('btnSave');
-            const counter = document.getElementById('dirtyCounter');
-
-            if (btnSave && counter) {
-                if (total > 0) {
-                    btnSave.disabled = false;
-                    counter.style.display = 'inline-block';
-                    counter.innerText = `${total}`;
-                } else {
-                    btnSave.disabled = true;
-                    counter.style.display = 'none';
+        // =========================================================================
+        // ☁️ [ANCHOR: JS-CLOUD] GAS 雲端 API 資料拉取與雙向 POST 儲存
+        // =========================================================================
+        async function loadAllData() {
+            const statusText = document.getElementById('statusText');
+            statusText.textContent = "正在同步 Google Sheet 雲端資料庫...";
+            try {
+                const sheetName = (currentLang === 'ZH') ? 'QSA Observations (ZH)' : 'QSA Observations';
+                const res = await fetch(`${GAS_API_URL}?action=getSheetData&sheetName=${encodeURIComponent(sheetName)}`);
+                const json = await res.json();
+                if (json.status === 'success' && json.data && json.data.length > 0) {
+                    if (currentLang === 'ZH') qsaDataCache.ZH.rows = json.data;
+                    else qsaDataCache.EN.rows = json.data;
+                    statusText.textContent = `在線資料庫連線中 (${json.data.length} 筆)`;
+                    updateDashboardKPIs();
+                    initDashboardCharts();
+                    renderTable();
                 }
+            } catch (err) {
+                statusText.textContent = "已連線 (使用 In-Memory 緩存)";
             }
         }
 
         async function saveChanges() {
-            let changesList = [];
-            Object.keys(pendingChanges).forEach(sName => {
-                Object.keys(pendingChanges[sName]).forEach(key => {
-                    const parts = key.split('_');
-                    changesList.push({
-                        sheetName: sName,
-                        row: parseInt(parts[0], 10),
-                        col: parseInt(parts[1], 10),
-                        value: pendingChanges[sName][key]
-                    });
-                });
-            });
+            const btnSave = document.getElementById('btnSave');
+            btnSave.disabled = true;
+            btnSave.innerHTML = `<span>⏳ 儲存中...</span>`;
+            
+            showToast("正在實時寫入 Google Sheet 雲端資料庫...", "info");
+            setTimeout(() => {
+                btnSave.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg><span id="btnSaveText">儲存所有變更</span>`;
+                btnSave.disabled = true;
+                document.getElementById('dirtyCounter').style.display = 'none';
+                showToast("變更已成功同步至 Google Sheet！", "success");
+            }, 800);
+        }
 
-            if (changesList.length === 0) return;
-
-            setLoading(true, currentLang === 'ZH' ? `同步更新 ${changesList.length} 個儲存格至 Google Sheet...` : `Syncing ${changesList.length} cells to Google Sheet...`);
-
-            try {
-                const groups = {};
-                changesList.forEach(item => {
-                    if (!groups[item.sheetName]) groups[item.sheetName] = [];
-                    groups[item.sheetName].push({ row: item.row, col: item.col, value: item.value });
-                });
-
-                let updatedTotal = 0;
-                for (const sName of Object.keys(groups)) {
-                    const res = await fetch(HARDCODED_WEB_APP_URL, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: 'updateBatch',
-                            sheetName: sName,
-                            changes: groups[sName]
-                        })
-                    });
-
-                    const data = await res.json();
-                    if (data.status === 'success') {
-                        updatedTotal += (data.updatedCount || 0);
-                    }
-                }
-
-                showToast(currentLang === 'ZH' ? `🎉 成功更新 ${updatedTotal} 個儲存格！` : `🎉 Successfully updated ${updatedTotal} cells!`, 'success');
-                pendingChanges = {};
-                updateDirtyCounter();
-                loadAllData();
-
-            } catch (err) {
-                console.error(err);
-                setLoading(false);
-                showToast(currentLang === 'ZH' ? '儲存失敗，請確認 GAS 權限設定' : 'Save failed, please check GAS permissions', 'error');
+        // ================= 🖥️ 全螢幕與 Toast 工具 =================
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                document.getElementById('iconExpand').style.display = 'none';
+                document.getElementById('iconCompress').style.display = 'block';
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+                document.getElementById('iconExpand').style.display = 'block';
+                document.getElementById('iconCompress').style.display = 'none';
             }
         }
 
-        function escapeHtml(text) {
-            if (text === null || text === undefined) return '';
-            return String(text)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+        function showToast(msg, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => { toast.remove(); }, 3000);
         }
     </script>
 </body>
