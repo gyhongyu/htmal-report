@@ -1099,30 +1099,30 @@
    * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
    * ========================================================================= -->
   <div class="floating-quick-dock" id="floatingQuickDock">
-    <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+    <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Navigation (快速切換模組)">
       🧭
     </div>
     <div class="floating-dock-menu" id="floatingDockMenu">
-      <button type="button" class="floating-dock-item active" onclick="navigateToModule('01_dashboard')">
-        <span>📊</span> 01 儀表台總覽
+      <button type="button" class="floating-dock-item active" id="dockItem01" onclick="navigateToModule('01_dashboard')">
+        <span>📊</span> 01 儀表台總覽 (當前)
       </button>
-      <button type="button" class="floating-dock-item" onclick="navigateToModule('02_qsa')">
+      <button type="button" class="floating-dock-item" id="dockItem02" onclick="navigateToModule('02_qsa')">
         <span>🛡️</span> 02 QSA 體系稽核
       </button>
-      <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+      <button type="button" class="floating-dock-item disabled" id="dockItem03" onclick="showModulePendingToast('03_qpa')">
         <span>⚙️</span> 03 QPA 製程 (建置中)
       </button>
-      <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('04_procurement')">
-        <span>📦</span> 04 設備採購 (建置中)
+      <button type="button" class="floating-dock-item" id="dockItem04" onclick="navigateToModule('04_procurement')">
+        <span>📦</span> 04 設備採購
       </button>
-      <button type="button" class="floating-dock-item" onclick="navigateToModule('05_sop')">
+      <button type="button" class="floating-dock-item" id="dockItem05" onclick="navigateToModule('05_sop')">
         <span>📘</span> 05 SOP 應對指南
       </button>
-      <button type="button" class="floating-dock-item" onclick="navigateToModule('06_governance')">
+      <button type="button" class="floating-dock-item" id="dockItem06" onclick="navigateToModule('06_governance')">
         <span>🏛️</span> 06 團隊架構與權責
       </button>
       <div style="height:1px; background:#E2E8F0; margin:2px 0;"></div>
-      <button type="button" class="floating-dock-item" onclick="reloadCurrentPage()">
+      <button type="button" class="floating-dock-item" id="dockItemReload" onclick="window.location.reload()">
         <span>🔄</span> 重新載入當前頁
       </button>
     </div>
@@ -1345,68 +1345,7 @@
   <script>
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwIGSon61ZQYFAGhWmFqUOmyK0YAoe2MsAnqgoldOLaKQnn6YFXLZFsBmm3dJ74aa0UAA/exec";
 
-    // Standard Universal Module URLs Dictionary
-    const PORTAL_URLS = {
-      '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
-      '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
-      '03_qpa': '',
-      '04_procurement': '',
-      '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
-      'sop_guide': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
-      '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
-    };
-
-    // Native Top-Level Window Navigation
-    function navigateToModule(modId) {
-      if (modId === '01_dashboard') {
-        toggleFloatingDock();
-        return;
-      }
-      const url = PORTAL_URLS[modId];
-      if (!url) {
-        showModulePendingToast(modId);
-        return;
-      }
-      window.location.href = url;
-    }
-
-    function toggleFloatingDock() {
-      const menu = document.getElementById('floatingDockMenu');
-      if (menu) menu.classList.toggle('active');
-    }
-
-    function reloadCurrentPage() {
-      window.location.reload();
-    }
-
-    let toastTimer = null;
-    function showToast(icon, msg) {
-      const toast = document.getElementById('toastPopup');
-      const iconEl = document.getElementById('toastIcon');
-      const msgEl = document.getElementById('toastMsg');
-      if (!toast) return;
-
-      iconEl.innerText = icon;
-      msgEl.innerText = msg;
-      toast.classList.add('active');
-
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('active');
-      }, 2600);
-    }
-
-    function showModulePendingToast(modId) {
-      const modNames = {
-        '03_qpa': (currentLang === 'en') ? '03 QPA Audit' : '03 QPA 製程',
-        '04_procurement': (currentLang === 'en') ? '04 Procurement' : '04 設備採購'
-      };
-      const name = modNames[modId] || '此模組';
-      const msg = (currentLang === 'en') ? `${name} is currently under construction!` : `${name} 模組建置中，敬請期待！`;
-      showToast('⚙️', msg);
-      const dockMenu = document.getElementById('floatingDockMenu');
-      if (dockMenu) dockMenu.classList.remove('active');
-    }
+    // Global State Management
 
     // STRICT i18n DICTIONARY
     const i18n = {
@@ -1448,6 +1387,12 @@
         cloudSynced: "☁️ Connected",
         cloudSyncing: "⏳ Syncing...",
         editSectionTitle: "✏️ Edit Task Details & Sync to Google Sheet",
+        calcModeTitle: "Progress Calculation Mode (Choose 1):",
+        modeQuant: "📊 Quantitative Calculation (Closed / Total)",
+        modeSlider: "🎚️ Manual Slider Mode (%)",
+        lblClosedItems: "Closed Count:",
+        lblTotalItems: "Total Items:",
+        lblCalcPreview: "Calculated Progress:",
         lblTaskName: "Task Name:",
         lblStartDate: "Start Date:",
         lblEndDate: "End Date:",
@@ -1500,6 +1445,12 @@
         cloudSynced: "☁️ 已連線至雲端",
         cloudSyncing: "⏳ 同步中...",
         editSectionTitle: "✏️ 編輯任務內容並同步至雲端",
+        calcModeTitle: "完成度計算模式（二選一）：",
+        modeQuant: "📊 缺失項/子項目量化自動算分 (Closed / Total)",
+        modeSlider: "🎚️ 手動滑塊拉桿模式 (%)",
+        lblClosedItems: "已閉環項數 (Closed)：",
+        lblTotalItems: "總項目數 (Total)：",
+        lblCalcPreview: "量化試算進度：",
         lblTaskName: "任務名稱：",
         lblStartDate: "開始日期：",
         lblEndDate: "結束日期：",
@@ -1999,8 +1950,62 @@
     }
 
     // =========================================================================
-    // ✏️ [ANCHOR: JS-MODALS] 任務與里程碑編輯彈窗
+    // ✏️ [ANCHOR: JS-MODALS] 任務與里程碑編輯彈窗 (通用量化算分引擎版)
     // =========================================================================
+    function onCalcModeChange(mode) {
+      const isQuant = mode === 'quant';
+      const quantBox = document.getElementById('quantCalcBox');
+      const sliderBox = document.getElementById('sliderCalcBox');
+      if (quantBox) quantBox.style.opacity = isQuant ? '1' : '0.45';
+      if (sliderBox) sliderBox.style.opacity = isQuant ? '0.45' : '1';
+
+      const closedInput = document.getElementById('editClosedCount');
+      const totalInput = document.getElementById('editTotalCount');
+      const sliderInput = document.getElementById('editSlider');
+      const numInput = document.getElementById('editNum');
+
+      if (isQuant) {
+        if (closedInput) closedInput.disabled = false;
+        if (totalInput) totalInput.disabled = false;
+        if (sliderInput) sliderInput.disabled = true;
+        if (numInput) numInput.disabled = true;
+        recalcQuantProgress();
+      } else {
+        if (closedInput) closedInput.disabled = true;
+        if (totalInput) totalInput.disabled = true;
+        if (sliderInput) sliderInput.disabled = false;
+        if (numInput) numInput.disabled = false;
+      }
+    }
+
+    function recalcQuantProgress() {
+      const closedInput = document.getElementById('editClosedCount');
+      const totalInput = document.getElementById('editTotalCount');
+      if (!closedInput || !totalInput) return;
+
+      const closed = Math.max(0, parseInt(closedInput.value, 10) || 0);
+      const total = Math.max(1, parseInt(totalInput.value, 10) || 1);
+      const pct = Math.min(100, Math.max(0, Math.round((closed / total) * 100)));
+
+      const sliderInput = document.getElementById('editSlider');
+      const numInput = document.getElementById('editNum');
+      const previewEl = document.getElementById('quantPreviewPct');
+      const openEl = document.getElementById('quantOpenCount');
+
+      if (sliderInput) sliderInput.value = pct;
+      if (numInput) numInput.value = pct;
+      if (previewEl) previewEl.innerText = `${pct}% (${closed} / ${total})`;
+      if (openEl) openEl.innerText = Math.max(0, total - closed);
+
+      // Auto update status dropdown based on progress
+      const statusSel = document.getElementById('editStatusSelect');
+      if (statusSel) {
+        if (pct === 100) statusSel.value = "Completed";
+        else if (pct > 0) statusSel.value = "In Progress";
+        else statusSel.value = "Scheduled";
+      }
+    }
+
     function showDetail(id) {
       const item = masterTasks.find(x => x.id === id);
       if (!item) return;
@@ -2014,6 +2019,12 @@
       
       const isMaster = masterTasks.some(x => x.id === item.id);
       const isCustomNew = item.id.startsWith("NEW-");
+
+      // Sub-Summary Quantitative Data initialization
+      const subTotal = (item.subSummary && item.subSummary.total) ? item.subSummary.total : (item.subSummary_total || 0);
+      const subClosed = (item.subSummary && item.subSummary.closed !== undefined) ? item.subSummary.closed : (item.subSummary_closed || 0);
+      const subOpen = (item.subSummary && item.subSummary.open !== undefined) ? item.subSummary.open : (subTotal - subClosed);
+      const hasQuantData = (subTotal > 0);
 
       const editSectionHTML = isMaster ? `
         <div class="edit-box">
@@ -2034,11 +2045,45 @@
             <input type="date" id="editEndDate" class="edit-input-date" value="${item.endDate}">
           </div>
 
-          <div class="edit-field">
-            <label>${t.lblProgress}</label>
-            <div class="edit-input-slider">
-              <input type="range" id="editSlider" min="0" max="100" value="${item.progressPct || 0}" oninput="document.getElementById('editNum').value = this.value">
-              <input type="number" id="editNum" min="0" max="100" value="${item.progressPct || 0}" oninput="document.getElementById('editSlider').value = this.value">%
+          <!-- Dual-Mode 2-Choice Calculation Box -->
+          <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:8px; padding:0.85rem; margin-bottom:0.85rem;">
+            <div style="font-size:0.82rem; font-weight:700; color:#1E293B; margin-bottom:0.5rem;">
+              ${t.calcModeTitle}
+            </div>
+
+            <!-- Option 1: Quantitative Calculation Mode -->
+            <div id="quantCalcBox" style="background:#F8FAFC; border:1px solid #BFDBFE; border-radius:6px; padding:0.6rem; margin-bottom:0.6rem; transition:opacity 0.2s;">
+              <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:700; color:#1D4ED8; cursor:pointer; margin-bottom:0.4rem;">
+                <input type="radio" name="calcMode" value="quant" ${hasQuantData ? 'checked' : ''} onchange="onCalcModeChange('quant')">
+                <span>${t.modeQuant}</span>
+              </label>
+
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:0.3rem;">
+                  <span style="font-size:0.78rem; font-weight:600; color:#475569;">${t.lblClosedItems}</span>
+                  <input type="number" id="editClosedCount" min="0" value="${subClosed}" style="width:65px; padding:3px 6px; border:1px solid #CBD5E1; border-radius:4px; font-weight:700; color:#15803D;" oninput="recalcQuantProgress()">
+                </div>
+                <div style="display:flex; align-items:center; gap:0.3rem;">
+                  <span style="font-size:0.78rem; font-weight:600; color:#475569;">/ ${t.lblTotalItems}</span>
+                  <input type="number" id="editTotalCount" min="0" value="${subTotal}" style="width:65px; padding:3px 6px; border:1px solid #CBD5E1; border-radius:4px; font-weight:700; color:#1E293B;" oninput="recalcQuantProgress()">
+                </div>
+                <div style="font-size:0.78rem; font-weight:700; color:#2563EB;">
+                  <span>${t.lblCalcPreview} <span id="quantPreviewPct">${item.progressPct || 0}%</span> (Open: <span id="quantOpenCount">${subOpen}</span>)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Option 2: Manual Slider Mode -->
+            <div id="sliderCalcBox" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:0.6rem; transition:opacity 0.2s;">
+              <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:700; color:#475569; cursor:pointer; margin-bottom:0.4rem;">
+                <input type="radio" name="calcMode" value="slider" ${!hasQuantData ? 'checked' : ''} onchange="onCalcModeChange('slider')">
+                <span>${t.modeSlider}</span>
+              </label>
+
+              <div class="edit-input-slider" style="margin-top:0.25rem;">
+                <input type="range" id="editSlider" min="0" max="100" value="${item.progressPct || 0}" oninput="document.getElementById('editNum').value = this.value">
+                <input type="number" id="editNum" min="0" max="100" value="${item.progressPct || 0}" oninput="document.getElementById('editSlider').value = this.value">%
+              </div>
             </div>
           </div>
 
@@ -2083,6 +2128,11 @@
       `;
 
       document.getElementById('detailModal').classList.add('active');
+
+      // Initialize disabled state based on initial checked calcMode
+      setTimeout(() => {
+        onCalcModeChange(hasQuantData ? 'quant' : 'slider');
+      }, 20);
     }
 
     function saveTaskFromModal(taskId) {
@@ -2091,6 +2141,16 @@
       const endVal = document.getElementById('editEndDate').value;
       const sliderVal = parseInt(document.getElementById('editSlider').value, 10);
       const statusVal = document.getElementById('editStatusSelect').value;
+
+      const calcModeEl = document.querySelector('input[name="calcMode"]:checked');
+      const isQuant = calcModeEl ? (calcModeEl.value === 'quant') : false;
+
+      let subTotal = 0, subClosed = 0, subOpen = 0;
+      if (document.getElementById('editTotalCount')) {
+        subTotal = Math.max(0, parseInt(document.getElementById('editTotalCount').value, 10) || 0);
+        subClosed = Math.max(0, parseInt(document.getElementById('editClosedCount').value, 10) || 0);
+        subOpen = Math.max(0, subTotal - subClosed);
+      }
 
       const local = masterTasks.find(t => t.id === taskId);
       if (local) {
@@ -2102,6 +2162,13 @@
         if (endVal) local.endDate = endVal;
         local.progressPct = sliderVal;
         local.status = statusVal;
+
+        if (isQuant || subTotal > 0) {
+          local.subSummary = { total: subTotal, closed: subClosed, open: subOpen };
+          local.subSummary_total = subTotal;
+          local.subSummary_closed = subClosed;
+          local.subSummary_open = subOpen;
+        }
       }
 
       renderTable();
@@ -2297,41 +2364,57 @@
       tag.innerText = i18n[currentLang].todayTagPrefix + dateStr + ")";
     }
 
-    function toggleLanguage() {
-      currentLang = (currentLang === 'en') ? 'zh' : 'en';
+    function applyLanguage(lang) {
+      currentLang = lang;
       const t = i18n[currentLang];
+      updateFloatingDockLanguage(currentLang);
 
-      document.getElementById('uiTitle').childNodes[0].nodeValue = t.title + ' ';
-      document.getElementById('uiSubtitle').innerText = t.subtitle;
-      document.getElementById('uiLangBtn').innerText = t.langBtn;
-      document.getElementById('uiFullscreenBtn').innerText = document.fullscreenElement ? t.btnExitFullscreen : t.btnFullscreen;
-      document.getElementById('uiToggleTableBtn').innerText = t.toggleTable;
-      document.getElementById('uiAddTaskBtn').innerText = t.addTask;
-      document.getElementById('uiPanelTitle').innerText = t.tableTitleMaster;
-      document.getElementById('uiTimelineTitle').innerText = t.timelineTitle;
+      const titleEl = document.getElementById('uiTitle');
+      if (titleEl && titleEl.childNodes.length > 0) {
+        titleEl.childNodes[0].nodeValue = t.title + ' ';
+      }
+      const subtitleEl = document.getElementById('uiSubtitle');
+      if (subtitleEl) subtitleEl.innerText = t.subtitle;
+      const langBtn = document.getElementById('uiLangBtn');
+      if (langBtn) langBtn.innerText = t.langBtn;
+      const fsBtn = document.getElementById('uiFullscreenBtn');
+      if (fsBtn) fsBtn.innerText = document.fullscreenElement ? t.btnExitFullscreen : t.btnFullscreen;
+      const toggleTableBtn = document.getElementById('uiToggleTableBtn');
+      if (toggleTableBtn) toggleTableBtn.innerText = t.toggleTable;
+      const addTaskBtn = document.getElementById('uiAddTaskBtn');
+      if (addTaskBtn) addTaskBtn.innerText = t.addTask;
+      const panelTitle = document.getElementById('uiPanelTitle');
+      if (panelTitle) panelTitle.innerText = t.tableTitleMaster;
+      const tlTitle = document.getElementById('uiTimelineTitle');
+      if (tlTitle) tlTitle.innerText = t.timelineTitle;
 
-      document.getElementById('thRef').innerText = t.colRef;
-      document.getElementById('thName').innerText = t.colName;
-      document.getElementById('thCategory').innerText = t.colCategory;
-      document.getElementById('thStatus').innerText = t.colStatus;
-      document.getElementById('thStart').innerText = t.colStart;
-      document.getElementById('thEnd').innerText = t.colEnd;
-      document.getElementById('thOwner').innerText = t.colOwner;
-      document.getElementById('thAuditPoint').innerText = t.colAuditPoint;
+      if (document.getElementById('thRef')) document.getElementById('thRef').innerText = t.colRef;
+      if (document.getElementById('thName')) document.getElementById('thName').innerText = t.colName;
+      if (document.getElementById('thCategory')) document.getElementById('thCategory').innerText = t.colCategory;
+      if (document.getElementById('thStatus')) document.getElementById('thStatus').innerText = t.colStatus;
+      if (document.getElementById('thStart')) document.getElementById('thStart').innerText = t.colStart;
+      if (document.getElementById('thEnd')) document.getElementById('thEnd').innerText = t.colEnd;
+      if (document.getElementById('thOwner')) document.getElementById('thOwner').innerText = t.colOwner;
+      if (document.getElementById('thAuditPoint')) document.getElementById('thAuditPoint').innerText = t.colAuditPoint;
 
-      document.getElementById('uiChartStatusTitle').innerText = t.chartStatusTitle;
-      document.getElementById('uiChartWsTitle').innerText = t.chartWsTitle;
-      document.getElementById('uiChartProgressTitle').innerText = t.chartProgressTitle;
+      if (document.getElementById('uiChartStatusTitle')) document.getElementById('uiChartStatusTitle').innerText = t.chartStatusTitle;
+      if (document.getElementById('uiChartWsTitle')) document.getElementById('uiChartWsTitle').innerText = t.chartWsTitle;
+      if (document.getElementById('uiChartProgressTitle')) document.getElementById('uiChartProgressTitle').innerText = t.chartProgressTitle;
 
-      document.getElementById('prog1Label').innerText = t.prog1;
-      document.getElementById('prog2Label').innerText = t.prog2;
-      document.getElementById('prog3Label').innerText = t.prog3;
+      if (document.getElementById('prog1Label')) document.getElementById('prog1Label').innerText = t.prog1;
+      if (document.getElementById('prog2Label')) document.getElementById('prog2Label').innerText = t.prog2;
+      if (document.getElementById('prog3Label')) document.getElementById('prog3Label').innerText = t.prog3;
 
       renderTable();
       renderTimeline();
       renderMilestones();
       updateTodayNeedle();
       updateCharts();
+    }
+
+    function toggleLanguage() {
+      const nextLang = (currentLang === 'en') ? 'zh' : 'en';
+      applyLanguage(nextLang);
     }
 
     function toggleInputPanel() {
@@ -2386,6 +2469,18 @@
               if (eDate) local.endDate = eDate;
               if (cloudItem.owner) local.owner = cloudItem.owner;
               if (cloudItem.workstream) local.workstream = cloudItem.workstream;
+
+              // Synchronize Quantitative subSummary Fields
+              const cTotal = (cloudItem.subSummary_total !== undefined && cloudItem.subSummary_total !== "") ? Number(cloudItem.subSummary_total) : (local.subSummary ? local.subSummary.total : 0);
+              const cClosed = (cloudItem.subSummary_closed !== undefined && cloudItem.subSummary_closed !== "") ? Number(cloudItem.subSummary_closed) : (local.subSummary ? local.subSummary.closed : 0);
+              const cOpen = (cloudItem.subSummary_open !== undefined && cloudItem.subSummary_open !== "") ? Number(cloudItem.subSummary_open) : (cTotal - cClosed);
+              
+              if (cTotal > 0) {
+                local.subSummary = { total: cTotal, closed: cClosed, open: cOpen };
+                local.subSummary_total = cTotal;
+                local.subSummary_closed = cClosed;
+                local.subSummary_open = cOpen;
+              }
             } else {
               cloudItem.color = cloudItem.color || "#3B82F6";
               cloudItem.startDate = sDate;
@@ -2456,7 +2551,10 @@
           status: local.status,
           startDate: local.startDate,
           endDate: local.endDate,
-          owner: local.owner
+          owner: local.owner,
+          subSummary_total: local.subSummary ? local.subSummary.total : 0,
+          subSummary_closed: local.subSummary ? local.subSummary.closed : 0,
+          subSummary_open: local.subSummary ? local.subSummary.open : 0
         };
 
         await fetch(GAS_WEBAPP_URL, {
@@ -2474,13 +2572,79 @@
       }
     }
 
+    // Standard Universal Module URLs Dictionary
+    const PORTAL_URLS = {
+      '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
+      '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
+      '03_qpa': '',
+      '04_procurement': 'https://html.foxlink.co.in/reports/report-1786884117627.html',
+      '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
+      '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
+    };
+
+    function toggleFloatingDock() {
+      const menu = document.getElementById('floatingDockMenu');
+      if (menu) menu.classList.toggle('active');
+    }
+
+    function navigateToModule(moduleKey) {
+      if (moduleKey === '01_dashboard') {
+        toggleFloatingDock();
+        return;
+      }
+      const url = PORTAL_URLS[moduleKey];
+      if (url) {
+        const targetUrl = url.includes('?') ? `${url}&lang=${currentLang.toLowerCase()}` : `${url}?lang=${currentLang.toLowerCase()}`;
+        window.location.href = targetUrl;
+      } else {
+        showToast(`模組 [${moduleKey}] 部署就緒中！`, "info");
+      }
+    }
+
+    function showModulePendingToast(moduleKey) {
+      showToast(`模組 [${moduleKey}] 正在最後驗證中，即將開放直達！`, "info");
+    }
+
+    function updateFloatingDockLanguage(lang) {
+      const isZH = lang === 'zh';
+      const items = {
+        'dockItem01': isZH ? '<span>📊</span> 01 儀表台總覽' : '<span>📊</span> 01 Dashboard Overview',
+        'dockItem02': isZH ? '<span>🛡️</span> 02 QSA 體系稽核' : '<span>🛡️</span> 02 QSA System Audit',
+        'dockItem03': isZH ? '<span>⚙️</span> 03 QPA 製程 (建置中)' : '<span>⚙️</span> 03 QPA Process (Pending)',
+        'dockItem04': isZH ? '<span>📦</span> 04 設備採購' : '<span>📦</span> 04 Procurement Tracking',
+        'dockItem05': isZH ? '<span>📘</span> 05 SOP 應對指南' : '<span>📘</span> 05 SOP Audit Handbook',
+        'dockItem06': isZH ? '<span>🏛️</span> 06 團隊架構與權責' : '<span>🏛️</span> 06 Governance & RACI',
+        'dockItemReload': isZH ? '<span>🔄</span> 重新載入當前頁' : '<span>🔄</span> Reload Current Page'
+      };
+      for (const [id, html] of Object.entries(items)) {
+        const el = document.getElementById(id);
+        if (el) {
+          const isCurrent = el.classList.contains('active');
+          el.innerHTML = html + (isCurrent ? ` ${isZH ? '(當前)' : '(Current)'}` : '');
+        }
+      }
+    }
+
+    // 點擊空白處關閉導航島
+    document.addEventListener('click', (e) => {
+      const dock = document.getElementById('floatingQuickDock');
+      if (dock && !dock.contains(e.target)) {
+        document.getElementById('floatingDockMenu').classList.remove('active');
+      }
+    });
+
     // Automatic Page Initialization on Load
     window.addEventListener('DOMContentLoaded', () => {
-      renderTable();
-      renderTimeline();
-      renderMilestones();
-      updateTodayNeedle();
-      initCharts();
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = (urlParams.get('lang') || '').toLowerCase();
+      if (langParam.startsWith('zh')) currentLang = 'zh';
+      else if (langParam.startsWith('en')) currentLang = 'en';
+      else {
+        const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        currentLang = browserLang.startsWith('zh') ? 'zh' : 'en';
+      }
+
+      applyLanguage(currentLang);
 
       // Load Single Source of Truth from Google Sheet Database
       loadTasksFromCloud();
