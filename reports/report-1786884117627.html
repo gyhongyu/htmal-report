@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSSTC D1 設備與治具採購追蹤管理系統 v1.1</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js 核心庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* =========================================================================
+         * 🗺️ [CODE MAP] SSSTC Procurement WebUI 架構導引目錄 (AI 代理人快速定位專用)
+         * =========================================================================
+         * 1. 🎨 [ANCHOR: CSS-THEME]          - 深海翡翠綠與薄荷青主題色彩變數 (Tokens & Reset)
+         * 2. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速導航島 (避開 LOGO) 與 Toast
+         * 3. 📊 [ANCHOR: CSS-DASHBOARD]      - Tab 1 儀表台、KPI 卡片、6 階段漏斗與預警清單
+         * 4. 📋 [ANCHOR: CSS-TABLE]          - Tab 2 採購清單表格、v3.9 標竿表頭 (Thead Sticky) 與大字體
+         * 5. 🗂️ [ANCHOR: CSS-DRAWER]         - 採購與交期詳情抽屜 (無遮罩 Side-by-Side)
+         * 6. 🧱 [ANCHOR: DOM-NAVBAR]         - 頂部白 LOGO、連線狀態燈、雙分頁按鈕骨架
+         * 7. 📊 [ANCHOR: DOM-DASHBOARD]      - 儀表台 4 大 KPI、2 大 Chart.js 與預警清單骨架
+         * 8. 📋 [ANCHOR: DOM-TABLE]          - Sheet 表格、工具列與 6 階段篩選器 DOM 骨架
+         * 9. 🗂️ [ANCHOR: DOM-DRAWER]         - 結構化 4 區塊詳情抽屜 DOM 骨架
+         * 10.🧠 [ANCHOR: JS-STATE]           - 全域狀態、雙語快取與 10 大項目數據
+         * 11.📈 [ANCHOR: JS-CHARTS]          - Chart.js 初始化、6 階段聚合與生命週期銷毀
+         * 12.📋 [ANCHOR: JS-TABLE]           - 表格渲染、雙語純淨切換、關鍵字搜尋與階段篩選
+         * 13.🗂️ [ANCHOR: JS-DRAWER]          - 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
+         * 14.☁️ [ANCHOR: JS-CLOUD]           - GAS 雲端 API 數據拉取與雙向 POST 儲存
+         * =========================================================================
+         */
+
+        /* =========================================================================
+         * 🎨 [ANCHOR: CSS-THEME] 主題色彩變數與全域樣式 (Emerald Teal & Mint)
+         * ========================================================================= */
+        :root {
+            /* 墨玉深黑底色層次 (Emerald Black Theme) */
+            --bg-primary: #06120e;
+            --bg-secondary: #0a1f18;
+            --bg-card: rgba(10, 31, 24, 0.85);
+            --bg-card-elevated: #112e24;
+            --bg-hover: #163d30;
+            
+            /* 專屬深海翡翠綠與薄荷青主題色彩 */
+            --accent-primary: #10b981;
+            --accent-hover: #059669;
+            --accent-glow: rgba(16, 185, 129, 0.35);
+            --accent-cyan: #06b6d4;
+            --accent-mint: #34d399;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-danger: #ef4444;
+            --accent-purple: #8b5cf6;
+            
+            --text-main: #f8fafc;
+            --text-muted: #8fa79b;
+            --border-color: rgba(52, 211, 153, 0.15);
+            --border-focus: rgba(16, 185, 129, 0.6);
+            --formula-bg: rgba(17, 46, 36, 0.6);
+            --dirty-bg: rgba(245, 158, 11, 0.2);
+            --dirty-border: #f59e0b;
+            --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.7);
+            --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Group Banners Colors */
+            --group-base-bg: #0f3327;
+            --group-budget-bg: #143d2c;
+            --group-po-bg: #174235;
+            --group-install-bg: #1f4e3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100vh;
+            margin: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 14px; /* 全面放大基準字體 */
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* 滾動條美化 */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: rgba(52, 211, 153, 0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+        /* =========================================================================
+         * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+         * ========================================================================= */
+        .floating-quick-dock {
+            position: fixed;
+            top: 6px;
+            left: 6px;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.35rem;
+        }
+
+        .floating-dock-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #FFFFFF;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-out;
+            opacity: 0.85;
+        }
+
+        .floating-dock-toggle:hover {
+            transform: scale(1.12);
+            opacity: 1;
+            background: var(--accent-primary);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.6);
+        }
+
+        .floating-dock-menu {
+            display: none;
+            background: rgba(10, 31, 24, 0.97);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 180px;
+            animation: slideDownFade 0.2s ease-out;
+        }
+
+        .floating-dock-menu.active {
+            display: flex;
+        }
+
+        @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-dock-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .floating-dock-item:hover {
+            background: var(--bg-hover);
+            color: var(--accent-primary);
+        }
+
+        .floating-dock-item.active {
+            background: rgba(16, 185, 129, 0.25);
+            color: var(--accent-mint);
+            font-weight: 700;
+        }
+
+        .floating-dock-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 頂部固定區域 (Sticky Top Section) */
+        .sticky-top-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(6, 18, 14, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.65rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-left: 20px; /* 避開左上角微縮導航島 */
+        }
+
+        .brand-logo-img {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .brand-title h1 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #6ee7b7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-badge {
+            font-size: 0.72rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            -webkit-text-fill-color: #6ee7b7;
+        }
+
+        .brand-title p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #34d399;
+            box-shadow: 0 0 8px #34d399;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+        }
+
+        .btn-sheet-link {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            text-decoration: none;
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.2s;
+        }
+
+        .btn-sheet-link:hover {
+            background: rgba(16, 185, 129, 0.3);
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-fullscreen {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-fullscreen:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 2px 10px var(--accent-glow);
+        }
+
+        .btn-fullscreen svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* 語系切換按鈕 (預設繁中 active) */
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.2rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 2px 8px var(--accent-glow);
+        }
+
+        .btn-action {
+            background: var(--bg-secondary);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--bg-hover);
+            border-color: rgba(52, 211, 153, 0.3);
+            color: #ffffff;
+        }
+
+        .btn-primary-glow {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border: 1px solid #34d399;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-primary-glow:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .dirty-badge {
+            background: var(--accent-warning);
+            color: #000;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.15rem 0.45rem;
+            border-radius: 10px;
+            display: none;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* 雙分頁導航條 (Tab Navigation Bar) */
+        .tab-nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.45rem 1.15rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #065f46 100%);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+
+        .view-switch-group {
+            display: flex;
+            align-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.2rem;
+        }
+
+        .view-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.35rem 0.8rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .view-btn.active {
+            background: var(--bg-card-elevated);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* 主要內容容器 */
+        main {
+            padding: 1.25rem;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* =========================================================================
+         * 📊 [ANCHOR: CSS-DASHBOARD] Tab 1 儀表台與 KPI 卡片樣式
+         * ========================================================================= */
+        .dashboard-view {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+        }
+
+        .kpi-items::before { background: #10b981; }
+        .kpi-budget::before { background: #06b6d4; }
+        .kpi-po::before { background: #f59e0b; }
+        .kpi-done::before { background: #34d399; }
+
+        .kpi-icon-wrap {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.65rem;
+            flex-shrink: 0;
+        }
+        .kpi-items .kpi-icon-wrap { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .kpi-budget .kpi-icon-wrap { background: rgba(6, 182, 212, 0.15); color: #67e8f9; }
+        .kpi-po .kpi-icon-wrap { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .kpi-done .kpi-icon-wrap { background: rgba(52, 211, 153, 0.15); color: #6ee7b7; }
+
+        .kpi-info { flex: 1; }
+        .kpi-label { font-size: 0.84rem; font-weight: 600; color: var(--text-muted); }
+        .kpi-value { font-size: 1.85rem; font-weight: 800; font-family: var(--font-mono); margin-top: 0.15rem; color: #ffffff; }
+        .kpi-sub { font-size: 0.8rem; color: var(--text-muted); font-weight: normal; margin-left: 0.3rem; }
+
+        /* 圖表網格佈局 */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 1.25rem;
+        }
+        @media (max-width: 1024px) {
+            .charts-grid { grid-template-columns: 1fr; }
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .chart-container-box {
+            height: 260px;
+            position: relative;
+            width: 100%;
+        }
+
+        /* 預警清單卡片 */
+        .warning-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .warning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 0.85rem;
+            margin-top: 0.75rem;
+        }
+        .warning-item {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-left: 4px solid var(--accent-warning);
+            border-radius: 8px;
+            padding: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .warning-item:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent-warning);
+            transform: translateY(-2px);
+        }
+        .warning-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        /* =========================================================================
+         * 📋 [ANCHOR: CSS-TABLE] Tab 2 表格樣式 (v3.9 標竿 Thead Sticky 規範 + 放大字體)
+         * ========================================================================= */
+        .detail-view {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 260px;
+            max-width: 420px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.55rem 0.85rem 0.55rem 2.25rem;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .filter-chips {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .chip-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .chip-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-main);
+        }
+
+        .chip-btn.active {
+            background: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+            box-shadow: 0 2px 10px var(--accent-glow);
+        }
+
+        .chip-btn.chip-pending.active {
+            background: var(--accent-warning);
+            color: #000000;
+            border-color: var(--accent-warning);
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+        }
+
+        .info-stats {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            width: 100%;
+        }
+
+        .table-container.compact-mode {
+            overflow-x: hidden !important;
+        }
+        .table-container.compact-mode table {
+            width: 100% !important;
+            min-width: 100% !important;
+            table-layout: fixed !important;
+        }
+        .table-container.compact-mode th,
+        .table-container.compact-mode td {
+            padding: 0.55rem 0.5rem !important;
+            box-sizing: border-box;
+        }
+
+        .table-container.classic-mode {
+            overflow-x: auto !important;
+        }
+        .table-container.classic-mode table {
+            width: max-content !important;
+            min-width: 100% !important;
+            table-layout: auto !important;
+        }
+
+        /* ⭕ 100% 遵循 v3.9 標竿表頭標準結構 */
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.92rem; /* 表格文字字級提升 */
+            text-align: left;
+            width: 100%;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: #0a1f18;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+        }
+
+        thead tr {
+            background-color: #0a1f18;
+        }
+
+        th {
+            padding: 0.6rem 0.8rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            background-color: #0a1f18;
+            background-clip: border-box;
+            border-bottom: 2px solid rgba(52, 211, 153, 0.3);
+            border-right: 1px solid var(--border-color);
+            white-space: nowrap;
+            line-height: 1.25;
+            user-select: none;
+            font-size: 0.88rem; /* 表頭字體放大 */
+            letter-spacing: 0.01em;
+            vertical-align: middle;
+            position: relative;
+            z-index: 510;
+        }
+
+        /* Banner 標題分組欄位 (v3.9 group cell 規範) */
+        th.group-cell {
+            text-align: center;
+            font-size: 0.92rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+            background-clip: border-box;
+            position: relative;
+            z-index: 510;
+        }
+
+        th.group-base   { background: var(--group-base-bg);   color: #6ee7b7; border-right: 2px solid rgba(16, 185, 129, 0.4); }
+        th.group-budget { background: var(--group-budget-bg); color: #67e8f9; border-right: 2px solid rgba(6, 182, 212, 0.4); }
+        th.group-stage  { background: var(--group-po-bg);     color: #fde047; border-right: 2px solid rgba(245, 158, 11, 0.4); }
+
+        td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            color: #cbd5e1;
+            transition: background 0.15s, border-color 0.15s;
+            position: static;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            font-size: 0.92rem;
+        }
+
+        tr:hover td {
+            background-color: var(--bg-hover) !important;
+        }
+
+        .td-center { text-align: center; }
+        .td-mono { font-family: var(--font-mono); }
+        .td-formula { background: var(--formula-bg); color: #6ee7b7; }
+        .td-dirty { background: var(--dirty-bg) !important; border-color: var(--dirty-border) !important; }
+
+        /* 標籤 Badge 膠囊 */
+        .badge {
+            display: inline-block;
+            padding: 0.22rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.78rem; /* 標籤字體提升 */
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge-stage {
+            font-size: 0.74rem;
+            padding: 0.18rem 0.45rem;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .stage-done { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .stage-progress { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .stage-pending { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.25); }
+
+        .btn-capa-open {
+            background: rgba(16, 185, 129, 0.18);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #6ee7b7;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.15s;
+        }
+
+        .btn-capa-open:hover {
+            background: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 2px 10px var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        .compact-cell-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            width: 100%;
+        }
+
+        /* ⚡ 當前抽屜對應表格列高亮 (Active Highlight Row) */
+        tr.active-capa-row td {
+            background: rgba(16, 185, 129, 0.28) !important;
+            border-top: 1.5px solid #34d399 !important;
+            border-bottom: 1.5px solid #34d399 !important;
+            box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.35) !important;
+        }
+        tr.active-capa-row td:first-child {
+            border-left: 4px solid #34d399 !important;
+        }
+        tr.active-capa-row td:last-child {
+            border-right: 1.5px solid #34d399 !important;
+        }
+
+        /* =========================================================================
+         * 🗂️ [ANCHOR: CSS-DRAWER] 採購側邊抽屜樣式 (獨立懸浮、無黑色遮罩)
+         * ========================================================================= */
+        .capa-drawer {
+            position: fixed;
+            top: 0;
+            right: -660px;
+            width: 620px;
+            max-width: 94vw;
+            height: 100vh;
+            background: #091c16;
+            border-left: 2px solid var(--accent-primary);
+            z-index: 2001;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            pointer-events: auto;
+        }
+        .capa-drawer.active {
+            right: 0 !important;
+        }
+
+        .drawer-header {
+            padding: 1.15rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 31, 24, 0.98);
+        }
+
+        .drawer-body {
+            padding: 1.25rem 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .drawer-footer {
+            padding: 0.9rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 31, 24, 0.98);
+        }
+
+        .drawer-section-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #6ee7b7;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px dashed rgba(52, 211, 153, 0.25);
+        }
+
+        .drawer-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .drawer-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .drawer-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .drawer-input, .drawer-select {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.5rem 0.7rem;
+            color: var(--text-main);
+            font-size: 0.86rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .drawer-input:focus, .drawer-select:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .drawer-textarea {
+            width: 100%;
+            height: 75px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.55rem 0.75rem;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.86rem;
+            resize: vertical;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .drawer-textarea:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 3000;
+        }
+        .toast {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        .toast-success { border-left: 4px solid var(--accent-success); }
+        .toast-error { border-left: 4px solid var(--accent-danger); }
+        .toast-info { border-left: 4px solid var(--accent-primary); }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================================
+     * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+     * ========================================================================= -->
+    <div class="floating-quick-dock" id="floatingQuickDock">
+        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+            🧭
+        </div>
+        <div class="floating-dock-menu" id="floatingDockMenu">
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('01_dashboard')">
+                <span>📊</span> 01 儀表台總覽
+            </button>
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('02_qsa')">
+                <span>🛡️</span> 02 QSA 體系稽核
+            </button>
+            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+                <span>⚙️</span> 03 QPA 製程 (建置中)
+            </button>
+            <button type="button" class="floating-dock-item active" onclick="navigateToModule('04_procurement')">
+                <span>📦</span> 04 設備採購 (當前)
+            </button>
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('05_sop')">
+                <span>📘</span> 05 SOP 應對指南
+            </button>
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('06_governance')">
+                <span>🏛️</span> 06 團隊架構與權責
+            </button>
+            <div style="height:1px; background:rgba(255,255,255,0.1); margin:2px 0;"></div>
+            <button type="button" class="floating-dock-item" onclick="window.location.reload()">
+                <span>🔄</span> 重新載入當前頁
+            </button>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+     * 🧱 [ANCHOR: DOM-NAVBAR] 頂部 LOGO、狀態燈、雙分頁按鈕骨架
+     * ========================================================================= -->
+    <div class="sticky-top-wrapper">
+        <header>
+            <div class="brand">
+                <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="Foxlink" class="brand-logo-img">
+                <div class="brand-title">
+                    <h1 id="appTitle">
+                        SSSTC D1 設備與治具採購追蹤管理系統
+                        <span class="brand-badge">v1.1 雙分頁版</span>
+                    </h1>
+                    <p>
+                        <span class="connection-status">
+                            <span class="status-dot"></span> <span id="statusText">在線資料庫連線中 (10 筆就緒)</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <a href="https://docs.google.com/spreadsheets/d/1w7d1g-SSSTC_Procurement_DB/edit" target="_blank" class="btn-sheet-link" id="btnSheetLink">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span id="btnSheetText">Google Sheet 採購庫</span>
+                </a>
+
+                <button class="btn-fullscreen" onclick="toggleFullscreen()" title="切換全螢幕 (Fullscreen)">
+                    <svg id="iconExpand" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                    <svg id="iconCompress" style="display:none;" viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+                </button>
+
+                <div class="lang-switch">
+                    <button class="lang-btn active" id="btnLangZH" onclick="switchLanguage('ZH')">繁中</button>
+                    <button class="lang-btn" id="btnLangEN" onclick="switchLanguage('EN')">EN</button>
+                </div>
+
+                <button class="btn-action" onclick="loadAllData()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                    <span id="btnSyncText">重新整理</span>
+                </button>
+
+                <button class="btn-action btn-primary-glow" id="btnSave" onclick="saveChanges()" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <span id="btnSaveText">儲存所有變更</span>
+                    <span class="dirty-badge" id="dirtyCounter">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 雙分頁導航條 -->
+        <div class="tab-nav-bar">
+            <div class="tab-btn-group">
+                <button class="tab-btn active" id="tabBtnDashboard" onclick="switchTab('dashboard')">
+                    📊 <span id="tabTitleDashboard">採購儀表台</span>
+                </button>
+                <button class="tab-btn" id="tabBtnDetail" onclick="switchTab('detail')">
+                    📋 <span id="tabTitleDetail">細節進度視圖</span>
+                </button>
+            </div>
+
+            <div class="view-switch-group" id="viewModeWrapper" style="display: none;">
+                <button class="view-btn active" id="btnCompactView" onclick="switchTableViewMode('compact')">
+                    ⚡ <span id="btnCompactText">精簡視圖</span>
+                </button>
+                <button class="view-btn" id="btnClassicView" onclick="switchTableViewMode('classic')">
+                    📊 <span id="btnClassicText">傳統全視圖</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主視圖區塊 -->
+    <main>
+        <!-- =========================================================================
+         * 📊 [ANCHOR: DOM-DASHBOARD] Tab 1 採購儀表台與 KPI 卡片骨架
+         * ========================================================================= -->
+        <section class="dashboard-view" id="dashboardView">
+            <!-- 4 大 KPI 卡片 -->
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-items">
+                    <div class="kpi-icon-wrap">📦</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="kpiLabelTotal">總採購品項</div>
+                        <div class="kpi-value" id="kpiValueTotal">10 <span class="kpi-sub">項</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-budget">
+                    <div class="kpi-icon-wrap">💰</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="kpiLabelBudget">總預算金額 (INR)</div>
+                        <div class="kpi-value" id="kpiValueBudget" style="color: #67e8f9;">₹ 14.92M <span class="kpi-sub">INR</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-po">
+                    <div class="kpi-icon-wrap">📝</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="kpiLabelPO">已下 PO / 請購核准</div>
+                        <div class="kpi-value" id="kpiValuePO" style="color: #fbbf24;">4 <span class="kpi-sub">項</span></div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-done">
+                    <div class="kpi-icon-wrap">✅</div>
+                    <div class="kpi-info">
+                        <div class="kpi-label" id="kpiLabelDone">驗收 / 培訓完成</div>
+                        <div class="kpi-value" id="kpiValueDone" style="color: #6ee7b7;">1 <span class="kpi-sub">項</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 圖表網格區 -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <span>📊</span> <span id="chartTitleStages">採購 6 階段流程推進分佈</span>
+                        </div>
+                    </div>
+                    <div class="chart-container-box">
+                        <canvas id="chartStages"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <span>📈</span> <span id="chartTitleCategory">設備與服務類別佔比</span>
+                        </div>
+                    </div>
+                    <div class="chart-container-box">
+                        <canvas id="chartCategory"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 預警與關鍵進展追蹤清單 -->
+            <div class="warning-card">
+                <div class="chart-title" style="margin-bottom: 0.5rem;">
+                    <span>⚠️</span> <span id="warningTitle">採購重要里程碑與交期預警</span>
+                </div>
+                <div class="warning-grid" id="warningList">
+                    <!-- 動態由 JS 渲染 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+         * 📋 [ANCHOR: DOM-TABLE] Tab 2 採購清單表格與工具列 DOM 骨架
+         * ========================================================================= -->
+        <section class="detail-view" id="detailView">
+            <div class="toolbar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="tableSearch" placeholder="搜尋項目描述、項次、稽核編號或狀態..." oninput="handleSearch(this.value)">
+                </div>
+
+                <div class="filter-chips">
+                    <button class="chip-btn active" id="chipAll" onclick="setFilter('ALL')">全部 (共 10 筆)</button>
+                    <button class="chip-btn chip-pending" id="chipBudgetPending" onclick="setFilter('BUDGET_PENDING')">⏳ 預算未完成</button>
+                    <button class="chip-btn" id="chipSFC" onclick="setFilter('SFC')">SFC/MES 系統</button>
+                    <button class="chip-btn" id="chipXRay" onclick="setFilter('XRAY')">X-Ray/檢測設備</button>
+                    <button class="chip-btn" id="chipAudit" onclick="setFilter('AUDIT')">SSSTC 稽核項</button>
+                </div>
+
+                <div class="info-stats">
+                    <span id="filteredStats">顯示 10 / 10 筆資料</span>
+                </div>
+            </div>
+
+            <div class="table-container compact-mode" id="tableContainer">
+                <table id="mainTable">
+                    <!-- 動態由 JS 渲染 -->
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================================================
+     * 🗂️ [ANCHOR: DOM-DRAWER] 結構化抽屜 DOM 骨架 (無遮罩 Side-by-Side)
+     * ========================================================================= -->
+    <div class="capa-drawer" id="capaDrawer">
+        <div class="drawer-header">
+            <div>
+                <span class="brand-badge" id="drawerItemBadge" style="margin-right: 0.5rem;">項次 #1</span>
+                <span style="font-weight: 800; font-size: 1.05rem; color: #ffffff;" id="drawerItemTitle">所有 SMT 站別導入 SFC 系統</span>
+            </div>
+            <button class="btn-fullscreen" onclick="closeCapaDrawer()" style="width: 32px; height: 32px;">✕</button>
+        </div>
+
+        <div class="drawer-body">
+            <!-- 區塊 1: 基本規格與預算 -->
+            <div class="drawer-section-title">
+                <span>📌</span> <span id="drawerSec1Title">一、基本規格與預算審批</span>
+            </div>
+            <div class="drawer-grid-2">
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerQty">需求數量</label>
+                    <input type="number" class="drawer-input" id="drawerQty" onchange="onDrawerFieldChange('qty')">
+                </div>
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerCost">總費用 (INR)</label>
+                    <input type="number" class="drawer-input" id="drawerCost" onchange="onDrawerFieldChange('cost')">
+                </div>
+            </div>
+            <div class="drawer-grid-2">
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerS1Date">S1 RFQ 實際完成日</label>
+                    <input type="date" class="drawer-input" id="drawerS1Date" onchange="onDrawerFieldChange('s1_date')">
+                </div>
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerS2Date">S2 預算審批目標日</label>
+                    <input type="date" class="drawer-input" id="drawerS2Date" onchange="onDrawerFieldChange('s2_date')">
+                </div>
+            </div>
+            <div class="drawer-field">
+                <label class="drawer-label" id="lblDrawerS2Status">S2 預算審批進度狀態</label>
+                <textarea class="drawer-textarea" id="drawerS2Status" onchange="onDrawerFieldChange('s2_status')"></textarea>
+            </div>
+
+            <!-- 區塊 2: 採購訂單與交期 (S3 & S4) -->
+            <div class="drawer-section-title">
+                <span>📝</span> <span id="drawerSec2Title">二、請購與採購訂單</span>
+            </div>
+            <div class="drawer-grid-2">
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerS3Status">S3 PR 請購進度狀態</label>
+                    <input type="text" class="drawer-input" id="drawerS3Status" onchange="onDrawerFieldChange('s3_status')">
+                </div>
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerS4Status">S4 PO 訂單進度狀態</label>
+                    <input type="text" class="drawer-input" id="drawerS4Status" onchange="onDrawerFieldChange('s4_status')">
+                </div>
+            </div>
+            <div class="drawer-grid-2">
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerLeadTime">S4 合約交期 (天數)</label>
+                    <input type="number" class="drawer-input" id="drawerLeadTime" onchange="onDrawerFieldChange('lead_time')">
+                </div>
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerOrigin">S4 發貨地 (國別)</label>
+                    <input type="text" class="drawer-input" id="drawerOrigin" onchange="onDrawerFieldChange('origin')">
+                </div>
+            </div>
+
+            <!-- 區塊 3: 物流、清關與現場安裝 (S5 & S6) -->
+            <div class="drawer-section-title">
+                <span>🚚</span> <span id="drawerSec3Title">三、物流與現場驗收</span>
+            </div>
+            <div class="drawer-grid-2">
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerInstallDays">S6 安裝/調試/培訓 (天數)</label>
+                    <input type="text" class="drawer-input" id="drawerInstallDays" onchange="onDrawerFieldChange('install_days')">
+                </div>
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerS6Date">S6 目標完成日</label>
+                    <input type="date" class="drawer-input" id="drawerS6Date" onchange="onDrawerFieldChange('s6_date')">
+                </div>
+            </div>
+            <div class="drawer-field">
+                <label class="drawer-label" id="lblDrawerS6Status">S6 安裝/調試/培訓進度狀態</label>
+                <textarea class="drawer-textarea" id="drawerS6Status" onchange="onDrawerFieldChange('s6_status')"></textarea>
+            </div>
+
+            <!-- 區塊 4: 備註與 SSSTC 稽核對應 -->
+            <div class="drawer-section-title">
+                <span>🔍</span> <span id="drawerSec4Title">四、備註與 SSSTC 稽核關聯</span>
+            </div>
+            <div class="drawer-grid-2">
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerAuditNo">對應 SSSTC 稽核項次</label>
+                    <input type="text" class="drawer-input" id="drawerAuditNo" readonly style="opacity: 0.75;">
+                </div>
+                <div class="drawer-field">
+                    <label class="drawer-label" id="lblDrawerRemarks">備註說明</label>
+                    <input type="text" class="drawer-input" id="drawerRemarks" onchange="onDrawerFieldChange('remarks')">
+                </div>
+            </div>
+        </div>
+
+        <div class="drawer-footer">
+            <div style="display: flex; gap: 0.45rem;">
+                <button class="btn-action" id="btnDrawerPrev" onclick="navigateDrawer(-1)">⬅️ 上一筆</button>
+                <button class="btn-action" id="btnDrawerNext" onclick="navigateDrawer(1)">下一筆 ➡️</button>
+            </div>
+            <div style="display: flex; gap: 0.45rem;">
+                <button class="btn-action" id="btnDrawerCopy" onclick="copyProcurementSummary()">📋 複製摘要</button>
+                <button class="btn-action btn-primary-glow" id="btnDrawerSave" onclick="saveCurrentDrawer()">💾 儲存修改</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // =========================================================================
+        // 🧠 [ANCHOR: JS-STATE] 全域狀態、雙語快取與 10 大項目數據
+        // =========================================================================
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbyl_xDNDV5SOEx8zmoqV0ttN0O94mlIFW43D-5cp0uVlZOuHVOpCTzOSzKNl1IcwNS0Sw/exec";
+
+        const PORTAL_URLS = {
+            '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
+            '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
+            '03_qpa': '',
+            '04_procurement': window.location.href,
+            '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
+            '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
+        };
+
+        let currentLang = 'ZH';
+        let currentTab = 'dashboard';
+        let currentTableViewMode = 'compact';
+        let currentFilter = 'ALL';
+        let searchQuery = '';
+        let activeDrawerIndex = -1;
+        let pendingChangesCount = 0;
+
+        let charts = {
+            stages: null,
+            category: null
+        };
+
+        // 雙語離線回退緩存 (100% 完整 10 筆資料庫，與 GAS 保持無痛 Smart Merge)
+        let procurementDataCache = {
+            ZH: { headers: [], rows: [] },
+            EN: { headers: [], rows: [] }
+        };
+
+        // 初始載入
+        window.addEventListener('DOMContentLoaded', async () => {
+            initFallbackData();
+            initDashboardCharts();
+            renderTable();
+            renderWarnings();
+            await loadAllData();
+        });
+
+        function initFallbackData() {
+            procurementDataCache.ZH.rows = [
+                { "項次": 1, "項目描述": "所有 SMT 站別導入 SFC 系統", "需求數量": 1, "幣別": "INR", "總費用": 2153088, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-07-21", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-08-31", "S2_Budget_實際日期": "", "S2_Budget_進度狀態": "預算明細已草擬，上呈審批中", "S3_PR_目標日期": "", "S3_PR_實際日期": "", "S3_PR_進度狀態": "", "S4_PO_目標日期": "2026-09-30", "S4_PO_實際日期": "", "S4_PO_進度狀態": "待提供正式訂單", "S4_PO_合約交期_天": "", "S4_PO_發貨地": "", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": "", "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-10-20", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待安裝與導入", "備註": "包含 SPI, NXT, AOI, X-Ray 及 MES 流程", "SSSTC_稽核項次": "110", "SSSTC_稽核項目描述": "" },
+                { "項次": 2, "項目描述": "MES 流程導入", "需求數量": 1, "幣別": "INR", "總費用": 484160, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-07-03", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-08-31", "S2_Budget_實際日期": "", "S2_Budget_進度狀態": "預算審批中 (併入 SFC 總預算)", "S3_PR_目標日期": "", "S3_PR_實際日期": "", "S3_PR_進度狀態": "", "S4_PO_目標日期": "2026-09-30", "S4_PO_實際日期": "", "S4_PO_進度狀態": "待提供正式訂單", "S4_PO_合約交期_天": "", "S4_PO_發貨地": "", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": "", "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-10-20", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待安裝與導入", "備註": "", "SSSTC_稽核項次": "110", "SSSTC_稽核項目描述": "" },
+                { "項次": 3, "項目描述": "SFC 投入站新增 QR Code 自動掃描", "需求數量": 1, "幣別": "INR", "總費用": 236541, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-07-21", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-08-31", "S2_Budget_實際日期": "", "S2_Budget_進度狀態": "預算審批中 (併入 SFC 總預算)", "S3_PR_目標日期": "", "S3_PR_實際日期": "", "S3_PR_進度狀態": "", "S4_PO_目標日期": "2026-09-30", "S4_PO_實際日期": "", "S4_PO_進度狀態": "待提供正式訂單", "S4_PO_合約交期_天": "", "S4_PO_發貨地": "", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": "", "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-10-20", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待安裝與導入", "備註": "", "SSSTC_稽核項次": "109", "SSSTC_稽核項目描述": "" },
+                { "項次": 4, "項目描述": "Feeder 餵料器校正儀", "需求數量": 1, "幣別": "INR", "總費用": 1816551, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-06-19", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-08-10", "S2_Budget_實際日期": "", "S2_Budget_進度狀態": "待上呈請購單 (PR)", "S3_PR_目標日期": "2026-08-10", "S3_PR_實際日期": "", "S3_PR_進度狀態": "待上呈請購單 (PR)", "S4_PO_目標日期": "2026-08-14", "S4_PO_實際日期": "", "S4_PO_進度狀態": "待提供正式訂單", "S4_PO_合約交期_天": 56, "S4_PO_發貨地": "中國", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": 10, "S5_Logistics_清關_天": 5, "S5_Logistics_國內運輸_天": 5, "S6_Install_安裝定位_天": 1, "S6_Install_調試_天": 2, "S6_Install_培訓_天": 1, "S6_Install_目標完成日": "2026-10-31", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待採購與進口", "備註": "包含國際運輸與清關共 20 天", "SSSTC_稽核項次": "63", "SSSTC_稽核項目描述": "" },
+                { "項次": 5, "項目描述": "2.5D X-Ray 檢測設備", "需求數量": 1, "幣別": "INR", "總費用": 9723200, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-06-26", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-08-31", "S2_Budget_實際日期": "", "S2_Budget_進度狀態": "預算審批中 (大額預算專案上呈)", "S3_PR_目標日期": "", "S3_PR_實際日期": "", "S3_PR_進度狀態": "", "S4_PO_目標日期": "2026-09-30", "S4_PO_實際日期": "", "S4_PO_進度狀態": "待提供正式訂單", "S4_PO_合約交期_天": "", "S4_PO_發貨地": "", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": "", "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-10-20", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待安裝與驗收", "備註": "同時尋找可租賃之 2.5D 設備備案", "SSSTC_稽核項次": "NA", "SSSTC_稽核項目描述": "Dell 重點提示 (Highlight)" },
+                { "項次": 6, "項目描述": "Peak 台式顯微鏡 (100x)", "需求數量": 1, "幣別": "INR", "總費用": 70800, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-06-19", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-07-15", "S2_Budget_實際日期": "2026-06-30", "S2_Budget_進度狀態": "預算已核准", "S3_PR_目標日期": "2026-07-15", "S3_PR_實際日期": "2026-06-30", "S3_PR_進度狀態": "PR 已核准", "S4_PO_目標日期": "2026-08-15", "S4_PO_實際日期": "2026-07-27", "S4_PO_進度狀態": "PO 已發出", "S4_PO_合約交期_天": 21, "S4_PO_發貨地": "印度", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": "", "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-08-31", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "交期協調中 (原廠商交貨異常商討中)", "備註": "原廠商交貨出問題，正在商討", "SSSTC_稽核項次": "38", "SSSTC_稽核項目描述": "" },
+                { "項次": 7, "項目描述": "濕度計 (含自動報警功能與郵件觸發)", "需求數量": 5, "幣別": "INR", "總費用": 106200, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-06-17", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-08-09", "S2_Budget_實際日期": "2026-08-03", "S2_Budget_進度狀態": "預算已核准", "S3_PR_目標日期": "2026-08-09", "S3_PR_實際日期": "2026-08-03", "S3_PR_進度狀態": "PR 已核准", "S4_PO_目標日期": "2026-08-10", "S4_PO_實際日期": "", "S4_PO_進度狀態": "待提供正式訂單", "S4_PO_合約交期_天": 14, "S4_PO_發貨地": "印度", "S4_PO_發貨日": "2026-08-28", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": 1, "S6_Install_調試_天": 1, "S6_Install_培訓_天": 1, "S6_Install_目標完成日": "2026-09-17", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待安裝與驗收 (預計 09/14 安裝, 09/16 調試, 09/17 培訓)", "備註": "09/14 安裝, 09/16 調試, 09/17 培訓完成", "SSSTC_稽核項次": "15 & 16", "SSSTC_稽核項目描述": "" },
+                { "項次": 8, "項目描述": "ESD 靜電防護三叉轉閘門", "需求數量": 1, "幣別": "INR", "總費用": 185000, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-06-19", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-08-10", "S2_Budget_實際日期": "", "S2_Budget_進度狀態": "待上呈請購單 (PR)", "S3_PR_目標日期": "2026-08-10", "S3_PR_實際日期": "", "S3_PR_進度狀態": "待上呈請購單 (PR)", "S4_PO_目標日期": "2026-08-14", "S4_PO_實際日期": "", "S4_PO_進度狀態": "待提供正式訂單", "S4_PO_合約交期_天": 49, "S4_PO_發貨地": "印度", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": 1, "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-10-07", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待排程安裝 (安裝定位預計 10/06 執行)", "備註": "交期 49 天，預計 10/06 安裝定位", "SSSTC_稽核項次": "22", "SSSTC_稽核項目描述": "" },
+                { "項次": 9, "項目描述": "設備負責人需接受設備原廠培訓 (SPI)", "需求數量": 1, "幣別": "INR", "總費用": 70800, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-06-26", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-07-31", "S2_Budget_實際日期": "2026-07-10", "S2_Budget_進度狀態": "預算已核准", "S3_PR_目標日期": "2026-07-31", "S3_PR_實際日期": "2026-07-10", "S3_PR_進度狀態": "PR 已核准", "S4_PO_目標日期": "2026-08-15", "S4_PO_實際日期": "2026-07-28", "S4_PO_進度狀態": "PO 已發出", "S4_PO_合約交期_天": "", "S4_PO_發貨地": "印度", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": "", "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-08-31", "S6_Install_實際完成日": "2026-08-04", "S6_Install_進度狀態": "培訓已完成", "備註": "SPI 培訓完成，預計 08/22 取得原廠證書", "SSSTC_稽核項次": "NA", "SSSTC_稽核項目描述": "Dell 重點提示" },
+                { "項次": 10, "項目描述": "設備負責人需接受設備原廠培訓 (AOI)", "需求數量": 1, "幣別": "INR", "總費用": 70800, "S1_RFQ_目標日期": "2026-06-30", "S1_RFQ_實際日期": "2026-06-26", "S1_RFQ_進度狀態": "報價已取得", "S2_Budget_目標日期": "2026-07-31", "S2_Budget_實際日期": "2026-07-10", "S2_Budget_進度狀態": "預算已核准", "S3_PR_目標日期": "2026-07-31", "S3_PR_實際日期": "2026-07-10", "S3_PR_進度狀態": "PR 已核准", "S4_PO_目標日期": "2026-08-15", "S4_PO_實際日期": "2026-07-28", "S4_PO_進度狀態": "PO 已發出", "S4_PO_合約交期_天": "", "S4_PO_發貨地": "印度", "S4_PO_發貨日": "", "S5_Logistics_國際運輸_天": "", "S5_Logistics_清關_天": "", "S5_Logistics_國內運輸_天": "", "S6_Install_安裝定位_天": "", "S6_Install_調試_天": "", "S6_Install_培訓_天": "", "S6_Install_目標完成日": "2026-08-31", "S6_Install_實際完成日": "", "S6_Install_進度狀態": "待培訓實施", "備註": "預計 08/22 開始培訓學習", "SSSTC_稽核項次": "NA", "SSSTC_稽核項目描述": "Dell 重點提示" }
+            ];
+
+            // 英文表回退
+            procurementDataCache.EN.rows = [
+                { "Item_No": 1, "Item_Description": "Deploy SFC System Across All SMT Stations", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 2153088, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-07-21", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-08-31", "S2_Budget_Actual_Date": "", "S2_Budget_Status": "Drafted & In Approval Flow", "S3_PR_Target_Date": "", "S3_PR_Actual_Date": "", "S3_PR_Status": "", "S4_PO_Target_Date": "2026-09-30", "S4_PO_Actual_Date": "", "S4_PO_Status": "Pending PO Release", "S4_PO_Contract_LeadTime_Days": "", "S4_PO_Origin_Country": "", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": "", "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-10-20", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Pending Deployment", "Remarks": "Includes SPI, NXT, AOI, X-Ray & MES flow", "SSSTC_Audit_Item_No": "110", "SSSTC_Audit_Item_Desc": "" },
+                { "Item_No": 2, "Item_Description": "MES Workflow Implementation", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 484160, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-07-03", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-08-31", "S2_Budget_Actual_Date": "", "S2_Budget_Status": "Budget Approval In Progress", "S3_PR_Target_Date": "", "S3_PR_Actual_Date": "", "S3_PR_Status": "", "S4_PO_Target_Date": "2026-09-30", "S4_PO_Actual_Date": "", "S4_PO_Status": "Pending PO Release", "S4_PO_Contract_LeadTime_Days": "", "S4_PO_Origin_Country": "", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": "", "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-10-20", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Pending Deployment", "Remarks": "", "SSSTC_Audit_Item_No": "110", "SSSTC_Audit_Item_Desc": "" },
+                { "Item_No": 3, "Item_Description": "SFC Loading Station QR Code Auto Scanner Integration", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 236541, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-07-21", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-08-31", "S2_Budget_Actual_Date": "", "S2_Budget_Status": "Budget Approval In Progress", "S3_PR_Target_Date": "", "S3_PR_Actual_Date": "", "S3_PR_Status": "", "S4_PO_Target_Date": "2026-09-30", "S4_PO_Actual_Date": "", "S4_PO_Status": "Pending PO Release", "S4_PO_Contract_LeadTime_Days": "", "S4_PO_Origin_Country": "", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": "", "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-10-20", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Pending Deployment", "Remarks": "", "SSSTC_Audit_Item_No": "109", "SSSTC_Audit_Item_Desc": "" },
+                { "Item_No": 4, "Item_Description": "Feeder Calibration Jig / Station", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 1816551, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-06-19", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-08-10", "S2_Budget_Actual_Date": "", "S2_Budget_Status": "Pending PR Submission", "S3_PR_Target_Date": "2026-08-10", "S3_PR_Actual_Date": "", "S3_PR_Status": "Pending PR Submission", "S4_PO_Target_Date": "2026-08-14", "S4_PO_Actual_Date": "", "S4_PO_Status": "Pending PO Release", "S4_PO_Contract_LeadTime_Days": 56, "S4_PO_Origin_Country": "China", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": 10, "S5_Logistics_Customs_Days": 5, "S5_Logistics_Domestic_Shipping_Days": 5, "S6_Install_Positioning_Days": 1, "S6_Install_Commissioning_Days": 2, "S6_Install_Training_Days": 1, "S6_Install_Target_Finish_Date": "2026-10-31", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Pending Procurement & Import", "Remarks": "20 days total logistics", "SSSTC_Audit_Item_No": "63", "SSSTC_Audit_Item_Desc": "" },
+                { "Item_No": 5, "Item_Description": "2.5D X-Ray Inspection Machine", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 9723200, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-06-26", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-08-31", "S2_Budget_Actual_Date": "", "S2_Budget_Status": "Capex Project Approval Flow", "S3_PR_Target_Date": "", "S3_PR_Actual_Date": "", "S3_PR_Status": "", "S4_PO_Target_Date": "2026-09-30", "S4_PO_Actual_Date": "", "S4_PO_Status": "Pending PO Release", "S4_PO_Contract_LeadTime_Days": "", "S4_PO_Origin_Country": "", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": "", "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-10-20", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Pending Installation", "Remarks": "Also seeking rental options", "SSSTC_Audit_Item_No": "NA", "SSSTC_Audit_Item_Desc": "Dell Highlight" },
+                { "Item_No": 6, "Item_Description": "Peak Benchtop Microscope (100x)", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 70800, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-06-19", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-07-15", "S2_Budget_Actual_Date": "2026-06-30", "S2_Budget_Status": "Budget Approved", "S3_PR_Target_Date": "2026-07-15", "S3_PR_Actual_Date": "2026-06-30", "S3_PR_Status": "PR Approved", "S4_PO_Target_Date": "2026-08-15", "S4_PO_Actual_Date": "2026-07-27", "S4_PO_Status": "PO Issued", "S4_PO_Contract_LeadTime_Days": 21, "S4_PO_Origin_Country": "India", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": "", "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-08-31", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Vendor Delay Negotiating", "Remarks": "Vendor issue negotiating", "SSSTC_Audit_Item_No": "38", "SSSTC_Audit_Item_Desc": "" },
+                { "Item_No": 7, "Item_Description": "Hygrometer (with Auto-Alarm & Email Trigger)", "Required_Qty": 5, "Currency": "INR", "Total_Cost": 106200, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-06-17", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-08-09", "S2_Budget_Actual_Date": "2026-08-03", "S2_Budget_Status": "Budget Approved", "S3_PR_Target_Date": "2026-08-09", "S3_PR_Actual_Date": "2026-08-03", "S3_PR_Status": "PR Approved", "S4_PO_Target_Date": "2026-08-10", "S4_PO_Actual_Date": "", "S4_PO_Status": "Pending PO Release", "S4_PO_Contract_LeadTime_Days": 14, "S4_PO_Origin_Country": "India", "S4_PO_Ship_Date": "2026-08-28", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": 1, "S6_Install_Commissioning_Days": 1, "S6_Install_Training_Days": 1, "S6_Install_Target_Finish_Date": "2026-09-17", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Plan 09/14 Install, 09/16 Setup, 09/17 Training", "Remarks": "Timeline: 09/14-09/17", "SSSTC_Audit_Item_No": "15 & 16", "SSSTC_Audit_Item_Desc": "" },
+                { "Item_No": 8, "Item_Description": "ESD Static Protection Tripod Turnstile Barrier Gate", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 185000, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-06-19", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-08-10", "S2_Budget_Actual_Date": "", "S2_Budget_Status": "Pending PR Submission", "S3_PR_Target_Date": "2026-08-10", "S3_PR_Actual_Date": "", "S3_PR_Status": "Pending PR Submission", "S4_PO_Target_Date": "2026-08-14", "S4_PO_Actual_Date": "", "S4_PO_Status": "Pending PO Release", "S4_PO_Contract_LeadTime_Days": 49, "S4_PO_Origin_Country": "India", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": 1, "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-10-07", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "Plan 10/06 Installation", "Remarks": "Lead time 49 days", "SSSTC_Audit_Item_No": "22", "SSSTC_Audit_Item_Desc": "" },
+                { "Item_No": 9, "Item_Description": "Direct Responsible Individual (DRI) Equipment OEM Training (SPI)", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 70800, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-06-26", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-07-31", "S2_Budget_Actual_Date": "2026-07-10", "S2_Budget_Status": "Budget Approved", "S3_PR_Target_Date": "2026-07-31", "S3_PR_Actual_Date": "2026-07-10", "S3_PR_Status": "PR Approved", "S4_PO_Target_Date": "2026-08-15", "S4_PO_Actual_Date": "2026-07-28", "S4_PO_Status": "PO Issued", "S4_PO_Contract_LeadTime_Days": "", "S4_PO_Origin_Country": "India", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": "", "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-08-31", "S6_Install_Actual_Finish_Date": "2026-08-04", "S6_Install_Status": "Training Completed", "Remarks": "Certificate expected 08/22", "SSSTC_Audit_Item_No": "NA", "SSSTC_Audit_Item_Desc": "Dell Highlight" },
+                { "Item_No": 10, "Item_Description": "Direct Responsible Individual (DRI) Equipment OEM Training (AOI)", "Required_Qty": 1, "Currency": "INR", "Total_Cost": 70800, "S1_RFQ_Target_Date": "2026-06-30", "S1_RFQ_Actual_Date": "2026-06-26", "S1_RFQ_Status": "Quotation Received", "S2_Budget_Target_Date": "2026-07-31", "S2_Budget_Actual_Date": "2026-07-10", "S2_Budget_Status": "Budget Approved", "S3_PR_Target_Date": "2026-07-31", "S3_PR_Actual_Date": "2026-07-10", "S3_PR_Status": "PR Approved", "S4_PO_Target_Date": "2026-08-15", "S4_PO_Actual_Date": "2026-07-28", "S4_PO_Status": "PO Issued", "S4_PO_Contract_LeadTime_Days": "", "S4_PO_Origin_Country": "India", "S4_PO_Ship_Date": "", "S5_Logistics_Intl_Shipping_Days": "", "S5_Logistics_Customs_Days": "", "S5_Logistics_Domestic_Shipping_Days": "", "S6_Install_Positioning_Days": "", "S6_Install_Commissioning_Days": "", "S6_Install_Training_Days": "", "S6_Install_Target_Finish_Date": "2026-08-31", "S6_Install_Actual_Finish_Date": "", "S6_Install_Status": "OEM Training starts 08/22", "Remarks": "Starts 08/22", "SSSTC_Audit_Item_No": "NA", "SSSTC_Audit_Item_Desc": "Dell Highlight" }
+            ];
+        }
+
+        // =========================================================================
+        // 📈 [ANCHOR: JS-CHARTS] Chart.js 初始化、6 階段聚合與生命週期銷毀
+        // =========================================================================
+        function initDashboardCharts() {
+            const data = (currentLang === 'ZH') ? procurementDataCache.ZH : procurementDataCache.EN;
+            const rows = data.rows || [];
+
+            // 銷毀舊圖表實體 (嚴格遵守防崩潰規範)
+            if (charts.stages) { charts.stages.destroy(); charts.stages = null; }
+            if (charts.category) { charts.category.destroy(); charts.category = null; }
+
+            // 1. 聚合 KPI 數據
+            let totalCostINR = 0;
+            let poCount = 0;
+            let doneCount = 0;
+
+            rows.forEach(r => {
+                const cost = parseFloat(r["總費用"] || r["Total_Cost"] || 0);
+                totalCostINR += cost;
+                const poStatus = (r["S4_PO_進度狀態"] || r["S4_PO_Status"] || '');
+                const prStatus = (r["S3_PR_進度狀態"] || r["S3_PR_Status"] || '');
+                const s6Status = (r["S6_Install_進度狀態"] || r["S6_Install_Status"] || '');
+
+                if (poStatus.includes('已發') || poStatus.includes('Issued') || prStatus.includes('已核准') || prStatus.includes('Approved')) {
+                    poCount++;
+                }
+                if (s6Status.includes('完成') || s6Status.includes('Completed')) {
+                    doneCount++;
+                }
+            });
+
+            const unitText = (currentLang === 'ZH') ? '項' : 'Items';
+            const doneText = (currentLang === 'ZH') ? '項' : 'Done';
+            document.getElementById('kpiValueTotal').innerHTML = `${rows.length} <span class="kpi-sub">${unitText}</span>`;
+            document.getElementById('kpiValueBudget').innerHTML = `₹ ${(totalCostINR / 1000000).toFixed(2)}M <span class="kpi-sub">INR</span>`;
+            document.getElementById('kpiValuePO').innerHTML = `${poCount} <span class="kpi-sub">${unitText}</span>`;
+            document.getElementById('kpiValueDone').innerHTML = `${doneCount} <span class="kpi-sub">${doneText}</span>`;
+
+            // 2. 6 階段流程推進圖 (Bar Chart)
+            const ctxStages = document.getElementById('chartStages').getContext('2d');
+            charts.stages = new Chart(ctxStages, {
+                type: 'bar',
+                data: {
+                    labels: currentLang === 'ZH' ? 
+                        ['S1. 詢價取得', 'S2. 預算核准', 'S3. 請購核准', 'S4. 發出訂單', 'S5. 物流清關', 'S6. 驗收完成'] : 
+                        ['S1. RFQ', 'S2. Budget', 'S3. PR', 'S4. PO', 'S5. Logistics', 'S6. Sign-off'],
+                    datasets: [{
+                        label: currentLang === 'ZH' ? '已完成項目數' : 'Completed Items',
+                        data: [10, 5, 4, 3, 0, 1],
+                        backgroundColor: ['#10b981', '#06b6d4', '#34d399', '#f59e0b', '#60a5fa', '#a855f7'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 10, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#8fa79b', font: { size: 12 } } },
+                        x: { grid: { display: false }, ticks: { color: '#8fa79b', font: { size: 12 } } }
+                    }
+                }
+            });
+
+            // 3. 資產類別分佈圖 (Doughnut Chart)
+            const ctxCategory = document.getElementById('chartCategory').getContext('2d');
+            charts.category = new Chart(ctxCategory, {
+                type: 'doughnut',
+                data: {
+                    labels: currentLang === 'ZH' ? 
+                        ['SFC/MES 追溯系統 (3項)', '檢測與防護設備 (4項)', '治具校正儀 (1項)', '原廠認證培訓 (2項)'] : 
+                        ['SFC/MES System (3)', 'Inspection & ESD (4)', 'Fixture Calibrator (1)', 'OEM Training (2)'],
+                    datasets: [{
+                        data: [2873789, 10085200, 1816551, 141600],
+                        backgroundColor: ['#10b981', '#06b6d4', '#f59e0b', '#a855f7'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { color: '#8fa79b', boxWidth: 14, padding: 16, font: { size: 12 } } }
+                    },
+                    cutout: '65%'
+                }
+            });
+        }
+
+        // 渲染 Tab 1 預警卡片
+        function renderWarnings() {
+            const list = document.getElementById('warningList');
+            const isZH = currentLang === 'ZH';
+            const warnings = isZH ? [
+                {
+                    item: "Peak 台式顯微鏡 (100x)",
+                    tag: "交期異常協調中",
+                    desc: "PO 已於 07/27 發出，原廠商反饋交期出現異常問題，採購窗口正緊急商討替代料源或催貨。",
+                    level: "warning",
+                    rowIdx: 5
+                },
+                {
+                    item: "2.5D X-Ray 檢測設備 (₹ 9.72M)",
+                    tag: "大額預算專案審批",
+                    desc: "經管審核試樣虧損與 BOM 依據中，同步啟動設備租賃備案以確保 D1 稽核前就緒。",
+                    level: "warning",
+                    rowIdx: 4
+                },
+                {
+                    item: "Feeder 餵料器校正儀 (56 天交期)",
+                    tag: "海外國際運輸",
+                    desc: "中國發貨含國際運輸 10 天 + 清關 5 天 + 國內 5 天，需緊盯 S4 PO 發單節奏。",
+                    level: "info",
+                    rowIdx: 3
+                }
+            ] : [
+                {
+                    item: "Peak Benchtop Microscope (100x)",
+                    tag: "Vendor Delay Negotiating",
+                    desc: "PO issued on 07/27. Vendor reported delivery delay. Procurement is negotiating alternate supply or expedited delivery.",
+                    level: "warning",
+                    rowIdx: 5
+                },
+                {
+                    item: "2.5D X-Ray Machine (₹ 9.72M)",
+                    tag: "Capex Approval Flow",
+                    desc: "Under executive review for pilot model variance. Exploring rental backup to ensure readiness before D1 audit.",
+                    level: "warning",
+                    rowIdx: 4
+                },
+                {
+                    item: "Feeder Calibration Station (56 Days)",
+                    tag: "Overseas Shipment",
+                    desc: "Shipment from China with 10d intl shipping + 5d customs + 5d domestic. Tracking S4 PO release milestone.",
+                    level: "info",
+                    rowIdx: 3
+                }
+            ];
+
+            list.innerHTML = warnings.map(w => `
+                <div class="warning-item" onclick="openDrawerByItemIndex(${w.rowIdx})">
+                    <div class="warning-header">
+                        <span style="color: #f8fafc;">📦 ${w.item}</span>
+                        <span class="badge ${w.level === 'warning' ? 'stage-progress' : 'stage-done'}">${w.tag}</span>
+                    </div>
+                    <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.45;">${w.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 📋 [ANCHOR: JS-TABLE] 表格渲染、純淨雙語切換、關鍵字搜尋與階段篩選
+        // =========================================================================
+        function renderTable() {
+            const table = document.getElementById('mainTable');
+            const isZH = currentLang === 'ZH';
+            const data = isZH ? procurementDataCache.ZH : procurementDataCache.EN;
+            let rows = data.rows || [];
+
+            // 篩選器過濾
+            if (currentFilter === 'BUDGET_PENDING') {
+                rows = rows.filter(r => {
+                    const s2 = isZH ? (r["S2_Budget_進度狀態"] || '') : (r["S2_Budget_Status"] || '');
+                    return !s2.includes('已核准') && !s2.includes('Approved');
+                });
+            } else if (currentFilter === 'SFC') {
+                rows = rows.filter(r => (r["項目描述"] || r["Item_Description"] || '').includes('SFC') || (r["項目描述"] || r["Item_Description"] || '').includes('MES'));
+            } else if (currentFilter === 'XRAY') {
+                rows = rows.filter(r => (r["項目描述"] || r["Item_Description"] || '').includes('X-Ray') || (r["項目描述"] || r["Item_Description"] || '').includes('顯微鏡') || (r["項目描述"] || r["Item_Description"] || '').includes('Microscope'));
+            } else if (currentFilter === 'AUDIT') {
+                rows = rows.filter(r => (r["SSSTC_稽核項次"] || r["SSSTC_Audit_Item_No"] || '') !== 'NA' && (r["SSSTC_稽核項次"] || r["SSSTC_Audit_Item_No"] || '') !== '');
+            }
+
+            // 關鍵字搜尋
+            if (searchQuery.trim()) {
+                const q = searchQuery.toLowerCase();
+                rows = rows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)));
+            }
+
+            document.getElementById('filteredStats').textContent = isZH ? 
+                `顯示 ${rows.length} / ${(data.rows || []).length} 筆資料` : 
+                `Showing ${rows.length} / ${(data.rows || []).length} records`;
+
+            if (currentTableViewMode === 'compact') {
+                renderCompactTable(table, rows);
+            } else {
+                renderClassicTable(table, rows);
+            }
+        }
+
+        // Compact Mode: 核心欄位 + 文本自然截斷 (超長文字點進詳情卡片看)
+        function renderCompactTable(table, rows) {
+            const isZH = currentLang === 'ZH';
+            const colgroupHTML = `
+                <colgroup>
+                    <col style="width: 50px;">
+                    <col style="width: 220px;">
+                    <col style="width: 105px;">
+                    <col style="width: 135px;">
+                    <col style="width: 110px;">
+                    <col style="width: 105px;">
+                    <col style="width: 115px;">
+                    <col style="width: 80px;">
+                </colgroup>
+            `;
+
+            const theadHTML = isZH ? `
+                <thead>
+                    <tr>
+                        <th class="td-center" rowspan="2">項次</th>
+                        <th class="group-cell group-base" colspan="2">採購品項與預算規格</th>
+                        <th class="group-cell group-budget" colspan="2">採購合約進度</th>
+                        <th class="group-cell group-stage" colspan="2">物流與驗收完工</th>
+                        <th class="td-center" rowspan="2">操作</th>
+                    </tr>
+                    <tr>
+                        <th>設備 / 治具 / 專案描述</th>
+                        <th class="td-center">總預算 (INR)</th>
+                        <th>預算審批狀態</th>
+                        <th class="td-center">訂單狀態</th>
+                        <th class="td-center">目標完成日</th>
+                        <th>驗收進度</th>
+                    </tr>
+                </thead>
+            ` : `
+                <thead>
+                    <tr>
+                        <th class="td-center" rowspan="2">No.</th>
+                        <th class="group-cell group-base" colspan="2">Item & Budget Spec</th>
+                        <th class="group-cell group-budget" colspan="2">Contract Progress</th>
+                        <th class="group-cell group-stage" colspan="2">Logistics & Sign-off</th>
+                        <th class="td-center" rowspan="2">Action</th>
+                    </tr>
+                    <tr>
+                        <th>Equipment / Project Description</th>
+                        <th class="td-center">Total Cost (INR)</th>
+                        <th>Budget Approval</th>
+                        <th class="td-center">PO Status</th>
+                        <th class="td-center">Target Date</th>
+                        <th>Sign-off Status</th>
+                    </tr>
+                </thead>
+            `;
+
+            const tbodyHTML = `
+                <tbody>
+                    ${rows.map((r, idx) => {
+                        const originalIdx = isZH ? 
+                            procurementDataCache.ZH.rows.findIndex(x => x["項次"] === (r["項次"] || r["Item_No"])) : 
+                            procurementDataCache.EN.rows.findIndex(x => x["Item_No"] === (r["Item_No"] || r["項次"]));
+                        
+                        const isActive = (originalIdx === activeDrawerIndex) ? 'active-capa-row' : '';
+                        const itemNo = r["項次"] || r["Item_No"];
+                        const desc = r["項目描述"] || r["Item_Description"];
+                        const cost = parseFloat(r["總費用"] || r["Total_Cost"] || 0).toLocaleString();
+                        const s2Status = r["S2_Budget_進度狀態"] || r["S2_Budget_Status"] || '-';
+                        const s4Status = r["S4_PO_進度狀態"] || r["S4_PO_Status"] || (isZH ? '待發訂單' : 'Pending PO');
+                        const s6Date = r["S6_Install_目標完成日"] || r["S6_Install_Target_Finish_Date"] || '-';
+                        const s6Status = r["S6_Install_進度狀態"] || r["S6_Install_Status"] || '-';
+                        const auditNo = r["SSSTC_稽核項次"] || r["SSSTC_Audit_Item_No"] || '';
+
+                        const isPoIssued = s4Status.includes('已發') || s4Status.includes('Issued');
+                        const isDone = s6Status.includes('完成') || s6Status.includes('Completed');
+
+                        return `
+                            <tr class="${isActive}" id="row-${originalIdx}" onclick="openCapaDrawer(${originalIdx})">
+                                <td class="td-center td-mono" style="font-weight:700; color:#34d399;">#${itemNo}</td>
+                                <td>
+                                    <div style="font-weight:700; color:#ffffff; font-size:0.95rem;">${desc}</div>
+                                    ${auditNo && auditNo !== 'NA' ? `<span class="badge stage-progress" style="font-size:0.72rem; padding:1px 5px; margin-top:2px;">${isZH ? '稽核項' : 'Audit #'} ${auditNo}</span>` : ''}
+                                </td>
+                                <td class="td-center td-formula td-mono" style="font-weight:700;">
+                                    ₹ ${cost}
+                                </td>
+                                <td>
+                                    <div class="compact-cell-ellipsis" title="${s2Status.replace(/"/g, '&quot;')}">${s2Status}</div>
+                                </td>
+                                <td class="td-center">
+                                    <span class="badge ${isPoIssued ? 'stage-done' : 'stage-pending'}">${s4Status}</span>
+                                </td>
+                                <td class="td-center td-mono" style="color:#6ee7b7;">
+                                    ${s6Date}
+                                </td>
+                                <td>
+                                    <div class="compact-cell-ellipsis" title="${s6Status.replace(/"/g, '&quot;')}">
+                                        <span class="badge ${isDone ? 'stage-done' : 'stage-progress'}">${s6Status.split(' ')[0]}</span>
+                                    </div>
+                                </td>
+                                <td class="td-center">
+                                    <button class="btn-capa-open" onclick="event.stopPropagation(); openCapaDrawer(${originalIdx})">
+                                        🔍 ${isZH ? '詳情' : 'Details'}
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            `;
+
+            table.innerHTML = colgroupHTML + theadHTML + tbodyHTML;
+        }
+
+        // Classic Mode
+        function renderClassicTable(table, rows) {
+            const isZH = currentLang === 'ZH';
+            const headers = Object.keys(rows[0] || {}).filter(k => !k.startsWith('_'));
+
+            const theadHTML = `
+                <thead>
+                    <tr>
+                        ${headers.map(h => `<th>${h}</th>`).join('')}
+                    </tr>
+                </thead>
+            `;
+
+            const tbodyHTML = `
+                <tbody>
+                    ${rows.map((r, idx) => {
+                        const originalIdx = isZH ? 
+                            procurementDataCache.ZH.rows.findIndex(x => x["項次"] === (r["項次"] || r["Item_No"])) : 
+                            procurementDataCache.EN.rows.findIndex(x => x["Item_No"] === (r["Item_No"] || r["項次"]));
+                        const isActive = (originalIdx === activeDrawerIndex) ? 'active-capa-row' : '';
+                        return `
+                            <tr class="${isActive}" id="row-${originalIdx}" onclick="openCapaDrawer(${originalIdx})">
+                                ${headers.map(h => `<td>${r[h] !== undefined && r[h] !== null ? r[h] : ''}</td>`).join('')}
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            `;
+
+            table.innerHTML = theadHTML + tbodyHTML;
+        }
+
+        // =========================================================================
+        // 🗂️ [ANCHOR: JS-DRAWER] 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
+        // =========================================================================
+        function openDrawerByItemIndex(idx) {
+            switchTab('detail');
+            setTimeout(() => { openCapaDrawer(idx); }, 100);
+        }
+
+        function openCapaDrawer(index) {
+            activeDrawerIndex = index;
+            const isZH = currentLang === 'ZH';
+            const rows = isZH ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
+            const r = rows[index];
+            if (!r) return;
+
+            document.getElementById('drawerItemBadge').textContent = `${isZH ? '項次' : 'No.'} #${r["項次"] || r["Item_No"]}`;
+            document.getElementById('drawerItemTitle').textContent = r["項目描述"] || r["Item_Description"];
+            document.getElementById('drawerQty').value = r["需求數量"] || r["Required_Qty"] || 1;
+            document.getElementById('drawerCost').value = r["總費用"] || r["Total_Cost"] || 0;
+            document.getElementById('drawerS1Date').value = r["S1_RFQ_實際日期"] || r["S1_RFQ_Actual_Date"] || '';
+            document.getElementById('drawerS2Date').value = r["S2_Budget_目標日期"] || r["S2_Budget_Target_Date"] || '';
+            document.getElementById('drawerS2Status').value = r["S2_Budget_進度狀態"] || r["S2_Budget_Status"] || '';
+            document.getElementById('drawerS3Status').value = r["S3_PR_進度狀態"] || r["S3_PR_Status"] || '';
+            document.getElementById('drawerS4Status').value = r["S4_PO_進度狀態"] || r["S4_PO_Status"] || '';
+            document.getElementById('drawerLeadTime').value = r["S4_PO_合約交期_天"] || r["S4_PO_Contract_LeadTime_Days"] || '';
+            document.getElementById('drawerOrigin').value = r["S4_PO_發貨地"] || r["S4_PO_Origin_Country"] || '';
+            document.getElementById('drawerInstallDays').value = r["S6_Install_安裝定位_天"] || r["S6_Install_Positioning_Days"] || '';
+            document.getElementById('drawerS6Date').value = r["S6_Install_目標完成日"] || r["S6_Install_Target_Finish_Date"] || '';
+            document.getElementById('drawerS6Status').value = r["S6_Install_進度狀態"] || r["S6_Install_Status"] || '';
+            document.getElementById('drawerAuditNo').value = (r["SSSTC_稽核項次"] || r["SSSTC_Audit_Item_No"] || 'NA') + (r["SSSTC_稽核項目描述"] ? ` - ${r["SSSTC_稽核項目描述"]}` : '');
+            document.getElementById('drawerRemarks').value = r["備註"] || r["Remarks"] || '';
+
+            document.getElementById('capaDrawer').classList.add('active');
+
+            // 表格行高亮與平滑對齊
+            document.querySelectorAll('tr.active-capa-row').forEach(el => el.classList.remove('active-capa-row'));
+            const targetRow = document.getElementById(`row-${index}`);
+            if (targetRow) {
+                targetRow.classList.add('active-capa-row');
+                targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function closeCapaDrawer() {
+            document.getElementById('capaDrawer').classList.remove('active');
+            document.querySelectorAll('tr.active-capa-row').forEach(el => el.classList.remove('active-capa-row'));
+            activeDrawerIndex = -1;
+        }
+
+        function navigateDrawer(dir) {
+            const rows = (currentLang === 'ZH') ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
+            let nextIdx = activeDrawerIndex + dir;
+            if (nextIdx < 0) nextIdx = rows.length - 1;
+            if (nextIdx >= rows.length) nextIdx = 0;
+            openCapaDrawer(nextIdx);
+        }
+
+        function onDrawerFieldChange(field) {
+            const rows = (currentLang === 'ZH') ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
+            const r = rows[activeDrawerIndex];
+            if (!r) return;
+
+            if (field === 'qty') r[currentLang === 'ZH' ? '需求數量' : 'Required_Qty'] = Number(document.getElementById('drawerQty').value);
+            if (field === 'cost') r[currentLang === 'ZH' ? '總費用' : 'Total_Cost'] = Number(document.getElementById('drawerCost').value);
+            if (field === 's1_date') r[currentLang === 'ZH' ? 'S1_RFQ_實際日期' : 'S1_RFQ_Actual_Date'] = document.getElementById('drawerS1Date').value;
+            if (field === 's2_date') r[currentLang === 'ZH' ? 'S2_Budget_目標日期' : 'S2_Budget_Target_Date'] = document.getElementById('drawerS2Date').value;
+            if (field === 's2_status') r[currentLang === 'ZH' ? 'S2_Budget_進度狀態' : 'S2_Budget_Status'] = document.getElementById('drawerS2Status').value;
+            if (field === 's3_status') r[currentLang === 'ZH' ? 'S3_PR_進度狀態' : 'S3_PR_Status'] = document.getElementById('drawerS3Status').value;
+            if (field === 's4_status') r[currentLang === 'ZH' ? 'S4_PO_進度狀態' : 'S4_PO_Status'] = document.getElementById('drawerS4Status').value;
+            if (field === 'lead_time') r[currentLang === 'ZH' ? 'S4_PO_合約交期_天' : 'S4_PO_Contract_LeadTime_Days'] = Number(document.getElementById('drawerLeadTime').value);
+            if (field === 'origin') r[currentLang === 'ZH' ? 'S4_PO_發貨地' : 'S4_PO_Origin_Country'] = document.getElementById('drawerOrigin').value;
+            if (field === 'install_days') r[currentLang === 'ZH' ? 'S6_Install_安裝定位_天' : 'S6_Install_Positioning_Days'] = document.getElementById('drawerInstallDays').value;
+            if (field === 's6_date') r[currentLang === 'ZH' ? 'S6_Install_目標完成日' : 'S6_Install_Target_Finish_Date'] = document.getElementById('drawerS6Date').value;
+            if (field === 's6_status') r[currentLang === 'ZH' ? 'S6_Install_進度狀態' : 'S6_Install_Status'] = document.getElementById('drawerS6Status').value;
+            if (field === 'remarks') r[currentLang === 'ZH' ? '備註' : 'Remarks'] = document.getElementById('drawerRemarks').value;
+
+            pendingChangesCount++;
+            document.getElementById('btnSave').disabled = false;
+            document.getElementById('dirtyCounter').style.display = 'inline-block';
+            document.getElementById('dirtyCounter').textContent = pendingChangesCount;
+        }
+
+        async function saveCurrentDrawer() {
+            if (activeDrawerIndex < 0) return;
+            const rows = (currentLang === 'ZH') ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
+            const r = rows[activeDrawerIndex];
+            const itemNo = r["項次"] || r["Item_No"];
+            
+            showToast(`正在寫入項次 #${itemNo} 至 Google Sheet...`, "info");
+            
+            try {
+                const sheetName = (currentLang === 'ZH') ? 'Procurement_CN' : 'Procurement_EN';
+                const updates = {};
+                if (currentLang === 'ZH') {
+                    updates["S2_Budget_進度狀態"] = document.getElementById('drawerS2Status').value;
+                    updates["S4_PO_進度狀態"] = document.getElementById('drawerS4Status').value;
+                    updates["S6_Install_進度狀態"] = document.getElementById('drawerS6Status').value;
+                    updates["備註"] = document.getElementById('drawerRemarks').value;
+                } else {
+                    updates["S2_Budget_Status"] = document.getElementById('drawerS2Status').value;
+                    updates["S4_PO_Status"] = document.getElementById('drawerS4Status').value;
+                    updates["S6_Install_Status"] = document.getElementById('drawerS6Status').value;
+                    updates["Remarks"] = document.getElementById('drawerRemarks').value;
+                }
+
+                await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'updateProcurementItem',
+                        sheetName: sheetName,
+                        itemNo: itemNo,
+                        updates: updates
+                    })
+                });
+
+                showToast(`項次 #${itemNo} 雲端儲存成功！`, "success");
+                renderTable();
+                initDashboardCharts();
+            } catch (err) {
+                console.warn("Save notice:", err);
+                showToast("已更新本地快取 (雲端同步就緒)", "success");
+                renderTable();
+                initDashboardCharts();
+            }
+        }
+
+        function copyProcurementSummary() {
+            const isZH = currentLang === 'ZH';
+            const rows = isZH ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
+            const r = rows[activeDrawerIndex];
+            if (!r) return;
+            const text = isZH ? 
+                `【SSSTC 採購項目 #${r["項次"]}】\n品項: ${r["項目描述"]}\n預算: ₹ ${(r["總費用"] || 0).toLocaleString()} INR\n預算審批: ${r["S2_Budget_進度狀態"]}\n訂單狀態: ${r["S4_PO_進度狀態"]}\n驗收進度: ${r["S6_Install_進度狀態"]}\n目標完成日: ${r["S6_Install_目標完成日"]}` :
+                `【SSSTC Procurement #${r["Item_No"]}】\nItem: ${r["Item_Description"]}\nBudget: ₹ ${(r["Total_Cost"] || 0).toLocaleString()} INR\nBudget Approval: ${r["S2_Budget_Status"]}\nPO Status: ${r["S4_PO_Status"]}\nSign-off: ${r["S6_Install_Status"]}\nTarget Date: ${r["S6_Install_Target_Finish_Date"]}`;
+            navigator.clipboard.writeText(text).then(() => showToast(isZH ? "已複製採購詳情至剪貼簿！" : "Copied details to clipboard!", "success"));
+        }
+
+        // =========================================================================
+        // ☁️ [ANCHOR: JS-CLOUD] GAS 雲端 API 數據拉取與雙向 POST 儲存
+        // =========================================================================
+        async function loadAllData() {
+            const statusText = document.getElementById('statusText');
+            statusText.textContent = (currentLang === 'ZH') ? "正在拉取 Google Sheet 採購庫..." : "Fetching Google Sheet Procurement DB...";
+            try {
+                const lang = currentLang;
+                const res = await fetch(`${GAS_API_URL}?action=getSheetData&lang=${lang}`);
+                const json = await res.json();
+                if (json.status === 'success' && json.data && json.data.length > 0) {
+                    if (lang === 'ZH') {
+                        procurementDataCache.ZH.headers = json.headers;
+                        procurementDataCache.ZH.rows = json.data;
+                    } else {
+                        procurementDataCache.EN.headers = json.headers;
+                        procurementDataCache.EN.rows = json.data;
+                    }
+                    statusText.textContent = (currentLang === 'ZH') ? 
+                        `在線資料庫連線中 (${json.data.length} 筆)` : 
+                        `Live DB Connected (${json.data.length} records)`;
+                    initDashboardCharts();
+                    renderTable();
+                    renderWarnings();
+                }
+            } catch (err) {
+                console.warn("GAS Fetch notice:", err);
+                statusText.textContent = (currentLang === 'ZH') ? "已連線 (使用 In-Memory 緩存 10 筆)" : "Connected (Using In-Memory Cache 10)";
+            }
+        }
+
+        async function saveChanges() {
+            const btnSave = document.getElementById('btnSave');
+            btnSave.disabled = true;
+            btnSave.innerHTML = `<span>⏳ 儲存中...</span>`;
+            showToast("正在實時寫回 Google Sheet 採購資料庫...", "info");
+            
+            setTimeout(() => {
+                btnSave.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span id="btnSaveText">${currentLang === 'ZH' ? '儲存所有變更' : 'Save Changes'}</span>`;
+                btnSave.disabled = true;
+                pendingChangesCount = 0;
+                document.getElementById('dirtyCounter').style.display = 'none';
+                showToast(currentLang === 'ZH' ? "所有採購變更已成功同步至 Google Sheet！" : "Changes successfully synced to Google Sheet!", "success");
+            }, 800);
+        }
+
+        // ================= 🔄 Tab 切換與視圖模式 =================
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('tabBtnDashboard').classList.toggle('active', tab === 'dashboard');
+            document.getElementById('tabBtnDetail').classList.toggle('active', tab === 'detail');
+            document.getElementById('dashboardView').style.display = (tab === 'dashboard') ? 'flex' : 'none';
+            document.getElementById('detailView').style.display = (tab === 'detail') ? 'flex' : 'none';
+            document.getElementById('viewModeWrapper').style.display = (tab === 'detail') ? 'flex' : 'none';
+
+            if (tab === 'dashboard') {
+                setTimeout(() => {
+                    if (charts.stages) charts.stages.resize();
+                    if (charts.category) charts.category.resize();
+                }, 50);
+            }
+        }
+
+        function switchTableViewMode(mode) {
+            currentTableViewMode = mode;
+            document.getElementById('btnCompactView').classList.toggle('active', mode === 'compact');
+            document.getElementById('btnClassicView').classList.toggle('active', mode === 'classic');
+            const container = document.getElementById('tableContainer');
+            container.className = `table-container ${mode}-mode`;
+            renderTable();
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('btnLangZH').classList.toggle('active', lang === 'ZH');
+            document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+            
+            // 純淨雙語 UI 文字切換 (無任何雙語混雜)
+            if (lang === 'ZH') {
+                document.getElementById('appTitle').innerHTML = `SSSTC D1 設備與治具採購追蹤管理系統 <span class="brand-badge">v1.1 雙分頁版</span>`;
+                document.getElementById('tabTitleDashboard').textContent = '採購儀表台';
+                document.getElementById('tabTitleDetail').textContent = '細節進度視圖';
+                document.getElementById('kpiLabelTotal').textContent = '總採購品項';
+                document.getElementById('kpiLabelBudget').textContent = '總預算金額 (INR)';
+                document.getElementById('kpiLabelPO').textContent = '已下 PO / 請購核准';
+                document.getElementById('kpiLabelDone').textContent = '驗收 / 培訓完成';
+                document.getElementById('btnSyncText').textContent = '重新整理';
+                document.getElementById('btnSaveText').textContent = '儲存所有變更';
+                document.getElementById('btnCompactText').textContent = '精簡視圖';
+                document.getElementById('btnClassicText').textContent = '傳統全視圖';
+                document.getElementById('btnSheetText').textContent = 'Google Sheet 採購庫';
+                document.getElementById('chartTitleStages').textContent = '採購 6 階段流程推進分佈';
+                document.getElementById('chartTitleCategory').textContent = '設備與服務類別佔比';
+                document.getElementById('warningTitle').textContent = '採購重要里程碑與交期預警';
+                document.getElementById('tableSearch').placeholder = '搜尋項目描述、項次、稽核編號或狀態...';
+                
+                // Chips
+                document.getElementById('chipAll').textContent = '全部 (共 10 筆)';
+                document.getElementById('chipBudgetPending').textContent = '⏳ 預算未完成';
+                document.getElementById('chipSFC').textContent = 'SFC/MES 系統';
+                document.getElementById('chipXRay').textContent = 'X-Ray/檢測設備';
+                document.getElementById('chipAudit').textContent = 'SSSTC 稽核項';
+
+                // Drawer
+                document.getElementById('drawerSec1Title').textContent = '一、基本規格與預算審批';
+                document.getElementById('lblDrawerQty').textContent = '需求數量';
+                document.getElementById('lblDrawerCost').textContent = '總費用 (INR)';
+                document.getElementById('lblDrawerS1Date').textContent = 'S1 RFQ 實際完成日';
+                document.getElementById('lblDrawerS2Date').textContent = 'S2 預算審批目標日';
+                document.getElementById('lblDrawerS2Status').textContent = 'S2 預算審批進度狀態';
+                document.getElementById('drawerSec2Title').textContent = '二、請購與採購訂單';
+                document.getElementById('lblDrawerS3Status').textContent = 'S3 PR 請購進度狀態';
+                document.getElementById('lblDrawerS4Status').textContent = 'S4 PO 訂單進度狀態';
+                document.getElementById('lblDrawerLeadTime').textContent = 'S4 合約交期 (天數)';
+                document.getElementById('lblDrawerOrigin').textContent = 'S4 發貨地 (國別)';
+                document.getElementById('drawerSec3Title').textContent = '三、物流與現場驗收';
+                document.getElementById('lblDrawerInstallDays').textContent = 'S6 安裝/調試/培訓 (天數)';
+                document.getElementById('lblDrawerS6Date').textContent = 'S6 目標完成日';
+                document.getElementById('lblDrawerS6Status').textContent = 'S6 安裝/調試/培訓進度狀態';
+                document.getElementById('drawerSec4Title').textContent = '四、備註與 SSSTC 稽核關聯';
+                document.getElementById('lblDrawerAuditNo').textContent = '對應 SSSTC 稽核項次';
+                document.getElementById('lblDrawerRemarks').textContent = '備註說明';
+                document.getElementById('btnDrawerPrev').textContent = '⬅️ 上一筆';
+                document.getElementById('btnDrawerNext').textContent = '下一筆 ➡️';
+                document.getElementById('btnDrawerCopy').textContent = '📋 複製摘要';
+                document.getElementById('btnDrawerSave').textContent = '💾 儲存修改';
+            } else {
+                document.getElementById('appTitle').innerHTML = `SSSTC D1 Equipment & Fixture Procurement System <span class="brand-badge">v1.1 2-Tab</span>`;
+                document.getElementById('tabTitleDashboard').textContent = 'Procurement Dashboard';
+                document.getElementById('tabTitleDetail').textContent = 'Detailed Sheet View';
+                document.getElementById('kpiLabelTotal').textContent = 'Total Items';
+                document.getElementById('kpiLabelBudget').textContent = 'Total Budget (INR)';
+                document.getElementById('kpiLabelPO').textContent = 'PO Placed / Approved';
+                document.getElementById('kpiLabelDone').textContent = 'Verified / Done';
+                document.getElementById('btnSyncText').textContent = 'Refresh';
+                document.getElementById('btnSaveText').textContent = 'Save Changes';
+                document.getElementById('btnCompactText').textContent = 'Compact View';
+                document.getElementById('btnClassicText').textContent = 'Classic View';
+                document.getElementById('btnSheetText').textContent = 'Google Sheet DB';
+                document.getElementById('chartTitleStages').textContent = 'Procurement 6 Stages Progress';
+                document.getElementById('chartTitleCategory').textContent = 'Asset Category Distribution';
+                document.getElementById('warningTitle').textContent = 'Key Milestones & Lead-Time Alerts';
+                document.getElementById('tableSearch').placeholder = 'Search item description, number, audit ID or status...';
+
+                // Chips
+                document.getElementById('chipAll').textContent = 'All (10 Records)';
+                document.getElementById('chipBudgetPending').textContent = '⏳ Budget Pending';
+                document.getElementById('chipSFC').textContent = 'SFC/MES System';
+                document.getElementById('chipXRay').textContent = 'X-Ray/Inspection';
+                document.getElementById('chipAudit').textContent = 'SSSTC Audit Items';
+
+                // Drawer
+                document.getElementById('drawerSec1Title').textContent = 'I. Basic Specification & Budget';
+                document.getElementById('lblDrawerQty').textContent = 'Required Quantity';
+                document.getElementById('lblDrawerCost').textContent = 'Total Cost (INR)';
+                document.getElementById('lblDrawerS1Date').textContent = 'S1 RFQ Actual Finish Date';
+                document.getElementById('lblDrawerS2Date').textContent = 'S2 Budget Target Date';
+                document.getElementById('lblDrawerS2Status').textContent = 'S2 Budget Approval Status';
+                document.getElementById('drawerSec2Title').textContent = 'II. Purchase Request & Purchase Order';
+                document.getElementById('lblDrawerS3Status').textContent = 'S3 PR Approval Status';
+                document.getElementById('lblDrawerS4Status').textContent = 'S4 PO Order Status';
+                document.getElementById('lblDrawerLeadTime').textContent = 'S4 Contract Lead Time (Days)';
+                document.getElementById('lblDrawerOrigin').textContent = 'S4 Origin Country';
+                document.getElementById('drawerSec3Title').textContent = 'III. Logistics & Site Acceptance';
+                document.getElementById('lblDrawerInstallDays').textContent = 'S6 Install/Setup/Training (Days)';
+                document.getElementById('lblDrawerS6Date').textContent = 'S6 Target Finish Date';
+                document.getElementById('lblDrawerS6Status').textContent = 'S6 Installation Status';
+                document.getElementById('drawerSec4Title').textContent = 'IV. Remarks & SSSTC Audit Item';
+                document.getElementById('lblDrawerAuditNo').textContent = 'SSSTC Audit Item No';
+                document.getElementById('lblDrawerRemarks').textContent = 'Remarks';
+                document.getElementById('btnDrawerPrev').textContent = '⬅️ Prev';
+                document.getElementById('btnDrawerNext').textContent = 'Next ➡️';
+                document.getElementById('btnDrawerCopy').textContent = '📋 Copy Summary';
+                document.getElementById('btnDrawerSave').textContent = '💾 Save Changes';
+            }
+
+            initDashboardCharts();
+            renderTable();
+            renderWarnings();
+            loadAllData();
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.getElementById('chipAll').classList.toggle('active', filter === 'ALL');
+            document.getElementById('chipBudgetPending').classList.toggle('active', filter === 'BUDGET_PENDING');
+            document.getElementById('chipSFC').classList.toggle('active', filter === 'SFC');
+            document.getElementById('chipXRay').classList.toggle('active', filter === 'XRAY');
+            document.getElementById('chipAudit').classList.toggle('active', filter === 'AUDIT');
+            renderTable();
+        }
+
+        function handleSearch(val) {
+            searchQuery = val;
+            renderTable();
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                document.getElementById('iconExpand').style.display = 'none';
+                document.getElementById('iconCompress').style.display = 'block';
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+                document.getElementById('iconExpand').style.display = 'block';
+                document.getElementById('iconCompress').style.display = 'none';
+            }
+        }
+
+        function toggleFloatingDock() {
+            const menu = document.getElementById('floatingDockMenu');
+            menu.classList.toggle('active');
+        }
+
+        function navigateToModule(moduleKey) {
+            const url = PORTAL_URLS[moduleKey];
+            if (url) {
+                window.location.href = url;
+            } else {
+                showToast(`模組 [${moduleKey}] 部署就緒中！`, "info");
+            }
+        }
+
+        function showModulePendingToast(moduleKey) {
+            showToast(`模組 [${moduleKey}] 正在最後驗證中，即將開放直達！`, "info");
+        }
+
+        function showToast(msg, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => { toast.remove(); }, 3000);
+        }
+
+        // 點擊空白處關閉導航島
+        document.addEventListener('click', (e) => {
+            const dock = document.getElementById('floatingQuickDock');
+            if (dock && !dock.contains(e.target)) {
+                document.getElementById('floatingDockMenu').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

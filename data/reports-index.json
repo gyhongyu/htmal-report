@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-08-16T11:20:06.286Z",
+  "lastUpdated": "2026-08-16T12:41:58.312Z",
   "reports": [
     {
       "id": "report-1766042552185",
@@ -1978,6 +1978,19 @@
       "fileName": "report-1786685529888.html",
       "createdAt": "2026-08-14T05:32:10.760Z",
       "updatedAt": "2026-08-14T05:32:10.760Z"
+    },
+    {
+      "id": "report-1786884117627",
+      "title": "SSSTC_Procurement_WebUI_v1.1",
+      "description": "SSSTC_Procurement_WebUI_v1.1",
+      "categories": [
+        "對外簡報",
+        "工作報告",
+        "項目計劃"
+      ],
+      "fileName": "report-1786884117627.html",
+      "createdAt": "2026-08-16T12:41:58.312Z",
+      "updatedAt": "2026-08-16T12:41:58.312Z"
     }
   ]
 }
