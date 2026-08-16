@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSSTC D1 QSA 品質體系稽核管理系統 (v4.0 雙分頁儀表台版)</title>
+    <title>SSSTC D1 QSA 品質體系稽核管理系統</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,19 +15,20 @@
         /* =========================================================================
          * 🗺️ [CODE MAP] SSSTC WebUI 架構導引目錄 (AI 代理人快速定位專用)
          * =========================================================================
-         * 1. 🎨 [ANCHOR: CSS-THEME]      - 主題色彩變數與全域樣式 (Tokens & Reset)
-         * 2. 📊 [ANCHOR: CSS-DASHBOARD]  - Tab 1 儀表台與 KPI 卡片樣式
-         * 3. 📋 [ANCHOR: CSS-TABLE]      - Tab 2 Google Sheet 表格與高亮列樣式
-         * 4. 🗂️ [ANCHOR: CSS-DRAWER]     - CAPA 側邊抽屜樣式 (無遮罩 Side-by-Side)
-         * 5. 🧱 [ANCHOR: DOM-NAVBAR]     - 頂部 LOGO、狀態燈、雙分頁按鈕骨架
-         * 6. 📊 [ANCHOR: DOM-DASHBOARD]  - 儀表台 KPI 與 Canvas 圖表骨架
-         * 7. 📋 [ANCHOR: DOM-TABLE]      - Sheet 表格與工具列 DOM 骨架
-         * 8. 🗂️ [ANCHOR: DOM-DRAWER]     - CAPA 詳情抽屜 DOM 骨架
-         * 9. 🧠 [ANCHOR: JS-STATE]       - 全域狀態、雙語快取與 Mock 數據
-         * 10.📈 [ANCHOR: JS-CHARTS]      - Chart.js 初始化、動態聚合與生命週期銷毀
-         * 11.📋 [ANCHOR: JS-TABLE]       - 表格渲染、雙語切換與搜尋過濾
-         * 12.🗂️ [ANCHOR: JS-DRAWER]      - 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
-         * 13.☁️ [ANCHOR: JS-CLOUD]       - GAS 雲端 API 資料拉取與雙向 POST 儲存
+         * 1. 🎨 [ANCHOR: CSS-THEME]          - 主題色彩變數與全域樣式 (Tokens & Reset)
+         * 2. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速導航島 (避開 LOGO) 與 Toast
+         * 3. 📊 [ANCHOR: CSS-DASHBOARD]      - Tab 1 儀表台與 KPI 卡片樣式
+         * 4. 📋 [ANCHOR: CSS-TABLE]          - Tab 2 Google Sheet 表格與高亮列樣式
+         * 5. 🗂️ [ANCHOR: CSS-DRAWER]         - CAPA 側邊抽屜樣式 (無遮罩 Side-by-Side)
+         * 6. 🧱 [ANCHOR: DOM-NAVBAR]         - 頂部 LOGO、狀態燈、雙分頁按鈕骨架
+         * 7. 📊 [ANCHOR: DOM-DASHBOARD]      - 儀表台 KPI 與 Canvas 圖表骨架
+         * 8. 📋 [ANCHOR: DOM-TABLE]          - Sheet 表格與工具列 DOM 骨架
+         * 9. 🗂️ [ANCHOR: DOM-DRAWER]         - CAPA 詳情抽屜 DOM 骨架
+         * 10.🧠 [ANCHOR: JS-STATE]           - 全域狀態、雙語快取與 Mock 數據
+         * 11.📈 [ANCHOR: JS-CHARTS]          - Chart.js 初始化、動態聚合與生命週期銷毀
+         * 12.📋 [ANCHOR: JS-TABLE]           - 表格渲染、雙語切換與搜尋過濾
+         * 13.🗂️ [ANCHOR: JS-DRAWER]          - 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
+         * 14.☁️ [ANCHOR: JS-CLOUD]           - GAS 雲端 API 資料拉取與雙向 POST 儲存
          * =========================================================================
          */
 
@@ -78,57 +79,158 @@
         html, body {
             height: 100vh;
             margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            font-family: var(--font-sans);
             background-color: var(--bg-primary);
             color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 13px;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
-        /* 👑 頂部固定導覽列區塊 */
-        .sticky-top-wrapper {
-            flex: 0 0 auto;
-            z-index: 1000;
-            background: rgba(11, 15, 25, 0.98);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
+        /* =========================================================================
+         * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+         * ========================================================================= */
+        .floating-quick-dock {
+            position: fixed;
+            top: 6px;
+            left: 6px;
+            z-index: 999999;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            align-items: flex-start;
+            gap: 0.35rem;
         }
 
-        /* 頂部 Header */
+        .floating-dock-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #FFFFFF;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-out;
+            opacity: 0.8;
+        }
+
+        .floating-dock-toggle:hover {
+            transform: scale(1.12);
+            opacity: 1;
+            background: var(--accent-primary);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.6);
+        }
+
+        .floating-dock-menu {
+            display: none;
+            background: rgba(19, 27, 46, 0.97);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 175px;
+            animation: slideDownFade 0.2s ease-out;
+        }
+
+        .floating-dock-menu.active {
+            display: flex;
+        }
+
+        @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-dock-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .floating-dock-item:hover {
+            background: var(--bg-hover);
+            color: var(--accent-primary);
+        }
+
+        .floating-dock-item.active {
+            background: rgba(139, 92, 246, 0.25);
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .floating-dock-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 頂部固定區域 (Sticky Top Section) */
+        .sticky-top-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(11, 15, 25, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.65rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
         header {
-            padding: 0.75rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
+            margin-left: 20px; /* Leave space for top-left floating dock */
         }
 
-        /* 官方純白 LOGO (不包底、純透明懸浮) */
         .brand-logo-img {
             height: 28px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.2));
             display: block;
+            background: transparent;
+            border: none;
+            padding: 0;
         }
 
         .brand-title h1 {
             font-size: 1.15rem;
             font-weight: 800;
-            letter-spacing: -0.01em;
-            background: linear-gradient(90deg, #ffffff, #c4b5fd);
-            background-clip: text;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
@@ -137,14 +239,15 @@
         }
 
         .brand-badge {
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 0.15rem 0.5rem;
-            border-radius: 9999px;
+            font-size: 0.68rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
             background: rgba(139, 92, 246, 0.2);
-            border: 1px solid rgba(139, 92, 246, 0.4);
             color: #c4b5fd;
-            -webkit-text-fill-color: initial;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            -webkit-text-fill-color: #c4b5fd;
         }
 
         .brand-title p {
@@ -248,103 +351,93 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 0.35rem 0.75rem;
-            border-radius: 6px;
+            padding: 0.35rem 0.65rem;
             font-size: 0.78rem;
             font-weight: 700;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .lang-btn.active {
-            background: var(--accent-primary) !important;
-            color: #ffffff !important;
+            background: var(--accent-primary);
+            color: #ffffff;
             box-shadow: 0 2px 8px var(--accent-glow);
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1.1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
-            color: white;
-            box-shadow: 0 4px 12px var(--accent-glow);
-        }
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px var(--accent-glow);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.5);
-        }
-
-        .btn-secondary {
+        .btn-action {
             background: var(--bg-secondary);
             color: var(--text-main);
             border: 1px solid var(--border-color);
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.2s;
         }
 
-        .btn-secondary:hover {
+        .btn-action:hover {
             background: var(--bg-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
         }
 
-        .btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
+        .btn-primary-glow {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border: 1px solid #34d399;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35);
         }
 
-        .badge-dirty {
-            background: #f59e0b;
-            color: #0f172a;
-            padding: 0.15rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
+        .btn-primary-glow:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .dirty-badge {
+            background: var(--accent-warning);
+            color: #000;
+            font-size: 0.7rem;
             font-weight: 800;
-            margin-left: 0.3rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 10px;
+            display: none;
+            animation: pulse 1.5s infinite;
         }
 
-        /* 👑 雙分頁切換導覽列 */
-        .tabs-header {
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* 雙分頁導航條 (Tab Navigation Bar) */
+        .tab-nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.5rem 1.5rem;
+            gap: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 0.5rem;
             flex-wrap: wrap;
-            gap: 0.6rem;
-            background: rgba(19, 27, 46, 0.75);
-            border-bottom: 1px solid var(--border-color);
         }
 
-        .tabs-main-nav {
+        .tab-btn-group {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .tab-main-btn {
-            background: rgba(255, 255, 255, 0.04);
+        .tab-btn {
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 0.5rem 1.1rem;
+            padding: 0.45rem 1.1rem;
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 700;
@@ -355,27 +448,25 @@
             transition: all 0.2s;
         }
 
-        .tab-main-btn:hover {
-            background: rgba(139, 92, 246, 0.1);
-            color: #ffffff;
-            border-color: rgba(139, 92, 246, 0.3);
+        .tab-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-main);
         }
 
-        .tab-main-btn.active {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(6, 182, 212, 0.2));
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #6d28d9 100%);
             color: #ffffff;
             border-color: var(--accent-primary);
-            box-shadow: 0 2px 12px var(--accent-glow);
+            box-shadow: 0 4px 14px var(--accent-glow);
         }
 
-        .view-switcher {
+        .view-switch-group {
             display: flex;
             align-items: center;
-            gap: 0.3rem;
-            background: rgba(11, 15, 25, 0.6);
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            padding: 0.2rem;
             border-radius: 8px;
+            padding: 0.2rem;
         }
 
         .view-btn {
@@ -383,30 +474,27 @@
             border: none;
             color: var(--text-muted);
             padding: 0.35rem 0.75rem;
-            border-radius: 6px;
             font-size: 0.78rem;
             font-weight: 600;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .view-btn.active {
             background: var(--bg-card-elevated);
-            color: var(--text-main);
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
         }
 
-        /* 主滾動區域 */
+        /* 主要內容容器 */
         main {
-            flex: 1 1 0;
-            min-height: 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            position: relative;
+            padding: 1.25rem;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
         /* =========================================================================
@@ -420,49 +508,35 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
-        }
-
-        @media (max-width: 1200px) {
-            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 640px) {
-            .kpi-grid { grid-template-columns: 1fr; }
         }
 
         .kpi-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 1.2rem 1.4rem;
+            padding: 1.15rem;
             display: flex;
             align-items: center;
-            gap: 1.2rem;
+            gap: 1rem;
+            box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(139, 92, 246, 0.35);
         }
 
         .kpi-card::before {
             content: '';
             position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 4px;
+            top: 0; left: 0; right: 0; height: 3px;
         }
+
         .kpi-total::before { background: #3b82f6; }
         .kpi-nc::before { background: #ef4444; }
         .kpi-hl::before { background: #a855f7; }
@@ -550,47 +624,47 @@
             flex-wrap: wrap;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
+            padding: 0.65rem 1rem;
             border-radius: 10px;
-            padding: 0.75rem 1rem;
-        }
-
-        .toolbar-left {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
         }
 
         .search-box {
-            display: flex;
-            align-items: center;
+            position: relative;
+            flex: 1;
+            min-width: 260px;
+            max-width: 420px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 0.45rem 0.85rem;
-            width: 300px;
-            transition: border-color 0.2s;
-        }
-
-        .search-box:focus-within {
-            border-color: var(--accent-primary);
-        }
-
-        .search-box input {
-            background: transparent;
-            border: none;
+            padding: 0.5rem 0.85rem 0.5rem 2.25rem;
             color: var(--text-main);
-            font-size: 0.85rem;
-            width: 100%;
-            margin-left: 0.5rem;
+            font-size: 0.82rem;
             outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .filter-chips {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .chip-btn {
@@ -683,60 +757,63 @@
         }
 
         th {
-            background: #141b2d;
+            background: var(--bg-secondary);
             font-weight: 700;
-            color: #cbd5e1;
-            white-space: nowrap;
+            color: var(--text-muted);
+            position: sticky;
+            top: 105px;
+            z-index: 10;
         }
+
+        /* Banner 標題分組欄位 */
+        .th-group-cat { background: var(--group-cat-bg); color: #a5b4fc; text-align: center; font-weight: 800; }
+        .th-group-nc { background: var(--group-nc-bg); color: #fca5a5; text-align: center; font-weight: 800; }
+        .th-group-capa { background: var(--group-capa-bg); color: #fde047; text-align: center; font-weight: 800; }
 
         tr:hover td {
-            background: rgba(139, 92, 246, 0.04);
+            background-color: var(--bg-hover) !important;
         }
 
-        .group-header-row th {
-            text-align: center;
-            font-weight: 800;
-            font-size: 0.82rem;
-            letter-spacing: 0.04em;
-            padding: 0.45rem 0.5rem;
-            color: #ffffff;
-        }
+        .td-center { text-align: center; }
+        .td-mono { font-family: var(--font-mono); }
+        .td-formula { background: var(--formula-bg); color: #93c5fd; }
+        .td-dirty { background: var(--dirty-bg) !important; border-color: var(--dirty-border) !important; }
 
-        .th-group-cat { background-color: var(--group-cat-bg) !important; border-color: #2e3860 !important; }
-        .th-group-nc { background-color: var(--group-nc-bg) !important; border-color: #5c203b !important; }
-        .th-group-capa { background-color: var(--group-capa-bg) !important; border-color: #63471c !important; }
-
-        .status-pill {
+        /* 標籤 Badge 膠囊 */
+        .badge {
             display: inline-block;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
             font-size: 0.72rem;
             font-weight: 700;
             white-space: nowrap;
         }
-        .pill-fail { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); }
-        .pill-pass { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
-        .pill-pending { background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
-        .pill-highlight { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
 
-        .btn-capa-view {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+        .badge-fail { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .badge-minor { background: rgba(239, 68, 68, 0.25); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.5); font-weight: 800; }
+        .badge-highlight { background: rgba(168, 85, 247, 0.25); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; }
+        .badge-dri { background: rgba(6, 182, 212, 0.15); color: #67e8f9; border: 1px solid rgba(6, 182, 212, 0.3); }
+
+        .btn-capa-open {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.5);
             color: #c4b5fd;
-            border: 1px solid rgba(139, 92, 246, 0.4);
             padding: 0.25rem 0.6rem;
             border-radius: 6px;
-            font-size: 0.74rem;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }
-        .btn-capa-view:hover {
+
+        .btn-capa-open:hover {
             background: var(--accent-primary);
             color: #ffffff;
-            box-shadow: 0 2px 8px var(--accent-glow);
+            box-shadow: 0 2px 10px var(--accent-glow);
+            transform: scale(1.05);
         }
 
         .compact-cell-ellipsis {
@@ -821,21 +898,24 @@
             color: var(--text-main);
         }
 
-        .capa-edit-area textarea {
+        .drawer-textarea {
             width: 100%;
-            min-height: 90px;
-            background: var(--bg-secondary);
+            height: 100px;
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 0.75rem;
             color: var(--text-main);
-            font-size: 0.85rem;
-            outline: none;
-            resize: vertical;
             font-family: inherit;
+            font-size: 0.85rem;
+            resize: vertical;
+            outline: none;
+            transition: all 0.2s;
         }
-        .capa-edit-area textarea:focus {
+
+        .drawer-textarea:focus {
             border-color: var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .loading-overlay {
@@ -894,6 +974,36 @@
 <body>
 
     <!-- =========================================================================
+     * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+     * ========================================================================= -->
+    <div class="floating-quick-dock" id="floatingQuickDock">
+        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+            🧭
+        </div>
+        <div class="floating-dock-menu" id="floatingDockMenu">
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('01_dashboard')">
+                <span>📊</span> 01 儀表台總覽
+            </button>
+            <button type="button" class="floating-dock-item active" onclick="navigateToModule('02_qsa')">
+                <span>🛡️</span> 02 QSA 體系稽核
+            </button>
+            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+                <span>⚙️</span> 03 QPA 製程 (建置中)
+            </button>
+            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('04_procurement')">
+                <span>📦</span> 04 設備採購 (建置中)
+            </button>
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('sop_guide')">
+                <span>📘</span> SOP 應對指南
+            </button>
+            <div style="height:1px; background:rgba(255,255,255,0.1); margin:2px 0;"></div>
+            <button type="button" class="floating-dock-item" onclick="window.location.reload()">
+                <span>🔄</span> 重新載入當前頁
+            </button>
+        </div>
+    </div>
+
+    <!-- =========================================================================
      * 🧱 [ANCHOR: DOM-NAVBAR] 頂部 LOGO、狀態燈、雙分頁按鈕骨架
      * ========================================================================= -->
     <div class="sticky-top-wrapper">
@@ -903,7 +1013,7 @@
                 <div class="brand-title">
                     <h1 id="appTitle">
                         SSSTC D1 QSA 品質體系稽核管理系統
-                        <span class="brand-badge">v4.0 雙分頁版</span>
+                        <span class="brand-badge">v4.1 雙分頁版</span>
                     </h1>
                     <p>
                         <span class="connection-status">
@@ -914,14 +1024,14 @@
             </div>
 
             <div class="header-actions">
-                <a id="btnSheetLink" href="https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit#gid=1459374771" target="_blank" rel="noopener noreferrer" class="btn-sheet-link" title="開啟 Google Sheet 對應語系原生試算表">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    <span id="btnSheetLinkText">🟢 Google Sheet 繁中表</span>
+                <a href="https://docs.google.com/spreadsheets/d/1Zp71d3n7iA_r4H12iC8j_6f7fX_QSA_DB/edit" target="_blank" class="btn-sheet-link" id="btnSheetLink">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span id="btnSheetText">Google Sheet 繁中表</span>
                 </a>
 
-                <button class="btn-fullscreen" id="btnFullscreen" onclick="toggleFullscreen()" title="切換全螢幕 (Toggle Fullscreen)">
+                <button class="btn-fullscreen" onclick="toggleFullscreen()" title="切換全螢幕 (Fullscreen)">
                     <svg id="iconExpand" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-                    <svg id="iconCompress" viewBox="0 0 24 24" style="display: none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+                    <svg id="iconCompress" style="display:none;" viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
                 </button>
 
                 <div class="lang-switch">
@@ -929,412 +1039,367 @@
                     <button class="lang-btn" id="btnLangEN" onclick="switchLanguage('EN')">EN</button>
                 </div>
 
-                <button class="btn btn-secondary" onclick="loadAllData()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-                    <span id="btnRefreshText">重新整理</span>
+                <button class="btn-action" onclick="loadAllData()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                    <span id="btnSyncText">重新整理</span>
                 </button>
 
-                <button class="btn btn-success" id="btnSave" onclick="saveChanges()" disabled>
+                <button class="btn-action btn-primary-glow" id="btnSave" onclick="saveChanges()" disabled>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                    <span id="btnSaveText">儲存所有變更</span> <span class="badge-dirty" id="dirtyCounter" style="display: none;">0</span>
+                    <span id="btnSaveText">儲存所有變更</span>
+                    <span class="dirty-badge" id="dirtyCounter">0</span>
                 </button>
             </div>
         </header>
 
-        <div class="tabs-header">
-            <div class="tabs-main-nav">
-                <button class="tab-main-btn active" id="tabBtnDashboard" onclick="switchMainTab('dashboard')">
-                    📊 <span id="lblTabDashboard">儀表台 (Dashboard)</span>
+        <!-- 雙分頁切換按鈕組 -->
+        <div class="tab-nav-bar">
+            <div class="tab-btn-group">
+                <button class="tab-btn active" id="tabBtnDashboard" onclick="switchTab('dashboard')">
+                    📊 <span id="tabTitleDashboard">儀表台 (Dashboard)</span>
                 </button>
-                <button class="tab-main-btn" id="tabBtnDetail" onclick="switchMainTab('detail')">
-                    📋 <span id="lblTabDetail">細節進度 (Sheet 視圖)</span>
+                <button class="tab-btn" id="tabBtnDetail" onclick="switchTab('detail')">
+                    📋 <span id="tabTitleDetail">細節進度 (Sheet 視圖)</span>
                 </button>
             </div>
 
-            <div class="view-switcher" id="viewSwitcherBox" style="display: none;">
-                <button class="view-btn active" id="btnViewCompact" onclick="switchViewMode('COMPACT')">
-                    ⚡ <span id="btnViewCompactText">精簡視圖 (無冗餘)</span>
+            <div class="view-switch-group" id="viewModeWrapper" style="display: none;">
+                <button class="view-btn active" id="btnCompactView" onclick="switchTableViewMode('compact')">
+                    ⚡ <span id="btnCompactText">精簡視圖 (無冗餘)</span>
                 </button>
-                <button class="view-btn" id="btnViewClassic" onclick="switchViewMode('CLASSIC')">
-                    📊 <span id="btnViewClassicText">傳統全視圖 (14欄)</span>
+                <button class="view-btn" id="btnClassicView" onclick="switchTableViewMode('classic')">
+                    📊 <span id="btnClassicText">傳統全視圖 (14欄)</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- 主內容滾動區 -->
+    <!-- 主視圖區塊 -->
     <main>
         <!-- =========================================================================
-         * 📊 [ANCHOR: DOM-DASHBOARD] 儀表台 KPI 與 Canvas 圖表骨架
+         * 📊 [ANCHOR: DOM-DASHBOARD] Tab 1 儀表台與 KPI 卡片骨架
          * ========================================================================= -->
-        <div class="dashboard-view" id="viewDashboard">
+        <section class="dashboard-view" id="dashboardView">
+            <!-- 4 大 KPI 卡片 -->
             <div class="kpi-grid">
                 <div class="kpi-card kpi-total">
                     <div class="kpi-icon-wrap">📋</div>
                     <div class="kpi-info">
-                        <div class="kpi-label" id="lblKpiTotal">稽核觀察總項數</div>
-                        <div class="kpi-value"><span id="valKpiTotal">15</span> <span class="kpi-sub">Obs</span></div>
+                        <div class="kpi-label" id="kpiLabelTotal">稽核觀察項總數</div>
+                        <div class="kpi-value" id="kpiValueTotal">15 <span class="kpi-sub">Obs</span></div>
                     </div>
                 </div>
                 <div class="kpi-card kpi-nc">
                     <div class="kpi-icon-wrap">❌</div>
                     <div class="kpi-info">
-                        <div class="kpi-label" id="lblKpiNc">缺失整改項 (NC)</div>
-                        <div class="kpi-value" style="color: #f87171;"><span id="valKpiNc">14</span> <span class="kpi-sub">Items</span></div>
+                        <div class="kpi-label" id="kpiLabelNC">缺失整改項 (NC)</div>
+                        <div class="kpi-value" id="kpiValueNC" style="color: #f87171;">14 <span class="kpi-sub">Items</span></div>
                     </div>
                 </div>
                 <div class="kpi-card kpi-hl">
                     <div class="kpi-icon-wrap">🟣</div>
                     <div class="kpi-info">
-                        <div class="kpi-label" id="lblKpiHl">重點關注項 (Highlight)</div>
-                        <div class="kpi-value" style="color: #c084fc;"><span id="valKpiHl">1</span> <span class="kpi-sub">Items</span></div>
+                        <div class="kpi-label" id="kpiLabelHL">重點關注項 (Highlight)</div>
+                        <div class="kpi-value" id="kpiValueHL" style="color: #c084fc;">1 <span class="kpi-sub">Items</span></div>
                     </div>
                 </div>
                 <div class="kpi-card kpi-pass">
                     <div class="kpi-icon-wrap">📈</div>
                     <div class="kpi-info">
-                        <div class="kpi-label" id="lblKpiPassRate">合規達成率 (Compliance)</div>
-                        <div class="kpi-value" style="color: #34d399;"><span id="valKpiPassRate">0%</span></div>
+                        <div class="kpi-label" id="kpiLabelCompliance">合規達成率 (Compliance)</div>
+                        <div class="kpi-value" id="kpiValueCompliance" style="color: #34d399;">0%</div>
                     </div>
                 </div>
             </div>
 
+            <!-- 4 大視覺化圖表網格 -->
             <div class="charts-grid">
                 <div class="chart-card">
                     <div class="chart-header">
                         <div class="chart-title">
-                            <span>📊</span> <span id="chartStreamTitle">流程階段缺失分佈 (Process Breakdown)</span>
+                            <span>📊</span> <span id="chartTitleProcess">流程階段缺失分佈 (Process Breakdown)</span>
                         </div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">IATF 16949 分類</span>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">IATF 16949 分類</span>
                     </div>
                     <div class="chart-container-box">
-                        <canvas id="streamChart"></canvas>
+                        <canvas id="chartProcess"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <div class="chart-title">
-                            <span>🎯</span> <span id="chartSeverityTitle">缺失嚴重度佔比 (Severity)</span>
+                            <span>🎯</span> <span id="chartTitleSeverity">缺失嚴重度佔比 (Severity)</span>
                         </div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">NC vs Highlight</span>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">NC vs Highlight</span>
                     </div>
                     <div class="chart-container-box">
-                        <canvas id="severityChart"></canvas>
+                        <canvas id="chartSeverity"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <div class="chart-title">
-                            <span>👥</span> <span id="chartDriTitle">責任單位改善待辦分佈 (DRI Task Allocation)</span>
+                            <span>👥</span> <span id="chartTitleDRI">責任單位改善待辦分佈 (DRI Task Allocation)</span>
                         </div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">CAPA 負責人</span>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">CAPA 負責人</span>
                     </div>
                     <div class="chart-container-box">
-                        <canvas id="driChart"></canvas>
+                        <canvas id="chartDRI"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
                     <div class="chart-header">
                         <div class="chart-title">
-                            <span>📅</span> <span id="chartDueTitle">改善對策預計完成排程 (Target Due Dates)</span>
+                            <span>📅</span> <span id="chartTitleTimeline">改善對策預計完成排程 (Target Due Dates)</span>
                         </div>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">截止時間軸</span>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">截止時間軸</span>
                     </div>
                     <div class="chart-container-box">
-                        <canvas id="dueChart"></canvas>
+                        <canvas id="chartTimeline"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- =========================================================================
-         * 📋 [ANCHOR: DOM-TABLE] Sheet 表格與工具列 DOM 骨架
+         * 📋 [ANCHOR: DOM-TABLE] Tab 2 Google Sheet 表格骨架
          * ========================================================================= -->
-        <div class="detail-view" id="viewDetail">
+        <section class="detail-view" id="detailView">
             <div class="toolbar">
-                <div class="toolbar-left">
-                    <div class="search-box">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        <input type="text" id="searchInput" placeholder="搜尋 QSA Observations 所有欄位..." oninput="onSearchInput()" />
-                    </div>
+                <div class="search-box">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="搜尋 QSA Observations 所有欄位..." oninput="handleSearch(this.value)">
+                </div>
 
-                    <div class="filter-chips">
-                        <button class="chip-btn active" id="chipAll" onclick="setStatusFilter('ALL')">全部</button>
-                        <button class="chip-btn chip-nc" id="chipNc" onclick="setStatusFilter('FAIL')">❌ 缺失未通過</button>
-                        <button class="chip-btn chip-hl" id="chipHl" onclick="setStatusFilter('HIGHLIGHT')">🟣 重點關注</button>
-                    </div>
+                <div class="filter-chips">
+                    <button class="chip-btn active" id="chipAll" onclick="setFilter('ALL')">全部</button>
+                    <button class="chip-btn chip-nc" id="chipNC" onclick="setFilter('NC')">❌ 缺失未通過</button>
+                    <button class="chip-btn chip-hl" id="chipHL" onclick="setFilter('HL')">🟣 重點關注</button>
                 </div>
 
                 <div class="info-stats">
-                    <span id="rowCountInfo">顯示 15 / 15 筆列資料</span>
-                    <span class="legend-item"><span class="legend-box legend-formula"></span> <span id="legendFormulaText">🔒 公式計算 (唯讀)</span></span>
-                    <span class="legend-item"><span class="legend-box legend-dirty"></span> <span id="legendDirtyText">✏️ 已修改 (待儲存)</span></span>
+                    <span id="filteredStats">顯示 15 / 15 筆列資料</span>
+                    <span class="legend-item"><span class="legend-box legend-formula"></span> 公式計算 (唯讀)</span>
+                    <span class="legend-item"><span class="legend-box legend-dirty"></span> 已修改 (待儲存)</span>
                 </div>
             </div>
 
             <div class="table-container compact-mode" id="tableContainer">
-                <div class="loading-overlay" id="tableLoadingOverlay" style="display: none;">
+                <div class="loading-overlay" id="tableLoading" style="display:none;">
                     <div class="spinner"></div>
-                    <div style="font-weight: 600;" id="overlayLoadingText">正在載入 QSA Observations 資料...</div>
+                    <div style="font-weight:600; color:var(--text-muted);">載入最新 Google Sheet 數據中...</div>
                 </div>
-                <div id="tableContentWrapper">
-                    <!-- 表格動態渲染區 -->
-                </div>
+
+                <table id="mainTable">
+                    <!-- Dynamic colgroup, thead, tbody injected by JS -->
+                </table>
             </div>
-        </div>
+        </section>
     </main>
 
     <!-- =========================================================================
-     * 🗂️ [ANCHOR: DOM-DRAWER] CAPA 詳情抽屜 DOM 骨架 (獨立側邊懸浮，無遮罩)
+     * 🗂️ [ANCHOR: DOM-DRAWER] CAPA 側邊抽屜骨架 (無遮罩 Side-by-Side)
      * ========================================================================= -->
     <div class="capa-drawer" id="capaDrawer">
         <div class="drawer-header">
-            <div class="drawer-header-title">
-                <h2 id="drawerRefTitle" style="font-size: 1.05rem; font-weight: 700; color: #fff;">⚡ CAPA 缺失整改對策詳情</h2>
-                <div class="drawer-header-subtitle" id="drawerMetaSub" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">
-                    <span>主類別: --</span> • <span>次類別: --</span>
-                </div>
+            <div>
+                <span class="badge badge-fail" id="drawerBadge" style="margin-bottom:0.35rem;">項次 #1</span>
+                <h3 id="drawerTitle" style="font-size:1.05rem; font-weight:700; color:var(--text-main);">CAPA 整改對策詳情</h3>
             </div>
-            <div style="display: flex; gap: 0.5rem; align-items: center;">
-                <button class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="copyCapaReport()">📋 複製報告</button>
-                <button class="btn btn-secondary" style="padding: 0.35rem 0.6rem; font-size: 0.85rem;" onclick="closeCapaDrawer()">✕</button>
-            </div>
+            <button style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:1.4rem;" onclick="closeCapaDrawer()">✕</button>
         </div>
 
         <div class="drawer-body">
             <div>
-                <div style="font-size: 0.85rem; font-weight: 700; color: #c4b5fd; margin-bottom: 0.5rem;" id="lblDrawerNcSection">📌 稽核缺失內容</div>
-                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                    <div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;">要求 (Requirement)</div>
-                        <div class="capa-text-box" id="drawerReqContent">--</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.25rem;">稽核意見 (Audit Finding)</div>
-                        <div class="capa-text-box" id="drawerFindingContent" style="color: #fca5a5;">--</div>
-                    </div>
+                <label style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">主要類別與子流程 (Process Hierarchy)</label>
+                <div class="capa-text-box" id="drawerCategory" style="margin-top:0.35rem; font-weight:600;">--</div>
+            </div>
+
+            <div>
+                <label style="font-size:0.75rem; color:#fca5a5; font-weight:700; text-transform:uppercase;">NC 要求與缺失說明 (Non-Conformance Detail)</label>
+                <div class="capa-text-box" id="drawerNC" style="margin-top:0.35rem; background:rgba(239, 68, 68, 0.08); border-color:rgba(239, 68, 68, 0.25); color:#fee2e2;">--</div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">責任單位 (DRI)</label>
+                    <div class="capa-text-box" id="drawerDRI" style="margin-top:0.35rem; font-family:var(--font-mono); font-weight:700; color:#67e8f9;">--</div>
+                </div>
+                <div>
+                    <label style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">目標截止日 (Target Due Date)</label>
+                    <div class="capa-text-box" id="drawerDueDate" style="margin-top:0.35rem; font-family:var(--font-mono); font-weight:700;">--</div>
                 </div>
             </div>
 
             <div>
-                <div style="font-size: 0.85rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;" id="lblDrawerTrackerSection">🛠️ CAPA 執行指標</div>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem;">
-                    <div class="capa-text-box">
-                        <div style="font-size: 0.7rem; color: var(--text-muted);">負責人 (DRI)</div>
-                        <div style="font-weight: 700; margin-top: 2px;" id="drawerDriVal">--</div>
-                    </div>
-                    <div class="capa-text-box">
-                        <div style="font-size: 0.7rem; color: var(--text-muted);">PQ2 種類</div>
-                        <div style="font-weight: 700; margin-top: 2px;" id="drawerPq2Val">--</div>
-                    </div>
-                    <div class="capa-text-box">
-                        <div style="font-size: 0.7rem; color: var(--text-muted);">截止日 (Due Date)</div>
-                        <div style="font-weight: 700; font-family: var(--font-mono); margin-top: 2px;" id="drawerDueDateVal">--</div>
-                    </div>
-                </div>
+                <label style="font-size:0.75rem; color:#fde047; font-weight:700; text-transform:uppercase;">根本原因分析 (Root Cause Analysis)</label>
+                <textarea id="drawerRootCause" class="drawer-textarea" style="margin-top:0.35rem;" placeholder="請輸入根本原因分析..." oninput="onDrawerFieldChange('rootCause')"></textarea>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                <div style="font-size: 0.85rem; font-weight: 700; color: #fbbf24;" id="lblDrawerCapaSection">🔍 根本原因與行動計劃</div>
-                <div class="capa-edit-area">
-                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.25rem;">根本原因 (Root Cause)</label>
-                    <textarea id="drawerRootCause" placeholder="請輸入根本原因..." onchange="onDrawerFieldChange('rootCause')"></textarea>
-                </div>
-                <div class="capa-edit-area">
-                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.25rem;">行動計劃 (Action Plan)</label>
-                    <textarea id="drawerActionPlan" placeholder="請輸入改善對策..." onchange="onDrawerFieldChange('actionPlan')"></textarea>
-                </div>
+            <div>
+                <label style="font-size:0.75rem; color:#86efac; font-weight:700; text-transform:uppercase;">行動計劃與整改對策 (Corrective Action Plan)</label>
+                <textarea id="drawerActionPlan" class="drawer-textarea" style="margin-top:0.35rem; height:120px;" placeholder="請輸入糾正與預防對策 (CAPA)..." oninput="onDrawerFieldChange('actionPlan')"></textarea>
             </div>
         </div>
 
         <div class="drawer-footer">
-            <div style="display: flex; gap: 0.5rem;">
-                <button class="btn btn-secondary" onclick="navigateDrawer(-1)" id="btnDrawerPrev">⬅️ 上一筆</button>
-                <button class="btn btn-secondary" onclick="navigateDrawer(1)" id="btnDrawerNext">下一筆 ➡️</button>
+            <div style="display:flex; gap:0.5rem;">
+                <button class="btn-action" onclick="navigateDrawer(-1)">⬅️ 上一筆</button>
+                <button class="btn-action" onclick="navigateDrawer(1)">下一筆 ➡️</button>
             </div>
-            <button class="btn btn-primary" onclick="closeCapaDrawer()">關閉</button>
+            <button class="btn-action" style="background:var(--accent-primary); border-color:var(--accent-primary); color:#fff;" onclick="copyCapaReport()">📋 複製對策報告</button>
         </div>
     </div>
 
-    <!-- 訊息提示 Toast 容器 -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <!-- =========================================================================
+     * 🧠 [ANCHOR: JS-STATE] 全域狀態與初始化
+     * ========================================================================= -->
     <script>
-        // =========================================================================
-        // 🧠 [ANCHOR: JS-STATE] 全域狀態、雙語快取與 Mock 數據
-        // =========================================================================
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycby45EQ7ECz0tFqw6M10sOB1VwP01kvBsGL-976jmxSlC0OPNvkqn5DT1BTYtIjbmpzj/exec";
-        
-        // 預設語言鎖定為繁體中文 (ZH)
-        let currentLang = 'ZH';
-        let currentMainTab = 'dashboard';
-        let currentViewMode = 'COMPACT';
-        let activeFilter = 'ALL';
-        let searchQuery = '';
-        let pendingChanges = [];
-        let activeDrawerIndex = -1;
 
-        // Chart.js 實體參考 (嚴格銷毀防崩潰)
-        let streamChartInstance = null;
-        let severityChartInstance = null;
-        let driChartInstance = null;
-        let dueChartInstance = null;
-
-        // 雙語資料快取
-        const qsaDataCache = {
-            ZH: { sheetName: "QSA Observations (ZH)", headers: [], rows: [] },
-            EN: { sheetName: "QSA Observations", headers: [], rows: [] }
+        // Standard Universal Module URLs Dictionary
+        const PORTAL_URLS = {
+            '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
+            '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
+            '03_qpa': '',
+            '04_procurement': '',
+            'sop_guide': 'https://html.foxlink.co.in/reports/report-1785909929403.html'
         };
 
-        // 繁中標準 15 筆內建結構資料
-        const defaultZhRows = [
-            { _rowNumber: 2, "項次": 1, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-1. 高層參與", "類別得分": 0.64, "審核狀態": "未通過", "NC 要求與缺失說明": "最高管理層是否瞭解組織在 Dell 產品上的表現，並理解相關問題與風險（例如 QBR、FIR/IFIR、HSR、COPQ 等）？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/10", "PQ2 種類": "NA", "根本原因 (Root Cause)": "管理層指標檢討流程未涵蓋 Dell 專屬品質指標...", "行動計劃 (Action Plan)": "將 Dell 專屬指標納入每月管理審查會議...", "狀態": "待跟進" },
-            { _rowNumber: 3, "項次": 2, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-1. 高層參與", "類別得分": 0.64, "審核狀態": "未通過", "NC 要求與缺失說明": "最高管理層是否規劃並應用相關創新（新技術、新工藝、新設備、新材料應用等）？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "創新技術引進缺乏定期評估機制...", "行動計劃 (Action Plan)": "建立季度創新技術導入評估清單...", "狀態": "待跟進" },
-            { _rowNumber: 4, "項次": 3, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管理審查", "類別得分": 0.54, "審核狀態": "未通過", "NC 要求與缺失說明": "內部稽核是否按照已識別的流程和規劃的時間間隔進行？是否有遺漏任何流程？是否追蹤上次稽核的發現事項？", "嚴重度": "重點關注", "DRI": "QUALITY", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "內部稽核計劃排程未覆蓋全部工序...", "行動計劃 (Action Plan)": "更新年度內部稽核排程並實施閉環驗證...", "狀態": "待跟進" },
-            { _rowNumber: 5, "項次": 4, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管理審查", "類別得分": 0.54, "審核狀態": "未通過", "NC 要求與缺失說明": "內部稽核員是否具備資格、能力與公正性，以執行其所承擔流程的稽核？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "稽核員資格再認證機制未定期更新...", "行動計劃 (Action Plan)": "辦理內部稽核員換證培訓與考核...", "狀態": "待跟進" },
-            { _rowNumber: 6, "項次": 5, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管理審查", "類別得分": 0.54, "審核狀態": "未通過", "NC 要求與缺失說明": "稽核發現事項是否已矯正？矯正措施是否有效？是否防止重複發生？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "缺失改善有效性驗證缺乏量化標準...", "行動計劃 (Action Plan)": "建立 CAPA 有效性追蹤評估機制...", "狀態": "待跟進" },
-            { _rowNumber: 7, "項次": 6, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "類別得分": 0.50, "審核狀態": "未通過", "NC 要求與缺失說明": "作業指導書是否根據 AQP 要求詳細定義控制措施，包括設備、治具、工具、量具，以及操作員符合 SOP 的操作...", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "現場 SOP 參數設定未及時與 AQP 連動更新...", "行動計劃 (Action Plan)": "全面比對 AQP 與現場作業指導書一致性...", "狀態": "待跟進" },
-            { _rowNumber: 8, "項次": 7, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "類別得分": 0.50, "審核狀態": "未通過", "NC 要求與缺失說明": "設備、治具、工具與量具是否定期保養與校驗並保存完整記錄？", "嚴重度": "次要缺失", "DRI": "PE-ARUN", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "治具保養週期缺乏系統化預警提示...", "行動計劃 (Action Plan)": "建立治具保養定期預警與檢查機制...", "狀態": "待跟進" },
-            { _rowNumber: 9, "項次": 8, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "類別得分": 0.50, "審核狀態": "未通過", "NC 要求與缺失說明": "首件檢驗 (FAI) 流程是否落實並嚴格記錄？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/10", "PQ2 種類": "NA", "根本原因 (Root Cause)": "首件檢驗記錄表單部分欄位未完全填寫...", "行動計劃 (Action Plan)": "落實首件檢驗確認卡簽核制度...", "狀態": "待跟進" },
-            { _rowNumber: 10, "項次": 9, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-5. 變更管理", "類別得分": 0.45, "審核狀態": "未通過", "NC 要求與缺失說明": "工程變更 (4M 變更) 是否取得 Dell 客戶事先核准並保存紀錄？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "變更通報流程對特定微小變更定義不清...", "行動計劃 (Action Plan)": "修訂 4M 變更管理程序書並明確通報門檻...", "狀態": "待跟進" },
-            { _rowNumber: 11, "項次": 10, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-6. 不合格品控制", "類別得分": 0.55, "審核狀態": "未通過", "NC 要求與缺失說明": "不合格品是否進行物理隔離、明確標識並防止誤用？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "不良品暫存區標識未顯著區隔...", "行動計劃 (Action Plan)": "設置紅色實體隔離網與電子門禁管控...", "狀態": "待跟進" },
-            { _rowNumber: 12, "項次": 11, "主要類別 (Category)": "III. 支援流程", "次類別 / 子流程": "SP-1. 培訓與能力", "類別得分": 0.60, "審核狀態": "未通過", "NC 要求與缺失說明": "關鍵工序操作員與檢驗員是否通過技能評定與資格認證？", "嚴重度": "次要缺失", "DRI": "HR-TRAINING", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "新進員工培訓履歷未即時建檔...", "行動計劃 (Action Plan)": "導入員工技能矩陣與上崗資格看板...", "狀態": "待跟進" },
-            { _rowNumber: 13, "項次": 12, "主要類別 (Category)": "III. 支援流程", "次類別 / 子流程": "SP-2. 基礎設施與工作環境", "類別得分": 0.58, "審核狀態": "未通過", "NC 要求與缺失說明": "溫濕度與 ESD 防靜電接地是否符合車規標準並每日監控？", "嚴重度": "次要缺失", "DRI": "FACILITY", "截止日": "2026/7/17", "PQ2 種類": "NA", "根本原因 (Root Cause)": "部分監測點未配置自動連續記錄器...", "行動計劃 (Action Plan)": "加裝在線連續溫濕度與 ESD 監測儀...", "狀態": "待跟進" },
-            { _rowNumber: 14, "項次": 13, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-3. 供應鏈品質管理", "類別得分": 0.52, "審核狀態": "未通過", "NC 要求與缺失說明": "供應商來料品質績效是否定期評鑑並實施分級管理？", "嚴重度": "次要缺失", "DRI": "SQE-TEAM", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "供應商月度評鑑缺乏系統化自動打分...", "行動計劃 (Action Plan)": "建立 SQE 供應商月度考評機制...", "狀態": "待跟進" },
-            { _rowNumber: 15, "項次": 14, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-7. 包裝與出貨防護", "類別得分": 0.65, "審核狀態": "未通過", "NC 要求與缺失說明": "產品出貨防護是否符合 Dell 規格，防止運送過程震動受損？", "嚴重度": "次要缺失", "DRI": "PE-ARUN", "截止日": "2026/7/16", "PQ2 種類": "NA", "根本原因 (Root Cause)": "外箱跌落測試報告未依批次歸檔...", "行動計劃 (Action Plan)": "建立每批次出貨跌落測試追溯清單...", "狀態": "待跟進" },
-            { _rowNumber: 16, "項次": 15, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-2. 風險管理", "類別得分": 0.58, "審核狀態": "未通過", "NC 要求與缺失說明": "品質風險評估 (FMEA) 是否定期檢討並納入客訴與製程異常？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/24", "PQ2 種類": "NA", "根本原因 (Root Cause)": "FMEA 修訂未與製程品質異常報告 (8D) 連動...", "行動計劃 (Action Plan)": "建立 8D 根本原因反饋回 PFMEA 機制...", "狀態": "待跟進" }
-        ];
+        function navigateToModule(modId) {
+            if (modId === '02_qsa') {
+                toggleFloatingDock();
+                return;
+            }
+            const url = PORTAL_URLS[modId];
+            if (!url) {
+                showToast("此模組建置中，敬請期待！", "info");
+                const dockMenu = document.getElementById('floatingDockMenu');
+                if (dockMenu) dockMenu.classList.remove('active');
+                return;
+            }
+            window.location.href = url;
+        }
 
-        // 英文版 15 筆內建結構資料
-        const defaultEnRows = defaultZhRows.map(r => ({
-            ...r,
-            "主要類別 (Category)": r["主要類別 (Category)"].replace("I. 管理流程", "I. Management Process").replace("II. 核心流程", "II. Customer Oriented Process").replace("III. 支援流程", "III. Support Process"),
-            "審核狀態": "Fail",
-            "嚴重度": r["嚴重度"] === "重點關注" ? "Highlight" : "Minor Nonconformance"
+        function toggleFloatingDock() {
+            const menu = document.getElementById('floatingDockMenu');
+            if (menu) menu.classList.toggle('active');
+        }
+
+        let currentLang = 'ZH'; // 預設繁體中文
+        let currentTab = 'dashboard'; // 預設儀表台
+        let currentTableViewMode = 'compact'; // 預設精簡視圖
+        let activeDrawerIndex = -1;
+        let currentFilter = 'ALL';
+        let searchQuery = '';
+
+        // Chart.js 實例字典 (用於生命週期銷毀防重繪崩潰)
+        let charts = {
+            process: null,
+            severity: null,
+            dri: null,
+            timeline: null
+        };
+
+        // 15 筆完整資料快取 (ZH 與 EN 雙語對映)
+        const qsaDataCache = {
+            ZH: {
+                headers: ["項次", "主要類別 (Category)", "次類別 / 子流程", "得分 / 狀態", "NC 要求與缺失說明", "嚴重度", "DRI", "截止日", "根本原因 (Root Cause)", "行動計劃 (Action Plan)", "狀態 (Status)"],
+                rows: [
+                    { "項次": 1, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-1. 高層參與", "得分 / 狀態": "64% 未通過", "NC 要求與缺失說明": "最高管理層是否瞭解組織在 Dell 產品上的表現，並理解相關問題與風險（例如 QBR、FIR/IFIR、HSR、COPQ 等）？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/10", "根本原因 (Root Cause)": "缺乏定期管理層品質審查機制與專屬匯報管道", "行動計劃 (Action Plan)": "1. 建立每月 SSSTC/Dell 專屬品質指標 (QBR/COPQ) 報告\n2. 納入高層管審例會定期檢視", "狀態 (Status)": "進行中" },
+                    { "項次": 2, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-1. 高層參與", "得分 / 狀態": "64% 未通過", "NC 要求與缺失說明": "最高管理層是否規劃並應用相關創新（新技術、新工藝、新設備、新材料應用等）？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/16", "根本原因 (Root Cause)": "技術創新提案未建立標準評估與導入追蹤流程", "行動計劃 (Action Plan)": "制定新設備與技術創新導入 Roadmap 並按季更新進度", "狀態 (Status)": "進行中" },
+                    { "項次": 3, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管審", "得分 / 狀態": "54% 未通過", "NC 要求與缺失說明": "內部稽核是否按照已識別的流程和規劃的時間間隔執行？是否有遺漏任何流程？是否追蹤上次稽核的發現事項？", "嚴重度": "重點關注", "DRI": "QUALITY", "截止日": "2026/7/24", "根本原因 (Root Cause)": "內稽查檢表未全面覆蓋車規級關鍵製程且追蹤閉環缺乏佐證", "行動計劃 (Action Plan)": "修訂 IATF 16949 內稽程序書，建立缺失閉環管制系統", "狀態 (Status)": "進行中" },
+                    { "項次": 4, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管審", "得分 / 狀態": "54% 未通過", "NC 要求與缺失說明": "內部稽核員是否具備資格、能力與公正性，以執行其所承擔流程的稽核？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/17", "根本原因 (Root Cause)": "內稽人員車規 VDA 6.3 / IATF 認證資質未定期重審", "行動計劃 (Action Plan)": "安排 6 位專責內稽員進行外部主任稽核員再認證", "狀態 (Status)": "進行中" },
+                    { "項次": 5, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-3. 內部稽核與管審", "得分 / 狀態": "54% 未通過", "NC 要求與缺失說明": "管理審查是否定期進行並涵蓋所有必要輸入？審查輸出是否包含改進措施與資源需求？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/17", "根本原因 (Root Cause)": "管審輸入資料缺少客戶專屬指標趨勢分析", "行動計劃 (Action Plan)": "建立標準管審簡報範本，整合各工序 KPI 矩陣", "狀態 (Status)": "進行中" },
+                    { "項次": 6, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "得分 / 狀態": "50% 未通過", "NC 要求與缺失說明": "作業指導書是否根據 AQP 要求詳細定義控制措施，包括設備、治具、工具、量具，以及操作員符合 SOP 的要求？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/16", "根本原因 (Root Cause)": "現場三階 SOP 未及時依最新工程變更 (ECN) 同步更新", "行動計劃 (Action Plan)": "全面盤點 SMT/DIP 產線 SOP，落實 AQP 控制點", "狀態 (Status)": "進行中" },
+                    { "項次": 7, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "得分 / 狀態": "50% 未通過", "NC 要求與缺失說明": "設備、治具、工具與量具是否定期保養與校驗並保存完整記錄？", "嚴重度": "次要缺失", "DRI": "PE-ARUN", "截止日": "2026/7/16", "根本原因 (Root Cause)": "治具保養卡未落實每日首件保養確認", "行動計劃 (Action Plan)": "推行 TPM 全員設備保養制度並建立電子保養履歷", "狀態 (Status)": "進行中" },
+                    { "項次": 8, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "得分 / 狀態": "50% 未通過", "NC 要求與缺失說明": "防錯機制 (Poka-Yoke) 是否有效實施並定期驗證其防錯功能？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/17", "根本原因 (Root Cause)": "防錯測試紅件 (Red Bunny) 缺乏每日開班點檢機制", "行動計劃 (Action Plan)": "建立防錯樣件清單，規定每班點檢並記錄於管制圖", "狀態 (Status)": "進行中" },
+                    { "項次": 9, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "得分 / 狀態": "50% 未通過", "NC 要求與缺失說明": "特殊特性 (KPC/KQC) 是否在各控制環節進行識別、標識與統計過程控制 (SPC)？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/17", "根本原因 (Root Cause)": "Cpk 計算未即時反映於現場目視化看板", "行動計劃 (Action Plan)": "全面導入 SPC 即時連線預警軟體", "狀態 (Status)": "進行中" },
+                    { "項次": 10, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "得分 / 狀態": "50% 未通過", "NC 要求與缺失說明": "產品與製程變更 (ECN/PCN) 是否經過嚴格驗證並取得客戶正式核准後方可實施？", "嚴重度": "次要缺失", "DRI": "PIE-BALAJI", "截止日": "2026/7/24", "根本原因 (Root Cause)": "變更導入前 4M1E 評估未落實跨部門簽核", "行動計劃 (Action Plan)": "更新工程變更管制程序書，增加 Dell 專案專屬放行卡", "狀態 (Status)": "進行中" },
+                    { "項次": 11, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-4. 生產過程控制", "得分 / 狀態": "50% 未通過", "NC 要求與缺失說明": "不合格品是否進行明確標識、隔離並記錄，防止非預期使用或流出？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/24", "根本原因 (Root Cause)": "維修暫存區實體物理隔離門鎖未嚴格管控", "行動計劃 (Action Plan)": "設置帶鎖不合格品專區並嚴格執行雙人進出登記", "狀態 (Status)": "進行中" },
+                    { "項次": 12, "主要類別 (Category)": "II. 核心流程", "次類別 / 子流程": "COP-5. 倉儲與物流", "得分 / 狀態": "50% 未通過", "NC 要求與缺失說明": "物料先進先出 (FIFO) 與溫濕度敏感物料 (MSD) 管制是否符合規範要求？", "嚴重度": "次要缺失", "DRI": "LOGISTICS", "截止日": "2026/7/24", "根本原因 (Root Cause)": "MSD 烘烤履歷未完全與 SFC 系統串接", "行動計劃 (Action Plan)": "全面實施條碼掃描管控 MSD 暴露時間與 FIFO", "狀態 (Status)": "進行中" },
+                    { "項次": 13, "主要類別 (Category)": "III. 支援流程", "次類別 / 子流程": "SP-2. 人力資源與培訓", "得分 / 狀態": "60% 未通過", "NC 要求與缺失說明": "關鍵工序操作員是否通過資格認證與考核，並保存培訓矩陣與技能檔案？", "嚴重度": "次要缺失", "DRI": "HR-TRAINING", "截止日": "2026/7/17", "根本原因 (Root Cause)": "技能矩陣看板未每月動態更新", "行動計劃 (Action Plan)": "更新技能矩陣為電子系統，設定資格到期自動預警", "狀態 (Status)": "進行中" },
+                    { "項次": 14, "主要類別 (Category)": "III. 支援流程", "次類別 / 子流程": "SP-3. 靜電防護 (ESD)", "得分 / 狀態": "60% 未通過", "NC 要求與缺失說明": "廠區靜電防護 (ESD) 控制體系是否符合 ANSI/ESD S20.20 標準，並落實每日點檢？", "嚴重度": "次要缺失", "DRI": "FACILITY-ESD", "截止日": "2026/7/17", "根本原因 (Root Cause)": "人體綜合測試儀無自動門禁聯鎖系統", "行動計劃 (Action Plan)": "採購安裝 ESD 靜電門禁自動閘門系統", "狀態 (Status)": "進行中" },
+                    { "項次": 15, "主要類別 (Category)": "I. 管理流程", "次類別 / 子流程": "MP-2. 客戶滿意度", "得分 / 狀態": "60% 未通過", "NC 要求與缺失說明": "客戶投訴處理是否遵循 8D 方法論，並在規定時限內完成根本原因分析與長期對策驗證？", "嚴重度": "次要缺失", "DRI": "QUALITY", "截止日": "2026/7/24", "根本原因 (Root Cause)": "8D 對策水平展開 (Lesson Learned) 未擴散至同類產品", "行動計劃 (Action Plan)": "建立品質教訓學習資料庫 (LLD)，每週跨產線推廣", "狀態 (Status)": "進行中" }
+                ]
+            },
+            EN: {
+                headers: ["Item #", "Category", "Sub-process / Flow", "Score / Status", "NC Requirement & Description", "Severity", "DRI", "Due Date", "Root Cause Analysis", "Action Plan", "Status"],
+                rows: [] // Dynamic clone with translated headers
+            }
+        };
+
+        // 複製中文結構並生成英文版本對照
+        qsaDataCache.EN.rows = qsaDataCache.ZH.rows.map(r => ({
+            "Item #": r["項次"],
+            "Category": r["主要類別 (Category)"],
+            "Sub-process / Flow": r["次類別 / 子流程"],
+            "Score / Status": r["得分 / 狀態"],
+            "NC Requirement & Description": r["NC 要求與缺失說明"],
+            "Severity": r["嚴重度"] === '次要缺失' ? 'Minor NC' : 'Highlight',
+            "DRI": r["DRI"],
+            "Due Date": r["截止日"],
+            "Root Cause Analysis": r["根本原因 (Root Cause)"],
+            "Action Plan": r["行動計劃 (Action Plan)"],
+            "Status": r["狀態 (Status)"] === '進行中' ? 'In Progress' : 'Closed'
         }));
 
+        // 頁面初始化
         window.addEventListener('DOMContentLoaded', () => {
-            qsaDataCache.ZH.rows = [...defaultZhRows];
-            qsaDataCache.EN.rows = [...defaultEnRows];
-            
-            updateDashboardKPIs();
             initDashboardCharts();
             renderTable();
-
             loadAllData();
         });
 
         // =========================================================================
-        // 📑 [ANCHOR: JS-TABS] 雙分頁與視圖切換
-        // =========================================================================
-        function switchMainTab(tabName) {
-            currentMainTab = tabName;
-            const isDashboard = (tabName === 'dashboard');
-
-            document.getElementById('tabBtnDashboard').classList.toggle('active', isDashboard);
-            document.getElementById('tabBtnDetail').classList.toggle('active', !isDashboard);
-
-            document.getElementById('viewDashboard').style.display = isDashboard ? 'flex' : 'none';
-            document.getElementById('viewDetail').style.display = isDashboard ? 'none' : 'flex';
-            document.getElementById('viewSwitcherBox').style.display = isDashboard ? 'none' : 'flex';
-
-            if (isDashboard) {
-                setTimeout(() => {
-                    if (streamChartInstance) streamChartInstance.resize();
-                    if (severityChartInstance) severityChartInstance.resize();
-                    if (driChartInstance) driChartInstance.resize();
-                    if (dueChartInstance) dueChartInstance.resize();
-                }, 50);
-            }
-        }
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            document.getElementById('btnLangZH').classList.toggle('active', lang === 'ZH');
-            document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
-
-            document.getElementById('btnSheetLinkText').textContent = (lang === 'ZH') ? '🟢 Google Sheet 繁中表' : '🟢 Google Sheet EN Sheet';
-
-            document.getElementById('lblTabDashboard').textContent = (lang === 'ZH') ? '儀表台 (Dashboard)' : 'Dashboard View';
-            document.getElementById('lblTabDetail').textContent = (lang === 'ZH') ? '細節進度 (Sheet 視圖)' : 'Detailed Sheet View';
-
-            updateDashboardKPIs();
-            initDashboardCharts();
-            renderTable();
-            showToast(`已切換至 ${lang === 'ZH' ? '繁體中文' : 'English'}`, 'info');
-        }
-
-        // =========================================================================
         // 📈 [ANCHOR: JS-CHARTS] Chart.js 初始化、動態聚合與生命週期銷毀
         // =========================================================================
-        function updateDashboardKPIs() {
-            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
-            const total = rows.length;
-            let ncCount = 0;
-            let hlCount = 0;
-
-            rows.forEach(r => {
-                const sev = (r["嚴重度"] || "").toString();
-                if (sev.includes("Highlight") || sev.includes("重點關注")) {
-                    hlCount++;
-                } else {
-                    ncCount++;
-                }
-            });
-
-            document.getElementById('valKpiTotal').textContent = total;
-            document.getElementById('valKpiNc').textContent = ncCount;
-            document.getElementById('valKpiHl').textContent = hlCount;
-            document.getElementById('valKpiPassRate').textContent = '0%';
-
-            if (currentLang === 'ZH') {
-                document.getElementById('lblKpiTotal').textContent = '稽核觀察總項數';
-                document.getElementById('lblKpiNc').textContent = '缺失整改項 (NC)';
-                document.getElementById('lblKpiHl').textContent = '重點關注項 (Highlight)';
-                document.getElementById('lblKpiPassRate').textContent = '合規達成率 (Compliance)';
-                document.getElementById('chartStreamTitle').textContent = '流程階段缺失分佈 (Process Breakdown)';
-                document.getElementById('chartSeverityTitle').textContent = '缺失嚴重度佔比 (Severity)';
-                document.getElementById('chartDriTitle').textContent = '責任單位改善待辦分佈 (DRI Task Allocation)';
-                document.getElementById('chartDueTitle').textContent = '改善對策預計完成排程 (Target Due Dates)';
-            } else {
-                document.getElementById('lblKpiTotal').textContent = 'Total Observations';
-                document.getElementById('lblKpiNc').textContent = 'Nonconformance (NC)';
-                document.getElementById('lblKpiHl').textContent = 'Highlight Items';
-                document.getElementById('lblKpiPassRate').textContent = 'Compliance Rate';
-                document.getElementById('chartStreamTitle').textContent = 'Process Stream Breakdown';
-                document.getElementById('chartSeverityTitle').textContent = 'Severity & Status Ratio';
-                document.getElementById('chartDriTitle').textContent = 'Task Allocation by DRI';
-                document.getElementById('chartDueTitle').textContent = 'Target Due Date Timeline';
-            }
-        }
-
         function initDashboardCharts() {
-            if (streamChartInstance) { streamChartInstance.destroy(); streamChartInstance = null; }
-            if (severityChartInstance) { severityChartInstance.destroy(); severityChartInstance = null; }
-            if (driChartInstance) { driChartInstance.destroy(); driChartInstance = null; }
-            if (dueChartInstance) { dueChartInstance.destroy(); dueChartInstance = null; }
-
             const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
 
-            let mpCount = 0, copCount = 0, spCount = 0;
+            // 1. 銷毀舊實體 (防崩潰鐵律)
+            if (charts.process) { charts.process.destroy(); charts.process = null; }
+            if (charts.severity) { charts.severity.destroy(); charts.severity = null; }
+            if (charts.dri) { charts.dri.destroy(); charts.dri = null; }
+            if (charts.timeline) { charts.timeline.destroy(); charts.timeline = null; }
+
+            // 2. 數據聚合運算
+            const catCounts = { "I. 管理流程": 0, "II. 核心流程": 0, "III. 支援流程": 0 };
+            const sevCounts = { "Minor": 0, "Highlight": 0 };
+            const driCounts = {};
+            const dateCounts = {};
+
             rows.forEach(r => {
-                const cat = (r["主要類別 (Category)"] || "").toString();
-                if (cat.includes("管理") || cat.includes("Management")) mpCount++;
-                else if (cat.includes("核心") || cat.includes("Customer Oriented")) copCount++;
-                else if (cat.includes("支援") || cat.includes("Support")) spCount++;
+                const cat = (currentLang === 'ZH') ? r["主要類別 (Category)"] : r["Category"];
+                if (cat && cat.includes("管理")) catCounts["I. 管理流程"]++;
+                else if (cat && cat.includes("核心")) catCounts["II. 核心流程"]++;
+                else if (cat && cat.includes("支援")) catCounts["III. 支援流程"]++;
+
+                const sev = (currentLang === 'ZH') ? r["嚴重度"] : r["Severity"];
+                if (sev && (sev.includes("次要") || sev.includes("Minor"))) sevCounts["Minor"]++;
+                else sevCounts["Highlight"]++;
+
+                const dri = r["DRI"] || "OTHER";
+                driCounts[dri] = (driCounts[dri] || 0) + 1;
+
+                const due = (currentLang === 'ZH') ? r["截止日"] : r["Due Date"];
+                if (due) dateCounts[due] = (dateCounts[due] || 0) + 1;
             });
 
-            const ctxStream = document.getElementById('streamChart').getContext('2d');
-            streamChartInstance = new Chart(ctxStream, {
+            // 3. 圖表 1: 流程階段分佈
+            const ctxProcess = document.getElementById('chartProcess').getContext('2d');
+            charts.process = new Chart(ctxProcess, {
                 type: 'bar',
                 data: {
-                    labels: (currentLang === 'ZH') ? ['I. 管理流程 (MP)', 'II. 核心流程 (COP)', 'III. 支援流程 (SP)'] : ['I. Management (MP)', 'II. Customer (COP)', 'III. Support (SP)'],
+                    labels: currentLang === 'ZH' ? ['I. 管理流程 (MP)', 'II. 核心流程 (COP)', 'III. 支援流程 (SP)'] : ['I. Management (MP)', 'II. Core Process (COP)', 'III. Support (SP)'],
                     datasets: [{
-                        label: (currentLang === 'ZH') ? '缺失項數' : 'NC Count',
-                        data: [mpCount, copCount, spCount],
+                        label: currentLang === 'ZH' ? '缺失項目數' : 'NC Count',
+                        data: [catCounts["I. 管理流程"], catCounts["II. 核心流程"], catCounts["III. 支援流程"]],
                         backgroundColor: ['#8b5cf6', '#3b82f6', '#06b6d4'],
                         borderRadius: 6
                     }]
@@ -1344,26 +1409,20 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8', stepSize: 2 }, grid: { color: 'rgba(255,255,255,0.06)' } }
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
                     }
                 }
             });
 
-            let hlCount = 0, minorCount = 0;
-            rows.forEach(r => {
-                const sev = (r["嚴重度"] || "").toString();
-                if (sev.includes("Highlight") || sev.includes("重點關注")) hlCount++;
-                else minorCount++;
-            });
-
-            const ctxSeverity = document.getElementById('severityChart').getContext('2d');
-            severityChartInstance = new Chart(ctxSeverity, {
+            // 4. 圖表 2: 嚴重度佔比 (Doughnut)
+            const ctxSeverity = document.getElementById('chartSeverity').getContext('2d');
+            charts.severity = new Chart(ctxSeverity, {
                 type: 'doughnut',
                 data: {
-                    labels: (currentLang === 'ZH') ? ['次要缺失 (Minor NC)', '重點關注 (Highlight)'] : ['Minor NC', 'Highlight'],
+                    labels: currentLang === 'ZH' ? ['次要缺失 (Minor NC)', '重點關注 (Highlight)'] : ['Minor NC', 'Highlight'],
                     datasets: [{
-                        data: [minorCount, hlCount],
+                        data: [sevCounts["Minor"], sevCounts["Highlight"]],
                         backgroundColor: ['#ef4444', '#a855f7'],
                         borderWidth: 0
                     }]
@@ -1372,27 +1431,23 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'right', labels: { color: '#f8fafc', font: { size: 11, weight: 600 } } }
-                    }
+                        legend: { position: 'right', labels: { color: '#94a3b8', boxWidth: 12, padding: 15 } }
+                    },
+                    cutout: '70%'
                 }
             });
 
-            const driMap = {};
-            rows.forEach(r => {
-                const dri = r["DRI"] || "QUALITY";
-                driMap[dri] = (driMap[dri] || 0) + 1;
-            });
-
-            const ctxDri = document.getElementById('driChart').getContext('2d');
-            driChartInstance = new Chart(ctxDri, {
+            // 5. 圖表 3: DRI 待辦分佈 (Horizontal Bar)
+            const ctxDRI = document.getElementById('chartDRI').getContext('2d');
+            charts.dri = new Chart(ctxDRI, {
                 type: 'bar',
                 data: {
-                    labels: Object.keys(driMap),
+                    labels: Object.keys(driCounts),
                     datasets: [{
-                        label: (currentLang === 'ZH') ? '負責項目' : 'Assigned Items',
-                        data: Object.values(driMap),
-                        backgroundColor: '#a855f7',
-                        borderRadius: 6
+                        label: currentLang === 'ZH' ? '待辦項目' : 'Tasks',
+                        data: Object.values(driCounts),
+                        backgroundColor: '#06b6d4',
+                        borderRadius: 4
                     }]
                 },
                 options: {
@@ -1401,31 +1456,27 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.06)' } },
-                        y: { ticks: { color: '#f8fafc', font: { weight: 'bold' } }, grid: { display: false } }
+                        x: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { display: false }, ticks: { color: '#94a3b8' } }
                     }
                 }
             });
 
-            const dueMap = {};
-            rows.forEach(r => {
-                const d = r["截止日"] || "2026/7/24";
-                dueMap[d] = (dueMap[d] || 0) + 1;
-            });
-
-            const ctxDue = document.getElementById('dueChart').getContext('2d');
-            dueChartInstance = new Chart(ctxDue, {
+            // 6. 圖表 4: 截止排程 (Line Chart)
+            const sortedDates = Object.keys(dateCounts).sort();
+            const ctxTimeline = document.getElementById('chartTimeline').getContext('2d');
+            charts.timeline = new Chart(ctxTimeline, {
                 type: 'line',
                 data: {
-                    labels: Object.keys(dueMap),
+                    labels: sortedDates,
                     datasets: [{
-                        label: (currentLang === 'ZH') ? '到期數量' : 'Due Count',
-                        data: Object.values(dueMap),
-                        borderColor: '#06b6d4',
-                        backgroundColor: 'rgba(6, 182, 212, 0.15)',
+                        label: currentLang === 'ZH' ? '目標到期數' : 'Target Closure',
+                        data: sortedDates.map(d => dateCounts[d]),
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.15)',
                         fill: true,
                         tension: 0.3,
-                        pointBackgroundColor: '#06b6d4',
+                        pointBackgroundColor: '#10b981',
                         pointRadius: 5
                     }]
                 },
@@ -1434,8 +1485,8 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8', stepSize: 2 }, grid: { color: 'rgba(255,255,255,0.06)' } }
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } }
                     }
                 }
             });
@@ -1444,196 +1495,182 @@
         // =========================================================================
         // 📋 [ANCHOR: JS-TABLE] 表格渲染、雙語切換與搜尋過濾
         // =========================================================================
-        function switchViewMode(mode) {
-            currentViewMode = mode;
-            document.getElementById('btnViewCompact').classList.toggle('active', mode === 'COMPACT');
-            document.getElementById('btnViewClassic').classList.toggle('active', mode === 'CLASSIC');
-            
-            const container = document.getElementById('tableContainer');
-            container.className = `table-container ${mode.toLowerCase()}-mode`;
-            renderTable();
-        }
-
-        function setStatusFilter(filter) {
-            activeFilter = filter;
-            document.getElementById('chipAll').classList.toggle('active', filter === 'ALL');
-            document.getElementById('chipNc').classList.toggle('active', filter === 'FAIL');
-            document.getElementById('chipHl').classList.toggle('active', filter === 'HIGHLIGHT');
-            renderTable();
-        }
-
-        function onSearchInput() {
-            searchQuery = document.getElementById('searchInput').value.toLowerCase();
-            renderTable();
-        }
-
         function renderTable() {
-            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
-            const container = document.getElementById('tableContentWrapper');
+            const table = document.getElementById('mainTable');
+            const data = (currentLang === 'ZH') ? qsaDataCache.ZH : qsaDataCache.EN;
+            let rows = data.rows;
 
-            const filteredRows = rows.filter(r => {
-                const matchSearch = !searchQuery || Object.values(r).some(v => (v || "").toString().toLowerCase().includes(searchQuery));
-                let matchFilter = true;
-                const sev = (r["嚴重度"] || "").toString();
-                if (activeFilter === 'FAIL') matchFilter = !sev.includes("Highlight") && !sev.includes("重點關注");
-                if (activeFilter === 'HIGHLIGHT') matchFilter = sev.includes("Highlight") || sev.includes("重點關注");
-                return matchSearch && matchFilter;
-            });
-
-            document.getElementById('rowCountInfo').textContent = (currentLang === 'ZH') 
-                ? `顯示 ${filteredRows.length} / ${rows.length} 筆列資料`
-                : `Showing ${filteredRows.length} of ${rows.length} records`;
-
-            let html = `<table>`;
-            
-            if (currentViewMode === 'COMPACT') {
-                html += `
-                    <colgroup>
-                        <col style="width: 4%;">
-                        <col style="width: 14%;">
-                        <col style="width: 9%;">
-                        <col style="width: 44%;">
-                        <col style="width: 9%;">
-                        <col style="width: 11%;">
-                        <col style="width: 9%;">
-                    </colgroup>
-                    <thead>
-                        <tr class="group-header-row">
-                            <th rowspan="2" style="background:#151e2e;">項次</th>
-                            <th colspan="2" class="th-group-cat">主要類別與次類別流程</th>
-                            <th colspan="2" class="th-group-nc">NC 缺失與要求細節</th>
-                            <th colspan="2" class="th-group-capa">CAPA 整改對策</th>
-                        </tr>
-                        <tr>
-                            <th class="th-group-cat">主類別 / 子流程</th>
-                            <th class="th-group-cat">得分 / 狀態</th>
-                            <th class="th-group-nc">NC 要求與缺失說明</th>
-                            <th class="th-group-nc">嚴重度</th>
-                            <th class="th-group-capa">DRI / 截止日</th>
-                            <th class="th-group-capa">CAPA 詳情</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                `;
-
-                filteredRows.forEach((r, idx) => {
-                    const sev = (r["嚴重度"] || "").toString();
-                    const isHl = sev.includes("Highlight") || sev.includes("重點關注");
-                    const pillClass = isHl ? "pill-highlight" : "pill-fail";
-                    const pillText = isHl ? (currentLang === 'ZH' ? '重點關注' : 'Highlight') : (currentLang === 'ZH' ? '次要缺失' : 'Minor NC');
-                    const score = Math.round((parseFloat(r["類別得分"]) || 0.5) * 100);
-
-                    html += `
-                        <tr id="qsa-row-${idx}">
-                            <td style="text-align: center; font-family: var(--font-mono); font-weight: 700;">${r["項次"] || (idx + 1)}</td>
-                            <td>
-                                <div style="font-weight: 700; color: #f8fafc;">${r["主要類別 (Category)"]}</div>
-                                <div style="font-size: 0.72rem; color: var(--text-muted);">${r["次類別 / 子流程"]}</div>
-                            </td>
-                            <td>
-                                <div style="font-family: var(--font-mono); font-weight: 700;">${score}%</div>
-                                <span class="status-pill pill-fail" style="margin-top: 2px;">${currentLang === 'ZH' ? '未通過' : 'Fail'}</span>
-                            </td>
-                            <td>
-                                <div class="compact-cell-ellipsis" title="${r["NC 要求與缺失說明"]}">${r["NC 要求與缺失說明"]}</div>
-                            </td>
-                            <td><span class="status-pill ${pillClass}">${pillText}</span></td>
-                            <td>
-                                <div style="font-weight: 700;">${r["DRI"]}</div>
-                                <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">${r["截止日"]}</div>
-                            </td>
-                            <td style="text-align: center;">
-                                <button class="btn-capa-view" onclick="openCapaDrawer(${idx})">🔍 CAPA 詳情</button>
-                            </td>
-                        </tr>
-                    `;
-                });
-            } else {
-                html += `
-                    <thead>
-                        <tr>
-                            <th>項次</th>
-                            <th>主要類別</th>
-                            <th>次類別 / 子流程</th>
-                            <th>得分</th>
-                            <th>狀態</th>
-                            <th>NC 說明</th>
-                            <th>嚴重度</th>
-                            <th>負責人 (DRI)</th>
-                            <th>截止日</th>
-                            <th>根本原因</th>
-                            <th>改善對策</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                `;
-                filteredRows.forEach((r, idx) => {
-                    html += `
-                        <tr id="qsa-row-${idx}">
-                            <td>${r["項次"]}</td>
-                            <td>${r["主要類別 (Category)"]}</td>
-                            <td>${r["次類別 / 子流程"]}</td>
-                            <td>${r["類別得分"]}</td>
-                            <td>${r["審核狀態"]}</td>
-                            <td style="max-width: 250px;">${r["NC 要求與缺失說明"]}</td>
-                            <td>${r["嚴重度"]}</td>
-                            <td>${r["DRI"]}</td>
-                            <td>${r["截止日"]}</td>
-                            <td style="max-width: 200px;">${r["根本原因 (Root Cause)"]}</td>
-                            <td style="max-width: 200px;">${r["行動計劃 (Action Plan)"]}</td>
-                            <td><button class="btn-capa-view" onclick="openCapaDrawer(${idx})">🔍 抽屜</button></td>
-                        </tr>
-                    `;
-                });
+            // 搜尋與篩選
+            if (currentFilter === 'NC') {
+                rows = rows.filter(r => (currentLang === 'ZH' ? r["嚴重度"] : r["Severity"]).includes('次要') || (currentLang === 'ZH' ? r["嚴重度"] : r["Severity"]).includes('Minor'));
+            } else if (currentFilter === 'HL') {
+                rows = rows.filter(r => (currentLang === 'ZH' ? r["嚴重度"] : r["Severity"]).includes('重點') || (currentLang === 'ZH' ? r["嚴重度"] : r["Severity"]).includes('Highlight'));
             }
 
-            html += `</tbody></table>`;
-            container.innerHTML = html;
+            if (searchQuery.trim()) {
+                const q = searchQuery.toLowerCase();
+                rows = rows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)));
+            }
+
+            document.getElementById('filteredStats').textContent = `顯示 ${rows.length} / ${data.rows.length} 筆列資料`;
+
+            if (currentTableViewMode === 'compact') {
+                renderCompactTable(table, rows);
+            } else {
+                renderClassicTable(table, data.headers, rows);
+            }
+        }
+
+        // Compact Mode: 8 個精準欄位
+        function renderCompactTable(table, rows) {
+            const colgroupHTML = `
+                <colgroup>
+                    <col style="width: 48px;">
+                    <col style="width: 140px;">
+                    <col style="width: 85px;">
+                    <col style="width: auto;">
+                    <col style="width: 80px;">
+                    <col style="width: 100px;">
+                    <col style="width: 85px;">
+                    <col style="width: 90px;">
+                </colgroup>
+            `;
+
+            const theadHTML = `
+                <thead>
+                    <tr>
+                        <th class="td-center" rowspan="2">項次</th>
+                        <th class="th-group-cat" colspan="2">主要類別與次類別流程</th>
+                        <th class="th-group-nc" colspan="3">NC 缺失與要求細節</th>
+                        <th class="th-group-capa" colspan="2">CAPA 整改對策</th>
+                    </tr>
+                    <tr>
+                        <th>主要類別 / 子流程</th>
+                        <th class="td-center">得分 / 狀態</th>
+                        <th>NC 要求與缺失說明</th>
+                        <th class="td-center">嚴重度</th>
+                        <th class="td-center">DRI / 截止日</th>
+                        <th class="td-center">CAPA 詳情</th>
+                        <th class="td-center">狀態</th>
+                    </tr>
+                </thead>
+            `;
+
+            const tbodyHTML = `
+                <tbody>
+                    ${rows.map((r, idx) => {
+                        const originalIdx = (currentLang === 'ZH') ? qsaDataCache.ZH.rows.findIndex(x => x["項次"] === (r["項次"] || r["Item #"])) : qsaDataCache.EN.rows.findIndex(x => x["Item #"] === (r["Item #"] || r["項次"]));
+                        const isActive = (originalIdx === activeDrawerIndex) ? 'active-capa-row' : '';
+                        const itemNum = r["項次"] || r["Item #"];
+                        const cat = r["主要類別 (Category)"] || r["Category"];
+                        const sub = r["次類別 / 子流程"] || r["Sub-process / Flow"];
+                        const score = r["得分 / 狀態"] || r["Score / Status"];
+                        const nc = r["NC 要求與缺失說明"] || r["NC Requirement & Description"];
+                        const sev = r["嚴重度"] || r["Severity"];
+                        const dri = r["DRI"];
+                        const due = r["截止日"] || r["Due Date"];
+                        const status = r["狀態 (Status)"] || r["Status"];
+
+                        const sevClass = (sev.includes('次要') || sev.includes('Minor')) ? 'badge-minor' : 'badge-highlight';
+                        const statusClass = (status.includes('進行') || status.includes('Progress')) ? 'badge-fail' : 'badge-pass';
+
+                        return `
+                            <tr class="${isActive}" id="row-${originalIdx}" onclick="openCapaDrawer(${originalIdx})">
+                                <td class="td-center td-mono" style="font-weight:700;">${itemNum}</td>
+                                <td>
+                                    <div style="font-weight:700; color:#c4b5fd;">${cat}</div>
+                                    <div class="compact-cell-ellipsis" style="color:var(--text-muted); font-size:0.75rem;" title="${sub}">${sub}</div>
+                                </td>
+                                <td class="td-center td-formula">
+                                    <div style="font-size:0.75rem; font-weight:700;">${score.split(' ')[0]}</div>
+                                    <span class="badge badge-fail" style="padding:1px 4px; font-size:0.65rem;">未通過</span>
+                                </td>
+                                <td>
+                                    <div class="compact-cell-ellipsis" title="${nc.replace(/"/g, '&quot;')}">${nc}</div>
+                                </td>
+                                <td class="td-center">
+                                    <span class="badge ${sevClass}">${sev}</span>
+                                </td>
+                                <td class="td-center td-mono">
+                                    <div class="badge badge-dri" style="padding:1px 5px;">${dri}</div>
+                                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:2px;">${due}</div>
+                                </td>
+                                <td class="td-center">
+                                    <button class="btn-capa-open" onclick="event.stopPropagation(); openCapaDrawer(${originalIdx})">
+                                        🟣 CAPA 詳情
+                                    </button>
+                                </td>
+                                <td class="td-center">
+                                    <span class="badge ${statusClass}">${status}</span>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            `;
+
+            table.innerHTML = colgroupHTML + theadHTML + tbodyHTML;
+        }
+
+        // Classic 14 欄傳統模式
+        function renderClassicTable(table, headers, rows) {
+            const theadHTML = `
+                <thead>
+                    <tr>
+                        ${headers.map(h => `<th>${h}</th>`).join('')}
+                    </tr>
+                </thead>
+            `;
+
+            const tbodyHTML = `
+                <tbody>
+                    ${rows.map((r, idx) => {
+                        const originalIdx = (currentLang === 'ZH') ? qsaDataCache.ZH.rows.findIndex(x => x["項次"] === (r["項次"] || r["Item #"])) : qsaDataCache.EN.rows.findIndex(x => x["Item #"] === (r["Item #"] || r["項次"]));
+                        const isActive = (originalIdx === activeDrawerIndex) ? 'active-capa-row' : '';
+                        return `
+                            <tr class="${isActive}" id="row-${originalIdx}" onclick="openCapaDrawer(${originalIdx})">
+                                ${headers.map(h => `<td>${r[h] || ''}</td>`).join('')}
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            `;
+
+            table.innerHTML = theadHTML + tbodyHTML;
         }
 
         // =========================================================================
-        // 🗂️ [ANCHOR: JS-DRAWER] 抽屜開關、上一筆/下一筆與高亮平滑滾動
+        // 🗂️ [ANCHOR: JS-DRAWER] 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
         // =========================================================================
         function openCapaDrawer(index) {
-            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
             activeDrawerIndex = index;
+            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
             const r = rows[index];
             if (!r) return;
 
-            // 1. 填入抽屜欄位
-            document.getElementById('drawerRefTitle').textContent = `⚡ CAPA #${r["項次"]} 缺失整改對策詳情`;
-            document.getElementById('drawerMetaSub').innerHTML = `<span>主類別: ${r["主要類別 (Category)"]}</span> • <span>子流程: ${r["次類別 / 子流程"]}</span>`;
-            document.getElementById('drawerReqContent').textContent = r["次類別 / 子流程"] + " 車規標準條款要求";
-            document.getElementById('drawerFindingContent').textContent = r["NC 要求與缺失說明"];
-            document.getElementById('drawerDriVal').textContent = r["DRI"];
-            document.getElementById('drawerPq2Val').textContent = r["PQ2 種類"] || "NA";
-            document.getElementById('drawerDueDateVal').textContent = r["截止日"];
-            document.getElementById('drawerRootCause').value = r["根本原因 (Root Cause)"] || "";
-            document.getElementById('drawerActionPlan').value = r["行動計劃 (Action Plan)"] || "";
+            document.getElementById('drawerBadge').textContent = `項次 #${r["項次"] || r["Item #"]}`;
+            document.getElementById('drawerCategory').textContent = `${r["主要類別 (Category)"] || r["Category"]} ➔ ${r["次類別 / 子流程"] || r["Sub-process / Flow"]}`;
+            document.getElementById('drawerNC').textContent = r["NC 要求與缺失說明"] || r["NC Requirement & Description"];
+            document.getElementById('drawerDRI').textContent = r["DRI"];
+            document.getElementById('drawerDueDate').textContent = r["截止日"] || r["Due Date"];
+            document.getElementById('drawerRootCause').value = r["根本原因 (Root Cause)"] || r["Root Cause Analysis"] || '';
+            document.getElementById('drawerActionPlan').value = r["行動計劃 (Action Plan)"] || r["Action Plan"] || '';
 
-            // 2. 開啟獨立側邊抽屜 (滑出)
-            const drawer = document.getElementById('capaDrawer');
-            if (drawer) {
-                drawer.classList.add('active');
-            }
+            document.getElementById('capaDrawer').classList.add('active');
 
-            // 3. 高亮左側表格對應行，並平滑滾動到可視範圍
+            // 表格列高亮與平滑對齊
             document.querySelectorAll('tr.active-capa-row').forEach(el => el.classList.remove('active-capa-row'));
-            const targetTr = document.getElementById(`qsa-row-${index}`);
-            if (targetTr) {
-                targetTr.classList.add('active-capa-row');
-                targetTr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            const targetRow = document.getElementById(`row-${index}`);
+            if (targetRow) {
+                targetRow.classList.add('active-capa-row');
+                targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
         function closeCapaDrawer() {
-            const drawer = document.getElementById('capaDrawer');
-            if (drawer) {
-                drawer.classList.remove('active');
-            }
-            // 清除表格高亮
+            document.getElementById('capaDrawer').classList.remove('active');
             document.querySelectorAll('tr.active-capa-row').forEach(el => el.classList.remove('active-capa-row'));
+            activeDrawerIndex = -1;
         }
 
         function navigateDrawer(dir) {
@@ -1679,11 +1716,13 @@
                     if (currentLang === 'ZH') qsaDataCache.ZH.rows = json.data;
                     else qsaDataCache.EN.rows = json.data;
                     statusText.textContent = `在線資料庫連線中 (${json.data.length} 筆)`;
-                    updateDashboardKPIs();
                     initDashboardCharts();
                     renderTable();
+                } else {
+                    statusText.textContent = "已連線 (使用 In-Memory 緩存)";
                 }
             } catch (err) {
+                console.warn("QSA GAS load notice:", err);
                 statusText.textContent = "已連線 (使用 In-Memory 緩存)";
             }
         }
@@ -1702,7 +1741,52 @@
             }, 800);
         }
 
-        // ================= 🖥️ 全螢幕與 Toast 工具 =================
+        // ================= 🔄 Tab 切換與視圖模式 =================
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('tabBtnDashboard').classList.toggle('active', tab === 'dashboard');
+            document.getElementById('tabBtnDetail').classList.toggle('active', tab === 'detail');
+            document.getElementById('dashboardView').style.display = (tab === 'dashboard') ? 'flex' : 'none';
+            document.getElementById('detailView').style.display = (tab === 'detail') ? 'flex' : 'none';
+            document.getElementById('viewModeWrapper').style.display = (tab === 'detail') ? 'flex' : 'none';
+
+            if (tab === 'dashboard') {
+                setTimeout(() => {
+                    Object.values(charts).forEach(c => { if (c) c.resize(); });
+                }, 50);
+            }
+        }
+
+        function switchTableViewMode(mode) {
+            currentTableViewMode = mode;
+            document.getElementById('btnCompactView').classList.toggle('active', mode === 'compact');
+            document.getElementById('btnClassicView').classList.toggle('active', mode === 'classic');
+            const container = document.getElementById('tableContainer');
+            container.className = `table-container ${mode}-mode`;
+            renderTable();
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('btnLangZH').classList.toggle('active', lang === 'ZH');
+            document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+            initDashboardCharts();
+            renderTable();
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.getElementById('chipAll').classList.toggle('active', filter === 'ALL');
+            document.getElementById('chipNC').classList.toggle('active', filter === 'NC');
+            document.getElementById('chipHL').classList.toggle('active', filter === 'HL');
+            renderTable();
+        }
+
+        function handleSearch(val) {
+            searchQuery = val;
+            renderTable();
+        }
+
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen();
