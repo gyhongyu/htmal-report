@@ -240,6 +240,7 @@
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #ffffff 0%, #6ee7b7 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
@@ -1094,30 +1095,30 @@
      * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
      * ========================================================================= -->
     <div class="floating-quick-dock" id="floatingQuickDock">
-        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Navigation (快速切換模組)">
             🧭
         </div>
         <div class="floating-dock-menu" id="floatingDockMenu">
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('01_dashboard')">
+            <button type="button" class="floating-dock-item" id="dockItem01" onclick="navigateToModule('01_dashboard')">
                 <span>📊</span> 01 儀表台總覽
             </button>
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('02_qsa')">
+            <button type="button" class="floating-dock-item" id="dockItem02" onclick="navigateToModule('02_qsa')">
                 <span>🛡️</span> 02 QSA 體系稽核
             </button>
-            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+            <button type="button" class="floating-dock-item disabled" id="dockItem03" onclick="showModulePendingToast('03_qpa')">
                 <span>⚙️</span> 03 QPA 製程 (建置中)
             </button>
-            <button type="button" class="floating-dock-item active" onclick="navigateToModule('04_procurement')">
+            <button type="button" class="floating-dock-item active" id="dockItem04" onclick="navigateToModule('04_procurement')">
                 <span>📦</span> 04 設備採購 (當前)
             </button>
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('05_sop')">
+            <button type="button" class="floating-dock-item" id="dockItem05" onclick="navigateToModule('05_sop')">
                 <span>📘</span> 05 SOP 應對指南
             </button>
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('06_governance')">
+            <button type="button" class="floating-dock-item" id="dockItem06" onclick="navigateToModule('06_governance')">
                 <span>🏛️</span> 06 團隊架構與權責
             </button>
             <div style="height:1px; background:rgba(255,255,255,0.1); margin:2px 0;"></div>
-            <button type="button" class="floating-dock-item" onclick="window.location.reload()">
+            <button type="button" class="floating-dock-item" id="dockItemReload" onclick="window.location.reload()">
                 <span>🔄</span> 重新載入當前頁
             </button>
         </div>
@@ -1426,12 +1427,23 @@
             '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
             '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
             '03_qpa': '',
-            '04_procurement': window.location.href,
+            '04_procurement': 'https://html.foxlink.co.in/reports/report-1786884117627.html',
             '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
             '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
         };
 
-        let currentLang = 'ZH';
+        // 🌐 智慧判斷初始語系（URL 參數 > 瀏覽器預設語系；非中文一律英文）
+        function getInitialLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = (urlParams.get('lang') || '').toLowerCase();
+            if (langParam.startsWith('zh')) return 'ZH';
+            if (langParam.startsWith('en')) return 'EN';
+
+            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            return browserLang.startsWith('zh') ? 'ZH' : 'EN';
+        }
+
+        let currentLang = getInitialLanguage();
         let currentTab = 'dashboard';
         let currentTableViewMode = 'compact';
         let currentFilter = 'ALL';
@@ -1453,9 +1465,7 @@
         // 初始載入
         window.addEventListener('DOMContentLoaded', async () => {
             initFallbackData();
-            initDashboardCharts();
-            renderTable();
-            renderWarnings();
+            switchLanguage(currentLang);
             await loadAllData();
         });
 
@@ -2032,10 +2042,31 @@
             renderTable();
         }
 
+        function updateFloatingDockLanguage(lang) {
+            const isZH = lang === 'ZH';
+            const items = {
+                'dockItem01': isZH ? '<span>📊</span> 01 儀表台總覽' : '<span>📊</span> 01 Dashboard Overview',
+                'dockItem02': isZH ? '<span>🛡️</span> 02 QSA 體系稽核' : '<span>🛡️</span> 02 QSA System Audit',
+                'dockItem03': isZH ? '<span>⚙️</span> 03 QPA 製程 (建置中)' : '<span>⚙️</span> 03 QPA Process (Pending)',
+                'dockItem04': isZH ? '<span>📦</span> 04 設備採購' : '<span>📦</span> 04 Procurement Tracking',
+                'dockItem05': isZH ? '<span>📘</span> 05 SOP 應對指南' : '<span>📘</span> 05 SOP Audit Handbook',
+                'dockItem06': isZH ? '<span>🏛️</span> 06 團隊架構與權責' : '<span>🏛️</span> 06 Governance & RACI',
+                'dockItemReload': isZH ? '<span>🔄</span> 重新載入當前頁' : '<span>🔄</span> Reload Current Page'
+            };
+            for (const [id, html] of Object.entries(items)) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const isCurrent = el.classList.contains('active');
+                    el.innerHTML = html + (isCurrent ? ` ${isZH ? '(當前)' : '(Current)'}` : '');
+                }
+            }
+        }
+
         function switchLanguage(lang) {
             currentLang = lang;
             document.getElementById('btnLangZH').classList.toggle('active', lang === 'ZH');
             document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+            updateFloatingDockLanguage(lang);
             
             // 純淨雙語 UI 文字切換 (無任何雙語混雜)
             if (lang === 'ZH') {
@@ -2139,7 +2170,6 @@
             initDashboardCharts();
             renderTable();
             renderWarnings();
-            loadAllData();
         }
 
         function setFilter(filter) {
@@ -2175,9 +2205,14 @@
         }
 
         function navigateToModule(moduleKey) {
+            if (moduleKey === '04_procurement') {
+                toggleFloatingDock();
+                return;
+            }
             const url = PORTAL_URLS[moduleKey];
             if (url) {
-                window.location.href = url;
+                const targetUrl = url.includes('?') ? `${url}&lang=${currentLang.toLowerCase()}` : `${url}?lang=${currentLang.toLowerCase()}`;
+                window.location.href = targetUrl;
             } else {
                 showToast(`模組 [${moduleKey}] 部署就緒中！`, "info");
             }
