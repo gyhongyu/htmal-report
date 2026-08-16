@@ -212,30 +212,30 @@
      * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
      * ========================================================================= -->
     <div class="floating-quick-dock no-print" id="floatingQuickDock">
-        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Navigation (快速切換模組)">
             🧭
         </div>
         <div class="floating-dock-menu" id="floatingDockMenu">
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('01_dashboard')">
+            <button type="button" class="floating-dock-item" id="dockItem01" onclick="navigateToModule('01_dashboard')">
                 <span>📊</span> 01 儀表台總覽
             </button>
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('02_qsa')">
+            <button type="button" class="floating-dock-item" id="dockItem02" onclick="navigateToModule('02_qsa')">
                 <span>🛡️</span> 02 QSA 體系稽核
             </button>
-            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+            <button type="button" class="floating-dock-item disabled" id="dockItem03" onclick="showModulePendingToast('03_qpa')">
                 <span>⚙️</span> 03 QPA 製程 (建置中)
             </button>
-            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('04_procurement')">
-                <span>📦</span> 04 設備採購 (建置中)
+            <button type="button" class="floating-dock-item" id="dockItem04" onclick="navigateToModule('04_procurement')">
+                <span>📦</span> 04 設備採購
             </button>
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('05_sop')">
+            <button type="button" class="floating-dock-item" id="dockItem05" onclick="navigateToModule('05_sop')">
                 <span>📘</span> 05 SOP 應對指南
             </button>
-            <button type="button" class="floating-dock-item active" onclick="navigateToModule('06_governance')">
-                <span>🏛️</span> 06 團隊架構與權責
+            <button type="button" class="floating-dock-item active" id="dockItem06" onclick="navigateToModule('06_governance')">
+                <span>🏛️</span> 06 團隊架構與權責 (當前)
             </button>
             <div style="height:1px; background:#e2e8f0; margin:2px 0;"></div>
-            <button type="button" class="floating-dock-item" onclick="window.location.reload()">
+            <button type="button" class="floating-dock-item" id="dockItemReload" onclick="window.location.reload()">
                 <span>🔄</span> 重新載入當前頁
             </button>
         </div>
@@ -709,63 +709,6 @@
      * 🧠 [ANCHOR: JS-STATE] 全域雙語切換引擎與導航控制器
      * ========================================================================= -->
     <script>
-        // Standard Universal Module URLs Dictionary
-        const PORTAL_URLS = {
-            '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
-            '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
-            '03_qpa': '',
-            '04_procurement': '',
-            '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
-            '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
-        };
-
-        function navigateToModule(modId) {
-            if (modId === '06_governance') {
-                toggleFloatingDock();
-                return;
-            }
-            const url = PORTAL_URLS[modId];
-            if (!url) {
-                showModulePendingToast(modId);
-                return;
-            }
-            window.location.href = url;
-        }
-
-        function toggleFloatingDock() {
-            const menu = document.getElementById('floatingDockMenu');
-            if (menu) menu.classList.toggle('active');
-        }
-
-        let toastTimer = null;
-        function showToast(icon, msg) {
-            const toast = document.getElementById('toastPopup');
-            const iconEl = document.getElementById('toastIcon');
-            const msgEl = document.getElementById('toastMsg');
-            if (!toast) return;
-
-            iconEl.innerText = icon;
-            msgEl.innerText = msg;
-            toast.classList.add('active');
-
-            if (toastTimer) clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('active');
-            }, 2600);
-        }
-
-        function showModulePendingToast(modId) {
-            const modNames = {
-                '03_qpa': (currentLang === 'en') ? '03 QPA Audit' : '03 QPA 製程',
-                '04_procurement': (currentLang === 'en') ? '04 Procurement' : '04 設備採購'
-            };
-            const name = modNames[modId] || '此模組';
-            const msg = (currentLang === 'en') ? `${name} is currently under construction!` : `${name} 模組建置中，敬請期待！`;
-            showToast('⚙️', msg);
-            const dockMenu = document.getElementById('floatingDockMenu');
-            if (dockMenu) dockMenu.classList.remove('active');
-        }
-
         const translations = {
             main_title: {
                 en: "FOXLINK - SSSTC Audit Governance Dashboard",
@@ -1008,7 +951,89 @@
             g_ftp_desc: { en: "Secure digital repository server used for uploading official audit documentation and evidence files.", zh: "用於上傳與存放正式審計文件、報告與佐證資料之伺服器平台。" }
         };
 
-        let currentLang = 'en';
+        // Standard Universal Module URLs Dictionary
+        const PORTAL_URLS = {
+            '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
+            '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
+            '03_qpa': '',
+            '04_procurement': 'https://html.foxlink.co.in/reports/report-1786884117627.html',
+            '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
+            '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
+        };
+
+        function toggleFloatingDock() {
+            const menu = document.getElementById('floatingDockMenu');
+            if (menu) menu.classList.toggle('active');
+        }
+
+        function navigateToModule(moduleKey) {
+            if (moduleKey === '06_governance') {
+                toggleFloatingDock();
+                return;
+            }
+            const url = PORTAL_URLS[moduleKey];
+            if (url) {
+                const targetUrl = url.includes('?') ? `${url}&lang=${currentLang.toLowerCase()}` : `${url}?lang=${currentLang.toLowerCase()}`;
+                window.location.href = targetUrl;
+            } else {
+                showToast(`模組 [${moduleKey}] 部署就緒中！`, "info");
+            }
+        }
+
+        function showModulePendingToast(moduleKey) {
+            showToast(`模組 [${moduleKey}] 正在最後驗證中，即將開放直達！`, "info");
+        }
+
+        function updateFloatingDockLanguage(lang) {
+            const isZH = lang === 'zh';
+            const items = {
+                'dockItem01': isZH ? '<span>📊</span> 01 儀表台總覽' : '<span>📊</span> 01 Dashboard Overview',
+                'dockItem02': isZH ? '<span>🛡️</span> 02 QSA 體系稽核' : '<span>🛡️</span> 02 QSA System Audit',
+                'dockItem03': isZH ? '<span>⚙️</span> 03 QPA 製程 (建置中)' : '<span>⚙️</span> 03 QPA Process (Pending)',
+                'dockItem04': isZH ? '<span>📦</span> 04 設備採購' : '<span>📦</span> 04 Procurement Tracking',
+                'dockItem05': isZH ? '<span>📘</span> 05 SOP 應對指南' : '<span>📘</span> 05 SOP Audit Handbook',
+                'dockItem06': isZH ? '<span>🏛️</span> 06 團隊架構與權責' : '<span>🏛️</span> 06 Governance & RACI',
+                'dockItemReload': isZH ? '<span>🔄</span> 重新載入當前頁' : '<span>🔄</span> Reload Current Page'
+            };
+            for (const [id, html] of Object.entries(items)) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const isCurrent = el.classList.contains('active');
+                    el.innerHTML = html + (isCurrent ? ` ${isZH ? '(當前)' : '(Current)'}` : '');
+                }
+            }
+        }
+
+        function showToast(msg, type = 'info') {
+            const popup = document.getElementById('toastPopup');
+            const msgEl = document.getElementById('toastMsg');
+            if (popup && msgEl) {
+                msgEl.textContent = msg;
+                popup.style.display = 'flex';
+                setTimeout(() => { popup.style.display = 'none'; }, 3000);
+            }
+        }
+
+        // 點擊空白處關閉導航島
+        document.addEventListener('click', (e) => {
+            const dock = document.getElementById('floatingQuickDock');
+            if (dock && !dock.contains(e.target)) {
+                document.getElementById('floatingDockMenu').classList.remove('active');
+            }
+        });
+
+        // 智慧判斷初始語系
+        function getInitialLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = (urlParams.get('lang') || '').toLowerCase();
+            if (langParam.startsWith('zh')) return 'zh';
+            if (langParam.startsWith('en')) return 'en';
+
+            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            return browserLang.startsWith('zh') ? 'zh' : 'en';
+        }
+
+        let currentLang = getInitialLanguage();
 
         function exportPDF() {
             window.print();
@@ -1032,7 +1057,12 @@
                 btnText.textContent = currentLang === 'en' ? '中文' : 'English';
             }
             document.documentElement.lang = currentLang;
+            updateFloatingDockLanguage(currentLang);
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateDOM();
+        });
     </script>
 </body>
 </html>
