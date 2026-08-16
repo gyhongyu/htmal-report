@@ -18,7 +18,149 @@
         }
     </script>
     <style>
+        /* =========================================================================
+         * 🗺️ [CODE MAP] SSSTC Governance WebUI 架構導引目錄 (AI 代理人快速定位專用)
+         * =========================================================================
+         * 1. 🎨 [ANCHOR: CSS-THEME]          - 主題色彩變數與全域樣式
+         * 2. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速導航島 (避開 LOGO) 與 Toast
+         * 3. 🖨️ [ANCHOR: CSS-PRINT]          - A4 Landscape 列印與 PDF 匯出最佳化樣式
+         * 4. 🧱 [ANCHOR: DOM-NAVBAR]         - 頂部 LOGO、標題、雙語切換與 PDF 匯出按鈕
+         * 5. 📊 [ANCHOR: DOM-ORG-FLOWCHART]  - 審計團隊架構與審計流程 SVG 互動圖
+         * 6. 📋 [ANCHOR: DOM-MATRIX-TABLE]   - 結構化權責與流程說明表 (RACI/DRI)
+         * 7. 📖 [ANCHOR: DOM-GLOSSARY-TABLE] - 專業術語與英文縮寫說明表
+         * 8. 🧠 [ANCHOR: JS-STATE]           - 全域雙語切換引擎與導航控制器
+         * =========================================================================
+         */
+
         body { font-family: 'Inter', sans-serif; }
+
+        /* =========================================================================
+         * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+         * ========================================================================= */
+        .floating-quick-dock {
+            position: fixed;
+            top: 6px;
+            left: 6px;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.35rem;
+        }
+
+        .floating-dock-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #FFFFFF;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-out;
+            opacity: 0.75;
+        }
+
+        .floating-dock-toggle:hover {
+            transform: scale(1.12);
+            opacity: 1;
+            background: #0f172a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+        }
+
+        .floating-dock-menu {
+            display: none;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 185px;
+            animation: slideDownFade 0.2s ease-out;
+        }
+
+        .floating-dock-menu.active {
+            display: flex;
+        }
+
+        @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-dock-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #1e293b;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .floating-dock-item:hover {
+            background: #f1f5f9;
+            color: #2563eb;
+        }
+
+        .floating-dock-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .floating-dock-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Toast Notification Popup */
+        .toast-popup {
+            position: fixed;
+            top: 45px;
+            left: 6px;
+            background: #1e293b;
+            color: #fff;
+            padding: 0.55rem 0.95rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+            z-index: 1000000;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .toast-popup.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =========================================================================
+         * 🖨️ [ANCHOR: CSS-PRINT] A4 Landscape 列印與 PDF 匯出最佳化樣式
+         * ========================================================================= */
         @media print {
             @page {
                 size: A4 landscape;
@@ -29,7 +171,7 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .no-print {
+            .no-print, .floating-quick-dock {
                 display: none !important;
             }
             main {
@@ -51,7 +193,6 @@
                 min-width: 0 !important;
                 width: 100% !important;
             }
-            /* 僅讓流程圖本體 SVG 於列印時滿版縮放，防止標題小圖示被放大 */
             .flowchart-svg {
                 width: 100% !important;
                 height: auto !important;
@@ -67,9 +208,51 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-full flex flex-col">
 
+    <!-- =========================================================================
+     * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
+     * ========================================================================= -->
+    <div class="floating-quick-dock no-print" id="floatingQuickDock">
+        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+            🧭
+        </div>
+        <div class="floating-dock-menu" id="floatingDockMenu">
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('01_dashboard')">
+                <span>📊</span> 01 儀表台總覽
+            </button>
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('02_qsa')">
+                <span>🛡️</span> 02 QSA 體系稽核
+            </button>
+            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+                <span>⚙️</span> 03 QPA 製程 (建置中)
+            </button>
+            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('04_procurement')">
+                <span>📦</span> 04 設備採購 (建置中)
+            </button>
+            <button type="button" class="floating-dock-item" onclick="navigateToModule('05_sop')">
+                <span>📘</span> 05 SOP 應對指南
+            </button>
+            <button type="button" class="floating-dock-item active" onclick="navigateToModule('06_governance')">
+                <span>🏛️</span> 06 團隊架構與權責
+            </button>
+            <div style="height:1px; background:#e2e8f0; margin:2px 0;"></div>
+            <button type="button" class="floating-dock-item" onclick="window.location.reload()">
+                <span>🔄</span> 重新載入當前頁
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Popup -->
+    <div class="toast-popup no-print" id="toastPopup">
+        <span id="toastIcon">ℹ️</span>
+        <span id="toastMsg">提示訊息</span>
+    </div>
+
+    <!-- =========================================================================
+     * 🧱 [ANCHOR: DOM-NAVBAR] 頂部固定 Header、官方 LOGO 與操作按鈕
+     * ========================================================================= -->
     <header class="bg-slate-900 text-white shadow-md">
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center gap-4">
-            <div class="flex items-center gap-3 sm:gap-4">
+            <div class="flex items-center gap-3 sm:gap-4 ml-5">
                 <!-- FOXLINK Logo - 純白Logo底色不加額外卡片色塊 -->
                 <img src="https://i.postimg.cc/PfMJs2P7/wlogo-foxlink-s.png" alt="FOXLINK Logo" class="h-7 sm:h-9 object-contain" onerror="this.style.display='none'">
                 <div class="h-6 w-px bg-slate-700 hidden sm:block"></div>
@@ -99,6 +282,9 @@
 
     <main class="flex-grow max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-6 space-y-8">
 
+        <!-- =========================================================================
+         * 📊 [ANCHOR: DOM-ORG-FLOWCHART] 審計團隊架構與審計流程 SVG 互動圖
+         * ========================================================================= -->
         <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 overflow-hidden">
             <div class="border-b border-slate-200 pb-3 mb-5 flex justify-between items-center">
                 <h2 data-i18n="chart_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -359,6 +545,9 @@
             </div>
         </section>
 
+        <!-- =========================================================================
+         * 📋 [ANCHOR: DOM-MATRIX-TABLE] 結構化權責與流程說明表 (RACI/DRI)
+         * ========================================================================= -->
         <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8">
             <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
                 <h2 data-i18n="matrix_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -427,6 +616,9 @@
             </div>
         </section>
 
+        <!-- =========================================================================
+         * 📖 [ANCHOR: DOM-GLOSSARY-TABLE] 專業術語與英文縮寫說明表
+         * ========================================================================= -->
         <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8">
             <div class="border-b border-slate-200 pb-4 mb-6 flex justify-between items-center">
                 <h2 data-i18n="glossary_title" class="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -509,11 +701,71 @@
 
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400 mt-auto">
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400 mt-auto no-print">
         <p>FOXLINK - SSSTC Audit Dashboard &copy; 2026</p>
     </footer>
 
+    <!-- =========================================================================
+     * 🧠 [ANCHOR: JS-STATE] 全域雙語切換引擎與導航控制器
+     * ========================================================================= -->
     <script>
+        // Standard Universal Module URLs Dictionary
+        const PORTAL_URLS = {
+            '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
+            '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
+            '03_qpa': '',
+            '04_procurement': '',
+            '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
+            '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
+        };
+
+        function navigateToModule(modId) {
+            if (modId === '06_governance') {
+                toggleFloatingDock();
+                return;
+            }
+            const url = PORTAL_URLS[modId];
+            if (!url) {
+                showModulePendingToast(modId);
+                return;
+            }
+            window.location.href = url;
+        }
+
+        function toggleFloatingDock() {
+            const menu = document.getElementById('floatingDockMenu');
+            if (menu) menu.classList.toggle('active');
+        }
+
+        let toastTimer = null;
+        function showToast(icon, msg) {
+            const toast = document.getElementById('toastPopup');
+            const iconEl = document.getElementById('toastIcon');
+            const msgEl = document.getElementById('toastMsg');
+            if (!toast) return;
+
+            iconEl.innerText = icon;
+            msgEl.innerText = msg;
+            toast.classList.add('active');
+
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('active');
+            }, 2600);
+        }
+
+        function showModulePendingToast(modId) {
+            const modNames = {
+                '03_qpa': (currentLang === 'en') ? '03 QPA Audit' : '03 QPA 製程',
+                '04_procurement': (currentLang === 'en') ? '04 Procurement' : '04 設備採購'
+            };
+            const name = modNames[modId] || '此模組';
+            const msg = (currentLang === 'en') ? `${name} is currently under construction!` : `${name} 模組建置中，敬請期待！`;
+            showToast('⚙️', msg);
+            const dockMenu = document.getElementById('floatingDockMenu');
+            if (dockMenu) dockMenu.classList.remove('active');
+        }
+
         const translations = {
             main_title: {
                 en: "FOXLINK - SSSTC Audit Governance Dashboard",
