@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSSTC D1 QSA 品質體系稽核管理系統</title>
+    <title>SSSTC D1 QSA 品質體系稽核管理系統 v4.2</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js 核心庫 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         /* =========================================================================
-         * 🗺️ [CODE MAP] SSSTC WebUI 架構導引目錄 (AI 代理人快速定位專用)
+         * 🗺️ [CODE MAP] SSSTC QSA WebUI 架構導引目錄 (AI 代理人快速定位專用)
          * =========================================================================
          * 1. 🎨 [ANCHOR: CSS-THEME]          - 主題色彩變數與全域樣式 (Tokens & Reset)
          * 2. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速導航島 (避開 LOGO) 與 Toast
          * 3. 📊 [ANCHOR: CSS-DASHBOARD]      - Tab 1 儀表台與 KPI 卡片樣式
-         * 4. 📋 [ANCHOR: CSS-TABLE]          - Tab 2 Google Sheet 表格與高亮列樣式
+         * 4. 📋 [ANCHOR: CSS-TABLE]          - Tab 2 Google Sheet 表格與 v3.9 標竿表頭樣式
          * 5. 🗂️ [ANCHOR: CSS-DRAWER]         - CAPA 側邊抽屜樣式 (無遮罩 Side-by-Side)
          * 6. 🧱 [ANCHOR: DOM-NAVBAR]         - 頂部 LOGO、狀態燈、雙分頁按鈕骨架
          * 7. 📊 [ANCHOR: DOM-DASHBOARD]      - 儀表台 KPI 與 Canvas 圖表骨架
          * 8. 📋 [ANCHOR: DOM-TABLE]          - Sheet 表格與工具列 DOM 骨架
          * 9. 🗂️ [ANCHOR: DOM-DRAWER]         - CAPA 詳情抽屜 DOM 骨架
-         * 10.🧠 [ANCHOR: JS-STATE]           - 全域狀態、雙語快取與 Mock 數據
+         * 10.🧠 [ANCHOR: JS-STATE]           - 全域狀態、雙語快取與 15 筆 Mock 數據
          * 11.📈 [ANCHOR: JS-CHARTS]          - Chart.js 初始化、動態聚合與生命週期銷毀
          * 12.📋 [ANCHOR: JS-TABLE]           - 表格渲染、雙語切換與搜尋過濾
          * 13.🗂️ [ANCHOR: JS-DRAWER]          - 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
@@ -33,7 +33,7 @@
          */
 
         /* =========================================================================
-         * 🎨 [ANCHOR: CSS-THEME] 主題色彩變數與全域樣式
+         * 🎨 [ANCHOR: CSS-THEME] 主題色彩變數與全域樣式 (Cyber Violet & Cyan)
          * ========================================================================= */
         :root {
             --bg-primary: #0b0f19;
@@ -82,10 +82,16 @@
             background-color: var(--bg-primary);
             color: var(--text-main);
             font-family: var(--font-sans);
-            font-size: 13px;
+            font-size: 14px; /* 全面放大基準字體 */
             overflow-x: hidden;
             overflow-y: auto;
         }
+
+        /* 滾動條美化 */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
 
         /* =========================================================================
          * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
@@ -117,7 +123,7 @@
             cursor: pointer;
             font-size: 0.95rem;
             transition: all 0.2s ease-out;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .floating-dock-toggle:hover {
@@ -129,7 +135,7 @@
 
         .floating-dock-menu {
             display: none;
-            background: rgba(19, 27, 46, 0.97);
+            background: rgba(19, 27, 46, 0.96);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--border-color);
@@ -138,7 +144,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             flex-direction: column;
             gap: 0.3rem;
-            min-width: 175px;
+            min-width: 180px;
             animation: slideDownFade 0.2s ease-out;
         }
 
@@ -155,9 +161,9 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.4rem 0.65rem;
+            padding: 0.45rem 0.7rem;
             border-radius: 6px;
-            font-size: 0.78rem;
+            font-size: 0.84rem;
             font-weight: 600;
             color: var(--text-main);
             background: transparent;
@@ -176,7 +182,7 @@
 
         .floating-dock-item.active {
             background: rgba(139, 92, 246, 0.25);
-            color: var(--accent-primary);
+            color: #c4b5fd;
             font-weight: 700;
         }
 
@@ -213,7 +219,7 @@
             display: flex;
             align-items: center;
             gap: 0.85rem;
-            margin-left: 20px; /* Leave space for top-left floating dock */
+            margin-left: 20px; /* 避開左上角微縮導航島 */
         }
 
         .brand-logo-img {
@@ -232,6 +238,7 @@
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
@@ -270,12 +277,12 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            font-size: 0.75rem;
-            padding: 0.3rem 0.7rem;
+            font-size: 0.78rem;
+            padding: 0.3rem 0.65rem;
             border-radius: 20px;
             background: rgba(16, 185, 129, 0.12);
             color: #34d399;
-            border: 1px solid rgba(52, 211, 153, 0.3);
+            border: 1px solid rgba(16, 185, 129, 0.25);
             font-weight: 600;
         }
 
@@ -283,8 +290,15 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background-color: #34d399;
-            box-shadow: 0 0 8px #34d399;
+            background-color: var(--accent-success);
+            box-shadow: 0 0 8px var(--accent-success);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
         .btn-sheet-link {
@@ -303,10 +317,10 @@
         }
 
         .btn-sheet-link:hover {
-            background: rgba(16, 185, 129, 0.3);
-            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.25);
+            border-color: var(--accent-success);
             color: #ffffff;
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
             transform: translateY(-1px);
         }
 
@@ -337,7 +351,6 @@
             fill: currentColor;
         }
 
-        /* 語系切換按鈕 (預設繁中 active) */
         .lang-switch {
             display: inline-flex;
             align-items: center;
@@ -351,8 +364,8 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 0.35rem 0.65rem;
-            font-size: 0.78rem;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.8rem;
             font-weight: 700;
             border-radius: 6px;
             cursor: pointer;
@@ -439,7 +452,7 @@
             color: var(--text-muted);
             padding: 0.45rem 1.1rem;
             border-radius: 8px;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -474,7 +487,7 @@
             border: none;
             color: var(--text-muted);
             padding: 0.35rem 0.75rem;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
@@ -522,10 +535,10 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 1.15rem;
+            padding: 1.25rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.1rem;
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
@@ -540,7 +553,7 @@
         .kpi-total::before { background: #3b82f6; }
         .kpi-nc::before { background: #ef4444; }
         .kpi-hl::before { background: #a855f7; }
-        .kpi-pass::before { background: #10b981; }
+        .kpi-rate::before { background: #10b981; }
 
         .kpi-icon-wrap {
             width: 48px;
@@ -555,21 +568,18 @@
         .kpi-total .kpi-icon-wrap { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
         .kpi-nc .kpi-icon-wrap { background: rgba(239, 68, 68, 0.15); color: #f87171; }
         .kpi-hl .kpi-icon-wrap { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
-        .kpi-pass .kpi-icon-wrap { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .kpi-rate .kpi-icon-wrap { background: rgba(16, 185, 129, 0.15); color: #34d399; }
 
         .kpi-info { flex: 1; }
         .kpi-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
-        .kpi-value { font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono); margin-top: 0.15rem; }
-        .kpi-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: normal; margin-left: 0.3rem; }
+        .kpi-value { font-size: 1.75rem; font-weight: 800; font-family: var(--font-mono); margin-top: 0.15rem; color: #ffffff; }
+        .kpi-sub { font-size: 0.78rem; color: var(--text-muted); font-weight: normal; margin-left: 0.3rem; }
 
-        /* 圖表網格佈局 */
+        /* 圖表網格佈局 (2x2) */
         .charts-grid {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
             gap: 1.25rem;
-        }
-        @media (max-width: 1024px) {
-            .charts-grid { grid-template-columns: 1fr; }
         }
 
         .chart-card {
@@ -601,13 +611,13 @@
         }
 
         .chart-container-box {
-            height: 260px;
+            height: 250px;
             position: relative;
             width: 100%;
         }
 
         /* =========================================================================
-         * 📋 [ANCHOR: CSS-TABLE] Tab 2 Google Sheet 表格與高亮列樣式
+         * 📋 [ANCHOR: CSS-TABLE] Tab 2 Google Sheet 表格樣式 (v3.9 標竿 Thead Sticky 規範)
          * ========================================================================= */
         .detail-view {
             display: none;
@@ -649,9 +659,9 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 0.5rem 0.85rem 0.5rem 2.25rem;
+            padding: 0.55rem 0.85rem 0.55rem 2.25rem;
             color: var(--text-main);
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             outline: none;
             transition: all 0.2s;
         }
@@ -671,15 +681,12 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 0.35rem 0.75rem;
+            padding: 0.4rem 0.85rem;
             border-radius: 20px;
-            font-size: 0.76rem;
+            font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
         }
 
         .chip-btn:hover {
@@ -694,8 +701,17 @@
             box-shadow: 0 2px 10px var(--accent-glow);
         }
 
-        .chip-nc.active { background: #ef4444; border-color: #ef4444; box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4); }
-        .chip-hl.active { background: #a855f7; border-color: #a855f7; box-shadow: 0 2px 10px rgba(168, 85, 247, 0.4); }
+        .chip-btn.chip-nc.active {
+            background: var(--accent-danger);
+            border-color: var(--accent-danger);
+            box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
+        }
+
+        .chip-btn.chip-hl.active {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            box-shadow: 0 2px 10px rgba(168, 85, 247, 0.4);
+        }
 
         .info-stats {
             font-size: 0.82rem;
@@ -705,8 +721,18 @@
             gap: 1.2rem;
         }
 
-        .legend-item { display: inline-flex; align-items: center; gap: 0.35rem; }
-        .legend-box { width: 12px; height: 12px; border-radius: 3px; }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .legend-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
         .legend-formula { background: var(--formula-bg); border: 1px solid var(--border-color); }
         .legend-dirty { background: var(--dirty-bg); border: 1px solid var(--dirty-border); }
 
@@ -730,7 +756,7 @@
         }
         .table-container.compact-mode th,
         .table-container.compact-mode td {
-            padding: 0.45rem 0.35rem !important;
+            padding: 0.55rem 0.5rem !important;
             box-sizing: border-box;
         }
 
@@ -743,32 +769,76 @@
             table-layout: auto !important;
         }
 
+        /* ⭕ 100% 遵循 v3.9 標竿表頭標準結構 */
         table {
-            border-collapse: collapse;
-            font-size: 0.82rem;
-            color: var(--text-main);
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.92rem;
+            text-align: left;
+            width: 100%;
         }
 
-        th, td {
-            padding: 0.65rem 0.85rem;
-            border: 1px solid var(--border-color);
-            text-align: left;
-            vertical-align: middle;
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: #131b2e;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+        }
+
+        thead tr {
+            background-color: #131b2e;
         }
 
         th {
-            background: var(--bg-secondary);
+            padding: 0.6rem 0.8rem;
             font-weight: 700;
-            color: var(--text-muted);
-            position: sticky;
-            top: 105px;
-            z-index: 10;
+            color: #e2e8f0;
+            background-color: #131b2e;
+            background-clip: border-box;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+            border-right: 1px solid var(--border-color);
+            white-space: nowrap;
+            line-height: 1.25;
+            user-select: none;
+            font-size: 0.88rem;
+            letter-spacing: 0.01em;
+            vertical-align: middle;
+            position: relative;
+            z-index: 510;
+        }
+
+        td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            color: #cbd5e1;
+            transition: background 0.15s, border-color 0.15s;
+            position: static;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            font-size: 0.92rem;
         }
 
         /* Banner 標題分組欄位 */
-        .th-group-cat { background: var(--group-cat-bg); color: #a5b4fc; text-align: center; font-weight: 800; }
-        .th-group-nc { background: var(--group-nc-bg); color: #fca5a5; text-align: center; font-weight: 800; }
-        .th-group-capa { background: var(--group-capa-bg); color: #fde047; text-align: center; font-weight: 800; }
+        th.group-cell {
+            text-align: center;
+            font-size: 0.92rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+            background-clip: border-box;
+            position: relative;
+            z-index: 510;
+        }
+        th.th-group-cat { background: var(--group-cat-bg); color: #a5b4fc; }
+        th.th-group-nc { background: var(--group-nc-bg); color: #fca5a5; }
+        th.th-group-capa { background: var(--group-capa-bg); color: #fde047; }
 
         tr:hover td {
             background-color: var(--bg-hover) !important;
@@ -782,9 +852,9 @@
         /* 標籤 Badge 膠囊 */
         .badge {
             display: inline-block;
-            padding: 0.2rem 0.55rem;
+            padding: 0.22rem 0.6rem;
             border-radius: 6px;
-            font-size: 0.72rem;
+            font-size: 0.78rem;
             font-weight: 700;
             white-space: nowrap;
         }
@@ -798,9 +868,9 @@
             background: rgba(139, 92, 246, 0.2);
             border: 1px solid rgba(139, 92, 246, 0.5);
             color: #c4b5fd;
-            padding: 0.25rem 0.6rem;
+            padding: 0.3rem 0.7rem;
             border-radius: 6px;
-            font-size: 0.75rem;
+            font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -824,18 +894,18 @@
             width: 100%;
         }
 
-        /* ⚡ 當前 CAPA 詳情對應表格列高亮 (Active Highlight Row) */
+        /* ⚡ 當前抽屜對應表格列高亮 (Active Highlight Row) */
         tr.active-capa-row td {
-            background: rgba(139, 92, 246, 0.32) !important;
-            border-top: 1.5px solid #a78bfa !important;
-            border-bottom: 1.5px solid #a78bfa !important;
-            box-shadow: inset 0 0 15px rgba(139, 92, 246, 0.35) !important;
+            background: rgba(139, 92, 246, 0.25) !important;
+            border-top: 1.5px solid #a855f7 !important;
+            border-bottom: 1.5px solid #a855f7 !important;
+            box-shadow: inset 0 0 12px rgba(139, 92, 246, 0.3) !important;
         }
         tr.active-capa-row td:first-child {
-            border-left: 4px solid #a78bfa !important;
+            border-left: 4px solid var(--accent-primary) !important;
         }
         tr.active-capa-row td:last-child {
-            border-right: 1.5px solid #a78bfa !important;
+            border-right: 1.5px solid #a855f7 !important;
         }
 
         /* =========================================================================
@@ -844,14 +914,14 @@
         .capa-drawer {
             position: fixed;
             top: 0;
-            right: -620px;
-            width: 580px;
+            right: -660px;
+            width: 620px;
             max-width: 92vw;
             height: 100vh;
-            background: #111827;
+            background: #101726;
             border-left: 2px solid var(--accent-primary);
             z-index: 2001;
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.85);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
             transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
@@ -867,7 +937,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(17, 24, 39, 0.98);
+            background: rgba(19, 27, 46, 0.95);
         }
 
         .drawer-body {
@@ -885,29 +955,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(17, 24, 39, 0.98);
+            background: rgba(19, 27, 46, 0.95);
         }
 
         .capa-text-box {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 0.75rem 1rem;
-            font-size: 0.85rem;
+            padding: 0.85rem;
+            font-size: 0.88rem;
             line-height: 1.5;
             color: var(--text-main);
         }
 
         .drawer-textarea {
             width: 100%;
-            height: 100px;
-            background: var(--bg-primary);
+            height: 95px;
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 0.75rem;
             color: var(--text-main);
             font-family: inherit;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             resize: vertical;
             outline: none;
             transition: all 0.2s;
@@ -915,31 +985,8 @@
 
         .drawer-textarea:focus {
             border-color: var(--accent-primary);
-            box-shadow: 0 0 10px var(--accent-glow);
+            box-shadow: 0 0 8px var(--accent-glow);
         }
-
-        .loading-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(4px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            z-index: 50;
-        }
-
-        .spinner {
-            width: 44px;
-            height: 44px;
-            border: 3.5px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--accent-primary);
-            border-radius: 50%;
-            animation: spin 0.8s infinite linear;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
 
         .toast-container {
             position: fixed;
@@ -953,7 +1000,7 @@
         .toast {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            padding: 0.8rem 1.25rem;
+            padding: 0.75rem 1.25rem;
             border-radius: 8px;
             font-size: 0.85rem;
             box-shadow: var(--shadow-lg);
@@ -977,30 +1024,30 @@
      * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
      * ========================================================================= -->
     <div class="floating-quick-dock" id="floatingQuickDock">
-        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Module Navigation (切換模組)">
+        <div class="floating-dock-toggle" onclick="toggleFloatingDock()" title="Quick Navigation (快速切換模組)">
             🧭
         </div>
         <div class="floating-dock-menu" id="floatingDockMenu">
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('01_dashboard')">
+            <button type="button" class="floating-dock-item" id="dockItem01" onclick="navigateToModule('01_dashboard')">
                 <span>📊</span> 01 儀表台總覽
             </button>
-            <button type="button" class="floating-dock-item active" onclick="navigateToModule('02_qsa')">
-                <span>🛡️</span> 02 QSA 體系稽核
+            <button type="button" class="floating-dock-item active" id="dockItem02" onclick="navigateToModule('02_qsa')">
+                <span>🛡️</span> 02 QSA 體系稽核 (當前)
             </button>
-            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('03_qpa')">
+            <button type="button" class="floating-dock-item disabled" id="dockItem03" onclick="showModulePendingToast('03_qpa')">
                 <span>⚙️</span> 03 QPA 製程 (建置中)
             </button>
-            <button type="button" class="floating-dock-item disabled" onclick="showModulePendingToast('04_procurement')">
-                <span>📦</span> 04 設備採購 (建置中)
+            <button type="button" class="floating-dock-item" id="dockItem04" onclick="navigateToModule('04_procurement')">
+                <span>📦</span> 04 設備採購
             </button>
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('05_sop')">
+            <button type="button" class="floating-dock-item" id="dockItem05" onclick="navigateToModule('05_sop')">
                 <span>📘</span> 05 SOP 應對指南
             </button>
-            <button type="button" class="floating-dock-item" onclick="navigateToModule('06_governance')">
+            <button type="button" class="floating-dock-item" id="dockItem06" onclick="navigateToModule('06_governance')">
                 <span>🏛️</span> 06 團隊架構與權責
             </button>
             <div style="height:1px; background:rgba(255,255,255,0.1); margin:2px 0;"></div>
-            <button type="button" class="floating-dock-item" onclick="window.location.reload()">
+            <button type="button" class="floating-dock-item" id="dockItemReload" onclick="window.location.reload()">
                 <span>🔄</span> 重新載入當前頁
             </button>
         </div>
@@ -1016,18 +1063,18 @@
                 <div class="brand-title">
                     <h1 id="appTitle">
                         SSSTC D1 QSA 品質體系稽核管理系統
-                        <span class="brand-badge">v4.1 雙分頁版</span>
+                        <span class="brand-badge">v4.2 雙分頁版</span>
                     </h1>
                     <p>
                         <span class="connection-status">
-                            <span class="status-dot"></span> <span id="statusText">在線資料庫連線中 (Live API Connected)</span>
+                            <span class="status-dot"></span> <span id="statusText">在線資料庫連線中 (15 筆就緒)</span>
                         </span>
                     </p>
                 </div>
             </div>
 
             <div class="header-actions">
-                <a href="https://docs.google.com/spreadsheets/d/1Zp71d3n7iA_r4H12iC8j_6f7fX_QSA_DB/edit" target="_blank" class="btn-sheet-link" id="btnSheetLink">
+                <a href="https://docs.google.com/spreadsheets/d/14FiK8NVCme_jkCG-CoOnZ2BuyKuYQDZAqUKy4Vu3xlM/edit" target="_blank" class="btn-sheet-link" id="btnSheetLink">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     <span id="btnSheetText">Google Sheet 繁中表</span>
                 </a>
@@ -1106,23 +1153,23 @@
                         <div class="kpi-value" id="kpiValueHL" style="color: #c084fc;">1 <span class="kpi-sub">Items</span></div>
                     </div>
                 </div>
-                <div class="kpi-card kpi-pass">
-                    <div class="kpi-icon-wrap">📈</div>
+                <div class="kpi-card kpi-rate">
+                    <div class="kpi-icon-wrap">🛡️</div>
                     <div class="kpi-info">
-                        <div class="kpi-label" id="kpiLabelCompliance">合規達成率 (Compliance)</div>
-                        <div class="kpi-value" id="kpiValueCompliance" style="color: #34d399;">0%</div>
+                        <div class="kpi-label" id="kpiLabelRate">CAPA 對策完成率</div>
+                        <div class="kpi-value" id="kpiValueRate" style="color: #34d399;">100% <span class="kpi-sub">Actioned</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- 4 大視覺化圖表網格 -->
+            <!-- 圖表網格區 (2x2) -->
             <div class="charts-grid">
                 <div class="chart-card">
                     <div class="chart-header">
                         <div class="chart-title">
-                            <span>📊</span> <span id="chartTitleProcess">流程階段缺失分佈 (Process Breakdown)</span>
+                            <span>📊</span> <span id="chartTitleProcess">三大管理與製程流程分佈</span>
                         </div>
-                        <span style="font-size:0.75rem; color:var(--text-muted);">IATF 16949 分類</span>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">MP / COP / SP</span>
                     </div>
                     <div class="chart-container-box">
                         <canvas id="chartProcess"></canvas>
@@ -1178,7 +1225,7 @@
                 </div>
 
                 <div class="filter-chips">
-                    <button class="chip-btn active" id="chipAll" onclick="setFilter('ALL')">全部</button>
+                    <button class="chip-btn active" id="chipAll" onclick="setFilter('ALL')">全部 (共 15 筆)</button>
                     <button class="chip-btn chip-nc" id="chipNC" onclick="setFilter('NC')">❌ 缺失未通過</button>
                     <button class="chip-btn chip-hl" id="chipHL" onclick="setFilter('HL')">🟣 重點關注</button>
                 </div>
@@ -1191,11 +1238,6 @@
             </div>
 
             <div class="table-container compact-mode" id="tableContainer">
-                <div class="loading-overlay" id="tableLoading" style="display:none;">
-                    <div class="spinner"></div>
-                    <div style="font-weight:600; color:var(--text-muted);">載入最新 Google Sheet 數據中...</div>
-                </div>
-
                 <table id="mainTable">
                     <!-- Dynamic colgroup, thead, tbody injected by JS -->
                 </table>
@@ -1270,35 +1312,25 @@
             '01_dashboard': 'https://html.foxlink.co.in/reports/report-1785841934678.html',
             '02_qsa': 'https://html.foxlink.co.in/reports/report-1785820067291.html',
             '03_qpa': '',
-            '04_procurement': '',
+            '04_procurement': 'https://html.foxlink.co.in/reports/report-1786884117627.html',
             '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
-            'sop_guide': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
             '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
         };
 
-        function navigateToModule(modId) {
-            if (modId === '02_qsa') {
-                toggleFloatingDock();
-                return;
-            }
-            const url = PORTAL_URLS[modId];
-            if (!url) {
-                showToast("此模組建置中，敬請期待！", "info");
-                const dockMenu = document.getElementById('floatingDockMenu');
-                if (dockMenu) dockMenu.classList.remove('active');
-                return;
-            }
-            window.location.href = url;
+        // 🌐 智慧判斷初始語系（URL 參數 > 瀏覽器預設語系；非中文一律英文）
+        function getInitialLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = (urlParams.get('lang') || '').toLowerCase();
+            if (langParam.startsWith('zh')) return 'ZH';
+            if (langParam.startsWith('en')) return 'EN';
+
+            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            return browserLang.startsWith('zh') ? 'ZH' : 'EN';
         }
 
-        function toggleFloatingDock() {
-            const menu = document.getElementById('floatingDockMenu');
-            if (menu) menu.classList.toggle('active');
-        }
-
-        let currentLang = 'ZH'; // 預設繁體中文
-        let currentTab = 'dashboard'; // 預設儀表台
-        let currentTableViewMode = 'compact'; // 預設精簡視圖
+        let currentLang = getInitialLanguage();
+        let currentTab = 'dashboard';
+        let currentTableViewMode = 'compact';
         let activeDrawerIndex = -1;
         let currentFilter = 'ALL';
         let searchQuery = '';
@@ -1335,7 +1367,7 @@
             },
             EN: {
                 headers: ["Item #", "Category", "Sub-process / Flow", "Score / Status", "NC Requirement & Description", "Severity", "DRI", "Due Date", "Root Cause Analysis", "Action Plan", "Status"],
-                rows: [] // Dynamic clone with translated headers
+                rows: []
             }
         };
 
@@ -1356,8 +1388,7 @@
 
         // 頁面初始化
         window.addEventListener('DOMContentLoaded', () => {
-            initDashboardCharts();
-            renderTable();
+            switchLanguage(currentLang);
             loadAllData();
         });
 
@@ -1517,7 +1548,9 @@
                 rows = rows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)));
             }
 
-            document.getElementById('filteredStats').textContent = `顯示 ${rows.length} / ${data.rows.length} 筆列資料`;
+            document.getElementById('filteredStats').textContent = (currentLang === 'ZH') ? 
+                `顯示 ${rows.length} / ${data.rows.length} 筆列資料` : 
+                `Showing ${rows.length} / ${data.rows.length} records`;
 
             if (currentTableViewMode === 'compact') {
                 renderCompactTable(table, rows);
@@ -1526,37 +1559,38 @@
             }
         }
 
-        // Compact Mode: 8 個精準欄位
+        // Compact Mode: 8 個精準平衡欄寬 (NC 說明彈性自適應，後方欄位固定不被擠壓)
         function renderCompactTable(table, rows) {
+            const isZH = currentLang === 'ZH';
             const colgroupHTML = `
                 <colgroup>
                     <col style="width: 48px;">
                     <col style="width: 140px;">
                     <col style="width: 85px;">
                     <col style="width: auto;">
-                    <col style="width: 80px;">
-                    <col style="width: 100px;">
-                    <col style="width: 85px;">
                     <col style="width: 90px;">
+                    <col style="width: 110px;">
+                    <col style="width: 105px;">
+                    <col style="width: 85px;">
                 </colgroup>
             `;
 
             const theadHTML = `
                 <thead>
                     <tr>
-                        <th class="td-center" rowspan="2">項次</th>
-                        <th class="th-group-cat" colspan="2">主要類別與次類別流程</th>
-                        <th class="th-group-nc" colspan="3">NC 缺失與要求細節</th>
-                        <th class="th-group-capa" colspan="2">CAPA 整改對策</th>
+                        <th class="td-center" rowspan="2">${isZH ? '項次' : 'No.'}</th>
+                        <th class="group-cell th-group-cat" colspan="2">${isZH ? '主要類別與次類別流程' : 'Process Hierarchy'}</th>
+                        <th class="group-cell th-group-nc" colspan="3">${isZH ? 'NC 缺失與要求細節' : 'NC Requirement & Detail'}</th>
+                        <th class="group-cell th-group-capa" colspan="2">${isZH ? 'CAPA 整改對策' : 'CAPA Plan & Status'}</th>
                     </tr>
                     <tr>
-                        <th>主要類別 / 子流程</th>
-                        <th class="td-center">得分 / 狀態</th>
-                        <th>NC 要求與缺失說明</th>
-                        <th class="td-center">嚴重度</th>
-                        <th class="td-center">DRI / 截止日</th>
-                        <th class="td-center">CAPA 詳情</th>
-                        <th class="td-center">狀態</th>
+                        <th>${isZH ? '主要類別 / 子流程' : 'Category / Process'}</th>
+                        <th class="td-center">${isZH ? '得分 / 狀態' : 'Score / Status'}</th>
+                        <th>${isZH ? 'NC 要求與缺失說明' : 'NC Requirement & Finding'}</th>
+                        <th class="td-center">${isZH ? '嚴重度' : 'Severity'}</th>
+                        <th class="td-center">${isZH ? 'DRI / 截止日' : 'DRI / Due Date'}</th>
+                        <th class="td-center">${isZH ? 'CAPA 詳情' : 'CAPA Detail'}</th>
+                        <th class="td-center">${isZH ? '狀態' : 'Status'}</th>
                     </tr>
                 </thead>
             `;
@@ -1581,14 +1615,14 @@
 
                         return `
                             <tr class="${isActive}" id="row-${originalIdx}" onclick="openCapaDrawer(${originalIdx})">
-                                <td class="td-center td-mono" style="font-weight:700;">${itemNum}</td>
+                                <td class="td-center td-mono" style="font-weight:700; color:#a78bfa;">#${itemNum}</td>
                                 <td>
-                                    <div style="font-weight:700; color:#c4b5fd;">${cat}</div>
-                                    <div class="compact-cell-ellipsis" style="color:var(--text-muted); font-size:0.75rem;" title="${sub}">${sub}</div>
+                                    <div style="font-weight:700; color:#c4b5fd; font-size:0.92rem;">${cat}</div>
+                                    <div class="compact-cell-ellipsis" style="color:var(--text-muted); font-size:0.78rem;" title="${sub}">${sub}</div>
                                 </td>
                                 <td class="td-center td-formula">
-                                    <div style="font-size:0.75rem; font-weight:700;">${score.split(' ')[0]}</div>
-                                    <span class="badge badge-fail" style="padding:1px 4px; font-size:0.65rem;">未通過</span>
+                                    <div style="font-size:0.8rem; font-weight:700;">${score.split(' ')[0]}</div>
+                                    <span class="badge badge-fail" style="padding:1px 5px; font-size:0.7rem;">${isZH ? '未通過' : 'Fail'}</span>
                                 </td>
                                 <td>
                                     <div class="compact-cell-ellipsis" title="${nc.replace(/"/g, '&quot;')}">${nc}</div>
@@ -1597,12 +1631,12 @@
                                     <span class="badge ${sevClass}">${sev}</span>
                                 </td>
                                 <td class="td-center td-mono">
-                                    <div class="badge badge-dri" style="padding:1px 5px;">${dri}</div>
-                                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:2px;">${due}</div>
+                                    <div class="badge badge-dri" style="padding:1px 6px;">${dri}</div>
+                                    <div style="font-size:0.74rem; color:var(--text-muted); margin-top:2px;">${due}</div>
                                 </td>
                                 <td class="td-center">
                                     <button class="btn-capa-open" onclick="event.stopPropagation(); openCapaDrawer(${originalIdx})">
-                                        🟣 CAPA 詳情
+                                        🟣 ${isZH ? 'CAPA 詳情' : 'CAPA Details'}
                                     </button>
                                 </td>
                                 <td class="td-center">
@@ -1634,7 +1668,7 @@
                         const isActive = (originalIdx === activeDrawerIndex) ? 'active-capa-row' : '';
                         return `
                             <tr class="${isActive}" id="row-${originalIdx}" onclick="openCapaDrawer(${originalIdx})">
-                                ${headers.map(h => `<td>${r[h] || ''}</td>`).join('')}
+                                ${headers.map(h => `<td>${r[h] !== undefined && r[h] !== null ? r[h] : ''}</td>`).join('')}
                             </tr>
                         `;
                     }).join('')}
@@ -1649,11 +1683,12 @@
         // =========================================================================
         function openCapaDrawer(index) {
             activeDrawerIndex = index;
-            const rows = (currentLang === 'ZH') ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
+            const isZH = currentLang === 'ZH';
+            const rows = isZH ? qsaDataCache.ZH.rows : qsaDataCache.EN.rows;
             const r = rows[index];
             if (!r) return;
 
-            document.getElementById('drawerBadge').textContent = `項次 #${r["項次"] || r["Item #"]}`;
+            document.getElementById('drawerBadge').textContent = `${isZH ? '項次' : 'No.'} #${r["項次"] || r["Item #"]}`;
             document.getElementById('drawerCategory').textContent = `${r["主要類別 (Category)"] || r["Category"]} ➔ ${r["次類別 / 子流程"] || r["Sub-process / Flow"]}`;
             document.getElementById('drawerNC').textContent = r["NC 要求與缺失說明"] || r["NC Requirement & Description"];
             document.getElementById('drawerDRI').textContent = r["DRI"];
@@ -1724,11 +1759,11 @@
                     initDashboardCharts();
                     renderTable();
                 } else {
-                    statusText.textContent = "已連線 (使用 In-Memory 緩存)";
+                    statusText.textContent = "已連線 (使用 In-Memory 緩存 15 筆)";
                 }
             } catch (err) {
                 console.warn("QSA GAS load notice:", err);
-                statusText.textContent = "已連線 (使用 In-Memory 緩存)";
+                statusText.textContent = "已連線 (使用 In-Memory 緩存 15 筆)";
             }
         }
 
@@ -1771,10 +1806,31 @@
             renderTable();
         }
 
+        function updateFloatingDockLanguage(lang) {
+            const isZH = lang === 'ZH';
+            const items = {
+                'dockItem01': isZH ? '<span>📊</span> 01 儀表台總覽' : '<span>📊</span> 01 Dashboard Overview',
+                'dockItem02': isZH ? '<span>🛡️</span> 02 QSA 體系稽核' : '<span>🛡️</span> 02 QSA System Audit',
+                'dockItem03': isZH ? '<span>⚙️</span> 03 QPA 製程 (建置中)' : '<span>⚙️</span> 03 QPA Process (Pending)',
+                'dockItem04': isZH ? '<span>📦</span> 04 設備採購' : '<span>📦</span> 04 Procurement Tracking',
+                'dockItem05': isZH ? '<span>📘</span> 05 SOP 應對指南' : '<span>📘</span> 05 SOP Audit Handbook',
+                'dockItem06': isZH ? '<span>🏛️</span> 06 團隊架構與權責' : '<span>🏛️</span> 06 Governance & RACI',
+                'dockItemReload': isZH ? '<span>🔄</span> 重新載入當前頁' : '<span>🔄</span> Reload Current Page'
+            };
+            for (const [id, html] of Object.entries(items)) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const isCurrent = el.classList.contains('active');
+                    el.innerHTML = html + (isCurrent ? ` ${isZH ? '(當前)' : '(Current)'}` : '');
+                }
+            }
+        }
+
         function switchLanguage(lang) {
             currentLang = lang;
             document.getElementById('btnLangZH').classList.toggle('active', lang === 'ZH');
             document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+            updateFloatingDockLanguage(lang);
             initDashboardCharts();
             renderTable();
         }
@@ -1804,6 +1860,29 @@
             }
         }
 
+        function toggleFloatingDock() {
+            const menu = document.getElementById('floatingDockMenu');
+            if (menu) menu.classList.toggle('active');
+        }
+
+        function navigateToModule(moduleKey) {
+            if (moduleKey === '02_qsa') {
+                toggleFloatingDock();
+                return;
+            }
+            const url = PORTAL_URLS[moduleKey];
+            if (url) {
+                const targetUrl = url.includes('?') ? `${url}&lang=${currentLang.toLowerCase()}` : `${url}?lang=${currentLang.toLowerCase()}`;
+                window.location.href = targetUrl;
+            } else {
+                showToast(`模組 [${moduleKey}] 部署就緒中！`, "info");
+            }
+        }
+
+        function showModulePendingToast(moduleKey) {
+            showToast(`模組 [${moduleKey}] 正在最後驗證中，即將開放直達！`, "info");
+        }
+
         function showToast(msg, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -1812,6 +1891,14 @@
             container.appendChild(toast);
             setTimeout(() => { toast.remove(); }, 3000);
         }
+
+        // 點擊空白處關閉導航島
+        document.addEventListener('click', (e) => {
+            const dock = document.getElementById('floatingQuickDock');
+            if (dock && !dock.contains(e.target)) {
+                document.getElementById('floatingDockMenu').classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
