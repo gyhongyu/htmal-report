@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSSTC D1 設備與治具採購追蹤管理系統 v1.1</title>
+    <title>SSSTC D1 設備與治具採購追蹤管理系統 v1.2</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
          * 11.📈 [ANCHOR: JS-CHARTS]          - Chart.js 初始化、6 階段聚合與生命週期銷毀
          * 12.📋 [ANCHOR: JS-TABLE]           - 表格渲染、雙語純淨切換、關鍵字搜尋與階段篩選
          * 13.🗂️ [ANCHOR: JS-DRAWER]          - 抽屜開啟/關閉、上一筆/下一筆與高亮平滑滾動
-         * 14.☁️ [ANCHOR: JS-CLOUD]           - GAS 雲端 API 數據拉取與雙向 POST 儲存
+         * 14.☁️ [ANCHOR: JS-CLOUD]           - GAS 雲端 API 數據拉取與非文字欄位 100% 雙向鏡像儲存
          * =========================================================================
          */
 
@@ -84,7 +84,7 @@
             background-color: var(--bg-primary);
             color: var(--text-main);
             font-family: var(--font-sans);
-            font-size: 14px; /* 全面放大基準字體 */
+            font-size: 14px;
             overflow-x: hidden;
             overflow-y: auto;
         }
@@ -802,7 +802,7 @@
         table {
             border-collapse: separate;
             border-spacing: 0;
-            font-size: 0.92rem; /* 表格文字字級提升 */
+            font-size: 0.92rem;
             text-align: left;
             width: 100%;
         }
@@ -830,7 +830,7 @@
             white-space: nowrap;
             line-height: 1.25;
             user-select: none;
-            font-size: 0.88rem; /* 表頭字體放大 */
+            font-size: 0.88rem;
             letter-spacing: 0.01em;
             vertical-align: middle;
             position: relative;
@@ -884,7 +884,7 @@
             display: inline-block;
             padding: 0.22rem 0.6rem;
             border-radius: 6px;
-            font-size: 0.78rem; /* 標籤字體提升 */
+            font-size: 0.78rem;
             font-weight: 700;
             white-space: nowrap;
         }
@@ -1080,9 +1080,9 @@
             gap: 0.6rem;
             animation: slideIn 0.3s ease-out forwards;
         }
-        .toast-success { border-left: 4px solid var(--accent-success); }
-        .toast-error { border-left: 4px solid var(--accent-danger); }
-        .toast-info { border-left: 4px solid var(--accent-primary); }
+        .toast-success { border-left: 4px solid var(--accent-success); color: #6ee7b7; }
+        .toast-error { border-left: 4px solid var(--accent-danger); color: #fca5a5; }
+        .toast-info { border-left: 4px solid var(--accent-primary); color: #93c5fd; }
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -1134,7 +1134,7 @@
                 <div class="brand-title">
                     <h1 id="appTitle">
                         SSSTC D1 設備與治具採購追蹤管理系統
-                        <span class="brand-badge">v1.1 雙分頁版</span>
+                        <span class="brand-badge">v1.2 雙向鏡像版</span>
                     </h1>
                     <p>
                         <span class="connection-status">
@@ -1450,6 +1450,7 @@
         let searchQuery = '';
         let activeDrawerIndex = -1;
         let pendingChangesCount = 0;
+        let modifiedItemNos = new Set();
 
         let charts = {
             stages: null,
@@ -1889,55 +1890,115 @@
             openCapaDrawer(nextIdx);
         }
 
+        // 當抽屜欄位變更時，非文字欄位即時雙向鏡像同步至 ZH 與 EN 兩表快取
         function onDrawerFieldChange(field) {
-            const rows = (currentLang === 'ZH') ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
-            const r = rows[activeDrawerIndex];
-            if (!r) return;
+            if (activeDrawerIndex < 0) return;
+            const rowZH = procurementDataCache.ZH.rows[activeDrawerIndex];
+            const rowEN = procurementDataCache.EN.rows[activeDrawerIndex];
 
-            if (field === 'qty') r[currentLang === 'ZH' ? '需求數量' : 'Required_Qty'] = Number(document.getElementById('drawerQty').value);
-            if (field === 'cost') r[currentLang === 'ZH' ? '總費用' : 'Total_Cost'] = Number(document.getElementById('drawerCost').value);
-            if (field === 's1_date') r[currentLang === 'ZH' ? 'S1_RFQ_實際日期' : 'S1_RFQ_Actual_Date'] = document.getElementById('drawerS1Date').value;
-            if (field === 's2_date') r[currentLang === 'ZH' ? 'S2_Budget_目標日期' : 'S2_Budget_Target_Date'] = document.getElementById('drawerS2Date').value;
-            if (field === 's2_status') r[currentLang === 'ZH' ? 'S2_Budget_進度狀態' : 'S2_Budget_Status'] = document.getElementById('drawerS2Status').value;
-            if (field === 's3_status') r[currentLang === 'ZH' ? 'S3_PR_進度狀態' : 'S3_PR_Status'] = document.getElementById('drawerS3Status').value;
-            if (field === 's4_status') r[currentLang === 'ZH' ? 'S4_PO_進度狀態' : 'S4_PO_Status'] = document.getElementById('drawerS4Status').value;
-            if (field === 'lead_time') r[currentLang === 'ZH' ? 'S4_PO_合約交期_天' : 'S4_PO_Contract_LeadTime_Days'] = Number(document.getElementById('drawerLeadTime').value);
-            if (field === 'origin') r[currentLang === 'ZH' ? 'S4_PO_發貨地' : 'S4_PO_Origin_Country'] = document.getElementById('drawerOrigin').value;
-            if (field === 'install_days') r[currentLang === 'ZH' ? 'S6_Install_安裝定位_天' : 'S6_Install_Positioning_Days'] = document.getElementById('drawerInstallDays').value;
-            if (field === 's6_date') r[currentLang === 'ZH' ? 'S6_Install_目標完成日' : 'S6_Install_Target_Finish_Date'] = document.getElementById('drawerS6Date').value;
-            if (field === 's6_status') r[currentLang === 'ZH' ? 'S6_Install_進度狀態' : 'S6_Install_Status'] = document.getElementById('drawerS6Status').value;
-            if (field === 'remarks') r[currentLang === 'ZH' ? '備註' : 'Remarks'] = document.getElementById('drawerRemarks').value;
+            const qtyVal = Number(document.getElementById('drawerQty').value);
+            const costVal = Number(document.getElementById('drawerCost').value);
+            const s1DateVal = document.getElementById('drawerS1Date').value;
+            const s2DateVal = document.getElementById('drawerS2Date').value;
+            const s2StatusVal = document.getElementById('drawerS2Status').value;
+            const s3StatusVal = document.getElementById('drawerS3Status').value;
+            const s4StatusVal = document.getElementById('drawerS4Status').value;
+            const leadTimeVal = document.getElementById('drawerLeadTime').value ? Number(document.getElementById('drawerLeadTime').value) : '';
+            const originVal = document.getElementById('drawerOrigin').value;
+            const installDaysVal = document.getElementById('drawerInstallDays').value ? document.getElementById('drawerInstallDays').value : '';
+            const s6DateVal = document.getElementById('drawerS6Date').value;
+            const s6StatusVal = document.getElementById('drawerS6Status').value;
+            const remarksVal = document.getElementById('drawerRemarks').value;
 
-            pendingChangesCount++;
+            // ⚡ 100% 非文字客觀屬性雙向對齊
+            if (rowZH) {
+                if (field === 'qty') rowZH['需求數量'] = qtyVal;
+                if (field === 'cost') rowZH['總費用'] = costVal;
+                if (field === 's1_date') rowZH['S1_RFQ_實際日期'] = s1DateVal;
+                if (field === 's2_date') rowZH['S2_Budget_目標日期'] = s2DateVal;
+                if (field === 's2_status') rowZH['S2_Budget_進度狀態'] = s2StatusVal;
+                if (field === 's3_status') rowZH['S3_PR_進度狀態'] = s3StatusVal;
+                if (field === 's4_status') rowZH['S4_PO_進度狀態'] = s4StatusVal;
+                if (field === 'lead_time') rowZH['S4_PO_合約交期_天'] = leadTimeVal;
+                if (field === 'origin') rowZH['S4_PO_發貨地'] = originVal;
+                if (field === 'install_days') rowZH['S6_Install_安裝定位_天'] = installDaysVal;
+                if (field === 's6_date') rowZH['S6_Install_目標完成日'] = s6DateVal;
+                if (field === 's6_status') rowZH['S6_Install_進度狀態'] = s6StatusVal;
+                if (field === 'remarks') rowZH['備註'] = remarksVal;
+            }
+
+            if (rowEN) {
+                if (field === 'qty') rowEN['Required_Qty'] = qtyVal;
+                if (field === 'cost') rowEN['Total_Cost'] = costVal;
+                if (field === 's1_date') rowEN['S1_RFQ_Actual_Date'] = s1DateVal;
+                if (field === 's2_date') rowEN['S2_Budget_Target_Date'] = s2DateVal;
+                if (field === 's2_status') rowEN['S2_Budget_Status'] = s2StatusVal;
+                if (field === 's3_status') rowEN['S3_PR_Status'] = s3StatusVal;
+                if (field === 's4_status') rowEN['S4_PO_Status'] = s4StatusVal;
+                if (field === 'lead_time') rowEN['S4_PO_Contract_LeadTime_Days'] = leadTimeVal;
+                if (field === 'origin') rowEN['S4_PO_Origin_Country'] = originVal;
+                if (field === 'install_days') rowEN['S6_Install_Positioning_Days'] = installDaysVal;
+                if (field === 's6_date') rowEN['S6_Install_Target_Finish_Date'] = s6DateVal;
+                if (field === 's6_status') rowEN['S6_Install_Status'] = s6StatusVal;
+                if (field === 'remarks') rowEN['Remarks'] = remarksVal;
+            }
+
+            const itemNo = (rowZH ? rowZH['項次'] : (rowEN ? rowEN['Item_No'] : activeDrawerIndex + 1));
+            modifiedItemNos.add(itemNo);
+            pendingChangesCount = modifiedItemNos.size;
+
             document.getElementById('btnSave').disabled = false;
             document.getElementById('dirtyCounter').style.display = 'inline-block';
             document.getElementById('dirtyCounter').textContent = pendingChangesCount;
         }
 
+        // =========================================================================
+        // ☁️ [ANCHOR: JS-CLOUD] GAS 雲端 API 數據拉取與非文字欄位 100% 雙向鏡像儲存
+        // =========================================================================
         async function saveCurrentDrawer() {
             if (activeDrawerIndex < 0) return;
             const rows = (currentLang === 'ZH') ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
             const r = rows[activeDrawerIndex];
             const itemNo = r["項次"] || r["Item_No"];
             
-            showToast(`正在寫入項次 #${itemNo} 至 Google Sheet...`, "info");
+            showToast(`正在寫入項次 #${itemNo} 至 Google Sheet (含雙語自動對齊)...`, "info");
             
             try {
                 const sheetName = (currentLang === 'ZH') ? 'Procurement_CN' : 'Procurement_EN';
                 const updates = {};
+
+                // ⚡ 完整打包 12+ 個可編輯欄位
                 if (currentLang === 'ZH') {
+                    updates["需求數量"] = Number(document.getElementById('drawerQty').value);
+                    updates["總費用"] = Number(document.getElementById('drawerCost').value);
+                    updates["S1_RFQ_實際日期"] = document.getElementById('drawerS1Date').value;
+                    updates["S2_Budget_目標日期"] = document.getElementById('drawerS2Date').value;
                     updates["S2_Budget_進度狀態"] = document.getElementById('drawerS2Status').value;
+                    updates["S3_PR_進度狀態"] = document.getElementById('drawerS3Status').value;
                     updates["S4_PO_進度狀態"] = document.getElementById('drawerS4Status').value;
+                    updates["S4_PO_合約交期_天"] = document.getElementById('drawerLeadTime').value ? Number(document.getElementById('drawerLeadTime').value) : '';
+                    updates["S4_PO_發貨地"] = document.getElementById('drawerOrigin').value;
+                    updates["S6_Install_安裝定位_天"] = document.getElementById('drawerInstallDays').value ? document.getElementById('drawerInstallDays').value : '';
+                    updates["S6_Install_目標完成日"] = document.getElementById('drawerS6Date').value;
                     updates["S6_Install_進度狀態"] = document.getElementById('drawerS6Status').value;
                     updates["備註"] = document.getElementById('drawerRemarks').value;
                 } else {
+                    updates["Required_Qty"] = Number(document.getElementById('drawerQty').value);
+                    updates["Total_Cost"] = Number(document.getElementById('drawerCost').value);
+                    updates["S1_RFQ_Actual_Date"] = document.getElementById('drawerS1Date').value;
+                    updates["S2_Budget_Target_Date"] = document.getElementById('drawerS2Date').value;
                     updates["S2_Budget_Status"] = document.getElementById('drawerS2Status').value;
+                    updates["S3_PR_Status"] = document.getElementById('drawerS3Status').value;
                     updates["S4_PO_Status"] = document.getElementById('drawerS4Status').value;
+                    updates["S4_PO_Contract_LeadTime_Days"] = document.getElementById('drawerLeadTime').value ? Number(document.getElementById('drawerLeadTime').value) : '';
+                    updates["S4_PO_Origin_Country"] = document.getElementById('drawerOrigin').value;
+                    updates["S6_Install_Positioning_Days"] = document.getElementById('drawerInstallDays').value ? document.getElementById('drawerInstallDays').value : '';
+                    updates["S6_Install_Target_Finish_Date"] = document.getElementById('drawerS6Date').value;
                     updates["S6_Install_Status"] = document.getElementById('drawerS6Status').value;
                     updates["Remarks"] = document.getElementById('drawerRemarks').value;
                 }
 
-                await fetch(GAS_API_URL, {
+                const res = await fetch(GAS_API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({
@@ -1948,14 +2009,25 @@
                     })
                 });
 
-                showToast(`項次 #${itemNo} 雲端儲存成功！`, "success");
-                renderTable();
-                initDashboardCharts();
+                const result = await res.json();
+                if (result.status === 'success') {
+                    showToast(`項次 #${itemNo} 雲端儲存成功（中英文雙表已自動對齊）！`, "success");
+                    modifiedItemNos.delete(itemNo);
+                    pendingChangesCount = modifiedItemNos.size;
+                    if (pendingChangesCount === 0) {
+                        document.getElementById('btnSave').disabled = true;
+                        document.getElementById('dirtyCounter').style.display = 'none';
+                    } else {
+                        document.getElementById('dirtyCounter').textContent = pendingChangesCount;
+                    }
+                    renderTable();
+                    initDashboardCharts();
+                } else {
+                    showToast(`儲存失敗: ${result.message || '後端回傳異常'}`, "error");
+                }
             } catch (err) {
-                console.warn("Save notice:", err);
-                showToast("已更新本地快取 (雲端同步就緒)", "success");
-                renderTable();
-                initDashboardCharts();
+                console.error("Save error:", err);
+                showToast(`網路或 GAS 連線失敗: ${err.message || err}`, "error");
             }
         }
 
@@ -1965,55 +2037,137 @@
             const r = rows[activeDrawerIndex];
             if (!r) return;
             const text = isZH ? 
-                `【SSSTC 採購項目 #${r["項次"]}】\n品項: ${r["項目描述"]}\n預算: ₹ ${(r["總費用"] || 0).toLocaleString()} INR\n預算審批: ${r["S2_Budget_進度狀態"]}\n訂單狀態: ${r["S4_PO_進度狀態"]}\n驗收進度: ${r["S6_Install_進度狀態"]}\n目標完成日: ${r["S6_Install_目標完成日"]}` :
-                `【SSSTC Procurement #${r["Item_No"]}】\nItem: ${r["Item_Description"]}\nBudget: ₹ ${(r["Total_Cost"] || 0).toLocaleString()} INR\nBudget Approval: ${r["S2_Budget_Status"]}\nPO Status: ${r["S4_PO_Status"]}\nSign-off: ${r["S6_Install_Status"]}\nTarget Date: ${r["S6_Install_Target_Finish_Date"]}`;
+                `【SSSTC 採購項目 #${r["項次"]}】\n品項: ${r["項目描述"]}\n數量: ${r["需求數量"] || 1}\n預算: ₹ ${(r["總費用"] || 0).toLocaleString()} INR\n預算審批: ${r["S2_Budget_進度狀態"]}\n訂單狀態: ${r["S4_PO_進度狀態"]}\n驗收進度: ${r["S6_Install_進度狀態"]}\n目標完成日: ${r["S6_Install_目標完成日"]}` :
+                `【SSSTC Procurement #${r["Item_No"]}】\nItem: ${r["Item_Description"]}\nQty: ${r["Required_Qty"] || 1}\nBudget: ₹ ${(r["Total_Cost"] || 0).toLocaleString()} INR\nBudget Approval: ${r["S2_Budget_Status"]}\nPO Status: ${r["S4_PO_Status"]}\nSign-off: ${r["S6_Install_Status"]}\nTarget Date: ${r["S6_Install_Target_Finish_Date"]}`;
             navigator.clipboard.writeText(text).then(() => showToast(isZH ? "已複製採購詳情至剪貼簿！" : "Copied details to clipboard!", "success"));
         }
 
-        // =========================================================================
-        // ☁️ [ANCHOR: JS-CLOUD] GAS 雲端 API 數據拉取與雙向 POST 儲存
-        // =========================================================================
         async function loadAllData() {
             const statusText = document.getElementById('statusText');
             statusText.textContent = (currentLang === 'ZH') ? "正在拉取 Google Sheet 採購庫..." : "Fetching Google Sheet Procurement DB...";
             try {
-                const lang = currentLang;
-                const res = await fetch(`${GAS_API_URL}?action=getSheetData&lang=${lang}`);
-                const json = await res.json();
-                if (json.status === 'success' && json.data && json.data.length > 0) {
-                    if (lang === 'ZH') {
-                        procurementDataCache.ZH.headers = json.headers;
-                        procurementDataCache.ZH.rows = json.data;
-                    } else {
-                        procurementDataCache.EN.headers = json.headers;
-                        procurementDataCache.EN.rows = json.data;
-                    }
-                    statusText.textContent = (currentLang === 'ZH') ? 
-                        `在線資料庫連線中 (${json.data.length} 筆)` : 
-                        `Live DB Connected (${json.data.length} records)`;
-                    initDashboardCharts();
-                    renderTable();
-                    renderWarnings();
+                // 平行抓取中文與英文兩表
+                const [resZH, resEN] = await Promise.all([
+                    fetch(`${GAS_API_URL}?action=getSheetData&lang=ZH`),
+                    fetch(`${GAS_API_URL}?action=getSheetData&lang=EN`)
+                ]);
+
+                const jsonZH = await resZH.json();
+                const jsonEN = await resEN.json();
+
+                if (jsonZH.status === 'success' && jsonZH.data && jsonZH.data.length > 0) {
+                    procurementDataCache.ZH.headers = jsonZH.headers;
+                    procurementDataCache.ZH.rows = jsonZH.data;
                 }
+                if (jsonEN.status === 'success' && jsonEN.data && jsonEN.data.length > 0) {
+                    procurementDataCache.EN.headers = jsonEN.headers;
+                    procurementDataCache.EN.rows = jsonEN.data;
+                }
+
+                const totalRecs = (currentLang === 'ZH' ? procurementDataCache.ZH.rows.length : procurementDataCache.EN.rows.length);
+                statusText.textContent = (currentLang === 'ZH') ? 
+                    `在線資料庫連線中 (${totalRecs} 筆雙向就緒)` : 
+                    `Live DB Connected (${totalRecs} records mirrored)`;
+                
+                initDashboardCharts();
+                renderTable();
+                renderWarnings();
             } catch (err) {
                 console.warn("GAS Fetch notice:", err);
                 statusText.textContent = (currentLang === 'ZH') ? "已連線 (使用 In-Memory 緩存 10 筆)" : "Connected (Using In-Memory Cache 10)";
+                initDashboardCharts();
+                renderTable();
+                renderWarnings();
             }
         }
 
         async function saveChanges() {
+            if (modifiedItemNos.size === 0) return;
             const btnSave = document.getElementById('btnSave');
             btnSave.disabled = true;
-            btnSave.innerHTML = `<span>⏳ 儲存中...</span>`;
-            showToast("正在實時寫回 Google Sheet 採購資料庫...", "info");
-            
-            setTimeout(() => {
-                btnSave.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span id="btnSaveText">${currentLang === 'ZH' ? '儲存所有變更' : 'Save Changes'}</span>`;
+            btnSave.innerHTML = `<span>⏳ 儲存中 (${modifiedItemNos.size} 項)...</span>`;
+            showToast("正在批次寫回 Google Sheet 採購資料庫...", "info");
+
+            const sheetName = (currentLang === 'ZH') ? 'Procurement_CN' : 'Procurement_EN';
+            const rows = (currentLang === 'ZH') ? procurementDataCache.ZH.rows : procurementDataCache.EN.rows;
+
+            let successCount = 0;
+            let errors = [];
+
+            for (const itemNo of Array.from(modifiedItemNos)) {
+                const r = rows.find(x => (x["項次"] == itemNo || x["Item_No"] == itemNo));
+                if (!r) continue;
+
+                const updates = {};
+                if (currentLang === 'ZH') {
+                    updates["需求數量"] = Number(r["需求數量"] || 1);
+                    updates["總費用"] = Number(r["總費用"] || 0);
+                    updates["S1_RFQ_實際日期"] = r["S1_RFQ_實際日期"] || '';
+                    updates["S2_Budget_目標日期"] = r["S2_Budget_目標日期"] || '';
+                    updates["S2_Budget_進度狀態"] = r["S2_Budget_進度狀態"] || '';
+                    updates["S3_PR_進度狀態"] = r["S3_PR_進度狀態"] || '';
+                    updates["S4_PO_進度狀態"] = r["S4_PO_進度狀態"] || '';
+                    updates["S4_PO_合約交期_天"] = r["S4_PO_合約交期_天"] || '';
+                    updates["S4_PO_發貨地"] = r["S4_PO_發貨地"] || '';
+                    updates["S6_Install_安裝定位_天"] = r["S6_Install_安裝定位_天"] || '';
+                    updates["S6_Install_目標完成日"] = r["S6_Install_目標完成日"] || '';
+                    updates["S6_Install_進度狀態"] = r["S6_Install_進度狀態"] || '';
+                    updates["備註"] = r["備註"] || '';
+                } else {
+                    updates["Required_Qty"] = Number(r["Required_Qty"] || 1);
+                    updates["Total_Cost"] = Number(r["Total_Cost"] || 0);
+                    updates["S1_RFQ_Actual_Date"] = r["S1_RFQ_Actual_Date"] || '';
+                    updates["S2_Budget_Target_Date"] = r["S2_Budget_Target_Date"] || '';
+                    updates["S2_Budget_Status"] = r["S2_Budget_Status"] || '';
+                    updates["S3_PR_Status"] = r["S3_PR_Status"] || '';
+                    updates["S4_PO_Status"] = r["S4_PO_Status"] || '';
+                    updates["S4_PO_Contract_LeadTime_Days"] = r["S4_PO_Contract_LeadTime_Days"] || '';
+                    updates["S4_PO_Origin_Country"] = r["S4_PO_Origin_Country"] || '';
+                    updates["S6_Install_Positioning_Days"] = r["S6_Install_Positioning_Days"] || '';
+                    updates["S6_Install_Target_Finish_Date"] = r["S6_Install_Target_Finish_Date"] || '';
+                    updates["S6_Install_Status"] = r["S6_Install_Status"] || '';
+                    updates["Remarks"] = r["Remarks"] || '';
+                }
+
+                try {
+                    const res = await fetch(GAS_API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({
+                            action: 'updateProcurementItem',
+                            sheetName: sheetName,
+                            itemNo: itemNo,
+                            updates: updates
+                        })
+                    });
+                    const json = await res.json();
+                    if (json.status === 'success') {
+                        successCount++;
+                        modifiedItemNos.delete(itemNo);
+                    } else {
+                        errors.push(`#${itemNo}: ${json.message}`);
+                    }
+                } catch (e) {
+                    errors.push(`#${itemNo}: ${e.message || e}`);
+                }
+            }
+
+            btnSave.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span id="btnSaveText">${currentLang === 'ZH' ? '儲存所有變更' : 'Save Changes'}</span><span class="dirty-badge" id="dirtyCounter">0</span>`;
+
+            pendingChangesCount = modifiedItemNos.size;
+            if (pendingChangesCount === 0) {
                 btnSave.disabled = true;
-                pendingChangesCount = 0;
                 document.getElementById('dirtyCounter').style.display = 'none';
-                showToast(currentLang === 'ZH' ? "所有採購變更已成功同步至 Google Sheet！" : "Changes successfully synced to Google Sheet!", "success");
-            }, 800);
+                showToast(currentLang === 'ZH' ? `🎉 成功同步 ${successCount} 項採購變更至 Google Sheet（雙表已自動對齊）！` : `🎉 Successfully synced ${successCount} items to Google Sheet!`, "success");
+            } else {
+                btnSave.disabled = false;
+                document.getElementById('dirtyCounter').style.display = 'inline-block';
+                document.getElementById('dirtyCounter').textContent = pendingChangesCount;
+                showToast(`部分項目同步失敗: ${errors.join(', ')}`, "error");
+            }
+
+            renderTable();
+            initDashboardCharts();
         }
 
         // ================= 🔄 Tab 切換與視圖模式 =================
@@ -2070,7 +2224,7 @@
             
             // 純淨雙語 UI 文字切換 (無任何雙語混雜)
             if (lang === 'ZH') {
-                document.getElementById('appTitle').innerHTML = `SSSTC D1 設備與治具採購追蹤管理系統 <span class="brand-badge">v1.1 雙分頁版</span>`;
+                document.getElementById('appTitle').innerHTML = `SSSTC D1 設備與治具採購追蹤管理系統 <span class="brand-badge">v1.2 雙向鏡像版</span>`;
                 document.getElementById('tabTitleDashboard').textContent = '採購儀表台';
                 document.getElementById('tabTitleDetail').textContent = '細節進度視圖';
                 document.getElementById('kpiLabelTotal').textContent = '總採購品項';
@@ -2118,7 +2272,7 @@
                 document.getElementById('btnDrawerCopy').textContent = '📋 複製摘要';
                 document.getElementById('btnDrawerSave').textContent = '💾 儲存修改';
             } else {
-                document.getElementById('appTitle').innerHTML = `SSSTC D1 Equipment & Fixture Procurement System <span class="brand-badge">v1.1 2-Tab</span>`;
+                document.getElementById('appTitle').innerHTML = `SSSTC D1 Equipment & Fixture Procurement System <span class="brand-badge">v1.2 Mirror Sync</span>`;
                 document.getElementById('tabTitleDashboard').textContent = 'Procurement Dashboard';
                 document.getElementById('tabTitleDetail').textContent = 'Detailed Sheet View';
                 document.getElementById('kpiLabelTotal').textContent = 'Total Items';
@@ -2228,7 +2382,7 @@
             toast.className = `toast toast-${type}`;
             toast.textContent = msg;
             container.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 3000);
+            setTimeout(() => { toast.remove(); }, 3500);
         }
 
         // 點擊空白處關閉導航島
