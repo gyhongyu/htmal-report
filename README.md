@@ -1,289 +1,108 @@
-# HTML Reports 管理系统
+# 🌟 HTML Reports 現代化雲端報告中心 (AI-Native Dual-Track Hub v2.0)
 
-基于 GitHub Pages 的静态报告展示系统 + 本地 Node.js Admin 管理后台。
+> 專為 **AI 代理人自動發布** 與 **人類專業管理** 打造的現代化 HTML 報告管理中心。  
+> 融合 **Google Sheet / Drive 萬能雲端 SSOT** 與 **GitHub Pages 靜態歸檔**，實現零伺服器、秒級秒開、永久獨立網址與密碼防護！
 
-**在线访问**：https://html.foxlink.co.in
+**🌐 線上正式訪問網址**：[https://html.foxlink.co.in](https://html.foxlink.co.in)
 
 ---
 
-## 🚀 快速开始
+## ✨ 核心架構亮點
 
-### 新电脑使用流程
+- ⚡ **5 毫秒極速秒開 (Zero-Block SWR)**：採用 `Promise.allSettled` 並行通道，本地 151 篇歷史索引與 Google 雲端 API 並行非同步拉取，徹底杜絕首頁卡頓。
+- ☁️ **大檔案無損突破**：大於 50KB 的 HTML 代碼自動存入 Google Drive (`HTML_Reports_Store`)，完全突破 Google Sheet 50,000 字元長度限制。
+- 🛡️ **雙軌向後相容保護**：
+  - **151 篇歷史舊報告**：位於 `reports/report-xxx.html`，既有網址永恆不壞；前端編輯時標題唯讀，HTML 代碼透過 GAS 調用 GitHub REST API 原地 Direct Commit 覆蓋！
+  - **全新雲端報告**：自動進入 Google Drive & Sheet，支援秒增、秒改、秒刪。
+- 🎨 **左右雙欄即時動態預覽編輯器**：深色代碼編輯器 ✕ 滿版 iframe 即時連動預覽 ✕ 多標籤點選。
+- 🔒 **密碼鎖與記住我**：動態讀取 Google Sheet `Config` 工作表密碼，首頁支援本機永久記住登入狀態。
+- 🤖 **AI 代理人原生直連**：AI Agent 產出報告後，只需調用 `gas_publisher.py` 一鍵上線並取得獨立永久預覽網址！
 
-```bash
-# 1. git clone 仓库
-git clone https://github.com/gyhongyu/htmal-report.git
-cd htmal-report
+---
 
-# 2. 运行 start.bat
-start.bat
+## 🤖 AI 代理人一鍵發布指引 (AI Agent Fast Publish)
 
-# 3. 浏览器自动打开 localhost:3030
-# 4. 首次访问 → 弹出配置窗口
-# 5. 填写 GitHub 信息 → 保存
-# 6. 自动创建 admin/.env
-# 7. 开始使用
+本專案根目錄內建 Python 發布工具 [`gas_publisher.py`](file:///e:/Projects/htmal-report/gas_publisher.py)，任何 AI 代理人皆可一行指令發布：
+
+### 1. 命令列調用 (CLI)
+```powershell
+py gas_publisher.py --file "reports/my_report.html" --title "XX專案 KYC 徵信調查報告" --categories "客戶KYC,對外簡報" --desc "Aisin專案供應鏈調查"
+```
+發布成功後，終端將直接輸出該報告的專屬永久獨立預覽網址：  
+👉 `https://html.foxlink.co.in/preview.html?id=rep_1786988344233`
+
+### 2. Python 腳本內建調用 (SDK Pattern)
+```python
+from gas_publisher import publish_html_report
+
+res = publish_html_report(
+    title="Aisin AVM 專案 PCBA 雙軌製造提案書",
+    html_content="<!DOCTYPE html><html>...</html>",
+    categories=["對外簡報", "客戶KYC", "客戶攻略"],
+    description="車載全球客戶實績簡介"
+)
+
+if res["success"]:
+    print("發布成功！網址:", res["url"])
 ```
 
-**就这么简单！** 脚本会自动：
-- ✅ 检测 Git 是否安装
-- ✅ 检测 Node.js 是否安装  
-- ✅ 自动安装依赖（npm install）
-- ✅ 检测端口占用
-- ✅ 启动服务器并打开浏览器
+---
+
+## 🔑 密碼與配置管理 (Password & Config)
+
+- **預設安全密碼**：`10101010`
+- **動態修改密碼**：
+  1. 打開 Google Sheet **《HTML代碼倉庫》**（[點此開啟試算表](https://docs.google.com/spreadsheets/d/1YgwlA-f5Iq487-0FVU2ChOckNVLb3h1ejbrUNkUr4WQ/edit)）。
+  2. 切換到底部的 **`Config`** 頁籤。
+  3. 修改 **B1** 格的密碼，全系統即時生效！
+
+| 工作表 | A 欄 (Key) | B 欄 (Value) |
+|---|---|---|
+| **Config** | `Admin_Password` | `您的自訂密碼` |
 
 ---
 
-## 📋 前置要求
-
-只需安装两个软件：
-
-1. **Git**  
-   下载：https://git-scm.com/downloads
-
-2. **Node.js (LTS 版本)**  
-   下载：https://nodejs.org/
-
----
-
-## 🏗️ 项目架构
-
-### 双端系统
-
-#### 本地 Admin 后台
-- **地址**: http://localhost:3030
-- **功能**: 创建、编辑、删除报告
-- **技术**: Node.js + Express + React
-- **存储**: 通过 GitHub API 自动同步
-
-#### 在线查看平台  
-- **地址**: https://html.foxlink.co.in (或您的 GitHub Pages 網址)
-- **功能**: 唯讀查看、搜尋、篩選、分享、下載
-- **技術**: 靜態 HTML + React (GitHub Pages)
-- **特性**: 核心依賴本地化處理，支援離線/快速加載 (Admin 端)
-
----
-
-## 📁 项目结构
+## 📁 目錄結構
 
 ```
 htmal-report/
-├── start.bat              # 智能启动脚本（根目录）
-├── index.html            # 前端主页
-├── preview.html         # 预览页面
-├── app.js              # 前端应用逻辑
+├── .agents/skills/              # 專案專屬 AI 技能庫
+│   ├── html_report_publisher/   # AI 報告極速發布大師
+│   └── htmal_report_admin/      # 雙軌架構與 Admin 維護手冊
+├── AGENTS.md                    # 專案最高守則與 AI 開發鐵律
+├── NEXT_AGENT_HANDOVER_ROADMAP.md # AI 代理人工作交接藍圖
 │
-├── components/         # React 组件
-│   ├── HomePage.js
-│   ├── PageCard.js
+├── index.html                   # 主系統首頁 (密碼鎖 + 卡片管理 + 左右雙欄編輯器)
+├── preview.html                 # 獨立報告原生滿版無損渲染頁面
+├── app.js                       # 前端核心應用邏輯
+│
+├── components/                  # React 模組化組件
+│   ├── HomePage.js              # 首頁網格與分類導航
+│   ├── PageCard.js              # 智慧雙軌卡片 (雲端刪除 / 舊卡唯讀)
+│   ├── HTMLEditor.js            # 左側代碼編輯器
+│   ├── PreviewPanel.js          # 右側滿版即時預覽視窗
 │   └── ...
 │
-├── utils/             # 工具函数
-│   └── reportsLoader.js
+├── utils/
+│   └── reportsLoader.js         # SWR 並行秒開雙軌載入器
 │
-├── reports/          # HTML 报告文件
-│   └── report-*.html
+├── gas_publisher.py             # 🌟 AI 代理人一鍵發布 CLI 工具
+├── sync_reports_to_gas.py       # 歷史舊報告批次雲端遷移工具
 │
-├── data/
-│   └── reports-index.json  # 报告索引和版本信息
-│
-└── admin/            # 本地管理后台
-    ├── server.js     # Express 服务器
-    ├── .env         # 配置文件（自动生成，不上传）
-    ├── .env.example # 配置示例
-    │
-    ├── lib/        # 后端模块
-    │   ├── github-api.js       # GitHub API 封装
-    │   ├── config-manager.js   # 配置管理
-    │   └── reports-manager.js  # 报告 CRUD
-    │
-    └── public/     # Admin 前端
-        ├── index.html
-        ├── app.js
-        ├── vendor/     # 本地化大型依賴 (Babel, Tailwind, React)
-        └── components/
+├── reports/                     # 151 篇 GitHub 歷史靜態報告 (只讀保護)
+└── data/
+    └── reports-index.json       # 歷史報告元數據索引
 ```
 
 ---
 
-## ⚙️ 首次配置
+## 🌿 分支管理策略 (Branch Strategy)
 
-运行 `start.bat` 后，首次访问会弹出配置窗口：
-
-### 需要填写的信息
-
-1. **GitHub 用户名**  
-   例如：`gyhongyu`
-
-2. **仓库名称**  
-   例如：`htmal-report`
-
-3. **Personal Access Token (PAT)**
-   - 访问：https://github.com/settings/tokens/new
-   - 勾选 `repo` 权限
-   - 生成并复制 Token
-   - 粘贴到配置窗口
-
-4. **服务器端口**（可选）  
-   默认：`3030`
-
-5. **預覽網址 (Base URL)**（可選，但強烈建議填寫）
-   - 例如：`https://html.foxlink.co.in` 或 `https://username.github.io/repo`
-   - 填寫後，Admin 介面中的「預覽 (GitHub Pages)」按鈕才會正確導向公網，否則會預設為 localhost。
-
-**保存后自动创建 `admin/.env` 文件**，无需手动操作。
+- **`main`**：最新主分支（已上線，現代化雲端雙軌架構，零依賴本地後端）。
+- **`backup-legacy-20260818`**：**舊架構永久安全備份分支**（包含舊版 Node.js `admin/` 與 `start.bat`，安全封存）。
 
 ---
 
-## 📝 使用流程
-
-### 创建报告
-
-1. 打开 Admin 后台（http://localhost:3030）
-2. 点击"创建新页面"
-3. 编辑 HTML 内容
-4. 填写标题、描述、选择分类
-5. 点击"保存" → **自动同步到 GitHub**
-
-### 查看報告
-
-**方式 1 - 線上訪問**：
-- 訪問您的 GitHub Pages 網址 (例如 `https://username.github.io/htmal-report`)
-- 系統會自動加載 `data/reports-index.json` 展示所有報告。
-
-**方式 2 - 編輯時預覽**：
-- 在 Admin 管理後台點擊報告的「編輯」按鈕。
-- 右側面板提供 **實時即時預覽** 功能，邊寫邊看。
-
-**方式 3 - 獨立預覽頁面**：
-- 訪問 `preview.html?id=報告ID`。
-- 此頁面會以統一的預覽框架加載指定的報告內容。
-
-**方式 4 - 直接打開文件**：
-- 報告實際存放於 `reports/` 資料夾中，可直接打開對應的 `.html` 文件。
-
----
-
-## 🔄 自动更新机制
-
-### 工作原理
-
-1. 每次本地保存报告 → 更新 `reports-index.json` 的 `lastUpdated`
-2. 访问公网地址 → 检查本地缓存的版本号
-3. 如发现新版本 → 自动刷新页面
-4. 加载最新内容
-
-### 用户体验
-
-```
-本地编辑 → 关闭浏览器 → 重新访问公网
-→ 显示加载动画 → 自动检测更新 → 显示最新内容
-```
-
-**无需任何手动刷新！** ✨
-
----
-
-## 🛠️ 常见问题
-
-### Q: 端口 3030 被占用怎么办？
-
-**A**: `start.bat` 会自动检测并询问是否关闭占用进程。或手动关闭：
-
-```powershell
-# 查找占用端口的进程
-netstat -ano | findstr :3030
-
-# 关闭进程（替换 PID）
-taskkill /F /PID <进程ID>
-```
-
-### Q: 如何在多台电脑之间同步？
-
-**A**: 
-```bash
-# 在新电脑上
-git clone https://github.com/gyhongyu/htmal-report.git
-cd htmal-report
-start.bat
-# 填写相同的 GitHub 配置即可
-```
-
-### Q: 如何备份数据？
-
-**A**: 所有数据都在 GitHub 仓库中：
-- `reports/` - HTML 文件
-- `data/reports-index.json` - 索引文件
-
-定期 `git pull` 或直接在 GitHub 下载即可。
-
-### Q: Token 过期了怎么办？
-
-**A**: 
-1. 访问 http://localhost:3030
-2. 点击右上角"设置"图标
-3. 重新填写新的 Token
-4. 保存即可
-
-### Q: 公网显示的不是最新内容？
-
-**A**: 
-- 首次访问后会自动检测版本
-- 如果页面已打开，按 **F5** 刷新
-- 关闭后重新打开会自动更新
-
----
-
-## 🔐 安全说明
-
-- ✅ Admin 后台仅在本地运行（localhost:3030）
-- ✅ GitHub Token 保存在本地 `.env` 文件（已在 .gitignore）
-- ✅ Token 永远不会上传到 GitHub
-- ⚠️ GitHub Pages 上的报告是公开的（如仓库为 Public）
-
----
-
-### 部署與 GitHub Pages 配置
-
-本專案使用 GitHub Pages 託管靜態內容。
-
-1. **基本配置**：
-   - 進入 GitHub 倉庫 `Settings` -> `Pages`。
-   - 在 `Build and deployment` -> `Source` 選擇 `Deploy from a branch`。
-   - 分支選擇 `main`，資料夾選擇 `/ (root)`，點擊 `Save`。
-   - 官方詳細說明：[GitHub Pages Documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-
-2. **自定義域名 (選配)**：
-   - 若您有自己的域名（如 `html.foxlink.co.in`），在 Pages 設置頁面填寫 `Custom domain` 並配置 DNS 的 CNAME 記錄即可。
-
----
-
-### 🎨 技術棧
-
-#### Admin 管理後端 (本地)
-- **運行環境**: Node.js + Express
-- **前端框架**: React 18
-- **效能優化**: **本地化加載** Babel Standalone (3.1MB) 與 TailwindCSS，確保在任何網絡環境下都能秒開。
-
-#### Report 前端 (公網/GitHub Pages)
-- **技術**: React 18 + TailwindCSS + Lucide Icons
-- **數據源**: 基於 `data/reports-index.json` 的動態加載。
-
----
-
-## 📜 许可证
-
-MIT License
-
----
-
-## 💡 提示
-
-- 第一次运行会自动安装依赖（需要几分钟）
-- 建议使用 Chrome 或 Edge 浏览器
-- 网络不稳定时 GitHub API 可能失败，重试即可
-- 自定义域名配置请查看 GitHub Pages 设置
-
----
-
-**享受使用！**🚀
+## 📜 授權與維護
+- **維護者**：Foxlink / gyhongyu
+- **AI 協作架構**：Google Antigravity Agentic Framework
