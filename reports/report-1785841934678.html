@@ -885,6 +885,10 @@
       gap: 0.5rem;
     }
 
+    .edit-field.vertical-align-top {
+      align-items: flex-start;
+    }
+
     .edit-field label {
       width: 140px;
       font-size: 0.8rem;
@@ -1267,7 +1271,7 @@
 
     <!-- =========================================================================
      * 📈 [ANCHOR: DOM-DASHBOARD-CHARTS] 雙 Chart.js 畫布與推進卡片
-     * ========================================================================= -->
+     * ========================================================================= */
     <div class="dashboard-grid">
       <div class="chart-card">
         <h3 id="uiChartStatusTitle">TASK STATUS DISTRIBUTION (%)</h3>
@@ -1398,6 +1402,8 @@
         lblEndDate: "End Date:",
         lblProgress: "Progress (%):",
         lblStatus: "Status:",
+        lblSubList: "Sub-item Details (1 per line):",
+        lblReportLink: "Report Link (URL):",
         btnSaveCloud: "💾 Save & Sync to Google Sheet",
         btnDeleteTask: "🗑️ Delete Task",
         confirmDelete: "Are you sure you want to delete task",
@@ -1456,6 +1462,8 @@
         lblEndDate: "結束日期：",
         lblProgress: "完成進度 (%)：",
         lblStatus: "執行狀態：",
+        lblSubList: "子清單細項條目 (每行一項)：",
+        lblReportLink: "詳細報告連結 (URL)：",
         btnSaveCloud: "💾 儲存並同步至 Google Sheet",
         btnDeleteTask: "🗑️ 刪除此任務",
         confirmDelete: "您確定要刪除任務",
@@ -1506,7 +1514,10 @@
         rootCause_en: "Team started work on Audit observations & initial alignment",
         rootCause_zh: "對策小組成立與全廠稽核發現點初審分析",
         deliverable_en: "Audit observation master breakdown list",
-        deliverable_zh: "稽核缺失條款總體歸納清單"
+        deliverable_zh: "稽核缺失條款總體歸納清單",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       },
       {
         id: "ACT-2",
@@ -1526,14 +1537,8 @@
         deliverable_zh: "112 筆 CAPA 改善前後對照佐證包",
         reportLink: "",
         subSummary: { total: 112, closed: 44, open: 68 },
-        subList_en: [
-          "• Total 112 items: 44 items closed, 68 items open",
-          "• Scheduled till August 31 to complete 100% CAPA evidence closure"
-        ],
-        subList_zh: [
-          "• 總計 112 項 QPA 缺失對策：已閉環 44 項，進行中 68 項",
-          "• 目標於 8 月 31 日前全數完成 100% CAPA 改善與佐證閉環"
-        ]
+        subList_en: "• Total 112 items: 44 items closed, 68 items open\n• Scheduled till August 31 to complete 100% CAPA evidence closure",
+        subList_zh: "• 總計 112 項 QPA 缺失對策：已閉環 44 項，進行中 68 項\n• 目標於 8 月 31 日前全數完成 100% CAPA 改善與佐證閉環"
       },
       {
         id: "ACT-3",
@@ -1553,14 +1558,8 @@
         deliverable_zh: "15 項 QSA 結案證明與品質體系程序書更新",
         reportLink: "https://html.foxlink.co.in/reports/report-1785820067291.html",
         subSummary: { total: 15, closed: 12, open: 3 },
-        subList_en: [
-          "• Total 15 items: 12 items closed, 3 items open",
-          "• Level 2/3 Quality SOP revision & operator training in progress"
-        ],
-        subList_zh: [
-          "• 總計 15 項 QSA 品質體系缺失：已閉環 12 項，進行中 3 項",
-          "• 二/三階品質程序書 (SOP) 修訂與作業員培訓推進中"
-        ]
+        subList_en: "• Total 15 items: 12 items closed, 3 items open\n• Level 2/3 Quality SOP revision & operator training in progress",
+        subList_zh: "• 總計 15 項 QSA 品質體系缺失：已閉環 12 項，進行中 3 項\n• 二/三階品質程序書 (SOP) 修訂與作業員培訓推進中"
       },
       {
         id: "ACT-4",
@@ -1578,24 +1577,10 @@
         rootCause_zh: "所有專案設備與 SFC 系統於 10 月底前全數採購與安裝到位 <span style='color:#EF4444; font-weight:700;'>(Feeder 校正儀除外)</span>",
         deliverable_en: "PO copies, FAT/SAT reports, Commissioning sign-off",
         deliverable_zh: "採購單據、出廠與現場驗收報告、上線運轉證明",
-        reportLink: "",
+        reportLink: "https://html.foxlink.co.in/reports/report-1786884117627.html",
         subSummary: { total: 9, closed: 3, open: 6 },
-        subList_en: [
-          "• Total 9 Budget Items: 3 closed, 6 open in procurement pipeline",
-          "1) Peak stand Microscope(100x): pending for arrangement from supplier (est. 8/15)",
-          "2) SPI training: completed.",
-          "3) AOI training: plan to raise PR before target date; supplier arrangement pending.",
-          "4) Temperature & Humidity meter: plan to raise PR on est. 8/9 (3 quotations received).",
-          "5) ESD turnstile gate: plan to raise PR on est. 8/10 (1 supplier quotation received)."
-        ],
-        subList_zh: [
-          "• 總計 9 項資本支出設備：已到位 3 項，6 項發單採購進度推進中",
-          "1) Peak 100x 顯微鏡：待供應商發貨安排 (預計 8/15)",
-          "2) SPI 專案培訓：已完成",
-          "3) AOI 培訓計畫：預計於目標日前提出請購 (PR)，後續由供應商派員",
-          "4) 溫濕度監測計：預計 8/9 前提出請購 (已取得 3 家最終報價與比價定案)",
-          "5) 靜電門禁閘門 (ESD Turnstile Gate)：預計 8/10 前提出請購 (現已拿到 1 家報價)"
-        ]
+        subList_en: "• Total 9 Budget Items: 3 closed, 6 open in procurement pipeline\n1) Peak stand Microscope(100x): pending for arrangement from supplier (est. 8/15)\n2) SPI training: completed.\n3) AOI training: plan to raise PR before target date; supplier arrangement pending.\n4) Temperature & Humidity meter: plan to raise PR on est. 8/9 (3 quotations received).\n5) ESD turnstile gate: plan to raise PR on est. 8/10 (1 supplier quotation received).",
+        subList_zh: "• 總計 9 項資本支出設備：已到位 3 項，6 項發單採購進度推進中\n1) Peak 100x 顯微鏡：待供應商發貨安排 (預計 8/15)\n2) SPI 專案培訓：已完成\n3) AOI 培訓計畫：預計於目標日前提出請購 (PR)，後續由供應商派員\n4) 溫濕度監測計：預計 8/9 前提出請購 (已取得 3 家最終報價與比價定案)\n5) 靜電門禁閘門 (ESD Turnstile Gate)：預計 8/10 前提出請購 (現已拿到 1 家報價)"
       },
       {
         id: "ACT-5",
@@ -1612,7 +1597,10 @@
         rootCause_en: "Training will be started and completed within 3 weeks for QSA and QPA",
         rootCause_zh: "針對 QSA 與 QPA 體系發現點，於 3 週內完成全員對策與 SOP 培訓",
         deliverable_en: "QSA & QPA Training attendance logs & sign-offs",
-        deliverable_zh: "QSA/QPA 專案培訓簽到表與紀錄"
+        deliverable_zh: "QSA/QPA 專案培訓簽到表與紀錄",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       },
       {
         id: "ACT-6",
@@ -1629,7 +1617,10 @@
         rootCause_en: "Training will be started and completed within 2 weeks for purchase items",
         rootCause_zh: "新進採購設備與過站軟體到位後，於 2 週內完成操作員實操培訓",
         deliverable_en: "Equipment Supplier Training Certifications",
-        deliverable_zh: "原廠設備操作培訓合格證書"
+        deliverable_zh: "原廠設備操作培訓合格證書",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       },
       {
         id: "ACT-7",
@@ -1646,7 +1637,10 @@
         rootCause_en: "After completion of training within 1 week will complete all self check points",
         rootCause_zh: "培訓完成後，於 1 週內執行 Check-sheet 擬真自我全檢",
         deliverable_en: "Full Internal Self Check Verification Report",
-        deliverable_zh: "廠內自我稽核 Check-sheet 驗證報告"
+        deliverable_zh: "廠內自我稽核 Check-sheet 驗證報告",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       },
       {
         id: "ACT-8",
@@ -1663,7 +1657,10 @@
         rootCause_en: "After completion self check will complete Corrective within 2 weeks",
         rootCause_zh: "自我全檢完成後，於 2 週內快速整改與閉環內部缺失",
         deliverable_en: "Internal Corrective Action Closure Log",
-        deliverable_zh: "內部自我稽核發現點快速改善對照表"
+        deliverable_zh: "內部自我稽核發現點快速改善對照表",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       },
       {
         id: "ACT-9",
@@ -1680,7 +1677,10 @@
         rootCause_en: "In 2nd week of December planning to schedule a SSSTC Online Audit",
         rootCause_zh: "排定於 12 月第 2 週正式執行 SSSTC 線上預審稽核",
         deliverable_en: "SSSTC Online Pre-audit Official Report",
-        deliverable_zh: "SSSTC 線上預審發現點追蹤表"
+        deliverable_zh: "SSSTC 線上預審發現點追蹤表",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       },
       {
         id: "ACT-10",
@@ -1697,7 +1697,10 @@
         rootCause_en: "Based on the observations we will take 3 weeks of time to close those",
         rootCause_zh: "針對 SSSTC 預審提報之發現點，於 3 週內完成對策與佐證閉環",
         deliverable_en: "SSSTC Observation Final Closure Package",
-        deliverable_zh: "SSSTC 預審發現點改善對照證明"
+        deliverable_zh: "SSSTC 預審發現點改善對照證明",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       },
       {
         id: "ACT-11",
@@ -1714,7 +1717,10 @@
         rootCause_en: "In 2nd week of January planning to schedule a D1 Re-Audit for mass production qualification",
         rootCause_zh: "排定於 2027 年 1 月第 2 週迎接 Dell 客戶聯合現場稽核，取得量產認證",
         deliverable_en: "Official D1 Audit Approval Letter & Certification",
-        deliverable_zh: "Dell D1 稽核閉環官方核准函與量產認證證書"
+        deliverable_zh: "Dell D1 稽核閉環官方核准函與量產認證證書",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       }
     ];
 
@@ -1735,7 +1741,7 @@
 
     function saveMilestonesToCache() {
       try {
-        localStorage.setItem('SSSTC_ROADMAP_MILESTONES_V35', JSON.stringify(masterMilestones));
+        localStorage.setItem('SSSTC_ROADMAP_MILESTONES_V50', JSON.stringify(masterMilestones));
       } catch(e) { console.warn('Milestone save notice:', e); }
     }
 
@@ -1811,7 +1817,8 @@
         const fillWidth = t.progressPct || 0;
         const durationStr = calcDurationWks(t.startDate, t.endDate);
 
-        const hasSub = !!(t.subList_en || t.subDetails_en || t.subSummary);
+        const rawList = (currentLang === 'en') ? (t.subList_en || t.subDetails_en) : (t.subList_zh || t.subDetails_zh);
+        const hasSub = !!(rawList || t.subSummary || t.reportLink);
         const expandBtnHTML = hasSub ? `<button class="btn-expand-sub" id="btnSub_${t.id}" onclick="event.stopPropagation(); toggleSubDrawer('${t.id}')" title="Expand/Collapse Details">🔻</button>` : '';
 
         let subContentHTML = '';
@@ -1827,7 +1834,7 @@
           }
 
           let headerBarHTML = '';
-          if (t.subSummary) {
+          if (t.subSummary && t.subSummary.total > 0) {
             headerBarHTML = `
               <div style="margin-bottom:0.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
                 <div style="display:flex; align-items:center; flex-wrap:wrap; gap:0.35rem;">
@@ -1846,12 +1853,12 @@
             `;
           }
 
-          const rawList = (currentLang === 'en') ? (t.subDetails_en || t.subList_en) : (t.subDetails_zh || t.subList_zh);
           let listHTML = '';
           if (Array.isArray(rawList)) {
-            listHTML = rawList.map(item => `<div class="sub-list-item">${item}</div>`).join('');
-          } else if (typeof rawList === 'string') {
-            listHTML = `<div class="sub-list-item">${rawList.replace(/\n/g, '<br>')}</div>`;
+            listHTML = rawList.filter(s => s && s.trim()).map(item => `<div class="sub-list-item">${item}</div>`).join('');
+          } else if (typeof rawList === 'string' && rawList.trim()) {
+            const lines = rawList.split(/\r?\n/).filter(line => line.trim().length > 0);
+            listHTML = lines.map(line => `<div class="sub-list-item">${line}</div>`).join('');
           }
 
           subContentHTML = `
@@ -2026,6 +2033,12 @@
       const subOpen = (item.subSummary && item.subSummary.open !== undefined) ? item.subSummary.open : (subTotal - subClosed);
       const hasQuantData = (subTotal > 0);
 
+      // Format subList string for Textarea
+      let subListRaw = (currentLang === 'en') ? (item.subList_en || item.subDetails_en || '') : (item.subList_zh || item.subDetails_zh || '');
+      if (Array.isArray(subListRaw)) {
+        subListRaw = subListRaw.join('\n');
+      }
+
       const editSectionHTML = isMaster ? `
         <div class="edit-box">
           <div class="edit-title">${t.editSectionTitle}</div>
@@ -2096,6 +2109,16 @@
             </select>
           </div>
 
+          <div class="edit-field vertical-align-top">
+            <label style="padding-top:4px;">${t.lblSubList}</label>
+            <textarea id="editSubList" class="edit-input-text" style="height:90px; resize:vertical; font-size:0.82rem; line-height:1.4;" placeholder="• Item 1&#10;• Item 2">${subListRaw}</textarea>
+          </div>
+
+          <div class="edit-field">
+            <label>${t.lblReportLink}</label>
+            <input type="url" id="editReportLink" class="edit-input-text" value="${(item.reportLink || '').replace(/"/g, '&quot;')}" placeholder="https://html.foxlink.co.in/reports/...">
+          </div>
+
           <button class="btn-save-cloud" onclick="saveTaskFromModal('${item.id}')">
             ${t.btnSaveCloud}
           </button>
@@ -2141,6 +2164,8 @@
       const endVal = document.getElementById('editEndDate').value;
       const sliderVal = parseInt(document.getElementById('editSlider').value, 10);
       const statusVal = document.getElementById('editStatusSelect').value;
+      const subListVal = document.getElementById('editSubList') ? document.getElementById('editSubList').value : '';
+      const reportLinkVal = document.getElementById('editReportLink') ? document.getElementById('editReportLink').value.trim() : '';
 
       const calcModeEl = document.querySelector('input[name="calcMode"]:checked');
       const isQuant = calcModeEl ? (calcModeEl.value === 'quant') : false;
@@ -2162,6 +2187,13 @@
         if (endVal) local.endDate = endVal;
         local.progressPct = sliderVal;
         local.status = statusVal;
+        local.reportLink = reportLinkVal;
+
+        if (currentLang === 'en') {
+          local.subList_en = subListVal;
+        } else {
+          local.subList_zh = subListVal;
+        }
 
         if (isQuant || subTotal > 0) {
           local.subSummary = { total: subTotal, closed: subClosed, open: subOpen };
@@ -2226,7 +2258,7 @@
             <input type="date" id="editMsDate" class="edit-input-date" value="${ms.date}">
           </div>
 
-          <div class="edit-field" style="align-items:flex-start;">
+          <div class="edit-field vertical-align-top">
             <label style="padding-top:4px;">${t.lblMsDesc}</label>
             <textarea id="editMsDesc" class="edit-input-text" style="height:70px; resize:vertical; font-size:0.82rem;">${descVal}</textarea>
           </div>
@@ -2294,7 +2326,10 @@
         rootCause_en: "New corrective action added by user",
         rootCause_zh: "使用者新增之改善對策項目",
         deliverable_en: "CAPA Evidence Report",
-        deliverable_zh: "CAPA 佐證報告"
+        deliverable_zh: "CAPA 佐證報告",
+        subList_en: "",
+        subList_zh: "",
+        reportLink: ""
       };
 
       masterTasks.push(newTask);
@@ -2470,6 +2505,17 @@
               if (cloudItem.owner) local.owner = cloudItem.owner;
               if (cloudItem.workstream) local.workstream = cloudItem.workstream;
 
+              // Full cloud sync for sub-list and reportLink
+              if (cloudItem.subList_zh !== undefined && cloudItem.subList_zh !== null && cloudItem.subList_zh !== "") {
+                local.subList_zh = String(cloudItem.subList_zh);
+              }
+              if (cloudItem.subList_en !== undefined && cloudItem.subList_en !== null && cloudItem.subList_en !== "") {
+                local.subList_en = String(cloudItem.subList_en);
+              }
+              if (cloudItem.reportLink !== undefined && cloudItem.reportLink !== null) {
+                local.reportLink = String(cloudItem.reportLink).trim();
+              }
+
               // Synchronize Quantitative subSummary Fields
               const cTotal = (cloudItem.subSummary_total !== undefined && cloudItem.subSummary_total !== "") ? Number(cloudItem.subSummary_total) : (local.subSummary ? local.subSummary.total : 0);
               const cClosed = (cloudItem.subSummary_closed !== undefined && cloudItem.subSummary_closed !== "") ? Number(cloudItem.subSummary_closed) : (local.subSummary ? local.subSummary.closed : 0);
@@ -2554,7 +2600,10 @@
           owner: local.owner,
           subSummary_total: local.subSummary ? local.subSummary.total : 0,
           subSummary_closed: local.subSummary ? local.subSummary.closed : 0,
-          subSummary_open: local.subSummary ? local.subSummary.open : 0
+          subSummary_open: local.subSummary ? local.subSummary.open : 0,
+          subList_zh: typeof local.subList_zh === 'string' ? local.subList_zh : (Array.isArray(local.subList_zh) ? local.subList_zh.join('\n') : ''),
+          subList_en: typeof local.subList_en === 'string' ? local.subList_en : (Array.isArray(local.subList_en) ? local.subList_en.join('\n') : ''),
+          reportLink: local.reportLink || ''
         };
 
         await fetch(GAS_WEBAPP_URL, {
