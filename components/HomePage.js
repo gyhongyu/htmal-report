@@ -1,4 +1,4 @@
-function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory, searchKeyword, setSearchKeyword }) {
+function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setCurrentCategory, searchKeyword, setSearchKeyword }) {
   try {
     const [allPages, setAllPages] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
@@ -207,18 +207,22 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
     };
 
     const handleCopyLink = async (pageId, title) => {
-      // 找到对应的 page 获取 fileName
       const page = allPages.find(p => p.pageId === pageId);
-      if (!page || !page.fileName) {
+      if (!page) {
         alert('無法複製連結');
         return;
       }
 
-      // 直接複製 HTML 文件連結
-      const url = `${window.location.origin}/reports/${page.fileName}`;
+      let url = '';
+      if (page.driveId || !page.fileName) {
+        url = `${window.location.origin}/preview.html?id=${page.pageId}`;
+      } else {
+        url = `${window.location.origin}/reports/${page.fileName}`;
+      }
+
       const text = `${title}\n${url}`;
       await navigator.clipboard.writeText(text);
-      alert('連結已複製到剪貼簿');
+      alert('獨立報告連結已複製到剪貼簿');
     };
 
     return (
@@ -319,8 +323,8 @@ function HomePage({ onCreateNew, onEditPage, currentCategory, setCurrentCategory
                     <PageCard
                       key={page.pageId}
                       page={page}
-                      onEdit={(pageId) => onEditPage(pageId)}
-                      onDelete={() => handleDeletePage(page.pageId)}
+                      onEdit={onEditPage ? () => onEditPage(page) : null}
+                      onDelete={onDeletePage ? () => onDeletePage(page.pageId) : null}
                       onShare={() => handleSharePage(page.pageId, page.title)}
                       onCopyLink={() => handleCopyLink(page.pageId, page.title)}
                     />

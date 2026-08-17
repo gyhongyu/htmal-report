@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/lucide-static@0.525.0/font/lucide.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style type="text/tailwindcss">
         @layer theme {
@@ -103,6 +104,27 @@
         50% { width: 70%; }
         100% { width: 100%; }
     }
+    
+    .input-field {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.5rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-field:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+    .preview-frame {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 480px;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.5rem;
+        background-color: #ffffff;
+    }
     </style>
 </head>
 
@@ -115,6 +137,8 @@
     <script type="text/babel" src="components/SearchBar.js"></script>
     <script type="text/babel" src="components/CategoryTabs.js"></script>
     <script type="text/babel" src="components/PageCard.js"></script>
+    <script type="text/babel" src="components/HTMLEditor.js"></script>
+    <script type="text/babel" src="components/PreviewPanel.js"></script>
     <script type="text/babel" src="components/HomePage.js"></script>
     <script type="text/babel" src="app.js"></script>
 </body>

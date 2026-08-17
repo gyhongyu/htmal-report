@@ -12,11 +12,12 @@ function HTMLEditor({ htmlCode, onChange }) {
           </p>
         </div>
         
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 flex flex-col min-h-[500px]">
           <textarea
             value={htmlCode}
             onChange={(e) => onChange(e.target.value)}
-            className="input-field h-full resize-none font-mono text-sm"
+            className="w-full flex-1 p-3 border border-slate-200 rounded-lg resize-none font-mono text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-900 text-slate-100"
+            style={{ minHeight: '520px', width: '100%', height: '100%' }}
             placeholder="請輸入您的HTML代碼..."
             spellCheck={false}
           />

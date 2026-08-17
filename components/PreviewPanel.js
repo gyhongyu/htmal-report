@@ -24,10 +24,11 @@ function PreviewPanel({ htmlCode }) {
           </p>
         </div>
         
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 flex flex-col min-h-[500px]">
           <iframe
             ref={iframeRef}
-            className="preview-frame"
+            className="w-full flex-1 border border-slate-200 rounded-lg bg-white shadow-inner"
+            style={{ minHeight: '520px', width: '100%', height: '100%' }}
             title="HTML預覽"
             sandbox="allow-scripts allow-same-origin"
           />

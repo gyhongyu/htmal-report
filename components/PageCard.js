@@ -1,10 +1,16 @@
-// 只读版本的 PageCard - 用于 GitHub Pages
-function PageCard({ page, onShare, onCopyLink }) {
+// 支援預覽、編輯、刪除的 PageCard 組件
+function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
   try {
     const handlePreview = () => {
-      // 直接打开 HTML 文件，不使用 iframe 预览
-      const url = `${window.location.origin}/reports/${page.fileName}`;
-      window.open(url, '_blank');
+      // 若是 GAS 雲端報告 (帶 driveId 或無 fileName)，使用 preview.html?id=xxx 渲染
+      if (page.driveId || !page.fileName) {
+        const url = `${window.location.origin}/preview.html?id=${page.pageId}`;
+        window.open(url, '_blank');
+      } else {
+        // 本地既有檔案直接打開
+        const url = `${window.location.origin}/reports/${page.fileName}`;
+        window.open(url, '_blank');
+      }
     };
 
     const handleDownload = async () => {
@@ -122,35 +128,51 @@ function PageCard({ page, onShare, onCopyLink }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={handlePreview}
-                className="flex items-center gap-1 px-3 py-1.5 text-green-600 hover:text-white hover:bg-green-600 border border-green-600 rounded text-sm transition-colors"
-                title="預覽頁面"
+                className="flex items-center gap-1 px-2.5 py-1.5 text-emerald-600 hover:text-white hover:bg-emerald-600 border border-emerald-600 rounded text-xs font-medium transition-colors"
+                title="全螢幕開啟報告"
               >
-                <div className="icon-external-link text-sm"></div>
+                <i className="fas fa-external-link-alt"></i>
                 <span>預覽</span>
               </button>
-              <button
-                onClick={onShare}
-                className="flex items-center gap-1 px-3 py-1.5 text-purple-600 hover:text-white hover:bg-purple-600 border border-purple-600 rounded text-sm transition-colors"
-                title="分享頁面"
-              >
-                <div className="icon-share text-sm"></div>
-                <span>分享</span>
-              </button>
+              
+              {onEdit && (
+                <button
+                  onClick={() => onEdit(page)}
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-blue-600 hover:text-white hover:bg-blue-600 border border-blue-600 rounded text-xs font-medium transition-colors"
+                  title="編輯報告內容"
+                >
+                  <i className="fas fa-edit"></i>
+                  <span>編輯</span>
+                </button>
+              )}
+
+              {/* 只有 Google 雲端報告才具備線上刪除功能 (避免刪除 GitHub 靜態檔案引發混亂) */}
+              {page.driveId && onDelete && (
+                <button
+                  onClick={() => onDelete(page)}
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-rose-600 hover:text-white hover:bg-rose-600 border border-rose-600 rounded text-xs font-medium transition-colors"
+                  title="從 Google 雲端刪除此報告"
+                >
+                  <i className="fas fa-trash-alt"></i>
+                  <span>刪除</span>
+                </button>
+              )}
             </div>
+            
             <div className="flex items-center gap-1">
               <button
                 onClick={handleDownload}
-                className="p-1.5 text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded transition-colors"
+                className="p-1.5 text-amber-600 hover:text-amber-700 hover:bg-amber-50 rounded transition-colors"
                 title="下載HTML文件"
               >
-                <div className="icon-download text-base"></div>
+                <i className="fas fa-download text-sm"></i>
               </button>
               <button
                 onClick={onCopyLink}
-                className="p-1.5 text-gray-600 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
-                title="複製連結"
+                className="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors"
+                title="複製獨立連結"
               >
-                <div className="icon-copy text-base"></div>
+                <i className="fas fa-copy text-sm"></i>
               </button>
             </div>
           </div>

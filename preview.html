@@ -1,35 +1,113 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML預覽頁面</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/lucide-static@0.525.0/font/lucide.css" rel="stylesheet">
-
-    <style type="text/tailwindcss">
-        @layer theme {
-        :root {
-            --primary-color: #2563eb;
+    <title>報告加載中...</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b0f17;
+            color: #94a3b8;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-    }
-    
-    @layer components {
-        .btn-primary {
-            @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-blue-700 transition-colors;
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-    }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(56, 189, 248, 0.2);
+            border-top-color: #38bdf8;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error-msg {
+            color: #f87171;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
-
 <body>
-    <div id="root"></div>
-    <script type="text/babel" src="utils/reportsLoader.js"></script>
-    <script type="text/babel" src="preview-app.js"></script>
-</body>
+    <div id="loader" class="loading-container">
+        <div class="spinner"></div>
+        <div>正在安全載入報告內容...</div>
+    </div>
 
+    <script>
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxcSYXocdTxhvYRq0A5eXsJqYvOI0xImay63Au9FSmolEwlbJ0My5Gr0aWUcvVpx8AiIA/exec';
+
+        async function initPreview() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const reportId = urlParams.get('id');
+            const driveIdParam = urlParams.get('driveId');
+
+            if (!reportId && !driveIdParam) {
+                showError('無效的報告連結 (缺少 ID)');
+                return;
+            }
+
+            try {
+                let targetDriveId = driveIdParam;
+
+                // 如果只給了 reportId，向 GAS 查出對應的 driveId
+                if (!targetDriveId && reportId) {
+                    const listResp = await fetch(`${GAS_API_URL}?action=list&v=${Date.now()}`, { cache: 'no-store' });
+                    const listData = await listResp.json();
+                    const report = listData.reports && listData.reports.find(r => r.id === reportId);
+                    
+                    if (report && report.driveId) {
+                        targetDriveId = report.driveId;
+                    } else {
+                        // 嘗試直接將 reportId 當作 driveId 或本地檔案
+                        targetDriveId = reportId;
+                    }
+                }
+
+                // 透過 GAS 讀取 Google Drive 完整 HTML 代碼
+                const getUrl = `${GAS_API_URL}?action=get&driveId=${targetDriveId}&v=${Date.now()}`;
+                const resp = await fetch(getUrl, { cache: 'no-store' });
+                
+                if (!resp.ok) {
+                    throw new Error('無法從雲端讀取報告');
+                }
+
+                const htmlContent = await resp.text();
+
+                if (!htmlContent || htmlContent.trim().length === 0) {
+                    throw new Error('報告內容為空');
+                }
+
+                // 100% 原生無損滿版覆蓋整頁，無任何 iframe、無任何頂部白條外殼
+                document.open();
+                document.write(htmlContent);
+                document.close();
+
+            } catch (err) {
+                console.error('載入失敗:', err);
+                showError('報告載入失敗: ' + err.message);
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('loader').innerHTML = `
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                <div class="error-msg">${msg}</div>
+            `;
+        }
+
+        initPreview();
+    </script>
+</body>
 </html>
