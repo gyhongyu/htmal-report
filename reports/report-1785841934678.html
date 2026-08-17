@@ -1477,20 +1477,48 @@
 
     let currentLang = 'en';
 
+    // Universal Robust Date Parser (Correctly handles ISO timestamps with 'T' in local browser timezone)
+    function parseCloudDate(val) {
+      if (!val) return '';
+      const str = String(val).trim();
+      if (str.includes('T')) {
+        const d = new Date(str);
+        if (!isNaN(d.getTime())) {
+          const year = d.getFullYear();
+          const month = String(d.getMonth() + 1).padStart(2, '0');
+          const day = String(d.getDate()).padStart(2, '0');
+          return `${year}-${month}-${day}`;
+        }
+      }
+      return str.split('T')[0].replace(/\//g, '-');
+    }
+
     // Total Range for Date Math: 2026-06-01 to 2027-01-31 (245 Days)
-    const axisStart = new Date("2026-06-01").getTime();
-    const axisEnd = new Date("2027-01-31").getTime();
+    const axisStart = new Date(2026, 5, 1).getTime();
+    const axisEnd = new Date(2027, 0, 31).getTime();
     const totalSpanMs = axisEnd - axisStart;
 
     function calcPercent(dateObj) {
-      const t = (dateObj instanceof Date) ? dateObj.getTime() : new Date(dateObj).getTime();
+      const normStr = parseCloudDate(dateObj);
+      let t;
+      if (normStr && normStr.includes('-')) {
+        const parts = normStr.split('-');
+        t = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])).getTime();
+      } else {
+        t = (dateObj instanceof Date) ? dateObj.getTime() : new Date(dateObj).getTime();
+      }
       let pct = ((t - axisStart) / totalSpanMs) * 100;
       return Math.max(0, Math.min(100, pct));
     }
 
     function calcDurationWks(startStr, endStr) {
-      const d1 = new Date(startStr);
-      const d2 = new Date(endStr);
+      const s = parseCloudDate(startStr);
+      const e = parseCloudDate(endStr);
+      const p1 = s.split('-');
+      const p2 = e.split('-');
+      if (p1.length < 3 || p2.length < 3) return '1 Wk';
+      const d1 = new Date(Number(p1[0]), Number(p1[1]) - 1, Number(p1[2]));
+      const d2 = new Date(Number(p2[0]), Number(p2[1]) - 1, Number(p2[2]));
       const diffMs = d2.getTime() - d1.getTime();
       const diffDays = Math.max(1, Math.round(diffMs / (1000 * 60 * 60 * 24)));
       const wks = Math.ceil(diffDays / 7);
@@ -1747,18 +1775,20 @@
 
     function formatMsDatePrefix(dateStr, lang) {
       if (!dateStr) return '';
-      const d = new Date(dateStr);
-      if (isNaN(d.getTime())) return '';
-
-      const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const monthStr = monthsEn[d.getMonth()];
-      const dayNum = String(d.getDate()).padStart(2, '0');
-
-      if (lang === 'en') {
-        return `${monthStr} ${dayNum}: `;
-      } else {
-        return `${d.getMonth() + 1}月${dayNum}日：`;
+      const cleanStr = String(dateStr).split('T')[0].replace(/\//g, '-').trim();
+      const parts = cleanStr.split('-');
+      if (parts.length >= 3) {
+        const monthNum = parseInt(parts[1], 10);
+        const dayNum = String(parseInt(parts[2], 10)).padStart(2, '0');
+        const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const monthStr = monthsEn[monthNum - 1] || `M${monthNum}`;
+        if (lang === 'en') {
+          return `${monthStr} ${dayNum}: `;
+        } else {
+          return `${monthNum}月${dayNum}日：`;
+        }
       }
+      return '';
     }
 
     // =========================================================================
@@ -1942,8 +1972,8 @@
             <td class="task-name-cell">${name}</td>
             <td><span style="color:${item.color}; font-weight:700;">${item.workstream}</span></td>
             <td><span class="badge-status ${statusClass}">${statusLabel}</span></td>
-            <td><input type="date" class="table-date-input" value="${item.startDate}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'startDate', this.value)"></td>
-            <td><input type="date" class="table-date-input" value="${item.endDate}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'endDate', this.value)"></td>
+            <td><input type="date" class="table-date-input" value="${parseCloudDate(item.startDate)}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'startDate', this.value)"></td>
+            <td><input type="date" class="table-date-input" value="${parseCloudDate(item.endDate)}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'endDate', this.value)"></td>
             <td>${owner}</td>
             <td><code>${auditPoint}</code></td>
           </tr>
@@ -2050,12 +2080,12 @@
 
           <div class="edit-field">
             <label>${t.lblStartDate}</label>
-            <input type="date" id="editStartDate" class="edit-input-date" value="${item.startDate}">
+            <input type="date" id="editStartDate" class="edit-input-date" value="${parseCloudDate(item.startDate)}">
           </div>
 
           <div class="edit-field">
             <label>${t.lblEndDate}</label>
-            <input type="date" id="editEndDate" class="edit-input-date" value="${item.endDate}">
+            <input type="date" id="editEndDate" class="edit-input-date" value="${parseCloudDate(item.endDate)}">
           </div>
 
           <!-- Dual-Mode 2-Choice Calculation Box -->
@@ -2255,7 +2285,7 @@
 
           <div class="edit-field">
             <label>${t.lblMsDate}</label>
-            <input type="date" id="editMsDate" class="edit-input-date" value="${ms.date}">
+            <input type="date" id="editMsDate" class="edit-input-date" value="${parseCloudDate(ms.date)}">
           </div>
 
           <div class="edit-field vertical-align-top">
@@ -2492,8 +2522,8 @@
           // Smart Merge Engine: Update local masterTasks attributes with cloud data while preserving local styling/colors
           list.forEach(cloudItem => {
             let local = masterTasks.find(t => t.id === cloudItem.id);
-            const sDate = (cloudItem.startDate && cloudItem.startDate.includes('T')) ? cloudItem.startDate.split('T')[0] : cloudItem.startDate;
-            const eDate = (cloudItem.endDate && cloudItem.endDate.includes('T')) ? cloudItem.endDate.split('T')[0] : cloudItem.endDate;
+            const sDate = parseCloudDate(cloudItem.startDate);
+            const eDate = parseCloudDate(cloudItem.endDate);
 
             if (local) {
               if (cloudItem.name_zh) local.name_zh = cloudItem.name_zh;
@@ -2539,7 +2569,7 @@
           if (jsonRes && Array.isArray(jsonRes.milestones) && jsonRes.milestones.length > 0) {
             jsonRes.milestones.forEach(cloudMs => {
               let localMs = masterMilestones.find(m => m.id === cloudMs.id);
-              const mDate = (cloudMs.date && cloudMs.date.includes('T')) ? cloudMs.date.split('T')[0] : cloudMs.date;
+              const mDate = parseCloudDate(cloudMs.date);
               if (localMs) {
                 if (cloudMs.name_zh) localMs.name_zh = cloudMs.name_zh;
                 if (cloudMs.name_en) localMs.name_en = cloudMs.name_en;
