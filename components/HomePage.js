@@ -33,8 +33,11 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
       try {
         setProgress(30);
         console.log('開始載入所有頁面...');
-        const pages = await getAllStoredPages();
-        console.log('getAllStoredPages 返回的頁面數:', pages.length);
+        const pages = await getAllStoredPages((updatedPages) => {
+          console.log('⚡ SWR 背景同步回傳，無縫更新頁面清單，總數:', updatedPages.length);
+          setAllPages(updatedPages);
+        });
+        console.log('getAllStoredPages 首屏頁面數:', pages.length);
         console.log('頁面內容預覽:', pages.slice(0, 3));
         setProgress(70);
         setAllPages(pages);

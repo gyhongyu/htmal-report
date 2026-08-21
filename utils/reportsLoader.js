@@ -3,82 +3,133 @@
 
 // GAS Web App 雲端網關網址
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxcSYXocdTxhvYRq0A5eXsJqYvOI0xImay63Au9FSmolEwlbJ0My5Gr0aWUcvVpx8AiIA/exec';
+const CLOUD_CACHE_KEY = 'htmal_cloud_reports_cache';
 
 /**
- * 載入報告索引清單 (極速並行雙軌：本地 5ms 先行渲染，GAS 雲端並行同步)
+ * 讀取本地快取的雲端報告列表
  */
-async function loadReportsIndex() {
-    let cloudReports = [];
-    let localReports = [];
-
-    // 1. 本地與雲端同時並行發起請求 (Promise.allSettled 徹底告別串行阻塞)
-    const localPromise = (async () => {
-        try {
-            const timestamp = Date.now();
-            const response = await fetch(`./data/reports-index.json?v=${timestamp}`, { cache: 'no-store' });
-            if (response.ok) {
-                const localData = await response.json();
-                return localData.reports || [];
-            }
-        } catch (e) {
-            console.warn('本地索引載入異常:', e);
+function getCachedCloudReports() {
+    try {
+        const cached = localStorage.getItem(CLOUD_CACHE_KEY);
+        if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed)) return parsed;
         }
-        return [];
-    })();
-
-    const cloudPromise = (async () => {
-        if (!GAS_API_URL) return [];
-        try {
-            const timestamp = Date.now();
-            // 設定 5 秒逾時，防止 GAS 喚醒延遲阻塞整體 UI
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 6000);
-            const response = await fetch(`${GAS_API_URL}?action=list&v=${timestamp}`, {
-                cache: 'no-store',
-                signal: controller.signal
-            });
-            clearTimeout(timeoutId);
-            if (response.ok) {
-                const data = await response.json();
-                return data.reports || [];
-            }
-        } catch (e) {
-            console.warn('GAS 雲端快速通道連線微延遲:', e);
-        }
-        return [];
-    })();
-
-    // 並行等待結果
-    const [localRes, cloudRes] = await Promise.allSettled([localPromise, cloudPromise]);
-    localReports = localRes.status === 'fulfilled' ? localRes.value : [];
-    cloudReports = cloudRes.status === 'fulfilled' ? cloudRes.value : [];
-
-    // 2. 智能合併（雲端優先排最前，接著排本地舊檔案）
-    const mergedMap = new Map();
-    cloudReports.forEach(r => { if (r.id) mergedMap.set(r.id, r); });
-    localReports.forEach(r => { if (r.id && !mergedMap.has(r.id)) mergedMap.set(r.id, r); });
-
-    const allMerged = Array.from(mergedMap.values());
-    console.log(`⚡ 極速並行載入完成：總計 ${allMerged.length} 篇 (雲端 ${cloudReports.length} + 本地 ${localReports.length})`);
-    return { reports: allMerged };
+    } catch (e) {
+        console.warn('讀取本地雲端快取異常:', e);
+    }
+    return [];
 }
 
 /**
- * 獲取所有報告列表（標準化元數據）
+ * 將雲端報告列表存入本地快取
  */
-async function getAllStoredPages() {
+function setCachedCloudReports(reports) {
     try {
-        const indexData = await loadReportsIndex();
-        return indexData.reports.map(r => ({
-            pageId: r.id,
-            title: r.title,
-            description: r.description || '',
-            categories: r.categories || ['未分類'],
-            fileName: r.fileName || '',
-            driveId: r.driveId || '',
-            createdAt: r.createdAt,
-            updatedAt: r.updatedAt || r.createdAt
-        }));
+        if (Array.isArray(reports)) {
+            localStorage.setItem(CLOUD_CACHE_KEY, JSON.stringify(reports));
+        }
+    } catch (e) {
+        console.warn('寫入本地雲端快取異常:', e);
+    }
+}
+
+/**
+ * 合併雲端與本地報告（雲端在前，本地在後，以 id 去重）
+ */
+function mergeReports(cloudList, localList) {
+    const mergedMap = new Map();
+    (cloudList || []).forEach(r => { if (r && r.id) mergedMap.set(r.id, r); });
+    (localList || []).forEach(r => { if (r && r.id && !mergedMap.has(r.id)) mergedMap.set(r.id, r); });
+    return Array.from(mergedMap.values());
+}
+
+/**
+ * 標準化報告數據結構
+ */
+function formatReportItems(reports) {
+    return (reports || []).map(r => ({
+        pageId: r.id,
+        title: r.title,
+        description: r.description || '',
+        categories: r.categories || ['未分類'],
+        fileName: r.fileName || '',
+        driveId: r.driveId || '',
+        createdAt: r.createdAt,
+        updatedAt: r.updatedAt || r.createdAt
+    }));
+}
+
+/**
+ * 載入報告索引清單 (SWR: 本地與快取 5ms 先行渲染，GAS 雲端背景異步同步)
+ * @param {Function} onCloudSync - 雲端同步完成時的回調 (updatedReports) => void
+ */
+async function loadReportsIndex(onCloudSync = null) {
+    // 1. 取得現有快取（0ms 秒開）
+    let cachedCloud = getCachedCloudReports();
+    let localReports = [];
+
+    // 2. 本地靜態 JSON 載入 (5ms)
+    try {
+        const timestamp = Date.now();
+        const response = await fetch(`./data/reports-index.json?v=${timestamp}`, { cache: 'no-store' });
+        if (response.ok) {
+            const localData = await response.json();
+            localReports = localData.reports || [];
+        }
+    } catch (e) {
+        console.warn('本地索引載入異常:', e);
+    }
+
+    // 3. 背景發起 GAS 雲端即時同步（給予 15 秒寬容時間，不阻塞首屏）
+    if (GAS_API_URL) {
+        (async () => {
+            try {
+                const timestamp = Date.now();
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+                const response = await fetch(`${GAS_API_URL}?action=list&v=${timestamp}`, {
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                if (response.ok) {
+                    const data = await response.json();
+                    const liveCloudReports = data.reports || [];
+                    
+                    // 更新快取
+                    setCachedCloudReports(liveCloudReports);
+                    
+                    // 若有註冊回調，通知前端更新
+                    if (typeof onCloudSync === 'function') {
+                        const newMerged = mergeReports(liveCloudReports, localReports);
+                        console.log(`☁️ 雲端背景同步完成：共 ${liveCloudReports.length} 篇雲端報告`);
+                        onCloudSync(newMerged);
+                    }
+                }
+            } catch (e) {
+                console.warn('GAS 雲端背景同步微延遲/逾時:', e);
+            }
+        })();
+    }
+
+    // 4. 第一階段立即返回（快取雲端 + 本地 151 篇）
+    const initialMerged = mergeReports(cachedCloud, localReports);
+    console.log(`⚡ SWR 首屏極速載入：總計 ${initialMerged.length} 篇 (快取雲端 ${cachedCloud.length} + 本地 ${localReports.length})`);
+    return { reports: initialMerged };
+}
+
+/**
+ * 獲取所有報告列表（標準化元數據，支援 SWR 背景更新回調）
+ */
+async function getAllStoredPages(onUpdate = null) {
+    try {
+        const onCloudSync = onUpdate ? (updatedReports) => {
+            onUpdate(formatReportItems(updatedReports));
+        } : null;
+
+        const indexData = await loadReportsIndex(onCloudSync);
+        return formatReportItems(indexData.reports);
     } catch (error) {
         console.error('獲取報告列表失敗:', error);
         return [];

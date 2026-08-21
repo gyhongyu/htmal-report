@@ -61,17 +61,33 @@
             try {
                 let targetDriveId = driveIdParam;
 
-                // 如果只給了 reportId，向 GAS 查出對應的 driveId
+                // 如果只給了 reportId，優先從本地快取中查找 driveId，秒級跳過 list 請求
                 if (!targetDriveId && reportId) {
-                    const listResp = await fetch(`${GAS_API_URL}?action=list&v=${Date.now()}`, { cache: 'no-store' });
-                    const listData = await listResp.json();
-                    const report = listData.reports && listData.reports.find(r => r.id === reportId);
-                    
-                    if (report && report.driveId) {
-                        targetDriveId = report.driveId;
-                    } else {
-                        // 嘗試直接將 reportId 當作 driveId 或本地檔案
-                        targetDriveId = reportId;
+                    try {
+                        const cached = localStorage.getItem('htmal_cloud_reports_cache');
+                        if (cached) {
+                            const parsed = JSON.parse(cached);
+                            if (Array.isArray(parsed)) {
+                                const found = parsed.find(r => r.id === reportId);
+                                if (found && found.driveId) {
+                                    targetDriveId = found.driveId;
+                                }
+                            }
+                        }
+                    } catch (e) {}
+
+                    // 若快取未命中，再向 GAS 查出對應的 driveId
+                    if (!targetDriveId) {
+                        const listResp = await fetch(`${GAS_API_URL}?action=list&v=${Date.now()}`, { cache: 'no-store' });
+                        const listData = await listResp.json();
+                        const report = listData.reports && listData.reports.find(r => r.id === reportId);
+                        
+                        if (report && report.driveId) {
+                            targetDriveId = report.driveId;
+                        } else {
+                            // 嘗試直接將 reportId 當作 driveId 或本地檔案
+                            targetDriveId = reportId;
+                        }
                     }
                 }
 
