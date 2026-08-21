@@ -215,7 +215,8 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
 
       let url = '';
       if (page.driveId || !page.fileName) {
-        url = `${window.location.origin}/preview.html?id=${page.pageId}`;
+        const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
+        url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
       } else {
         url = `${window.location.origin}/reports/${page.fileName}`;
       }

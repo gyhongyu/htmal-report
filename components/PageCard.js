@@ -4,7 +4,8 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
     const handlePreview = () => {
       // 若是 GAS 雲端報告 (帶 driveId 或無 fileName)，使用 preview.html?id=xxx 渲染
       if (page.driveId || !page.fileName) {
-        const url = `${window.location.origin}/preview.html?id=${page.pageId}`;
+        const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
+        const url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
         window.open(url, '_blank');
       } else {
         // 本地既有檔案直接打開
