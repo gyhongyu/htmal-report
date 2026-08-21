@@ -81,35 +81,39 @@ async function loadReportsIndex(onCloudSync = null) {
         console.warn('本地索引載入異常:', e);
     }
 
-    // 3. 背景發起 GAS 雲端即時同步（給予 15 秒寬容時間，不阻塞首屏）
+    // 3. 背景發起 GAS 雲端即時同步（完全非阻塞背景執行，不設過激逾時，允許慢速網路與冷啟動完成）
     if (GAS_API_URL) {
         (async () => {
-            try {
-                const timestamp = Date.now();
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000);
-                const response = await fetch(`${GAS_API_URL}?action=list&v=${timestamp}`, {
-                    cache: 'no-store',
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-                if (response.ok) {
-                    const data = await response.json();
-                    const liveCloudReports = data.reports || [];
-                    
-                    // 更新快取
-                    setCachedCloudReports(liveCloudReports);
-                    
-                    // 若有註冊回調，通知前端更新
-                    if (typeof onCloudSync === 'function') {
-                        const newMerged = mergeReports(liveCloudReports, localReports);
-                        console.log(`☁️ 雲端背景同步完成：共 ${liveCloudReports.length} 篇雲端報告`);
-                        onCloudSync(newMerged);
+            const fetchCloud = async (retryCount = 0) => {
+                try {
+                    const timestamp = Date.now();
+                    const response = await fetch(`${GAS_API_URL}?action=list&v=${timestamp}`, {
+                        cache: 'no-store'
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        const liveCloudReports = data.reports || [];
+                        
+                        // 更新快取
+                        setCachedCloudReports(liveCloudReports);
+                        
+                        // 若有註冊回調，通知前端更新
+                        if (typeof onCloudSync === 'function') {
+                            const newMerged = mergeReports(liveCloudReports, localReports);
+                            console.log(`☁️ 雲端背景同步成功：共 ${liveCloudReports.length} 篇雲端報告`);
+                            onCloudSync(newMerged);
+                        }
+                        return true;
+                    }
+                } catch (e) {
+                    console.warn(`GAS 雲端背景同步重試 (${retryCount + 1}/2):`, e);
+                    if (retryCount < 1) {
+                        setTimeout(() => fetchCloud(retryCount + 1), 2000);
                     }
                 }
-            } catch (e) {
-                console.warn('GAS 雲端背景同步微延遲/逾時:', e);
-            }
+                return false;
+            };
+            fetchCloud(0);
         })();
     }
 
