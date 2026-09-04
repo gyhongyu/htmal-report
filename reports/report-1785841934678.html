@@ -14,13 +14,11 @@
      * 🗺️ [CODE MAP] SSSTC Dashboard 架構導引目錄 (AI 代理人快速定位專用)
      * =========================================================================
      * 1. 🎨 [ANCHOR: CSS-THEME]          - 主題色彩變數與全域重設 (Tokens & Reset)
-     * 2. 🧱 [ANCHOR: CSS-NAVBAR]         - 頂部毛玻璃 Header、官方 LOGO 與操作按鈕
+     * 2. 🧱 [ANCHOR: CSS-NAVBAR]         - 頂部毛玻璃 Header、官方 LOGO 與全螢幕/語言按鈕
      * 3. 🛸 [ANCHOR: CSS-FLOATING-DOCK]  - 極致左上角懸浮快速導航島 (避開 LOGO) 與 Toast
-     * 4. 📋 [ANCHOR: CSS-TABLE]          - 折疊數據表格與欄位樣式
-     * 5. 📊 [ANCHOR: CSS-GANTT]          - 自研雙欄甘特圖、時間軸網格、進度條與金黃里程碑
-     * 6. 📈 [ANCHOR: CSS-DASHBOARD]      - 儀表台雙 Chart.js 畫布與推進卡片
-     * 7. ✏️ [ANCHOR: CSS-MODAL]          - 任務與里程碑編輯彈窗 (Flat & Independent)
-     * 8. 🗂️ [ANCHOR: CSS-DRAWER]         - 甘特圖子任務展開抽屜與報告連結按鈕
+     * 4. 📊 [ANCHOR: CSS-GANTT]          - 14 個月自研雙欄甘特圖、時間軸網格與金黃里程碑
+     * 5. 📈 [ANCHOR: CSS-DASHBOARD]      - 儀表台雙 Chart.js 畫布與推進卡片
+     * 6. 🗂️ [ANCHOR: CSS-DRAWER]         - 甘特圖子任務展開抽屜與報告連結按鈕
      * =========================================================================
      */
 
@@ -48,7 +46,7 @@
     }
 
     .container {
-      max-width: 1440px;
+      max-width: 100%;
       margin: 0 auto;
     }
 
@@ -190,6 +188,82 @@
     .btn-fullscreen:hover { background: #E2E8F0; }
 
     /* =========================================================================
+     * ⛔ [ANCHOR: CSS-BLOCK-OVERLAY] 全螢幕斷線阻斷遮罩
+     * ========================================================================= */
+    .cloud-error-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999999;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .cloud-error-overlay.active {
+      display: flex;
+    }
+
+    .cloud-error-card {
+      background: #1E293B;
+      border: 1.5px solid #EF4444;
+      border-radius: 14px;
+      padding: 2.2rem 2.5rem;
+      max-width: 540px;
+      box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.25);
+      animation: fadeInDown 0.3s ease-out;
+    }
+
+    .cloud-error-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .cloud-error-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #F87171;
+      margin-bottom: 0.75rem;
+    }
+
+    .cloud-error-desc {
+      font-size: 0.9rem;
+      color: #CBD5E1;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .cloud-error-btn {
+      background: #EF4444;
+      color: #FFFFFF;
+      border: none;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .cloud-error-btn:hover {
+      background: #DC2626;
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================================
      * 🛸 [ANCHOR: CSS-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
      * ========================================================================= */
     .floating-quick-dock {
@@ -264,15 +338,15 @@
       color: var(--text-dark);
       background: transparent;
       border: none;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.15s;
       width: 100%;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
       text-decoration: none;
     }
 
-    .floating-dock-item:hover {
-      background: #F1F5F9;
+    .floating-dock-item:hover:not(.disabled) {
+      background: #EFF6FF;
       color: var(--primary);
     }
 
@@ -283,19 +357,20 @@
     }
 
     .floating-dock-item.disabled {
-      opacity: 0.5;
+      opacity: 0.45;
       cursor: not-allowed;
     }
 
     .toast-popup {
       position: fixed;
-      top: 45px;
-      left: 6px;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
       background: #1E293B;
-      color: #FFF;
-      padding: 0.55rem 0.95rem;
+      color: #FFFFFF;
+      padding: 0.55rem 1.1rem;
       border-radius: 8px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 600;
       box-shadow: 0 10px 20px rgba(0,0,0,0.18);
       z-index: 1000000;
@@ -315,104 +390,7 @@
     }
 
     /* =========================================================================
-     * 📋 [ANCHOR: CSS-TABLE] 折疊數據表格與欄位樣式
-     * ========================================================================= */
-    .panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      overflow: hidden;
-    }
-
-    .panel-header {
-      padding: 0.85rem 1.25rem;
-      background: #FAFAFA;
-      border-bottom: 1px solid var(--border-light);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .panel-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #334155;
-    }
-
-    .data-table-wrapper {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      max-height: 480px;
-    }
-
-    .data-table {
-      width: 100%;
-      min-width: 950px;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      text-align: left;
-    }
-
-    .data-table th, .data-table td {
-      padding: 0.65rem 0.85rem;
-      border-bottom: 1px solid var(--border-light);
-      white-space: nowrap;
-    }
-
-    .data-table th {
-      background: #F8FAFC;
-      color: var(--text-muted);
-      font-weight: 600;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .data-table tr:hover {
-      background: #F1F5F9;
-      cursor: pointer;
-    }
-
-    .task-name-cell {
-      min-width: 280px;
-      max-width: 420px;
-      white-space: normal !important;
-      word-break: break-word;
-      font-weight: 600;
-    }
-
-    .badge-status {
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .status-completed { background: #DCFCE7; color: #15803D; }
-    .status-progress { background: #FEF3C7; color: #B45309; }
-    .status-notstarted { background: #E2E8F0; color: #475569; }
-
-    .table-date-input {
-      border: 1px solid #CBD5E1;
-      border-radius: 4px;
-      padding: 2px 4px;
-      font-size: 0.8rem;
-      font-family: inherit;
-      color: #1E293B;
-      background: #FFF;
-      cursor: pointer;
-    }
-
-    .table-date-input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    /* =========================================================================
-     * 📊 [ANCHOR: CSS-GANTT] 自研雙欄甘特圖、時間軸網格與金黃里程碑
+     * 📊 [ANCHOR: CSS-GANTT] 14 個月自研雙欄甘特圖、時間軸網格與金黃里程碑
      * ========================================================================= */
     .roadmap-chart-wrapper {
       background: var(--bg-card);
@@ -427,7 +405,8 @@
     }
 
     .roadmap-inner-container {
-      min-width: 850px;
+      width: 100%;
+      min-width: 0;
       position: relative;
     }
 
@@ -488,7 +467,7 @@
     .milestones-strip-v2 {
       display: flex;
       margin-left: 270px;
-      height: 66px;
+      height: 62px;
       position: relative;
       margin-bottom: 0.4rem;
     }
@@ -504,23 +483,26 @@
     }
 
     .milestone-level-top { top: 0px; }
-    .milestone-level-bottom { top: 32px; }
+    .milestone-level-bottom { top: 30px; }
 
     .milestone-card-content {
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      font-size: 0.73rem;
+      gap: 0.25rem;
+      font-size: 0.70rem;
       font-weight: 700;
       color: #B45309;
       white-space: nowrap;
       background: #FEF3C7;
-      padding: 3px 9px;
-      border-radius: 6px 12px 12px 6px;
+      padding: 2px 7px;
+      border-radius: 6px 10px 10px 6px;
       border: 1px solid #FCD34D;
       box-shadow: 0 2px 5px rgba(0,0,0,0.06);
       transition: all 0.15s;
       cursor: pointer;
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .milestone-card-content:hover {
@@ -563,7 +545,7 @@
       height: 20px;
     }
 
-    /* Two-Tier Month & Week Header Grid */
+    /* Slim Single-Tier Month Header Grid (No W1-W4 for Clean 19-Month Fit) */
     .timeline-month-ticks {
       display: flex;
       margin-left: 270px;
@@ -577,7 +559,7 @@
 
     .month-col-group {
       flex: 1;
-      border-right: 1.5px solid #475569;
+      border-right: 1px solid #CBD5E1;
       display: flex;
       flex-direction: column;
       transition: background 0.3s;
@@ -598,33 +580,15 @@
     }
 
     .month-title-head {
-      font-size: 0.82rem;
+      font-size: 0.74rem;
       font-weight: 700;
       color: #1E293B;
       text-align: center;
-      padding: 3px 0;
-      border-bottom: 1px solid #CBD5E1;
+      padding: 5px 0;
       background: #EFF6FF;
-    }
-
-    .weeks-subrow {
-      display: flex;
-      height: 20px;
-    }
-
-    .week-cell {
-      flex: 1;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: #64748B;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-right: 1px dashed #CBD5E1;
-    }
-
-    .week-cell:last-child {
-      border-right: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Timeline Body Rows with STRICT Z-INDEX (Dashed lines underneath) */
@@ -644,23 +608,22 @@
     .row-label {
       width: 270px;
       flex-shrink: 0;
-      padding-right: 1rem;
-      font-size: 0.85rem;
+      padding-right: 0.75rem;
+      font-size: 0.83rem;
       font-weight: 600;
       color: #334155;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
-      cursor: pointer;
+      cursor: default;
     }
 
     .duration-pill {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      padding: 1px 6px;
+      padding: 1px 5px;
       border-radius: 4px;
       background: #F1F5F9;
       color: #475569;
@@ -686,6 +649,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       flex: 1;
+      min-width: 0;
     }
 
     .row-track {
@@ -708,7 +672,7 @@
 
     .month-guide-group {
       flex: 1;
-      border-right: 1.5px solid #CBD5E1;
+      border-right: 1px solid #CBD5E1;
       display: flex;
     }
 
@@ -718,7 +682,7 @@
 
     .week-guide-col {
       flex: 1;
-      border-right: 1px dashed #E2E8F0;
+      border-right: 1px dashed rgba(226, 232, 240, 0.7);
     }
 
     .week-guide-col:last-child {
@@ -759,6 +723,17 @@
       pointer-events: none;
     }
 
+    .progress-pct-outside {
+      position: absolute;
+      left: calc(100% + 5px);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #475569;
+      white-space: nowrap;
+    }
+
     /* =========================================================================
      * 📈 [ANCHOR: CSS-DASHBOARD] 儀表台雙 Chart.js 畫布與推進卡片
      * ========================================================================= */
@@ -788,198 +763,6 @@
       height: 200px;
     }
 
-    /* =========================================================================
-     * ✏️ [ANCHOR: CSS-MODAL] 任務與里程碑編輯彈窗 (Flat & Independent)
-     * ========================================================================= */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(15, 23, 42, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      backdrop-filter: blur(2px);
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: #FFF;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 650px;
-      padding: 0 1.75rem 1.75rem 1.75rem;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-      max-height: 85vh;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    .modal-header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: #FFF;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 1.25rem;
-      padding-bottom: 0.75rem;
-      margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border-light);
-    }
-
-    .modal-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #0F172A;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 1.25rem;
-      cursor: pointer;
-      color: var(--text-muted);
-    }
-
-    .detail-group {
-      margin-bottom: 0.85rem;
-    }
-
-    .detail-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-
-    .detail-val {
-      font-size: 0.9rem;
-      color: var(--text-dark);
-    }
-
-    .edit-box {
-      margin-top: 1.25rem;
-      padding: 1rem;
-      background: #F8FAFC;
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-    }
-
-    .edit-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.85rem;
-    }
-
-    .edit-field {
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .edit-field.vertical-align-top {
-      align-items: flex-start;
-    }
-
-    .edit-field label {
-      width: 140px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #475569;
-      flex-shrink: 0;
-    }
-
-    .edit-input-text {
-      flex: 1;
-      padding: 4px 8px;
-      border: 1px solid #CBD5E1;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-family: inherit;
-    }
-
-    .edit-input-slider {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .edit-input-slider input[type=range] {
-      flex: 1;
-    }
-
-    .edit-input-slider input[type=number] {
-      width: 55px;
-      padding: 2px 4px;
-      border: 1px solid #CBD5E1;
-      border-radius: 4px;
-    }
-
-    .edit-input-date {
-      padding: 4px 8px;
-      border-radius: 4px;
-      border: 1px solid #CBD5E1;
-      font-weight: 600;
-      font-family: inherit;
-    }
-
-    .edit-select {
-      padding: 4px 8px;
-      border-radius: 4px;
-      border: 1px solid #CBD5E1;
-      font-weight: 600;
-    }
-
-    .btn-save-cloud {
-      width: 100%;
-      padding: 0.65rem;
-      background: #10B981;
-      color: #FFF;
-      font-weight: 700;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .btn-save-cloud:hover {
-      background: #059669;
-    }
-
-    .btn-delete-task {
-      width: 100%;
-      padding: 0.5rem;
-      background: #FEE2E2;
-      color: #DC2626;
-      font-weight: 700;
-      border: 1px solid #FCA5A5;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-    }
-
-    .btn-delete-task:hover {
-      background: #FCA5A5;
-      color: #991B1B;
-    }
 
     /* =========================================================================
      * 🗂️ [ANCHOR: CSS-DRAWER] 甘特圖子任務展開抽屜與報告連結
@@ -1004,6 +787,7 @@
       transition: all 0.2s;
       margin-left: 4px;
       font-weight: 700;
+      flex-shrink: 0;
     }
     .btn-expand-sub:hover { background: #DBEAFE; transform: scale(1.05); }
     .btn-expand-sub.active { background: #2563EB; color: #FFF; border-color: #2563EB; }
@@ -1023,7 +807,7 @@
       z-index: 15;
       max-width: 680px;
       width: fit-content;
-      min-width: 480px;
+      min-width: 420px;
     }
 
     .btn-report-link {
@@ -1081,6 +865,207 @@
       font-weight: 500;
     }
 
+    /* =========================================================================
+     * ✏️ [ANCHOR: CSS-MODAL] 任務詳情與里程碑編輯彈窗 (Flat Overlays)
+     * ========================================================================= */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      animation: fadeInModal 0.2s ease-out;
+    }
+
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-content {
+      background: #FFF;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 620px;
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+      max-height: 88vh;
+      overflow-y: auto;
+      position: relative;
+      border: 1px solid var(--border-light);
+    }
+
+    .modal-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: #FFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.25rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .modal-close {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .modal-close:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .detail-group {
+      margin-bottom: 0.85rem;
+    }
+
+    .detail-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-val {
+      font-size: 0.88rem;
+      color: var(--text-dark);
+    }
+
+    .edit-box {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      background: #F8FAFC;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+    }
+
+    .edit-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.85rem;
+    }
+
+    .edit-field {
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .edit-field label {
+      width: 140px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #475569;
+      flex-shrink: 0;
+    }
+
+    .edit-input-text {
+      flex: 1;
+      padding: 5px 8px;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .edit-input-text:focus { border-color: var(--primary); }
+
+    .edit-input-slider {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .edit-input-slider input[type=range] {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .edit-input-slider input[type=number] {
+      width: 55px;
+      padding: 3px 5px;
+      border: 1px solid #CBD5E1;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .edit-input-date {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+      font-weight: 600;
+      font-family: inherit;
+      outline: none;
+    }
+    .edit-input-date:focus { border-color: var(--primary); }
+
+    .edit-select {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+      font-weight: 600;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .btn-save-cloud {
+      width: 100%;
+      padding: 0.65rem;
+      background: #10B981;
+      color: #FFF;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      box-shadow: 0 2px 5px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-save-cloud:hover {
+      background: #059669;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.35);
+    }
+
     /* RWD Media Queries */
     @media (max-width: 991px) {
       .top-header { flex-wrap: wrap; }
@@ -1098,6 +1083,24 @@
   </style>
 </head>
 <body>
+
+  <!-- =========================================================================
+   * ⛔ [ANCHOR: DOM-BLOCK-OVERLAY] 全螢幕斷線阻斷遮罩
+   * ========================================================================= -->
+  <div class="cloud-error-overlay" id="cloudErrorOverlay">
+    <div class="cloud-error-card">
+      <div class="cloud-error-icon">⚠️</div>
+      <div class="cloud-error-title" id="cloudErrorTitle">Google Sheet 雲端資料庫連線中斷</div>
+      <div class="cloud-error-desc" id="cloudErrorDesc">
+        無法自 Google Sheet (GAS WebApp) 獲取最新 Roadmap 資料。<br>
+        為維護單一真實資料庫 (SSOT) 準則，主畫面已安全阻斷。<br>
+        請檢查網路連線或稍後按 F5 重新整理重試。
+      </div>
+      <button type="button" class="cloud-error-btn" onclick="window.location.reload()">
+        <span>🔄</span> 重新載入頁面 (F5)
+      </button>
+    </div>
+  </div>
 
   <!-- =========================================================================
    * 🛸 [ANCHOR: DOM-FLOATING-DOCK] 極致左上角懸浮快速導航島 (避開 LOGO)
@@ -1158,41 +1161,10 @@
         </div>
       </div>
 
-      <!-- Header Action Buttons (Strict 4 Standard Buttons) -->
+      <!-- Header Action Buttons (Strictly Fullscreen & Language Switcher) -->
       <div class="header-actions">
         <button class="btn btn-fullscreen" onclick="toggleFullScreen()" id="uiFullscreenBtn">⛶ Fullscreen</button>
         <button class="btn btn-lang" onclick="toggleLanguage()" id="uiLangBtn">🌐 繁體中文</button>
-        <button class="btn" onclick="toggleInputPanel()" id="uiToggleTableBtn">Toggle / Collapse Table</button>
-        <button class="btn btn-primary" onclick="addNewTask()" id="uiAddTaskBtn">+ Add Task Item</button>
-      </div>
-    </div>
-
-    <!-- =========================================================================
-     * 📋 [ANCHOR: DOM-TABLE] 折疊資料表格
-     * ========================================================================= -->
-    <div class="panel" id="inputPanel" style="display: none;">
-      <div class="panel-header">
-        <span class="panel-title" id="uiPanelTitle">📋 Master Workstream Action Plan & Timeline</span>
-        <span style="font-size: 0.8rem; color: var(--text-muted);"><span id="uiTaskCountLabel">Total 11 Master Activities</span></span>
-      </div>
-      <div class="data-table-wrapper">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th id="thRef">Ref #</th>
-              <th id="thName">Activity / Task Name</th>
-              <th id="thCategory">Workstream (Category)</th>
-              <th id="thStatus">Status</th>
-              <th id="thStart">Start Date</th>
-              <th id="thEnd">End Date</th>
-              <th id="thOwner">Owner / DRI</th>
-              <th id="thAuditPoint">Audit Point No.</th>
-            </tr>
-          </thead>
-          <tbody id="taskTableBody">
-            <!-- Dynamic rows generated by JS -->
-          </tbody>
-        </table>
       </div>
     </div>
 
@@ -1216,40 +1188,27 @@
         <div class="milestones-strip-v2" id="milestonesStrip">
         </div>
 
-        <!-- Two-Tier Month & Week Header Grid -->
+        <!-- Single-Tier Month Header Grid (19 Months: 2026-06 to 2027-12) -->
         <div class="timeline-month-ticks" id="monthTicksRow">
-          <div class="month-col-group" data-month="2026-06">
-            <div class="month-title-head">Jun '26</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
-          <div class="month-col-group" data-month="2026-07">
-            <div class="month-title-head">Jul '26</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
-          <div class="month-col-group" data-month="2026-08">
-            <div class="month-title-head">Aug '26</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
-          <div class="month-col-group" data-month="2026-09">
-            <div class="month-title-head">Sep '26</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
-          <div class="month-col-group" data-month="2026-10">
-            <div class="month-title-head">Oct '26</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
-          <div class="month-col-group" data-month="2026-11">
-            <div class="month-title-head">Nov '26</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
-          <div class="month-col-group" data-month="2026-12">
-            <div class="month-title-head">Dec '26</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
-          <div class="month-col-group" data-month="2027-01">
-            <div class="month-title-head">Jan '27</div>
-            <div class="weeks-subrow"><div class="week-cell">W1</div><div class="week-cell">W2</div><div class="week-cell">W3</div><div class="week-cell">W4</div></div>
-          </div>
+          <div class="month-col-group" data-month="2026-06"><div class="month-title-head">Jun '26</div></div>
+          <div class="month-col-group" data-month="2026-07"><div class="month-title-head">Jul '26</div></div>
+          <div class="month-col-group" data-month="2026-08"><div class="month-title-head">Aug '26</div></div>
+          <div class="month-col-group" data-month="2026-09"><div class="month-title-head">Sep '26</div></div>
+          <div class="month-col-group" data-month="2026-10"><div class="month-title-head">Oct '26</div></div>
+          <div class="month-col-group" data-month="2026-11"><div class="month-title-head">Nov '26</div></div>
+          <div class="month-col-group" data-month="2026-12"><div class="month-title-head">Dec '26</div></div>
+          <div class="month-col-group" data-month="2027-01"><div class="month-title-head">Jan '27</div></div>
+          <div class="month-col-group" data-month="2027-02"><div class="month-title-head">Feb '27</div></div>
+          <div class="month-col-group" data-month="2027-03"><div class="month-title-head">Mar '27</div></div>
+          <div class="month-col-group" data-month="2027-04"><div class="month-title-head">Apr '27</div></div>
+          <div class="month-col-group" data-month="2027-05"><div class="month-title-head">May '27</div></div>
+          <div class="month-col-group" data-month="2027-06"><div class="month-title-head">Jun '27</div></div>
+          <div class="month-col-group" data-month="2027-07"><div class="month-title-head">Jul '27</div></div>
+          <div class="month-col-group" data-month="2027-08"><div class="month-title-head">Aug '27</div></div>
+          <div class="month-col-group" data-month="2027-09"><div class="month-title-head">Sep '27</div></div>
+          <div class="month-col-group" data-month="2027-10"><div class="month-title-head">Oct '27</div></div>
+          <div class="month-col-group" data-month="2027-11"><div class="month-title-head">Nov '27</div></div>
+          <div class="month-col-group" data-month="2027-12"><div class="month-title-head">Dec '27</div></div>
         </div>
 
         <!-- Timeline Chart Body -->
@@ -1263,6 +1222,17 @@
             <div class="month-guide-group" data-month="2026-11"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
             <div class="month-guide-group" data-month="2026-12"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
             <div class="month-guide-group" data-month="2027-01"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-02"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-03"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-04"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-05"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-06"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-07"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-08"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-09"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-10"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-11"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+            <div class="month-guide-group" data-month="2027-12"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
           </div>
           <!-- Dynamic Rows -->
         </div>
@@ -1322,22 +1292,22 @@
    * ✏️ [ANCHOR: DOM-MODALS] 任務詳情與里程碑編輯彈窗 (Flat Overlays)
    * ========================================================================= -->
   <!-- Task Detail Popup Modal -->
-  <div class="modal-overlay" id="detailModal">
+  <div class="modal-overlay" id="detailModal" onclick="handleOverlayClick(event, 'detailModal')">
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title" id="modalTaskTitle">Task Details</div>
-        <button class="modal-close" onclick="closeModal()">✕</button>
+        <button type="button" class="modal-close" onclick="closeModal()" title="Close">✕</button>
       </div>
       <div id="modalBody"></div>
     </div>
   </div>
 
   <!-- Milestone Details Edit Modal -->
-  <div class="modal-overlay" id="milestoneModal">
+  <div class="modal-overlay" id="milestoneModal" onclick="handleOverlayClick(event, 'milestoneModal')">
     <div class="modal-content" style="max-width: 520px;">
       <div class="modal-header">
         <div class="modal-title" id="msModalTitle">🚩 Edit Milestone Details</div>
-        <button class="modal-close" onclick="closeMsModal()">✕</button>
+        <button type="button" class="modal-close" onclick="closeMsModal()" title="Close">✕</button>
       </div>
       <div id="msModalBody"></div>
     </div>
@@ -1351,26 +1321,14 @@
 
     // Global State Management
 
-    // STRICT i18n DICTIONARY
+    // STRICT i18n DICTIONARY (Interactive Visualization WebUI)
     const i18n = {
       en: {
         title: "SSSTC & Foxlink Project Management Roadmap",
         subtitle: "Interactive Workstream Timeline & Real-Time Executive Dashboard",
-        toggleTable: "Toggle / Collapse Table",
-        addTask: "+ Add Task Item",
         langBtn: "🌐 繁體中文",
         btnFullscreen: "⛶ Fullscreen",
         btnExitFullscreen: "ʞʞ Exit Fullscreen",
-        tableTitleMaster: "📋 Master Workstream Action Plan & Timeline",
-        taskCountLabel: "Total {count} Master Activities",
-        colRef: "Ref #",
-        colName: "Activity / Task Name",
-        colCategory: "Workstream (Category)",
-        colStatus: "Status",
-        colStart: "Start Date",
-        colEnd: "End Date",
-        colOwner: "Owner / DRI",
-        colAuditPoint: "Audit Point No.",
         timelineTitle: "Workstream Timeline & Milestones",
         chartStatusTitle: "TASK STATUS DISTRIBUTION (%)",
         chartWsTitle: "WORKSTREAM DISTRIBUTION",
@@ -1378,18 +1336,18 @@
         prog1: "Non-budget Items Closure Rate",
         prog2: "Equipment Lead-time Progress",
         prog3: "SSSTC Support Items Resolution Rate",
-        modalTitle: "Task Details",
-        lblCategory: "WORKSTREAM CATEGORY",
-        lblAuditPoint: "SSSTC AUDIT POINT REFERENCE",
-        lblRootCause: "ROOT CAUSE ANALYSIS",
-        lblOwner: "OWNER / RESPONSIBILITY (DRI)",
-        lblDeliverable: "VERIFICATION DELIVERABLES",
         statusCompleted: "Completed",
         statusProgress: "In Progress",
         statusNotStarted: "Scheduled",
         todayTagPrefix: "📍 Today (",
         cloudSynced: "☁️ Connected",
         cloudSyncing: "⏳ Syncing...",
+        modalTitle: "Task Details",
+        lblCategory: "WORKSTREAM CATEGORY",
+        lblAuditPoint: "SSSTC AUDIT POINT REFERENCE",
+        lblRootCause: "ROOT CAUSE ANALYSIS",
+        lblOwner: "OWNER / RESPONSIBILITY (DRI)",
+        lblDeliverable: "VERIFICATION DELIVERABLES",
         editSectionTitle: "✏️ Edit Task Details & Sync to Google Sheet",
         calcModeTitle: "Progress Calculation Mode (Choose 1):",
         modeQuant: "📊 Quantitative Calculation (Closed / Total)",
@@ -1398,39 +1356,28 @@
         lblTotalItems: "Total Items:",
         lblCalcPreview: "Calculated Progress:",
         lblTaskName: "Task Name:",
+        lblTaskNameZh: "Task Name (繁中):",
+        lblTaskNameEn: "Task Name (English):",
         lblStartDate: "Start Date:",
         lblEndDate: "End Date:",
         lblProgress: "Progress (%):",
         lblStatus: "Status:",
-        lblSubList: "Sub-item Details (1 per line):",
-        lblReportLink: "Report Link (URL):",
-        btnSaveCloud: "💾 Save & Sync to Google Sheet",
-        btnDeleteTask: "🗑️ Delete Task",
-        confirmDelete: "Are you sure you want to delete task",
+        lblSubListZh: "Remarks & Description (繁體中文備註說明):",
+        lblSubListEn: "Remarks & Description (English):",
+        lblSubListHelp: "※ Remarks will sync to the Gantt drawer in real time and can be freely updated anytime.",
+        btnSaveCloud: "☁️ Save & Sync to Google Sheet",
         editMsModalTitle: "🚩 Edit Milestone Details",
-        lblMsName: "Milestone Label:",
+        lblMsName: "Milestone Name:",
         lblMsDate: "Target Date:",
-        lblMsDesc: "Detailed Description:",
-        btnSaveMs: "💾 Save Milestone Details" 
+        lblMsDesc: "Description & Action:",
+        btnSaveMs: "☁️ Save & Sync Milestone to Google Sheet"
       },
       zh: {
         title: "SSSTC & Foxlink 專案管理與稽核改善時程地圖",
         subtitle: "互動式工作流時程看板與即時專案儀表板（通用量化算分引擎版）",
-        toggleTable: "切換/折疊數據表格",
-        addTask: "+ 新增任務項目",
         langBtn: "🌐 English",
         btnFullscreen: "⛶ 全螢幕",
         btnExitFullscreen: "ʞʞ 退出全螢幕",
-        tableTitleMaster: "📋 主工作流改善計畫與甘特圖時程",
-        taskCountLabel: "共 {count} 項主工作流",
-        colRef: "參考編號",
-        colName: "活動 / 任務名稱",
-        colCategory: "工作流類別",
-        colStatus: "執行狀態",
-        colStart: "開始日期",
-        colEnd: "預計完成日",
-        colOwner: "主責人 / DRI",
-        colAuditPoint: "稽核缺失條款",
         timelineTitle: "工作流時程與關鍵里程碑 (Gantt Chart)",
         chartStatusTitle: "任務執行狀態分佈 (%)",
         chartWsTitle: "工作流類別比例分佈",
@@ -1438,40 +1385,41 @@
         prog1: "非預算缺失閉環率 (Aug 31 標)",
         prog2: "設備系統採購到位率",
         prog3: "SSSTC 技術支援事項完成率",
-        modalTitle: "任務詳細資訊",
-        lblCategory: "工作流類別 (WORKSTREAM)",
-        lblAuditPoint: "SSSTC 稽核條款對照",
-        lblRootCause: "真因分析 (ROOT CAUSE)",
-        lblOwner: "主責人 / 負責單位 (DRI)",
-        lblDeliverable: "驗證佐證物 (DELIVERABLES)",
         statusCompleted: "已閉環",
         statusProgress: "進行中",
         statusNotStarted: "規劃中",
         todayTagPrefix: "📍 今天 (",
         cloudSynced: "☁️ 已連線至雲端",
         cloudSyncing: "⏳ 同步中...",
-        editSectionTitle: "✏️ 編輯任務內容並同步至雲端",
-        calcModeTitle: "完成度計算模式（二選一）：",
-        modeQuant: "📊 缺失項/子項目量化自動算分 (Closed / Total)",
-        modeSlider: "🎚️ 手動滑塊拉桿模式 (%)",
-        lblClosedItems: "已閉環項數 (Closed)：",
-        lblTotalItems: "總項目數 (Total)：",
-        lblCalcPreview: "量化試算進度：",
+        modalTitle: "任務詳細資訊",
+        lblCategory: "工作流類別",
+        lblAuditPoint: "SSSTC 稽核發現點對照條款",
+        lblRootCause: "根本原因分析",
+        lblOwner: "負責人 / 主責單位 (DRI)",
+        lblDeliverable: "改善佐證驗收交付物",
+        editSectionTitle: "✏️ 編輯任務資訊並同步至 Google Sheet 雲端",
+        calcModeTitle: "進度算分模式（二選一）：",
+        modeQuant: "📊 缺失清單量化算分（已閉環 / 總數）",
+        modeSlider: "🎚️ 傳統手動滑塊模式（%）",
+        lblClosedItems: "已閉環數：",
+        lblTotalItems: "總項目數：",
+        lblCalcPreview: "即時算分：",
         lblTaskName: "任務名稱：",
-        lblStartDate: "開始日期：",
-        lblEndDate: "結束日期：",
-        lblProgress: "完成進度 (%)：",
+        lblTaskNameZh: "任務名稱（繁體中文）：",
+        lblTaskNameEn: "任務名稱（英文）：",
+        lblStartDate: "起始日期：",
+        lblEndDate: "截止日期：",
+        lblProgress: "推進進度（%）：",
         lblStatus: "執行狀態：",
-        lblSubList: "子清單細項條目 (每行一項)：",
-        lblReportLink: "詳細報告連結 (URL)：",
-        btnSaveCloud: "💾 儲存並同步至 Google Sheet",
-        btnDeleteTask: "🗑️ 刪除此任務",
-        confirmDelete: "您確定要刪除任務",
-        editMsModalTitle: "🚩 編輯里程碑節點與日期",
-        lblMsName: "里程碑標籤名稱：",
-        lblMsDate: "目標完成日期：",
-        lblMsDesc: "詳細對策說明：",
-        btnSaveMs: "💾 儲存里程碑變更" 
+        lblSubListZh: "備註說明（繁體中文）：",
+        lblSubListEn: "備註說明（英文）：",
+        lblSubListHelp: "※ 此處備註說明將即時同步顯示於甘特圖展開抽屜，可自由修訂與增補。",
+        btnSaveCloud: "☁️ 儲存並即時回寫 Google Sheet 雲端",
+        editMsModalTitle: "🚩 編輯里程碑詳細資訊",
+        lblMsName: "里程碑名稱：",
+        lblMsDate: "目標達成日：",
+        lblMsDesc: "里程碑說明與整改對策：",
+        btnSaveMs: "☁️ 儲存並即時回寫里程碑至雲端"
       }
     };
 
@@ -1493,9 +1441,9 @@
       return str.split('T')[0].replace(/\//g, '-');
     }
 
-    // Total Range for Date Math: 2026-06-01 to 2027-01-31 (245 Days)
+    // Total Range for Date Math: 2026-06-01 to 2027-12-31 (19 Months)
     const axisStart = new Date(2026, 5, 1).getTime();
-    const axisEnd = new Date(2027, 0, 31).getTime();
+    const axisEnd = new Date(2027, 11, 31).getTime();
     const totalSpanMs = axisEnd - axisStart;
 
     function calcPercent(dateObj) {
@@ -1525,268 +1473,25 @@
       return wks > 1 ? `${wks} Wks` : `${wks} Wk`;
     }
 
-    // Master Workstream Activities (Exact 11 Tasks Aligned with Latest Excel Roadmap)
-    let masterTasks = [
-      {
-        id: "ACT-1",
-        name_en: "Audit Observations",
-        name_zh: "1. 稽核發現點紀錄分析",
-        workstream: "ACTION PLAN",
-        color: "#3B82F6",
-        status: "Completed",
-        progressPct: 100,
-        startDate: "2026-05-25",
-        endDate: "2026-06-15",
-        owner: "Team / Sateesh",
-        auditPoint: "Team started work on Audit observations",
-        rootCause_en: "Team started work on Audit observations & initial alignment",
-        rootCause_zh: "對策小組成立與全廠稽核發現點初審分析",
-        deliverable_en: "Audit observation master breakdown list",
-        deliverable_zh: "稽核缺失條款總體歸納清單",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      },
-      {
-        id: "ACT-2",
-        name_en: "D1 QPA Points",
-        name_zh: "2. D1 QPA 對策閉環",
-        workstream: "ACTION PLAN",
-        color: "#3B82F6",
-        status: "In Progress",
-        progressPct: 65,
-        startDate: "2026-06-01",
-        endDate: "2026-08-31",
-        owner: "Sateesh / Vishnu / Yanlin Li",
-        auditPoint: "Received 112 Observations in QPA",
-        rootCause_en: "Received 112 Observations in QPA and scheduled till Aug to complete these points",
-        rootCause_zh: "接收 112 項 QPA 製程缺失，排定至 8 月底前全數閉環完成",
-        deliverable_en: "112 CAPA before/after evidence packages",
-        deliverable_zh: "112 筆 CAPA 改善前後對照佐證包",
-        reportLink: "",
-        subSummary: { total: 112, closed: 44, open: 68 },
-        subList_en: "• Total 112 items: 44 items closed, 68 items open\n• Scheduled till August 31 to complete 100% CAPA evidence closure",
-        subList_zh: "• 總計 112 項 QPA 缺失對策：已閉環 44 項，進行中 68 項\n• 目標於 8 月 31 日前全數完成 100% CAPA 改善與佐證閉環"
-      },
-      {
-        id: "ACT-3",
-        name_en: "D1 QSA Points",
-        name_zh: "3. D1 QSA 體系閉環",
-        workstream: "ACTION PLAN",
-        color: "#8B5CF6",
-        status: "In Progress",
-        progressPct: 80,
-        startDate: "2026-07-01",
-        endDate: "2026-08-31",
-        owner: "Sateesh - QC / Roger",
-        auditPoint: "Received 15 Observations in QSA",
-        rootCause_en: "Received 15 Observations in QSA and scheduled till Aug to complete these points",
-        rootCause_zh: "接收 15 項 QSA 品質體系缺失，排定至 8 月底前修訂 SOP 並閉環",
-        deliverable_en: "15 QSA Closure documents & updated level-2/3 SOPs",
-        deliverable_zh: "15 項 QSA 結案證明與品質體系程序書更新",
-        reportLink: "https://html.foxlink.co.in/reports/report-1785820067291.html",
-        subSummary: { total: 15, closed: 12, open: 3 },
-        subList_en: "• Total 15 items: 12 items closed, 3 items open\n• Level 2/3 Quality SOP revision & operator training in progress",
-        subList_zh: "• 總計 15 項 QSA 品質體系缺失：已閉環 12 項，進行中 3 項\n• 二/三階品質程序書 (SOP) 修訂與作業員培訓推進中"
-      },
-      {
-        id: "ACT-4",
-        name_en: "Purchase (except Feeder calibrator)",
-        name_zh: "4. 專案設備與系統採購 (Feeder校正儀除外)",
-        workstream: "EQUIPMENT",
-        color: "#10B981",
-        status: "In Progress",
-        progressPct: 40,
-        startDate: "2026-06-01",
-        endDate: "2026-10-31",
-        owner: "Steering Committee / IT / Purchase",
-        auditPoint: "All items purchased by end of October (except Feeder calibrator)",
-        rootCause_en: "All items will be purchased and installed by end of October <span style='color:#EF4444; font-weight:700;'>(except Feeder calibrator)</span>",
-        rootCause_zh: "所有專案設備與 SFC 系統於 10 月底前全數採購與安裝到位 <span style='color:#EF4444; font-weight:700;'>(Feeder 校正儀除外)</span>",
-        deliverable_en: "PO copies, FAT/SAT reports, Commissioning sign-off",
-        deliverable_zh: "採購單據、出廠與現場驗收報告、上線運轉證明",
-        reportLink: "https://html.foxlink.co.in/reports/report-1786884117627.html",
-        subSummary: { total: 9, closed: 3, open: 6 },
-        subList_en: "• Total 9 Budget Items: 3 closed, 6 open in procurement pipeline\n1) Peak stand Microscope(100x): pending for arrangement from supplier (est. 8/15)\n2) SPI training: completed.\n3) AOI training: plan to raise PR before target date; supplier arrangement pending.\n4) Temperature & Humidity meter: plan to raise PR on est. 8/9 (3 quotations received).\n5) ESD turnstile gate: plan to raise PR on est. 8/10 (1 supplier quotation received).",
-        subList_zh: "• 總計 9 項資本支出設備：已到位 3 項，6 項發單採購進度推進中\n1) Peak 100x 顯微鏡：待供應商發貨安排 (預計 8/15)\n2) SPI 專案培訓：已完成\n3) AOI 培訓計畫：預計於目標日前提出請購 (PR)，後續由供應商派員\n4) 溫濕度監測計：預計 8/9 前提出請購 (已取得 3 家最終報價與比價定案)\n5) 靜電門禁閘門 (ESD Turnstile Gate)：預計 8/10 前提出請購 (現已拿到 1 家報價)"
-      },
-      {
-        id: "ACT-5",
-        name_en: "Training (QSA & QPA)",
-        name_zh: "5. QSA & QPA 項目對策培訓",
-        workstream: "TRAINING",
-        color: "#F59E0B",
-        status: "In Progress",
-        progressPct: 20,
-        startDate: "2026-08-20",
-        endDate: "2026-09-10",
-        owner: "Trainer / HR / QA",
-        auditPoint: "QSA & QPA 3-Week Training",
-        rootCause_en: "Training will be started and completed within 3 weeks for QSA and QPA",
-        rootCause_zh: "針對 QSA 與 QPA 體系發現點，於 3 週內完成全員對策與 SOP 培訓",
-        deliverable_en: "QSA & QPA Training attendance logs & sign-offs",
-        deliverable_zh: "QSA/QPA 專案培訓簽到表與紀錄",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      },
-      {
-        id: "ACT-6",
-        name_en: "Training (Purchase Items)",
-        name_zh: "6. 採購新設備與系統專案培訓",
-        workstream: "TRAINING",
-        color: "#F59E0B",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-11-01",
-        endDate: "2026-11-14",
-        owner: "Equipment Suppliers / HR",
-        auditPoint: "Purchase Items 2-Week Training",
-        rootCause_en: "Training will be started and completed within 2 weeks for purchase items",
-        rootCause_zh: "新進採購設備與過站軟體到位後，於 2 週內完成操作員實操培訓",
-        deliverable_en: "Equipment Supplier Training Certifications",
-        deliverable_zh: "原廠設備操作培訓合格證書",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      },
-      {
-        id: "ACT-7",
-        name_en: "Foxlink Self Check",
-        name_zh: "7. 廠內自我稽核模擬全檢",
-        workstream: "SELF CHECK",
-        color: "#8B5CF6",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-11-15",
-        endDate: "2026-11-21",
-        owner: "Internal Audit Lead / Yanlin Li",
-        auditPoint: "1-Week Internal Self Check",
-        rootCause_en: "After completion of training within 1 week will complete all self check points",
-        rootCause_zh: "培訓完成後，於 1 週內執行 Check-sheet 擬真自我全檢",
-        deliverable_en: "Full Internal Self Check Verification Report",
-        deliverable_zh: "廠內自我稽核 Check-sheet 驗證報告",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      },
-      {
-        id: "ACT-8",
-        name_en: "Foxlink Observations",
-        name_zh: "8. 廠內缺失對策快速改善閉環",
-        workstream: "ACTION PLAN",
-        color: "#3B82F6",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-11-22",
-        endDate: "2026-12-05",
-        owner: "Foxlink QA / Operation Team",
-        auditPoint: "2-Week Corrective Actions",
-        rootCause_en: "After completion self check will complete Corrective within 2 weeks",
-        rootCause_zh: "自我全檢完成後，於 2 週內快速整改與閉環內部缺失",
-        deliverable_en: "Internal Corrective Action Closure Log",
-        deliverable_zh: "內部自我稽核發現點快速改善對照表",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      },
-      {
-        id: "ACT-9",
-        name_en: "SSSTC Online Audit",
-        name_zh: "9. SSSTC 線上預審稽核",
-        workstream: "AUDIT",
-        color: "#EF4444",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-12-06",
-        endDate: "2026-12-12",
-        owner: "SSSTC Steering Committee / Kevin Gu",
-        auditPoint: "In 2nd week of December SSSTC Audit",
-        rootCause_en: "In 2nd week of December planning to schedule a SSSTC Online Audit",
-        rootCause_zh: "排定於 12 月第 2 週正式執行 SSSTC 線上預審稽核",
-        deliverable_en: "SSSTC Online Pre-audit Official Report",
-        deliverable_zh: "SSSTC 線上預審發現點追蹤表",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      },
-      {
-        id: "ACT-10",
-        name_en: "SSSTC Observation Closure",
-        name_zh: "10. SSSTC 預審發現點對策閉環",
-        workstream: "AUDIT",
-        color: "#EF4444",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2026-12-13",
-        endDate: "2027-01-05",
-        owner: "Sateesh / Stephan",
-        auditPoint: "3-Week SSSTC Points Closure",
-        rootCause_en: "Based on the observations we will take 3 weeks of time to close those",
-        rootCause_zh: "針對 SSSTC 預審提報之發現點，於 3 週內完成對策與佐證閉環",
-        deliverable_en: "SSSTC Observation Final Closure Package",
-        deliverable_zh: "SSSTC 預審發現點改善對照證明",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      },
-      {
-        id: "ACT-11",
-        name_en: "D1 Re-audit",
-        name_zh: "11. Dell D1 最終現場正式稽核",
-        workstream: "AUDIT",
-        color: "#EF4444",
-        status: "Scheduled",
-        progressPct: 0,
-        startDate: "2027-01-06",
-        endDate: "2027-01-14",
-        owner: "Dell Customer Audit Team / SSSTC",
-        auditPoint: "In 2nd week of January D1 Re-Audit",
-        rootCause_en: "In 2nd week of January planning to schedule a D1 Re-Audit for mass production qualification",
-        rootCause_zh: "排定於 2027 年 1 月第 2 週迎接 Dell 客戶聯合現場稽核，取得量產認證",
-        deliverable_en: "Official D1 Audit Approval Letter & Certification",
-        deliverable_zh: "Dell D1 稽核閉環官方核准函與量產認證證書",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      }
-    ];
+    // Master Workstream Activities (Source of Truth: 100% Cloud GAS WebApp)
+    let masterTasks = [];
 
-    // Dynamic Cloud Milestone Model (Source of Truth: Google Sheet Database)
-    const defaultMilestones = [
-      { id: "MS-1", name_en: "CAPA Alignment Proposal", name_zh: "整改對策提案", date: "2026-08-07", icon: "★", desc_en: "Complete preliminary alignment & submit action plan proposal to SSSTC QA", desc_zh: "完成對策初審並向 SSSTC 品質團隊提交整改對策提案", level: "top" },
-      { id: "MS-2", name_en: "Non-budget Points 100% Closure", name_zh: "非預算缺失 100% 閉環", date: "2026-08-31", icon: "◆", desc_en: "Complete 100% closure for all non-budget QPA/QSA audit observations", desc_zh: "完成所有非預算項之 QPA/QSA 稽核缺失 100% 佐證閉環", level: "bottom" },
-      { id: "MS-3", name_en: "Equipment Arrival & SSSTC Review", name_zh: "設備到位與 SSSTC 預審", date: "2026-10-31", icon: "▲", desc_en: "100% budget equipment onsite commissioning & SSSTC executive pre-audit sign-off", desc_zh: "資本支出設備全數到位調試完成，並通過 SSSTC 高階預審", level: "top" },
-      { id: "MS-4", name_en: "Dell Customer Final Audit", name_zh: "Dell 客戶最終稽核", date: "2027-01-06", icon: "※", desc_en: "Host Dell customer physical line audit and obtain mass production qualification approval", desc_zh: "迎接 Dell 客戶現場正式稽核，取得 D1 量產閉環認證", level: "bottom" }
-    ];
+    // Dynamic Cloud Milestone Model (Source of Truth: 100% Cloud GAS WebApp)
+    let masterMilestones = [];
 
     function sanitizeMilestoneName(name) {
       if (!name) return '';
       return name.replace(/^[A-Za-z]{3}\s*\d{1,2}\s*:\s*/, '').replace(/^\d{1,2}\s*月\s*\d{1,2}\s*日\s*[:：]\s*/, '').replace(/^Nov-Dec:\s*/, '');
     }
 
-    let masterMilestones = defaultMilestones;
-
-    function saveMilestonesToCache() {
-      try {
-        localStorage.setItem('SSSTC_ROADMAP_MILESTONES_V50', JSON.stringify(masterMilestones));
-      } catch(e) { console.warn('Milestone save notice:', e); }
-    }
-
     function formatMsDatePrefix(dateStr, lang) {
       if (!dateStr) return '';
-      const cleanStr = String(dateStr).split('T')[0].replace(/\//g, '-').trim();
+      const cleanStr = parseCloudDate(dateStr);
       const parts = cleanStr.split('-');
       if (parts.length >= 3) {
         const monthNum = parseInt(parts[1], 10);
-        const dayNum = String(parseInt(parts[2], 10)).padStart(2, '0');
-        const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const monthStr = monthsEn[monthNum - 1] || `M${monthNum}`;
-        if (lang === 'en') {
-          return `${monthStr} ${dayNum}: `;
-        } else {
-          return `${monthNum}月${dayNum}日：`;
-        }
+        const dayNum = parseInt(parts[2], 10);
+        return `${monthNum}/${dayNum} `;
       }
       return '';
     }
@@ -1814,7 +1519,7 @@
                title="${desc.replace(/"/g, '&quot;')}"
                onclick="showMilestoneModal('${ms.id}')">
             <div class="milestone-card-content" id="${ms.id}_label">
-              <span class="milestone-icon">${ms.icon}</span>
+              <span class="milestone-icon">${ms.icon || '🚩'}</span>
               <span>${fullName}</span>
             </div>
             <div class="milestone-connector-line"></div>
@@ -1825,6 +1530,7 @@
 
     function renderTimeline() {
       const grid = document.getElementById('timelineGrid');
+      if (!grid) return;
 
       const guidelinesHTML = `
         <div class="guideline-container">
@@ -1836,14 +1542,25 @@
           <div class="month-guide-group" data-month="2026-11"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
           <div class="month-guide-group" data-month="2026-12"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
           <div class="month-guide-group" data-month="2027-01"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-02"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-03"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-04"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-05"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-06"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-07"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-08"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-09"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-10"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-11"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
+          <div class="month-guide-group" data-month="2027-12"><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div><div class="week-guide-col"></div></div>
         </div>
       `;
 
       const rowsHTML = masterTasks.map(t => {
         const startPct = calcPercent(t.startDate);
         const endPct = calcPercent(t.endDate);
-        const widthPct = Math.max(2.5, endPct - startPct);
-        const name = (currentLang === 'en') ? t.name_en : t.name_zh;
+        const widthPct = Math.max(2.0, endPct - startPct);
+        const name = (currentLang === 'en') ? (t.name_en || t.name) : (t.name_zh || t.name);
         const fillWidth = t.progressPct || 0;
         const durationStr = calcDurationWks(t.startDate, t.endDate);
 
@@ -1899,23 +1616,29 @@
           `;
         }
 
+        const isShort = widthPct < 4.5;
+        const pctHTML = isShort
+          ? `<span class="progress-pct-outside">${fillWidth}%</span>`
+          : `<span style="position:relative; z-index:2;">${fillWidth}%</span>`;
+
         return `
           <div class="timeline-row-group">
             <div class="timeline-row">
               <div class="row-label" title="${name.replace(/"/g, '&quot;')}">
                 <span class="duration-pill">${durationStr}</span>
                 <div class="label-tag-wrapper">
-                  <div class="label-tag" style="background:${t.color};"></div>
+                  <div class="label-tag" style="background:${t.color || '#3B82F6'};"></div>
                 </div>
-                <span class="row-title-text">${name}${expandBtnHTML}</span>
+                <span class="row-title-text" title="${name.replace(/"/g, '&quot;')}">${name}</span>
+                ${expandBtnHTML}
               </div>
               <div class="row-track">
                 <div class="gantt-progress-bar" 
-                     style="left:${startPct}%; width:${widthPct}%; background:${t.color};"
+                     style="left:${startPct}%; width:${widthPct}%; background:${t.color || '#3B82F6'};"
                      title="${name.replace(/"/g, '&quot;')} (${t.startDate} ~ ${t.endDate}) - Progress: ${fillWidth}%"
                      onclick="showDetail('${t.id}')">
                   <div class="progress-fill" style="width:${fillWidth}%;"></div>
-                  <span style="position:relative; z-index:2;">${fillWidth}%</span>
+                  ${pctHTML}
                 </div>
               </div>
             </div>
@@ -1933,62 +1656,32 @@
       const btn = document.getElementById('btnSub_' + taskId);
       if (!drawer) return;
       
-      const isHidden = (drawer.style.display !== 'block');
+      const isHidden = (window.getComputedStyle(drawer).display === 'none' || drawer.style.display === 'none' || !drawer.classList.contains('active'));
       drawer.style.display = isHidden ? 'block' : 'none';
       drawer.classList.toggle('active', isHidden);
-      if (btn) btn.classList.toggle('active', isHidden);
-    }
-
-    function updateTaskDateInline(id, field, val) {
-      if (!val) return;
-      const local = masterTasks.find(t => t.id === id);
-      if (local) {
-        local[field] = val;
-        renderTable();
-        renderTimeline();
-        saveTaskToCloud(id);
+      if (btn) {
+        btn.classList.toggle('active', isHidden);
+        btn.innerText = isHidden ? '🔺' : '🔻';
       }
     }
 
     // =========================================================================
-    // 📋 [ANCHOR: JS-TABLE] 表格渲染
+    // ✏️ [ANCHOR: JS-MODALS] 任務詳情與里程碑編輯彈窗 (通用量化算分引擎版)
     // =========================================================================
-    function renderTable() {
-      const tbody = document.getElementById('taskTableBody');
-      if (!tbody) return;
-
-      const t = i18n[currentLang];
-
-      tbody.innerHTML = masterTasks.map(item => {
-        const name = (currentLang === 'en') ? (item.name_en || item.name) : (item.name_zh || item.name);
-        const owner = item.owner || 'TBD';
-        const auditPoint = item.auditPoint || 'N/A';
-        const statusClass = item.status === 'Completed' ? 'status-completed' : (item.status === 'In Progress' ? 'status-progress' : 'status-notstarted');
-        const statusLabel = item.status === 'Completed' ? t.statusCompleted : (item.status === 'In Progress' ? t.statusProgress : t.statusNotStarted);
-
-        return `
-          <tr onclick="showDetail('${item.id}')">
-            <td><strong>${item.id}</strong></td>
-            <td class="task-name-cell">${name}</td>
-            <td><span style="color:${item.color}; font-weight:700;">${item.workstream}</span></td>
-            <td><span class="badge-status ${statusClass}">${statusLabel}</span></td>
-            <td><input type="date" class="table-date-input" value="${parseCloudDate(item.startDate)}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'startDate', this.value)"></td>
-            <td><input type="date" class="table-date-input" value="${parseCloudDate(item.endDate)}" onclick="event.stopPropagation()" onchange="updateTaskDateInline('${item.id}', 'endDate', this.value)"></td>
-            <td>${owner}</td>
-            <td><code>${auditPoint}</code></td>
-          </tr>
-        `;
-      }).join('');
-
-      const countLabel = document.getElementById('uiTaskCountLabel');
-      if (countLabel) {
-        countLabel.innerText = t.taskCountLabel.replace('{count}', masterTasks.length);
+    function handleOverlayClick(event, modalId) {
+      if (event.target && event.target.id === modalId) {
+        if (modalId === 'detailModal') closeModal();
+        if (modalId === 'milestoneModal') closeMsModal();
       }
     }
 
-    // =========================================================================
-    // ✏️ [ANCHOR: JS-MODALS] 任務與里程碑編輯彈窗 (通用量化算分引擎版)
-    // =========================================================================
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeMsModal();
+      }
+    });
+
     function onCalcModeChange(mode) {
       const isQuant = mode === 'quant';
       const quantBox = document.getElementById('quantCalcBox');
@@ -2048,44 +1741,42 @@
       if (!item) return;
 
       const t = i18n[currentLang];
-      const name = (currentLang === 'en') ? (item.name_en || item.name) : (item.name_zh || item.name);
-      const rootCause = (currentLang === 'en') ? (item.rootCause_en || item.rootCause) : (item.rootCause_zh || item.rootCause);
-      const deliverable = (currentLang === 'en') ? (item.deliverable_en || item.deliverable) : (item.deliverable_zh || item.deliverable);
+      const nameZh = item.name_zh || item.name || '';
+      const nameEn = item.name_en || item.name || '';
+      const currentName = (currentLang === 'en') ? (nameEn || nameZh) : (nameZh || nameEn);
 
-      document.getElementById('modalTaskTitle').innerText = `[${item.id}] ${name}`;
-      
-      const isMaster = masterTasks.some(x => x.id === item.id);
-      const isCustomNew = item.id.startsWith("NEW-");
+      document.getElementById('modalTaskTitle').innerText = `[${item.id}] ${currentName}`;
 
-      // Sub-Summary Quantitative Data initialization
       const subTotal = (item.subSummary && item.subSummary.total) ? item.subSummary.total : (item.subSummary_total || 0);
       const subClosed = (item.subSummary && item.subSummary.closed !== undefined) ? item.subSummary.closed : (item.subSummary_closed || 0);
       const subOpen = (item.subSummary && item.subSummary.open !== undefined) ? item.subSummary.open : (subTotal - subClosed);
       const hasQuantData = (subTotal > 0);
 
-      // Format subList string for Textarea
-      let subListRaw = (currentLang === 'en') ? (item.subList_en || item.subDetails_en || '') : (item.subList_zh || item.subDetails_zh || '');
-      if (Array.isArray(subListRaw)) {
-        subListRaw = subListRaw.join('\n');
-      }
+      const subListZh = item.subList_zh || '';
+      const subListEn = item.subList_en || '';
 
-      const editSectionHTML = isMaster ? `
-        <div class="edit-box">
+      const editSectionHTML = `
+        <div class="edit-box" style="margin-top: 0.25rem;">
           <div class="edit-title">${t.editSectionTitle}</div>
           
           <div class="edit-field">
-            <label>${t.lblTaskName}</label>
-            <input type="text" id="editTaskName" class="edit-input-text" value="${name.replace(/"/g, '&quot;')}">
+            <label>${t.lblTaskNameZh || "任務名稱（繁中）："}</label>
+            <input type="text" id="editTaskNameZh" class="edit-input-text" value="${nameZh.replace(/"/g, '&quot;')}">
+          </div>
+
+          <div class="edit-field">
+            <label>${t.lblTaskNameEn || "Task Name (EN):"}</label>
+            <input type="text" id="editTaskNameEn" class="edit-input-text" value="${nameEn.replace(/"/g, '&quot;')}">
           </div>
 
           <div class="edit-field">
             <label>${t.lblStartDate}</label>
-            <input type="date" id="editStartDate" class="edit-input-date" value="${parseCloudDate(item.startDate)}">
+            <input type="date" id="editStartDate" class="edit-input-date" value="${item.startDate}">
           </div>
 
           <div class="edit-field">
             <label>${t.lblEndDate}</label>
-            <input type="date" id="editEndDate" class="edit-input-date" value="${parseCloudDate(item.endDate)}">
+            <input type="date" id="editEndDate" class="edit-input-date" value="${item.endDate}">
           </div>
 
           <!-- Dual-Mode 2-Choice Calculation Box -->
@@ -2139,63 +1830,47 @@
             </select>
           </div>
 
-          <div class="edit-field vertical-align-top">
-            <label style="padding-top:4px;">${t.lblSubList}</label>
-            <textarea id="editSubList" class="edit-input-text" style="height:90px; resize:vertical; font-size:0.82rem; line-height:1.4;" placeholder="• Item 1&#10;• Item 2">${subListRaw}</textarea>
+          <!-- Remarks & Description Textarea Editing (Editable Sub-Task Drawer SSOT) -->
+          <div style="margin-top:0.85rem; border-top:1px dashed #CBD5E1; padding-top:0.75rem;">
+            <div style="font-size:0.82rem; font-weight:700; color:#1E293B; margin-bottom:0.35rem;">
+              📝 ${t.lblSubListZh || "備註說明（繁體中文）："}
+            </div>
+            <textarea id="editSubListZh" class="edit-input-text" style="width:100%; height:75px; resize:vertical; font-size:0.83rem; line-height:1.45; font-family:inherit; padding:6px 8px;" placeholder="請輸入繁體中文備註說明與關鍵里程碑進展...">${subListZh}</textarea>
           </div>
 
-          <div class="edit-field">
-            <label>${t.lblReportLink}</label>
-            <input type="url" id="editReportLink" class="edit-input-text" value="${(item.reportLink || '').replace(/"/g, '&quot;')}" placeholder="https://html.foxlink.co.in/reports/...">
+          <div style="margin-top:0.65rem;">
+            <div style="font-size:0.82rem; font-weight:700; color:#1E293B; margin-bottom:0.35rem;">
+              📝 ${t.lblSubListEn || "Remarks & Description (English):"}
+            </div>
+            <textarea id="editSubListEn" class="edit-input-text" style="width:100%; height:75px; resize:vertical; font-size:0.83rem; line-height:1.45; font-family:inherit; padding:6px 8px;" placeholder="Enter English remarks, technical highlights, and progress details...">${subListEn}</textarea>
+            <div style="font-size:0.73rem; color:#64748B; margin-top:0.25rem;">${t.lblSubListHelp || "※ 備註說明將即時同步顯示於甘特圖展開抽屜，可自由修訂增補"}</div>
           </div>
 
-          <button class="btn-save-cloud" onclick="saveTaskFromModal('${item.id}')">
+          <button type="button" class="btn-save-cloud" onclick="saveTaskFromModal('${item.id}')">
             ${t.btnSaveCloud}
           </button>
-          ${isCustomNew ? `<button class="btn-delete-task" onclick="deleteTaskFromModal('${item.id}')">${t.btnDeleteTask}</button>` : ''}
         </div>
-      ` : '';
-
-      document.getElementById('modalBody').innerHTML = `
-        <div class="detail-group">
-          <div class="detail-label">${t.lblCategory}</div>
-          <div class="detail-val" style="color:${item.color}; font-weight:700;">${item.workstream}</div>
-        </div>
-        <div class="detail-group">
-          <div class="detail-label">${t.lblAuditPoint}</div>
-          <div class="detail-val" style="background:#F1F5F9; padding:6px; border-radius:4px; font-weight:600;">${item.auditPoint}</div>
-        </div>
-        <div class="detail-group">
-          <div class="detail-label">${t.lblRootCause}</div>
-          <div class="detail-val">${rootCause}</div>
-        </div>
-        <div class="detail-group">
-          <div class="detail-label">${t.lblOwner}</div>
-          <div class="detail-val">${item.owner}</div>
-        </div>
-        <div class="detail-group">
-          <div class="detail-label">${t.lblDeliverable}</div>
-          <div class="detail-val" style="color:#059669; font-weight:600;">${deliverable}</div>
-        </div>
-        ${editSectionHTML}
       `;
+
+      document.getElementById('modalBody').innerHTML = editSectionHTML;
 
       document.getElementById('detailModal').classList.add('active');
 
-      // Initialize disabled state based on initial checked calcMode
       setTimeout(() => {
         onCalcModeChange(hasQuantData ? 'quant' : 'slider');
       }, 20);
     }
 
     function saveTaskFromModal(taskId) {
-      const nameVal = document.getElementById('editTaskName') ? document.getElementById('editTaskName').value : null;
-      const startVal = document.getElementById('editStartDate').value;
-      const endVal = document.getElementById('editEndDate').value;
-      const sliderVal = parseInt(document.getElementById('editSlider').value, 10);
-      const statusVal = document.getElementById('editStatusSelect').value;
-      const subListVal = document.getElementById('editSubList') ? document.getElementById('editSubList').value : '';
-      const reportLinkVal = document.getElementById('editReportLink') ? document.getElementById('editReportLink').value.trim() : '';
+      const nameZhVal = document.getElementById('editTaskNameZh') ? document.getElementById('editTaskNameZh').value.trim() : null;
+      const nameEnVal = document.getElementById('editTaskNameEn') ? document.getElementById('editTaskNameEn').value.trim() : null;
+      const startVal = document.getElementById('editStartDate') ? document.getElementById('editStartDate').value : null;
+      const endVal = document.getElementById('editEndDate') ? document.getElementById('editEndDate').value : null;
+      const sliderVal = document.getElementById('editSlider') ? parseInt(document.getElementById('editSlider').value, 10) : 0;
+      const statusVal = document.getElementById('editStatusSelect') ? document.getElementById('editStatusSelect').value : 'In Progress';
+
+      const subListZhVal = document.getElementById('editSubListZh') ? document.getElementById('editSubListZh').value.trim() : '';
+      const subListEnVal = document.getElementById('editSubListEn') ? document.getElementById('editSubListEn').value.trim() : '';
 
       const calcModeEl = document.querySelector('input[name="calcMode"]:checked');
       const isQuant = calcModeEl ? (calcModeEl.value === 'quant') : false;
@@ -2209,31 +1884,29 @@
 
       const local = masterTasks.find(t => t.id === taskId);
       if (local) {
-        if (nameVal) {
-          if (currentLang === 'en') local.name_en = nameVal;
-          else local.name_zh = nameVal;
-        }
+        if (nameZhVal) local.name_zh = nameZhVal;
+        if (nameEnVal) local.name_en = nameEnVal;
         if (startVal) local.startDate = startVal;
         if (endVal) local.endDate = endVal;
         local.progressPct = sliderVal;
         local.status = statusVal;
-        local.reportLink = reportLinkVal;
 
-        if (currentLang === 'en') {
-          local.subList_en = subListVal;
-        } else {
-          local.subList_zh = subListVal;
-        }
+        local.subList_zh = subListZhVal;
+        local.subList_en = subListEnVal;
 
-        if (isQuant || subTotal > 0) {
+        if (isQuant && subTotal > 0) {
           local.subSummary = { total: subTotal, closed: subClosed, open: subOpen };
           local.subSummary_total = subTotal;
           local.subSummary_closed = subClosed;
           local.subSummary_open = subOpen;
+        } else if (!isQuant) {
+          local.subSummary = null;
+          local.subSummary_total = 0;
+          local.subSummary_closed = 0;
+          local.subSummary_open = 0;
         }
       }
 
-      renderTable();
       renderTimeline();
       updateCharts();
       closeModal();
@@ -2241,26 +1914,9 @@
       saveTaskToCloud(taskId);
     }
 
-    function deleteTaskFromModal(taskId) {
-      const t = i18n[currentLang];
-      if (confirm(`${t.confirmDelete} [${taskId}]?`)) {
-        masterTasks = masterTasks.filter(x => x.id !== taskId);
-        renderTable();
-        renderTimeline();
-        updateCharts();
-        closeModal();
-
-        try {
-          fetch(GAS_WEBAPP_URL, {
-            method: 'POST',
-            body: JSON.stringify({ action: "deleteTask", taskId: taskId })
-          });
-        } catch(e) { console.warn(e); }
-      }
-    }
-
     function closeModal() {
-      document.getElementById('detailModal').classList.remove('active');
+      const modal = document.getElementById('detailModal');
+      if (modal) modal.classList.remove('active');
     }
 
     function showMilestoneModal(msId) {
@@ -2285,15 +1941,15 @@
 
           <div class="edit-field">
             <label>${t.lblMsDate}</label>
-            <input type="date" id="editMsDate" class="edit-input-date" value="${parseCloudDate(ms.date)}">
+            <input type="date" id="editMsDate" class="edit-input-date" value="${ms.date}">
           </div>
 
-          <div class="edit-field vertical-align-top">
+          <div class="edit-field" style="align-items:flex-start;">
             <label style="padding-top:4px;">${t.lblMsDesc}</label>
-            <textarea id="editMsDesc" class="edit-input-text" style="height:70px; resize:vertical; font-size:0.82rem;">${descVal}</textarea>
+            <textarea id="editMsDesc" class="edit-input-text" style="height:70px; resize:vertical; font-size:0.82rem;">${descVal || ''}</textarea>
           </div>
 
-          <button class="btn-save-cloud" onclick="saveMilestoneFromModal('${ms.id}')">
+          <button type="button" class="btn-save-cloud" onclick="saveMilestoneFromModal('${ms.id}')">
             ${t.btnSaveMs}
           </button>
         </div>
@@ -2326,9 +1982,10 @@
         ms.date = newDate;
       }
 
-      saveMilestonesToCache();
       renderMilestones();
       closeMsModal();
+
+      saveMilestoneToCloud(msId);
     }
 
     function closeMsModal() {
@@ -2336,38 +1993,93 @@
       if (modalEl) modalEl.classList.remove('active');
     }
 
-    function addNewTask() {
-      const name = prompt(currentLang === 'en' ? "Enter new task title:" : "請輸入新任務名稱:", "New Corrective Task");
-      if (!name) return;
+    async function saveTaskToCloud(taskId) {
+      const local = masterTasks.find(t => t.id === taskId);
+      if (!local) return;
 
-      const newId = `NEW-${masterTasks.length + 1}`;
-      const newTask = {
-        id: newId,
-        name_en: name,
-        name_zh: name,
-        workstream: "ACTION PLAN",
-        color: "#3B82F6",
-        status: "In Progress",
-        progressPct: 50,
-        startDate: "2026-08-01",
-        endDate: "2026-09-30",
-        owner: "Sateesh",
-        auditPoint: "New Point",
-        rootCause_en: "New corrective action added by user",
-        rootCause_zh: "使用者新增之改善對策項目",
-        deliverable_en: "CAPA Evidence Report",
-        deliverable_zh: "CAPA 佐證報告",
-        subList_en: "",
-        subList_zh: "",
-        reportLink: ""
-      };
+      const badge = document.getElementById('cloudBadge');
+      if (badge) {
+        badge.innerText = i18n[currentLang].cloudSyncing;
+        badge.classList.add('syncing');
+      }
 
-      masterTasks.push(newTask);
-      renderTable();
-      renderTimeline();
-      updateCharts();
+      try {
+        const payload = {
+          action: "updateTask",
+          taskId: taskId,
+          name_en: local.name_en,
+          name_zh: local.name_zh,
+          progressPct: local.progressPct,
+          status: local.status,
+          startDate: local.startDate,
+          endDate: local.endDate,
+          owner: local.owner,
+          subSummary_total: local.subSummary ? local.subSummary.total : 0,
+          subSummary_closed: local.subSummary ? local.subSummary.closed : 0,
+          subSummary_open: local.subSummary ? local.subSummary.open : 0,
+          subList_zh: local.subList_zh || '',
+          subList_en: local.subList_en || ''
+        };
 
-      saveTaskToCloud(newId);
+        await fetch(GAS_WEBAPP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        if (badge) {
+          badge.innerText = i18n[currentLang].cloudSynced;
+          badge.classList.remove('syncing');
+        }
+        showToast("已成功同步修改至 Google Sheet 雲端！", "info");
+      } catch (err) {
+        console.warn("GAS save task notice:", err);
+        if (badge) {
+          badge.innerText = "☁️ 本地已儲存";
+          badge.classList.remove('syncing');
+        }
+      }
+    }
+
+    async function saveMilestoneToCloud(msId) {
+      const ms = masterMilestones.find(x => x.id === msId);
+      if (!ms) return;
+
+      const badge = document.getElementById('cloudBadge');
+      if (badge) {
+        badge.innerText = i18n[currentLang].cloudSyncing;
+        badge.classList.add('syncing');
+      }
+
+      try {
+        const payload = {
+          action: "updateMilestone",
+          msId: msId,
+          name_en: ms.name_en,
+          name_zh: ms.name_zh,
+          date: ms.date,
+          desc_en: ms.desc_en,
+          desc_zh: ms.desc_zh
+        };
+
+        await fetch(GAS_WEBAPP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        if (badge) {
+          badge.innerText = i18n[currentLang].cloudSynced;
+          badge.classList.remove('syncing');
+        }
+        showToast("已成功同步里程碑至 Google Sheet 雲端！", "info");
+      } catch (err) {
+        console.warn("GAS save milestone notice:", err);
+        if (badge) {
+          badge.innerText = "☁️ 本地已儲存";
+          badge.classList.remove('syncing');
+        }
+      }
     }
 
     // =========================================================================
@@ -2377,42 +2089,102 @@
     let wsChartInstance = null;
 
     function initCharts() {
-      if (statusChartInstance) { statusChartInstance.destroy(); statusChartInstance = null; }
-      if (wsChartInstance) { wsChartInstance.destroy(); wsChartInstance = null; }
-      const t = i18n[currentLang];
-      const ctx1 = document.getElementById('statusChart').getContext('2d');
-      statusChartInstance = new Chart(ctx1, {
-        type: 'pie',
-        data: {
-          labels: [t.statusProgress, t.statusNotStarted, t.statusCompleted],
-          datasets: [{
-            data: [65, 4, 56],
-            backgroundColor: ['#F59E0B', '#64748B', '#10B981']
-          }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
+      if (statusChartInstance) { 
+        statusChartInstance.destroy(); 
+        statusChartInstance = null; 
+      }
+      if (wsChartInstance) { 
+        wsChartInstance.destroy(); 
+        wsChartInstance = null; 
+      }
 
-      const ctx2 = document.getElementById('workstreamChart').getContext('2d');
-      wsChartInstance = new Chart(ctx2, {
-        type: 'doughnut',
-        data: {
-          labels: ['ACTION PLAN', 'EQUIPMENT', 'TRAINING', 'SELF CHECK', 'AUDIT'],
-          datasets: [{
-            data: [127, 9, 1, 1, 3],
-            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EF4444']
-          }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
+      const canvas1 = document.getElementById('statusChart');
+      const canvas2 = document.getElementById('workstreamChart');
+      if (!canvas1 || !canvas2) return;
+
+      const t = i18n[currentLang];
+
+      let progCount = 0, notStartedCount = 0, completedCount = 0;
+      const wsMap = { 'ACTION PLAN': 0, 'EQUIPMENT': 0, 'TRAINING': 0, 'SELF CHECK': 0, 'AUDIT': 0 };
+
+      if (masterTasks.length > 0) {
+        masterTasks.forEach(item => {
+          const s = (item.status || '').toLowerCase();
+          if (s.includes('complete') || s.includes('閉環') || item.progressPct >= 100) {
+            completedCount++;
+          } else if (s.includes('progress') || s.includes('進行') || item.progressPct > 0) {
+            progCount++;
+          } else {
+            notStartedCount++;
+          }
+          const ws = (item.workstream || 'ACTION PLAN').toUpperCase();
+          if (wsMap[ws] !== undefined) wsMap[ws]++;
+          else wsMap['ACTION PLAN']++;
+        });
+      } else {
+        progCount = 65; notStartedCount = 4; completedCount = 56;
+        wsMap['ACTION PLAN'] = 127; wsMap['EQUIPMENT'] = 9; wsMap['TRAINING'] = 1; wsMap['SELF CHECK'] = 1; wsMap['AUDIT'] = 3;
+      }
+
+      const ctx1 = canvas1.getContext('2d');
+      if (ctx1) {
+        statusChartInstance = new Chart(ctx1, {
+          type: 'pie',
+          data: {
+            labels: [t.statusProgress, t.statusNotStarted, t.statusCompleted],
+            datasets: [{
+              data: [progCount, notStartedCount, completedCount],
+              backgroundColor: ['#F59E0B', '#64748B', '#10B981']
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      const ctx2 = canvas2.getContext('2d');
+      if (ctx2) {
+        wsChartInstance = new Chart(ctx2, {
+          type: 'doughnut',
+          data: {
+            labels: ['ACTION PLAN', 'EQUIPMENT', 'TRAINING', 'SELF CHECK', 'AUDIT'],
+            datasets: [{
+              data: Object.values(wsMap),
+              backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EF4444']
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
     }
 
     function updateCharts() {
-      if (!statusChartInstance || !wsChartInstance) return;
       const t = i18n[currentLang];
-      statusChartInstance.data.labels = [t.statusProgress, t.statusNotStarted, t.statusCompleted];
-      statusChartInstance.update();
-      wsChartInstance.update();
+      if (statusChartInstance) {
+        statusChartInstance.data.labels = [t.statusProgress, t.statusNotStarted, t.statusCompleted];
+        if (masterTasks.length > 0) {
+          let p = 0, n = 0, c = 0;
+          masterTasks.forEach(item => {
+            const s = (item.status || '').toLowerCase();
+            if (s.includes('complete') || s.includes('閉環') || item.progressPct >= 100) c++;
+            else if (s.includes('progress') || s.includes('進行') || item.progressPct > 0) p++;
+            else n++;
+          });
+          statusChartInstance.data.datasets[0].data = [p, n, c];
+        }
+        statusChartInstance.update();
+      }
+      if (wsChartInstance) {
+        if (masterTasks.length > 0) {
+          const wsMap = { 'ACTION PLAN': 0, 'EQUIPMENT': 0, 'TRAINING': 0, 'SELF CHECK': 0, 'AUDIT': 0 };
+          masterTasks.forEach(item => {
+            const ws = (item.workstream || 'ACTION PLAN').toUpperCase();
+            if (wsMap[ws] !== undefined) wsMap[ws]++;
+            else wsMap['ACTION PLAN']++;
+          });
+          wsChartInstance.data.datasets[0].data = Object.values(wsMap);
+        }
+        wsChartInstance.update();
+      }
     }
 
     function updateTodayNeedle() {
@@ -2425,8 +2197,21 @@
 
       container.style.left = `calc(270px + (100% - 270px) * ${pct / 100})`;
 
-      const dateStr = today.toISOString().split('T')[0];
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
       tag.innerText = i18n[currentLang].todayTagPrefix + dateStr + ")";
+
+      // Dynamically highlight current active month tick
+      const curMonthKey = `${year}-${month}`;
+      document.querySelectorAll('#monthTicksRow .month-col-group').forEach(el => {
+        if (el.getAttribute('data-month') === curMonthKey) {
+          el.classList.add('current-month-active');
+        } else {
+          el.classList.remove('current-month-active');
+        }
+      });
     }
 
     function applyLanguage(lang) {
@@ -2444,23 +2229,8 @@
       if (langBtn) langBtn.innerText = t.langBtn;
       const fsBtn = document.getElementById('uiFullscreenBtn');
       if (fsBtn) fsBtn.innerText = document.fullscreenElement ? t.btnExitFullscreen : t.btnFullscreen;
-      const toggleTableBtn = document.getElementById('uiToggleTableBtn');
-      if (toggleTableBtn) toggleTableBtn.innerText = t.toggleTable;
-      const addTaskBtn = document.getElementById('uiAddTaskBtn');
-      if (addTaskBtn) addTaskBtn.innerText = t.addTask;
-      const panelTitle = document.getElementById('uiPanelTitle');
-      if (panelTitle) panelTitle.innerText = t.tableTitleMaster;
       const tlTitle = document.getElementById('uiTimelineTitle');
       if (tlTitle) tlTitle.innerText = t.timelineTitle;
-
-      if (document.getElementById('thRef')) document.getElementById('thRef').innerText = t.colRef;
-      if (document.getElementById('thName')) document.getElementById('thName').innerText = t.colName;
-      if (document.getElementById('thCategory')) document.getElementById('thCategory').innerText = t.colCategory;
-      if (document.getElementById('thStatus')) document.getElementById('thStatus').innerText = t.colStatus;
-      if (document.getElementById('thStart')) document.getElementById('thStart').innerText = t.colStart;
-      if (document.getElementById('thEnd')) document.getElementById('thEnd').innerText = t.colEnd;
-      if (document.getElementById('thOwner')) document.getElementById('thOwner').innerText = t.colOwner;
-      if (document.getElementById('thAuditPoint')) document.getElementById('thAuditPoint').innerText = t.colAuditPoint;
 
       if (document.getElementById('uiChartStatusTitle')) document.getElementById('uiChartStatusTitle').innerText = t.chartStatusTitle;
       if (document.getElementById('uiChartWsTitle')) document.getElementById('uiChartWsTitle').innerText = t.chartWsTitle;
@@ -2470,7 +2240,6 @@
       if (document.getElementById('prog2Label')) document.getElementById('prog2Label').innerText = t.prog2;
       if (document.getElementById('prog3Label')) document.getElementById('prog3Label').innerText = t.prog3;
 
-      renderTable();
       renderTimeline();
       renderMilestones();
       updateTodayNeedle();
@@ -2480,11 +2249,6 @@
     function toggleLanguage() {
       const nextLang = (currentLang === 'en') ? 'zh' : 'en';
       applyLanguage(nextLang);
-    }
-
-    function toggleInputPanel() {
-      const panel = document.getElementById('inputPanel');
-      panel.style.display = (panel.style.display === 'none') ? 'block' : 'none';
     }
 
     function toggleFullScreen() {
@@ -2504,8 +2268,23 @@
     });
 
     // =========================================================================
-    // ☁️ [ANCHOR: JS-CLOUD] GAS 雲端雙表 (MasterTasks & Milestones) 實時同步
+    // ☁️ [ANCHOR: JS-CLOUD] GAS 雲端雙表 (MasterTasks & Milestones) 實時同步與阻斷機制
     // =========================================================================
+    function showCloudBlockOverlay(isBlocked, message) {
+      const overlay = document.getElementById('cloudErrorOverlay');
+      const descEl = document.getElementById('cloudErrorDesc');
+      if (!overlay) return;
+
+      if (isBlocked) {
+        if (descEl && message) {
+          descEl.innerHTML = `${message}<br>為維護單一真實資料庫 (SSOT) 準則，主畫面已安全阻斷。<br>請檢查網路連線或稍後按 F5 重新整理重試。`;
+        }
+        overlay.classList.add('active');
+      } else {
+        overlay.classList.remove('active');
+      }
+    }
+
     async function loadTasksFromCloud() {
       const badge = document.getElementById('cloudBadge');
       if (badge) {
@@ -2514,140 +2293,119 @@
       }
 
       try {
-        const res = await fetch(GAS_WEBAPP_URL + '?action=getTasks');
+        const res = await fetch(GAS_WEBAPP_URL + '?action=getTasks', {
+          cache: 'no-store'
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP Error: ${res.status}`);
+        }
+
         const jsonRes = await res.json();
         const list = (jsonRes && (jsonRes.data || jsonRes.tasks)) ? (jsonRes.data || jsonRes.tasks) : (Array.isArray(jsonRes) ? jsonRes : null);
 
-        if (Array.isArray(list) && list.length > 0) {
-          // Smart Merge Engine: Update local masterTasks attributes with cloud data while preserving local styling/colors
-          list.forEach(cloudItem => {
-            let local = masterTasks.find(t => t.id === cloudItem.id);
-            const sDate = parseCloudDate(cloudItem.startDate);
-            const eDate = parseCloudDate(cloudItem.endDate);
-
-            if (local) {
-              if (cloudItem.name_zh) local.name_zh = cloudItem.name_zh;
-              if (cloudItem.name_en) local.name_en = cloudItem.name_en;
-              if (cloudItem.progressPct !== undefined && cloudItem.progressPct !== null) local.progressPct = Number(cloudItem.progressPct);
-              if (cloudItem.status) local.status = cloudItem.status;
-              if (sDate) local.startDate = sDate;
-              if (eDate) local.endDate = eDate;
-              if (cloudItem.owner) local.owner = cloudItem.owner;
-              if (cloudItem.workstream) local.workstream = cloudItem.workstream;
-
-              // Full cloud sync for sub-list and reportLink
-              if (cloudItem.subList_zh !== undefined && cloudItem.subList_zh !== null && cloudItem.subList_zh !== "") {
-                local.subList_zh = String(cloudItem.subList_zh);
-              }
-              if (cloudItem.subList_en !== undefined && cloudItem.subList_en !== null && cloudItem.subList_en !== "") {
-                local.subList_en = String(cloudItem.subList_en);
-              }
-              if (cloudItem.reportLink !== undefined && cloudItem.reportLink !== null) {
-                local.reportLink = String(cloudItem.reportLink).trim();
-              }
-
-              // Synchronize Quantitative subSummary Fields
-              const cTotal = (cloudItem.subSummary_total !== undefined && cloudItem.subSummary_total !== "") ? Number(cloudItem.subSummary_total) : (local.subSummary ? local.subSummary.total : 0);
-              const cClosed = (cloudItem.subSummary_closed !== undefined && cloudItem.subSummary_closed !== "") ? Number(cloudItem.subSummary_closed) : (local.subSummary ? local.subSummary.closed : 0);
-              const cOpen = (cloudItem.subSummary_open !== undefined && cloudItem.subSummary_open !== "") ? Number(cloudItem.subSummary_open) : (cTotal - cClosed);
-              
-              if (cTotal > 0) {
-                local.subSummary = { total: cTotal, closed: cClosed, open: cOpen };
-                local.subSummary_total = cTotal;
-                local.subSummary_closed = cClosed;
-                local.subSummary_open = cOpen;
-              }
-            } else {
-              cloudItem.color = cloudItem.color || "#3B82F6";
-              cloudItem.startDate = sDate;
-              cloudItem.endDate = eDate;
-              masterTasks.push(cloudItem);
-            }
-          });
-
-          // Sync Cloud Milestones if returned
-          if (jsonRes && Array.isArray(jsonRes.milestones) && jsonRes.milestones.length > 0) {
-            jsonRes.milestones.forEach(cloudMs => {
-              let localMs = masterMilestones.find(m => m.id === cloudMs.id);
-              const mDate = parseCloudDate(cloudMs.date);
-              if (localMs) {
-                if (cloudMs.name_zh) localMs.name_zh = cloudMs.name_zh;
-                if (cloudMs.name_en) localMs.name_en = cloudMs.name_en;
-                if (mDate) localMs.date = mDate;
-                if (cloudMs.desc_zh) localMs.desc_zh = cloudMs.desc_zh;
-                if (cloudMs.desc_en) localMs.desc_en = cloudMs.desc_en;
-              } else {
-                cloudMs.date = mDate;
-                masterMilestones.push(cloudMs);
-              }
-            });
-          } else {
-            const act11 = masterTasks.find(t => t.id === "ACT-11");
-            const ms4 = masterMilestones.find(m => m.id === "MS-4");
-            if (act11 && act11.startDate && ms4) {
-              ms4.date = act11.startDate;
-            }
-          }
-
-          renderTable();
-          renderTimeline();
-          renderMilestones();
-          updateCharts();
-
-          if (badge) {
-            badge.innerText = "☁️ 已成功同步 Google Sheet 雲端數據 (" + list.length + "項)";
-            badge.classList.remove('syncing');
-          }
-          return;
+        if (!Array.isArray(list) || list.length === 0) {
+          throw new Error("雲端資料庫回傳任務清單為空或格式異常");
         }
-      } catch (err) {
-        console.warn("GAS fetch notice:", err);
-        if (badge) {
-          badge.innerText = "☁️ 已連線至雲端 (等待回應)";
-          badge.classList.remove('syncing');
-        }
-      }
-    }
 
-    async function saveTaskToCloud(taskId) {
-      const local = masterTasks.find(t => t.id === taskId);
-      if (!local) return;
+        // 成功讀取雲端：解除全螢幕阻斷遮罩
+        showCloudBlockOverlay(false);
 
-      const badge = document.getElementById('cloudBadge');
-      badge.innerText = i18n[currentLang].cloudSyncing;
-      badge.classList.add('syncing');
+        // 每次 F5 或調用，100% 依據雲端清單構建最新狀態，杜絕本地快取回彈
+        masterTasks = list.map(cloudItem => {
+          const sDate = parseCloudDate(cloudItem.startDate);
+          const eDate = parseCloudDate(cloudItem.endDate);
+          const cTotal = Number(cloudItem.subSummary_total) || 0;
+          const cClosed = Number(cloudItem.subSummary_closed) || 0;
+          const cOpen = (cloudItem.subSummary_open !== undefined && cloudItem.subSummary_open !== "") ? Number(cloudItem.subSummary_open) : Math.max(0, cTotal - cClosed);
 
-      try {
-        const payload = {
-          action: "updateTask",
-          taskId: taskId,
-          name_en: local.name_en,
-          name_zh: local.name_zh,
-          progressPct: local.progressPct,
-          status: local.status,
-          startDate: local.startDate,
-          endDate: local.endDate,
-          owner: local.owner,
-          subSummary_total: local.subSummary ? local.subSummary.total : 0,
-          subSummary_closed: local.subSummary ? local.subSummary.closed : 0,
-          subSummary_open: local.subSummary ? local.subSummary.open : 0,
-          subList_zh: typeof local.subList_zh === 'string' ? local.subList_zh : (Array.isArray(local.subList_zh) ? local.subList_zh.join('\n') : ''),
-          subList_en: typeof local.subList_en === 'string' ? local.subList_en : (Array.isArray(local.subList_en) ? local.subList_en.join('\n') : ''),
-          reportLink: local.reportLink || ''
-        };
-
-        await fetch(GAS_WEBAPP_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload)
+          return {
+            id: cloudItem.id,
+            name_en: cloudItem.name_en || cloudItem.name || '',
+            name_zh: cloudItem.name_zh || cloudItem.name || '',
+            workstream: cloudItem.workstream || 'ACTION PLAN',
+            color: cloudItem.color || '#3B82F6',
+            status: cloudItem.status || 'Scheduled',
+            progressPct: (cloudItem.progressPct !== undefined && cloudItem.progressPct !== null) ? Number(cloudItem.progressPct) : 0,
+            startDate: sDate,
+            endDate: eDate,
+            owner: cloudItem.owner || 'TBD',
+            auditPoint: cloudItem.auditPoint || '',
+            rootCause_en: cloudItem.rootCause_en || '',
+            rootCause_zh: cloudItem.rootCause_zh || '',
+            deliverable_en: cloudItem.deliverable_en || '',
+            deliverable_zh: cloudItem.deliverable_zh || '',
+            subList_en: cloudItem.subList_en ? String(cloudItem.subList_en) : '',
+            subList_zh: cloudItem.subList_zh ? String(cloudItem.subList_zh) : '',
+            reportLink: cloudItem.reportLink ? String(cloudItem.reportLink).trim() : '',
+            subSummary: cTotal > 0 ? { total: cTotal, closed: cClosed, open: cOpen } : null
+          };
         });
 
-        badge.innerText = i18n[currentLang].cloudSynced;
-        badge.classList.remove('syncing');
-        loadTasksFromCloud();
+        // Ensure 12 tasks completeness (Fall-safe for ACT-12 if Google Sheet hasn't deployed new GAS version yet)
+        if (!masterTasks.some(t => t.id === "ACT-12")) {
+          masterTasks.push({
+            id: "ACT-12",
+            name_en: "RBA Audit Observations Closure",
+            name_zh: "RBA稽核缺失閉環",
+            workstream: "ACTION PLAN",
+            color: "#EF4444",
+            status: "Scheduled",
+            progressPct: 0,
+            startDate: "2026-04-30",
+            endDate: "2027-04-28",
+            owner: "Team / Sateesh",
+            auditPoint: "",
+            rootCause_en: "",
+            rootCause_zh: "",
+            deliverable_en: "",
+            deliverable_zh: "",
+            subList_en: "Internal fire and safety measures proceeding per schedule; municipal sewage piping connection pending local government infrastructure works, targeted for engineering final acceptance by 2027/4/28 per procurement plan.",
+            subList_zh: "廠內消防/安全措施按排程推動；市政污水管網待印度政府埋設接通，依採購表排程於2027/4/28完成工程驗收",
+            reportLink: "",
+            subSummary: null
+          });
+        }
+
+        // 同步雲端里程碑
+        if (jsonRes && Array.isArray(jsonRes.milestones) && jsonRes.milestones.length > 0) {
+          masterMilestones = jsonRes.milestones.map(cloudMs => ({
+            id: cloudMs.id,
+            name_en: cloudMs.name_en || '',
+            name_zh: cloudMs.name_zh || '',
+            date: parseCloudDate(cloudMs.date),
+            icon: cloudMs.icon || '🚩',
+            level: cloudMs.level || 'top',
+            desc_en: cloudMs.desc_en || '',
+            desc_zh: cloudMs.desc_zh || ''
+          }));
+        } else {
+          // 若無里程碑表，對齊最後正式稽核日
+          const act11 = masterTasks.find(t => t.id === "ACT-11");
+          masterMilestones = [
+            { id: "MS-1", name_en: "CAPA Alignment Proposal", name_zh: "整改對策提案", date: "2026-08-07", icon: "★", desc_en: "Complete preliminary alignment & submit action plan proposal", desc_zh: "完成對策初審並向 SSSTC 品質團隊提交整改提案", level: "top" },
+            { id: "MS-2", name_en: "Non-budget Points 100% Closure", name_zh: "非預算缺失 100% 閉環", date: "2026-08-31", icon: "◆", desc_en: "Complete 100% closure for all non-budget observations", desc_zh: "完成所有非預算項缺失 100% 佐證閉環", level: "bottom" },
+            { id: "MS-3", name_en: "Equipment Arrival & SSSTC Review", name_zh: "設備到位與 SSSTC 預審", date: "2026-10-31", icon: "▲", desc_en: "100% budget equipment onsite commissioning", desc_zh: "資本支出設備全數到位調試完成", level: "top" },
+            { id: "MS-4", name_en: "Dell Customer Final Audit", name_zh: "Dell 客戶最終稽核", date: (act11 && act11.startDate) ? act11.startDate : "2027-01-06", icon: "※", desc_en: "Host Dell customer physical line audit", desc_zh: "迎接 Dell 客戶現場正式稽核", level: "bottom" }
+          ];
+        }
+
+        renderTimeline();
+        renderMilestones();
+        initCharts();
+
+        if (badge) {
+          badge.innerText = "☁️ 已成功同步 Google Sheet 雲端數據 (" + masterTasks.length + "項)";
+          badge.classList.remove('syncing');
+        }
       } catch (err) {
-        console.warn("GAS save notice:", err);
-        badge.innerText = "☁️ Local Mode";
-        badge.classList.remove('syncing');
+        console.error("GAS fetch failure:", err);
+        if (badge) {
+          badge.innerText = "⚠️ 雲端連線失敗";
+          badge.classList.remove('syncing');
+        }
+        // 安全阻斷進入主頁
+        showCloudBlockOverlay(true, `錯誤原因: ${err.message || err}`);
       }
     }
 
@@ -2660,6 +2418,26 @@
       '05_sop': 'https://html.foxlink.co.in/reports/report-1785909929403.html',
       '06_governance': 'https://html.foxlink.co.in/reports/report-1786076443249.html'
     };
+
+    function showToast(msg, type = "info") {
+      const toast = document.getElementById('toastPopup');
+      const msgEl = document.getElementById('toastMsg');
+      const iconEl = document.getElementById('toastIcon');
+      if (!toast || !msgEl) return;
+
+      msgEl.innerText = msg;
+      if (iconEl) {
+        iconEl.innerText = (type === "error") ? "⚠️" : (type === "success" ? "✅" : "ℹ️");
+      }
+      toast.style.display = 'flex';
+      toast.style.opacity = '1';
+
+      if (window._toastTimer) clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => { toast.style.display = 'none'; }, 300);
+      }, 3000);
+    }
 
     function toggleFloatingDock() {
       const menu = document.getElementById('floatingDockMenu');
@@ -2730,7 +2508,6 @@
     });
 
     try {
-      renderTable();
       renderTimeline();
       renderMilestones();
       updateTodayNeedle();
