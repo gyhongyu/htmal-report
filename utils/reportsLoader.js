@@ -21,9 +21,6 @@ function getCachedCloudReports() {
     return [];
 }
 
-/**
- * 將雲端報告列表存入本地快取
- */
 function setCachedCloudReports(reports) {
     try {
         if (Array.isArray(reports)) {
@@ -32,6 +29,50 @@ function setCachedCloudReports(reports) {
     } catch (e) {
         console.warn('寫入本地雲端快取異常:', e);
     }
+}
+
+/**
+ * 主動從本地快取移除特定報告（刪除時即時同步）
+ */
+function removeCloudReportFromCache(idOrDriveId) {
+    try {
+        const cached = getCachedCloudReports();
+        const updated = cached.filter(r => r.id !== idOrDriveId && r.driveId !== idOrDriveId);
+        setCachedCloudReports(updated);
+        return updated;
+    } catch (e) {
+        console.warn('從快取移除報告異常:', e);
+        return [];
+    }
+}
+
+/**
+ * 主動更新或加入報告至本地快取（保存時即時同步）
+ */
+function upsertCloudReportInCache(report) {
+    try {
+        const cached = getCachedCloudReports();
+        const index = cached.findIndex(r => r.id === report.id || (report.driveId && r.driveId === report.driveId));
+        if (index >= 0) {
+            cached[index] = { ...cached[index], ...report };
+        } else {
+            cached.unshift(report);
+        }
+        setCachedCloudReports(cached);
+        return cached;
+    } catch (e) {
+        console.warn('更新快取報告異常:', e);
+        return [];
+    }
+}
+
+/**
+ * 強制清空雲端快取
+ */
+function clearCloudReportsCache() {
+    try {
+        localStorage.removeItem(CLOUD_CACHE_KEY);
+    } catch (e) {}
 }
 
 /**

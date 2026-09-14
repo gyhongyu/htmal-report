@@ -328,7 +328,7 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
                       key={page.pageId}
                       page={page}
                       onEdit={onEditPage ? () => onEditPage(page) : null}
-                      onDelete={onDeletePage ? () => onDeletePage(page.pageId) : null}
+                      onDelete={onDeletePage ? (p) => onDeletePage(p || page) : null}
                       onShare={() => handleSharePage(page.pageId, page.title)}
                       onCopyLink={() => handleCopyLink(page.pageId, page.title)}
                     />
