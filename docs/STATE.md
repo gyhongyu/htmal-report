@@ -28,3 +28,4 @@
 - [x] 完成左右雙欄即時預覽編輯器
 - [x] 完成專案拓撲架構守護與代碼地圖引擎播種
 - [x] 完成 DEV_DMC 知識庫初始化 (docs/ 治理骨架)
+- [x] 完成 iOS Safari 滿版報告預覽修復 (Blob URL + srcdoc 雙軌架構，淘汰 document.write)
