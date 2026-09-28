@@ -109,7 +109,7 @@
 
                     // 若快取未命中，再向 GAS 查出對應的 driveId
                     if (!targetDriveId) {
-                        const listResp = await fetch(`${GAS_API_URL}?action=list&v=${Date.now()}`, { cache: 'no-store' });
+                        const listResp = await fetch(`${GAS_API_URL}?action=list`);
                         const listData = await listResp.json();
                         const report = listData.reports && listData.reports.find(r => r.id === reportId);
                         
@@ -121,13 +121,27 @@
                     }
                 }
 
-                // 透過 GAS 讀取 Google Drive 完整 HTML 代碼 (針對 iOS Safari 跨域 302 轉址加固)
-                const getUrl = `${GAS_API_URL}?action=get&driveId=${targetDriveId}&v=${Date.now()}`;
+                // 🌟 SWR 本地內容快取加速 (0 毫秒極速首屏)
+                const cacheKey = `htmal_report_content_${targetDriveId}`;
+                let cachedHtml = null;
+                try {
+                    cachedHtml = localStorage.getItem(cacheKey);
+                    if (cachedHtml && cachedHtml.length > 100) {
+                        console.log('⚡ 命中本地內容快取，0ms 極速秒開首屏！');
+                        // 動態提取標題
+                        const titleMatch = cachedHtml.match(/<title[^>]*>([^<]+)<\/title>/i);
+                        if (titleMatch && titleMatch[1]) document.title = titleMatch[1].trim();
+                        renderWithIframe(cachedHtml);
+                    }
+                } catch (cErr) {}
+
+                // 移除破壞性時間戳 &v=...，充分利用 HTTP 快取與 CDN 邊緣
+                const getUrl = `${GAS_API_URL}?action=get&driveId=${targetDriveId}`;
                 
                 let htmlContent = '';
                 let fetchError = null;
 
-                // 雙保險重試機制 (容忍 Safari 冷啟動與行動端網路抖動)
+                // 雙保險跨域讀取 (支援 Safari 轉址，且若已命中快取則背景異步靜默刷新)
                 for (let attempt = 1; attempt <= 2; attempt++) {
                     try {
                         const resp = await fetch(getUrl, {
@@ -155,23 +169,31 @@
                         fetchError = err;
                         console.warn(`第 ${attempt} 次讀取嘗試未果:`, err);
                         if (attempt < 2) {
-                            await new Promise(r => setTimeout(r, 600)); // 稍候重試
+                            await new Promise(r => setTimeout(r, 600));
                         }
                     }
                 }
 
-                if (fetchError || !htmlContent) {
+                if (htmlContent && htmlContent.length > 100) {
+                    // 寫入快取供下次秒開
+                    try {
+                        localStorage.setItem(cacheKey, htmlContent);
+                    } catch (e) {}
+
+                    // 動態同步報告標題
+                    const titleMatch = htmlContent.match(/<title[^>]*>([^<]+)<\/title>/i);
+                    if (titleMatch && titleMatch[1]) {
+                        document.title = titleMatch[1].trim();
+                    }
+
+                    // 渲染最新內容 (若先前已從快取渲染且內容相同，則不重複重繪)
+                    if (!cachedHtml || cachedHtml !== htmlContent) {
+                        renderWithIframe(htmlContent);
+                    }
+                } else if (!cachedHtml) {
+                    // 若無快取且 fetch 失敗才報錯
                     throw new Error('無法從雲端讀取報告: ' + (fetchError ? fetchError.message : '內容為空'));
                 }
-
-                // 動態同步報告標題至外層頁面分頁
-                const titleMatch = htmlContent.match(/<title[^>]*>([^<]+)<\/title>/i);
-                if (titleMatch && titleMatch[1]) {
-                    document.title = titleMatch[1].trim();
-                }
-
-                // 渲染至滿版 iframe (徹底解決 iOS Safari document.write 攔截與腳本凍結痛點)
-                renderWithIframe(htmlContent);
 
             } catch (err) {
                 console.error('載入失敗:', err);
@@ -185,37 +207,25 @@
 
             if (!frame) return;
 
-            // 雙軌保底渲染：優先使用 Blob URL (iOS Safari WebKit 原生沙盒頂級相容)，降級使用 srcdoc
-            let rendered = false;
+            // 🌟 核心防死鎖：立即移除/隱藏載入遮罩，絕不等待不穩定的 iframe onload 事件
+            if (loader) loader.style.display = 'none';
+            frame.style.display = 'block';
+
+            // 雙軌保底渲染：優先使用 Blob URL，備用 srcdoc
             try {
                 const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
                 const blobUrl = URL.createObjectURL(blob);
-                
-                frame.onload = () => {
-                    if (loader) loader.style.display = 'none';
-                    frame.style.display = 'block';
-                };
-
                 frame.src = blobUrl;
-                rendered = true;
             } catch (blobErr) {
-                console.warn('Blob URL 載入失敗，切換為 srcdoc 備用通道:', blobErr);
-            }
-
-            if (!rendered) {
+                console.warn('Blob URL 注入受阻，使用 srcdoc 渲染:', blobErr);
                 frame.srcdoc = html;
-                frame.onload = () => {
-                    if (loader) loader.style.display = 'none';
-                    frame.style.display = 'block';
-                };
-                if (loader) loader.style.display = 'none';
-                frame.style.display = 'block';
             }
         }
 
         function showError(msg) {
             const loader = document.getElementById('loader');
             if (!loader) return;
+            loader.style.display = 'flex';
             loader.innerHTML = `
                 <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
                 <div class="error-msg">${msg}</div>

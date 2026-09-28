@@ -54,13 +54,29 @@ function doGet(e) {
     return jsonResponse({ reports: reports.reverse() });
   }
   
-  // 3. 取得單篇完整 HTML 代碼
+  // 3. 取得單篇完整 HTML 代碼 (含 CacheService 內存加速)
   if (action === "get") {
     const driveId = params.driveId;
     if (!driveId) return jsonResponse({ error: "Missing driveId" });
+    
+    // A. 優先嘗試從 Google 伺服器高速快取讀取
+    const cache = CacheService.getScriptCache();
+    const cachedHtml = cache.get("html_" + driveId);
+    if (cachedHtml) {
+      return ContentService.createTextOutput(cachedHtml).setMimeType(ContentService.MimeType.TEXT);
+    }
+
     try {
       const file = DriveApp.getFileById(driveId);
       const html = file.getBlob().getDataAsString();
+      
+      // 快取小於 100KB 的內容至內存 (6小時)
+      if (html.length < 100000) {
+        try {
+          cache.put("html_" + driveId, html, 21600);
+        } catch (cErr) {}
+      }
+
       return ContentService.createTextOutput(html).setMimeType(ContentService.MimeType.TEXT);
     } catch (err) {
       return jsonResponse({ error: "Failed to read file: " + err.message });
@@ -185,6 +201,8 @@ function doPost(e) {
         try {
           const file = DriveApp.getFileById(driveId);
           file.setContent(html);
+          // 清除 Google 伺服器舊快取
+          CacheService.getScriptCache().remove("html_" + driveId);
         } catch (fErr) {}
       }
 
