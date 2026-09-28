@@ -12,6 +12,7 @@
 - **SWR 並行秒開**：`utils/reportsLoader.js` 必須維持 `Promise.allSettled` 並行拉取，本地快取先瞬間渲染，GAS 雲端異步同步。
 - **左右雙欄即時預覽編輯器**：左側代碼 ✕ 右側 iframe 滿版預覽 (`min-h-[520px]`)，嚴禁退化為陽春彈窗。
 - **動態密碼管理**：優先讀取 Google Sheet `Config` 頁籤 B1，保底密碼 `10101010`。
+- **Google Sheet 台帳真理鎖**：唯一綁定試算表為《HTML代碼倉庫》（`1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY`），嚴禁私自替換或盲連業務表格。
 - **Git 鐵律**：嚴禁主動執行未授權之 `git push`。
 
 ---
@@ -29,3 +30,4 @@
 - [x] 完成專案拓撲架構守護與代碼地圖引擎播種
 - [x] 完成 DEV_DMC 知識庫初始化 (docs/ 治理骨架)
 - [x] 完成 iOS Safari 滿版報告預覽修復 (Blob URL + srcdoc 雙軌架構，淘汰 document.write)
+- [x] 固化 Google Sheet 台帳真理鎖並校正全域文檔 (結案 INCIDENT-20260929-01)

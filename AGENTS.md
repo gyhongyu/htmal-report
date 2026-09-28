@@ -25,7 +25,12 @@
 - 密碼優先讀取 Google Sheet《HTML代碼倉庫》`Config` 工作表（B1 格）。
 - 保底密碼為 `10101010`，首頁必須具備「記住我」持久化機制。
 
-### 5. ⛔ 絕對禁止未授權 Git 推送鐵律 (No Unsolicited Push)
+### 5. 🛑 Google Sheet 台帳真理鎖定律 (SSOT Sheet Asset Lock)
+- 本專案綁定之 Google Sheet 唯一真理：**《HTML代碼倉庫》**（ID: `1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY`）。
+- **嚴禁自作聰明替換、改寫、重新關聯或在文檔傳播其他 Sheet ID**！
+- 任何代理人欲變更或校驗試算表時，**必須先比對試算表名稱（必須為《HTML代碼倉庫》）與頁籤結構（必須含 `工作表1` 與 `Config`）**，嚴禁盲連任何個人流水帳或業務表格！
+
+### 6. ⛔ 絕對禁止未授權 Git 推送鐵律 (No Unsolicited Push)
 - 除非使用者在對話中明確下達「推送倉庫」、「git push」、「推到 github」等明確指令，否則嚴禁主動發起 push！
 
 ---
