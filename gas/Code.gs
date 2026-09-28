@@ -164,8 +164,16 @@ function doPost(e) {
 
       const folders = DriveApp.getFoldersByName(FOLDER_NAME);
       const folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(FOLDER_NAME);
+      try {
+        folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.EDIT);
+      } catch (fPermErr) {}
+
       const file = folder.createFile(id + ".html", html, "text/html");
       const driveId = file.getId();
+      try {
+        // 設定「知道連結的人均可編輯」
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.EDIT);
+      } catch (permErr) {}
 
       if (sheet.getLastRow() === 0) {
         sheet.appendRow(["ID", "Title", "Categories", "CreatedAt", "Description", "DriveFileID"]);
@@ -173,6 +181,27 @@ function doPost(e) {
       sheet.appendRow([id, title, categories, createdAt, description, driveId]);
 
       return jsonResponse({ success: true, id: id, driveId: driveId, title: title });
+    }
+
+    // ==========================================
+    // 🌟 一鍵將 Google Drive 內所有既有報告全部設為「公開可編輯」
+    // ==========================================
+    if (action === "make_all_public_editable") {
+      let count = 0;
+      const folders = DriveApp.getFoldersByName(FOLDER_NAME);
+      if (folders.hasNext()) {
+        const folder = folders.next();
+        folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.EDIT);
+        const files = folder.getFiles();
+        while (files.hasNext()) {
+          const file = files.next();
+          try {
+            file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.EDIT);
+            count++;
+          } catch (e) {}
+        }
+      }
+      return jsonResponse({ success: true, message: `已成功將 ${count} 份雲端報告設定為「公開知道連結皆可編輯」` });
     }
 
     // ==========================================
