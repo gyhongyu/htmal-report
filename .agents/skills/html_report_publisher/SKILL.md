@@ -17,15 +17,18 @@ description: 專案專屬 HTML 報告雲端極速發布大師。專門用於指�
 
 ## 🛠️ AI 代理人一鍵發布指令 (CLI Standard)
 
-專案根目錄內建 Python 發布工具：[`gas_publisher.py`](file:///e:/Projects/htmal-report/gas_publisher.py)
+發布工具位於技能專屬腳本目錄：[`gas_publisher.py`](scripts/gas_publisher.py)
 
 ### 1. 發布本地 HTML 檔案至雲端
 ```powershell
-py gas_publisher.py --file "path/to/report.html" --title "XX 專案提案書" --categories "對外簡報,客戶KYC" --desc "簡要描述"
+py .agents\skills\html_report_publisher\scripts\gas_publisher.py --file "path/to/report.html" --title "XX 專案提案書" --categories "對外簡報,客戶KYC" --desc "簡要描述"
 ```
 
 ### 2. 程式碼內建調用 (Python SDK Pattern)
 ```python
+import sys
+from pathlib import Path
+sys.path.append(str(Path(".agents/skills/html_report_publisher/scripts").resolve()))
 from gas_publisher import publish_html_report
 
 result = publish_html_report(
