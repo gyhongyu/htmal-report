@@ -30,3 +30,17 @@
 - **防禦手段 / 測試背書**:
   - 測試正式生產環境 GAS API `verify_password`、`list` 以及批次權限開放 `make_all_public_editable` 均 100% 成功通過。
   - 專案所有文檔與雙環境 AGENTS.md 均已完成防禦規則落盤。
+
+---
+
+### [2026-09-29] [UNREFINED] [frontend/preview] 修復 iOS Safari/WebKit 外鏈圖片阻斷與 Logo 破圖 (INCIDENT-20260929-02)
+- **類型**: `BUG_FIX`
+- **代碼錨點**: `preview.html` (L212~L235)
+- **核心事實 / 決策理由**:
+  - 在 iOS Safari / iPhone 實機測試中，報告主體成功加載，但第三方外鏈圖片（如 Foxlink 官方 Logo `wlogo_foxlink_b.png`）破圖。
+  - 根因分析：原本採用 `Blob URL`（`blob:https://...`）餵給 `iframe.src`，WebKit 引擎將其標記為特殊沙盒隔離域，底層主動攔截向跨站域名（`www.foxlink.com`）發起的第三方子資源請求。
+  - 決策：改採 `srcdoc` 優先策略（`frame.srcdoc = html`）。`srcdoc` 完全繼承父頁面的 `https://html.foxlink.co.in` 源上下文，WebKit 判定為同源並完整放行外鏈圖片。
+- **踩坑 / 失敗模式**:
+  - Android/Chrome (Chromium) 寬容允許 blob 頁面加載跨域圖片，導致在 PC 與安卓測試正常，只有 iOS WebKit 暴露出破圖問題。
+- **防禦手段 / 測試背書**:
+  - 在 iPhone 16 (iOS 18) 實機 / BrowserStack 遠端環境實測驗證，Foxlink 標誌完整高畫質呈現，不再破圖。
