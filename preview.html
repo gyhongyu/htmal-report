@@ -212,14 +212,24 @@
             if (loader) loader.style.display = 'none';
             frame.style.display = 'block';
 
-            // 雙軌保底渲染：優先使用 Blob URL，備用 srcdoc
+            // 🌟 雙軌渲染策略：
+            // 優先使用 srcdoc（在 iOS WebKit/Safari 具備完整的父頁面 Origin 繼承，確保第三方外鏈圖片與 Logo 100% 正常載入）
+            // 備用 Blob URL（若極舊瀏覽器不支援 srcdoc 則無縫降級）
             try {
-                const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-                const blobUrl = URL.createObjectURL(blob);
-                frame.src = blobUrl;
-            } catch (blobErr) {
-                console.warn('Blob URL 注入受阻，使用 srcdoc 渲染:', blobErr);
-                frame.srcdoc = html;
+                if ('srcdoc' in frame) {
+                    frame.srcdoc = html;
+                } else {
+                    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                    frame.src = URL.createObjectURL(blob);
+                }
+            } catch (renderErr) {
+                console.warn('srcdoc 渲染異常，嘗試使用 Blob URL 降級:', renderErr);
+                try {
+                    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                    frame.src = URL.createObjectURL(blob);
+                } catch (fallbackErr) {
+                    console.error('雙軌渲染均失敗:', fallbackErr);
+                }
             }
         }
 
