@@ -12,6 +12,7 @@
 ### 📌 關鍵對話突觸 (Conversation Synapse)
 - **當前交班會話 ID**: `74ac6e83-7669-4675-b7c8-1cc72bdb3a22`
 - **歷史關聯背景**: 舊版 Node.js 後端已完整封存至分支 `backup-legacy-20260818`，線上已全面運行純前端 SWR + Google Apps Script (GAS) 雲端架構。
+- **治理部署**: 本地 Git 已提交 `3f7248d`，成功播種 `project_structure_keeper`、`agent_code_map`、`dmc_knowledge_manager` 與 `agent_multi_rules_architect`。
 
 ### ⛔ 鋼鐵防線與不可違背之硬性鐵律 (Hard Invariants)
 1. **🛑 絕對禁止破壞 151 篇歷史舊報告網址**：
@@ -52,13 +53,40 @@ graph TD
 - [`utils/`](utils/)：`reportsLoader.js`（SWR 並行秒開核心載入器）。
 - [`components/`](components/)：`HTMLEditor.js`、`PreviewPanel.js` 等左右雙欄預覽元件。
 - [`gas/`](gas/)：GAS 後端萬能網關代碼 (`Code.gs`)。
+- [`preview.html`](preview.html)：**新版雲端報告預覽入口（當前疑難排查焦點）**。
 - [`docs/`](docs/)：DEV_DMC 研發知識庫 (`STATE.md`, `ACTIVE_LOG.md`, `TOPOLOGY.md`)。
-- [`.agents/skills/`](.agents/skills/)：專案原生技能庫（`project_structure_keeper` 拓撲守護、`agent_code_map` AST 地圖）。
+- [`.agents/skills/`](.agents/skills/)：專案原生技能庫（`project_structure_keeper` 拓撲守護、`agent_code_map` AST 地圖、`html_report_publisher` 發布大師）。
 - [`.agent_profiles/`](.agent_profiles/)：多模式規則庫（開發模式與生產模式切換）。
 
 ---
 
-## 2. 系統現況與關鍵雲端資產配置 (System Baseline & Assets)
+## 2. 🚨 【下一棒最高優先排查任務】新版報告在蘋果手機打不開問題
+
+### 📱 故障現象與回報線索
+- **使用者回報**：新版 HTML 報告連結在 **蘋果手機 (iOS / Safari / iPhone WebKit)** 上打不開或卡住。
+- **出事連結範例**（來自使用者截圖）：
+  ```text
+  https://html.foxlink.co.in/preview.html?id=rep_1790613215638&driveId=1nLBJB1q4IoYi-Fj-iVLmRfH8rx3xhUJM
+  ```
+- **截圖展示**：該報告在桌面 Chrome 可以正常滿版展示（標題：*Target: Setindiabiz Private Limited*），但在 iPhone 上無法開啟。
+
+### 🔬 預先驗屍與核心可疑代碼排查路徑 ([`preview.html`](preview.html))
+接班代理人請重點針對 [`preview.html`](preview.html) 的第 80~112 行展開深入排查：
+
+1. **死穴可疑點 A：`document.open()` / `document.write()` / `document.close()` 在 iOS Safari 的阻斷問題**：
+   - `preview.html` 取得 HTML 後，透過 `document.write(htmlContent)` 覆寫整頁。
+   - 在 iOS Safari（特別是異步 `await fetch` 結束後）調用 `document.write()`，Safari 常會直接拋出異常、靜默忽略、或停止渲染外部 script/style！
+2. **死穴可疑點 B：GAS 重定向與 CORS 問題在 WebKit 上的表現**：
+   - 請求 `https://script.google.com/macros/s/.../exec?action=get&driveId=...` 時，Google 會發起 `302 Moved Temporarily` 轉址到 `googleusercontent.com`。
+   - Safari 在跨域轉址獲取純文字（TEXT/HTML）時對 `fetch` 的安全限制較為嚴苛，可能引發 `Fetch API cannot load ... due to access control checks`。
+3. **死穴可疑點 C：報告代碼內部腳本衝突或 Content-Security-Policy (CSP)**：
+   - 報告本身可能包含 Tailwind CDN、圖表腳本（如 Chart.js/ECharts），覆寫整頁後在 iOS 沙盒環境下觸發安全攔截。
+4. **替代方案探討（Pre-mortem Alternative）**：
+   - 若 `document.write()` 在 iOS 上無法相容，考慮改採**原生滿版 `iframe`（`width: 100vw; height: 100vh; border: none;`）搭配 `srcdoc` 或 `URL.createObjectURL(new Blob([html], {type: 'text/html'}))`**，此方式在 iOS WebKit 具備極高相容性！
+
+---
+
+## 3. 系統現況與關鍵雲端資產配置 (System Baseline & Assets)
 
 - **Google Sheet 台帳名稱**：《HTML代碼倉庫》
 - **Google Sheet 試算表 ID**：`1YgwlA-f5Iq487-0FVU2ChOckNVLb3h1ejbrUNkUr4WQ`
@@ -66,26 +94,13 @@ graph TD
 - **Google Drive HTML 存儲資料夾**：`HTML_Reports_Store`
 - **GAS 部署端點 (Web App Live URL)**：
   `https://script.google.com/macros/s/AKfycbxcSYXocdTxhvYRq0A5eXsJqYvOI0xImay63Au9FSmolEwlbJ0My5Gr0aWUcvVpx8AiIA/exec`
-- **GitHub 直連憑證 (用於 GAS 原地 Commit 覆蓋舊報告)**：
-  - 帳號：`gyhongyu` / 倉庫：`htmal-report` / Token：配置於 GAS 後端代碼中。
 - **AI Agent 一鍵發布工具**：[`.agents/skills/html_report_publisher/scripts/gas_publisher.py`](.agents/skills/html_report_publisher/scripts/gas_publisher.py)
   ```powershell
   py .agents\skills\html_report_publisher\scripts\gas_publisher.py --file "path/to/report.html" --title "報告標題" --categories "分類1,分類2" --desc "簡述"
   ```
 - **多模式開發切換**：
-  - 開發模式（預設）：`py .agent_profiles/switch_mode.py dev`（或點擊 `切換為開發模式.bat`）
-  - 生產模式（只查不改）：`py .agent_profiles/switch_mode.py prod`（或點擊 `切換為生產模式.bat`）
-
----
-
-## 3. 下一棒核心任務建議 (Immediate Action Items)
-
-1. **維持 SWR 秒開與左右雙欄預覽穩定性**：任何前端微調或樣式優化，不得破壞 `Promise.allSettled` 並行邏輯與雙欄布局。
-2. **監控與維護 GAS 萬能網關**：若 Google Sheet 結構有擴展，需同步維護 `gas/Code.gs`。
-3. **日常研發遵守 DMC 與拓撲紀律**：
-   - 重大修改單向追加至 [`docs/ACTIVE_LOG.md`](docs/ACTIVE_LOG.md)。
-   - 維護 [`docs/STATE.md`](docs/STATE.md) 嚴格 $\le 200$ 行門禁。
-   - 交接或提交前運行 `py .agents\skills\project_structure_keeper\scripts\keeper.py audit`。
+  - 開發模式（當前模式）：`py .agent_profiles/switch_mode.py dev`（或雙擊 `切換為開發模式.bat`）
+  - 生產模式（只查不改）：`py .agent_profiles/switch_mode.py prod`（或雙擊 `切換為生產模式.bat`）
 
 ---
 
