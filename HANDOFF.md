@@ -89,8 +89,8 @@ graph TD
 ## 3. 系統現況與關鍵雲端資產配置 (System Baseline & Assets)
 
 - **Google Sheet 台帳名稱**：《HTML代碼倉庫》
-- **Google Sheet 試算表 ID**：`1YgwlA-f5Iq487-0FVU2ChOckNVLb3h1ejbrUNkUr4WQ`
-- **Google Sheet 線上網址**：[開啟 Google 試算表](https://docs.google.com/spreadsheets/d/1YgwlA-f5Iq487-0FVU2ChOckNVLb3h1ejbrUNkUr4WQ/edit)
+- **Google Sheet 試算表 ID**：`1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY`
+- **Google Sheet 線上網址**：[開啟 Google 試算表](https://docs.google.com/spreadsheets/d/1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY/edit)
 - **Google Drive HTML 存儲資料夾**：`HTML_Reports_Store`
 - **GAS 部署端點 (Web App Live URL)**：
   `https://script.google.com/macros/s/AKfycbxcSYXocdTxhvYRq0A5eXsJqYvOI0xImay63Au9FSmolEwlbJ0My5Gr0aWUcvVpx8AiIA/exec`

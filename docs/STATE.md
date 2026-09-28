@@ -7,7 +7,7 @@
 
 ## 1. 專案定位與架構不變量 (Hard Invariants)
 - **雙軌報告架構**：
-  1. **雲端動態報告**：Google Drive (`HTML_Reports_Store`) + Google Sheet (`1YgwlA-f5Iq487-0FVU2ChOckNVLb3h1ejbrUNkUr4WQ`)，透過 GAS 萬能網關全生命週期管理。
+  1. **雲端動態報告**：Google Drive (`HTML_Reports_Store`) + Google Sheet (`1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY`)，透過 GAS 萬能網關全生命週期管理。
   2. **歷史靜態歸檔**：`reports/report-xxx.html` (151 篇)，外部大量歸檔引用，**絕對嚴禁刪除、移動或重命名**。
 - **SWR 並行秒開**：`utils/reportsLoader.js` 必須維持 `Promise.allSettled` 並行拉取，本地快取先瞬間渲染，GAS 雲端異步同步。
 - **左右雙欄即時預覽編輯器**：左側代碼 ✕ 右側 iframe 滿版預覽 (`min-h-[520px]`)，嚴禁退化為陽春彈窗。

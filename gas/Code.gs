@@ -1,5 +1,7 @@
 /**
  * HTML 報告專用 GAS 雲端萬能網關 v3 (含 GitHub REST API 直連原地覆蓋 Commit 引擎)
+ * 🔒 容器綁定之 Google Sheet:《HTML代碼倉庫》
+ *    Sheet ID: 1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY
  */
 const FOLDER_NAME = "HTML_Reports_Store";
 // GITHUB_TOKEN 存放於全域 github_manager 技能中

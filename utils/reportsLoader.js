@@ -1,7 +1,10 @@
 // 從 GAS 雲端資料庫 (Google Sheet + Google Drive) 或 GitHub Pages 加載報告的工具函數
 // 禁用所有緩存，確保即時獲取最新數據
 
-// GAS Web App 雲端網關網址
+// 🔒 本專案唯一綁定之 Google Sheet:《HTML代碼倉庫》
+// Sheet ID: 1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY
+// https://docs.google.com/spreadsheets/d/1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY/edit
+// GAS Web App 雲端網關網址 (容器綁定於上述 Sheet)
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxcSYXocdTxhvYRq0A5eXsJqYvOI0xImay63Au9FSmolEwlbJ0My5Gr0aWUcvVpx8AiIA/exec';
 const CLOUD_CACHE_KEY = 'htmal_cloud_reports_cache';
 

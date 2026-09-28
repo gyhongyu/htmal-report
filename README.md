@@ -52,7 +52,7 @@ if res["success"]:
 
 - **預設安全密碼**：`10101010`
 - **動態修改密碼**：
-  1. 打開 Google Sheet **《HTML代碼倉庫》**（[點此開啟試算表](https://docs.google.com/spreadsheets/d/1YgwlA-f5Iq487-0FVU2ChOckNVLb3h1ejbrUNkUr4WQ/edit)）。
+  1. 打開 Google Sheet **《HTML代碼倉庫》**（[點此開啟試算表](https://docs.google.com/spreadsheets/d/1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY/edit)）。
   2. 切換到底部的 **`Config`** 頁籤。
   3. 修改 **B1** 格的密碼，全系統即時生效！
 
