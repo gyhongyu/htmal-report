@@ -32,3 +32,4 @@
 - [x] 完成 iOS Safari 滿版報告預覽修復 (srcdoc 優先雙軌架構，淘汰 document.write 與 Blob URL 跨域隔離)
 - [x] 固化 Google Sheet 台帳真理鎖並校正全域文檔 (結案 INCIDENT-20260929-01)
 - [x] 固化 WebKit 子資源跨域防護與 srcdoc 優先渲染 (結案 INCIDENT-20260929-02)
+- [x] 完成 WhatsApp/LINE 社群預覽卡片 (Foxlink-CIBC 1200x630 官方 3D 浮雕封面與 assets/ 資產正規化)

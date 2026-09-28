@@ -44,3 +44,18 @@
   - Android/Chrome (Chromium) 寬容允許 blob 頁面加載跨域圖片，導致在 PC 與安卓測試正常，只有 iOS WebKit 暴露出破圖問題。
 - **防禦手段 / 測試背書**:
   - 在 iPhone 16 (iOS 18) 實機 / BrowserStack 遠端環境實測驗證，Foxlink 標誌完整高畫質呈現，不再破圖。
+
+---
+
+### [2026-09-29] [UNREFINED] [frontend/seo] 完成 WhatsApp/LINE 社群卡片優化與靜態資產正規化
+- **類型**: `FEATURE`
+- **代碼錨點**: `preview.html` (L6~L25), `index.html` (L10~L29), `assets/Foxlink-CIBC.jpg`, `docs/TOPOLOGY.md`
+- **核心事實 / 決策理由**:
+  - 原 `preview.html` 採客戶端 SPA 渲染，初始標題死寫為「報告加載中...」且缺少 OG 標籤，導致通訊軟體爬蟲抓出白板與無封面圖。
+  - WhatsApp / Meta 具備 24h+ 伺服器端強快取特性，若搞單一入口邊緣爬蟲動態注入極易引發快取污染與時序錯亂，最終敲定「方案 A：正崴官方 CIBC 標準品牌卡片」。
+  - 採用使用者提供之 1200x630 (1.91:1) 正崴經典 3D 浮雕封面，並依架構衛生原則將圖檔規範收納至 `assets/` 目錄。
+- **踩坑 / 失敗模式**:
+  - 社群爬蟲（WhatsApp/LineBot）完全不執行 JS，僅抓取 HTML 首屏靜態 `<head>`；圖檔若放根目錄易導致專案拓撲雜亂，故建立 `assets/` 模組登錄至 TOPOLOGY.md。
+- **防禦手段 / 測試背書**:
+  - `preview.html` 與 `index.html` 注入完整 `og:title`、`og:description`、`og:image`、`twitter:card`。
+  - 運行 `keeper.py audit` 通過 0 孤兒雜檔衛生審計。

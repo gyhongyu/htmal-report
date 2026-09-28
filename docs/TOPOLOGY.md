@@ -18,6 +18,7 @@
 | `docs/` | **DEV_DMC 研發知識庫** | 存放 `STATE.md` (架構真理 ≤200行)、`ACTIVE_LOG.md` (單向追加日誌)、`TOPOLOGY.md`、`adr/` 與 `how-to/` | 接手專案、釐清架構決策或追加開發日誌時查閱 |
 | `.agents/skills/` | **專案常駐守護技能** | 包含 `project_structure_keeper/` (目錄拓撲與衛生審計) 與 `agent_code_map/` (原生 AST 代碼地圖) | 探索專案拓撲、追蹤函式呼叫鏈與 Git 封箱前審計時喚醒 |
 | `.agent_profiles/` | **多模式規則倉庫** | 包含 `development/` (研發工程/DMC門禁) 與 `production/` (日常辦公/源碼硬鎖) 之實體規則與切換腳本 | 切換 IDE 操作模式或維護環境憲法時查閱 |
+| `assets/` | **專案共用靜態資產庫** | 存放官方高規格社群預覽封面 (`Foxlink-CIBC.jpg`)、品牌標識與靜態多媒體素材 | 維護全站品牌圖檔、社群 OG 卡片或靜態素材時查閱 |
 | `reference/` | **架構參考規範與素材** | 專案參考規格與設計原型資料 | 參考架構設計原型時查閱 |
 
 ---
