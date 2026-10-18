@@ -40,7 +40,6 @@
 - [`htmal_report_admin`](file:///e:/Projects/htmal-report/.agents/skills/htmal_report_admin/SKILL.md)：雙軌架構與 Admin 維護手冊
 - [`project_structure_keeper`](file:///e:/Projects/htmal-report/.agents/skills/project_structure_keeper/SKILL.md)：專案拓撲架構活地圖與封箱審計守護者
 - [`agent_code_map`](file:///e:/Projects/htmal-report/.agents/skills/agent_code_map/SKILL.md)：專案原生 AST 代碼地圖與調用鏈穿透引擎
-- [`dmc_knowledge_manager`](file:///C:/Users/9892/.gemini/config/skills/dmc_knowledge_manager/SKILL.md)：DEV_DMC 研發知識治理、日誌追加與活頁蒸餾大師 (docs/)
 
 <!-- [START: CODE_MAP_INVARIANT] -->
 ## 🗺️ 專案代碼導航與呼叫鏈門禁 (Code Map Navigation Invariant)
@@ -49,12 +48,12 @@
    ```powershell
    py .agents\skills\agent_code_map\scripts\map.py
    ```
-3. **第二步微觀定位**：若要追蹤某個函式/方法被專案中「哪些檔案、哪些類別呼叫」，強制調用呼叫者穿透指令：
+3. **第二步微觀定位 (Unified Search)**：同時獲取符號定義位置與所有被呼叫點：
    ```powershell
    py .agents\skills\agent_code_map\scripts\callers.py <symbol_name>
    ```
-4. **定義尋址**：若要定位類別或函式的原始定義位置：
-   ```powershell
-   py .agents\skills\agent_code_map\scripts\callers.py --def <symbol_name>
-   ```
+4. **專項指令速查**：
+   - 原始定義尋址: `py .agents\skills\agent_code_map\scripts\callers.py def <symbol_name>`
+   - 提取函式文檔/簽名: `py .agents\skills\agent_code_map\scripts\callers.py doc <symbol_name>`
+   - 前端 DOM 錨點查詢: `py .agents\skills\agent_code_map\scripts\callers.py dom <id_or_class>`
 <!-- [END: CODE_MAP_INVARIANT] -->

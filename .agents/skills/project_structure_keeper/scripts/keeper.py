@@ -93,6 +93,7 @@ def audit_topology():
                         continue
                     status = item[:2].strip()
                     rel_file = item[3:].strip().strip('"')
+                    p = Path(rel_file)
                     target_path = proj_root / p
                     if len(p.parts) == 1 and (status == "??" or status == "A"):
                         if target_path.is_dir():
