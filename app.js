@@ -1,7 +1,6 @@
 // 完整全功能 Admin 系統 - 整合 Google Sheet 密碼鎖、原始左右分欄編輯器與 GitHub/GAS 雙向存儲
 function App() {
   const [currentView, setCurrentView] = React.useState('home'); // 'home' | 'edit'
-  const [currentCategory, setCurrentCategory] = React.useState('全部');
   const [searchKeyword, setSearchKeyword] = React.useState('');
   
   // 檢查登入狀態
@@ -75,14 +74,13 @@ function App() {
   };
 
   // 點擊新增報告 -> 進入原始 Admin 編輯視圖
-  const handleCreateNew = (category = '全部') => {
+  const handleCreateNew = () => {
     setEditingPageId(null);
     setEditingFileName(null);
-    const initialCategories = (category && category !== '全部') ? [category] : [];
     setPageData({
       title: '',
       description: '',
-      categories: initialCategories,
+      categories: [],
       htmlCode: '<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="utf-8">\n  <title>新報告</title>\n</head>\n<body>\n  <h1>Hello World!</h1>\n  <p>這是一個全新 HTML 報告</p>\n</body>\n</html>'
     });
     setCurrentView('edit');
@@ -98,14 +96,14 @@ function App() {
         setPageData({
           title: storedData.title || page.title,
           description: storedData.description || page.description || '',
-          categories: storedData.categories || page.categories || ['未分類'],
+          categories: storedData.categories || page.categories || [],
           htmlCode: storedData.htmlCode || ''
         });
       } else {
         setPageData({
           title: page.title,
           description: page.description || '',
-          categories: page.categories || ['未分類'],
+          categories: page.categories || [],
           htmlCode: ''
         });
       }
@@ -371,8 +369,6 @@ function App() {
               setSyncStatus(null);
             }
           }}
-          currentCategory={currentCategory}
-          setCurrentCategory={setCurrentCategory}
           searchKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
         />
@@ -390,13 +386,6 @@ function App() {
       </div>
     );
   }
-
-  // 2. 原始 Admin 左右分欄即時預覽編輯器視圖 (Edit View)
-  const categoryOptions = [
-    '對外簡報', '客戶KYC', '客戶攻略', '內部簡報', '會議記要',
-    '工作報告', '數據分析', '市場分析', '財務分析', '年度計劃',
-    '季度計劃', '項目計劃', '其他'
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -441,7 +430,7 @@ function App() {
           {editingFileName && (
             <div className="flex items-center gap-2 p-2.5 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-lg">
               <i className="fas fa-info-circle text-amber-600"></i>
-              <span>此為 GitHub 靜態歸檔報告（<strong>{editingFileName}</strong>）。標題與分類已鎖定為唯讀；<strong>下方 HTML 代碼可自由修改</strong>，儲存後會自動 Commit 原地更新該檔案！</span>
+              <span>此為 GitHub 靜態歸檔報告（<strong>{editingFileName}</strong>）。標題已鎖定為唯讀；<strong>下方 HTML 代碼可自由修改</strong>，儲存後會自動 Commit 原地更新該檔案！</span>
             </div>
           )}
 
@@ -471,42 +460,6 @@ function App() {
                 className={`input-field ${editingFileName ? 'bg-gray-100 text-gray-500 cursor-not-allowed border-dashed' : ''}`}
                 placeholder="請輸入簡要描述..."
               />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold text-gray-700 uppercase mb-1.5">
-              分類標籤 {editingFileName ? '(GitHub 歸檔已鎖定)' : '（可多選）'}
-              {pageData.categories && pageData.categories.length > 0 && (
-                <span className="ml-2 text-xs font-normal text-blue-600">已選 {pageData.categories.length} 個</span>
-              )}
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {categoryOptions.map(category => {
-                const isSelected = pageData.categories && pageData.categories.includes(category);
-                return (
-                  <button
-                    key={category}
-                    type="button"
-                    disabled={!!editingFileName}
-                    onClick={() => {
-                      if (editingFileName) return;
-                      const current = pageData.categories || [];
-                      const newCategories = isSelected
-                        ? current.filter(c => c !== category)
-                        : [...current, category];
-                      setPageData(prev => ({ ...prev, categories: newCategories }));
-                    }}
-                    className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
-                      editingFileName
-                        ? (isSelected ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-gray-100 text-gray-400 cursor-not-allowed')
-                        : (isSelected ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-700 hover:bg-gray-200')
-                    }`}
-                  >
-                    {category}
-                  </button>
-                );
-              })}
             </div>
           </div>
         </div>

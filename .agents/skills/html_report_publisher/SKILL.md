@@ -10,18 +10,38 @@ description: 專案專屬 HTML 報告雲端極速發布大師。專門用於指�
 > 1. **大檔案無損突破**：大於 50KB 的 HTML 代碼一律儲存於 Google Drive (`HTML_Reports_Store`)，Google Sheet 僅儲存元數據索引與 `DriveFileID`，徹底規避 Google Sheet 單元格 50,000 字元長度限制。
 > 2. **雙軌獨立網址防線**：
 >    - **舊版 151 篇報告**：位於 `reports/report-xxx.html`，網址為 `https://html.foxlink.co.in/reports/report-xxx.html`，**嚴禁任何操作破壞既有路徑與檔案名稱**！
->    - **新版雲端報告**：位於 Google Drive，網址為 `https://html.foxlink.co.in/preview.html?id=rep_xxx`。
+>    - **新版雲端報告**：位於 Google Drive，網址為 `https://html.foxlink.co.in/preview.html?id=rep_xxx`。其元數據之 `fileName` 固定為空字串 `""`，唯一識別為 `driveId` 與 `pageId`，此為正常契約，嚴禁視為缺失！
 > 3. **原生滿版無損渲染**：`preview.html` 採用原生 `document.open/write/close` 滿版無損渲染，嚴禁額外包裝外層 React 外殼或標題列，確保圖表、字體與排版 100% 無損呈現。
 
 ---
 
-## 🛠️ AI 代理人一鍵發布指令 (CLI Standard)
+## 🛠️ AI 代理人全生命週期雲端管理指令 (CLI Standard)
 
-發布工具位於技能專屬腳本目錄：[`gas_publisher.py`](scripts/gas_publisher.py)
+發布與管理工具位於技能專屬腳本目錄：[`gas_publisher.py`](scripts/gas_publisher.py)
 
-### 1. 發布本地 HTML 檔案至雲端
+### 1. 發布新報告 (Publish)
 ```powershell
 py .agents\skills\html_report_publisher\scripts\gas_publisher.py --file "path/to/report.html" --title "XX 專案提案書" --categories "對外簡報,客戶KYC" --desc "簡要描述"
+```
+
+### 2. 查詢所有雲端報告台帳 (List)
+```powershell
+py .agents\skills\html_report_publisher\scripts\gas_publisher.py list
+```
+
+### 3. 原地更新雲端報告 (Update)
+```powershell
+py .agents\skills\html_report_publisher\scripts\gas_publisher.py update --id rep_xxx --file "new.html" --title "新標題"
+```
+
+### 4. 刪除雲端報告 (Delete)
+```powershell
+py .agents\skills\html_report_publisher\scripts\gas_publisher.py delete --id rep_xxx
+```
+
+### 5. 下載雲端報告原始碼 (Get)
+```powershell
+py .agents\skills\html_report_publisher\scripts\gas_publisher.py get --drive-id 1ab...xyz --output "saved.html"
 ```
 
 ### 2. 程式碼內建調用 (Python SDK Pattern)

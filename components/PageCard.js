@@ -101,20 +101,6 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
                   <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 mb-1">
                     {page.title || '無標題頁面'}
                   </h3>
-                  {page.categories && page.categories.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {page.categories.slice(0, 3).map((cat, idx) => (
-                        <span key={idx} className="inline-block px-2 py-0.5 text-xs bg-blue-100 text-blue-700 rounded">
-                          {cat}
-                        </span>
-                      ))}
-                      {page.categories.length > 3 && (
-                        <span className="inline-block px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded">
-                          +{page.categories.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  )}
                 </div>
               </div>
               <p className="text-gray-600 text-sm line-clamp-3 mb-3">

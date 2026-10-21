@@ -8,8 +8,8 @@ description: 專案專屬雙軌架構維護與全功能 Admin 管理手冊。專
 > [!IMPORTANT]
 > **🌟 核心架構鐵律與防錯邊界 (Mandatory Guardrails)**：
 > 1. **雙軌資產邊界隔離**：
->    - **GitHub 既有靜態檔案 (151 篇)**：元數據位於 `data/reports-index.json`，實體位於 `reports/`。**前端嚴禁提供刪除按鈕**；編輯時標題/分類反灰唯讀鎖定，HTML 代碼可自由編輯並透過 GAS 調用 GitHub REST API (`update_github_file`) 發起 Direct Commit 原地覆蓋，確保舊網址永恆不變！
->    - **Google 雲端動態報告**：元數據位於 Google Sheet，實體位於 Google Drive。前端提供完整「預覽 / 編輯 / 刪除」，0 秒即時生效。
+>    - **GitHub 既有靜態檔案 (151 篇)**：元數據位於 `data/reports-index.json`，實體位於 `reports/`。**前端嚴禁提供刪除按鈕**；編輯時標題/分類反灰唯讀鎖定，HTML 代碼可自由編輯並透過 GAS 調用 GitHub REST API (`update_github_file`) 發起 Direct Commit 原地覆蓋；下載時讀取本地檔案，確保舊網址永恆不變！
+>    - **Google 雲端動態報告**：元數據位於 Google Sheet，實體位於 Google Drive。前端提供完整「預覽 / 編輯 / 刪除 / 下載（由 GAS 讀取 Drive 實體）」功能，0 秒即時生效。
 > 2. **SWR 並行秒開架構 (Zero-Block Invariant)**：
 >    - `utils/reportsLoader.js` 中的 `loadReportsIndex()` **必須 100% 採用 `Promise.allSettled` 並行異步拉取**。本地 5 毫秒瞬間先完成頁面渲染，嚴禁改回串行阻塞等待 GAS，徹底杜絕首頁卡在 30% 一分鐘的延遲！
 > 3. **密碼鎖與記住我 (Auth SSOT)**：
@@ -25,9 +25,9 @@ description: 專案專屬雙軌架構維護與全功能 Admin 管理手冊。專
 - **`index.html`**：主應用入口，整合暗黑科技風密碼鎖、頂部連線狀態列與左右雙欄專業編輯器。
 - **`preview.html`**：獨立報告原生滿版載入器，向 GAS/本地請求 HTML 後以原生 `document.write` 滿版無損渲染。
 - **`utils/reportsLoader.js`**：雙軌極速合併載入器，並行讀取本地 JSON 與 Google Sheet，帶 6 秒逾時防禦。
-- **`components/PageCard.js`**：卡片組件，智慧識別 `driveId`，動態顯示刪除按鈕與獨立複製連結。
+- **`components/PageCard.js`**：卡片組件，智慧識別 `driveId`，動態支援雙軌下載、獨立複製連結與線上刪除。
 - **`components/HTMLEditor.js`** & **`PreviewPanel.js`**：左右雙欄滿版即時預覽編輯器組件。
-- **`gas_publisher.py`**：供 AI 代理人直接調用的免登入發布工具。
+- **`.agents/skills/html_report_publisher/scripts/gas_publisher.py`**：供 AI 代理人直接調用的免登入發布工具。
 
 ---
 

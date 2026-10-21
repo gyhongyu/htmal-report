@@ -1,4 +1,4 @@
-function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setCurrentCategory, searchKeyword, setSearchKeyword }) {
+function HomePage({ onCreateNew, onEditPage, onDeletePage, searchKeyword, setSearchKeyword }) {
   try {
     const [allPages, setAllPages] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
@@ -84,69 +84,21 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
     };
 
     const filteredPages = React.useMemo(() => {
-      // Step 1: Filter by search keyword
-      let filtered = allPages;
-      if (searchKeyword.trim()) {
-        const keyword = searchKeyword.toLowerCase().trim();
-        filtered = allPages.filter(page => {
-          const titleMatch = page.title && page.title.toLowerCase().includes(keyword);
-          const descMatch = page.description && page.description.toLowerCase().includes(keyword);
-          return titleMatch || descMatch;
-        });
+      // 純關鍵字極速檢索 (標題 + 摘要)
+      if (!searchKeyword.trim()) {
+        return allPages;
       }
-
-      // Step 2: Filter by category
-      if (currentCategory !== '全部') {
-        filtered = filtered.filter(page => {
-          return page.categories && page.categories.includes(currentCategory);
-        });
-      }
-
-      return filtered;
-    }, [allPages, currentCategory, searchKeyword]);
-
-    const categoryCounts = React.useMemo(() => {
-      // Filter by search keyword first
-      let pagesToCount = allPages;
-      if (searchKeyword.trim()) {
-        const keyword = searchKeyword.toLowerCase().trim();
-        pagesToCount = allPages.filter(page => {
-          const titleMatch = page.title && page.title.toLowerCase().includes(keyword);
-          const descMatch = page.description && page.description.toLowerCase().includes(keyword);
-          return titleMatch || descMatch;
-        });
-      }
-
-      const counts = { '全部': pagesToCount.length };
-      pagesToCount.forEach(page => {
-        if (page.categories && Array.isArray(page.categories)) {
-          page.categories.forEach(cat => {
-            counts[cat] = (counts[cat] || 0) + 1;
-          });
-        }
+      const keyword = searchKeyword.toLowerCase().trim();
+      return allPages.filter(page => {
+        const titleMatch = page.title && page.title.toLowerCase().includes(keyword);
+        const descMatch = page.description && page.description.toLowerCase().includes(keyword);
+        return titleMatch || descMatch;
       });
-      return counts;
     }, [allPages, searchKeyword]);
 
     const totalPages = Math.ceil(filteredPages.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedPages = filteredPages.slice(startIndex, startIndex + itemsPerPage);
-
-    React.useEffect(() => {
-      setCurrentPage(1);
-    }, [currentCategory]);
-
-    const handleCategoryChange = async (category) => {
-      setLoading(true);
-      setProgress(0);
-      setCurrentCategory(category);
-
-      setProgress(50);
-      await new Promise(resolve => setTimeout(resolve, 200));
-      setProgress(100);
-
-      setTimeout(() => setLoading(false), 300);
-    };
 
     const handleDeletePage = async (pageId) => {
       if (confirm('確定要刪除這個頁面嗎？刪除後無法恢復。')) {
@@ -288,12 +240,6 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
           </div>
         </header>
 
-        <CategoryTabs
-          activeCategory={currentCategory}
-          onCategoryChange={handleCategoryChange}
-          categoryCounts={categoryCounts}
-        />
-
         {loading && (
           <div className="max-w-7xl mx-auto px-4 py-8">
             <LoadingProgress progress={progress} />
@@ -306,11 +252,13 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
               <div className="text-center py-16">
                 <div className="icon-file-text text-6xl text-gray-300 mb-4"></div>
                 <h3 className="text-xl font-medium text-gray-900 mb-2">
-                  {currentCategory === '全部' ? '還沒有HTML頁面' : `${currentCategory}分類中還沒有頁面`}
+                  {searchKeyword.trim() ? `找不到符合「${searchKeyword}」的報告` : '還沒有HTML頁面'}
                 </h3>
-                <p className="text-gray-600 mb-6">創建您的第一個HTML頁面開始吧</p>
+                <p className="text-gray-600 mb-6">
+                  {searchKeyword.trim() ? '請嘗試更換關鍵字重新搜尋' : '創建您的第一個HTML頁面開始吧'}
+                </p>
                 <button
-                  onClick={() => onCreateNew(currentCategory)}
+                  onClick={() => onCreateNew()}
                   className="btn-primary flex items-center gap-2 mx-auto"
                 >
                   <div className="icon-plus text-lg"></div>
