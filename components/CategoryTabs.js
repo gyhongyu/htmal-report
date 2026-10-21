@@ -1,5 +1,4 @@
 function CategoryTabs({ activeCategory, currentCategory, onCategoryChange, setCurrentCategory, categoryCounts = {} }) {
-  console.log('Root CategoryTabs rendered', { activeCategory, currentCategory, categoryCounts });
   const active = activeCategory || currentCategory;
   const onChange = onCategoryChange || setCurrentCategory;
   const safeCounts = categoryCounts || {};

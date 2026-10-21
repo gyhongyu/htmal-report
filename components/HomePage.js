@@ -84,11 +84,6 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
     };
 
     const filteredPages = React.useMemo(() => {
-      console.log('=== 過濾邏輯調試 ===');
-      console.log('搜尋關鍵字:', searchKeyword);
-      console.log('當前分類:', currentCategory);
-      console.log('所有頁面數量:', allPages.length);
-
       // Step 1: Filter by search keyword
       let filtered = allPages;
       if (searchKeyword.trim()) {
@@ -98,7 +93,6 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
           const descMatch = page.description && page.description.toLowerCase().includes(keyword);
           return titleMatch || descMatch;
         });
-        console.log('關鍵字過濾後:', filtered.length, '筆');
       }
 
       // Step 2: Filter by category
@@ -106,11 +100,8 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
         filtered = filtered.filter(page => {
           return page.categories && page.categories.includes(currentCategory);
         });
-        console.log('分類過濾後:', filtered.length, '筆');
       }
 
-      console.log('最終結果:', filtered.length, '筆');
-      console.log('===================');
       return filtered;
     }, [allPages, currentCategory, searchKeyword]);
 
@@ -172,12 +163,18 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, currentCategory, setC
       try {
         // 找到对应的 page 获取 fileName
         const page = allPages.find(p => p.pageId === pageId);
-        if (!page || !page.fileName) {
-          alert('頁面資料不完整，無法分享');
+        if (!page) {
+          alert('頁面資料不存在，無法分享');
           return;
         }
 
-        const url = `${window.location.origin}/reports/${page.fileName}`;
+        let url = '';
+        if (page.driveId || !page.fileName) {
+          const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
+          url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
+        } else {
+          url = `${window.location.origin}/reports/${page.fileName}`;
+        }
 
         // 优先使用原生分享 API（移动设备会弹出 WhatsApp/WeChat/Line 等）
         if (navigator.share) {

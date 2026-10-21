@@ -22,7 +22,7 @@ function App() {
   const [pageData, setPageData] = React.useState({
     title: '',
     description: '',
-    categories: ['對外簡報', '客戶KYC', '客戶攻略'],
+    categories: [],
     htmlCode: '<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="utf-8">\n  <title>我的報告</title>\n</head>\n<body>\n  <h1>新報告標題</h1>\n  <p>請在此編寫或貼上 HTML 內容...</p>\n</body>\n</html>'
   });
 
@@ -78,7 +78,7 @@ function App() {
   const handleCreateNew = (category = '全部') => {
     setEditingPageId(null);
     setEditingFileName(null);
-    const initialCategories = category !== '全部' ? [category] : ['對外簡報', '客戶KYC', '其他'];
+    const initialCategories = (category && category !== '全部') ? [category] : [];
     setPageData({
       title: '',
       description: '',

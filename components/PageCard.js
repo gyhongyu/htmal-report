@@ -14,31 +14,35 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
       }
     };
 
+    const [isDownloading, setIsDownloading] = React.useState(false);
+
     const handleDownload = async () => {
       try {
-        // page 对象来自 reports-index.json，包含 fileName 属性
-        const fileName = page.fileName;
+        // 雙軌識別：Google Drive 雲端報告 (driveId) 或 GitHub 本地靜態報告 (fileName)
+        const isDrive = Boolean(page.driveId || (!page.fileName && page.pageId));
+        const targetIdentifier = page.driveId || page.fileName;
 
-        if (!fileName) {
-          console.error('無文件名:', page);
-          alert('無法下載：缺少文件信息');
+        if (!targetIdentifier) {
+          console.error('缺少檔案識別碼:', page);
+          alert('無法下載：缺少文件識別資訊');
           return;
         }
 
-        console.log('[下載] 正在加載文件:', fileName);
+        setIsDownloading(true);
+        console.log('[下載] 正在載入內容:', targetIdentifier, isDrive ? '(Google Drive)' : '(GitHub Reports)');
 
-        // 从 reports/ 文件夹加载 HTML 内容
-        const htmlContent = await getReportHTML(fileName);
+        // 透過 reportsLoader.js 獲取 HTML 內容 (支援 GAS 雲端 Drive 與 本地 reports/ 雙向請求)
+        const htmlContent = await getReportHTML(targetIdentifier, isDrive);
 
         if (!htmlContent) {
           console.error('[下載] HTML內容為空');
-          alert('無法獲取報告內容');
+          alert('無法獲取報告內容，請檢查網路連線或雲端權限');
           return;
         }
 
         console.log('[下載] HTML內容大小:', htmlContent.length, '字節');
 
-        // 智能文件名：标题 + 描述
+        // 智能檔案名稱：標題 + 描述
         let downloadFileName = '';
         const title = (page.title || '無標題').trim();
         const description = (page.description || '').trim();
@@ -49,10 +53,10 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
           downloadFileName = `${title}.html`;
         }
 
-        // 移除文件名中的非法字符
+        // 移除檔案名中的非法字元
         downloadFileName = downloadFileName.replace(/[<>:"/\\|?*]/g, '_');
 
-        console.log('[下載] 文件名:', downloadFileName);
+        console.log('[下載] 檔案名:', downloadFileName);
 
         const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
@@ -69,7 +73,9 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
         console.log('[下載] 成功');
       } catch (error) {
         console.error('[下載] 失敗:', error);
-        alert('下載失敗，請重試');
+        alert('下載失敗，請重試: ' + error.message);
+      } finally {
+        setIsDownloading(false);
       }
     };
 
@@ -163,10 +169,15 @@ function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
             <div className="flex items-center gap-1">
               <button
                 onClick={handleDownload}
-                className="p-1.5 text-amber-600 hover:text-amber-700 hover:bg-amber-50 rounded transition-colors"
-                title="下載HTML文件"
+                disabled={isDownloading}
+                className={`p-1.5 rounded transition-colors ${
+                  isDownloading 
+                    ? 'text-amber-400 bg-amber-50 cursor-wait' 
+                    : 'text-amber-600 hover:text-amber-700 hover:bg-amber-50'
+                }`}
+                title={isDownloading ? '正在從雲端載入報告...' : '下載HTML文件'}
               >
-                <i className="fas fa-download text-sm"></i>
+                <i className={`fas ${isDownloading ? 'fa-spinner fa-spin' : 'fa-download'} text-sm`}></i>
               </button>
               <button
                 onClick={onCopyLink}
