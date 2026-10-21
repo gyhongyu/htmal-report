@@ -43,6 +43,27 @@ def send_get_request(params: dict) -> dict:
         return {"success": False, "error": f"GET Request failed: {str(e)}"}
 
 
+BASE62_CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def encode_base62(num: int) -> str:
+    if num == 0:
+        return BASE62_CHARS[0]
+    res = []
+    base = len(BASE62_CHARS)
+    while num > 0:
+        res.append(BASE62_CHARS[num % base])
+        num //= base
+    return "".join(reversed(res))
+
+def get_short_url(rep_id: str) -> str:
+    """將 rep_1786988344233 轉為 https://html.foxlink.co.in/vszOYMV"""
+    if rep_id and str(rep_id).startswith("rep_"):
+        ts_str = str(rep_id)[4:]
+        if ts_str.isdigit():
+            code = encode_base62(int(ts_str))
+            return f"https://html.foxlink.co.in/{code}"
+    return f"{PREVIEW_BASE_URL}?id={rep_id}"
+
 def publish_html_report(title: str, html_content: str, description: str = "", categories: list = None) -> dict:
     """一鍵發布 HTML 報告至 Google Sheet / Drive 雲端資料庫 (免標籤純淨發布)"""
     if not title or not html_content:
@@ -60,6 +81,7 @@ def publish_html_report(title: str, html_content: str, description: str = "", ca
     if res_data.get("success"):
         rep_id = res_data.get("id")
         res_data["url"] = f"{PREVIEW_BASE_URL}?id={rep_id}"
+        res_data["short_url"] = get_short_url(rep_id)
     return res_data
 
 
@@ -252,7 +274,9 @@ def main():
             print("\n🎉 發布成功！")
             print(f"📌 報告 ID: {result.get('id')}")
             print(f"☁️ Google Drive ID: {result.get('driveId')}")
-            print(f"🌐 永久獨立預覽網址: {result.get('url')}\n")
+            if result.get("short_url"):
+                print(f"🔗 【極簡公網短網址】: {result.get('short_url')}")
+            print(f"🌐 原始完整預覽網址: {result.get('url')}\n")
         else:
             print(f"\n❌ 發布失敗: {result.get('error')}\n")
             sys.exit(1)

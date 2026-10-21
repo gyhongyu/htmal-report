@@ -165,17 +165,25 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, searchKeyword, setSea
         return;
       }
 
+      // 優先生成優雅的 33 字元 Base62 短網址 (https://html.foxlink.co.in/xxxxxxx)
       let url = '';
-      if (page.driveId || !page.fileName) {
-        const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
-        url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
-      } else {
-        url = `${window.location.origin}/reports/${page.fileName}`;
+      if (typeof window.getShortReportUrl === 'function') {
+        url = window.getShortReportUrl(page.pageId);
+      }
+
+      // 降級容錯
+      if (!url) {
+        if (page.driveId || !page.fileName) {
+          const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
+          url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
+        } else {
+          url = `${window.location.origin}/reports/${page.fileName}`;
+        }
       }
 
       const text = `${title}\n${url}`;
       await navigator.clipboard.writeText(text);
-      alert('獨立報告連結已複製到剪貼簿');
+      alert('獨立報告短連結已複製到剪貼簿：\n' + url);
     };
 
     return (
