@@ -121,11 +121,16 @@ function HomePage({ onCreateNew, onEditPage, onDeletePage, searchKeyword, setSea
         }
 
         let url = '';
-        if (page.driveId || !page.fileName) {
-          const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
-          url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
-        } else {
-          url = `${window.location.origin}/reports/${page.fileName}`;
+        if (typeof window.getShortReportUrl === 'function') {
+          url = window.getShortReportUrl(page.pageId);
+        }
+        if (!url) {
+          if (page.driveId || !page.fileName) {
+            const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
+            url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
+          } else {
+            url = `${window.location.origin}/reports/${page.fileName}`;
+          }
         }
 
         // 优先使用原生分享 API（移动设备会弹出 WhatsApp/WeChat/Line 等）

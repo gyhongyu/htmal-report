@@ -99,14 +99,26 @@
         sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads allow-modals"
     ></iframe>
 
+    <script src="utils/shortUrl.js"></script>
     <script>
         // 🔒 本專案綁定之 Sheet:《HTML代碼倉庫》ID: 1Fs921osBAcxuF45alc0IG20u5u_E6OIyCaL91qOKafY
         const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxcSYXocdTxhvYRq0A5eXsJqYvOI0xImay63Au9FSmolEwlbJ0My5Gr0aWUcvVpx8AiIA/exec';
 
         async function initPreview() {
             const urlParams = new URLSearchParams(window.location.search);
-            const reportId = urlParams.get('id');
+            let reportId = urlParams.get('id');
             const driveIdParam = urlParams.get('driveId');
+
+            // 🌟 支援直接從短網址 pathname (如 /vyoTgMb) 解析 reportId
+            if (!reportId && !driveIdParam) {
+                const pathParts = window.location.pathname.split('/').filter(Boolean);
+                if (pathParts.length === 1 && typeof window.shortCodeToPageId === 'function') {
+                    const decoded = window.shortCodeToPageId(pathParts[0]);
+                    if (decoded && decoded.pageId) {
+                        reportId = decoded.pageId;
+                    }
+                }
+            }
 
             if (!reportId && !driveIdParam) {
                 showError('無效的報告連結 (缺少 ID)');

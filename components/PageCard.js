@@ -2,16 +2,22 @@
 function PageCard({ page, onEdit, onDelete, onShare, onCopyLink }) {
   try {
     const handlePreview = () => {
-      // 若是 GAS 雲端報告 (帶 driveId 或無 fileName)，使用 preview.html?id=xxx 渲染
-      if (page.driveId || !page.fileName) {
-        const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
-        const url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
-        window.open(url, '_blank');
-      } else {
-        // 本地既有檔案直接打開
-        const url = `${window.location.origin}/reports/${page.fileName}`;
-        window.open(url, '_blank');
+      // 🌟 優先使用優雅的 Base62 極簡短網址 (https://html.foxlink.co.in/xxxxxxx)
+      let url = '';
+      if (typeof window.getShortReportUrl === 'function') {
+        url = window.getShortReportUrl(page.pageId);
       }
+
+      // 降級容錯
+      if (!url) {
+        if (page.driveId || !page.fileName) {
+          const driveParam = page.driveId ? `&driveId=${page.driveId}` : '';
+          url = `${window.location.origin}/preview.html?id=${page.pageId}${driveParam}`;
+        } else {
+          url = `${window.location.origin}/reports/${page.fileName}`;
+        }
+      }
+      window.open(url, '_blank');
     };
 
     const [isDownloading, setIsDownloading] = React.useState(false);
