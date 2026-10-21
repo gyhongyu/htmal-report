@@ -5,6 +5,9 @@ import sys
 import urllib.request
 import urllib.parse
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 # Google Apps Script 萬能發布網關端點
 GAS_URL = "https://script.google.com/macros/s/AKfycbxcSYXocdTxhvYRq0A5eXsJqYvOI0xImay63Au9FSmolEwlbJ0My5Gr0aWUcvVpx8AiIA/exec"
 PREVIEW_BASE_URL = "https://html.foxlink.co.in/preview.html"

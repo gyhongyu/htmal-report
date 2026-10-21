@@ -1,12 +1,20 @@
 ---
 name: html_report_publisher
-description: 專案專屬 HTML 報告雲端極速發布大師。專門用於指導 AI 代理人將生成的商業簡報、客戶 KYC、會議紀要等 HTML 文件，透過 GAS 萬能網關一鍵發布至 Google Drive (HTML_Reports_Store) 與 Google Sheet (HTML代碼倉庫)，自動獲取獨立永久預覽網址 (preview.html?id=rep_xxx)。當使用者或代理人需要「發布新 HTML 報告」、「將報告上傳至雲端」、「生成報告獨立連結」時自動觸發。
+description: 專案專屬 HTML 報告雲端極速發布大師與全域母港中樞 (Universal HTML Report Cloud Publisher & Base SSOT)。本專案為全域技能 html_report_publisher 的唯一母碼庫。當使用者或代理人需要「發布新 HTML 報告」、「將報告上傳至雲端」、「生成報告獨立連結」、「升級全域技能」、「發布全域技能」、「檢查全域同步狀態」、「母技能有更新嗎」、「查全域技能翻車工單」、「你在維護哪個全域技能」時自動強制觸發。
+gateway_source: true
 ---
 
-# HTML 報告雲端極速發布技能 (html_report_publisher v1.0)
+# HTML 報告雲端極速發布技能 (html_report_publisher v1.0 - 母港基地專用)
 
 > [!IMPORTANT]
-> **🌟 單一真理庫 (SSOT) 與核心邊界守則**：
+> **⚓ 本專案為全域技能 `html_report_publisher` 的唯一母港開發基地 (SSOT Base)**：
+> 1. 本技能遵循 `agent_skill_architect` 之【雙生鏡像規範 (Twin-Skill Invariant)】。
+> 2. 任何全新進場之 AI 代理人，看到本技能即確認**本專案負責維護全域 `html_report_publisher`**！
+> 3. 母港專用管理哨兵位於：[`scripts/sentinel.py`](scripts/sentinel.py)。
+>    - 自檢身分：`py .agents\skills\html_report_publisher\scripts\sentinel.py status`
+>    - 母碼差異：`py .agents\skills\html_report_publisher\scripts\sentinel.py diff`
+>    - 外部工單：`py .agents\skills\html_report_publisher\scripts\sentinel.py incidents`
+>    - 一鍵發布：`py .agents\skills\html_report_publisher\scripts\sentinel.py deploy`
 > 1. **大檔案無損突破**：大於 50KB 的 HTML 代碼一律儲存於 Google Drive (`HTML_Reports_Store`)，Google Sheet 僅儲存元數據索引與 `DriveFileID`，徹底規避 Google Sheet 單元格 50,000 字元長度限制。
 > 2. **雙軌獨立網址防線**：
 >    - **舊版 151 篇報告**：位於 `reports/report-xxx.html`，網址為 `https://html.foxlink.co.in/reports/report-xxx.html`，**嚴禁任何操作破壞既有路徑與檔案名稱**！
